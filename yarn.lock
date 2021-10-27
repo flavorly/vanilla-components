@@ -2553,6 +2553,11 @@ vue-eslint-parser@^7.9.0:
     lodash "^4.17.21"
     semver "^6.3.0"
 
+vue-shadow-dom@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/vue-shadow-dom/-/vue-shadow-dom-2.0.0.tgz#08a268d02e4461bea335e867d60c6ae7f1d81620"
+  integrity sha512-zoQpYfm1nbiUJj5472vT0+0JBYj4zzkHuT5+vrxc6369uEWrSDh9gQ5NrqqcpdPPpfCEloiA4ebu2IOwVzCBKw==
+
 vue@^3.1.1:
   version "3.1.5"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.1.5.tgz#12879b11d0685ee4478c8869551799630a52f9fe"
