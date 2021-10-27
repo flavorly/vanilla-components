@@ -67,3 +67,12 @@ yarn lint
 ```bash
 yarn format
 ```
+
+**FAQS**
+
+```
+https://github.com/ulissesferreira/moon
+https://codybontecou.com/tailwindcss-with-vitepress.html
+https://github.com/ky-is/vitepress-starter-tailwind/blob/main/docs/.vitepress/theme/tailwind.postcss
+https://vitepress-tailwind-clone.netlify.app/docs/browser-support.html
+```

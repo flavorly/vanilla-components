@@ -4,8 +4,8 @@
  */
 module.exports = {
   lang: 'en-US',
-  title: '🌙 Moon',
-  description: 'A lightweight Vue 3 component library',
+  title: 'Vanilla Components',
+  description: 'A lightweight Vue 3 component based on Tailwind CSS',
 
   themeConfig: {
     docsDir: 'docs',
@@ -31,17 +31,6 @@ module.exports = {
 function getComponents() {
   return [
     { text: 'Button', link: '/guide/button/button' },
-    { text: 'Checkbox', link: '/guide/checkbox/checkbox' },
-    { text: 'Input', link: '/guide/input/input' },
-    { text: 'Link', link: '/guide/link/link' },
-    { text: 'Modal', link: '/guide/modal/modal' },
-    { text: 'ModalManager', link: '/guide/modal-manager/modal-manager' },
-    { text: 'Progress', link: '/guide/progress/progress' },
-    { text: 'Radio', link: '/guide/radio/radio' },
-    { text: 'Sidebar', link: '/guide/sidebar/sidebar' },
-    { text: 'SidebarManager', link: '/guide/sidebar-manager/sidebar-manager' },
-    { text: 'Switch', link: '/guide/switch/switch' },
-    { text: 'Textarea', link: '/guide/textarea/textarea' },
-    { text: 'Tooltip', link: '/guide/tooltip/tooltip' },
+    { text: 'Card', link: '/guide/cards/card' },
   ]
 }

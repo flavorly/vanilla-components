@@ -43,8 +43,12 @@
     "vitepress": "^0.15.6"
   },
   "dependencies": {
+    "@tailwindcss/aspect-ratio": "^0.3.0",
+    "@tailwindcss/typography": "^0.4.1",
+    "@tailwindcss/forms": "^0.3.3",
+    "autoprefixer": "^10.3.7",
     "mitt": "^3.0.0",
-    "tabbable": "^5.2.0",
-    "tippy.js": "^6.3.1"
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.17"
   }
 }
