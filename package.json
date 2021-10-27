@@ -19,9 +19,9 @@
   "unpkg": "./dist/moon.umd.js",
   "jsdelivr": "./dist/moon.umd.js",
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs",
+    "dev": "vitepress dev",
+    "build": "vitepress build",
+    "serve": "vitepress serve",
     "build:library": "vite build",
     "analyze": "vite build --config analyze.config.js",
     "publish:library": "npm publish --access public",
@@ -44,9 +44,10 @@
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.3.0",
-    "@tailwindcss/typography": "^0.4.1",
     "@tailwindcss/forms": "^0.3.3",
+    "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.3.7",
+    "gray-matter": "^4.0.3",
     "mitt": "^3.0.0",
     "postcss": "^8.3.11",
     "tailwindcss": "^2.2.17"
