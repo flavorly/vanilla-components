@@ -37,6 +37,7 @@
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.14.0",
+    "postcss-import": "^14.0.2",
     "prettier": "^2.3.2",
     "rollup-plugin-visualizer": "^5.5.2",
     "vite": "^2.4.3",
@@ -44,11 +45,12 @@
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.3.0",
-    "@tailwindcss/typography": "^0.4.1",
     "@tailwindcss/forms": "^0.3.3",
+    "@tailwindcss/typography": "^0.4.1",
     "autoprefixer": "^10.3.7",
     "mitt": "^3.0.0",
     "postcss": "^8.3.11",
+    "postcss-nested": "^5.0.6",
     "tailwindcss": "^2.2.17"
   }
 }

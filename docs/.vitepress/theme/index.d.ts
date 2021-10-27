@@ -3,10 +3,6 @@ import './styles/layout.css';
 import './styles/code.css';
 import './styles/custom-blocks.css';
 import './styles/sidebar-links.css';
-import Layout from './Layout.vue';
-import NotFound from './NotFound.vue';
-const theme = {
-    Layout,
-    NotFound
-};
+import { Theme } from 'vitepress';
+declare const theme: Theme;
 export default theme;
