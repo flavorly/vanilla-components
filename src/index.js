@@ -1,5 +1,3 @@
 export { default as Button } from './components/Button/Button.vue'
 export { default as XCard } from './components/Cards/Card.vue'
 export { default as XWrapper } from './components/XWrapper.vue'
-export { default as WrapperTest } from './components/WrapperTest.vue'
-export { default as EventBus } from './utils/mitt'
