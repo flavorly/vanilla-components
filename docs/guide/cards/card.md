@@ -1,6 +1,7 @@
-# Button
 
-The button component is a simple customizable button.
+# Cards
+
+Simple cards for your app
 
 | Prop       | Description               | Accepted Values                 | Default     |
 | :--------- | :------------------------ | :------------------------------ | :---------- |
@@ -18,6 +19,7 @@ The button component is a simple customizable button.
 Content
 </x-card>
 ```
+
 
 <CardExample />
 

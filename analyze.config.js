@@ -10,13 +10,13 @@ export default defineConfig({
     vue(),
     visualizer({
       open: true,
-      title: 'Moon Bundle Visualizer',
+      title: 'Vanilla Components Bundle Visualizer',
     }),
   ],
   build: {
     lib: {
       entry: resolve(__dirname, 'src/index.js'),
-      name: 'moon',
+      name: 'vanilla-components',
     },
     rollupOptions: {
       // make sure to externalize deps that shouldn't be bundled

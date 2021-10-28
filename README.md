@@ -1,25 +1,19 @@
-# 🌙 Moon
-
-[![npm (scoped)](https://img.shields.io/npm/v/@ulissesferreira/moon)](https://www.npmjs.com/package/@ulissesferreira/moon)
-[![npm bundle size (scoped)](https://img.shields.io/bundlephobia/minzip/@ulissesferreira/moon)](https://bundlephobia.com/result?p=@ulissesferreira/moon@latest)
-[![NPM](https://img.shields.io/npm/l/@ulissesferreira/moon)](https://github.com/ulissesferreira/moon/blob/main/LICENSE)
+# Vanilla Components
 
 A lightweight Vue 3 component library.
-
-When you are starting a new prototype you want to be able to develop features fast. We created this component library as a way for us to build products quickly without having to deal with complicated packages and a huge bundle sizes.
 
 ## Usage
 
 First install the library using your prefered package manager
 
 ```bash
-yarn add @ulissesferreira/moon
+yarn add @igerslike/vanilla-components
 ```
 
 then you can import the available components like so
 
 ```vue
-import { Button } from '@ulissesferreira/moon'
+import { Button } from '@igerslike/vanilla-components'
 ```
 
 ## Available commands

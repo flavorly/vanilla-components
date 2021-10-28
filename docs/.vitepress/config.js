@@ -12,7 +12,7 @@ module.exports = {
     nav: [
       {
         text: 'Github',
-        link: 'https://github.com/ulissesferreira/moon',
+        link: 'https://github.com/igerslike/vanilla-documents',
       },
     ],
     sidebar: [
@@ -26,11 +26,15 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+      require('vue-shadow-dom')
+  ]
 }
 
 function getComponents() {
   return [
     { text: 'Button', link: '/guide/button/button' },
     { text: 'Card', link: '/guide/cards/card' },
+    { text: 'Teste', link: '/guide/sample' },
   ]
 }
