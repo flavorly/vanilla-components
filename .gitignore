@@ -85,3 +85,8 @@ jspm_packages/
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# Vuepress
+docs/.vuepress/node_modules
+docs/.vuepress/.temp
+docs/.vuepress/.cache

@@ -19,9 +19,8 @@
   "unpkg": "./dist/vanilla-components.umd.js",
   "jsdelivr": "./dist/vanilla-components.umd.js",
   "scripts": {
-    "dev": "vitepress dev docs",
-    "build": "vitepress build docs",
-    "serve": "vitepress serve docs",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "build:library": "vite build",
     "analyze": "vite build --config analyze.config.js",
     "publish:library": "npm publish --access public",
@@ -34,6 +33,7 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.5",
     "@vue/compiler-sfc": "^3.1.5",
+    "@vuepress/plugin-register-components": "^2.0.0-beta.27",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.14.0",
@@ -41,7 +41,9 @@
     "prettier": "^2.3.2",
     "rollup-plugin-visualizer": "^5.5.2",
     "vite": "^2.4.3",
-    "vitepress": "^0.15.6"
+    "vuepress": "^2.0.0-beta.27",
+    "@vuepress/cli": "^2.0.0-alpha.8",
+    "@vuepress/utils": "^2.0.0-alpha.1"
   },
   "dependencies": {
     "@tailwindcss/aspect-ratio": "^0.3.0",

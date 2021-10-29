@@ -15,11 +15,13 @@ let makeShadow = (name, rgb) => {
 };
 
 module.exports = {
-  purge: [],
-  darkMode: 'class', // or 'media' or 'class'
-  variants: {
-    extend: {},
-  },
+  mode: 'jit',
+  darkMode: 'class', // or 'media' or 'class'*,
+  purge: [
+    './docs/.vuepress/**/*.{js,jsx,ts,tsx,vue,md}',
+    './docs/guide/**/*.{js,jsx,ts,tsx,vue,md}',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
+  ],
   theme: {
     colors: {
       transparent: 'transparent',
