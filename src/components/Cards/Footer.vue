@@ -17,9 +17,9 @@
   <div
     v-else-if="type === 'grid'"
     :class="{
-      'grid-with-1-columns': parseInt(columns) === 1,
-      'grid-with-2-columns': parseInt(columns) === 2,
-      'grid-with-3-columns': parseInt(columns) === 3,
+      'sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense': parseInt(columns) === 1,
+      'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense': parseInt(columns) === 2,
+      'sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense': parseInt(columns) === 3,
       'border-t border-gray-200 dark:border-gray-700': border
     }"
     class="p-4 sm:p-6"
@@ -31,7 +31,7 @@
   <div
     v-else-if="type === 'split'"
     :class="{'border-t border-gray-200 dark:border-gray-700': border}"
-    class="grid-with-2-columns px-4 py-4 sm:px-6"
+    class="sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense px-4 py-4 sm:px-6"
   >
     <div class="flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0">
       <slot name="left" />
