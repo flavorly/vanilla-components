@@ -27,6 +27,12 @@ export default {
           { text: 'Card', link: '/guide/cards' },
         ],
       },
+      {
+        text: 'Inputs',
+        children: [
+          { text: 'Select', link: '/guide/inputs/select' },
+        ],
+      },
     ],
   },
   plugins: [

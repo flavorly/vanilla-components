@@ -33,7 +33,9 @@
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.5",
     "@vue/compiler-sfc": "^3.1.5",
+    "@vuepress/cli": "^2.0.0-alpha.8",
     "@vuepress/plugin-register-components": "^2.0.0-beta.27",
+    "@vuepress/utils": "^2.0.0-alpha.1",
     "eslint": "^7.31.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-vue": "^7.14.0",
@@ -41,11 +43,11 @@
     "prettier": "^2.3.2",
     "rollup-plugin-visualizer": "^5.5.2",
     "vite": "^2.4.3",
-    "vuepress": "^2.0.0-beta.27",
-    "@vuepress/cli": "^2.0.0-alpha.8",
-    "@vuepress/utils": "^2.0.0-alpha.1"
+    "vuepress": "^2.0.0-beta.27"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.4.1",
+    "@heroicons/vue": "^1.0.5",
     "@tailwindcss/aspect-ratio": "^0.3.0",
     "@tailwindcss/forms": "^0.3.3",
     "@tailwindcss/typography": "^0.4.1",
