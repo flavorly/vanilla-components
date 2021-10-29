@@ -23,9 +23,8 @@ export default {
       {
         text: 'Components',
         children: [
-          // { text: 'Button', link: '/guide/button/button' },
-          { text: 'Card', link: '/guide/card' },
-          { text: 'Teste', link: '/guide/sample' },
+          { text: 'Button', link: '/guide/buttons' },
+          { text: 'Card', link: '/guide/cards' },
         ],
       },
     ],

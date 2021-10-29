@@ -5,7 +5,7 @@
 </template>
 <script>
 import {ShadowRoot} from 'vue-shadow-dom/dist/shadow';
-import './../../styles/tailwind.css';
+import './../../../../src/styles/main.pcss';
 export default {
   components: {
     ShadowRoot

@@ -20,7 +20,7 @@ module.exports = {
   purge: [
     './docs/.vuepress/components/**/*.{js,jsx,ts,tsx,vue}',
     './docs/.vuepress/theme/**/*.{js,jsx,ts,tsx,vue}',
-    './docs/guide/**/*.{js,jsx,ts,tsx,vue}',
+    './docs/guide/**/*.{js,jsx,ts,tsx,vue,md}',
     './src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   theme: {
