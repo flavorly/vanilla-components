@@ -1,4 +1,0 @@
----
-layout: Blank
----
-<card-example />

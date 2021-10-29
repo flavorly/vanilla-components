@@ -90,3 +90,4 @@ jspm_packages/
 docs/.vuepress/node_modules
 docs/.vuepress/.temp
 docs/.vuepress/.cache
+docs/.vuepress/dist

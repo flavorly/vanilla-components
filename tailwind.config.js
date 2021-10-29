@@ -18,8 +18,9 @@ module.exports = {
   mode: 'jit',
   darkMode: 'class', // or 'media' or 'class'*,
   purge: [
-    './docs/.vuepress/**/*.{js,jsx,ts,tsx,vue,md}',
-    './docs/guide/**/*.{js,jsx,ts,tsx,vue,md}',
+    './docs/.vuepress/components/**/*.{js,jsx,ts,tsx,vue}',
+    './docs/.vuepress/theme/**/*.{js,jsx,ts,tsx,vue}',
+    './docs/guide/**/*.{js,jsx,ts,tsx,vue}',
     './src/**/*.{js,jsx,ts,tsx,vue}',
   ],
   theme: {

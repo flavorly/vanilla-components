@@ -21,4 +21,4 @@ Content
 </x-card>
 ```
 
-<wrapper />
+<x-wrapper src="card" />
