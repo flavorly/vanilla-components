@@ -6,6 +6,7 @@ export default {
   description: 'A lightweight Vue 3 component based on Tailwind CSS',
   serviceWorker: true,
   theme: path.resolve(__dirname, './theme'),
+  port: 3000,
   themeConfig: {
     docsDir: 'docs',
     darkMode: true,
@@ -30,6 +31,7 @@ export default {
       {
         text: 'Inputs',
         children: [
+          { text: 'Introduction', link: '/guide/inputs/shared-options' },
           { text: 'Select', link: '/guide/inputs/select' },
         ],
       },

@@ -32,13 +32,23 @@
           :value="empty.value"
           v-html="empty.title"
         />
-        <option
+
+        <template
           v-for="(item, index) in options"
           :key="index"
-          :value="item?.value || index"
         >
-          {{ item?.text || item?.label || item }}
-        </option>
+          <slot
+            :item="item"
+            :index="index"
+            name="option"
+          >
+            <option
+              :value="item?.value || index"
+            >
+              {{ item?.text || item?.label || item }}
+            </option>
+          </slot>
+        </template>
       </select>
       <slot name="after" />
       <div
@@ -79,7 +89,7 @@ export default {
     inheritAttrs: false,
     props: {
         modelValue: {
-            default: '',
+            default: null,
             required: false,
         },
         options: {
@@ -88,7 +98,7 @@ export default {
         },
         showEmpty: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         empty: {
             type: Object,
