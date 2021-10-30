@@ -19,6 +19,14 @@ All the inputs have standard layouts & options out-the-box.
 | :--------- | :------------------------ | :------------------------------ | :---------- |
 | `modelValue`    | The Value selected | Any   | `undefined or null` |
 
+## Slots
+
+| Event   | Description               | Parameters    |
+| :------ | :------------------------ | :------------ |
+| `label` | Slot for the label | `slot` |
+| `before` | Prepends the field | `empty` |
+| `after` | Appends the field | `empty` |
+
 
 ## Errors, Label, Helper & Layout
 

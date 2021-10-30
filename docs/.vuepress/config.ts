@@ -32,6 +32,7 @@ export default {
         text: 'Inputs',
         children: [
           { text: 'Introduction', link: '/guide/inputs/shared-options' },
+          { text: 'Text', link: '/guide/inputs/text' },
           { text: 'Select', link: '/guide/inputs/select' },
         ],
       },
