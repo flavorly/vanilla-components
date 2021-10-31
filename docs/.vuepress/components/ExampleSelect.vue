@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import XSelect from "../../../src/components/Inputs/Select";
+import XSelect from "@/components/Inputs/Select";
 export default {
   name: "ExampleSelect",
   components: {
