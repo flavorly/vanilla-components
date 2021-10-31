@@ -13,29 +13,31 @@
       </slot>
     </template>
 
-    <div class="relative flex">
-      <slot name="before" />
+    <div class="relative flex-1">
       <input
         :id="uuid(name)"
         ref="input"
         v-model="modelValue"
-        :name="uuid(name)"
-        type="text"
         :autocomplete="name"
-        :class="[
-          hasErrors ? 'danger' : '',
-          classesForButtonHasGroupAbove,
-          classesForButtonHasGroupBellow
-        ]"
+        :class="[ hasErrors ? 'danger' : '', inputClass]"
+        :type="type"
         class="form-input"
         v-bind="$attrs"
       >
-      <slot name="after" />
       <div
-        v-if="hasErrors && showLeadingErrorIcon"
-        class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"
+        class="absolute inset-y-0 right-0 pr-3 flex items-center z-10 cursor-pointer"
+        @click="togglePassword"
       >
-        <ExclamationCircleIcon class="w-5 h-5 text-red-500" />
+        <i
+          v-show="!showingPassword"
+          :class="[hasErrors ? 'text-red-400' : 'text-gray-500']"
+          class="fa fa-eye"
+        />
+        <i
+          v-show="showingPassword"
+          :class="[hasErrors ? 'text-red-400' : 'text-gray-500']"
+          class="fa fa-eye-slash"
+        />
       </div>
     </div>
     <x-form-errors
@@ -49,7 +51,6 @@
   </x-input-layout>
 </template>
 <script>
-import {ExclamationCircleIcon} from "@heroicons/vue/solid";
 import UseFormInputs from "@/utils/UseFormInputs";
 import XInputLayout from "@/components/Inputs/Partials/Layout";
 import XFormErrors from "@/components/Inputs/Partials/Errors";
@@ -57,20 +58,34 @@ import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
 
 export default {
-    name: 'XInputText',
+    name: 'XInputPassword',
     components: {
         XFormLabel,
         XFormHelper,
         XFormErrors,
         XInputLayout,
-        ExclamationCircleIcon,
     },
     mixins: [UseFormInputs],
     inheritAttrs: false,
     props: {
+        inputClass: {
+            type: String,
+            default: "",
+        },
         modelValue: {
-            default: '',
-            required: false,
+            required: true,
+        },
+    },
+    data() {
+        return {
+            showingPassword: false,
+            type: 'password'
+        };
+    },
+    methods: {
+        togglePassword() {
+            this.showingPassword = !this.showingPassword;
+            this.type = this.showingPassword ? 'text' : 'password';
         },
     },
 };

@@ -15,41 +15,21 @@
 
     <div class="relative flex">
       <slot name="before" />
-      <select
+      <textarea
         :id="name"
         ref="input"
         v-model="modelValue"
-        class="form-input"
+        :name="name"
+        :autocomplete="name"
         :class="[
           hasErrors ? 'danger' : '',
           classesForButtonHasGroupAbove,
           classesForButtonHasGroupBellow
         ]"
+        class="form-input"
+        :rows="rows"
         v-bind="$attrs"
-      >
-        <option
-          v-if="empty && showEmpty"
-          :value="empty.value"
-          v-html="empty.title"
-        />
-
-        <template
-          v-for="(item, index) in options"
-          :key="index"
-        >
-          <slot
-            :item="item"
-            :index="index"
-            name="option"
-          >
-            <option
-              :value="item?.value || index"
-            >
-              {{ item?.text || item?.label || item }}
-            </option>
-          </slot>
-        </template>
-      </select>
+      />
       <slot name="after" />
       <div
         v-if="hasErrors && showLeadingErrorIcon"
@@ -77,7 +57,7 @@ import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
 
 export default {
-    name: 'XSelect',
+    name: 'XInputTextArea',
     components: {
         XFormLabel,
         XFormHelper,
@@ -89,26 +69,13 @@ export default {
     inheritAttrs: false,
     props: {
         modelValue: {
-            default: null,
-            required: false,
+            default: '',
+            required: true,
         },
-        options: {
-            type: [Array,Object],
-            default: () => [],
-        },
-        showEmpty: {
-            type: Boolean,
-            default: true,
-        },
-        empty: {
-            type: Object,
-            default: () => {
-                return {
-                    value: null,
-                    title: "&mdash;",
-                };
-            },
-        },
+        rows: {
+            default: 3,
+            required: false
+        }
     },
 };
 </script>

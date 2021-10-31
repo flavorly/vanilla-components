@@ -1,5 +1,7 @@
 <template>
-  <x-input-layout :layout="layout">
+  <x-input-layout
+    :layout="layout"
+  >
     <template #label>
       <slot
         v-if="$slots.label || label"
@@ -15,41 +17,35 @@
 
     <div class="relative flex">
       <slot name="before" />
-      <select
-        :id="name"
-        ref="input"
+      <!--        <flat-pickr-->
+      <!--          ref="input"-->
+      <!--          v-model="modelValue"-->
+      <!--          :config="config"-->
+      <!--          class="form-input"-->
+      <!--          :class="[-->
+      <!--            hasErrors ? 'danger' : '',-->
+      <!--            classesForButtonHasGroupAbove,-->
+      <!--            classesForButtonHasGroupBellow-->
+      <!--          ]"-->
+      <!--          v-bind="$attrs"-->
+      <!--          @update:modelValue="$emit('update:modelValue', $event)"-->
+      <!--        />-->
+      <input
+        :id="uuid(name)"
+        ref="picker"
         v-model="modelValue"
-        class="form-input"
+        :name="uuid(name)"
+        type="text"
+        :autocomplete="name"
         :class="[
           hasErrors ? 'danger' : '',
           classesForButtonHasGroupAbove,
           classesForButtonHasGroupBellow
         ]"
+        class="form-input"
         v-bind="$attrs"
+        @update:modelValue="$emit('update:modelValue', $event)"
       >
-        <option
-          v-if="empty && showEmpty"
-          :value="empty.value"
-          v-html="empty.title"
-        />
-
-        <template
-          v-for="(item, index) in options"
-          :key="index"
-        >
-          <slot
-            :item="item"
-            :index="index"
-            name="option"
-          >
-            <option
-              :value="item?.value || index"
-            >
-              {{ item?.text || item?.label || item }}
-            </option>
-          </slot>
-        </template>
-      </select>
       <slot name="after" />
       <div
         v-if="hasErrors && showLeadingErrorIcon"
@@ -75,9 +71,10 @@ import XInputLayout from "@/components/Inputs/Partials/Layout";
 import XFormErrors from "@/components/Inputs/Partials/Errors";
 import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
+import Flatpickr from 'flatpickr';
 
 export default {
-    name: 'XSelect',
+    name: 'XDateTimePicker',
     components: {
         XFormLabel,
         XFormHelper,
@@ -89,26 +86,22 @@ export default {
     inheritAttrs: false,
     props: {
         modelValue: {
-            default: null,
+            default: '',
             required: false,
         },
-        options: {
-            type: [Array,Object],
-            default: () => [],
-        },
-        showEmpty: {
-            type: Boolean,
-            default: true,
-        },
-        empty: {
+        config: {
             type: Object,
             default: () => {
                 return {
-                    value: null,
-                    title: "&mdash;",
+                    enableTime: true,
+                    time_24hr: true,
                 };
             },
         },
     },
+    emits: ['update:modelValue'],
+    mounted() {
+        new Flatpickr(this.$refs.picker,this.config)
+    }
 };
 </script>
