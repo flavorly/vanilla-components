@@ -46,7 +46,6 @@ import XRichSelect from "./RichSelect";
 import find from 'lodash/find';
 import first from 'lodash/first';
 
-
 export default {
     name: 'XInputCountry',
     components: {
