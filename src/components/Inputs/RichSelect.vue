@@ -123,7 +123,7 @@
 
               <ListboxOptions
                 static
-                class="outline-none focus:ring-0 focus:ring-indigo-500 focus:outline-none focus:ring-offset-1"
+                class="outline-none focus:ring-0 focus:ring-indigo-500 focus:outline-none"
               >
                 <ListboxOption
                   v-for="anOption in selectOptions"
