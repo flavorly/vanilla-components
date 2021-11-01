@@ -75,7 +75,7 @@ import XInputLayout from "@/components/Inputs/Partials/Layout";
 import XFormLabel from "@/components/Inputs/Partials/Label";
 
 export default {
-    name: 'XToggle',
+    name: 'XInputToggle',
     components: {
         XFormLabel,
         XInputLayout

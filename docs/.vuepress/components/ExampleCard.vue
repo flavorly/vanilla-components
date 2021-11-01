@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import XCard from "@/components/Cards/Card";
+import {XCard} from "@/index";
 export default {
   name: "ExampleButtons",
   components: {

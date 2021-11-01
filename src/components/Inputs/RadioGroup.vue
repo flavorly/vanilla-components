@@ -138,7 +138,7 @@ import {
 } from '@headlessui/vue'
 
 export default {
-    name: 'XRadioGroup',
+    name: 'XInputRadioGroup',
     components: {
       XFormLabel,
       XFormHelper,

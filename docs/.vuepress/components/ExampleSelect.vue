@@ -1,7 +1,7 @@
 <template>
   <!-- Regular -->
   <div class="space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-select
+    <x-input-select
       class="inline-flex"
       :options="options"
       layout="naked"
@@ -15,7 +15,7 @@
 
   <!-- Sloted -->
   <div class="mt-5 space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-select
+    <x-input-select
       class="inline-flex"
       :options="options"
       layout="naked"
@@ -24,7 +24,7 @@
       <template v-slot:option="{item,index}">
         <option :value="item.value">Im sloted {{ item.label }}</option>
       </template>
-    </x-select>
+    </x-input-select>
 
   </div>
   <div class="flex items-center justify-center mx-auto text-center mt-2">
@@ -33,7 +33,7 @@
 
   <!-- Errors -->
   <div class="mt-5 space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-select
+    <x-input-select
       class="inline-flex"
       :options="options"
       layout="naked"
@@ -44,7 +44,7 @@
 
   <!-- Helper -->
   <div class="mt-5 space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-select
+    <x-input-select
       class="inline-flex"
       :options="options"
       layout="naked"
@@ -55,11 +55,11 @@
 </template>
 
 <script>
-import XSelect from "@/components/Inputs/Select";
+import {XInputSelect} from "@/index";
 export default {
   name: "ExampleSelect",
   components: {
-    XSelect
+    XInputSelect
   },
   data(){
       return {

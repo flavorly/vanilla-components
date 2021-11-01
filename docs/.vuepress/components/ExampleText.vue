@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import XInputText from "@/components/Inputs/Text";
+import {XInputText} from "@/index";
 export default {
   name: "ExampleSelect",
   components: {

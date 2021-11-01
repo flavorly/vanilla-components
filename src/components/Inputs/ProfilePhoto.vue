@@ -71,10 +71,10 @@ import XInputLayout from "@/components/Inputs/Partials/Layout";
 import XFormErrors from "@/components/Inputs/Partials/Errors";
 import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
-import XButton from "@/Components/Buttons/Button";
+import XButton from "@/components/Buttons/Button";
 
 export default {
-    name: "XProfilePhoto",
+    name: "XInputProfilePhoto",
     components: {
         XFormLabel,
         XFormHelper,

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import XButton from "@/components/Buttons/Button";
+import {XButton} from "@/index";
 export default {
   name: "ExampleButtons",
   components: {

@@ -13,7 +13,7 @@
     </template>
 
     <div class="relative flex-1">
-      <x-rich-select
+      <x-input-rich-select
         :errors="errors"
         :model-value="modelValue"
         :name="'countryCode'+name"
@@ -38,11 +38,11 @@
 import UseFormInputs from "@/utils/UseFormInputs";
 import SyncProps from "@/utils/SyncProps";
 import {filterCountriesByName, countries} from "@/utils/CountryCodes";
-import XInputLayout from "./Partials/Layout";
-import XFormErrors from "./Partials/Errors";
-import XFormHelper from "./Partials/Helper";
-import XFormLabel from "./Partials/Label";
-import XRichSelect from "./RichSelect";
+import XInputLayout from "@/components/Inputs/Partials/Layout";
+import XFormErrors from "@/components/Inputs/Partials/Errors";
+import XFormHelper from "@/components/Inputs/Partials/Helper";
+import XFormLabel from "@/components/Inputs/Partials/Label";
+import XInputRichSelect from "./RichSelect";
 import find from 'lodash/find';
 import first from 'lodash/first';
 
@@ -52,7 +52,7 @@ export default {
         XFormLabel,
         XFormHelper,
         XFormErrors,
-        XRichSelect,
+        XInputRichSelect,
         XInputLayout,
     },
     mixins: [

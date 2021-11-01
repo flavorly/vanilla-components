@@ -77,7 +77,7 @@ import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
 
 export default {
-    name: 'XSelect',
+    name: 'XInputSelect',
     components: {
         XFormLabel,
         XFormHelper,

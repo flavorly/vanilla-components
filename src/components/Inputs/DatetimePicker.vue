@@ -17,19 +17,6 @@
 
     <div class="relative flex">
       <slot name="before" />
-      <!--        <flat-pickr-->
-      <!--          ref="input"-->
-      <!--          v-model="modelValue"-->
-      <!--          :config="config"-->
-      <!--          class="form-input"-->
-      <!--          :class="[-->
-      <!--            hasErrors ? 'danger' : '',-->
-      <!--            classesForButtonHasGroupAbove,-->
-      <!--            classesForButtonHasGroupBellow-->
-      <!--          ]"-->
-      <!--          v-bind="$attrs"-->
-      <!--          @update:modelValue="$emit('update:modelValue', $event)"-->
-      <!--        />-->
       <input
         :id="uuid(name)"
         ref="picker"
@@ -74,7 +61,7 @@ import XFormLabel from "@/components/Inputs/Partials/Label";
 import Flatpickr from 'flatpickr';
 
 export default {
-    name: 'XDateTimePicker',
+    name: 'XInputDateTimePicker',
     components: {
         XFormLabel,
         XFormHelper,

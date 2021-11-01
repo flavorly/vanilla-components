@@ -53,7 +53,7 @@ export default {
   // options for webpack bundler
   bundlerConfig: {
     chainWebpack(config,isServer,isBuild){
-      console.log(config);
+      //console.log(config);
       config.resolve.alias.set('@', path.resolve(__dirname, "./../../src"))
     },
   },

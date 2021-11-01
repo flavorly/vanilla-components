@@ -188,16 +188,16 @@ import XInputLayout from "@/components/Inputs/Partials/Layout";
 import XFormErrors from "@/components/Inputs/Partials/Errors";
 import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
+import XInputText from "@/components/Inputs/Text";
 import {Listbox, ListboxButton, ListboxOption, ListboxOptions} from '@headlessui/vue';
 import {CheckIcon, SelectorIcon} from '@heroicons/vue/solid';
 import find from 'lodash/find';
 import each from 'lodash/each';
-import XInputText from "@/Components/Inputs/Text";
 import Fuse from "fuse.js";
 import { onClickOutside } from '@vueuse/core'
 
 export default {
-    name: "XRichSelect",
+    name: "XInputRichSelect",
     components: {
       XFormLabel,
       XFormHelper,

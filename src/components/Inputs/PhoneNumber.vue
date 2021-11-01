@@ -15,7 +15,7 @@
     <div class="relative flex-1">
       <div class="mt-1 rounded-md -space-y-px">
         <!-- Actual Country Code-->
-        <x-rich-select
+        <x-input-rich-select
           :errors="errors"
           :model-value="countryCode"
           :name="'phoneCountryCode'+name"
@@ -67,19 +67,19 @@ import XFormErrors from "@/components/Inputs/Partials/Errors";
 import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
 import {filterCountriesByName, phoneCountries} from "@/utils/CountryCodes";
-import XRichSelect from "@/Components/Inputs/RichSelect";
+import XInputRichSelect from "@/components/Inputs/RichSelect";
 import XInputText from "@/components/Inputs/Text";
 import find from 'lodash/find';
 import first from 'lodash/first';
 
 export default {
-    name: 'XPhoneNumber',
+    name: 'XInputPhoneNumber',
     components: {
         XFormLabel,
         XFormHelper,
         XFormErrors,
         XInputText,
-        XRichSelect,
+        XInputRichSelect,
         XInputLayout,
     },
     mixins: [
