@@ -25,8 +25,8 @@ export default {
       {
         text: 'Components',
         children: [
-          { text: 'Button', link: '/guide/buttons' },
-          { text: 'Card', link: '/guide/cards' },
+          { text: 'Button', link: '/guide/elements/buttons' },
+          { text: 'Card', link: '/guide/elements/cards' },
         ],
       },
       {
@@ -35,6 +35,7 @@ export default {
           { text: 'Introduction', link: '/guide/inputs/shared-options' },
           { text: 'Text', link: '/guide/inputs/text' },
           { text: 'Select', link: '/guide/inputs/select' },
+          { text: 'Rich Select', link: '/guide/inputs/rich-select' },
         ],
       },
     ],

@@ -39,7 +39,7 @@
 <script>
 import {XInputText} from "@/index";
 export default {
-  name: "ExampleSelect",
+  name: "ExampleInputSelect",
   components: {
     XInputText,
   },

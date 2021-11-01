@@ -2,4 +2,4 @@
 layout: Blank
 ---
 
-<ExampleSelect />
+<example-input-text />

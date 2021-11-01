@@ -1,6 +1,6 @@
 <template>
   <!-- Regular -->
-  <div class="space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
+  <div class="space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
     <x-input-select
       class="inline-flex"
       :options="options"
@@ -14,7 +14,7 @@
   </div>
 
   <!-- Sloted -->
-  <div class="mt-5 space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
+  <div class="mt-5 space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
     <x-input-select
       class="inline-flex"
       :options="options"
@@ -32,7 +32,7 @@
   </div>
 
   <!-- Errors -->
-  <div class="mt-5 space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
+  <div class="mt-5 space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
     <x-input-select
       class="inline-flex"
       :options="options"
@@ -43,7 +43,7 @@
   </div>
 
   <!-- Helper -->
-  <div class="mt-5 space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
+  <div class="mt-5 space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
     <x-input-select
       class="inline-flex"
       :options="options"
@@ -57,7 +57,7 @@
 <script>
 import {XInputSelect} from "@/index";
 export default {
-  name: "ExampleSelect",
+  name: "ExampleInputSelect",
   components: {
     XInputSelect
   },

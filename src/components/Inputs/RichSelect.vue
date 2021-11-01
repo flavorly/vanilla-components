@@ -39,6 +39,12 @@
           >
             <div class="relative pr-3">
               <div class="flex items-center space-x-2 text-sm">
+                <span
+                  v-if="option?.indicator"
+                  class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
+                  :class="indicatorClass(option)"
+                  aria-hidden="true"
+                />
                 <img
                   v-if="option?.image"
                   :alt="option.label"
@@ -106,7 +112,10 @@
                       :searchable="searchable"
                       name="noResults"
                     >
-                      {{ $t('generic.components.select-no-records', {query: query}) }}
+                      {{ typeof $t !== "undefined" ?
+                        $t('generic.components.select-no-records', {query: query}) :
+                        noResultsLabel.replace(':query',query)
+                      }}
                     </slot>
                   </div>
                 </div>
@@ -118,9 +127,9 @@
               >
                 <ListboxOption
                   v-for="anOption in selectOptions"
-                  :key="anOption.id"
+                  :key="anOption.value"
                   v-slot="{ active, selected }"
-                  :value="anOption.id"
+                  :value="anOption.value"
                   as="template"
                   class="py-2 pl-4 pr-4"
                 >
@@ -132,6 +141,12 @@
                         :class="[selected ? 'font-medium' : 'font-normal','block truncate',]"
                         class="flex items-center space-x-2 text-sm"
                       >
+                        <span
+                          v-if="anOption?.indicator"
+                          class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
+                          :class="indicatorClass(anOption)"
+                          aria-hidden="true"
+                        />
                         <img
                           v-if="anOption?.image"
                           :alt="anOption.label"
@@ -242,6 +257,12 @@ export default {
         openOnClickLabel: {
             type: Boolean,
             default: false,
+        },
+        noResultsLabel: {
+            type: String,
+            default: () => {
+                return '😅 Sorry but there is no records matching ":query"'
+            }
         }
     },
     emits: [
@@ -305,7 +326,7 @@ export default {
             handler(value) {
                 this.query = '';
                 this.show = false;
-                this.option = find(this.options, {'id': value}) || this.options[0]
+                this.option = find(this.options, {'value': value}) || this.options[0]
             }
         },
         options: {
@@ -318,7 +339,7 @@ export default {
             immediate: true,
             handler(options) {
                 if(options.length){
-                    this.option = find(options, {'id': this.modelValue}) || options[0]
+                    this.option = find(options, {'value': this.modelValue}) || options[0]
                 }
             }
         },
@@ -339,7 +360,7 @@ export default {
         },
         closeDropdown(e){
             e.preventDefault();
-            this.$emit('update:modelValue',this.option.id)
+            this.$emit('update:modelValue',this.option.value)
             this.query = '';
             this.show = false;
         },
@@ -350,7 +371,15 @@ export default {
         openDropdown(e){
             this.query = '';
             this.show = true;
-        }
+        },
+        indicatorClass(option){
+          return {
+            'green' : 'bg-green-400',
+            'gray': 'bg-gray-200',
+            'red' : 'bg-red-400',
+            'yellow': 'bg-yellow-400',
+          }[option?.indicator || '']
+        },
     },
 }
 </script>

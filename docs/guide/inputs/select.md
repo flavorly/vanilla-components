@@ -37,11 +37,10 @@ Inherits the default Layout Options and the following options:
     <pre>{{ JSON.stringify(value) }}</pre>
 </template>
 <script>
-import XSelect from "Select";
+import {XInputSelect} from "@vanilla-components";
 export default {
-  name: "ExampleSelect",
   components: {
-    XSelect
+    XInputSelect
   },
   data(){
     return {

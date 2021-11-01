@@ -4,7 +4,7 @@ import filter from 'lodash/filter';
 import each from 'lodash/each';
 
 export const Timezones = momentTZ.tz.names().map((timezone) => ({
-    id: timezone,
+    value: timezone,
     label: timezone,
 }));
 
@@ -24,14 +24,14 @@ export const filterTimezonesByName = function (
 
     if (query === '' || query.length < minCharacters) {
         return filter(collection, (timezone) => {
-            return favoriteTimezones.includes(timezone.id) || timezone.id === current
+            return favoriteTimezones.includes(timezone.value) || timezone.value === current
         })
     }
 
     const options = {
         includeScore: false,
         threshold: 0.3,
-        keys: ['id']
+        keys: ['value']
     }
 
     const fuse = new Fuse(collection, options);
