@@ -36,6 +36,7 @@ export default {
           { text: 'Text', link: '/guide/inputs/text' },
           { text: 'Select', link: '/guide/inputs/select' },
           { text: 'Rich Select', link: '/guide/inputs/rich-select' },
+          { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },
         ],
       },
     ],
