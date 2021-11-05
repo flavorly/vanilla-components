@@ -62,9 +62,9 @@
                 />
               </div>
               <div
-                v-if="option?.subtext"
+                v-if="option?.description"
                 class="w-100 text-xs text-gray-500 dark:text-gray-300 text-left mt-1"
-                v-html="option.subtext"
+                v-html="option.description"
               />
             </div>
 
@@ -165,9 +165,9 @@
                       </div>
                     </div>
                     <div
-                      v-if="anOption?.subtext"
+                      v-if="anOption?.description"
                       class="w-100 text-xs text-gray-500 text-left mt-1"
-                      v-html="anOption.subtext"
+                      v-html="anOption.description"
                     />
                     <span
                       v-if="selected"

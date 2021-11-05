@@ -8,19 +8,10 @@ Inherits the default Layout Options and the following options:
 
 | Prop       | Description               | Accepted Values                 | Default     |
 | :--------- | :------------------------ | :------------------------------ | :---------- |
-| `options`| Array/Object of options | Object|Arra y| `undefined` |
-| `search`| Function to search threw objects| Boolean|Function | `false` |
-| `searchPlaceholder` | A placeholder to show while searching | `String` | `Undefined`|
-| `searchable`| If the select should be searchable | `Boolean` | `true`|
-| `openOnClickLabel`| If the select should open on click the label | `Boolean` | `false`|
-| `noResultsLabel`| When searching and no results | `String` | `false`|
-
-## Events
-
-| Event   | Description               | Parameters    |
-| :------ | :------------------------ | :------------ |
-| `modelValue` | Value emmited | `$event` |
-| `labelClick` | When user clicks the label | `$event` |
+| `options`| Array/Object of options | Object|Array | `undefined` |
+| `separated`| If wants the options separated or stick together | Boolean | `false` |
+| `radio` | If you want a radio button or a SVG icon | `Boolean` | `false`|
+| `dark`| If dark mode is enable/disable | `Boolean` | `true`|
 
 ## Slots
 
@@ -36,6 +27,8 @@ Inherits the default Layout Options and the following options:
 <template>
   <x-input-radio-group
       :options="options"
+      :separted="true"
+      :dark="false"
       layout="naked"
       v-model="value"
   />
@@ -58,12 +51,12 @@ export default {
         {
           value: 'paypal', 
           label: 'Paypal',
-          subtext: 'Checkout using Paypal',
+          description: 'Checkout using Paypal',
         },
         {
           value: 'credit-card',
           label: 'Credit Card ( Visa / Master Card )',
-          subtext: 'Checkout using Stripe and use your favorite Payment provider.',
+          description: 'Checkout using Stripe and use your favorite Payment provider.',
         },
       ]
     }

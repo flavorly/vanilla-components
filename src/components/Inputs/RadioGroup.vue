@@ -42,7 +42,8 @@
                 'bg-white dark:bg-gray-900': !checked,
                 'rounded-tl-lg rounded-tr-lg': !separated && index === 0,
                 'rounded-bl-lg rounded-br-lg': !separated && index === options.length - 1,
-                'rounded-lg': separated
+                'rounded-lg': separated,
+                'flex items-center content-center': false,
               }"
               class="relative flex px-5 py-4 cursor-pointer focus:outline-none"
             >
@@ -95,8 +96,8 @@
                       cx="12"
                       cy="12"
                       r="12"
-                      :fill="[$dark ? '#fff' : '#4f46e5']"
-                      :fill-opacity="[$dark ? '0.2' : '0.9']"
+                      :fill="[dark ? '#fff' : '#4f46e5']"
+                      :fill-opacity="[dark ? '0.2' : '0.9']"
                     />
                     <path
                       d="M7 13l3 3 7-7"
@@ -160,7 +161,7 @@ export default {
         },
         modelValue: {
             default: '',
-            required: true,
+            required: false,
         },
         separated: {
             type: Boolean,
@@ -169,6 +170,10 @@ export default {
         radio: {
             type: Boolean,
             default: false,
+        },
+        dark: {
+          type: Boolean,
+          default: false,
         }
     },
     emits: [
