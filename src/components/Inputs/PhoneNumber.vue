@@ -32,7 +32,7 @@
             :errors="errors"
             :model-value="phone"
             :name="'phoneNumber'+name"
-            :placeholder="$t('placeholders.phone_number')"
+            :placeholder="phonePlaceHolder"
             :show-errors="false"
             class="pl-14"
             grouped="above"
@@ -88,7 +88,7 @@ export default {
     ],
     props: {
         phone: {
-            type: [Object, Array, String, Number],
+            type: [String, Number],
             required: false,
             default: '',
             sync: 'internalPhoneNumber',
@@ -99,27 +99,68 @@ export default {
             default: '',
             sync: 'internalCountryCode'
         },
+        fullPhone: {
+          type: [String, Number],
+          required: false,
+          default: null,
+          sync: 'internalFullPhone'
+        },
+        phonePlaceHolder: {
+            type: [String,Number],
+            required: false,
+            default: (props) =>{
+              return '4844578762';
+            },
+        }
     },
     emits: [
         'update:phone',
-        'update:countryCode'
+        'update:countryCode',
+        'update:countryDialCode',
+        'update:fullPhone',
     ],
     data() {
         return {
             internalPhoneNumber: null,
             internalCountryCode: null,
+            internalCountryDialCode: this.selectedPhoneCountry?.dialCode,
+            internalFullPhone: null,
         }
     },
     computed: {
         selectedPhoneCountry() {
             return find(
                 phoneCountries,
-                country => country.id === this.internalCountryCode
+                country => country.value === this.internalCountryCode
             ) || first(this.phoneCountriesOptions)
         },
         phoneCountriesOptions() {
             return filterCountriesByName('', this.internalCountryCode, phoneCountries);
         },
+    },
+    watch: {
+      internalPhoneNumber: {
+        immediate: false,
+        handler: function (value, oldValue) {
+          // This ensures the state is cleared when the user changes the input
+          if (value !== '') {
+            this.internalFullPhone = '+' + this.internalCountryDialCode + value;
+            this.$emit('update:fullPhone',this.internalFullPhone)
+          }
+        }
+      },
+      internalCountryCode: {
+        immediate: false,
+        handler: function (value, oldValue) {
+          // This ensures the state is cleared when the user changes the input
+          if (value !== '') {
+            this.internalCountryDialCode = this.selectedPhoneCountry?.dialCode;
+            this.internalFullPhone =  '+'+ this.internalCountryDialCode + this.internalPhoneNumber;
+            this.$emit('update:fullPhone',this.internalFullPhone)
+            this.$emit('update:countryDialCode',this.internalCountryDialCode)
+          }
+        }
+      },
     },
     methods: {
         searchPhoneCountries(options, query) {

@@ -33,7 +33,7 @@
               classesForButtonHasGroupAbove,
               classesForButtonHasGroupBellow
             ]"
-            class="relative w-full border bg-white dark:bg-gray-900 rounded-lg px-4 py-2 dark:border-gray-700 border-1 shadow-sm"
+            class="relative w-full border bg-white dark:bg-gray-900 px-4 py-2 dark:border-gray-700 border-1 shadow-sm"
             @click="show = !show"
             @keydown.esc="closeDropdown"
           >
@@ -260,6 +260,7 @@ export default {
         },
         noResultsLabel: {
             type: String,
+            required: false,
             default: () => {
                 return '😅 Sorry but there is no records matching ":query"'
             }

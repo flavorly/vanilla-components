@@ -56,7 +56,7 @@ export default {
         // Defines if a form has a field above or bellow
         grouped: {
             type: [String],
-            default: undefined,
+            default: null,
             required: false,
             validate: (grouped) => {
                 return ['bellow', 'above'].includes(grouped)
@@ -65,9 +65,15 @@ export default {
     },
     computed: {
         classesForButtonHasGroupAbove() {
+            if(!this.grouped){
+                return 'rounded-lg';
+            }
             return this.grouped === 'above' ? 'rounded-none rounded-b-md focus:z-10' : ''
         },
         classesForButtonHasGroupBellow() {
+            if(!this.grouped){
+              return 'rounded-lg';
+            }
             return this.grouped === 'bellow' ? 'rounded-none rounded-t-md focus:z-10' : ''
         }
     },
