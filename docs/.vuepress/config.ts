@@ -53,11 +53,19 @@ export default {
   // when using vuepress package, you can omit this field
   // because webpack is the default bundler
   bundler: '@vuepress/bundler-webpack',
+  //bundler: '@vuepress/bundler-vite',
   // options for webpack bundler
   bundlerConfig: {
-    chainWebpack(config,isServer,isBuild){
-      //console.log(config);
-      config.resolve.alias.set('@', path.resolve(__dirname, "./../../src"))
-    },
+      chainWebpack(config,isServer,isBuild){
+        //console.log(config);
+        config.resolve.alias.set('@', path.resolve(__dirname, "./../../src"))
+      },
+      // viteOptions: {
+      //   resolve:{
+      //     alias:{
+      //       '@' : path.resolve(__dirname, './../../src')
+      //     },
+      //   },
+      // }
   },
 }

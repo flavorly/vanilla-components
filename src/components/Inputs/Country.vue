@@ -42,7 +42,7 @@ import XInputLayout from "@/components/Inputs/Partials/Layout";
 import XFormErrors from "@/components/Inputs/Partials/Errors";
 import XFormHelper from "@/components/Inputs/Partials/Helper";
 import XFormLabel from "@/components/Inputs/Partials/Label";
-import XInputRichSelect from "./RichSelect";
+import XInputRichSelect from "@/components/Inputs/RichSelect";
 import find from 'lodash/find';
 import first from 'lodash/first';
 
