@@ -24,4 +24,10 @@ foreach ($files as $key =>$file ) {
     file_put_contents("./Index.vue", $content);
 }
 
+$content = str_replace("###", '', file_get_contents("./Index.vue"));
+$content = str_replace('xmlns="http://www.w3.org/2000/svg"', '', $content);
+$content = str_replace('xmlns:xlink="http://www.w3.org/1999/xlink"', '', $content);
+$content = str_replace('<svg ', '<svg v-bind="$attrs" ', $content);
+file_put_contents("./Index.vue", $content);
+
 //print_r($files);
