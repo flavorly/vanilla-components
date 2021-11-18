@@ -29,7 +29,7 @@
           <template #pre-span="{ anOption }">
             <span>
               <vc-flag-icon
-                :country="anOption.value"
+                :iso="anOption.value"
                 class="h-3"
               />
             </span>
