@@ -141,6 +141,10 @@
                         :class="[selected ? 'font-medium' : 'font-normal','block truncate',]"
                         class="flex items-center space-x-2 text-sm"
                       >
+                        <slot
+                          name="pre-span"
+                          v-bind="{ anOption }"
+                        />
                         <span
                           v-if="anOption?.indicator"
                           class="flex-shrink-0 inline-block h-2 w-2 rounded-full"

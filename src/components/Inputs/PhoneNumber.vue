@@ -25,7 +25,16 @@
           grouped="bellow"
           layout="naked"
           @update:modelValue="$emit('update:countryCode',$event)"
-        />
+        >
+          <template #pre-span="{ anOption }">
+            <span>
+              <vc-flag-icon
+                :country="anOption.value"
+                class="h-3"
+              />
+            </span>
+          </template>
+        </x-input-rich-select>
         <!-- National Phone Number-->
         <div class="relative group">
           <x-input-text
@@ -71,102 +80,104 @@ import XInputRichSelect from "@/components/Inputs/RichSelect";
 import XInputText from "@/components/Inputs/Text";
 import find from 'lodash/find';
 import first from 'lodash/first';
+import VcFlagIcon from "@/components/Icons/VcFlagIcon/Index";
 
 export default {
-    name: 'XInputPhoneNumber',
-    components: {
-        XFormLabel,
-        XFormHelper,
-        XFormErrors,
-        XInputText,
-        XInputRichSelect,
-        XInputLayout,
+  name: 'XInputPhoneNumber',
+  components: {
+    VcFlagIcon,
+    XFormLabel,
+    XFormHelper,
+    XFormErrors,
+    XInputText,
+    XInputRichSelect,
+    XInputLayout,
+  },
+  mixins: [
+    UseFormInputs,
+    SyncProps
+  ],
+  props: {
+    phone: {
+      type: [String, Number],
+      required: false,
+      default: '',
+      sync: 'internalPhoneNumber',
     },
-    mixins: [
-        UseFormInputs,
-        SyncProps
-    ],
-    props: {
-        phone: {
-            type: [String, Number],
-            required: false,
-            default: '',
-            sync: 'internalPhoneNumber',
-        },
-        countryCode: {
-            type: [String, Number],
-            required: false,
-            default: '',
-            sync: 'internalCountryCode'
-        },
-        fullPhone: {
-          type: [String, Number],
-          required: false,
-          default: null,
-          sync: 'internalFullPhone'
-        },
-        phonePlaceHolder: {
-            type: [String,Number],
-            required: false,
-            default: (props) =>{
-              return '4844578762';
-            },
-        }
+    countryCode: {
+      type: [String, Number],
+      required: false,
+      default: '',
+      sync: 'internalCountryCode'
     },
-    emits: [
-        'update:phone',
-        'update:countryCode',
-        'update:countryDialCode',
-        'update:fullPhone',
-    ],
-    data() {
-        return {
-            internalPhoneNumber: null,
-            internalCountryCode: null,
-            internalCountryDialCode: this.selectedPhoneCountry?.dialCode,
-            internalFullPhone: null,
-        }
+    fullPhone: {
+      type: [String, Number],
+      required: false,
+      default: null,
+      sync: 'internalFullPhone'
     },
-    computed: {
-        selectedPhoneCountry() {
-            return find(
-                phoneCountries,
-                country => country.value === this.internalCountryCode
-            ) || first(this.phoneCountriesOptions)
-        },
-        phoneCountriesOptions() {
-            return filterCountriesByName('', this.internalCountryCode, phoneCountries);
-        },
-    },
-    watch: {
-      internalPhoneNumber: {
-        immediate: false,
-        handler: function (value, oldValue) {
-          // This ensures the state is cleared when the user changes the input
-          if (value !== '') {
-            this.internalFullPhone = '+' + this.internalCountryDialCode + value;
-            this.$emit('update:fullPhone',this.internalFullPhone)
-          }
-        }
+    phonePlaceHolder: {
+      type: [String, Number],
+      required: false,
+      default: (props) => {
+        return '4844578762';
       },
-      internalCountryCode: {
-        immediate: false,
-        handler: function (value, oldValue) {
-          // This ensures the state is cleared when the user changes the input
-          if (value !== '') {
-            this.internalCountryDialCode = this.selectedPhoneCountry?.dialCode;
-            this.internalFullPhone =  '+'+ this.internalCountryDialCode + this.internalPhoneNumber;
-            this.$emit('update:fullPhone',this.internalFullPhone)
-            this.$emit('update:countryDialCode',this.internalCountryDialCode)
-          }
+    }
+  },
+  emits: [
+    'update:phone',
+    'update:countryCode',
+    'update:countryDialCode',
+    'update:fullPhone',
+  ],
+  data() {
+    return {
+      internalPhoneNumber: null,
+      internalCountryCode: null,
+      internalCountryDialCode: this.selectedPhoneCountry?.dialCode,
+      internalFullPhone: null,
+    }
+  },
+  computed: {
+    selectedPhoneCountry() {
+      return find(
+        phoneCountries,
+        country => country.value === this.internalCountryCode
+      ) || first(this.phoneCountriesOptions)
+    },
+    phoneCountriesOptions() {
+      return filterCountriesByName('', this.internalCountryCode, phoneCountries);
+    },
+  },
+  watch: {
+    internalPhoneNumber: {
+      immediate: false,
+      handler: function (value, oldValue) {
+        // This ensures the state is cleared when the user changes the input
+        if (value !== '') {
+          this.internalFullPhone = '+' + this.internalCountryDialCode + value;
+          this.$emit('update:fullPhone', this.internalFullPhone)
         }
-      },
+      }
     },
-    methods: {
-        searchPhoneCountries(options, query) {
-            return filterCountriesByName(query, this.internalCountryCode, phoneCountries)
-        },
+    internalCountryCode: {
+      immediate: false,
+      handler: function (value, oldValue) {
+        // This ensures the state is cleared when the user changes the input
+        if (value !== '') {
+          this.internalCountryDialCode = this.selectedPhoneCountry?.dialCode;
+          this.internalFullPhone = '+' + this.internalCountryDialCode + this.internalPhoneNumber;
+          this.$emit('update:fullPhone', this.internalFullPhone)
+          this.$emit('update:countryDialCode', this.internalCountryDialCode)
+        }
+      }
     },
+  },
+  methods: {
+    searchPhoneCountries(options, query) {
+      return filterCountriesByName(query, this.internalCountryCode, phoneCountries)
+    },
+  },
 }
 </script>
 
