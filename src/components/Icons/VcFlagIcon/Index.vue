@@ -12,6 +12,10 @@ export default {
     as: {
       type: String,
       default: 'span'
+    },
+    iso: {
+      type: String,
+      default: '',
     }
   }
 }
