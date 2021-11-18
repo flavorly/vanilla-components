@@ -8,9 +8,10 @@ $files = array_filter($scan, function ($file) {
 
 foreach ($files as $key =>$file ) {
     if ($key > 2) {
-        continue;
+//        continue;
     }
     $flagSvg = file_get_contents("./svg/{$file}");
+    $flagSvg = str_replace("\n", " ", $flagSvg);
     $iso2 = strtoupper(str_replace('.svg', '', $file));
     $addSvg = "<span v-if=\"iso === '{$iso2}'\"> {$flagSvg} </span>";
 
