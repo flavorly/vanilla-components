@@ -1,6 +1,5 @@
 import { path } from '@vuepress/utils'
 
-
 export default {
   lang: 'en-US',
   title: 'Vanilla Components',
@@ -52,20 +51,21 @@ export default {
   ],
   // when using vuepress package, you can omit this field
   // because webpack is the default bundler
-  bundler: '@vuepress/bundler-webpack',
-  //bundler: '@vuepress/bundler-vite',
+  bundler: '@vuepress/bundler-vite',
   // options for webpack bundler
   bundlerConfig: {
       chainWebpack(config,isServer,isBuild){
         //console.log(config);
         config.resolve.alias.set('@', path.resolve(__dirname, "./../../src"))
       },
-      // viteOptions: {
-      //   resolve:{
-      //     alias:{
-      //       '@' : path.resolve(__dirname, './../../src')
-      //     },
-      //   },
-      // }
+      viteOptions: {
+        alias: [
+          { find: '/^~/', replacement: ''},
+          { find: '@', replacement: path.resolve(__dirname,'./../../src') }
+        ]
+      }
+  },
+  alias: {
+    '@': path.resolve(__dirname,'./../../src'),
   },
 }
