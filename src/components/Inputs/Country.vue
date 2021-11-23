@@ -1,11 +1,11 @@
 <template>
-  <x-input-layout :layout="layout">
+  <vanilla-input-layout :layout="layout">
     <template #label>
       <slot
         v-if="$slots.label || label"
         name="label"
       >
-        <x-form-label
+        <vanilla-form-label
           :label-for="name"
           :value="label"
         />
@@ -13,7 +13,7 @@
     </template>
 
     <div class="relative flex-1">
-      <x-input-rich-select
+      <vanilla-input-rich-select
         :errors="errors"
         :model-value="modelValue"
         :name="'countryCode'+name"
@@ -24,36 +24,36 @@
         @update:modelValue="$emit('update:modelValue',$event)"
       />
     </div>
-    <x-form-errors
+    <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
-    <x-form-helper
+    <vanilla-form-helper
       v-if="help"
       :text="help"
     />
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
 import SyncProps from "@/utils/SyncProps";
 import {filterCountriesByName, countries} from "@/utils/CountryCodes";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormErrors from "@/components/Inputs/Partials/Errors";
-import XFormHelper from "@/components/Inputs/Partials/Helper";
-import XFormLabel from "@/components/Inputs/Partials/Label";
-import XInputRichSelect from "@/components/Inputs/RichSelect";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputRichSelect from "@/components/Inputs/RichSelect";
 import find from 'lodash/find';
 import first from 'lodash/first';
 
 export default {
-    name: 'XInputCountry',
+    name: 'VanillaInputCountry',
     components: {
-        XFormLabel,
-        XFormHelper,
-        XFormErrors,
-        XInputRichSelect,
-        XInputLayout,
+        VanillaFormLabel,
+        VanillaFormHelper,
+        VanillaFormErrors,
+        VanillaInputRichSelect,
+        VanillaInputLayout,
     },
     mixins: [
         UseFormInputs,

@@ -1,11 +1,11 @@
 <template>
-  <x-input-layout :layout="layout">
+  <vanilla-input-layout :layout="layout">
     <template #label>
       <slot
         v-if="$slots.label || label"
         name="label"
       >
-        <x-form-label
+        <vanilla-form-label
           :label-for="name"
           :value="label"
           @click.prevent="selectNewPhoto"
@@ -44,43 +44,43 @@
       />
     </div>
 
-    <x-button
+    <vanilla-button
       variant="secondary"
       class="mt-2"
       type="button"
       @click="selectNewPhoto"
     >
       {{ $t('users.action-upload-photo') }}
-    </x-button>
+    </vanilla-button>
 
     <!-- Errors -->
-    <x-form-errors
+    <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
-    <x-form-helper
+    <vanilla-form-helper
       v-if="help"
       :text="help"
     />
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormErrors from "@/components/Inputs/Partials/Errors";
-import XFormHelper from "@/components/Inputs/Partials/Helper";
-import XFormLabel from "@/components/Inputs/Partials/Label";
-import XButton from "@/components/Buttons/Button";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaButton from "@/components/Buttons/Button";
 
 export default {
-    name: "XInputProfilePhoto",
+    name: "VanillaInputProfilePhoto",
     components: {
-        XFormLabel,
-        XFormHelper,
-        XFormErrors,
-        XButton,
-        XInputLayout
+        VanillaFormLabel,
+        VanillaFormHelper,
+        VanillaFormErrors,
+        VanillaButton,
+        VanillaInputLayout
     },
     mixins: [UseFormInputs],
     model: {

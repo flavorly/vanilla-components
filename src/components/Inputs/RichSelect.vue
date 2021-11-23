@@ -1,5 +1,5 @@
 <template>
-  <x-input-layout
+  <vanilla-input-layout
     :layout="layout"
   >
     <template #label>
@@ -7,7 +7,7 @@
         v-if="$slots.label || label"
         name="label"
       >
-        <x-form-label
+        <vanilla-form-label
           :label-for="name"
           :value="label"
           @click="toggleWithLabel"
@@ -90,7 +90,7 @@
             >
               <!-- Search bar -->
               <div :key="'searchbar'">
-                <x-input-text
+                <vanilla-input-text
                   v-if="searchable"
                   v-model="query"
                   :layout="'naked'"
@@ -190,24 +190,24 @@
         </div>
       </Listbox>
     </div>
-    <x-form-errors
+    <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
-    <x-form-helper
+    <vanilla-form-helper
       v-if="help"
       :text="help"
       @click="$emit('labelClick',true)"
     />
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormErrors from "@/components/Inputs/Partials/Errors";
-import XFormHelper from "@/components/Inputs/Partials/Helper";
-import XFormLabel from "@/components/Inputs/Partials/Label";
-import XInputText from "@/components/Inputs/Text";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputText from "@/components/Inputs/Text";
 import {Listbox, ListboxButton, ListboxOption, ListboxOptions} from '@headlessui/vue';
 import {CheckIcon, SelectorIcon} from '@heroicons/vue/solid';
 import find from 'lodash/find';
@@ -216,13 +216,13 @@ import Fuse from "fuse.js";
 import { onClickOutside } from '@vueuse/core'
 
 export default {
-    name: "XInputRichSelect",
+    name: "VanillaInputRichSelect",
     components: {
-      XFormLabel,
-      XFormHelper,
-      XFormErrors,
-        XInputText,
-        XInputLayout,
+      VanillaFormLabel,
+      VanillaFormHelper,
+      VanillaFormErrors,
+        VanillaInputText,
+        VanillaInputLayout,
         Listbox,
         ListboxButton,
         ListboxOptions,

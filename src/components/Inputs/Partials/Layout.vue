@@ -46,7 +46,7 @@
 
 <script>
 export default {
-    name: "XInputLayout",
+    name: "VanillaInputLayout",
     props: {
         layout: {
             type: [String],

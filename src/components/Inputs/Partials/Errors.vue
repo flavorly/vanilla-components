@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name: 'XFormErrors',
+    name: 'VanillaFormErrors',
     props: {
         error: {
             type: [String, Array],

@@ -54,18 +54,18 @@ export default {
   bundler: '@vuepress/bundler-vite',
   // options for webpack bundler
   bundlerConfig: {
-      chainWebpack(config,isServer,isBuild){
-        //console.log(config);
-        config.resolve.alias.set('@', path.resolve(__dirname, "./../../src"))
-      },
+      // chainWebpack(config,isServer,isBuild){
+      //   //console.log(config);
+      //   config.resolve.alias.set('@', path.resolve(__dirname, "./../../src"))
+      // },
       viteOptions: {
         alias: [
-          { find: '/^~/', replacement: ''},
-          { find: '@', replacement: path.resolve(__dirname,'./../../src') }
+          //{ find: '/^~/', replacement: ''},
+          //{ find: '@', replacement: path.resolve(__dirname,'./../../src') }
         ]
       }
   },
-  alias: {
-    '@': path.resolve(__dirname,'./../../src'),
-  },
+  // alias: {
+  //   '@': path.resolve(__dirname,'./../../src'),
+  // },
 }

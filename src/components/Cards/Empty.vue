@@ -7,7 +7,7 @@
 </template>
 <script>
 export default {
-    name: 'XCardEmpty',
+    name: 'VanillaCardEmpty',
 }
 </script>
 

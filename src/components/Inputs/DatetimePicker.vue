@@ -1,5 +1,5 @@
 <template>
-  <x-input-layout
+  <vanilla-input-layout
     :layout="layout"
   >
     <template #label>
@@ -7,7 +7,7 @@
         v-if="$slots.label || label"
         name="label"
       >
-        <x-form-label
+        <vanilla-form-label
           :label-for="name"
           :value="label"
           @click="onClickLabel"
@@ -41,32 +41,32 @@
         <ExclamationCircleIcon class="w-5 h-5 text-red-500" />
       </div>
     </div>
-    <x-form-errors
+    <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
-    <x-form-helper
+    <vanilla-form-helper
       v-if="help"
       :text="help"
     />
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 <script>
 import {ExclamationCircleIcon} from "@heroicons/vue/solid";
 import UseFormInputs from "@/utils/UseFormInputs";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormErrors from "@/components/Inputs/Partials/Errors";
-import XFormHelper from "@/components/Inputs/Partials/Helper";
-import XFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label";
 import Flatpickr from 'flatpickr';
 
 export default {
-    name: 'XInputDateTimePicker',
+    name: 'VanillaInputDateTimePicker',
     components: {
-        XFormLabel,
-        XFormHelper,
-        XFormErrors,
-        XInputLayout,
+        VanillaFormLabel,
+        VanillaFormHelper,
+        VanillaFormErrors,
+        VanillaInputLayout,
         ExclamationCircleIcon,
     },
     mixins: [UseFormInputs],
