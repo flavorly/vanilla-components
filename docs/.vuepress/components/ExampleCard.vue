@@ -12,6 +12,9 @@ export default {
   name: "ExampleButtons",
   components: {
     XCard
-  }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
+  },
 }
 </script>

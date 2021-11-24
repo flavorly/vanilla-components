@@ -60,6 +60,9 @@ export default {
         value3: null,
       }
   },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
+  },
   computed: {
     isDark(){
       return useDarkMode().value

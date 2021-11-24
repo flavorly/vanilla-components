@@ -28,6 +28,9 @@ export default {
   name: "ExampleButtons",
   components: {
     VanillaButton
-  }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
+  },
 }
 </script>

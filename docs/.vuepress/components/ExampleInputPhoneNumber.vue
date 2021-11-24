@@ -70,5 +70,8 @@ export default {
         countryDialCode: null,
       }
   },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
+  },
 }
 </script>
