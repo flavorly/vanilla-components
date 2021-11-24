@@ -71,13 +71,13 @@
 <script>
 import SyncProps from "@/utils/SyncProps";
 import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label";
-import VanillaInputRichSelect from "@/components/Inputs/RichSelect";
-import VanillaInputText from "@/components/Inputs/Text";
-import VanillaFlagIcon from "@/components/Icons/FlagIcon/Index";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+import VanillaInputRichSelect from "@/components/Inputs/RichSelect.vue";
+import VanillaInputText from "@/components/Inputs/Text.vue";
+import VanillaFlagIcon from "@/components/Icons/FlagIcon/Index.vue";
 import {filterCountriesByName, phoneCountries} from "@/utils/CountryCodes";
 import find from 'lodash/find';
 import first from 'lodash/first';

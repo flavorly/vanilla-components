@@ -54,10 +54,10 @@
 <script>
 import {ExclamationCircleIcon} from "@heroicons/vue/solid";
 import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
 import Flatpickr from 'flatpickr';
 
 export default {

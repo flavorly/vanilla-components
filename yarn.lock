@@ -50,10 +50,10 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@headlessui/vue@^0.0.0-dev.9f638c9":
-  version "0.0.0"
-  resolved "https://registry.npmjs.org/@headlessui/vue/-/vue-0.0.0.tgz"
-  integrity sha512-nhnRk7yIcUysoEiHpFE5kAFaqP7hbwVLouNMdMBppfJ9MuYeYvyjSTGnvMhfJWc/qidYQEOYPFelBNTlzHrQKg==
+"@headlessui/vue@^1.4.2":
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/@headlessui/vue/-/vue-1.4.2.tgz#1098f52cb6c583772708a980b3487222ac0ae65e"
+  integrity sha512-+uOaPwHncxHZ6JBwYycu3YxDDrY0v1tcxCtK04H1WGBLBm07dqVi38Q2RB7eY867FUhD0sL6q+Fj69rVn8P0OQ==
 
 "@heroicons/vue@^1.0.1":
   version "1.0.5"

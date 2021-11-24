@@ -59,10 +59,12 @@ export default {
       //   config.resolve.alias.set('@', path.resolve(__dirname, "./../../src"))
       // },
       viteOptions: {
-        alias: [
-          //{ find: '/^~/', replacement: ''},
-          //{ find: '@', replacement: path.resolve(__dirname,'./../../src') }
-        ]
+        resolve: {
+          alias: [
+            //{ find: '/^~/', replacement: ''},
+            { find: '@', replacement: path.resolve(__dirname,'./../../src') }
+          ]
+        }
       }
   },
   // alias: {

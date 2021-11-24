@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import {XInputPhoneNumber} from "@/index";
+import { VanillaInputPhoneNumber as XInputPhoneNumber } from "@/index";
 export default {
   name: "ExampleInputPhoneNumber",
   components: {

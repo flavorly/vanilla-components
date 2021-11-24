@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import {XInputRichSelect} from "@/index";
+import { VanillaInputRichSelect as XInputRichSelect } from "@/index";
 export default {
   name: "ExampleInputRichSelect",
   components: {

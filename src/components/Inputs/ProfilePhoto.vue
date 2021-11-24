@@ -67,11 +67,11 @@
 
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label";
-import VanillaButton from "@/components/Buttons/Button";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+import VanillaButton from "@/components/Buttons/Button.vue";
 
 export default {
     name: "VanillaInputProfilePhoto",

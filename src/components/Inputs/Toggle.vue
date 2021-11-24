@@ -71,8 +71,8 @@
 </template>
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
 
 export default {
     name: 'VanillaInputToggle',

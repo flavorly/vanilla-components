@@ -38,11 +38,11 @@
 import UseFormInputs from "@/utils/UseFormInputs";
 import SyncProps from "@/utils/SyncProps";
 import {filterCountriesByName, countries} from "@/utils/CountryCodes";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label";
-import VanillaInputRichSelect from "@/components/Inputs/RichSelect";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+import VanillaInputRichSelect from "@/components/Inputs/RichSelect.vue";
 import find from 'lodash/find';
 import first from 'lodash/first';
 

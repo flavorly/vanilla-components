@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import {XInputSelect} from "@/index";
+import { VanillaInputSelect as XInputSelect } from "@/index";
 export default {
   name: "ExampleInputSelect",
   components: {
