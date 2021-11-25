@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import {XInputPhoneNumber} from "@/index";
+import { VanillaInputPhoneNumber as XInputPhoneNumber } from "@/index";
 export default {
   name: "ExampleInputPhoneNumber",
   components: {
@@ -69,6 +69,9 @@ export default {
         fullPhoneNumber: null,
         countryDialCode: null,
       }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
   },
 }
 </script>

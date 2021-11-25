@@ -50,7 +50,7 @@
 </template>
 <script>
 export default {
-    name: 'XCard',
+    name: 'VanillaCard',
     props: {
         title: {
             type: String,

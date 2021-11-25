@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import {XInputRichSelect} from "@/index";
+import { VanillaInputRichSelect as XInputRichSelect } from "@/index";
 export default {
   name: "ExampleInputRichSelect",
   components: {
@@ -76,6 +76,9 @@ export default {
         value2: null,
         value3: null,
       }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
   },
   computed: {
     options(){

@@ -1,11 +1,11 @@
 <template>
-  <x-input-layout :layout="layout">
+  <vanilla-input-layout :layout="layout">
     <template #label>
       <slot
         v-if="$slots.label || label"
         name="label"
       >
-        <x-form-label
+        <vanilla-form-label
           :label-for="name"
           :value="label"
         />
@@ -114,23 +114,23 @@
         </div>
       </RadioGroup>
     </div>
-    <x-form-errors
+    <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
-    <x-form-helper
+    <vanilla-form-helper
       v-if="help"
       :text="help"
     />
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormErrors from "@/components/Inputs/Partials/Errors";
-import XFormHelper from "@/components/Inputs/Partials/Helper";
-import XFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
 import {
     RadioGroup,
     RadioGroupLabel,
@@ -139,12 +139,12 @@ import {
 } from '@headlessui/vue'
 
 export default {
-    name: 'XInputRadioGroup',
+    name: 'VanillaInputRadioGroup',
     components: {
-      XFormLabel,
-      XFormHelper,
-      XFormErrors,
-      XInputLayout,
+      VanillaFormLabel,
+      VanillaFormHelper,
+      VanillaFormErrors,
+      VanillaInputLayout,
       RadioGroup,
       RadioGroupLabel,
       RadioGroupDescription,

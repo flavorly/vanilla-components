@@ -10,7 +10,7 @@
 
 <script>
 export default {
-    name: 'XFormLabel',
+    name: 'VanillaFormLabel',
     props: {
         value: {
             type: [String],

@@ -46,7 +46,7 @@
 </template>
 
 <script>
-import {XInputRadioGroup} from "@/index";
+import { VanillaInputRadioGroup as XInputRadioGroup } from "@/index";
 import { useDarkMode } from '@vuepress/theme-default/lib/client/composables/useDarkMode'
 export default {
   name: "ExampleInputRichSelect",
@@ -59,6 +59,9 @@ export default {
         value2: null,
         value3: null,
       }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
   },
   computed: {
     isDark(){

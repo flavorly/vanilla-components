@@ -1,11 +1,11 @@
 <template>
-  <x-input-layout :layout="layout">
+  <vanilla-input-layout :layout="layout">
     <template #label>
       <slot
         v-if="($slots.label || label) && templateLabel"
         name="label"
       >
-        <x-form-label
+        <vanilla-form-label
           :label-for="name"
           :value="label"
           @click="onClickLabel"
@@ -67,18 +67,18 @@
         </label>
       </span>
     </div>
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
 
 export default {
-    name: 'XInputToggle',
+    name: 'VanillaInputToggle',
     components: {
-        XFormLabel,
-        XInputLayout
+        VanillaFormLabel,
+        VanillaInputLayout
     },
     mixins: [UseFormInputs],
     model: {

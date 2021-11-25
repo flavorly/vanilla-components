@@ -45,7 +45,7 @@
 
 <script>
 export default {
-    name: 'XCardFooter',
+    name: 'VanillaCardFooter',
     props: {
         columns: {
             type: [Number, String],

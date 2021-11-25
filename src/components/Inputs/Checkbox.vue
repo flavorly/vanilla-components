@@ -1,5 +1,5 @@
 <template>
-  <x-input-layout :layout="'naked'">
+  <vanilla-input-layout :layout="'naked'">
     <div class="relative flex items-start">
       <div class="flex items-center h-5">
         <input
@@ -28,28 +28,28 @@
         </label>
       </div>
     </div>
-    <x-form-errors
+    <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
-    <x-form-helper
+    <vanilla-form-helper
       v-if="help"
       :text="help"
     />
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormErrors from "@/components/Inputs/Partials/Errors";
-import XFormHelper from "@/components/Inputs/Partials/Helper";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
 
 export default {
-    name: 'XInputCheckbox',
+    name: 'VanillaInputCheckbox',
     components: {
-        XFormHelper,
-        XFormErrors,
-        XInputLayout
+      VanillaFormHelper,
+      VanillaFormErrors,
+      VanillaInputLayout
     },
     mixins: [
         UseFormInputs

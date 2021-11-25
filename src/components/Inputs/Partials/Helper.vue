@@ -17,7 +17,7 @@
 
 <script>
 export default {
-    name: 'XFormHelper',
+    name: 'VanillaFormHelper',
     props: {
         text: {
             type: String,

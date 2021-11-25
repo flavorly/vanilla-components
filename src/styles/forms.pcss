@@ -1,5 +1,5 @@
 @layer components{
-    /* Regular form input */
+
     .form-input{
         @apply appearance-none;
         @apply block w-full leading-normal shadow-sm;
@@ -31,14 +31,12 @@
         }
     }
 
-    /* Checkbox Toggle */
     .form-toggle{
         @apply relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200;
         @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600;
         @apply dark:focus:ring-offset-gray-900;
     }
 
-    /* Checkbox Input */
     .form-checkbox{
         @apply h-4 w-4;
         @apply transition duration-150 ease-in-out;
@@ -57,7 +55,6 @@
         @apply sm:divide-y sm:divide-gray-200 dark:border-gray-750;
     }
 
-    /* Form row with label and input in same line     @apply first:pt-0; */
     .form-row-default{
         @apply sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 px-6 py-5;
     }
@@ -79,19 +76,16 @@
         @apply mt-3 text-sm leading-5 sm:mt-0 sm:col-span-2;
     }
 
-    /* Form row for plain content centered */
     .form-row-content{
         @apply px-6 py-3 sm:mt-0 sm:grid border-b border-gray-200 cursor-pointer text-center;
         @apply dark:border-gray-750;
     }
 
-    /* Form row for plain content centered */
     .form-content{
         @apply dark:text-white;
         @apply px-6 py-3 sm:mt-0 sm:grid cursor-pointer text-center;
     }
 
-    /* Form row with label and input bellow label */
     .form-row-standard{
         @apply px-6 py-3 mt-0 grid;
     }
@@ -101,7 +95,6 @@
         @apply dark:text-white;
     }
 
-    /* Fixed the Chrome and Firefox Autocomplete Colors */
     input {
         filter: none;
     }

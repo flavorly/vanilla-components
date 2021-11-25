@@ -1,11 +1,11 @@
 <template>
-  <x-input-layout :layout="layout">
+  <vanilla-input-layout :layout="layout">
     <template #label>
       <slot
         v-if="$slots.label || label"
         name="label"
       >
-        <x-form-label
+        <vanilla-form-label
           :label-for="name"
           :value="label"
         />
@@ -15,7 +15,7 @@
     <div class="relative flex-1">
       <div class="mt-1 rounded-md -space-y-px">
         <!-- Actual Country Code-->
-        <x-input-rich-select
+        <vanilla-input-rich-select
           :errors="errors"
           :model-value="countryCode"
           :name="'phoneCountryCode'+name"
@@ -28,16 +28,16 @@
         >
           <template #pre-span="{ anOption }">
             <span>
-              <vc-flag-icon
+              <vanilla-flag-icon
                 :iso="anOption.value"
                 class="h-3"
               />
             </span>
           </template>
-        </x-input-rich-select>
+        </vanilla-input-rich-select>
         <!-- National Phone Number-->
         <div class="relative group">
-          <x-input-text
+          <vanilla-input-text
             :errors="errors"
             :model-value="phone"
             :name="'phoneNumber'+name"
@@ -54,44 +54,44 @@
                 <span class="text-gray-500 sm:text-sm">+{{ selectedPhoneCountry?.dialCode }}</span>
               </div>
             </template>
-          </x-input-text>
+          </vanilla-input-text>
         </div>
       </div>
     </div>
-    <x-form-errors
+    <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
-    <x-form-helper
+    <vanilla-form-helper
       v-if="help"
       :text="help"
     />
-  </x-input-layout>
+  </vanilla-input-layout>
 </template>
 <script>
 import SyncProps from "@/utils/SyncProps";
 import UseFormInputs from "@/utils/UseFormInputs";
-import XInputLayout from "@/components/Inputs/Partials/Layout";
-import XFormErrors from "@/components/Inputs/Partials/Errors";
-import XFormHelper from "@/components/Inputs/Partials/Helper";
-import XFormLabel from "@/components/Inputs/Partials/Label";
+import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
+import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+import VanillaInputRichSelect from "@/components/Inputs/RichSelect.vue";
+import VanillaInputText from "@/components/Inputs/Text.vue";
+import VanillaFlagIcon from "@/components/Icons/FlagIcon/Index.vue";
 import {filterCountriesByName, phoneCountries} from "@/utils/CountryCodes";
-import XInputRichSelect from "@/components/Inputs/RichSelect";
-import XInputText from "@/components/Inputs/Text";
 import find from 'lodash/find';
 import first from 'lodash/first';
-import VcFlagIcon from "@/components/Icons/VcFlagIcon/Index";
 
 export default {
-  name: 'XInputPhoneNumber',
+  name: 'VanillaInputPhoneNumber',
   components: {
-    VcFlagIcon,
-    XFormLabel,
-    XFormHelper,
-    XFormErrors,
-    XInputText,
-    XInputRichSelect,
-    XInputLayout,
+    VanillaFlagIcon,
+    VanillaFormLabel,
+    VanillaFormHelper,
+    VanillaFormErrors,
+    VanillaInputText,
+    VanillaInputRichSelect,
+    VanillaInputLayout,
   },
   mixins: [
     UseFormInputs,

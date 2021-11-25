@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import {XInputText} from "@/index";
+import { VanillaInputText as XInputText } from "@/index";
 export default {
   name: "ExampleInputSelect",
   components: {
@@ -48,6 +48,9 @@ export default {
         value: null,
         value2: null,
       }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
   },
 }
 </script>

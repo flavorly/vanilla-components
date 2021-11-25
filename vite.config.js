@@ -5,10 +5,12 @@ import { resolve } from 'path'
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve:{
-    alias:{
-      '@' : path.resolve(__dirname, './src')
-    },
+    alias: [
+      { find: '/^~/', replacement: ''},
+      { find: '@', replacement: resolve(__dirname,'src') }
+    ]
   },
+
   plugins: [vue()],
   build: {
     lib: {

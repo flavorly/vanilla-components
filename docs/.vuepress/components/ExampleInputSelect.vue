@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import {XInputSelect} from "@/index";
+import { VanillaInputSelect as XInputSelect } from "@/index";
 export default {
   name: "ExampleInputSelect",
   components: {
@@ -66,6 +66,9 @@ export default {
         value: null,
         value2: null,
       }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
   },
   computed: {
     options(){

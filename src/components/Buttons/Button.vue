@@ -47,7 +47,7 @@
 <script>
 
 export default {
-  name: 'XButton',
+  name: 'VanillaButton',
   props: {
     variant: {
       type: String,
