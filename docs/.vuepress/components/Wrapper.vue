@@ -3,7 +3,7 @@
       <iframe
         v-if="mounted"
         ref="frame"
-        :src="'/examples/'+src+'.html'"
+        :src="'/guide/'+src+'.html'"
         :style="{
           width: '100%',
           height: height,

@@ -56,4 +56,4 @@ export default {
 ```
 
 ## Preview
-<x-wrapper src="button-primary" />
+<wrapper src="elements/buttons/demo" />

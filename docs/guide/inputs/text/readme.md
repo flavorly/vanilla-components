@@ -8,7 +8,7 @@ Inherits the default Layout Options.
 
 | Prop       | Description               | Accepted Values                 | Default     |
 | :--------- | :------------------------ | :------------------------------ | :---------- |
-| `placeholder`    | Array/Object of options        | Object|Array | `undefined` |
+| `placeholder`| Array/Object of options| Object|Array | `undefined` |
 
 ## Events
 
@@ -22,14 +22,14 @@ Inherits the default Layout Options.
     <x-input-text
         class="inline-flex"
         layout="naked"
-        placeholder="Your name"
+        placeholder="Elon Musk"
         v-model="value"
+        helper="Write your first and last name"
     />
 </template>
 <script>
-import XInputText from "Text";
+import {VanillaInputText} from "@vanilla-components";
 export default {
-  name: "ExampleInput",
   components: {
     XInputText
   },
@@ -43,4 +43,4 @@ export default {
 ```
 
 ## Preview
-<x-wrapper src="input-text" />
+<wrapper src="inputs/text/demo" />

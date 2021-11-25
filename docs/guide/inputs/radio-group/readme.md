@@ -66,4 +66,4 @@ export default {
 ```
 
 ## Preview
-<x-wrapper src="input-radio-group" />
+<wrapper src="inputs/radio-group/demo" />

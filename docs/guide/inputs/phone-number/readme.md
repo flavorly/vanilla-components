@@ -29,20 +29,19 @@ Todo
 ## Example
 ```vue
 <template>
-      <x-input-phone-number
-          v-model:countryCode="countryCode"
-          v-model:countryDialCode="countryDialCode"
-          v-model:phone="phoneNumber"
-          v-model:fullPhone="fullPhoneNumber"
-          class="inline-flex"
-          layout="naked"
-      />
+    <vanilla-input-phone-number
+      v-model:countryCode="countryCode"
+      v-model:countryDialCode="countryDialCode"
+      v-model:phone="phoneNumber"
+      v-model:fullPhone="fullPhoneNumber"
+      class="inline-flex"
+      layout="naked"
+    />
     <pre>{{ JSON.stringify(value) }}</pre>
 </template>
 <script>
-import {XInputPhoneNumber} from "@vanilla-components";
+import {VanillaInputPhoneNumber} from "@vanilla-components";
 export default {
-  name: "ExampleInputPhoneNumber",
   components: {
     XInputPhoneNumber,
   },
@@ -59,4 +58,4 @@ export default {
 ```
 
 ## Preview
-<x-wrapper src="input-phone-number" />
+<wrapper src="inputs/phone-number/demo" />

@@ -43,9 +43,20 @@ export default {
   },
   plugins: [
     [
-      '@vuepress/plugin-register-components',
+      '@vuepress/register-components',
       {
-        componentsDir: path.resolve(__dirname, './components'),
+        componentsDir: path.resolve(__dirname, './../guide'),
+        components: {
+          Wrapper: path.resolve(__dirname, './components/Wrapper.vue'),
+        },
+        getComponentName: (filePath) => {
+          const fileName = path.basename(filePath, path.extname(filePath))
+          return fileName
+            .replace(/^[a-z]/, (s) => s.toUpperCase())
+            .replace(/([a-z])([A-Z])/g, "$1-$2")
+            .replace(/\s+/g, '-')
+            .toLowerCase();
+        },
       },
     ],
   ],

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import {VanillaButton} from "./../../../src/index";
+import { VanillaButton } from "@/index";
 export default {
   name: "ExampleButtons",
   components: {

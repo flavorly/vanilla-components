@@ -72,4 +72,4 @@ export default {
 ```
 
 ## Preview
-<x-wrapper src="input-rich-select" />
+<wrapper src="inputs/rich-select/demo" />

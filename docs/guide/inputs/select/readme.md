@@ -61,4 +61,4 @@ export default {
 ```
 
 ## Preview
-<x-wrapper src="input-select" />
+<wrapper src="inputs/select/demo" />
