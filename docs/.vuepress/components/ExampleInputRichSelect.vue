@@ -77,6 +77,9 @@ export default {
         value3: null,
       }
   },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
+  },
   computed: {
     options(){
       return [
