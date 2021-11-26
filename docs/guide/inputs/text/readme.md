@@ -19,7 +19,7 @@ Inherits the default Layout Options.
 ## Example
 ```vue
 <template>
-    <x-input-text
+    <vanilla-input-text
         class="inline-flex"
         layout="naked"
         placeholder="Elon Musk"
@@ -31,7 +31,7 @@ Inherits the default Layout Options.
 import {VanillaInputText} from "@vanilla-components";
 export default {
   components: {
-    XInputText
+    VanillaInputText
   },
   data(){
     return {

@@ -190,10 +190,12 @@
         </div>
       </Listbox>
     </div>
+
     <vanilla-form-errors
       v-if="hasErrors && showErrors"
       :error="errors"
     />
+
     <vanilla-form-helper
       v-if="help"
       :text="help"
