@@ -13,10 +13,6 @@ export default {
             type: [String, Number],
             default: ''
         },
-        rules: {
-            type: [String, Object],
-            default: ''
-        },
         name: {
             type: String,
             default: ''

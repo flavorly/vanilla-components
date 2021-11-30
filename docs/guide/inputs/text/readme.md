@@ -2,19 +2,31 @@
 
 Native text component gives you the ability to write text and number hein, how amazing isnt it?
 
-## Properties
+!!!include(./docs/guide/includes/shared-props.md)!!!
 
-Inherits the default Layout Options.
+## Specific Properties
+
+Properties available for this component that extending the default properties.
 
 | Prop       | Description               | Accepted Values                 | Default     |
 | :--------- | :------------------------ | :------------------------------ | :---------- |
-| `placeholder`| Array/Object of options| Object|Array | `undefined` |
+| `placeholder`| Placeholder for this input | String | `''` |
 
 ## Events
 
+Events Emmit for this Component
+
 | Event   | Description               | Parameters    |
 | :------ | :------------------------ | :------------ |
-| `modelValue` | Value emmited | `$event` |
+| `modelValue` | Value emitted | `$event` |
+
+## Slots
+
+Slots Available for this Component
+
+| Event   | Description               | Parameters    |
+| :------ | :------------------------ | :------------ |
+!!!include(./docs/guide/includes/slots-default.md)!!!
 
 ## Example
 ```vue

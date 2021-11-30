@@ -1,7 +1,7 @@
 <template>
   <!-- Regular -->
   <div class="space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-input-select
+    <vanilla-input-select
       v-model="value"
       class="inline-flex"
       :options="options"
@@ -16,7 +16,7 @@
 
   <!-- Errors -->
   <div class="mt-5 space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-input-select
+    <vanilla-input-select
       v-model="value2"
       class="inline-flex"
       :options="options"
@@ -27,11 +27,11 @@
 </template>
 
 <script>
-import { VanillaInputSelect as XInputSelect } from "@/index";
+import { VanillaInputSelect} from "@/index";
 export default {
   name: "ExampleInputSelect",
   components: {
-    XInputSelect
+    VanillaInputSelect
   },
   data(){
       return {

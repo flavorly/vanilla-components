@@ -48,6 +48,7 @@ export default {
         componentsDir: path.resolve(__dirname, './../guide'),
         components: {
           Wrapper: path.resolve(__dirname, './components/Wrapper.vue'),
+          SharedProperties: path.resolve(__dirname, './components/SharedProperties.vue'),
         },
         getComponentName: (filePath) => {
           const fileName = path.basename(filePath, path.extname(filePath))
@@ -80,4 +81,8 @@ export default {
         },
       }
   },
+  extendsMarkdown: (md) => {
+    // use more markdown-it plugins!
+    md.use(require('markdown-it-include'))
+  }
 }

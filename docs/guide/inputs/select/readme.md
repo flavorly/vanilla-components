@@ -1,34 +1,40 @@
 # Select
 
-Native select component gives you the ability to select a list of options, how amazing isnt it?
+Native select input for Options & Options Picker.
 
-## Properties
+!!!include(./docs/guide/includes/shared-props.md)!!!
 
-Inherits the default Layout Options and the following options:
+## Specific Properties
+
+Properties available for this component that extending the default properties.
 
 | Prop       | Description               | Accepted Values                 | Default     |
 | :--------- | :------------------------ | :------------------------------ | :---------- |
-| `options`    | Array/Object of options        | Object|Array                               | `undefined` |
-| `title`    | HTML title attribute      | -                               | `undefined` |
-| `type`     | Visual type of button     | `default`, `outlined` or `text` | `default`   |
-| `disabled` | HTML's disabled attribute | `true` or `false`               | `false`     |
+| `options`| Array/Object of Options| Array, Object | `[]` |
+| `showEmpty`| If we should show the empty option | Boolean |`true`|
+| `empty`| Default option to show when its empty or not selected | Object |`{title: '&mdash;', value: null}`|
 
 ## Events
 
+Events Emmit for this Component
+
 | Event   | Description               | Parameters    |
 | :------ | :------------------------ | :------------ |
-| `modelValue` | Value emmited | `$event` |
+| `modelValue` | Value emitted | `$event` |
 
 ## Slots
 
-| Event   | Description               | Parameters    |
+Slots Available for this Component
+
+| Event | Description | Scoped Variables |
 | :------ | :------------------------ | :------------ |
+!!!include(./docs/guide/includes/slots-default.md)!!!
 | `option` | Slot to change the option | `item, index` |
 
 ## Example
 ```vue
 <template>
-    <x-select
+    <vanilla-input-select
         class="inline-flex"
         :options="options"
         layout="naked"
@@ -37,10 +43,10 @@ Inherits the default Layout Options and the following options:
     <pre>{{ JSON.stringify(value) }}</pre>
 </template>
 <script>
-import {XInputSelect} from "@vanilla-components";
+import {VanillaInputSelect} from "@vanilla-components";
 export default {
   components: {
-    XInputSelect
+    VanillaInputSelect
   },
   data(){
     return {
