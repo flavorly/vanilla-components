@@ -27,6 +27,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"
   },
+  "sideEffects": false,
   "peerDependencies": {
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "^1.0.1",
