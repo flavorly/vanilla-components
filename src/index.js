@@ -19,4 +19,7 @@ export { default as VanillaInputText } from './components/Inputs/Text.vue'
 export { default as VanillaInputTextarea } from './components/Inputs/Textarea.vue'
 export { default as VanillaInputToggle } from './components/Inputs/Textarea.vue'
 
+// Icons
+export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue'
+
 

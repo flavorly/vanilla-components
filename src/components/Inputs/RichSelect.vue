@@ -142,30 +142,31 @@
                         class="flex items-center space-x-2 text-sm"
                       >
                         <slot
-                          name="pre-span"
+                          name="option"
                           v-bind="{ anOption }"
-                        />
-                        <span
-                          v-if="anOption?.indicator"
-                          class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
-                          :class="indicatorClass(anOption)"
-                          aria-hidden="true"
-                        />
-                        <img
-                          v-if="anOption?.image"
-                          :alt="anOption.label"
-                          :src="anOption.image"
-                          class="flex-shrink-0 h-6 w-6 rounded-full"
                         >
-                        <span
-                          v-if="anOption?.icon"
-                          class="flex-shrink-0 pl-1"
-                          v-html="anOption.icon"
-                        />
-                        <span
-                          class="block whitespace-nowrap truncate"
-                          v-html="anOption?.label"
-                        />
+                          <span
+                            v-if="anOption?.indicator"
+                            class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
+                            :class="indicatorClass(anOption)"
+                            aria-hidden="true"
+                          />
+                          <img
+                            v-if="anOption?.image"
+                            :alt="anOption.label"
+                            :src="anOption.image"
+                            class="flex-shrink-0 h-6 w-6 rounded-full"
+                          >
+                          <span
+                            v-if="anOption?.icon"
+                            class="flex-shrink-0 pl-1"
+                            v-html="anOption.icon"
+                          />
+                          <span
+                            class="block whitespace-nowrap truncate"
+                            v-html="anOption?.label"
+                          />
+                        </slot>
                       </div>
                     </div>
                     <div
@@ -214,6 +215,7 @@ import {Listbox, ListboxButton, ListboxOption, ListboxOptions} from '@headlessui
 import {CheckIcon, SelectorIcon} from '@heroicons/vue/solid';
 import find from 'lodash/find';
 import each from 'lodash/each';
+import throttle from 'lodash/throttle';
 import Fuse from "fuse.js";
 import { onClickOutside } from '@vueuse/core'
 
@@ -280,7 +282,7 @@ export default {
         return {
             show: false,
             selectOptions: [],
-            query: '',
+            query: null,
             searching: false,
             option: undefined,
         }
@@ -296,7 +298,7 @@ export default {
     watch: {
         query: {
             immediate: true,
-            handler(query) {
+            handler: throttle(function(query) {
 
                 if (query === '' || !query) {
                     this.selectOptions = this.options;
@@ -326,7 +328,7 @@ export default {
                 }
 
                 this.searching = false;
-            }
+            },500)
         },
         modelValue: {
             immediate: false,

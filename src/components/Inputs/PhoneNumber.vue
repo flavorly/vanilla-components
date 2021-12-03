@@ -26,13 +26,15 @@
           layout="naked"
           @update:modelValue="$emit('update:countryCode',$event)"
         >
-          <template #pre-span="{ anOption }">
-            <span>
-              <vanilla-flag-icon
-                :iso="anOption.value"
-                class="h-3"
-              />
-            </span>
+          <template #option="{ anOption }">
+            <vanilla-flag-icon
+              :country="anOption.value.toLowerCase()"
+              class="h-3"
+            />
+            <span
+              class="block whitespace-nowrap truncate"
+              v-html="anOption?.label"
+            />
           </template>
         </vanilla-input-rich-select>
         <!-- National Phone Number-->
