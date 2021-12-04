@@ -1,6 +1,6 @@
 # Text Input
 
-Native text component gives you the ability to write text and number hein, how amazing isnt it?
+Native styled Text inputs with Tailwind CSS
 
 !!!include(./docs/guide/includes/shared-props.md)!!!
 
@@ -24,8 +24,8 @@ Events Emmit for this Component
 
 Slots Available for this Component
 
-| Event | Description | Parameters |
-|:------|:------------|:-----------|
+| Name | Description | Parameters |
+|:-----|:------------|:-----------|
 !!!include(./docs/guide/includes/slots-default.md)!!!
 
 ## Example

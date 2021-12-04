@@ -26,8 +26,8 @@ Events Emmit for this Component
 
 Slots Available for this Component
 
-| Event | Description | Scoped Variables |
-|:------|:------------|:-----------------|
+| Name | Description | Scoped Variables |
+|:-----|:------------|:-----------------|
 !!!include(./docs/guide/includes/slots-default.md)!!!
 | `option` | Slot to change the option | `item, index` |
 

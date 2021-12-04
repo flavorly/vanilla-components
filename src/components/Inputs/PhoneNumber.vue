@@ -26,15 +26,32 @@
           layout="naked"
           @update:modelValue="$emit('update:countryCode',$event)"
         >
+          <!-- Selected Option -->
+          <template #selected="{ option }">
+            <slot name="selected">
+              <vanilla-flag-icon
+                :country="option?.value.toLowerCase()"
+                class="h-3"
+              />
+              <span
+                class="block whitespace-nowrap truncate"
+                v-html="option?.label"
+              />
+            </slot>
+          </template>
+
+          <!-- Option Template -->
           <template #option="{ anOption }">
-            <vanilla-flag-icon
-              :country="anOption.value.toLowerCase()"
-              class="h-3"
-            />
-            <span
-              class="block whitespace-nowrap truncate"
-              v-html="anOption?.label"
-            />
+            <slot name="option">
+              <vanilla-flag-icon
+                :country="anOption?.value.toLowerCase()"
+                class="h-3"
+              />
+              <span
+                class="block whitespace-nowrap truncate"
+                v-html="anOption?.label"
+              />
+            </slot>
           </template>
         </vanilla-input-rich-select>
         <!-- National Phone Number-->
@@ -53,7 +70,12 @@
           >
             <template #before>
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-20">
-                <span class="text-gray-500 sm:text-sm">+{{ selectedPhoneCountry?.dialCode }}</span>
+                <slot
+                  name="dialCode"
+                  v-bind="{ selectedPhoneCountry }"
+                >
+                  <span class="text-gray-500 sm:text-sm">+{{ selectedPhoneCountry?.dialCode }}</span>
+                </slot>
               </div>
             </template>
           </vanilla-input-text>

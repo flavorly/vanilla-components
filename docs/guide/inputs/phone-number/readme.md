@@ -2,9 +2,11 @@
 
 Phone number input with Country code and Phone Number, supports country code and full number out of the box
 
-## Properties
+!!!include(./docs/guide/includes/shared-props.md)!!!
 
-Inherits the default Layout Options and the following options:
+## Specific Properties
+
+Properties available for this component that extending the default properties.
 
 | Prop               | Description                                   | Accepted Values   | Default     |
 |:-------------------|:----------------------------------------------|:------------------|:------------|
@@ -15,6 +17,8 @@ Inherits the default Layout Options and the following options:
 
 ## Events
 
+Events Emmit for this Component
+
 | Event             | Description                        | Parameters |
 |:------------------|:-----------------------------------|:-----------|
 | `phone`           | Phone number in national format    | `$event`   |
@@ -24,7 +28,14 @@ Inherits the default Layout Options and the following options:
 
 ## Slots
 
-Todo
+Slots Available for this Component
+
+| Name | Description | Parameters |
+|:-----|:------------|:-----------|
+!!!include(./docs/guide/includes/slots-default.md)!!!
+| `selected` | Slot for the selected Option | `option` |
+| `option` | Slot for the Options item | `anOption` |
+| `dialCode` | Slot for the Dial Code Form append | `selectedPhoneCountry` |
 
 ## Example
 ```vue
@@ -34,8 +45,6 @@ Todo
       v-model:countryDialCode="countryDialCode"
       v-model:phone="phoneNumber"
       v-model:fullPhone="fullPhoneNumber"
-      class="inline-flex"
-      layout="naked"
     />
     <pre>{{ JSON.stringify(value) }}</pre>
 </template>
