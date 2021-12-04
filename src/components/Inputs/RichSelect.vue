@@ -39,27 +39,32 @@
           >
             <div class="relative pr-3">
               <div class="flex items-center space-x-2 text-sm">
-                <span
-                  v-if="option?.indicator"
-                  class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
-                  :class="indicatorClass(option)"
-                  aria-hidden="true"
-                />
-                <img
-                  v-if="option?.image"
-                  :alt="option.label"
-                  :src="option.image"
-                  class="flex-shrink-0 h-6 w-6 rounded-full"
+                <slot
+                  name="selected"
+                  v-bind="{option}"
                 >
-                <span
-                  v-if="option?.icon"
-                  class="flex-shrink-0 pl-1"
-                  v-html="option.icon"
-                />
-                <span
-                  class="block whitespace-nowrap text-base sm:text-sm truncate"
-                  v-html="option?.label"
-                />
+                  <span
+                    v-if="option?.indicator"
+                    class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
+                    :class="indicatorClass(option)"
+                    aria-hidden="true"
+                  />
+                  <img
+                    v-if="option?.image"
+                    :alt="option.label"
+                    :src="option.image"
+                    class="flex-shrink-0 h-6 w-6 rounded-full"
+                  >
+                  <span
+                    v-if="option?.icon"
+                    class="flex-shrink-0 pl-1"
+                    v-html="option.icon"
+                  />
+                  <span
+                    class="block whitespace-nowrap text-base sm:text-sm truncate"
+                    v-html="option?.label"
+                  />
+                </slot>
               </div>
               <div
                 v-if="option?.description"
@@ -112,10 +117,7 @@
                       :searchable="searchable"
                       name="noResults"
                     >
-                      {{ typeof $t !== "undefined" ?
-                        $t('generic.components.select-no-records', {query: query}) :
-                        noResultsLabel.replace(':query',query)
-                      }}
+                      {{ noResultsLabel.replace(':query',query) }}
                     </slot>
                   </div>
                 </div>
@@ -143,7 +145,7 @@
                       >
                         <slot
                           name="option"
-                          v-bind="{ anOption }"
+                          v-bind="{ anOption, active, selected }"
                         >
                           <span
                             v-if="anOption?.indicator"

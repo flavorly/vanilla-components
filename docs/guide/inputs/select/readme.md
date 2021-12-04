@@ -8,26 +8,26 @@ Native select input for Options & Options Picker.
 
 Properties available for this component that extending the default properties.
 
-| Prop       | Description               | Accepted Values                 | Default     |
-| :--------- | :------------------------ | :------------------------------ | :---------- |
-| `options`| Array/Object of Options| Array, Object | `[]` |
-| `showEmpty`| If we should show the empty option | Boolean |`true`|
-| `empty`| Default option to show when its empty or not selected | Object |`{title: '&mdash;', value: null}`|
+| Prop        | Description                                           | Accepted Values | Default                           |
+|:------------|:------------------------------------------------------|:----------------|:----------------------------------|
+| `options`   | Array/Object of Options                               | Array, Object   | `[]`                              |
+| `showEmpty` | If we should show the empty option                    | Boolean         | `true`                            |
+| `empty`     | Default option to show when its empty or not selected | Object          | `{title: '&mdash;', value: null}` |
 
 ## Events
 
 Events Emmit for this Component
 
-| Event   | Description               | Parameters    |
-| :------ | :------------------------ | :------------ |
-| `modelValue` | Value emitted | `$event` |
+| Event        | Description   | Parameters |
+|:-------------|:--------------|:-----------|
+| `modelValue` | Value emitted | `$event`   |
 
 ## Slots
 
 Slots Available for this Component
 
 | Event | Description | Scoped Variables |
-| :------ | :------------------------ | :------------ |
+|:------|:------------|:-----------------|
 !!!include(./docs/guide/includes/slots-default.md)!!!
 | `option` | Slot to change the option | `item, index` |
 
