@@ -8,24 +8,24 @@ Native text component gives you the ability to write text and number hein, how a
 
 Properties available for this component that extending the default properties.
 
-| Prop       | Description               | Accepted Values                 | Default     |
-| :--------- | :------------------------ | :------------------------------ | :---------- |
-| `placeholder`| Placeholder for this input | String | `''` |
+| Prop          | Description                | Accepted Values | Default |
+|:--------------|:---------------------------|:----------------|:--------|
+| `placeholder` | Placeholder for this input | String          | `''`    |
 
 ## Events
 
 Events Emmit for this Component
 
-| Event   | Description               | Parameters    |
-| :------ | :------------------------ | :------------ |
-| `modelValue` | Value emitted | `$event` |
+| Event        | Description   | Parameters |
+|:-------------|:--------------|:-----------|
+| `modelValue` | Value emitted | `$event`   |
 
 ## Slots
 
 Slots Available for this Component
 
-| Event   | Description               | Parameters    |
-| :------ | :------------------------ | :------------ |
+| Event | Description | Parameters |
+|:------|:------------|:-----------|
 !!!include(./docs/guide/includes/slots-default.md)!!!
 
 ## Example

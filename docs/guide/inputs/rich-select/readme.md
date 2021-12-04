@@ -6,28 +6,29 @@ Native select component gives you the ability to select a list of options, how a
 
 Inherits the default Layout Options and the following options:
 
-| Prop       | Description               | Accepted Values                 | Default     |
-| :--------- | :------------------------ | :------------------------------ | :---------- |
-| `options`| Array/Object of options | Object|Arra y| `undefined` |
-| `search`| Function to search threw objects| Boolean|Function | `false` |
-| `searchPlaceholder` | A placeholder to show while searching | `String` | `Undefined`|
-| `searchable`| If the select should be searchable | `Boolean` | `true`|
-| `openOnClickLabel`| If the select should open on click the label | `Boolean` | `false`|
-| `noResultsLabel`| When searching and no results | `String` | `false`|
+| Prop                | Description                                  | Accepted Values            | Default     |
+|:--------------------|:---------------------------------------------|:---------------------------|:------------|
+| `options`           | Array/Object of options                      | `Object`, `array`          | `undefined` |`
+| `search`            | Function to search threw objects             | `Boolean`, `Function`      | false       |
+| `searchPlaceholder` | A placeholder to show while searching        | `String`                   | `undefined` |
+| `searchable`        | If the select should be searchable           | `Boolean`                  | `true`      |
+| `openOnClickLabel`  | If the select should open on click the label | `Boolean`                  | `false`     |
+| `noResultsLabel`    | When searching and no results                | `String`                   | `false`     |
 
 ## Events
 
-| Event   | Description               | Parameters    |
-| :------ | :------------------------ | :------------ |
-| `modelValue` | Value emmited | `$event` |
-| `labelClick` | When user clicks the label | `$event` |
+| Event        | Description                | Parameters |
+|:-------------|:---------------------------|:-----------|
+| `modelValue` | Value emmited              | `$event`   |
+| `labelClick` | When user clicks the label | `$event`   |
 
 ## Slots
 
-| Event   | Description               | Parameters    |
-| :------ | :------------------------ | :------------ |
-| `label` | Slot to change the label | `none` |
-| `query` | Slot to change the label | `query`, `searchable` |
+| Event    | Description              | Parameters            |
+|:---------|:-------------------------|:----------------------|
+!!!include(./docs/guide/includes/slots-default.md)!!!
+| `label`  | Slot to change the label | `none`                |
+| `query`  | Slot to change the label | `query`, `searchable` |
 | `option` | Slot the option template | `query`, `searchable` |
 
 ## Example

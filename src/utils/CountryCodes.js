@@ -30,15 +30,15 @@ export const countryCodes = allCountries.map((country) => ({
 
 export const phoneCountries = countryCodes.map((country) => ({
     value: country.iso2,
-    label: '<span class="flag-icon flag-icon-' + country.iso2.toLowerCase() + '"></span> ' + country.name + ' +' + country.dialCode,
-    name: '<span class="flag-icon flag-icon-' + country.iso2.toLowerCase() + '"></span> ' + country.name,
+    label: country.name + ' +' + country.dialCode,
+    name: country.name,
     name_raw: country.name,
     dialCode: country.dialCode
 }));
 
 export const countries = countryCodes.map((country) => ({
     value: country.iso2,
-    label: '<span class="flag-icon flag-icon-' + country.iso2.toLowerCase() + '"></span> ' + country.name,
+    label: country.name,
     name_raw: country.name,
 }));
 

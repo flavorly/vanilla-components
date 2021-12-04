@@ -1,33 +1,30 @@
 <?php
 
-$scan = scandir('./svg');
-
+$scan = scandir('./SVG');
 $files = array_filter($scan, function ($file) {
     return $file !== '.' && $file !== '..';
 });
 
-foreach ($files as $key =>$file ) {
-    if ($key > 2) {
-//        continue;
-    }
-    $flagSvg = file_get_contents("./svg/{$file}");
+$lines = [];
+$lineTemplate = "'vanilla-flag-%s': defineAsyncComponent(() => import('./Countries/Flag%s.vue'))";
+//$lineTemplate = "'vanilla-flag-%s': defineAsyncComponent({loader: () => import('./Countries/Flag%s.vue'), delay: 0,timeout: 1000, errorComponent: FlagErrorComponent,loadingComponent: FlagLoadingComponent})";
+foreach ($files as $key => $file) {
+
+    $flagSvg = file_get_contents("./SVG/{$file}");
     $flagSvg = str_replace("\n", " ", $flagSvg);
     $iso2 = strtoupper(str_replace('.svg', '', $file));
-    $addSvg = "<span v-if=\"iso === '{$iso2}'\"> {$flagSvg} </span>";
+    $addSvg = "<template>$flagSvg</template>";
+    $addSvg = preg_replace('/\>\s+\</m', '><', $addSvg);
 
-    $content = str_replace(
-        "###\n",
-        $addSvg . "\n    ###\n",
-        file_get_contents("./Index.vue")
+    $lines[] = sprintf(
+        $lineTemplate,
+        strtolower($iso2),
+        $iso2
     );
 
-    file_put_contents("./Index.vue", $content);
+    file_put_contents(sprintf("./Countries/Flag%s.vue",$iso2), $addSvg);
 }
 
-$content = str_replace("###", '', file_get_contents("./Index.vue"));
-$content = str_replace('xmlns="http://www.w3.org/2000/svg"', '', $content);
-$content = str_replace('xmlns:xlink="http://www.w3.org/1999/xlink"', '', $content);
-$content = str_replace('<svg ', '<svg v-bind="$attrs" ', $content);
-file_put_contents("./Index.vue", $content);
-
-//print_r($files);
+$stub = file_get_contents('./BaseComponentFlag.stub');
+$stubReplace = str_replace('{{imports}}', implode(",\n", $lines), $stub);
+file_put_contents("./Index.vue", $stubReplace);

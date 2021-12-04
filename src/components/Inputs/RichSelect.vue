@@ -39,27 +39,32 @@
           >
             <div class="relative pr-3">
               <div class="flex items-center space-x-2 text-sm">
-                <span
-                  v-if="option?.indicator"
-                  class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
-                  :class="indicatorClass(option)"
-                  aria-hidden="true"
-                />
-                <img
-                  v-if="option?.image"
-                  :alt="option.label"
-                  :src="option.image"
-                  class="flex-shrink-0 h-6 w-6 rounded-full"
+                <slot
+                  name="selected"
+                  v-bind="{option}"
                 >
-                <span
-                  v-if="option?.icon"
-                  class="flex-shrink-0 pl-1"
-                  v-html="option.icon"
-                />
-                <span
-                  class="block whitespace-nowrap text-base sm:text-sm truncate"
-                  v-html="option?.label"
-                />
+                  <span
+                    v-if="option?.indicator"
+                    class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
+                    :class="indicatorClass(option)"
+                    aria-hidden="true"
+                  />
+                  <img
+                    v-if="option?.image"
+                    :alt="option.label"
+                    :src="option.image"
+                    class="flex-shrink-0 h-6 w-6 rounded-full"
+                  >
+                  <span
+                    v-if="option?.icon"
+                    class="flex-shrink-0 pl-1"
+                    v-html="option.icon"
+                  />
+                  <span
+                    class="block whitespace-nowrap text-base sm:text-sm truncate"
+                    v-html="option?.label"
+                  />
+                </slot>
               </div>
               <div
                 v-if="option?.description"
@@ -112,10 +117,7 @@
                       :searchable="searchable"
                       name="noResults"
                     >
-                      {{ typeof $t !== "undefined" ?
-                        $t('generic.components.select-no-records', {query: query}) :
-                        noResultsLabel.replace(':query',query)
-                      }}
+                      {{ noResultsLabel.replace(':query',query) }}
                     </slot>
                   </div>
                 </div>
@@ -142,30 +144,31 @@
                         class="flex items-center space-x-2 text-sm"
                       >
                         <slot
-                          name="pre-span"
-                          v-bind="{ anOption }"
-                        />
-                        <span
-                          v-if="anOption?.indicator"
-                          class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
-                          :class="indicatorClass(anOption)"
-                          aria-hidden="true"
-                        />
-                        <img
-                          v-if="anOption?.image"
-                          :alt="anOption.label"
-                          :src="anOption.image"
-                          class="flex-shrink-0 h-6 w-6 rounded-full"
+                          name="option"
+                          v-bind="{ anOption, active, selected }"
                         >
-                        <span
-                          v-if="anOption?.icon"
-                          class="flex-shrink-0 pl-1"
-                          v-html="anOption.icon"
-                        />
-                        <span
-                          class="block whitespace-nowrap truncate"
-                          v-html="anOption?.label"
-                        />
+                          <span
+                            v-if="anOption?.indicator"
+                            class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
+                            :class="indicatorClass(anOption)"
+                            aria-hidden="true"
+                          />
+                          <img
+                            v-if="anOption?.image"
+                            :alt="anOption.label"
+                            :src="anOption.image"
+                            class="flex-shrink-0 h-6 w-6 rounded-full"
+                          >
+                          <span
+                            v-if="anOption?.icon"
+                            class="flex-shrink-0 pl-1"
+                            v-html="anOption.icon"
+                          />
+                          <span
+                            class="block whitespace-nowrap truncate"
+                            v-html="anOption?.label"
+                          />
+                        </slot>
                       </div>
                     </div>
                     <div
@@ -214,6 +217,7 @@ import {Listbox, ListboxButton, ListboxOption, ListboxOptions} from '@headlessui
 import {CheckIcon, SelectorIcon} from '@heroicons/vue/solid';
 import find from 'lodash/find';
 import each from 'lodash/each';
+import throttle from 'lodash/throttle';
 import Fuse from "fuse.js";
 import { onClickOutside } from '@vueuse/core'
 
@@ -280,7 +284,7 @@ export default {
         return {
             show: false,
             selectOptions: [],
-            query: '',
+            query: null,
             searching: false,
             option: undefined,
         }
@@ -296,7 +300,7 @@ export default {
     watch: {
         query: {
             immediate: true,
-            handler(query) {
+            handler: throttle(function(query) {
 
                 if (query === '' || !query) {
                     this.selectOptions = this.options;
@@ -326,7 +330,7 @@ export default {
                 }
 
                 this.searching = false;
-            }
+            },500)
         },
         modelValue: {
             immediate: false,
