@@ -31,6 +31,20 @@ Slots Available for this Component
 !!!include(./docs/guide/includes/slots-default.md)!!!
 | `option` | Slot to change the option | `item, index` |
 
+## Options
+
+Options should contain a specific structure, we could leave this to your own choice, but the whole point of this package
+is to simplify your life, you are free tho, if you want to modify the default behaviour of this package and use your own structure, just
+make sure to also override the slots `option`and `selected` to align with your own logic.
+
+The following key/values are available by default
+
+| key           | value                                                               |
+|:--------------|:--------------------------------------------------------------------|
+| `value`       | The value for your v-model                                          |
+| `label`       | Main Label for this this option                                     |
+
+
 ## Example
 ```vue
 <template>
