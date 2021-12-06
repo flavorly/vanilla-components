@@ -1,31 +1,35 @@
 # Rich Radio Group
 
-Nice and beautiful styled radio groups based on Headless UI
+Phone number input with Country code and Phone Number, supports country code and full number out of the box
 
-## Properties
+!!!include(./docs/guide/includes/shared-props.md)!!!
 
-Inherits the default Layout Options and the following options:
+## Specific Properties
 
-| Prop       | Description               | Accepted Values                 | Default     |
-| :--------- | :------------------------ | :------------------------------ | :---------- |
-| `options`| Array/Object of options | Object|Array | `undefined` |
-| `separated`| If wants the options separated or stick together | Boolean | `false` |
-| `radio` | If you want a radio button or a SVG icon | `Boolean` | `false`|
-| `dark`| If dark mode is enable/disable | `Boolean` | `true`|
+Properties available for this component that extending the default properties.
+
+| Prop        | Description                                      | Accepted Values    | Default     |
+|:------------|:-------------------------------------------------|:-------------------|:------------|
+| `options`   | Array/Object of options                          | `Boolean`, `Array` | `undefined` |
+| `separated` | If wants the options separated or stick together | `Boolean`          | `false`     |
+| `radio`     | If you want a radio button or a SVG icon         | `Boolean`          | `false`     |
+| `dark`      | If dark mode is enable/disable                   | `Boolean`          | `true`      |
 
 ## Slots
 
-| Event   | Description               | Parameters    |
-| :------ | :------------------------ | :------------ |
-| `label` | Slot to change the label | `none` |
-| `query` | Slot to change the label | `query`, `searchable` |
+Slots Available for this Component
+
+| Event    | Description              | Parameters            |
+|:---------|:-------------------------|:----------------------|
+| `label`  | Slot to change the label | `none`                |
+| `query`  | Slot to change the label | `query`, `searchable` |
 | `option` | Slot the option template | `query`, `searchable` |
 
 ## Example
 
 ```vue
 <template>
-  <x-input-radio-group
+  <vanilla-input-radio-group
       :options="options"
       :separted="true"
       :dark="false"
@@ -35,10 +39,10 @@ Inherits the default Layout Options and the following options:
   <pre>{{ JSON.stringify(value) }}</pre>
 </template>
 <script>
-import {XInputRadioGroup} from "@vanilla-components";
+import {VanillaInputRadioGroup} from "@vanilla-components";
 export default {
   components: {
-    XInputRadioGroup
+    VanillaInputRadioGroup
   },
   data() {
     return {

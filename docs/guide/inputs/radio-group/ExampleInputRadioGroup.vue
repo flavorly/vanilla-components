@@ -1,12 +1,12 @@
 <template>
   <!-- Regular -->
   <div class="space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-input-radio-group
+    <vanilla-input-radio-group
+      v-model="value"
       class="inline-flex"
       :options="options"
       :dark="isDark"
       layout="naked"
-      v-model="value"
     />
   </div>
   <div class="flex items-center justify-center mx-auto text-center mt-2">
@@ -15,13 +15,13 @@
 
   <!-- Separated -->
   <div class="mt-5 space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-input-radio-group
+    <vanilla-input-radio-group
+      v-model="value"
       class="inline-flex"
       :options="options"
       :separated="true"
       :dark="isDark"
       layout="naked"
-      v-model="value"
     />
   </div>
   <div class="flex items-center justify-center mx-auto text-center mt-2">
@@ -30,14 +30,14 @@
 
   <!-- Radio -->
   <div class="mt-5 space-x-2 space-y-2 w-full items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <x-input-radio-group
+    <vanilla-input-radio-group
+      v-model="value"
       class="inline-flex"
       :options="options"
       :radio="true"
       :separated="true"
       :dark="isDark"
       layout="naked"
-      v-model="value"
     />
   </div>
   <div class="flex items-center justify-center mx-auto text-center mt-2">
@@ -46,12 +46,12 @@
 </template>
 
 <script>
-import { VanillaInputRadioGroup as XInputRadioGroup } from "@/index";
+import { VanillaInputRadioGroup } from "@/index";
 import { useDarkMode } from '@vuepress/theme-default/lib/client/composables/useDarkMode'
 export default {
   name: "ExampleInputRichSelect",
   components: {
-    XInputRadioGroup
+    VanillaInputRadioGroup
   },
   data(){
       return {
@@ -59,9 +59,6 @@ export default {
         value2: null,
         value3: null,
       }
-  },
-  mounted() {
-    window.parent.postMessage('mounted', '*')
   },
   computed: {
     isDark(){
@@ -78,6 +75,9 @@ export default {
         }
       ]
     }
+  },
+  mounted() {
+    window.parent.postMessage('mounted', '*')
   }
 }
 </script>
