@@ -74,7 +74,13 @@
                   name="dialCode"
                   v-bind="{ selectedPhoneCountry }"
                 >
-                  <span class="text-gray-500 sm:text-sm">+{{ selectedPhoneCountry?.dialCode }}</span>
+                  <span
+                    class="sm:text-sm"
+                    :class="{
+                      'text-red-300': hasErrors,
+                      'text-gray-500': !hasErrors
+                    }"
+                  >+{{ selectedPhoneCountry?.dialCode }}</span>
                 </slot>
               </div>
             </template>
@@ -187,6 +193,7 @@ export default {
     internalCountryCode: {
       immediate: false,
       handler: function (value, oldValue) {
+
         // This ensures the state is cleared when the user changes the input
         if (value !== '') {
           this.internalCountryDialCode = this.selectedPhoneCountry?.dialCode;

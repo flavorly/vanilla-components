@@ -33,7 +33,7 @@
               classesForButtonHasGroupAbove,
               classesForButtonHasGroupBellow
             ]"
-            class="relative w-full border bg-white dark:bg-gray-900 px-4 py-2 dark:border-gray-700 border-1 shadow-sm"
+            class="relative w-full border bg-white dark:bg-gray-900 px-4 py-2 border-1 shadow-sm"
             @click="show = !show"
             @keydown.esc="closeDropdown"
           >
@@ -301,7 +301,7 @@ export default {
         classesForButtonIfHasErrors() {
             return this.hasErrors ?
                 'text-red-600 border-red-300 placeholder-red-300 focus:ring-red-500 dark:focus:border-red-400' :
-                'focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:ring-1 border-gray-300'
+                'focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:ring-1 border-gray-300 dark:border-gray-700'
         },
     },
     watch: {

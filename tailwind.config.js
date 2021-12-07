@@ -1,5 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
+const plugin = require('tailwindcss/plugin')
+
 let makeShadow = (name, rgb) => {
   let obj = {};
   obj[name + "-xs"] = `0 0 0 1px rgba(${rgb}, 0.05)`;
@@ -78,7 +80,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
-    //require('@tailwindcss/forms'),
-    require('./src/Utils/TailwindFormsPlugin')
+    require('./src/Utils/TailwindFormsPlugin'),
+    require('./src/Utils/TailwindFillOpacityPlugin'),
   ],
 }
