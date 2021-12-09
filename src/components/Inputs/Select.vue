@@ -18,7 +18,7 @@
       <select
         :id="name"
         ref="input"
-        v-model="modelValue"
+        v-model="internalValue"
         class="form-input"
         :class="[
           hasErrors ? 'danger' : '',
@@ -85,13 +85,11 @@ export default {
         VanillaInputLayout,
         ExclamationCircleIcon,
     },
-    mixins: [UseFormInputs],
+    mixins: [
+      UseFormInputs,
+    ],
     inheritAttrs: false,
     props: {
-        modelValue: {
-            default: null,
-            required: false,
-        },
         options: {
             type: [Array,Object],
             default: () => [],

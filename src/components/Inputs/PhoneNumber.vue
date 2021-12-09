@@ -193,7 +193,6 @@ export default {
     internalCountryCode: {
       immediate: false,
       handler: function (value, oldValue) {
-
         // This ensures the state is cleared when the user changes the input
         if (value !== '') {
           this.internalCountryDialCode = this.selectedPhoneCountry?.dialCode;

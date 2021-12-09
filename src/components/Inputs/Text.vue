@@ -18,7 +18,7 @@
       <input
         :id="uuid(name)"
         ref="input"
-        v-model="modelValue"
+        v-model="internalValue"
         :name="uuid(name)"
         type="text"
         :autocomplete="name"
@@ -65,13 +65,9 @@ export default {
         VanillaInputLayout,
         ExclamationCircleIcon,
     },
-    mixins: [UseFormInputs],
+    mixins: [
+      UseFormInputs
+    ],
     inheritAttrs: false,
-    props: {
-        modelValue: {
-            default: '',
-            required: false,
-        },
-    },
 };
 </script>

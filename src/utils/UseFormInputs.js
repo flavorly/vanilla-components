@@ -1,13 +1,19 @@
+import SyncProps from "@/utils/SyncProps";
 export default {
     inheritAttrs: false,
+    emits: [
+      'update:modelValue'
+    ],
     data() {
         return {
             hasErrors: false,
-            default: () => {
-                return this.errors.length > 0;
-            }
+            internalValue: null,
+            internalErrors: null,
         }
     },
+    mixins: [
+      SyncProps
+    ],
     props: {
         label: {
             type: [String, Number],
@@ -28,7 +34,8 @@ export default {
         },
         errors: {
             type: [Array, String],
-            default: () => [],
+            default: '',
+            sync: 'internalErrors',
         },
         showErrors: {
             type: Boolean,
@@ -38,8 +45,6 @@ export default {
             type: Boolean,
             default: true,
         },
-
-        // Layout for the field, above, inline, etc
         layout: {
             type: [String],
             default: 'default',
@@ -48,8 +53,6 @@ export default {
                 return ['default', 'content', 'standard', 'naked'].includes(rowStyle)
             },
         },
-
-        // Defines if a form has a field above or bellow
         grouped: {
             type: [String],
             default: null,
@@ -74,18 +77,20 @@ export default {
         }
     },
     watch: {
-        modelValue: {
+        internalValue: {
             handler: function (value, oldValue) {
                 // This ensures the state is cleared when the user changes the input
                 if (value !== oldValue && value !== '') {
+                    this.internalErrors = [];
                     this.hasErrors = false;
                 }
+                this.$emit('update:modelValue', value)
             }
         },
-        errors: {
-            immediate: true,
+        internalErrors: {
+            immediate: false,
             handler: function (value) {
-                this.hasErrors = !!value.length;
+                this.hasErrors = !!value?.length;
             }
         },
     },
