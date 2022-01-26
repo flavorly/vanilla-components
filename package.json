@@ -35,31 +35,31 @@
     "vue": "^3.1.5"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^1.2.5",
+    "@vitejs/plugin-vue": "^2.1.0",
     "@vue/compiler-sfc": "^3.1.5",
     "@vuepress/bundler-vite": "^2.0.0-beta.27",
     "@vuepress/bundler-webpack": "^2.0.0-beta.27",
     "@vuepress/cli": "^2.0.0-alpha.8",
     "@vuepress/plugin-register-components": "^2.0.0-beta.27",
     "@vuepress/utils": "^2.0.0-alpha.1",
-    "eslint": "^7.31.0",
+    "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-vue": "^7.14.0",
+    "eslint-plugin-vue": "^8.3.0",
+    "markdown-it-include": "^2.0.0",
     "postcss-import": "^14.0.2",
     "prettier": "^2.3.2",
     "rollup-plugin-visualizer": "^5.5.2",
     "vite": "^2.4.3",
-    "vuepress": "^2.0.0-beta.27",
-    "markdown-it-include": "^2.0.0",
-    "vue-shadow-dom": "^2.0.0"
+    "vue-shadow-dom": "^3.0.1",
+    "vuepress": "^2.0.0-beta.27"
   },
   "dependencies": {
     "@headlessui/vue": "^1.4.2",
     "@heroicons/vue": "^1.0.1",
-    "@tailwindcss/aspect-ratio": "^0.3.0",
-    "@tailwindcss/forms": "^0.3.3",
-    "@tailwindcss/typography": "^0.4.1",
-    "@vueuse/core": "^6.7.4",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.4.0",
+    "@tailwindcss/typography": "^0.5.0",
+    "@vueuse/core": "^7.5.5",
     "autoprefixer": "^10.3.7",
     "flatpickr": "^4.6.9",
     "fuse.js": "^6.4.6",
@@ -68,6 +68,6 @@
     "mitt": "^3.0.0",
     "postcss": "^8.3.11",
     "postcss-nested": "^5.0.6",
-    "tailwindcss": "^2.2.17"
+    "tailwindcss": "^3.0.16"
   }
 }

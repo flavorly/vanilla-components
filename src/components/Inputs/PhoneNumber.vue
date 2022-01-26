@@ -24,7 +24,7 @@
           :show-errors="false"
           grouped="bellow"
           layout="naked"
-          @update:modelValue="$emit('update:countryCode',$event)"
+          @update:model-value="$emit('update:countryCode',$event)"
         >
           <!-- Selected Option -->
           <template #selected="{ option }">
@@ -66,7 +66,7 @@
             grouped="above"
             layout="naked"
             type="tel"
-            @update:modelValue="$emit('update:phone',$event)"
+            @update:model-value="$emit('update:phone',$event)"
           >
             <template #before>
               <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none z-20">
@@ -187,6 +187,7 @@ export default {
         if (value !== '') {
           this.internalFullPhone = '+' + this.internalCountryDialCode + value;
           this.$emit('update:fullPhone', this.internalFullPhone)
+          this.internalValue = this.internalFullPhone;
         }
       }
     },
@@ -199,6 +200,7 @@ export default {
           this.internalFullPhone = '+' + this.internalCountryDialCode + this.internalPhoneNumber;
           this.$emit('update:fullPhone', this.internalFullPhone)
           this.$emit('update:countryDialCode', this.internalCountryDialCode)
+          this.internalValue = this.internalFullPhone;
         }
       }
     },

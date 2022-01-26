@@ -13,7 +13,8 @@ export default {
                     }),
                     this.$watch(opts.sync, val => {
                         if (val !== this[prop]) {
-                            this.$emit(`update:${prop}`, val);
+                            // TODO : check this
+                            //this.$emit(`update:${prop}`, val);
                         }
                     })
                 );

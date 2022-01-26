@@ -21,7 +21,7 @@
     >
       <Listbox
         :model-value="modelValue"
-        @update:modelValue="$emit('update:modelValue',$event)"
+        @update:model-value="internalValue = $event"
         @keydown.esc="closeDropdown"
         @keydown.enter="openDropdown"
       >
@@ -130,7 +130,7 @@
 
               <ListboxOptions
                 static
-                class="outline-none focus:ring-0 focus:ring-indigo-500 focus:outline-none"
+                class="outline-none focus:ring-0 focus:ring-primary-500 focus:outline-none"
               >
                 <ListboxOption
                   v-for="anOption in selectOptions"
@@ -141,7 +141,7 @@
                   class="py-2 pl-4 pr-4"
                 >
                   <li
-                    :class="[active ? 'text-indigo-900 bg-indigo-100' : 'text-gray-900 dark:text-white','select-none relative focus-visible:ring-0 cursor-pointer',]"
+                    :class="[active ? 'text-primary-900 bg-primary-100' : 'text-gray-900 dark:text-white','select-none relative focus-visible:ring-0 cursor-pointer',]"
                   >
                     <div class="relative">
                       <div
@@ -243,7 +243,9 @@ export default {
         CheckIcon,
         SelectorIcon,
     },
-    mixins: [UseFormInputs],
+    mixins: [
+      UseFormInputs
+    ],
     model: {
         prop: "modelValue",
         event: "change",
@@ -283,10 +285,7 @@ export default {
             }
         }
     },
-    emits: [
-        'update:modelValue',
-        'labelClick'
-    ],
+
     data() {
         return {
             show: false,
@@ -301,7 +300,7 @@ export default {
         classesForButtonIfHasErrors() {
             return this.hasErrors ?
                 'text-red-600 border-red-300 placeholder-red-300 focus:ring-red-500 dark:focus:border-red-400' :
-                'focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:ring-1 border-gray-300 dark:border-gray-700'
+                'focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:ring-1 border-gray-300 dark:border-gray-700'
         },
     },
     watch: {
@@ -378,7 +377,7 @@ export default {
         },
         closeDropdown(e){
             e.preventDefault();
-            this.$emit('update:modelValue',this.option.value)
+            this.internalValue = this.option.value;
             this.query = '';
             this.show = false;
         },

@@ -2,11 +2,12 @@ import SyncProps from "@/utils/SyncProps";
 export default {
     inheritAttrs: false,
     emits: [
-      'update:modelValue'
+      'update:modelValue',
+      'update:errors',
+      'labelClick'
     ],
     data() {
         return {
-            hasErrors: false,
             internalValue: null,
             internalErrors: null,
         }
@@ -34,7 +35,7 @@ export default {
         },
         errors: {
             type: [Array, String],
-            default: '',
+            default: [],
             sync: 'internalErrors',
         },
         showErrors: {
@@ -74,6 +75,9 @@ export default {
               return 'rounded-lg';
             }
             return this.grouped === 'bellow' ? 'rounded-none rounded-t-md focus:z-10' : ''
+        },
+        hasErrors(){
+          return !!this.internalErrors?.length
         }
     },
     watch: {
@@ -82,15 +86,8 @@ export default {
                 // This ensures the state is cleared when the user changes the input
                 if (value !== oldValue && value !== '') {
                     this.internalErrors = [];
-                    this.hasErrors = false;
                 }
                 this.$emit('update:modelValue', value)
-            }
-        },
-        internalErrors: {
-            immediate: false,
-            handler: function (value) {
-                this.hasErrors = !!value?.length;
             }
         },
     },

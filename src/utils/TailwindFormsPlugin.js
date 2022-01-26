@@ -1,8 +1,9 @@
 const svgToDataUri = require('mini-svg-data-uri')
 const plugin = require('tailwindcss/plugin')
 const defaultTheme = require('tailwindcss/defaultTheme')
-const [baseFontSize, {lineHeight: baseLineHeight}] = defaultTheme.fontSize.base
-const {colors, spacing, borderWidth, borderRadius, outline} = defaultTheme
+const colors = require('tailwindcss/colors')
+const [baseFontSize, { lineHeight: baseLineHeight }] = defaultTheme.fontSize.base
+const { spacing, borderWidth, borderRadius } = defaultTheme
 
 const forms = plugin(function ({addBase, theme}) {
     addBase({
@@ -35,8 +36,8 @@ const forms = plugin(function ({addBase, theme}) {
             'font-size': baseFontSize,
             'line-height': baseLineHeight,
             '&:focus': {
-                outline: outline.none[0],
-                'outline-offset': outline.none[1],
+                outline: '2px solid transparent',
+                'outline-offset': '2px',
                 '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
                 '--tw-ring-offset-width': '0px',
                 '--tw-ring-offset-color': '#fff',
@@ -119,8 +120,8 @@ const forms = plugin(function ({addBase, theme}) {
       [type='checkbox']:focus,
       [type='radio']:focus
     `]: {
-            outline: outline.none[0],
-            'outline-offset': outline.none[1],
+            outline: '2px solid transparent',
+           'outline-offset': '2px',
             '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
             '--tw-ring-offset-width': '2px',
             '--tw-ring-offset-color': '#fff',

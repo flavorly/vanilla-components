@@ -19,7 +19,7 @@ let makeShadow = (name, rgb) => {
 module.exports = {
   mode: 'jit',
   darkMode: 'class', // or 'media' or 'class'*,
-  purge: [
+  content: [
     './docs/.vuepress/components/**/*.{js,jsx,ts,tsx,vue}',
     './docs/.vuepress/theme/**/*.{js,jsx,ts,tsx,vue}',
     './docs/guide/**/*.{js,jsx,ts,tsx,vue,md}',
@@ -50,6 +50,8 @@ module.exports = {
         850: '#1D2532',
         900: '#1a202c',
       },
+      // Primary color, change to your own
+      primary: colors.indigo,
     },
     extend: {
       fontFamily: {

@@ -2,19 +2,18 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "@vuepress/theme-default/lib/client/styles/normalize";
 @import "@vuepress/theme-default/lib/client/styles/arrow";
 @import "@vuepress/theme-default/lib/client/styles/badge";
 @import "@vuepress/theme-default/lib/client/styles/code";
 @import "@vuepress/theme-default/lib/client/styles/code-group";
 @import "@vuepress/theme-default/lib/client/styles/custom-container";
-@import "@vuepress/theme-default/lib/client/styles/dropdown";
 @import "@vuepress/theme-default/lib/client/styles/home";
 @import "@vuepress/theme-default/lib/client/styles/layout";
 @import "@vuepress/theme-default/lib/client/styles/navbar";
+@import "@vuepress/theme-default/lib/client/styles/navbar-dropdown";
+@import "@vuepress/theme-default/lib/client/styles/normalize";
 @import "@vuepress/theme-default/lib/client/styles/page";
 @import "@vuepress/theme-default/lib/client/styles/sidebar";
-@import "@vuepress/theme-default/lib/client/styles/sr-only";
 @import "@vuepress/theme-default/lib/client/styles/toc";
 @import "@vuepress/theme-default/lib/client/styles/transitions";
 

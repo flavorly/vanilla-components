@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import {ShadowRoot} from 'vue-shadow-dom/dist/shadow';
+import {ShadowRoot} from 'vue-shadow-dom/shadow';
 import './../../../../src/styles/main.pcss';
 export default {
   components: {

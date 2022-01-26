@@ -17,7 +17,7 @@
     >
       <RadioGroup
         :model-value="modelValue"
-        @update:modelValue="$emit('update:modelValue',$event)"
+        @update:model-vale="$emit('update:modelValue',$event)"
       >
         <div
           class="rounded-lg"
@@ -36,9 +36,9 @@
           >
             <div
               :class="{
-                'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-indigo-600 border border-indigo-200 dark:bg-indigo-500 dark:border-indigo-500 z-10' : active,
+                'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-primary-600 border border-primary-200 dark:bg-primary-500 dark:border-primary-500 z-10' : active,
                 'border border-gray-200 dark:border-gray-700' : !active,
-                'bg-indigo-100 dark:bg-indigo-500 text-white border-indigo-200 dark:border-indigo-500 z-10' : checked,
+                'bg-primary-100 dark:bg-primary-500 text-white border-primary-200 dark:border-primary-500 z-10' : checked,
                 'bg-white dark:bg-gray-900': !checked,
                 'rounded-tl-lg rounded-tr-lg': !separated && index === 0,
                 'rounded-bl-lg rounded-br-lg': !separated && index === options.length - 1,
@@ -55,8 +55,8 @@
                 <span
                   v-if="radio"
                   :class="[
-                    checked ? 'bg-indigo-600 border-transparent dark:bg-indigo-700 ring-offset-white dark:ring-offset-gray-700' : 'bg-white border-gray-300',
-                    active ? 'ring-2 ring-offset-2 ring-indigo-500' : '',
+                    checked ? 'bg-primary-600 border-transparent dark:bg-primary-700 ring-offset-white dark:ring-offset-gray-700' : 'bg-white border-gray-300',
+                    active ? 'ring-2 ring-offset-2 ring-primary-500' : '',
                     'h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center'
                   ]"
                   class="mr-3"
@@ -80,7 +80,7 @@
                       >
                         <RadioGroupLabel
                           as="p"
-                          :class="checked ? 'font-bold text-indigo-900 dark:text-white' : 'font-normal text-gray-900 dark:text-white'"
+                          :class="checked ? 'font-bold text-primary-900 dark:text-white' : 'font-normal text-gray-900 dark:text-white'"
                           class="font-medium"
                           v-html="option.label"
                         />
@@ -91,7 +91,7 @@
                       >
                         <RadioGroupDescription
                           as="span"
-                          :class="checked ? 'text-indigo-700 dark:text-gray-200' : 'text-gray-500 dark:text-gray-400'"
+                          :class="checked ? 'text-primary-700 dark:text-gray-200' : 'text-gray-500 dark:text-gray-400'"
                           class="inline"
                         >
                           <span

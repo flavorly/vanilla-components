@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import {ShadowRoot} from 'vue-shadow-dom/dist/shadow';
+import {ShadowRoot} from 'vue-shadow-dom/shadow';
 export default {
   name: "XWrapper",
   components: {

@@ -17,7 +17,7 @@
       </div>
       <div class="ml-3 text-sm">
         <label
-          :for="name"
+          :for="uuid(name)"
           class="block text-sm text-gray-900 dark:text-white"
           v-bind="$attrs"
           @click="onClickLabel"
@@ -59,7 +59,9 @@ export default {
         event: "change",
     },
     props: {
-        value: {},
+        value: {
+
+        },
         modelValue: {
             default: false,
         },

@@ -101,7 +101,7 @@ export default {
         },
         activeColor: {
             type: String,
-            default: "bg-indigo-600",
+            default: "bg-priamry-600",
         },
         labelAfter: {
             type: Boolean,
