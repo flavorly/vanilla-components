@@ -16,6 +16,11 @@ export default {
       SyncProps
     ],
     props: {
+        modelValue: {
+            type: [String, Number, Boolean, Object, Array],
+            default: null,
+            sync : 'internalValue'
+        },
         label: {
             type: [String, Number],
             default: ''
@@ -35,7 +40,7 @@ export default {
         },
         errors: {
             type: [Array, String],
-            default: [],
+            default: null,
             sync: 'internalErrors',
         },
         showErrors: {
@@ -82,11 +87,14 @@ export default {
     },
     watch: {
         internalValue: {
+            immediate: false,
             handler: function (value, oldValue) {
+                console.log('changed', value, oldValue)
                 // This ensures the state is cleared when the user changes the input
-                if (value !== oldValue && value !== '') {
-                    this.internalErrors = [];
+                if(oldValue !== null && value !== oldValue){
+                  this.internalErrors = null;
                 }
+
                 this.$emit('update:modelValue', value)
             }
         },

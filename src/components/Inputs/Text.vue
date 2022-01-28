@@ -66,7 +66,7 @@ export default {
         ExclamationCircleIcon,
     },
     mixins: [
-      UseFormInputs
+        UseFormInputs
     ],
     inheritAttrs: false,
 };

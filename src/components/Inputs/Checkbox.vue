@@ -47,9 +47,9 @@ import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
 export default {
     name: 'VanillaInputCheckbox',
     components: {
-      VanillaFormHelper,
-      VanillaFormErrors,
-      VanillaInputLayout
+        VanillaFormHelper,
+        VanillaFormErrors,
+        VanillaInputLayout
     },
     mixins: [
         UseFormInputs

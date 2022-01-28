@@ -39,20 +39,20 @@
 <script>
 import { VanillaInputPhoneNumber } from "@/index";
 export default {
-  name: "ExampleInputPhoneNumber",
-  components: {
-    VanillaInputPhoneNumber,
-  },
-  data(){
-      return {
-        countryCode: 'US',
-        phoneNumber: '4844578762',
-        fullPhoneNumber: null,
-        countryDialCode: null,
-      }
-  },
-  mounted() {
-    window.parent.postMessage('mounted', '*')
-  },
+    name: "ExampleInputPhoneNumber",
+    components: {
+        VanillaInputPhoneNumber,
+    },
+    data(){
+        return {
+            countryCode: 'US',
+            phoneNumber: '4844578762',
+            fullPhoneNumber: '+351915279172',
+            countryDialCode: null,
+        }
+    },
+    mounted() {
+        window.parent.postMessage('mounted', '*')
+    },
 }
 </script>

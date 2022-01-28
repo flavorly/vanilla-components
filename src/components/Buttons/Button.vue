@@ -47,27 +47,27 @@
 <script>
 
 export default {
-  name: 'VanillaButton',
-  props: {
-    variant: {
-      type: String,
-      required: false,
-      default: 'primary',
+    name: 'VanillaButton',
+    props: {
+        variant: {
+            type: String,
+            required: false,
+            default: 'primary',
+        },
+        as: {
+            type: String,
+            required: false,
+            default: 'button',
+        },
+        loading: {
+            type: Boolean,
+            default: false,
+        },
+        invalid: {
+            type: Boolean,
+            default: false,
+        },
     },
-    as: {
-      type: String,
-      required: false,
-      default: 'button',
-    },
-    loading: {
-      type: Boolean,
-      default: false,
-    },
-    invalid: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  emits: ['click'],
+    emits: ['click'],
 }
 </script>

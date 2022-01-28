@@ -231,9 +231,9 @@ import { onClickOutside } from '@vueuse/core'
 export default {
     name: "VanillaInputRichSelect",
     components: {
-      VanillaFormLabel,
-      VanillaFormHelper,
-      VanillaFormErrors,
+        VanillaFormLabel,
+        VanillaFormHelper,
+        VanillaFormErrors,
         VanillaInputText,
         VanillaInputLayout,
         Listbox,
@@ -244,7 +244,7 @@ export default {
         SelectorIcon,
     },
     mixins: [
-      UseFormInputs
+        UseFormInputs
     ],
     model: {
         prop: "modelValue",
@@ -390,13 +390,13 @@ export default {
             this.show = true;
         },
         indicatorClass(option){
-          return {
-            'green' : 'bg-green-400',
-            'gray': 'bg-gray-200',
-            'red' : 'bg-red-400',
-            'yellow': 'bg-yellow-400',
-            'blue': 'bg-blue-400',
-          }[option?.indicator || '']
+            return {
+                'green' : 'bg-green-400',
+                'gray': 'bg-gray-200',
+                'red' : 'bg-red-400',
+                'yellow': 'bg-yellow-400',
+                'blue': 'bg-blue-400',
+            }[option?.indicator || '']
         },
     },
 }

@@ -17,26 +17,30 @@
       <input
         :id="uuid(name)"
         ref="input"
-        v-model="modelValue"
+        v-model="internalValue"
+        :name="uuid(name)"
         :autocomplete="name"
-        :class="[ hasErrors ? 'danger' : '', inputClass]"
+        :class="[
+          hasErrors ? 'danger' : '',
+          classesForButtonHasGroupAbove,
+          classesForButtonHasGroupBellow
+        ]"
         :type="type"
         class="form-input"
         v-bind="$attrs"
       >
       <div
         class="absolute inset-y-0 right-0 pr-3 flex items-center z-10 cursor-pointer"
+        :class="[hasErrors ? 'text-red-300' : 'text-gray-300']"
         @click="togglePassword"
       >
-        <i
+        <eye-icon
           v-show="!showingPassword"
-          :class="[hasErrors ? 'text-red-400' : 'text-gray-500']"
-          class="fa fa-eye"
+          class="h-4 w-4"
         />
-        <i
+        <eye-off-icon
           v-show="showingPassword"
-          :class="[hasErrors ? 'text-red-400' : 'text-gray-500']"
-          class="fa fa-eye-slash"
+          class="h-4 w-4"
         />
       </div>
     </div>
@@ -56,6 +60,7 @@ import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
 import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
 import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
 import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+import {EyeIcon, EyeOffIcon} from "@heroicons/vue/solid";
 
 export default {
     name: 'VanillaInputPassword',
@@ -64,18 +69,11 @@ export default {
         VanillaFormHelper,
         VanillaFormErrors,
         VanillaInputLayout,
+        EyeIcon,
+        EyeOffIcon,
     },
     mixins: [UseFormInputs],
     inheritAttrs: false,
-    props: {
-        inputClass: {
-            type: String,
-            default: "",
-        },
-        modelValue: {
-            required: true,
-        },
-    },
     data() {
         return {
             showingPassword: false,

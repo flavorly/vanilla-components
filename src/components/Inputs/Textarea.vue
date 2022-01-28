@@ -16,10 +16,10 @@
     <div class="relative flex">
       <slot name="before" />
       <textarea
-        :id="name"
+        :id="uuid(name)"
         ref="input"
-        v-model="modelValue"
-        :name="name"
+        v-model="internalValue"
+        :name="uuid(name)"
         :autocomplete="name"
         :class="[
           hasErrors ? 'danger' : '',
@@ -68,10 +68,6 @@ export default {
     mixins: [UseFormInputs],
     inheritAttrs: false,
     props: {
-        modelValue: {
-            default: '',
-            required: true,
-        },
         rows: {
             default: 3,
             required: false

@@ -166,14 +166,14 @@ import {
 export default {
     name: 'VanillaInputRadioGroup',
     components: {
-      VanillaFormLabel,
-      VanillaFormHelper,
-      VanillaFormErrors,
-      VanillaInputLayout,
-      RadioGroup,
-      RadioGroupLabel,
-      RadioGroupDescription,
-      RadioGroupOption,
+        VanillaFormLabel,
+        VanillaFormHelper,
+        VanillaFormErrors,
+        VanillaInputLayout,
+        RadioGroup,
+        RadioGroupLabel,
+        RadioGroupDescription,
+        RadioGroupOption,
     },
     mixins: [UseFormInputs],
     props: {

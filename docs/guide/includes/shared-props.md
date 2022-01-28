@@ -3,7 +3,7 @@ Shared Properties Inherited from Base Input
 
 | Prop                   | Description                               | Accepted Values                           | Default     |
 |:-----------------------|:------------------------------------------|:------------------------------------------|:------------|
-| `modalValue`           | Array/Object of options                   | Any                                       | `undefined` |
+| `modalValue`           | The value to be bound/passed              | Any                                       | `undefined` |
 | `label`                | Label for this Input                      | String                                    | `''`        |
 | `name`                 | Unique name for this Input                | String                                    | `''`        |
 | `nameSeed`             | Seed for the name for Uniqueness          | String                                    | `''`        |

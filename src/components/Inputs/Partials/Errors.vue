@@ -17,7 +17,7 @@ export default {
     props: {
         error: {
             type: [String, Array],
-            default: '',
+            default: null,
             required: false
         },
         safe: {
