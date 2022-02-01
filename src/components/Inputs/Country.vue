@@ -14,19 +14,47 @@
 
     <div class="relative flex-1">
       <vanilla-input-rich-select
-        :errors="errors"
+        v-model="internalCountryCode"
+        :errors="internalErrors"
         :model-value="modelValue"
         :name="'countryCode'+name"
         :options="countryOptions"
-        :search="searchPhoneCountries"
+        :search="searchCountries"
         :show-errors="false"
         layout="naked"
-        @update:model-value="$emit('update:modelValue',$event)"
-      />
+      >
+        <!-- Selected Option -->
+        <template #selected="{ option }">
+          <slot name="selected">
+            <vanilla-flag-icon
+              :country="option?.value.toLowerCase()"
+              class="h-3"
+            />
+            <span
+              class="block whitespace-nowrap"
+              v-html="option?.label"
+            />
+          </slot>
+        </template>
+
+        <!-- Option Template -->
+        <template #option="{ anOption }">
+          <slot name="option">
+            <vanilla-flag-icon
+              :country="anOption?.value.toLowerCase()"
+              class="h-3"
+            />
+            <span
+              class="block whitespace-nowrap"
+              v-html="anOption?.label"
+            />
+          </slot>
+        </template>
+      </vanilla-input-rich-select>
     </div>
     <vanilla-form-errors
       v-if="hasErrors && showErrors"
-      :error="errors"
+      :error="internalErrors"
     />
     <vanilla-form-helper
       v-if="help"
@@ -43,6 +71,7 @@ import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
 import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
 import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
 import VanillaInputRichSelect from "@/components/Inputs/RichSelect.vue";
+import VanillaFlagIcon from "@/components/Icons/FlagIcon/Index.vue";
 import find from 'lodash/find';
 import first from 'lodash/first';
 
@@ -54,20 +83,23 @@ export default {
         VanillaFormErrors,
         VanillaInputRichSelect,
         VanillaInputLayout,
+        VanillaFlagIcon,
     },
     mixins: [
         UseFormInputs,
         SyncProps
     ],
     props: {
-        modelValue: {
-            type: [Object, Array, String, Number],
+        favoriteCountries: {
+            type: [Array, Object],
             required: false,
-            default: '',
+            default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
         },
     },
     emits: [
-        'update:modelValue',
+        'update:countryDialCode',
+        'update:countryCode',
+        'update:countryName',
     ],
     data() {
         return {
@@ -75,19 +107,33 @@ export default {
         }
     },
     computed: {
-        selectedPhoneCountry() {
+        selectedCountry() {
             return find(
                 countries,
                 country => country.id === this.internalCountryCode
             ) || first(this.countryOptions)
         },
         countryOptions() {
-            return filterCountriesByName('', this.internalCountryCode, countries);
+            return filterCountriesByName('', this.internalCountryCode, countries,2, this.favoriteCountries);
+        },
+    },
+    watch: {
+        internalCountryCode: {
+            immediate: true,
+            handler: function (value, oldValue) {
+                // This ensures the state is cleared when the user changes the input
+                if (value !== '' && value !== oldValue) {
+                    this.$emit('update:countryDialCode', this.selectedCountry.dialCode);
+                    this.$emit('update:countryCode', this.selectedCountry.value);
+                    this.$emit('update:countryName', this.selectedCountry.name_raw);
+                    this.internalValue = this.internalCountryCode;
+                }
+            }
         },
     },
     methods: {
-        searchPhoneCountries(options, query) {
-            return filterCountriesByName(query, this.internalCountryCode, countries)
+        searchCountries(options, query) {
+            return filterCountriesByName(query, this.internalCountryCode, countries, 2, this.favoriteCountries)
         },
     },
 }

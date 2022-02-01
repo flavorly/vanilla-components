@@ -29,32 +29,32 @@
 <script>
 import { VanillaInputSelect} from "@/index";
 export default {
-  name: "ExampleInputSelect",
-  components: {
-    VanillaInputSelect
-  },
-  data(){
-      return {
-        value: null,
-        value2: null,
-      }
-  },
-  computed: {
-    options(){
-      return [
-        {value: 'roberto', label: 'Roberto Boes'},
-        {value: 'pedro', label: 'Pedro Boes'},
-        {
-          value: [
-            { foo: 'bar', nested: 'deep'}
-          ],
-          label: 'Complex Object'
+    name: "ExampleInputSelect",
+    components: {
+        VanillaInputSelect
+    },
+    data(){
+        return {
+            value: null,
+            value2: null,
         }
-      ]
+    },
+    computed: {
+        options(){
+            return [
+                {value: 'roberto', label: 'Roberto Boes'},
+                {value: 'pedro', label: 'Pedro Boes'},
+                {
+                    value: [
+                        { foo: 'bar', nested: 'deep'}
+                    ],
+                    label: 'Complex Object'
+                }
+            ]
+        }
+    },
+    mounted() {
+        window.parent.postMessage('mounted', '*')
     }
-  },
-  mounted() {
-    window.parent.postMessage('mounted', '*')
-  }
 }
 </script>

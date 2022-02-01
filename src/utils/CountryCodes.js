@@ -40,6 +40,7 @@ export const countries = countryCodes.map((country) => ({
     value: country.iso2,
     label: country.name,
     name_raw: country.name,
+    dialCode: country.dialCode
 }));
 
 export const filterCountriesByName = function (

@@ -145,7 +145,7 @@
                   >
                     <div class="relative">
                       <div
-                        :class="[selected ? 'font-medium' : 'font-normal','block truncate',]"
+                        :class="[selected ? 'font-medium' : 'font-normal','block']"
                         class="flex items-center space-x-2 text-sm"
                       >
                         <slot
@@ -285,7 +285,7 @@ export default {
             }
         }
     },
-
+    emits: ['labelClick'],
     data() {
         return {
             show: false,
