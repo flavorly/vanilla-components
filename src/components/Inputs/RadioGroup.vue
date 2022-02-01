@@ -17,7 +17,7 @@
     >
       <RadioGroup
         :model-value="modelValue"
-        @update:model-vale="$emit('update:modelValue',$event)"
+        @update:model-value="internalValue = $event"
       >
         <div
           class="rounded-lg"
@@ -30,20 +30,23 @@
             v-for="(option,index) in options"
             :key="option.value"
             v-slot="{ active, checked }"
-            as="div"
+            as="template"
             :value="option.value"
-            class="rounded-lg"
           >
             <div
               :class="{
-                'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-primary-600 border border-primary-200 dark:bg-primary-500 dark:border-primary-500 z-10' : active,
+                'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-primary-600 border border-primary-200 dark:bg-primary-500 dark:border-primary-500 z-10' : active && !hasErrors,
                 'border border-gray-200 dark:border-gray-700' : !active,
-                'bg-primary-100 dark:bg-primary-500 text-white border-primary-200 dark:border-primary-500 z-10' : checked,
+                'bg-primary-100 dark:bg-primary-500/60 text-white border-primary-200 dark:border-primary-500 z-10' : checked && !hasErrors,
+                'bg-red-100/70 dark:bg-red-400/10 text-white border-red-200 dark:border-red-500 z-10' : checked && hasErrors,
                 'bg-white dark:bg-gray-900': !checked,
                 'rounded-tl-lg rounded-tr-lg': !separated && index === 0,
                 'rounded-bl-lg rounded-br-lg': !separated && index === options.length - 1,
                 'rounded-lg': separated,
+                // In case we want the checkbox centered
                 'flex items-center content-center': false,
+                'px-5 py-4': !compact,
+                'px-4 py-2': compact
               }"
               class="relative flex px-5 py-4 cursor-pointer focus:outline-none"
             >
@@ -55,18 +58,21 @@
                 <span
                   v-if="radio"
                   :class="[
-                    checked ? 'bg-primary-600 border-transparent dark:bg-primary-700 ring-offset-white dark:ring-offset-gray-700' : 'bg-white border-gray-300',
+                    checked && !hasErrors ? 'bg-primary-600 border-transparent dark:bg-primary-700 ring-offset-white dark:ring-offset-gray-900' : 'bg-white dark:bg-gray-700 border-gray-300',
+                    checked && hasErrors ? 'bg-red-600 border-transparent dark:bg-red-700 ring-offset-white dark:ring-offset-gray-900' : 'bg-white dark:bg-gray-700 border-gray-300',
                     active ? 'ring-2 ring-offset-2 ring-primary-500' : '',
-                    'h-4 w-4 mt-0.5 cursor-pointer rounded-full border flex items-center justify-center'
+                    'h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center'
                   ]"
-                  class="mr-3"
                   aria-hidden="true"
                 >
                   <span class="rounded-full bg-white w-1.5 h-1.5" />
                 </span>
               </slot>
               <!-- Main Content -->
-              <div class="flex items-center justify-between w-full">
+              <div
+                class="ml-3 flex items-center justify-between"
+                :class="{'w-full': !radio}"
+              >
                 <!-- Actual option -->
                 <slot
                   name="option"
@@ -80,7 +86,11 @@
                       >
                         <RadioGroupLabel
                           as="p"
-                          :class="checked ? 'font-bold text-primary-900 dark:text-white' : 'font-normal text-gray-900 dark:text-white'"
+                          :class="{
+                            'font-bold text-primary-900 dark:text-white': checked && !hasErrors,
+                            'font-bold text-red-900 dark:text-white': checked && hasErrors,
+                            'font-normal text-gray-900 dark:text-white': !checked
+                          }"
                           class="font-medium"
                           v-html="option.label"
                         />
@@ -90,12 +100,16 @@
                         v-bind="{checked,option}"
                       >
                         <RadioGroupDescription
+                          v-if="option?.description && !compact"
                           as="span"
-                          :class="checked ? 'text-primary-700 dark:text-gray-200' : 'text-gray-500 dark:text-gray-400'"
+                          :class="{
+                            'text-primary-700 dark:text-gray-200': checked && !hasErrors,
+                            'text-red-700 dark:text-gray-200': checked && hasErrors,
+                            'text-gray-500 dark:text-gray-400': !checked
+                          }"
                           class="inline"
                         >
                           <span
-                            v-if="option?.description"
                             v-html="option?.description"
                           />
                         </RadioGroupDescription>
@@ -121,7 +135,11 @@
                         cx="12"
                         cy="12"
                         r="12"
-                        class="fill-opacity-90 dark:fill-opacity-20 fill-[#4f46e5] dark:fill-[#fff]"
+                        class=""
+                        :class="{
+                          'fill-opacity-90 dark:fill-opacity-30 fill-[#4f46e5] dark:fill-[#fff]': !hasErrors,
+                          'fill-opacity-90 dark:fill-opacity-30 fill-red-300 dark:fill-[#fff]': hasErrors,
+                        }"
                       />
                       <path
                         d="M7 13l3 3 7-7"
@@ -139,12 +157,16 @@
         </div>
       </RadioGroup>
     </div>
+    <!-- Errors -->
     <vanilla-form-errors
       v-if="hasErrors && showErrors"
+      class="px-2 mt-2"
       :error="errors"
     />
+    <!-- Helper -->
     <vanilla-form-helper
       v-if="help"
+      class="px-2 mt-2"
       :text="help"
     />
   </vanilla-input-layout>
@@ -184,10 +206,6 @@ export default {
                 return [];
             }
         },
-        modelValue: {
-            default: '',
-            required: false,
-        },
         separated: {
             type: Boolean,
             default: false,
@@ -195,11 +213,12 @@ export default {
         radio: {
             type: Boolean,
             default: false,
-        }
+        },
+        compact: {
+            type: Boolean,
+            default: false,
+        },
     },
-    emits: [
-        'update:modelValue',
-    ],
     methods: {
         isActive(option) {
             return this.selected.value === option.value

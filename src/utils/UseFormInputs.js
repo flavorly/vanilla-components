@@ -2,9 +2,9 @@ import SyncProps from "@/utils/SyncProps";
 export default {
     inheritAttrs: false,
     emits: [
-      'update:modelValue',
-      'update:errors',
-      'labelClick'
+        'update:modelValue',
+        'update:errors',
+        'labelClick'
     ],
     data() {
         return {
@@ -13,7 +13,7 @@ export default {
         }
     },
     mixins: [
-      SyncProps
+        SyncProps
     ],
     props: {
         modelValue: {
@@ -77,22 +77,21 @@ export default {
         },
         classesForButtonHasGroupBellow() {
             if(!this.grouped){
-              return 'rounded-lg';
+                return 'rounded-lg';
             }
             return this.grouped === 'bellow' ? 'rounded-none rounded-t-md focus:z-10' : ''
         },
         hasErrors(){
-          return !!this.internalErrors?.length
+            return !!this.internalErrors?.length
         }
     },
     watch: {
         internalValue: {
             immediate: false,
             handler: function (value, oldValue) {
-                console.log('changed', value, oldValue)
                 // This ensures the state is cleared when the user changes the input
                 if(oldValue !== null && value !== oldValue){
-                  this.internalErrors = null;
+                    this.internalErrors = null;
                 }
 
                 this.$emit('update:modelValue', value)

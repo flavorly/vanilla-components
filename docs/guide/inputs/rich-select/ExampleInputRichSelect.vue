@@ -65,72 +65,79 @@
 <script>
 import { VanillaInputRichSelect as XInputRichSelect } from "@/index";
 export default {
-  name: "ExampleInputRichSelect",
-  components: {
-    XInputRichSelect
-  },
-  data(){
-      return {
-        value: 'Option 1',
-        value2: 'Option 2',
-        value3: 'Option 3',
-      }
-  },
-  computed: {
-    options(){
-      return [
-        {value: 'Option 1', label: 'One Option'},
-        {value: 'Option 2', label: 'Two Options'},
-        {value: [ { anotherObject: true, nested: 'deep'}], label: 'Complex Object'}
-      ]
+    name: "ExampleInputRichSelect",
+    components: {
+        XInputRichSelect
     },
-    optionsWithImagesAndText(){
-      return [
-        {
-          value: 'Option 1',
-          label: 'Jon Doe',
-          description: 'This an additional text for your select',
-          image: 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-        {
-          value: 'Option 2',
-          label: 'Robert',
-          description: 'This an additional text for your select',
-          image: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-        {
-          value: 'Option 3',
-          label: 'Amando',
-          description: 'This an additional text for your select',
-          image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-        },
-      ]
+    data(){
+        return {
+            value: 'Option 1',
+            value2: 'Option 2',
+            value3: 'Option 3',
+        }
     },
-    optionsWithIndicators(){
-      return [
-        {
-          value: 'Option 1',
-          label: 'Jon Doe',
-          description: 'This an additional text for your select',
-          indicator: 'green',
+    computed: {
+        options(){
+            return [
+                {value: 'Option 1', label: 'One Option'},
+                {value: 'Option 2', label: 'Two Options'},
+                {value: [
+                     {
+                         anotherObject: true,
+                         nested: 'deep'
+                     }
+                 ],
+                 label: 'Complex Object'
+                }
+            ]
         },
-        {
-          value: 'Option 2',
-          label: 'Robert',
-          description: 'This an additional text for your select',
-          indicator: 'red',
+        optionsWithImagesAndText(){
+            return [
+                {
+                    value: 'Option 1',
+                    label: 'Jon Doe',
+                    description: 'This an additional text for your select',
+                    image: 'https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+                },
+                {
+                    value: 'Option 2',
+                    label: 'Robert',
+                    description: 'This an additional text for your select',
+                    image: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+                },
+                {
+                    value: 'Option 3',
+                    label: 'Amando',
+                    description: 'This an additional text for your select',
+                    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+                },
+            ]
         },
-        {
-          value: 'Option 3',
-          label: 'Amando',
-          description: 'This an additional text for your select',
-          indicator: 'gray',
-        },
-      ]
+        optionsWithIndicators(){
+            return [
+                {
+                    value: 'Option 1',
+                    label: 'Jon Doe',
+                    description: 'This an additional text for your select',
+                    indicator: 'green',
+                },
+                {
+                    value: 'Option 2',
+                    label: 'Robert',
+                    description: 'This an additional text for your select',
+                    indicator: 'red',
+                },
+                {
+                    value: 'Option 3',
+                    label: 'Amando',
+                    description: 'This an additional text for your select',
+                    indicator: 'gray',
+                },
+            ]
+        }
+    },
+    mounted() {
+        window.parent.postMessage('mounted', '*')
     }
-  },
-  mounted() {
-    window.parent.postMessage('mounted', '*')
-  }
 }
 </script>

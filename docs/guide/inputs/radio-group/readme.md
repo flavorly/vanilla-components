@@ -13,6 +13,7 @@ Properties available for this component that extending the default properties.
 | `options`   | Array/Object of options                          | `Object`, `array` | `undefined` |
 | `separated` | Separate the table options with a little padding | `Boolean`         | `false`     |
 | `radio`     | Radio Styled Checkboxes or SVG Icon              | `Boolean`         | `false`     |
+| `compact`   | Compact style of the Radio                       | `Boolean`         | `false`     |
 
 ## Slots
 
@@ -60,7 +61,7 @@ const options = [
   <vanilla-input-radio-group
       :options="options"
       :separted="true"
-      :dark="false"
+      :compact="false"
       layout="naked"
       v-model="value"
   />
