@@ -40,6 +40,7 @@ export default {
           { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },
           { text: 'Phone Input', link: '/guide/inputs/phone-number' },
           { text: 'Country', link: '/guide/inputs/country' },
+          { text: 'Toggle', link: '/guide/inputs/toggle' },
         ],
       },
     ],

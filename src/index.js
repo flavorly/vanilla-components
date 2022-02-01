@@ -17,7 +17,7 @@ export { default as VanillaInputRichSelect } from './components/Inputs/RichSelec
 export { default as VanillaInputSelect } from './components/Inputs/Select.vue'
 export { default as VanillaInputText } from './components/Inputs/Text.vue'
 export { default as VanillaInputTextarea } from './components/Inputs/Textarea.vue'
-export { default as VanillaInputToggle } from './components/Inputs/Textarea.vue'
+export { default as VanillaInputToggle } from './components/Inputs/Toggle.vue'
 
 // Icons
 export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue'

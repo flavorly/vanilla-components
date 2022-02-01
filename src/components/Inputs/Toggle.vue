@@ -67,18 +67,31 @@
         </label>
       </span>
     </div>
+    <vanilla-form-errors
+      v-if="hasErrors && showErrors"
+      class="mt-5"
+      :error="errors"
+    />
+    <vanilla-form-helper
+      v-if="help"
+      :text="help"
+    />
   </vanilla-input-layout>
 </template>
 <script>
 import UseFormInputs from "@/utils/UseFormInputs";
 import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
 import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
+import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
 
 export default {
     name: 'VanillaInputToggle',
     components: {
         VanillaFormLabel,
-        VanillaInputLayout
+        VanillaInputLayout,
+        VanillaFormHelper,
+        VanillaFormErrors,
     },
     mixins: [UseFormInputs],
     model: {
@@ -101,7 +114,7 @@ export default {
         },
         activeColor: {
             type: String,
-            default: "bg-priamry-600",
+            default: "bg-primary-600",
         },
         labelAfter: {
             type: Boolean,
@@ -112,7 +125,9 @@ export default {
             default: false,
         }
     },
-    emits: ['update:modelValue'],
+    emits: [
+        'update:modelValue'
+    ],
     computed: {
         isChecked() {
             if (this.modelValue instanceof Array) {
@@ -122,8 +137,16 @@ export default {
             return this.modelValue === this.trueValue;
         },
         activeState() {
-            if (this.isChecked) {
+            if (this.isChecked && !this.hasErrors) {
                 return this.activeColor;
+            }
+
+            if (this.isChecked && this.hasErrors) {
+                return 'bg-red-500';
+            }
+
+            if(this.hasErrors){
+                return 'border-red-500 dark:border';
             }
 
             return "bg-gray-200 dark:bg-gray-900 dark:border-gray-700 dark:border";
