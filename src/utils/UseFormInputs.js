@@ -89,6 +89,7 @@ export default {
         internalValue: {
             immediate: false,
             handler: function (value, oldValue) {
+                console.log('trigger',value, oldValue);
                 // This ensures the state is cleared when the user changes the input
                 if(oldValue !== null && value !== oldValue){
                     this.internalErrors = null;

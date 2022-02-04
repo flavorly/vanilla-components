@@ -3,9 +3,10 @@
   <div class="space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
     <vanilla-input-toggle
       v-model="value"
-      class="inline-flex"
-      layout="naked"
       :help="'Toggle me to see magic'"
+      :label="'Toggle me'"
+      :label-after="false"
+      layout="naked"
     />
   </div>
 
@@ -18,13 +19,11 @@
     <vanilla-input-toggle
       v-model="valueMultiple"
       :value="'foo'"
-      class="inline-flex"
       layout="naked"
     />
     <vanilla-input-toggle
       v-model="valueMultiple"
       :value="'bar'"
-      class="inline-flex"
       layout="naked"
     />
   </div>
@@ -37,8 +36,8 @@
   <div class="mt-5 space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
     <vanilla-input-toggle
       v-model="valueWithError"
+      :value="'checked'"
       placeholder="Type to clear errors"
-      class="inline-flex"
       layout="naked"
       :true-value="'checked'"
       :false-value="'unchecked'"
@@ -61,7 +60,7 @@ export default {
     data(){
         return {
             value: false,
-            valueMultiple: [],
+            valueMultiple: ['foo'],
             valueWithError: 'checked',
         }
     },

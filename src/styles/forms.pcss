@@ -33,7 +33,7 @@
 
     .form-toggle{
         @apply relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200;
-        @apply focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-600;
+        @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
         @apply dark:focus:ring-offset-gray-900;
     }
 
@@ -90,7 +90,7 @@
         @apply px-6 py-3 mt-0 grid;
     }
 
-    .form-row-standard span{
+    .form-row-standard .label{
         @apply block text-sm font-medium text-gray-700 mb-2;
         @apply dark:text-white;
     }

@@ -4,7 +4,10 @@
     v-if="layout === 'default'"
     class="form-row-default"
   >
-    <div class="form-row-default-label">
+    <div
+      v-if="$slots['label']"
+      class="form-row-default-label"
+    >
       <slot name="label" />
     </div>
     <div class="form-row-default-input">
@@ -37,7 +40,10 @@
     v-else
     class="form-row-standard"
   >
-    <span v-if="$slots['label']">
+    <span
+      v-if="$slots['label']"
+      class="label"
+    >
       <slot name="label" />
     </span>
     <slot />

@@ -1,31 +1,38 @@
 <template>
   <vanilla-input-layout :layout="layout">
-    <template #label>
+    <!--    <template #label>-->
+    <!--      <slot-->
+    <!--        v-if="($slots.label || label) && templateLabel"-->
+    <!--        name="label"-->
+    <!--      >-->
+    <!--        <vanilla-form-label-->
+    <!--          :label-for="name"-->
+    <!--          :value="label"-->
+    <!--          @click="onClickLabel"-->
+    <!--        />-->
+    <!--      </slot>-->
+    <!--    </template>-->
+    <div
+      :class="[classes.wrapper]"
+    >
       <slot
-        v-if="($slots.label || label) && templateLabel"
-        name="label"
+        name="labelBefore"
+        v-bind="{label}"
       >
-        <vanilla-form-label
-          :label-for="name"
-          :value="label"
+        <span
+          v-if="label && !labelAfter && !templateLabel"
+          class="mr-3"
           @click="onClickLabel"
-        />
-      </slot>
-    </template>
-
-    <div class="flex items-center">
-      <span
-        v-if="label && !labelAfter && !templateLabel"
-        class="ml-3"
-      >
-        <label
-          :for="name"
-          class="text-sm font-medium text-gray-700"
-          v-bind="$attrs"
         >
-          {{ label }}
-        </label>
-      </span>
+          <label
+            :for="name"
+            :class="[classes.label]"
+          >
+            {{ label }}
+          </label>
+        </span>
+      </slot>
+
       <input
         :id="name"
         ref="checkbox"
@@ -37,10 +44,18 @@
       >
       <button
         ref="input"
-        :class="[activeState]"
+        :class="{
+          'bg-gray-200 dark:bg-gray-900 dark:border-gray-700 dark:border': !isChecked && !hasErrors,
+          'focus:ring-primary-600': !hasErrors,
+          'focus:ring-red-600': hasErrors,
+          'bg-primary-600': isChecked && !hasErrors,
+          'bg-red-500': isChecked && hasErrors,
+          'border-red-500 dark:border': hasErrors,
+        }"
         aria-pressed="false"
         class="form-toggle"
         type="button"
+        v-bind="$attrs"
         @click="$refs.checkbox.click()"
       >
         <span
@@ -48,29 +63,68 @@
           aria-hidden="true"
           class="pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transform ring-0 transition ease-in-out duration-200 flex items-center justify-center"
         >
+          <!-- Checked Slot -->
           <slot
             :isChecked="isChecked"
-            name="default"
-          />
+            name="unchecked"
+          >
+            <svg
+              v-if="!isChecked"
+              class="h-3 w-3 text-gray-400"
+              fill="none"
+              viewBox="0 0 12 12"
+            >
+              <path
+                d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </slot>
+          <!-- Un-Checked Slot -->
+          <slot
+            :isChecked="isChecked"
+            name="checked"
+          >
+            <svg
+              v-if="isChecked"
+              class="h-3 w-3"
+              :class="{
+                'text-primary-600': !hasErrors,
+                'text-red-600': hasErrors
+              }"
+              fill="currentColor"
+              viewBox="0 0 12 12"
+            >
+              <path d="M3.707 5.293a1 1 0 00-1.414 1.414l1.414-1.414zM5 8l-.707.707a1 1 0 001.414 0L5 8zm4.707-3.293a1 1 0 00-1.414-1.414l1.414 1.414zm-7.414 2l2 2 1.414-1.414-2-2-1.414 1.414zm3.414 2l4-4-1.414-1.414-4 4 1.414 1.414z" />
+            </svg>
+          </slot>
         </span>
       </button>
-      <span
-        v-if="label && labelAfter && !templateLabel"
-        class="ml-3"
+      <slot
+        name="labelAfter"
+        v-bind="{label}"
       >
-        <label
-          :for="name"
-          class="text-sm text-gray-700 dark:text-gray-200"
-          v-bind="$attrs"
+        <span
+          v-if="label && labelAfter && !templateLabel"
+          class="ml-3"
+          @click="onClickLabel"
         >
-          {{ label }}
-        </label>
-      </span>
+          <label
+            :for="name"
+            :class="[classes.label]"
+          >
+            {{ label }}
+          </label>
+        </span>
+      </slot>
     </div>
     <vanilla-form-errors
       v-if="hasErrors && showErrors"
       class="mt-5"
-      :error="errors"
+      :error="internalErrors"
     />
     <vanilla-form-helper
       v-if="help"
@@ -105,16 +159,13 @@ export default {
         },
         modelValue: {
             default: false,
+            sync: 'internalValue',
         },
         trueValue: {
             default: true,
         },
         falseValue: {
             default: false,
-        },
-        activeColor: {
-            type: String,
-            default: "bg-primary-600",
         },
         labelAfter: {
             type: Boolean,
@@ -123,6 +174,13 @@ export default {
         templateLabel : {
             type: Boolean,
             default: false,
+        },
+        classes: {
+            type: [Object],
+            default: () => ({
+                wrapper: 'flex items-center justify-center',
+                label: 'text-sm font-medium text-gray-700',
+            }),
         }
     },
     emits: [
@@ -135,21 +193,6 @@ export default {
             }
 
             return this.modelValue === this.trueValue;
-        },
-        activeState() {
-            if (this.isChecked && !this.hasErrors) {
-                return this.activeColor;
-            }
-
-            if (this.isChecked && this.hasErrors) {
-                return 'bg-red-500';
-            }
-
-            if(this.hasErrors){
-                return 'border-red-500 dark:border';
-            }
-
-            return "bg-gray-200 dark:bg-gray-900 dark:border-gray-700 dark:border";
         },
     },
     methods: {
@@ -165,15 +208,11 @@ export default {
                 } else {
                     newValue.splice(newValue.indexOf(this.value), 1);
                 }
-
-                this.$emit("update:modelValue", newValue);
+                this.internalValue = newValue;
                 return;
             }
 
-            this.$emit(
-                "update:modelValue",
-                isChecked ? this.trueValue : this.falseValue
-            );
+            this.internalValue = isChecked ? this.trueValue : this.falseValue;
         },
     },
 };
