@@ -20,7 +20,7 @@
       <input
         :id="uuid(name)"
         ref="picker"
-        v-model="modelValue"
+        v-model="internalValue"
         :name="uuid(name)"
         type="text"
         :autocomplete="name"
@@ -72,11 +72,7 @@ export default {
     mixins: [UseFormInputs],
     inheritAttrs: false,
     props: {
-        modelValue: {
-            default: '',
-            required: false,
-        },
-        config: {
+        options: {
             type: Object,
             default: () => {
                 return {
@@ -88,7 +84,7 @@ export default {
     },
     emits: ['update:modelValue'],
     mounted() {
-        new Flatpickr(this.$refs.picker,this.config)
+        new Flatpickr(this.$refs.picker,this.options)
     }
 };
 </script>

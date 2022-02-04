@@ -41,6 +41,8 @@ export default {
           { text: 'Phone Input', link: '/guide/inputs/phone-number' },
           { text: 'Country', link: '/guide/inputs/country' },
           { text: 'Toggle', link: '/guide/inputs/toggle' },
+          { text: 'Profile Photo', link: '/guide/inputs/profile-photo' },
+          { text: 'Datetime', link: '/guide/inputs/datetime' },
         ],
       },
     ],

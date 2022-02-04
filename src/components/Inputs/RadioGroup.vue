@@ -36,6 +36,7 @@
             <div
               :class="{
                 'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-primary-600 border border-primary-200 dark:bg-primary-500 dark:border-primary-500 z-10' : active && !hasErrors,
+                'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-red-600 border border-primary-200 dark:bg-primary-500 dark:border-red-500 z-10' : active && hasErrors,
                 'border border-gray-200 dark:border-gray-700' : !active,
                 'bg-primary-100 dark:bg-primary-500/60 text-white border-primary-200 dark:border-primary-500 z-10' : checked && !hasErrors,
                 'bg-red-100/70 dark:bg-red-400/10 text-white border-red-200 dark:border-red-500 z-10' : checked && hasErrors,
@@ -60,7 +61,8 @@
                   :class="[
                     checked && !hasErrors ? 'bg-primary-600 border-transparent dark:bg-primary-700 ring-offset-white dark:ring-offset-gray-900' : 'bg-white dark:bg-gray-700 border-gray-300',
                     checked && hasErrors ? 'bg-red-600 border-transparent dark:bg-red-700 ring-offset-white dark:ring-offset-gray-900' : 'bg-white dark:bg-gray-700 border-gray-300',
-                    active ? 'ring-2 ring-offset-2 ring-primary-500' : '',
+                    active && !hasErrors ? 'ring-2 ring-offset-2 ring-primary-500' : '',
+                    active && hasErrors ? 'ring-2 ring-offset-2 ring-red-500' : '',
                     'h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center'
                   ]"
                   aria-hidden="true"

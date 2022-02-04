@@ -21,47 +21,79 @@
       @change="updatePhotoPreview"
     >
 
-    <!-- Current Profile Photo -->
-    <div
-      v-show="! photoPreview"
-      class="mt-2"
-    >
-      <img
-        :src="$page.props.user.profile_photo_url"
-        alt="Current Profile Photo"
-        class="rounded-full h-20 w-20 object-cover"
+    <div class="flex items-center justify-center cursor-pointer">
+      <!-- Current Profile Photo -->
+      <slot
+        name="photo"
+        v-bind="{photo,photoAlt,hasErrors,placeholderLetters}"
       >
-    </div>
+        <div
+          v-show="! photoPreview"
+          class="mt-2"
+        >
+          <img
+            v-if="photo"
+            :src="photo"
+            :alt="photoAlt"
+            class="rounded-full h-20 w-20 object-cover"
+          >
+          <span
+            v-else
+            class="inline-flex items-center justify-center rounded-full h-20 w-20 rounded-full bg-primary-100 p-5"
+            :class="{
+              'bg-primary-100 text-primary-800 dark:bg-gray-600 dark:text-white': ! hasErrors,
+              'bg-red-100 text-red-500': hasErrors,
+            }"
+          >
+            <span class="text-sm font-light leading-none ">{{ placeholderLetters }}</span>
+          </span>
+        </div>
+      </slot>
 
-    <!-- New Profile Photo Preview -->
-    <div
-      v-show="photoPreview"
-      class="mt-2"
-    >
-      <span
-        :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"
-        class="block rounded-full w-20 h-20"
+      <!-- New Profile Photo Preview -->
+      <slot
+        name="preview"
+        v-bind="{photoPreview}"
+      >
+        <div
+          v-show="photoPreview"
+          class="mt-2"
+        >
+          <span
+            :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"
+            class="block rounded-full w-20 h-20"
+          />
+        </div>
+      </slot>
+    </div>
+    <!-- Button to Upload -->
+    <div class="flex items-center justify-center">
+      <slot
+        name="button"
+        v-bind="{selectNewPhoto, hasErrors}"
+      >
+        <vanilla-button
+          :variant="hasErrors ? 'danger-soft' : 'secondary'"
+          class="mt-2"
+          type="button"
+          @click="selectNewPhoto"
+        >
+          {{ buttonLabel }}
+        </vanilla-button>
+      </slot>
+    </div>
+    <!-- Errors & Helper -->
+    <div class="flex items-center justify-center">
+      <vanilla-form-errors
+        v-if="hasErrors && showErrors"
+        class="mt-3"
+        :error="internalErrors"
+      />
+      <vanilla-form-helper
+        v-if="help"
+        :text="help"
       />
     </div>
-
-    <vanilla-button
-      variant="secondary"
-      class="mt-2"
-      type="button"
-      @click="selectNewPhoto"
-    >
-      {{ $t('users.action-upload-photo') }}
-    </vanilla-button>
-
-    <!-- Errors -->
-    <vanilla-form-errors
-      v-if="hasErrors && showErrors"
-      :error="errors"
-    />
-    <vanilla-form-helper
-      v-if="help"
-      :text="help"
-    />
   </vanilla-input-layout>
 </template>
 
@@ -91,9 +123,27 @@ export default {
         photo: {
             type: String,
             default: () => {
-                return this.$page.props.user.profile_photo_url
+                return null
             }
-        }
+        },
+        photoAlt: {
+            type: String,
+            default: (props) => {
+                return props.label;
+            }
+        },
+        buttonLabel: {
+            type: String,
+            default: () => {
+                return 'Change Profile Photo'
+            }
+        },
+        placeholderLetters: {
+            type: String,
+            default: () => {
+                return 'Profile Photo'
+            }
+        },
     },
     emits: [
         'update:modelValue'
@@ -112,10 +162,8 @@ export default {
             reader.onload = (e) => {
                 this.photoPreview = e.target.result;
             };
-
-            this.$emit("update:modelValue", this.$refs.photo.files[0]);
-
-            reader.readAsDataURL(this.$refs.photo.files[0]);
+            this.internalValue = this.$refs.photo.files[0];
+            reader.readAsDataURL(this.internalValue);
         },
     }
 }

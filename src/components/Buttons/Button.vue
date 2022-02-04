@@ -4,6 +4,7 @@
     :class="{
       'btn-primary': variant === 'primary',
       'btn-danger': variant === 'danger',
+      'btn-danger-soft': variant === 'danger-soft',
       'btn': variant === 'secondary',
       'opacity-100': loading && !invalid,
       'opacity-50': invalid,
