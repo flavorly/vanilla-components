@@ -1,8 +1,20 @@
 import { defineClientAppEnhance } from '@vuepress/client'
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
+import plugin from '../../src/plugin'
+import { variantJS } from '@variantjs/vue'
+import { VariantJSConfiguration } from './types/variantCore';
 
 export default defineClientAppEnhance(({ app, router, siteData }) => {
+
+  const configuration: VariantJSConfiguration = {
+    TInput: {
+      classes: 'foo',
+    },
+  };
+
+  //app.use(plugin, configuration)
+  app.use(variantJS, configuration)
+
+  console.log(app);
 
   //console.log(app);
   // Register all components in Src folder as global

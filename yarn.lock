@@ -88,6 +88,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@popperjs/core@^2.11.2":
+  version "2.11.2"
+  resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.2.tgz#830beaec4b4091a9e9398ac50f865ddea52186b9"
+  integrity sha512-92FRmppjjqz29VMJ2dn+xdyXZBrMlE42AV6Kq6BwjWV7CNUW1hs2FtxSNLQE+gJhaZ6AAmYuO9y8dshhcBl7vA==
+
 "@rollup/plugin-typescript@^8.3.0":
   version "8.3.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-typescript/-/plugin-typescript-8.3.0.tgz#bc1077fa5897b980fc27e376c4e377882c63e68b"
@@ -429,6 +434,18 @@
   version "0.0.79"
   resolved "https://registry.yarnpkg.com/@variantjs/core/-/core-0.0.79.tgz#b569a3c921d84b38b5765f7ecc8515d705914844"
   integrity sha512-8GR/mMPsoWM71CxH1lUnpx7Z0Re7Iu6KNtAJ7s7mXnKoxG5qV75ew4HssOsfsJYa/UuPuJ+yid4Yr9snHoQUrA==
+
+"@variantjs/core@^0.0.80":
+  version "0.0.80"
+  resolved "https://registry.yarnpkg.com/@variantjs/core/-/core-0.0.80.tgz#742be6087a73256d5b5535c0231c997a1dded2ce"
+  integrity sha512-43vcdvMlocajpfHyzxqHZmu77oMbYFsZI38/TC0E3r2vWu95UyqHS+goaDYXd9H7ES/mcPI0H6fBwkUBoZjgxQ==
+
+"@variantjs/vue@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@variantjs/vue/-/vue-0.0.21.tgz#7d2d2b0361fc4ae2cbd5988ed478130779a2057d"
+  integrity sha512-pmxsGgVGe4XcvwbHt2Ytd+oYmJmVF+fgPl5NSbVqWyQlm7dSre9HadfH79+HLghzC8quRQNd49BO+hfN+BRPtA==
+  dependencies:
+    "@variantjs/core" "^0.0.79"
 
 "@vitejs/plugin-vue@^2.1.0":
   version "2.1.0"
@@ -1286,6 +1303,11 @@ body-parser@1.19.1:
     qs "6.9.6"
     raw-body "2.4.2"
     type-is "~1.6.18"
+
+body-scroll-lock@^4.0.0-beta.0:
+  version "4.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/body-scroll-lock/-/body-scroll-lock-4.0.0-beta.0.tgz#4f78789d10e6388115c0460cd6d7d4dd2bbc4f7e"
+  integrity sha512-a7tP5+0Mw3YlUJcGAKUqIBkYYGlYxk2fnCasq/FUph1hadxlTRjF+gAcZksxANnaMnALjxEddmSi/H3OR8ugcQ==
 
 bonjour@^3.5.0:
   version "3.5.0"

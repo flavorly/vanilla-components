@@ -30,6 +30,7 @@
         class="form-input"
         v-bind="$attrs"
       >
+      <t-input v-model="internalErrors" />
       <slot name="after" />
       <div
         v-if="hasErrors && showLeadingErrorIcon"
@@ -49,16 +50,21 @@
   </vanilla-input-layout>
 </template>
 <script>
-import {ExclamationCircleIcon} from "@heroicons/vue/solid";
-import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import UseFormInputs from '@/utils/UseFormInputs';
+import VanillaInputLayout from '@/components/Inputs/Partials/Layout.vue';
+import VanillaFormErrors from '@/components/Inputs/Partials/Errors.vue';
+import VanillaFormHelper from '@/components/Inputs/Partials/Helper.vue';
+import VanillaFormLabel from '@/components/Inputs/Partials/Label.vue';
+import useConfiguration from '@/use/useConfiguration';
+import { getVariantProps } from '@/utils/getVariantProps';
+import { TInputConfig } from '@variantjs/core';
+import { TInput } from '@variantjs/vue';
 
 export default {
     name: 'VanillaInputText',
     components: {
+        TInput,
         VanillaFormLabel,
         VanillaFormHelper,
         VanillaFormErrors,
@@ -66,8 +72,16 @@ export default {
         ExclamationCircleIcon,
     },
     mixins: [
-        UseFormInputs
+        UseFormInputs,
     ],
     inheritAttrs: false,
+    props:{
+        ...getVariantProps(),
+    },
+    mounted() {
+        const { configuration, attributes } = useConfiguration(TInputConfig);
+        console.log('configuration', configuration);
+        console.log('attributes', attributes);
+    },
 };
 </script>
