@@ -1,6 +1,7 @@
 # Vanilla Components
 
-A lightweight Vue 3 component library.
+A lightweight Vue 3 component library based on VariantJS & Headlessui + Vanilla Components
+
 
 ## Usage
 

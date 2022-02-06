@@ -16,11 +16,11 @@ import {
   isPrimitive,
   parseVariant,
   pick,
-} from '@variantjs/core';
+} from '@/core';
 
 import {
-  VariantJSConfiguration,
-} from '../types';
+  VCConfiguration,
+} from '@/core/types';
 
 export const extractDefinedProps = (vm: ComponentInternalInstance): string[] => {
   const validProps = Object.keys(vm.props);
@@ -58,9 +58,11 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
 } {
   const vm = getCurrentInstance()!;
 
-  const variantGlobalConfiguration = inject<VariantJSConfiguration>('configuration', {});
+  const variantGlobalConfiguration = inject<VCConfiguration>('configuration', {});
 
-  const componentGlobalConfiguration = get<VariantJSConfiguration, ComponentOptions>(variantGlobalConfiguration, vm?.type.name as keyof VariantJSConfiguration, {});
+  // This ensures the configuration can only be loaded for this component name
+  // TODO: check this, we can probably add other ways to pick the configuration key file.
+  const componentGlobalConfiguration = get<VCConfiguration, ComponentOptions>(variantGlobalConfiguration, vm?.type.name as keyof VCConfiguration, {});
 
   const propsValues = computed(() => {
     const values: Data = {};
@@ -86,6 +88,7 @@ export default function useConfiguration<ComponentOptions extends Data>(defaultC
   const vm = getCurrentInstance()!;
 
   const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>();
+
 
   const computedConfiguration = computed(() => {
     const props = { ...vm.props };

@@ -1,11 +1,14 @@
 import {
-  CSSClass, CSSRawClassesList, Data, Variants, VariantsWithClassesList,
-} from '@variantjs/core';
-
+  CSSClass,
+  CSSRawClassesList,
+  Data,
+  Variants,
+  VariantsWithClassesList,
+} from '@/core';
+import { VcProps, VCWithClassesListProps } from '@/core/types';
 import { PropType } from 'vue';
-import { VariantJSProps, VariantJSWithClassesListProps } from '../types';
 
-const getVariantProps = <ComponentOptions extends Data>() : VariantJSProps => ({
+const getVariantProps = <ComponentOptions extends Data>() : VcProps => ({
   classes: {
     type: [String, Array, Object] as PropType<CSSClass>,
     default: undefined,
@@ -24,7 +27,7 @@ const getVariantProps = <ComponentOptions extends Data>() : VariantJSProps => ({
   },
 });
 
-const getVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKeys extends string>() : VariantJSWithClassesListProps<ClassesKeys> => ({
+const getVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKeys extends string>() : VCWithClassesListProps<ClassesKeys> => ({
   classes: {
     type: [String, Array, Object] as PropType<CSSRawClassesList<ClassesKeys>>,
     default: undefined,
@@ -43,4 +46,7 @@ const getVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKe
   },
 });
 
-export { getVariantProps, getVariantPropsWithClassesList };
+export {
+  getVariantProps,
+  getVariantPropsWithClassesList,
+};

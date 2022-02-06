@@ -1,20 +1,18 @@
 import {
   CSSRawClassesList,
-  CSSClass, Variants, VariantsWithClassesList, WithVariantProps, WithVariantPropsAndClassesList, Data,
-} from '@variantjs/core';
+  CSSClass,
+  Variants,
+  VariantsWithClassesList,
+  WithVariantProps,
+  WithVariantPropsAndClassesList,
+  Data,
+} from '@/core';
 
 import { ComponentPropsOptions, PropType } from 'vue';
-// import { TButtonOptions } from './components/t-button';
-// import { TCardOptions } from './components/t-card';
-// import { TCheckboxOptions } from './components/t-checkbox';
-// import { TInputOptions } from './components/t-input';
-// import { TInputGroupOptions } from './components/t-input-group';
-// import { TRadioOptions } from './components/t-radio';
-// import { TSelectOptions } from './components/t-select';
-// import { TTagOptions } from './components/t-tag';
-// import { TTextareaOptions } from './components/t-textarea';
 
-type VariantJSProps<ComponentOptions extends WithVariantProps<Data> = {
+import { VCInputOptions } from '@/components/Input/Type';
+
+type VcProps<ComponentOptions extends WithVariantProps<Data> = {
   classes?: CSSClass;
   fixedClasses?: CSSClass;
   variants?: Variants<Data>;
@@ -56,7 +54,7 @@ type VariantJSProps<ComponentOptions extends WithVariantProps<Data> = {
   },
 };
 
-type VariantJSWithClassesListProps<
+type VCWithClassesListProps<
   ClassesKeys extends string,
   ComponentOptions extends WithVariantPropsAndClassesList<Data, ClassesKeys> = WithVariantPropsAndClassesList<Data, ClassesKeys>,
   PropsOptions extends Readonly<ComponentPropsOptions> = {
@@ -95,18 +93,15 @@ type VariantJSWithClassesListProps<
     },
   };
 
-type VariantJSConfiguration = {
-  // TInput?: TInputOptions
-  // TSelect?: TSelectOptions
-  // TRadio?: TRadioOptions
-  // TCheckbox?: TCheckboxOptions
-  // TButton?: TButtonOptions
-  // TTextarea?: TTextareaOptions
-  // TTag?: TTagOptions
-  // TCard?: TCardOptions
-  // TInputGroup?: TInputGroupOptions,
+type VCConfiguration = {
+   TInput?: VCInputOptions,
+   VanillaInputText?: VCInputOptions,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };
 
-export { VariantJSConfiguration, VariantJSProps, VariantJSWithClassesListProps };
+export {
+  VCConfiguration,
+  VcProps,
+  VCWithClassesListProps,
+};

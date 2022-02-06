@@ -1,5 +1,6 @@
-const plugin = require('tailwindcss/plugin')
-const fillOpacityPlugin = plugin(function({ addUtilities }) {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const plugin = require('tailwindcss/plugin');
+const fillOpacityPlugin = plugin(function ( { addUtilities }) {
   const opacity = {
     0: 0,
     10: '0.1',
@@ -12,16 +13,16 @@ const fillOpacityPlugin = plugin(function({ addUtilities }) {
     80: '0.8',
     90: '0.9',
     100: '1',
-  }
+  };
 
   const newUtilities = Object.keys(opacity).reduce((result, key) => {
     result[`.fill-opacity-${key}`] = {
       fillOpacity: opacity[key],
-    }
-    return result
-  }, {})
+    };
+    return result;
+  }, {});
 
-  addUtilities(newUtilities, ['responsive', 'hover','dark'])
-})
+  addUtilities(newUtilities, ['responsive', 'hover', 'dark']);
+});
 
-module.exports = fillOpacityPlugin
+module.exports = fillOpacityPlugin;

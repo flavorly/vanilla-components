@@ -1,5 +1,5 @@
 import momentTZ from 'moment-timezone';
-import Fuse from "fuse.js";
+import Fuse from 'fuse.js';
 import filter from 'lodash/filter';
 import each from 'lodash/each';
 
@@ -18,29 +18,29 @@ export const filterTimezonesByName = function (
         'Europe/London',
         'Europe/Lisbon',
         'Europe/Spain',
-        'Europe/Dublin'
-    ]
+        'Europe/Dublin',
+    ],
 ) {
 
     if (query === '' || query.length < minCharacters) {
         return filter(collection, (timezone) => {
-            return favoriteTimezones.includes(timezone.value) || timezone.value === current
-        })
+            return favoriteTimezones.includes(timezone.value) || timezone.value === current;
+        });
     }
 
     const options = {
         includeScore: false,
         threshold: 0.3,
-        keys: ['value']
-    }
+        keys: ['value'],
+    };
 
     const fuse = new Fuse(collection, options);
     let results = fuse.search(query);
     let filtered = [];
 
     each(results, (result) => {
-        filtered.push(result.item)
-    })
+        filtered.push(result.item);
+    });
 
     return filtered;
-}
+};

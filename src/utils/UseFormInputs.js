@@ -1,33 +1,33 @@
-import SyncProps from "@/utils/SyncProps";
+import SyncProps from '@/utils/SyncProps';
 export default {
     inheritAttrs: false,
     emits: [
         'update:modelValue',
         'update:errors',
-        'labelClick'
+        'labelClick',
     ],
     data() {
         return {
             internalValue: null,
             internalErrors: null,
-        }
+        };
     },
     mixins: [
-        SyncProps
+        SyncProps,
     ],
     props: {
         modelValue: {
             type: [String, Number, Boolean, Object, Array],
             default: null,
-            sync : 'internalValue'
+            sync : 'internalValue',
         },
         label: {
             type: [String, Number],
-            default: ''
+            default: '',
         },
         name: {
             type: String,
-            default: ''
+            default: '',
         },
         nameSeed: {
             type: String,
@@ -36,7 +36,7 @@ export default {
         },
         help: {
             type: String,
-            default: ''
+            default: '',
         },
         errors: {
             type: [Array, String],
@@ -56,7 +56,7 @@ export default {
             default: 'default',
             required: false,
             validate: (rowStyle) => {
-                return ['default', 'content', 'standard', 'naked'].includes(rowStyle)
+                return ['default', 'content', 'standard', 'naked'].includes(rowStyle);
             },
         },
         grouped: {
@@ -64,47 +64,47 @@ export default {
             default: null,
             required: false,
             validate: (grouped) => {
-                return ['bellow', 'above'].includes(grouped)
+                return ['bellow', 'above'].includes(grouped);
             },
-        }
+        },
     },
     computed: {
         classesForButtonHasGroupAbove() {
-            if(!this.grouped){
+            if (!this.grouped){
                 return 'rounded-lg';
             }
-            return this.grouped === 'above' ? 'rounded-none rounded-b-md focus:z-10' : ''
+            return this.grouped === 'above' ? 'rounded-none rounded-b-md focus:z-10' : '';
         },
         classesForButtonHasGroupBellow() {
-            if(!this.grouped){
+            if (!this.grouped){
                 return 'rounded-lg';
             }
-            return this.grouped === 'bellow' ? 'rounded-none rounded-t-md focus:z-10' : ''
+            return this.grouped === 'bellow' ? 'rounded-none rounded-t-md focus:z-10' : '';
         },
         hasErrors(){
-            return !!this.internalErrors?.length
-        }
+            return !!this.internalErrors?.length;
+        },
     },
     watch: {
         internalValue: {
             immediate: false,
             handler: function (value, oldValue) {
-                console.log('trigger',value, oldValue);
+                console.log('trigger', value, oldValue);
                 // This ensures the state is cleared when the user changes the input
-                if(oldValue !== null && value !== oldValue){
+                if (oldValue !== null && value !== oldValue){
                     this.internalErrors = null;
                 }
 
-                this.$emit('update:modelValue', value)
-            }
+                this.$emit('update:modelValue', value);
+            },
         },
     },
     methods: {
         onClickLabel(){
-            this.$refs.input.focus()
+            this.$refs.input.focus();
         },
         uuid(seed = ''){
             return (Math.random() + 1).toString(36).substring(7) + '_' + this.nameSeed || seed;
-        }
-    }
-}
+        },
+    },
+};

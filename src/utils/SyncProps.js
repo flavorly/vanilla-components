@@ -1,5 +1,5 @@
-import {onBeforeUnmount} from "vue";
-import forEach from 'lodash/forEach'
+import { onBeforeUnmount } from 'vue';
+import forEach from 'lodash/forEach';
 
 export default {
    created() {
@@ -12,8 +12,8 @@ export default {
                   prop,
                   val => {this[opts.sync] = val;},
                   {
-                     immediate: false
-                  }
+                     immediate: false,
+                  },
                ),
 
                this.$watch(
@@ -24,11 +24,11 @@ export default {
                      }
                   },
                   {
-                     immediate: false
-                  }
-               )
+                     immediate: false,
+                  },
+               ),
             );
-            if (this[prop] !== undefined || "default" in props) {
+            if (this[prop] !== undefined || 'default' in props) {
                this[opts.sync] = this[prop];
             }
          }
@@ -36,7 +36,7 @@ export default {
             watchers.push(
                this.$watch(prop, (newVal, oldVal) => {
                   opts.watch.bind(this)(newVal, oldVal);
-               })
+               }),
             );
             opts.watch.bind(this)(newVal, oldVal);
          }
@@ -45,6 +45,6 @@ export default {
       // Before unmount remove the watchers
       onBeforeUnmount(() => {
          forEach(watchers, unwatch => unwatch());
-      })
-   }
+      });
+   },
 };

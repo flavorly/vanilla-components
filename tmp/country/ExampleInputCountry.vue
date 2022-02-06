@@ -1,7 +1,7 @@
 <template>
   <!-- Regular -->
   <div class="space-x-2 w-full space-y-2 items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <vanilla-input-country
+    <c-select-country
       v-model="countryCode"
       v-model:countryCode="countryCode"
       v-model:countryDialCode="dialCode"
@@ -23,7 +23,7 @@
 
   <!-- Errors -->
   <div class="mt-5 space-x-2 w-full space-y-2 items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <vanilla-input-country
+    <c-select-country
       v-model="countryCode"
       v-model:countryCode="countryCode"
       v-model:countryDialCode="dialCode"
@@ -36,21 +36,21 @@
 </template>
 
 <script>
-import { VanillaInputCountry } from "@/index";
+import { CSelectCountry } from '@/index';
 export default {
-    name: "ExampleInputCountry",
+    name: 'ExampleInputCountry',
     components: {
-        VanillaInputCountry,
+        CSelectCountry,
     },
     data(){
         return {
             countryCode: 'PT',
             dialCode: null,
             name: null,
-        }
+        };
     },
     mounted() {
-        window.parent.postMessage('mounted', '*')
+        window.parent.postMessage('mounted', '*');
     },
-}
+};
 </script>
