@@ -6,6 +6,7 @@ import {
   WithVariantProps,
   WithVariantPropsAndClassesList,
   Data,
+  Errors,
 } from '@/core';
 
 import { ComponentPropsOptions, PropType } from 'vue';
@@ -18,6 +19,7 @@ type VcProps<ComponentOptions extends WithVariantProps<Data> = {
   variants?: Variants<Data>;
   variant?: string;
   class?: string;
+  errors?: Errors;
 }, PropsOptions extends Readonly<ComponentPropsOptions> = {
   classes: {
     type: PropType<CSSClass>;
@@ -35,6 +37,10 @@ type VcProps<ComponentOptions extends WithVariantProps<Data> = {
     type:PropType<string | undefined>;
     default: undefined;
   },
+  errors: {
+    type:PropType<Errors>;
+    default: undefined;
+  },
 }> = PropsOptions & {
   classes: {
     type: PropType<CSSClass>;
@@ -50,6 +56,10 @@ type VcProps<ComponentOptions extends WithVariantProps<Data> = {
   },
   variant: {
     type:PropType<string | undefined>;
+    default: undefined;
+  },
+  errors: {
+    type:PropType<Errors>;
     default: undefined;
   },
 };
@@ -74,6 +84,10 @@ type VCWithClassesListProps<
       type:PropType<string | undefined>;
       default: undefined;
     },
+    errors: {
+      type:PropType<Errors>;
+      default: undefined;
+    },
   }> = PropsOptions & {
     classes: {
       type: PropType<CSSRawClassesList<ClassesKeys>>;
@@ -89,6 +103,10 @@ type VCWithClassesListProps<
     },
     variant: {
       type:PropType<string | undefined>;
+      default: undefined;
+    },
+    errors: {
+      type:PropType<Errors>;
       default: undefined;
     },
   };

@@ -1,6 +1,6 @@
 import {
   CSSRawClassesList,
-  Data,
+  Data, Errors,
   VariantsWithClassesList,
 } from '@/core';
 import { VCWithClassesListProps } from '@/core/types';
@@ -22,6 +22,10 @@ const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKe
   },
   variant: {
     type: String as PropType<string | undefined>,
+    default: undefined,
+  },
+  errors: {
+    type: [String, Array, Object] as PropType<Errors>,
     default: undefined,
   },
 });

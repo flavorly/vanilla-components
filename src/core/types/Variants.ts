@@ -1,4 +1,4 @@
-import { CSSClass, CSSClassesList } from '@/core';
+import { CSSClass, CSSClassesList, Errors } from '@/core';
 
 export type WithVariantProps<P> = {
   classes?: CSSClass
@@ -6,6 +6,7 @@ export type WithVariantProps<P> = {
   variants?: Variants<P>
   variant?: string
   class?: string
+  errors? : Errors
 } & P;
 
 export interface Variants<P> {

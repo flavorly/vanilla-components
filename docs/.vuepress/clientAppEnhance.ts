@@ -4,7 +4,7 @@ import { variantJS, VariantJSConfiguration } from '@variantjs/vue'
 export default defineClientAppEnhance(({ app, router, siteData }) => {
 
   const configuration: VariantJSConfiguration = {
-    VanillaInputText: {
+    TInput: {
       classes: 'foo',
       variants: {
         // A red variant of the button (applied when `<t-button variant="error" />`)

@@ -6,7 +6,7 @@
       class="inline-flex"
       layout="naked"
       :help="'Im useful helper out here, choose wisely'"
-      :variant="'error'"
+      :errors="'Fooooooo'"
     />
   </div>
 

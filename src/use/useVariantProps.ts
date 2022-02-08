@@ -1,6 +1,7 @@
 import {
   CSSClass,
   Data,
+  Errors,
   Variants,
 } from '@/core';
 
@@ -22,6 +23,10 @@ const useVariantProps = <ComponentOptions extends Data>() : VcProps => ({
   },
   variant: {
     type: String as PropType<string | undefined>,
+    default: undefined,
+  },
+  errors: {
+    type: [String, Array, Object] as PropType<Errors>,
     default: undefined,
   },
 });

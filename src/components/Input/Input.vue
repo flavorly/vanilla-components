@@ -1,48 +1,25 @@
 <template>
-  <input
-    v-model="localValue"
-    v-bind="attributes"
-  >
+  <t-input
+    v-bind="$attrs"
+    :variant="errors.length ? 'error' : undefined"
+  />
 </template>
 <script lang="ts">
-import { defineComponent, PropType, getCurrentInstance } from 'vue';
-import useVModel from '@/use/useVModel';
-import useConfiguration from '@/use/useConfiguration';
+import { defineComponent } from 'vue';
+import { TInput } from '@variantjs/vue';
 import useVariantProps from '@/use/useVariantProps';
-import VCInputConfig from '@/components/Input/Config';
-import { VCInputOptions, VCInputValue } from '@/components/Input/Type';
+import { VCInputOptions } from '@/components/Input/Type';
 
 export default defineComponent({
     name: 'VanillaInputText',
+    components: {
+        TInput,
+    },
     compatConfig: {
         MODE: 3,
     },
     props: {
         ...useVariantProps<VCInputOptions>(),
-        modelValue: {
-            type: [String, Number] as PropType<VCInputValue>,
-            default: undefined,
-        },
-    },
-    setup(props) {
-        const vm = getCurrentInstance();
-
-        const definedProps = vm!.vnode.props;
-
-        const usesVModel = definedProps && definedProps.modelValue !== undefined;
-
-        const localValue = useVModel(props, 'modelValue');
-
-        const { configuration, attributes } = useConfiguration<VCInputOptions>(VCInputConfig);
-
-        console.log(configuration, attributes);
-
-        return {
-            localValue,
-            configuration,
-            attributes,
-            usesVModel,
-        };
     },
 });
 </script>
