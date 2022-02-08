@@ -6,7 +6,6 @@ import {
   CSSClassesList,
   CSSRawClassesList,
 } from '@/core/types';
-
 import pick from '@/core/helpers/pick';
 import mergeClasses from '@/core/mergeClasses';
 import hasProperty from '@/core/helpers/hasProperty';

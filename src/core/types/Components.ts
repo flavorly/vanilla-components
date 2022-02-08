@@ -7,19 +7,19 @@ import {
   WithVariantPropsAndClassesList,
   Data,
   Errors,
-} from '@/core';
-
+} from '@/core/types';
 import { ComponentPropsOptions, PropType } from 'vue';
-
 import { VCInputOptions } from '@/components/Input/Type';
 
-type VcProps<ComponentOptions extends WithVariantProps<Data> = {
+type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   classes?: CSSClass;
   fixedClasses?: CSSClass;
   variants?: Variants<Data>;
   variant?: string;
   class?: string;
   errors?: Errors;
+  feedback?: string;
+  name?: string;
 }, PropsOptions extends Readonly<ComponentPropsOptions> = {
   classes: {
     type: PropType<CSSClass>;
@@ -41,6 +41,15 @@ type VcProps<ComponentOptions extends WithVariantProps<Data> = {
     type:PropType<Errors>;
     default: undefined;
   },
+  feedback: {
+    type:PropType<string | undefined>;
+    default: undefined;
+  },
+  name: {
+    type: PropType<string | undefined>;
+    default: string;
+    required: boolean,
+  },
 }> = PropsOptions & {
   classes: {
     type: PropType<CSSClass>;
@@ -55,16 +64,25 @@ type VcProps<ComponentOptions extends WithVariantProps<Data> = {
     default: undefined;
   },
   variant: {
-    type:PropType<string | undefined>;
+    type: PropType<string | undefined>;
     default: undefined;
   },
   errors: {
-    type:PropType<Errors>;
+    type: PropType<Errors>;
     default: undefined;
+  },
+  feedback: {
+    type: PropType<string | undefined>;
+    default: undefined;
+  },
+  name: {
+    type: PropType<string | undefined>;
+    default: string;
+    required: boolean,
   },
 };
 
-type VCWithClassesListProps<
+type VanillaComponentWithClassesListProps<
   ClassesKeys extends string,
   ComponentOptions extends WithVariantPropsAndClassesList<Data, ClassesKeys> = WithVariantPropsAndClassesList<Data, ClassesKeys>,
   PropsOptions extends Readonly<ComponentPropsOptions> = {
@@ -88,6 +106,15 @@ type VCWithClassesListProps<
       type:PropType<Errors>;
       default: undefined;
     },
+    feedback: {
+      type:PropType<string | undefined>;
+      default: undefined;
+    },
+    name: {
+      type: PropType<string | undefined>;
+      default: string;
+      required: boolean,
+    },
   }> = PropsOptions & {
     classes: {
       type: PropType<CSSRawClassesList<ClassesKeys>>;
@@ -109,9 +136,18 @@ type VCWithClassesListProps<
       type:PropType<Errors>;
       default: undefined;
     },
+    feedback: {
+      type:PropType<string | undefined>;
+      default: undefined;
+    },
+    name: {
+      type: PropType<string | undefined>;
+      default: string;
+      required: boolean,
+    },
   };
 
-type VCConfiguration = {
+type VanillaComponentConfiguration = {
    TInput?: VCInputOptions,
    VanillaInputText?: VCInputOptions,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -119,7 +155,7 @@ type VCConfiguration = {
 };
 
 export {
-  VCConfiguration,
-  VcProps,
-  VCWithClassesListProps,
+  VanillaComponentConfiguration,
+  VanillaComponentProps,
+  VanillaComponentWithClassesListProps,
 };

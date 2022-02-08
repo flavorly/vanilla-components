@@ -4,16 +4,9 @@ import {
   reactive,
   watch,
 } from 'vue';
-
-import {
-  Data,
-  parseVariantWithClassesList,
-} from '@/core';
-
-import {
-  useAttributes,
-  useConfigurationParts,
-} from './useConfiguration';
+import { Data } from '@/core/types';
+import { parseVariantWithClassesList } from '@/core';
+import { useAttributes, useConfigurationParts } from './useConfiguration';
 
 export default function useConfigurationWithClassesList<ComponentOptions extends Data>(defaultConfiguration: ComponentOptions, classesListKeys: string[]): {
   configuration: ComponentOptions,

@@ -1,5 +1,4 @@
 import get from './helpers/get';
-
 import {
   InputOptions,
   NormalizedOptions,
@@ -8,7 +7,7 @@ import {
   InputOptionValue,
   InputOptionText,
   InputOptionObject,
-} from './types';
+} from '@/core/types';
 
 const guessOptionValue = (option: InputOptionObject, valueAttribute?: string): InputOptionValue => {
   if (valueAttribute) {

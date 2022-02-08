@@ -1,7 +1,7 @@
 import {
   NormalizedOption,
   NormalizedOptions,
-} from './types';
+} from '@/core/types';
 
 const flattenOptions = (options: NormalizedOptions): NormalizedOptions => options.flatMap((option: NormalizedOption) => {
   if (option.children) {

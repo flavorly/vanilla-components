@@ -21,6 +21,9 @@ export default defineComponent({
     props: {
         ...useVariantProps<VCInputOptions>(),
     },
+    setup(props) {
+        console.log(props);
+    },
 });
 </script>
 

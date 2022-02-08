@@ -19,7 +19,7 @@ import {
 } from '@/core';
 
 import {
-  VCConfiguration,
+  VanillaComponentConfiguration,
 } from '@/core/types';
 
 export const extractDefinedProps = (vm: ComponentInternalInstance): string[] => {
@@ -58,11 +58,11 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
 } {
   const vm = getCurrentInstance()!;
 
-  const variantGlobalConfiguration = inject<VCConfiguration>('configuration', {});
+  const variantGlobalConfiguration = inject<VanillaComponentConfiguration>('configuration', {});
 
   // This ensures the configuration can only be loaded for this component name
   // TODO: check this, we can probably add other ways to pick the configuration key file.
-  const componentGlobalConfiguration = get<VCConfiguration, ComponentOptions>(variantGlobalConfiguration, vm?.type.name as keyof VCConfiguration, {});
+  const componentGlobalConfiguration = get<VanillaComponentConfiguration, ComponentOptions>(variantGlobalConfiguration, vm?.type.name as keyof VanillaComponentConfiguration, {});
 
   const propsValues = computed(() => {
     const values: Data = {};

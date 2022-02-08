@@ -1,7 +1,7 @@
 import {
   NormalizedOption,
   NormalizedOptions,
-} from './types';
+} from '@/core/types';
 
 const filterOptions = (options: NormalizedOptions, query: string): NormalizedOptions => {
   if (query === '') {

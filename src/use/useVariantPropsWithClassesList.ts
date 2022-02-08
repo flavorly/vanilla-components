@@ -3,11 +3,11 @@ import {
   Data, Errors,
   VariantsWithClassesList,
 } from '@/core';
-import { VCWithClassesListProps } from '@/core/types';
+import { VanillaComponentWithClassesListProps } from '@/core/types';
 import { PropType } from 'vue';
 
 
-const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKeys extends string>() : VCWithClassesListProps<ClassesKeys> => ({
+const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKeys extends string>() : VanillaComponentWithClassesListProps<ClassesKeys> => ({
   classes: {
     type: [String, Array, Object] as PropType<CSSRawClassesList<ClassesKeys>>,
     default: undefined,

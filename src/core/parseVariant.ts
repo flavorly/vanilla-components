@@ -1,8 +1,4 @@
-import {
-  ObjectWithClassName,
-  Variants,
-  WithVariantProps,
-} from '@/core/types';
+import { ObjectWithClassName, Variants, WithVariantProps } from '@/core/types';
 import mergeClasses from './mergeClasses';
 
 const getCustomPropsFromVariant = <P extends ObjectWithClassName>(

@@ -3,12 +3,11 @@ import {
   Data,
   Errors,
   Variants,
-} from '@/core';
-
+  VanillaComponentProps,
+} from '@/core/types';
 import { PropType } from 'vue';
-import { VcProps } from '@/Core/types';
 
-const useVariantProps = <ComponentOptions extends Data>() : VcProps => ({
+const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProps => ({
   classes: {
     type: [String, Array, Object] as PropType<CSSClass>,
     default: undefined,
@@ -28,6 +27,15 @@ const useVariantProps = <ComponentOptions extends Data>() : VcProps => ({
   errors: {
     type: [String, Array, Object] as PropType<Errors>,
     default: undefined,
+  },
+  feedback: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
+  name: {
+    type: [String] as PropType<string>,
+    required: false,
+    default: Date.now().toString(36) + Math.random().toString(36).substr(2),
   },
 });
 
