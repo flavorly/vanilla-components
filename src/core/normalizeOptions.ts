@@ -1,4 +1,3 @@
-import get from './helpers/get';
 import {
   InputOptions,
   NormalizedOptions,
@@ -8,7 +7,13 @@ import {
   InputOptionText,
   InputOptionObject,
 } from '@/core/types';
+import get from '@/core/helpers/get';
 
+/**
+ * Attempts to guess an option value
+ * @param option
+ * @param valueAttribute
+ */
 const guessOptionValue = (option: InputOptionObject, valueAttribute?: string): InputOptionValue => {
   if (valueAttribute) {
     const value = get(option, valueAttribute);
@@ -31,6 +36,11 @@ const guessOptionValue = (option: InputOptionObject, valueAttribute?: string): I
   return option.value;
 };
 
+/**
+ * Attempts to guess an option text
+ * @param option
+ * @param textAttribute
+ */
 const guessOptionText = (option: InputOptionObject, textAttribute?: string): InputOptionText => {
   if (textAttribute) {
     const text = get(option, textAttribute);
@@ -49,6 +59,12 @@ const guessOptionText = (option: InputOptionObject, textAttribute?: string): Inp
   return option.text;
 };
 
+/**
+ * Normalize a option for the select
+ * @param option
+ * @param textAttribute
+ * @param valueAttribute
+ */
 const normalizeOption = (
   option: InputOption,
   textAttribute?: string,
@@ -80,6 +96,12 @@ const normalizeOption = (
   return normalizedOption;
 };
 
+/**
+ * Normalize the options for the select
+ * @param options
+ * @param textAttribute
+ * @param valueAttribute
+ */
 const normalizeOptions = (
   options?: InputOptions,
   textAttribute?: string,

@@ -3,6 +3,11 @@ import {
   NormalizedOptions,
 } from '@/core/types';
 
+/**
+ * Filter the options from the list
+ * @param options
+ * @param query
+ */
 const filterOptions = (options: NormalizedOptions, query: string): NormalizedOptions => {
   if (query === '') {
     return options;

@@ -1,3 +1,4 @@
+import { ComponentPropsOptions, PropType } from 'vue';
 import {
   CSSRawClassesList,
   CSSClass,
@@ -8,9 +9,12 @@ import {
   Data,
   Errors,
 } from '@/core/types';
-import { ComponentPropsOptions, PropType } from 'vue';
+
 import { VCInputOptions } from '@/components/Input/Type';
 
+/**
+ * Props definition for the component
+ */
 type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   classes?: CSSClass;
   fixedClasses?: CSSClass;
@@ -82,6 +86,9 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   },
 };
 
+/**
+ * Same as above but with classes list
+ */
 type VanillaComponentWithClassesListProps<
   ClassesKeys extends string,
   ComponentOptions extends WithVariantPropsAndClassesList<Data, ClassesKeys> = WithVariantPropsAndClassesList<Data, ClassesKeys>,
@@ -147,6 +154,9 @@ type VanillaComponentWithClassesListProps<
     },
   };
 
+/**
+ * Stores the Type for all components available in project
+ */
 type VanillaComponentConfiguration = {
    TInput?: VCInputOptions,
    VanillaInputText?: VCInputOptions,

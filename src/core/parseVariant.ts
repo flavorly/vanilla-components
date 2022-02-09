@@ -1,6 +1,15 @@
-import { ObjectWithClassName, Variants, WithVariantProps } from '@/core/types';
-import mergeClasses from './mergeClasses';
+import {
+  ObjectWithClassName,
+  Variants,
+  WithVariantProps,
+} from '@/core/types';
+import mergeClasses from '@/core/mergeClasses';
 
+/**
+ * Get the custom props from variants to a specific selected variant
+ * @param variants
+ * @param variant
+ */
 const getCustomPropsFromVariant = <P extends ObjectWithClassName>(
   variants?: Variants<P>,
   variant?: string,
@@ -12,6 +21,12 @@ const getCustomPropsFromVariant = <P extends ObjectWithClassName>(
   return undefined;
 };
 
+/**
+ * Parse a variant
+ * @param props
+ * @param globalConfiguration
+ * @param defaultConfiguration
+ */
 const parseVariant = <P extends ObjectWithClassName>(
   props: WithVariantProps<P>,
   globalConfiguration?: WithVariantProps<P>,

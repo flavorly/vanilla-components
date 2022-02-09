@@ -28,6 +28,7 @@ const getShouldClearClasses = <
   P extends ObjectWithClassesList,
   ClassesKeys extends string,
 >(props: WithVariantPropsAndClassesList<P, ClassesKeys>, key: string, variant: string | undefined): boolean => {
+
   if (variant === undefined) {
     return hasProperty(props, key) && (props[key] === undefined || props[key] === null);
   }

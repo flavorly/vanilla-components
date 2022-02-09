@@ -10,7 +10,6 @@ import {
 } from 'vue';
 
 import {
-  Data,
   get,
   isEqual,
   isPrimitive,
@@ -19,9 +18,14 @@ import {
 } from '@/core';
 
 import {
+  Data,
   VanillaComponentConfiguration,
 } from '@/core/types';
 
+/**
+ * Extract the defined props from the component
+ * @param vm
+ */
 export const extractDefinedProps = (vm: ComponentInternalInstance): string[] => {
   const validProps = Object.keys(vm.props);
 
@@ -30,6 +34,10 @@ export const extractDefinedProps = (vm: ComponentInternalInstance): string[] => 
     .filter((propName) => validProps.includes(propName) && propName !== 'modelValue');
 };
 
+/**
+ * Extract the Attributes from the configuration
+ * @param configuration
+ */
 export function useAttributes<ComponentOptions extends Data>(configuration: ComponentOptions): Data {
   const vm = getCurrentInstance()!;
 
@@ -52,26 +60,31 @@ export function useAttributes<ComponentOptions extends Data>(configuration: Comp
   return attributes;
 }
 
+/**
+ * Extracts the configuration parts for the component such as
+ * classes list & options / classes for the component
+ */
 export function useConfigurationParts<ComponentOptions extends Data>(): {
   componentGlobalConfiguration?: ComponentOptions
   propsValues: ComputedRef<Data>
 } {
+  // Get the current instance
   const vm = getCurrentInstance()!;
 
+  // Inject the Default Configuration
   const variantGlobalConfiguration = inject<VanillaComponentConfiguration>('configuration', {});
 
   // This ensures the configuration can only be loaded for this component name
   // TODO: check this, we can probably add other ways to pick the configuration key file.
   const componentGlobalConfiguration = get<VanillaComponentConfiguration, ComponentOptions>(variantGlobalConfiguration, vm?.type.name as keyof VanillaComponentConfiguration, {});
 
+  // Set the props
   const propsValues = computed(() => {
     const values: Data = {};
-
     extractDefinedProps(vm).forEach((attributeName) => {
       const normalizedAttribute = camelize(attributeName);
       values[normalizedAttribute] = vm.props[normalizedAttribute];
     });
-
     return values;
   });
 
@@ -81,6 +94,12 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
   };
 }
 
+/**
+ * Use this function to extract the current configuration ( custom + globals for a certain component )
+ * Returns the configuration for the component & the Attributes
+ *
+ * @param defaultConfiguration
+ */
 export default function useConfiguration<ComponentOptions extends Data>(defaultConfiguration: ComponentOptions): {
   configuration: ComponentOptions,
   attributes: Data,
@@ -88,7 +107,6 @@ export default function useConfiguration<ComponentOptions extends Data>(defaultC
   const vm = getCurrentInstance()!;
 
   const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>();
-
 
   const computedConfiguration = computed(() => {
     const props = { ...vm.props };

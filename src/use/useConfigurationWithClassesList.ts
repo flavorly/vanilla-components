@@ -6,8 +6,14 @@ import {
 } from 'vue';
 import { Data } from '@/core/types';
 import { parseVariantWithClassesList } from '@/core';
-import { useAttributes, useConfigurationParts } from './useConfiguration';
+import { useAttributes, useConfigurationParts } from '@/use/useConfiguration';
 
+/**
+ * Same as configuration but with classes list.
+ *
+ * @param defaultConfiguration
+ * @param classesListKeys
+ */
 export default function useConfigurationWithClassesList<ComponentOptions extends Data>(defaultConfiguration: ComponentOptions, classesListKeys: string[]): {
   configuration: ComponentOptions,
   attributes: Data,

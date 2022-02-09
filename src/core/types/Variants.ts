@@ -30,6 +30,7 @@ export type ObjectWithClassesList = ObjectWithClassName & {
 export type WithVariantPropsAndClassesList<P, ClassesKeys extends string> = WithVariantProps<P> & {
   classesList?: CSSClassesList<ClassesKeys>
 };
+
 export interface VariantsWithClassesList<P, ClassesKeys extends string> {
   [key: string]: WithVariantPropsAndClassesList<P, ClassesKeys> | undefined
 }

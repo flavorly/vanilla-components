@@ -4,3 +4,4 @@ export { default as parseVariantWithClassesList } from './parseVariantWithClasse
 export { default as normalizeOptions } from './normalizeOptions';
 export { default as flattenOptions } from './flattenOptions';
 export { default as filterOptions } from './filterOptions';
+export * from './helpers';
