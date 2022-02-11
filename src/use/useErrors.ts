@@ -1,30 +1,39 @@
-import { Data } from '@variantjs/core';
+import {
+  Errors,
+  Data,
+} from '@/core/types';
+
 import {
   getCurrentInstance,
   Ref,
   watch,
   ref,
-  toRef,
+  computed,
+  ComputedRef,
 } from 'vue';
 
-export default function useErrors<Props extends Data, ErrorsKey extends keyof Props, ModelValueKey extends Ref>(
+export default function useErrors<Props extends Data, ErrorsKey extends string, ModelValueKey extends Ref>(
   props: Props,
   errorsKey: ErrorsKey,
   modelValue: ModelValueKey,
 ) {
-  const vm = getCurrentInstance();
-  const localErrors = toRef(props, errorsKey) as Ref<Props[ErrorsKey]>;
-  const hasErrors = localErrors.value !== undefined;
 
-  console.log('Model Value on Boot', modelValue.value);
+  const vm = getCurrentInstance()!;
+  // Check any errors from the component itself or parent component
+  const parentErrors = ref(vm.parent?.props[errorsKey]) as Ref<Errors>;
+  const componentErrors = ref(props[errorsKey]) as Ref<Errors>;
+  // Errors can be either from parent or from component itself, it gives priority to component errors
+  const errors = computed(() => componentErrors.value ?? parentErrors.value) as Ref<Errors>;
+  // Ensure we have a bool to toggle errors
+  const hasErrors = computed(() => errors.value !== undefined) as ComputedRef<boolean>;
 
-  watch(modelValue, (value) => {
-    console.log('Model Value Changed', value);
-    console.log('Local Errors are', localErrors.value);
+  watch(modelValue, () => {
+      componentErrors.value = undefined;
+      parentErrors.value = undefined;
   });
 
   return {
-    localErrors,
     hasErrors,
+    errors,
   };
 }
