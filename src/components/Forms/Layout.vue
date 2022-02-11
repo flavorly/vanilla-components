@@ -50,18 +50,25 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import { PropType } from 'vue/dist/vue';
+import { Errors } from '@/core/types';
+
 export default {
-    name: "VanillaInputLayout",
+    name: 'VanillaInputLayout',
     props: {
         layout: {
             type: [String],
             default: 'naked',
             required: false,
-            validate: (rowStyle) => {
-                return ['default', 'content', 'standard', 'naked'].includes(rowStyle)
+            validate: (rowStyle: string) => {
+                return ['default', 'content', 'standard', 'naked'].includes(rowStyle);
             },
         },
+        errors: {
+            type: [String, Array, Object] as PropType<Errors>,
+            default: undefined,
+        },
     },
-}
+};
 </script>

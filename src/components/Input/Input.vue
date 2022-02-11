@@ -2,18 +2,17 @@
   <t-input
     v-model="localValue"
     v-bind="$attrs"
-    :variant="hasErrors ? 'error' : undefined"
+    :variant="hasErrors && !variant ? 'error' : variant"
   />
-  <p>{{ JSON.stringify(localErrors) }}</p>
+  <p>{{ JSON.stringify(errors) }}</p>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, watch } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { TInput } from '@variantjs/vue';
 import useVariantProps from '@/use/useVariantProps';
 import useErrors from '@/use/useErrors';
 import useVModel from '@/use/useVmodel';
 import { VCInputOptions, VCInputValue } from '@/components/Input/Type';
-
 export default defineComponent({
     name: 'VanillaInputText',
     components: {
@@ -31,11 +30,11 @@ export default defineComponent({
     },
     setup(props) {
         const localValue = useVModel(props, 'modelValue');
-        const { localErrors, hasErrors } = useErrors(props, 'errors', localValue);
+        const { errors, hasErrors } = useErrors(props, 'errors', localValue);
         return {
-            localErrors,
-            hasErrors,
             localValue,
+            errors,
+            hasErrors,
         };
     },
 });

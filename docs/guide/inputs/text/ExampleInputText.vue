@@ -1,13 +1,13 @@
 <template>
   <!-- Regular -->
   <div class="space-x-2 space-y-2 flex items-center mx-auto flex-col items-center justify-start sm:space-y-0 sm:flex-row sm:items-end sm:justify-around">
-    <VanillaInput
-      v-model="value"
-      class="inline-flex"
-      layout="naked"
-      :help="'Im useful helper out here, choose wisely'"
-      :errors="'Fooooooo'"
-    />
+    <VanillaInputLayout :errors="'Fooooooo from parent'">
+      <VanillaInput
+        v-model="value"
+        class="inline-flex"
+        :help="'Im useful helper out here, choose wisely'"
+      />
+    </VanillaInputLayout>
   </div>
 
   <div class="flex items-center justify-center mx-auto text-center mt-2">
@@ -27,15 +27,16 @@
 </template>
 
 <script>
-import { VanillaInput } from '@/index';
+import { VanillaInput, VanillaInputLayout } from '@/index';
 export default {
     name: 'ExampleInputText',
     components: {
+        VanillaInputLayout,
         VanillaInput,
     },
     data(){
         return {
-            value: null,
+            value: '',
             value2: null,
         };
     },
