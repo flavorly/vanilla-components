@@ -26,3 +26,7 @@ export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
 // export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
 
 
+// Plugin to Install
+export { default as VanillaComponents } from './plugin';
+
+

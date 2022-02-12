@@ -14,3 +14,4 @@ export { default as normalizedOptionIsDisabled } from './normalizedOptionIsDisab
 export { default as hasProperty } from './hasProperty';
 export { default as promisify } from './promisify';
 export { default as promisifyFunctionResult } from './promisifyFunctionResult';
+export { default as merge } from './merge';

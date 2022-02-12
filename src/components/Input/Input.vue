@@ -1,20 +1,21 @@
 <template>
   <t-input
     v-model="localValue"
+    :variant="hasErrors ? 'error' : variant"
     v-bind="$attrs"
-    :variant="hasErrors && !variant ? 'error' : variant"
+    type="text"
   />
-  <p>{{ JSON.stringify(errors) }}</p>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { TInput } from '@variantjs/vue';
-import useVariantProps from '@/use/useVariantProps';
 import useErrors from '@/use/useErrors';
 import useVModel from '@/use/useVmodel';
-import { VCInputOptions, VCInputValue } from '@/components/Input/Type';
+import { VCInputValue, VCInputOptions } from '@/components/Input/Type';
+import useVariantProps from '@/use/useVariantProps';
+
 export default defineComponent({
-    name: 'VanillaInputText',
+    name: 'VanillaInput',
     components: {
         TInput,
     },
@@ -27,10 +28,15 @@ export default defineComponent({
             type: [String, Number] as PropType<VCInputValue>,
             default: undefined,
         },
+        type: {
+            type: [String] as PropType<string>,
+            default: 'text',
+        },
     },
     setup(props) {
         const localValue = useVModel(props, 'modelValue');
         const { errors, hasErrors } = useErrors(props, 'errors', localValue);
+
         return {
             localValue,
             errors,

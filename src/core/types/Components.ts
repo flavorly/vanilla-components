@@ -158,8 +158,7 @@ type VanillaComponentWithClassesListProps<
  * Stores the Type for all components available in project
  */
 type VanillaComponentConfiguration = {
-   TInput?: VCInputOptions,
-   VanillaInputText?: VCInputOptions,
+   VanillaInput?: VCInputOptions,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };

@@ -72,7 +72,7 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
   const vm = getCurrentInstance()!;
 
   // Inject the Default Configuration
-  const variantGlobalConfiguration = inject<VanillaComponentConfiguration>('configuration', {});
+  const variantGlobalConfiguration = inject<VanillaComponentConfiguration>('vanilla_configuration', {});
 
   // This ensures the configuration can only be loaded for this component name
   // TODO: check this, we can probably add other ways to pick the configuration key file.

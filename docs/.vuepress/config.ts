@@ -56,7 +56,7 @@ export default {
           Wrapper: path.resolve(__dirname, './components/Wrapper.vue'),
           SharedProperties: path.resolve(__dirname, './components/SharedProperties.vue'),
         },
-        getComponentName: (filePath) => {
+        getComponentName: (filePath: string) => {
           const fileName = path.basename(filePath, path.extname(filePath))
           return fileName
             .replace(/^[a-z]/, (s) => s.toUpperCase())
@@ -87,7 +87,7 @@ export default {
         },
       }
   },
-  extendsMarkdown: (md) => {
+  extendsMarkdown: (md: any) => {
     // use more markdown-it plugins!
     md.use(require('markdown-it-include'))
   }

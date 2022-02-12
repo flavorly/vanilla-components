@@ -13,7 +13,7 @@ import VCInputConfig from '@/components/Input/Config';
 import { VCInputOptions, VCInputValue } from '@/components/Input/Type';
 
 export default defineComponent({
-    name: 'VanillaInputText',
+    name: 'VanillaInputTextDemo',
     compatConfig: {
         MODE: 3,
     },
