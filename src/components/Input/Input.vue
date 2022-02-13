@@ -1,25 +1,30 @@
 <template>
   <div :class="configuration.classesList.wrapper">
-    <slot name="before" />
+    <div :class="configuration.classesList.addonBefore">
+      <slot name="before" />
+    </div>
     <t-input
       v-model="localValue"
       v-bind="$attrs"
+      :class="[
+        $slots.before ? configuration.classesList.addonBeforeInputClasses : '',
+        $slots.after || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
+      ]"
       :variant="localVariant"
       :type="type"
     />
-    <slot name="after" />
-    <slot
-      v-if="hasErrors"
-      name="errorIcon"
-    >
-      <div :class="configuration.classesList.errorsWrapper">
-        <ExclamationCircleIcon :class="configuration.classesList.errorsIcon" />
-      </div>
-    </slot>
+    <div :class="configuration.classesList.addonAfter">
+      <slot name="after">
+        <ExclamationCircleIcon
+          v-if="hasErrors"
+          :class="configuration.classesList.addonAfterErrors"
+        />
+      </slot>
+    </div>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, getCurrentInstance, PropType } from 'vue';
 import useBootVariant from '@/use/useBootVariant';
 import useVModel from '@/use/useVmodel';
 import useVariantProps from '@/use/useVariantProps';
@@ -64,7 +69,10 @@ export default defineComponent({
             localVariant,
         );
 
-        console.log(configuration, attributes);
+        if (localVariant.value === 'error'){
+            console.log(configuration, attributes);
+            console.log(getCurrentInstance());
+        }
 
         return {
             localValue,
