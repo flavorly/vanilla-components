@@ -9,6 +9,7 @@ import {
 import pick from '@/core/helpers/pick';
 import mergeClasses from '@/core/mergeClasses';
 import hasProperty from '@/core/helpers/hasProperty';
+import { ref } from 'vue';
 
 const getCustomPropsFromVariant = <
   P extends ObjectWithClassesList,
@@ -50,7 +51,9 @@ const parseVariantWithClassesList = <
     classesListKeys: Readonly<Array<ClassesKeys>>,
     globalConfiguration?: WithVariantPropsAndClassesList<P, ClassesKeys>,
     defaultConfiguration?: WithVariantPropsAndClassesList<P, ClassesKeys>,
+    givenVariant ?: string | undefined,
   ): P => {
+
   const { variants, variant, ...mainProps } = {
     ...defaultConfiguration,
     ...globalConfiguration,
@@ -58,13 +61,12 @@ const parseVariantWithClassesList = <
   };
 
   // TODO : Check how can we forward the variant
-  console.log('Variant: ', variant);
+  // We should store here the variant as a "localVariant" to forward it and be able to maninpulate it
+  const localVariant = ref(givenVariant ?? variant);
 
   const classes: Partial<CSSRawClassesList<ClassesKeys>> = {};
   const fixedClasses: Partial<CSSRawClassesList<ClassesKeys>> = {};
-
   const clearClasses = getShouldClearClasses(props, 'classes', variant);
-
   const clearFixedClasses = getShouldClearClasses(props, 'fixedClasses', variant);
 
   if (clearClasses) {
@@ -81,21 +83,21 @@ const parseVariantWithClassesList = <
         classes[classItemKey] = defaultConfiguration.classes[classItemKey];
       }
 
-      if (variant) {
-        if (props.variants !== undefined && props.variants[variant] !== undefined) {
-          const propsVariant = props.variants[variant] as WithVariantProps<P>;
+      if (localVariant.value) {
+        if (props.variants !== undefined && props.variants[localVariant.value] !== undefined) {
+          const propsVariant = props.variants[localVariant.value] as WithVariantProps<P>;
 
           if (propsVariant.classes && hasProperty(propsVariant.classes, classItemKey)) {
             classes[classItemKey] = propsVariant.classes[classItemKey];
           }
-        } else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[variant] !== undefined) {
-          const globalConfigurationVariant = globalConfiguration.variants[variant] as WithVariantProps<P>;
+        } else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[localVariant.value] !== undefined) {
+          const globalConfigurationVariant = globalConfiguration.variants[localVariant.value] as WithVariantProps<P>;
 
           if (globalConfigurationVariant.classes && hasProperty(globalConfigurationVariant.classes, classItemKey)) {
             classes[classItemKey] = globalConfigurationVariant.classes[classItemKey];
           }
-        } else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[variant] !== undefined) {
-          const defaultConfigurationVariant = defaultConfiguration.variants[variant] as WithVariantProps<P>;
+        } else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[localVariant.value] !== undefined) {
+          const defaultConfigurationVariant = defaultConfiguration.variants[localVariant.value] as WithVariantProps<P>;
 
           if (defaultConfigurationVariant.classes && hasProperty(defaultConfigurationVariant.classes, classItemKey)) {
             classes[classItemKey] = defaultConfigurationVariant.classes[classItemKey];
@@ -119,21 +121,21 @@ const parseVariantWithClassesList = <
         fixedClasses[classItemKey] = defaultConfiguration.fixedClasses[classItemKey];
       }
 
-      if (variant) {
-        if (props.variants !== undefined && props.variants[variant] !== undefined) {
-          const propsVariant = props.variants[variant] as WithVariantProps<P>;
+      if (localVariant.value) {
+        if (props.variants !== undefined && props.variants[localVariant.value] !== undefined) {
+          const propsVariant = props.variants[localVariant.value] as WithVariantProps<P>;
 
           if (propsVariant.fixedClasses && hasProperty(propsVariant.fixedClasses, classItemKey)) {
             fixedClasses[classItemKey] = propsVariant.fixedClasses[classItemKey];
           }
-        } else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[variant] !== undefined) {
-          const globalConfigurationVariant = globalConfiguration.variants[variant] as WithVariantProps<P>;
+        } else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[localVariant.value] !== undefined) {
+          const globalConfigurationVariant = globalConfiguration.variants[localVariant.value] as WithVariantProps<P>;
 
           if (globalConfigurationVariant.fixedClasses && hasProperty(globalConfigurationVariant.fixedClasses, classItemKey)) {
             fixedClasses[classItemKey] = globalConfigurationVariant.fixedClasses[classItemKey];
           }
-        } else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[variant] !== undefined) {
-          const defaultConfigurationVariant = defaultConfiguration.variants[variant] as WithVariantProps<P>;
+        } else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[localVariant.value] !== undefined) {
+          const defaultConfigurationVariant = defaultConfiguration.variants[localVariant.value] as WithVariantProps<P>;
 
           if (defaultConfigurationVariant.fixedClasses && hasProperty(defaultConfigurationVariant.fixedClasses, classItemKey)) {
             fixedClasses[classItemKey] = defaultConfigurationVariant.fixedClasses[classItemKey];

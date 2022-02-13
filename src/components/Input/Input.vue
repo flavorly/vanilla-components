@@ -3,9 +3,9 @@
     <slot name="before" />
     <t-input
       v-model="localValue"
-      :variant="hasErrors ? 'error' : variant"
       v-bind="$attrs"
-      type="text"
+      :variant="localVariant"
+      :type="type"
     />
     <slot name="after" />
     <slot
@@ -20,13 +20,13 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { TInput } from '@variantjs/vue';
-import useErrors from '@/use/useErrors';
+import useBootVariant from '@/use/useBootVariant';
 import useVModel from '@/use/useVmodel';
-import { VCInputValue, VCInputOptions } from '@/components/Input/Type';
-import { VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/Config';
 import useVariantProps from '@/use/useVariantProps';
 import useConfigurationWithClassesList from '@/use/useConfigurationWithClassesList';
+import { VCInputValue, VCInputOptions } from '@/components/Input/Type';
+import { VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/Config';
+import { TInput } from '@variantjs/vue';
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
 
 export default defineComponent({
@@ -52,18 +52,24 @@ export default defineComponent({
     },
     setup(props) {
         const localValue = useVModel(props, 'modelValue');
-        const { errors, hasErrors } = useErrors(props, 'errors', localValue);
+        const {
+            errors,
+            hasErrors,
+            localVariant,
+        } = useBootVariant(props, 'errors', localValue);
 
         const { configuration, attributes } = useConfigurationWithClassesList<VCInputOptions>(
             VanillaInputConfig,
             VanillaInputClassesKeys,
+            localVariant,
         );
 
-        // TODO : forward variant to local component from the actual variant
+        console.log(configuration, attributes);
 
         return {
             localValue,
             errors,
+            localVariant,
             hasErrors,
             configuration,
         };

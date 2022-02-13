@@ -39,7 +39,7 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   },
   variant: {
     type:PropType<string | undefined>;
-    default: undefined;
+    default: undefined | string | never;
   },
   errors: {
     type:PropType<Errors>;

@@ -20,10 +20,6 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
     type: Object as PropType<Variants<ComponentOptions>>,
     default: undefined,
   },
-  variant: {
-    type: String as PropType<string | undefined>,
-    default: undefined,
-  },
   errors: {
     type: [String, Array, Object] as PropType<Errors>,
     default: undefined,
@@ -36,6 +32,10 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
     type: [String] as PropType<string>,
     required: false,
     default: Date.now().toString(36) + Math.random().toString(36).substr(2),
+  },
+  variant: {
+    type: String as PropType<string | undefined>,
+    default: undefined,
   },
 });
 

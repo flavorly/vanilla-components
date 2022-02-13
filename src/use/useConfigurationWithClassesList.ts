@@ -1,7 +1,7 @@
 import {
   computed,
   getCurrentInstance,
-  reactive,
+  reactive, Ref,
   watch,
 } from 'vue';
 import { Data } from '@/core/types';
@@ -13,8 +13,13 @@ import { useAttributes, useConfigurationParts } from '@/use/useConfiguration';
  *
  * @param defaultConfiguration
  * @param classesListKeys
+ * @param variant
  */
-export default function useConfigurationWithClassesList<ComponentOptions extends Data>(defaultConfiguration: ComponentOptions, classesListKeys: string[]): {
+export default function useConfigurationWithClassesList<ComponentOptions extends Data>(
+  defaultConfiguration: ComponentOptions,
+  classesListKeys: string[],
+  variant: Ref,
+): {
   configuration: ComponentOptions,
   attributes: Data,
 } {
@@ -29,6 +34,7 @@ export default function useConfigurationWithClassesList<ComponentOptions extends
       classesListKeys,
       componentGlobalConfiguration,
       defaultConfiguration,
+      variant.value,
     ),
   }));
 
