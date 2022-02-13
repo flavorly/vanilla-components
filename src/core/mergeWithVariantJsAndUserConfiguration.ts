@@ -1,4 +1,4 @@
-import VanillaInputConfig from '@/components/Input/Config';
+import { VanillaInputConfig, VanillaInputConfigToVariantJs } from '@/components/Input/Config';
 import { VanillaComponentConfiguration } from '@/core/types';
 import { merge } from 'lodash';
 
@@ -14,7 +14,7 @@ const MergeWithVariantJsAndUserConfiguration = (userConfiguration: VanillaCompon
 
     // Mapping the Variant JS Configuration with the Vanilla Components Configuration & User Provider Configuration
     const VariantJSMapping = {
-        TInput: VanillaComponentsDefaults?.VanillaInput ?? {},
+        TInput: VanillaInputConfigToVariantJs(VanillaComponentsDefaults?.VanillaInput ?? {}),
     };
 
     // Return Both Merged Configuration

@@ -57,6 +57,9 @@ const parseVariantWithClassesList = <
     ...props,
   };
 
+  // TODO : Check how can we forward the variant
+  console.log('Variant: ', variant);
+
   const classes: Partial<CSSRawClassesList<ClassesKeys>> = {};
   const fixedClasses: Partial<CSSRawClassesList<ClassesKeys>> = {};
 
