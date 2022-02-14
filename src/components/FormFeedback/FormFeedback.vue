@@ -2,6 +2,7 @@
   <div
     v-if="text"
     :class="configuration.class"
+    @click="$emit('feedbackClick')"
   >
     <span
       v-if="safe"
@@ -36,6 +37,7 @@ export default defineComponent({
             required: false,
         },
     },
+    emits: ['feedbackClick'],
     setup(props) {
         const { localVariant } = useBootVariant(props, '', ref(null));
         const { configuration } = useConfiguration<VanillaFormFeedbackProps>(VanillaFormFeedbackConfig);

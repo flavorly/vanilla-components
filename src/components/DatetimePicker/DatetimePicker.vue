@@ -1,79 +1,71 @@
 <template>
-  <vanilla-input-layout
-    :layout="layout"
-  >
-    <template #label>
-      <slot
-        v-if="$slots.label || label"
-        name="label"
-      >
-        <vanilla-form-label
-          :label-for="name"
-          :value="label"
-          @click="onClickLabel"
-        />
-      </slot>
-    </template>
-
-    <div class="relative flex">
-      <slot name="before" />
+  <div class="vanilla-input">
+    <div :class="configuration.classesList.wrapper">
+      <div :class="configuration.classesList.addonBefore">
+        <slot name="before" />
+      </div>
       <input
-        :id="uuid(name)"
-        ref="picker"
-        v-model="internalValue"
-        :name="uuid(name)"
-        type="text"
-        :autocomplete="name"
+        :id="name"
+        ref="flatpickr"
+        v-model="localValue"
+        :name="name"
         :class="[
-          hasErrors ? 'danger' : '',
-          classesForButtonHasGroupAbove,
-          classesForButtonHasGroupBellow
+          hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
+          hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
+          configuration.classesList.input
         ]"
-        class="form-input"
+        :type="type"
         v-bind="$attrs"
-        @update:model-value="$emit('update:modelValue', $event)"
       >
-      <slot name="after" />
-      <div
-        v-if="hasErrors && showLeadingErrorIcon"
-        class="form-errors-container"
-      >
-        <ExclamationCircleIcon class="form-errors-icon" />
+      <div :class="configuration.classesList.addonAfter">
+        <slot name="after">
+          <ExclamationCircleIcon
+            v-if="hasErrors && type !== 'password'"
+            :class="configuration.classesList.addonClasses"
+          />
+        </slot>
       </div>
     </div>
-    <vanilla-form-errors
-      v-if="hasErrors && showErrors"
-      :error="errors"
+    <VanillaFormErrors
+      v-if="hasErrors"
+      :errors="errors"
     />
-    <vanilla-form-helper
-      v-if="help"
-      :text="help"
+    <VanillaFormFeedback
+      v-if="!hasErrors && feedback !== undefined"
+      :text="feedback"
     />
-  </vanilla-input-layout>
+  </div>
 </template>
-<script>
-import {ExclamationCircleIcon} from "@heroicons/vue/solid";
-import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+<script lang="ts">
+import { defineComponent, PropType, onMounted, ref } from 'vue';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
+import { hasSlot } from '@/core/helpers';
+import { VanillaDatetimePickerValue, VanillaDatetimePickerProps } from '@/components/DatetimePicker/Type';
+import { VanillaDatetimePickerClassesKeys, VanillaDatetimePickerConfig } from '@/components/DatetimePicker/Config';
+import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
+import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 import Flatpickr from 'flatpickr';
 
-export default {
-    name: 'VanillaInputDateTimePicker',
+export default defineComponent({
+    name: 'VanillaDatetimePicker',
     components: {
-        VanillaFormLabel,
-        VanillaFormHelper,
         VanillaFormErrors,
-        VanillaInputLayout,
+        VanillaFormFeedback,
         ExclamationCircleIcon,
     },
-    mixins: [UseFormInputs],
     inheritAttrs: false,
+    compatConfig: {
+        MODE: 3,
+    },
     props: {
+        ...useVariantProps<VanillaDatetimePickerProps>(),
+        modelValue: {
+            type: [String, undefined] as PropType<VanillaDatetimePickerValue>,
+            default: undefined,
+        },
         options: {
-            type: Object,
+            type: [Object] as PropType<object>,
             default: () => {
                 return {
                     enableTime: true,
@@ -81,10 +73,43 @@ export default {
                 };
             },
         },
+        type: {
+            type: [String] as PropType<string>,
+            default: 'text',
+        },
     },
-    emits: ['update:modelValue'],
-    mounted() {
-        new Flatpickr(this.$refs.picker,this.options)
-    }
-};
+    setup(props) {
+        const localValue = useVModel(props, 'modelValue');
+        const flatpickr = ref(null);
+        const {
+            errors,
+            hasErrors,
+            localVariant,
+        } = useBootVariant(props, 'errors', localValue);
+
+        const { configuration } = useConfigurationWithClassesList<VanillaDatetimePickerProps>(
+            VanillaDatetimePickerConfig,
+            VanillaDatetimePickerClassesKeys,
+            localVariant,
+        );
+
+        // On mounted start flatpickr
+        onMounted(() => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            Flatpickr(flatpickr.value, props.options);
+        });
+
+        return {
+            configuration,
+            localValue,
+            localVariant,
+            errors,
+            hasErrors,
+            hasSlot,
+            flatpickr,
+        };
+    },
+});
 </script>
+

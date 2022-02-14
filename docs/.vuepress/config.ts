@@ -32,8 +32,7 @@ export default {
         text: 'Inputs',
         children: [
           { text: 'Introduction', link: '/guide/inputs/shared-options' },
-          { text: 'Text', link: '/guide/inputs/text' },
-          // { text: 'Password', link: '/guide/inputs/password' },
+          { text: 'Text & Password', link: '/guide/inputs/text' },
           // { text: 'Textarea', link: '/guide/inputs/textarea' },
           // { text: 'Select', link: '/guide/inputs/select' },
           // { text: 'Rich Select', link: '/guide/inputs/rich-select' },
@@ -42,7 +41,7 @@ export default {
           // { text: 'Country', link: '/guide/inputs/country' },
           // { text: 'Toggle', link: '/guide/inputs/toggle' },
           // { text: 'Profile Photo', link: '/guide/inputs/profile-photo' },
-          // { text: 'Datetime', link: '/guide/inputs/datetime' },
+          { text: 'Datetime', link: '/guide/inputs/datetimepicker' },
         ],
       },
     ],

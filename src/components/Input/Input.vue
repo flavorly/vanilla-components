@@ -1,27 +1,39 @@
 <template>
-  <div :class="configuration.classesList.wrapper">
-    <div :class="configuration.classesList.addonBefore">
-      <slot name="before" />
-    </div>
-    <input
-      :id="name"
-      v-model="localValue"
-      :name="name"
-      :class="[
-        hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
-        hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
-        configuration.classesList.input
-      ]"
-      :type="type"
-      v-bind="$attrs"
-    >
-    <div :class="configuration.classesList.addonAfter">
-      <slot name="after">
-        <ExclamationCircleIcon
-          v-if="hasErrors"
-          :class="configuration.classesList.addonAfterErrors"
-        />
-      </slot>
+  <div class="vanilla-input">
+    <div :class="configuration.classesList.wrapper">
+      <div :class="configuration.classesList.addonBefore">
+        <slot name="before" />
+      </div>
+      <input
+        :id="name"
+        v-model="localValue"
+        :name="name"
+        :class="[
+          hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
+          hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
+          configuration.classesList.input
+        ]"
+        :type="localType"
+        v-bind="$attrs"
+      >
+      <div :class="configuration.classesList.addonAfter">
+        <slot name="after">
+          <ExclamationCircleIcon
+            v-if="hasErrors && type !== 'password'"
+            :class="configuration.classesList.addonClasses"
+          />
+          <EyeIcon
+            v-if="type === 'password' && !showingPassword"
+            :class="configuration.classesList.addonClasses"
+            @click="togglePassword"
+          />
+          <EyeOffIcon
+            v-if="showingPassword"
+            :class="configuration.classesList.addonClasses"
+            @click="togglePassword"
+          />
+        </slot>
+      </div>
     </div>
     <VanillaFormErrors
       v-if="hasErrors"
@@ -34,12 +46,12 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
 import { VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/Config';
-import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import { ExclamationCircleIcon, EyeIcon, EyeOffIcon } from '@heroicons/vue/solid';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 
@@ -49,6 +61,8 @@ export default defineComponent({
         VanillaFormErrors,
         VanillaFormFeedback,
         ExclamationCircleIcon,
+        EyeIcon,
+        EyeOffIcon,
     },
     inheritAttrs: false,
     compatConfig: {
@@ -67,6 +81,7 @@ export default defineComponent({
     },
     setup(props) {
         const localValue = useVModel(props, 'modelValue');
+        const localType = ref(props.type);
         const {
             errors,
             hasErrors,
@@ -79,13 +94,23 @@ export default defineComponent({
             localVariant,
         );
 
+        // When type is password
+        const showingPassword = ref(false);
+        const togglePassword = () => {
+            showingPassword.value = !showingPassword.value;
+            localType.value = showingPassword.value ? 'text' : 'password';
+        };
+
         return {
-            localValue,
-            errors,
-            localVariant,
-            hasErrors,
             configuration,
+            localValue,
+            localVariant,
+            localType,
+            errors,
+            hasErrors,
             hasSlot,
+            showingPassword,
+            togglePassword,
         };
     },
 });
