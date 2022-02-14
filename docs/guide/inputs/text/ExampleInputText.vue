@@ -16,6 +16,7 @@
     placeholder="Type to clear errors"
     class="inline-flex"
     :errors="'Sorry for this name is already taken'"
+    :feedback="'I only show when i dont have errors'"
     variant="error"
   />
 </template>

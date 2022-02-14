@@ -3,16 +3,18 @@
     <div :class="configuration.classesList.addonBefore">
       <slot name="before" />
     </div>
-    <t-input
+    <input
+      :id="name"
       v-model="localValue"
-      v-bind="$attrs"
+      :name="name"
       :class="[
         hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
         hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
+        configuration.classesList.input
       ]"
-      :variant="localVariant"
       :type="type"
-    />
+      v-bind="$attrs"
+    >
     <div :class="configuration.classesList.addonAfter">
       <slot name="after">
         <ExclamationCircleIcon
@@ -21,6 +23,14 @@
         />
       </slot>
     </div>
+    <VanillaFormErrors
+      v-if="hasErrors"
+      :errors="errors"
+    />
+    <VanillaFormFeedback
+      v-if="!hasErrors && feedback !== undefined"
+      :text="feedback"
+    />
   </div>
 </template>
 <script lang="ts">
@@ -29,13 +39,15 @@ import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClasses
 import { hasSlot } from '@/core/helpers';
 import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
 import { VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/Config';
-import { TInput } from '@variantjs/vue';
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
+import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 
 export default defineComponent({
     name: 'VanillaInput',
     components: {
-        TInput,
+        VanillaFormErrors,
+        VanillaFormFeedback,
         ExclamationCircleIcon,
     },
     inheritAttrs: false,

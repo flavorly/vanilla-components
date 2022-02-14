@@ -62,12 +62,13 @@ const parseVariantWithClassesList = <
 
   // TODO : Check how can we forward the variant
   // We should store here the variant as a "localVariant" to forward it and be able to maninpulate it
-  const localVariant = ref(givenVariant ?? variant);
+  //const localVariant = ref(givenVariant ?? variant);
+  const localVariant = ref(givenVariant);
 
   const classes: Partial<CSSRawClassesList<ClassesKeys>> = {};
   const fixedClasses: Partial<CSSRawClassesList<ClassesKeys>> = {};
-  const clearClasses = getShouldClearClasses(props, 'classes', variant);
-  const clearFixedClasses = getShouldClearClasses(props, 'fixedClasses', variant);
+  const clearClasses = getShouldClearClasses(props, 'classes', localVariant.value);
+  const clearFixedClasses = getShouldClearClasses(props, 'fixedClasses', localVariant.value);
 
   if (clearClasses) {
     classesListKeys.forEach((classItemKey) => {
@@ -145,7 +146,7 @@ const parseVariantWithClassesList = <
     });
   }
 
-  const customProps = getCustomPropsFromVariant(variants, variant);
+  const customProps = getCustomPropsFromVariant(variants, localVariant.value);
 
   const mergedProps = {
     ...mainProps,

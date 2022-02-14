@@ -40,6 +40,8 @@ export default function useConfigurationWithClassesList<ComponentOptions extends
 
   const configuration = reactive(computedConfiguration.value);
 
+  // Watches all the component props and also the variant clases list
+  // If any changes, it will be updated with the new keys
   watch(computedConfiguration, (newValue) => {
     Object.keys(newValue).forEach((key) => {
       configuration[key] = newValue[key];

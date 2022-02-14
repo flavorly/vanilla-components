@@ -18,6 +18,8 @@
 // export { default as VanillaSelect } from './components/Select/Select.vue';
 export { default as VanillaInput } from './components/Input/Input.vue';
 export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
+export { default as VanillaFormErrors } from './components/FormErrors/FormErrors.vue';
+export { default as VanillaFormFeedback } from './components/FormFeedback/FormFeedback.vue';
 // export { default as VanillaTextarea } from './components/Textarea/Textarea.vue';
 // export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 
