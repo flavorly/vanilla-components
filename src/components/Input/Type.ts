@@ -1,9 +1,10 @@
 import { Data, WithVariantProps } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 
-export type VCInputValue = string | number | string[] | undefined;
+export type VanillaInputValue = string | number | string[] | undefined;
 
 //  Should be VanillaComponentProps
-export type VCInputOptions = WithVariantProps<{
-  modelValue?: VCInputValue,
+export type VanillaInputProps = WithVariantProps<{
+  modelValue?: VanillaInputValue,
+  type?: string,
 } & InputHTMLAttributes & Data>;

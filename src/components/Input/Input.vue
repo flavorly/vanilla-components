@@ -7,8 +7,8 @@
       v-model="localValue"
       v-bind="$attrs"
       :class="[
-        $slots.before ? configuration.classesList.addonBeforeInputClasses : '',
-        $slots.after || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
+        hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
+        hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
       ]"
       :variant="localVariant"
       :type="type"
@@ -24,12 +24,10 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, getCurrentInstance, PropType } from 'vue';
-import useBootVariant from '@/use/useBootVariant';
-import useVModel from '@/use/useVmodel';
-import useVariantProps from '@/use/useVariantProps';
-import useConfigurationWithClassesList from '@/use/useConfigurationWithClassesList';
-import { VCInputValue, VCInputOptions } from '@/components/Input/Type';
+import { defineComponent, PropType } from 'vue';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
+import { hasSlot } from '@/core/helpers';
+import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
 import { VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/Config';
 import { TInput } from '@variantjs/vue';
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
@@ -45,9 +43,9 @@ export default defineComponent({
         MODE: 3,
     },
     props: {
-        ...useVariantProps<VCInputOptions>(),
+        ...useVariantProps<VanillaInputProps>(),
         modelValue: {
-            type: [String, Number] as PropType<VCInputValue>,
+            type: [String, Number] as PropType<VanillaInputValue>,
             default: undefined,
         },
         type: {
@@ -63,16 +61,11 @@ export default defineComponent({
             localVariant,
         } = useBootVariant(props, 'errors', localValue);
 
-        const { configuration, attributes } = useConfigurationWithClassesList<VCInputOptions>(
+        const { configuration } = useConfigurationWithClassesList<VanillaInputProps>(
             VanillaInputConfig,
             VanillaInputClassesKeys,
             localVariant,
         );
-
-        if (localVariant.value === 'error'){
-            console.log(configuration, attributes);
-            console.log(getCurrentInstance());
-        }
 
         return {
             localValue,
@@ -80,6 +73,7 @@ export default defineComponent({
             localVariant,
             hasErrors,
             configuration,
+            hasSlot,
         };
     },
 });

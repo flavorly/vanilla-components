@@ -10,7 +10,7 @@ import useVModel from '@/use/useVModel';
 import useConfiguration from '@/use/useConfiguration';
 import useVariantProps from '@/use/useVariantProps';
 import VCInputConfig from '@/components/Input/Config';
-import { VCInputOptions, VCInputValue } from '@/components/Input/Type';
+import { VanillaInputProps, VanillaInputValue } from '@/components/Input/Type';
 
 export default defineComponent({
     name: 'VanillaInputTextDemo',
@@ -18,9 +18,9 @@ export default defineComponent({
         MODE: 3,
     },
     props: {
-        ...useVariantProps<VCInputOptions>(),
+        ...useVariantProps<VanillaInputProps>(),
         modelValue: {
-            type: [String, Number] as PropType<VCInputValue>,
+            type: [String, Number] as PropType<VanillaInputValue>,
             default: undefined,
         },
     },
@@ -33,7 +33,7 @@ export default defineComponent({
 
         const localValue = useVModel(props, 'modelValue');
 
-        const { configuration, attributes } = useConfiguration<VCInputOptions>(VCInputConfig);
+        const { configuration, attributes } = useConfiguration<VanillaInputProps>(VCInputConfig);
 
         console.log(configuration, attributes);
 

@@ -10,7 +10,7 @@ import {
   Errors,
 } from '@/core/types';
 
-import { VCInputOptions } from '@/components/Input/Type';
+import { VanillaInputProps } from '@/components/Input/Type';
 
 /**
  * Props definition for the component
@@ -158,7 +158,7 @@ type VanillaComponentWithClassesListProps<
  * Stores the Type for all components available in project
  */
 type VanillaComponentConfiguration = {
-   VanillaInput?: VCInputOptions,
+   VanillaInput?: VanillaInputProps,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };
