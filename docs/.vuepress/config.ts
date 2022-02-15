@@ -33,7 +33,7 @@ export default {
         children: [
           { text: 'Introduction', link: '/guide/inputs/shared-options' },
           { text: 'Text & Password', link: '/guide/inputs/text' },
-          // { text: 'Textarea', link: '/guide/inputs/textarea' },
+          { text: 'Textarea', link: '/guide/inputs/textarea' },
           // { text: 'Select', link: '/guide/inputs/select' },
           // { text: 'Rich Select', link: '/guide/inputs/rich-select' },
           // { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },

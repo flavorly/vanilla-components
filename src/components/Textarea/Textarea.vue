@@ -1,77 +1,94 @@
 <template>
-  <vanilla-input-layout :layout="layout">
-    <template #label>
-      <slot
-        v-if="$slots.label || label"
-        name="label"
-      >
-        <vanilla-form-label
-          :label-for="name"
-          :value="label"
-          @click="onClickLabel"
-        />
-      </slot>
-    </template>
-
-    <div class="relative flex">
-      <slot name="before" />
+  <div class="vanilla-input">
+    <div :class="configuration.classesList.wrapper">
+      <div :class="configuration.classesList.addonBefore">
+        <slot name="before" />
+      </div>
       <textarea
-        :id="uuid(name)"
-        ref="input"
-        v-model="internalValue"
-        :name="uuid(name)"
-        :autocomplete="name"
+        :id="name"
+        v-model="localValue"
+        :name="name"
         :class="[
-          hasErrors ? 'danger' : '',
-          classesForButtonHasGroupAbove,
-          classesForButtonHasGroupBellow
+          hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
+          hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
+          configuration.classesList.input
         ]"
-        class="form-input"
-        :rows="rows"
         v-bind="$attrs"
       />
-      <slot name="after" />
-      <div
-        v-if="hasErrors && showLeadingErrorIcon"
-        class="form-errors-container"
-      >
-        <ExclamationCircleIcon class="form-errors-icon" />
+      <div :class="configuration.classesList.addonAfter">
+        <slot name="after">
+          <ExclamationCircleIcon
+            v-if="hasErrors && type !== 'password'"
+            :class="configuration.classesList.addonClasses"
+          />
+        </slot>
       </div>
     </div>
-    <vanilla-form-errors
-      v-if="hasErrors && showErrors"
-      :error="errors"
+    <VanillaFormErrors
+      v-if="hasErrors"
+      :errors="errors"
     />
-    <vanilla-form-helper
-      v-if="help"
-      :text="help"
+    <VanillaFormFeedback
+      v-if="!hasErrors && feedback !== undefined"
+      :text="feedback"
     />
-  </vanilla-input-layout>
+  </div>
 </template>
-<script>
-import {ExclamationCircleIcon} from "@heroicons/vue/solid";
-import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
+import { hasSlot } from '@/core/helpers';
+import { VanillaTextareaValue, VanillaTextareaProps } from '@/components/Textarea/Type';
+import { VanillaTextareaClassesKeys, VanillaTextareaConfig } from '@/components/Textarea/Config';
+import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
+import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 
-export default {
-    name: 'VanillaInputTextArea',
+export default defineComponent({
+    name: 'VanillaTextarea',
     components: {
-        VanillaFormLabel,
-        VanillaFormHelper,
         VanillaFormErrors,
-        VanillaInputLayout,
+        VanillaFormFeedback,
         ExclamationCircleIcon,
     },
-    mixins: [UseFormInputs],
     inheritAttrs: false,
-    props: {
-        rows: {
-            default: 3,
-            required: false
-        }
+    compatConfig: {
+        MODE: 3,
     },
-};
+    props: {
+        ...useVariantProps<VanillaTextareaProps>(),
+        modelValue: {
+            type: [String, Number] as PropType<VanillaTextareaValue>,
+            default: undefined,
+        },
+        rows: {
+            type: [String, Number] as PropType<string | number>,
+            default: 4,
+        },
+    },
+    setup(props) {
+        const localValue = useVModel(props, 'modelValue');
+        const {
+            errors,
+            hasErrors,
+            localVariant,
+        } = useBootVariant(props, 'errors', localValue);
+
+        const { configuration } = useConfigurationWithClassesList<VanillaTextareaProps>(
+            VanillaTextareaConfig,
+            VanillaTextareaClassesKeys,
+            localVariant,
+        );
+
+        return {
+            configuration,
+            localValue,
+            localVariant,
+            errors,
+            hasErrors,
+            hasSlot,
+        };
+    },
+});
 </script>
+

@@ -32,9 +32,7 @@ Slots Available for this Component
 ## Example
 ```vue
 <template>
-    <vanilla-input-textarea
-        class="inline-flex"
-        layout="naked"
+    <vanilla-textarea
         placeholder="Elon Musk"
         v-model="value"
         helper="Write your first and last name"

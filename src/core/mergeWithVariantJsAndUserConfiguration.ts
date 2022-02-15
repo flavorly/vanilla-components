@@ -3,6 +3,7 @@ import { merge } from 'lodash';
 
 import { VanillaInputConfig, VanillaInputConfigToVariantJs } from '@/components/Input/Config';
 import { VanillaDatetimePickerConfig } from '@/components/DatetimePicker/Config';
+import { VanillaTextareaConfig } from '@/components/Textarea/Config';
 import { VanillaFormErrorsConfig } from '@/components/FormErrors/Config';
 import { VanillaFormFeedbackConfig } from '@/components/FormFeedback/Config';
 
@@ -12,7 +13,9 @@ const MergeWithVariantJsAndUserConfiguration = (userConfiguration: VanillaCompon
     const VanillaComponentsDefaults = merge(
       {
         VanillaInput: VanillaInputConfig,
+        VanillaTextarea: VanillaTextareaConfig,
         VanillaDatetimePicker: VanillaDatetimePickerConfig,
+
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,
       },
