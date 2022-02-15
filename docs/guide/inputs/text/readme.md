@@ -28,31 +28,33 @@ Slots Available for this Component
 |:-----|:------------|:-----------|
 !!!include(./docs/guide/includes/slots-default.md)!!!
 
-## Example
+## Example & Snippet
+:::demo
 ```vue
 <template>
-    <vanilla-input-text
-        class="inline-flex"
-        layout="naked"
-        placeholder="Elon Musk"
+    <VanillaInput 
         v-model="value"
-        helper="Write your first and last name"
+        :feedback="'Im useful helper out here, choose wisely'"
+        placeholder="Elon Musk"
     />
 </template>
-<script>
-import {VanillaInputText} from "@vanilla-components";
-export default {
-  components: {
-    VanillaInputText
-  },
-  data(){
-    return {
-      value: null,
-    }
-  }
-}
+<script lang="ts">
+import { VanillaInput } from '@vanilla-components';
+import { defineComponent, ref } from 'vue';
+export default defineComponent({
+    components: {
+		    VanillaInput
+    },
+    setup() {
+        const value = ref(null);
+        return {
+            value,
+        };
+    },
+});
 </script>
 ```
+:::
 
 ## Preview
 <wrapper src="inputs/text/demo" />

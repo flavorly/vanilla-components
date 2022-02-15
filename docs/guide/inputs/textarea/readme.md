@@ -29,29 +29,33 @@ Slots Available for this Component
 |:-----|:------------|:-----------|
 !!!include(./docs/guide/includes/slots-default.md)!!!
 
-## Example
+## Example & Snippet
+:::demo
 ```vue
 <template>
-    <vanilla-textarea
-        placeholder="Elon Musk"
+    <VanillaTextarea 
         v-model="value"
-        helper="Write your first and last name"
+        :feedback="'Im useful helper out here, choose wisely'"
+        placeholder="Elon Musk"
     />
 </template>
-<script>
-import {VanillaInputTextarea} from "@vanilla-components";
-export default {
-  components: {
-      VanillaInputTextarea
-  },
-  data(){
-    return {
-      value: null,
-    }
-  }
-}
+<script lang="ts">
+import { VanillaTextarea } from '@vanilla-components';
+import { defineComponent, ref } from 'vue';
+export default defineComponent({
+    components: {
+        VanillaTextarea
+    },
+    setup() {
+        const value = ref(null);
+        return {
+            value,
+        };
+    },
+});
 </script>
 ```
+:::
 
 ## Preview
 <wrapper src="inputs/textarea/demo" />

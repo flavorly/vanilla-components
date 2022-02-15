@@ -65,6 +65,33 @@ export default {
         },
       },
     ],
+    // Preview Docs Plugin
+    [
+      'vuepress-plugin-demoblock-plus', {
+         //theme: 'dracula'
+        scriptImports: ["import * as VanillaComponents from '@/index'"],
+        scriptReplaces: [
+          {
+            searchValue: /import ({.*}) from '@vanilla-components'/g,
+            replaceValue: (s: any, s1: any) => `const ${s1} = VanillaComponents`
+          }
+        ],
+        locales: {
+          '/': {
+            'hide-text': 'View Design',
+            'show-text': 'Show Source code',
+            'copy-button-text': 'Copy',
+            'copy-success-text': 'Copied to Clipboard',
+          },
+          '/zh': {
+            'hide-text': '隐藏代码',
+            'show-text': '显示代码',
+            'copy-button-text': '复制代码片段',
+            'copy-success-text': '复制成功'
+          }
+        }
+      }
+    ]
   ],
   bundler: '@vuepress/bundler-vite',
   bundlerConfig: {

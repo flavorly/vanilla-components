@@ -18,7 +18,7 @@
       <div :class="configuration.classesList.addonAfter">
         <slot name="after">
           <ExclamationCircleIcon
-            v-if="hasErrors && type !== 'password'"
+            v-if="hasErrors"
             :class="configuration.classesList.addonClasses"
           />
         </slot>

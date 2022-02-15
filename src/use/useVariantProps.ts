@@ -5,6 +5,7 @@ import {
   Variants,
   VanillaComponentProps,
 } from '@/core/types';
+import { uniqueId } from 'lodash';
 import { PropType } from 'vue';
 
 const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProps => ({
@@ -31,7 +32,11 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
   name: {
     type: [String] as PropType<string>,
     required: false,
-    default: Date.now().toString(36) + Math.random().toString(36).substr(2),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    default(): string {
+      return uniqueId('variant-');
+    },
   },
   variant: {
     type: String as PropType<string | undefined>,
