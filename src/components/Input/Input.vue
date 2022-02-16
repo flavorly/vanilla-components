@@ -1,7 +1,10 @@
 <template>
   <div class="vanilla-input">
     <div :class="configuration.classesList.wrapper">
-      <div :class="configuration.classesList.addonBefore">
+      <div
+        v-if="hasSlot($slots.before)"
+        :class="configuration.classesList.addonBefore"
+      >
         <slot name="before" />
       </div>
       <input
@@ -16,7 +19,10 @@
         :type="localType"
         v-bind="$attrs"
       >
-      <div :class="configuration.classesList.addonAfter">
+      <div
+        v-if="hasSlot($slots.after) || hasErrors || type === 'password'"
+        :class="configuration.classesList.addonAfter"
+      >
         <slot name="after">
           <ExclamationCircleIcon
             v-if="hasErrors && type !== 'password'"

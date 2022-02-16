@@ -27,5 +27,5 @@ defineComponent({ name: 'ExampleDatetimePicker' });
 onMounted(() => window.parent.postMessage('mounted', '*'));
 
 const value = ref('2011-01-01 0:00:01');
-const value2 = ref('2022-01-01 12:45:01');
+const value2 = ref('2022-01-01 0:00:01');
 </script>

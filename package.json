@@ -19,7 +19,7 @@
   "unpkg": "./dist/vanilla-components.umd.js",
   "jsdelivr": "./dist/vanilla-components.umd.js",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
+    "docs:dev": "vuepress dev docs -p=3000",
     "docs:build": "vuepress build docs",
     "build:library": "vite build",
     "analyze": "vite build --config analyze.config.js",

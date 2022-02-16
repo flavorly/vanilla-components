@@ -1,12 +1,16 @@
 <template>
   <div class="vanilla-input">
     <div :class="configuration.classesList.wrapper">
-      <div :class="configuration.classesList.addonBefore">
+      <div
+        v-if="hasSlot($slots.before)"
+        :class="configuration.classesList.addonBefore"
+      >
         <slot name="before" />
       </div>
       <input
         :id="name"
-        ref="flatpickr"
+        v-bind="$attrs"
+        ref="flatpickrInput"
         v-model="localValue"
         :name="name"
         :class="[
@@ -15,12 +19,14 @@
           configuration.classesList.input
         ]"
         :type="type"
-        v-bind="$attrs"
       >
-      <div :class="configuration.classesList.addonAfter">
+      <div
+        v-if="hasSlot($slots.after) || hasErrors"
+        :class="configuration.classesList.addonAfter"
+      >
         <slot name="after">
           <ExclamationCircleIcon
-            v-if="hasErrors && type !== 'password'"
+            v-if="hasErrors"
             :class="configuration.classesList.addonClasses"
           />
         </slot>
@@ -47,7 +53,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, onMounted, ref } from 'vue';
+import { defineComponent, PropType, onMounted, ref, nextTick } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaDatetimePickerValue, VanillaDatetimePickerProps } from '@/components/DatetimePicker/Type';
@@ -90,7 +96,7 @@ export default defineComponent({
     },
     setup(props) {
         const localValue = useVModel(props, 'modelValue');
-        const flatpickr = ref(null);
+        const flatpickrInput = ref(null);
         const {
             errors,
             hasErrors,
@@ -107,7 +113,7 @@ export default defineComponent({
         onMounted(() => {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
-            Flatpickr(flatpickr.value, props.options);
+            Flatpickr(flatpickrInput.value, props.options);
         });
 
         return {
@@ -117,7 +123,7 @@ export default defineComponent({
             errors,
             hasErrors,
             hasSlot,
-            flatpickr,
+            flatpickrInput,
         };
     },
 });

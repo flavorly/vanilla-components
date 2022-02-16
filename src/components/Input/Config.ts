@@ -1,18 +1,32 @@
 import { mapValues } from 'lodash';
+import { commonClasses } from '@/core/config/commonClasses';
+import { mergeClasses } from '@/core';
 
 export const VanillaInputConfig = {
   fixedClasses: {
-    input: 'appearance-none block w-full leading-normal sm:text-sm shadow-sm disabled:opacity-50 disabled:cursor-not-allowed  focus:outline-none focus:ring-1',
+    input: mergeClasses(
+      'appearance-none block w-full',
+      commonClasses.inputsText,
+      commonClasses.inputsShadows,
+      commonClasses.inputsDisabled,
+      commonClasses.inputsSpacing,
+    ),
     wrapper: 'relative',
     addonBefore: 'absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer',
     addonAfter: 'absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer',
     addonBeforeInputClasses: 'pl-10',
     addonAfterInputClasses: 'pr-10',
-    addonClasses: 'w-5 h-5',
+    addonClasses: commonClasses.iconsSize,
   },
   // Default Input appearance
   classes: {
-    input: 'border-gray-300 dark:bg-gray-900 dark:border-gray-700 dark:text-white dark:focus:ring-offset-gray-900 focus:ring-primary-600 focus:border-primary-600 dark:focus:border-primary-400',
+    input:  mergeClasses(
+      '',
+      commonClasses.inputsBackground,
+      commonClasses.inputsBorder,
+      commonClasses.inputsRing,
+      commonClasses.inputsRadius,
+    ),
     wrapper : '',
     addonBefore: '',
     addonAfter: '',
@@ -25,13 +39,18 @@ export const VanillaInputConfig = {
     // Used for Errors
     error: {
       classes: {
-        input: 'text-red-400 border-red-400 focus:border-red-400 placeholder-red-400 dark:bg-gray-900 focus:ring-red-500  dark:focus:border-red-400',
+        input: mergeClasses(
+          commonClasses.inputsErrorText,
+          commonClasses.inputsErrorsBackground,
+          commonClasses.inputsErrorBorder,
+          commonClasses.inputsErrorsRing,
+        ),
         wrapper : '',
         addonBefore: '',
         addonAfter: '',
         addonBeforeInputClasses: '',
         addonAfterInputClasses: '',
-        addonClasses: 'text-red-400',
+        addonClasses: commonClasses.inputsErrorText,
       },
     },
   },

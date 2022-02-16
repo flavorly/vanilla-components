@@ -1,7 +1,8 @@
+import { commonClasses } from '@/core/config/commonClasses';
 export const VanillaFormErrorsConfig = {
   fixedClasses: 'mt-2 text-xs',
   // Default Input appearance
-  classes: 'text-red-400',
+  classes: commonClasses.inputsErrorText,
   // Variants
   variants: {
     error: {
