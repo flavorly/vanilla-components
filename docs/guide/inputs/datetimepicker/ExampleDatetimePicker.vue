@@ -19,21 +19,13 @@
   </div>
 </template>
 
-<script>
+<script setup type="ts">
 import { VanillaDatetimePicker } from '@/index';
-export default {
-    name: 'ExampleInputRichSelect',
-    components: {
-        VanillaDatetimePicker,
-    },
-    data(){
-        return {
-            value: '2011-01-01 0:00:01',
-            value2: '2011-01-02 0:00:21',
-        };
-    },
-    mounted() {
-        window.parent.postMessage('mounted', '*');
-    },
-};
+import { onMounted, ref, defineComponent } from 'vue';
+
+defineComponent({ name: 'ExampleDatetimePicker' });
+onMounted(() => window.parent.postMessage('mounted', '*'));
+
+const value = ref('2011-01-01 0:00:01');
+const value2 = ref('2022-01-01 12:45:01');
 </script>

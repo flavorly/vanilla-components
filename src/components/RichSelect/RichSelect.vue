@@ -1,403 +1,295 @@
 <template>
-  <vanilla-input-layout
-    :layout="layout"
-  >
-    <template #label>
-      <slot
-        v-if="$slots.label || label"
-        name="label"
+  <div class="vanilla-input">
+    <div :class="configuration.classesList.wrapper">
+      <div :class="configuration.classesList.addonBefore">
+        <slot name="before" />
+      </div>
+      <t-rich-select
+        v-model="localValue"
+        v-bind="$attrs"
+        :variant="localVariant"
+        :name="name"
+        :options="options"
+        :normalize-otions="normalizeOptions"
+        :multiple="multiple"
+        :disabled="disabled"
+        :tags="tags"
+        :placeholder="placeholder"
+        :dropdown-placement="dropdownPlacement"
+        :dropdown-popper-options="dropdownPopperOptions"
+        :close-on-select="closeOnSelect"
+        :select-on-close="selectOnClose"
+        :clear-search-on-close="clearSearchOnClose"
+        :toggle-on-focus="toggleOnFocus"
+        :toggle-on-click="toggleOnClick"
+        :hide-search-box="hideSearchBox"
+        :search-box-placeholder="searchBoxPlaceholder"
+        :no-results-text="noResultsText"
+        :searching-text="searchingText"
+        :loading-closed-placeholder="loadingClosedPlaceholder"
+        :loading-more-results-text="loadingMoreResultsText"
+        :clearable="clearable"
+        :max-height="maxHeight"
+        :fetch-options="fetchOptions"
+        :pre-fetch-options="prefetchOptions"
+        :delay="delay"
+        :minimum-input-length="minimumInputLength"
+        :minimum-input-length-text="minimumInputLengthText"
+        :minimum-results-for-search="minimumResultsForSearch"
+        :teleport="teleport"
+        :teleport-to="teleportTo"
       >
-        <vanilla-form-label
-          :label-for="name"
-          :value="label"
-          @click="toggleWithLabel"
-        />
-      </slot>
-    </template>
+        <template #label="{selectedOption: option, className, label}">
+          <slot
+            name="label"
+            v-bind="{ option, className,label}"
+          />
+        </template>
 
-    <div
-      ref="holder"
-      class="relative flex-1"
-    >
-      <Listbox
-        :model-value="modelValue"
-        @update:model-value="internalValue = $event"
-        @keydown.esc="closeDropdown"
-        @keydown.enter="openDropdown"
-      >
-        <div class="relative">
-          <ListboxButton
-            ref="select"
-            :class="[
-              classesForButtonIfHasErrors,
-              classesForButtonHasGroupAbove,
-              classesForButtonHasGroupBellow
-            ]"
-            class="relative w-full border bg-white dark:bg-gray-900 px-4 py-2 border-1 shadow-sm"
-            @click="show = !show"
-            @keydown.esc="closeDropdown"
-          >
-            <div class="relative pr-3">
-              <div class="flex items-center space-x-2 text-sm">
-                <slot
-                  name="selected"
-                  v-bind="{option}"
-                >
-                  <span
-                    v-if="option?.indicator"
-                    class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
-                    :class="indicatorClass(option)"
-                    aria-hidden="true"
-                  />
-                  <img
-                    v-if="option?.image"
-                    :alt="option.label"
-                    :src="option.image"
-                    class="flex-shrink-0 h-6 w-6 rounded-full"
-                  >
-                  <span
-                    v-if="option?.icon"
-                    class="flex-shrink-0 pl-1"
-                    v-html="option.icon"
-                  />
-                  <span
-                    class="block whitespace-nowrap text-base sm:text-sm truncate"
-                    v-html="option?.label"
-                  />
-                </slot>
-              </div>
-              <div
-                v-if="option?.description"
-                class="w-100 text-xs text-gray-500 dark:text-gray-300 text-left mt-1"
-                v-html="option.description"
-              />
-            </div>
+        <template #option="{ option, className, isSelected }">
+          <slot
+            name="option"
+            v-bind="{option, className, isSelected}"
+          />
+        </template>
+      </t-rich-select>
 
-            <span
-              class="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none"
-            >
-              <slot
-                name="selectorIcon"
-                v-bind="{hasErrors}"
-              >
-                <SelectorIcon
-                  :class="[hasErrors ? 'text-red-500' : 'text-gray-400']"
-                  aria-hidden="true"
-                  class="w-5 h-5  flex-shrink-0 mr-2"
-                />
-              </slot>
-            </span>
-          </ListboxButton>
-
-          <transition
-            leave-active-class="transition duration-100 ease-in"
-            leave-from-class="opacity-100"
-            leave-to-class="opacity-0"
-          >
-            <div
-              v-show="show"
-              class="absolute z-40 mt-1 w-full bg-white dark:bg-gray-900 shadow-lg max-h-56 rounded-md text-base ring-1 ring-black ring-opacity-5 overflow-auto focus:outline-none sm:text-sm border border-1 border-gray-300 dark:border-gray-700"
-            >
-              <!-- Search bar -->
-              <div :key="'searchbar'">
-                <vanilla-input-text
-                  v-if="searchable"
-                  v-model="query"
-                  :layout="'naked'"
-                  :placeholder="'Search your stuff here'"
-                  class="py-2 px-2 w-full mx-4 my-3"
-                  autocomplete="off"
-                  :name="'searching'"
-                  :name-seed="(Math.random() + 1).toString(36).substring(7)"
-                  @keydown.enter.stop="closeDropdown"
-                  @keyup.enter.stop="closeDropdown"
-                />
-              </div>
-
-              <div v-if="searchable && query !== '' && selectOptions?.length <= 0">
-                <div class="relative flex">
-                  <div class="py-2 px-2 w-full mx-4 my-1 text-sm">
-                    <slot
-                      :query="query"
-                      :searchable="searchable"
-                      name="noResults"
-                    >
-                      {{ noResultsLabel.replace(':query', query) }}
-                    </slot>
-                  </div>
-                </div>
-              </div>
-
-              <ListboxOptions
-                static
-                class="outline-none focus:ring-0 focus:ring-primary-500 focus:outline-none"
-              >
-                <ListboxOption
-                  v-for="anOption in selectOptions"
-                  :key="anOption.value"
-                  v-slot="{ active, selected }"
-                  :value="anOption.value"
-                  as="template"
-                  class="py-2 pl-4 pr-4"
-                >
-                  <li
-                    :class="[active ? 'text-primary-900 bg-primary-100' : 'text-gray-900 dark:text-white','select-none relative focus-visible:ring-0 cursor-pointer',]"
-                  >
-                    <div class="relative">
-                      <div
-                        :class="[selected ? 'font-medium' : 'font-normal','block']"
-                        class="flex items-center space-x-2 text-sm"
-                      >
-                        <slot
-                          name="option"
-                          v-bind="{ anOption, active, selected }"
-                        >
-                          <span
-                            v-if="anOption?.indicator"
-                            class="flex-shrink-0 inline-block h-2 w-2 rounded-full"
-                            :class="indicatorClass(anOption)"
-                            aria-hidden="true"
-                          />
-                          <img
-                            v-if="anOption?.image"
-                            :alt="anOption.label"
-                            :src="anOption.image"
-                            class="flex-shrink-0 h-6 w-6 rounded-full"
-                          >
-                          <span
-                            v-if="anOption?.icon"
-                            class="flex-shrink-0 pl-1"
-                            v-html="anOption.icon"
-                          />
-                          <span
-                            class="block whitespace-nowrap truncate"
-                            v-html="anOption?.label"
-                          />
-                        </slot>
-                      </div>
-                    </div>
-                    <div
-                      v-if="anOption?.description"
-                      class="w-100 text-xs text-gray-500 text-left mt-1"
-                      v-html="anOption.description"
-                    />
-
-                    <span
-                      v-if="selected"
-                      class="absolute inset-y-0 right-0 flex items-center pl-3 pr-3 text-amber-600"
-                    >
-                      <slot name="selectedIcon">
-                        <CheckIcon
-                          aria-hidden="true"
-                          class="w-5 h-5"
-                        />
-                      </slot>
-                    </span>
-                  </li>
-                </ListboxOption>
-              </ListboxOptions>
-            </div>
-          </transition>
-        </div>
-      </Listbox>
+      <div :class="configuration.classesList.addonAfter">
+        <slot name="after">
+          <ExclamationCircleIcon
+            v-if="hasErrors"
+            :class="configuration.classesList.addonClasses"
+          />
+        </slot>
+      </div>
     </div>
-
-    <vanilla-form-errors
-      v-if="hasErrors && showErrors"
-      :error="errors"
-    />
-
-    <vanilla-form-helper
-      v-if="help"
-      :text="help"
-      @click="$emit('labelClick',true)"
-    />
-  </vanilla-input-layout>
+    <slot
+      name="errors"
+      v-bind="{hasErrors, errors}"
+    >
+      <VanillaFormErrors
+        v-if="hasErrors"
+        :errors="errors"
+      />
+    </slot>
+    <slot
+      name="feedback"
+      v-bind="{hasErrors, feedback}"
+    >
+      <VanillaFormFeedback
+        v-if="!hasErrors && feedback !== undefined"
+        :text="feedback"
+      />
+    </slot>
+  </div>
 </template>
-<script>
-import UseFormInputs from "@/utils/UseFormInputs";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
-import VanillaInputText from "@/components/Inputs/Text.vue";
-import {Listbox, ListboxButton, ListboxOption, ListboxOptions} from '@headlessui/vue';
-import {CheckIcon, SelectorIcon} from '@heroicons/vue/solid';
-import find from 'lodash/find';
-import each from 'lodash/each';
-import Fuse from "fuse.js";
-import { onClickOutside } from '@vueuse/core'
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
+import { hasSlot } from '@/core/helpers';
+import { VanillaRichSelectValue, VanillaRichSelectProps, MinimumInputLengthTextProp } from '@/components/RichSelect/Type';
+import { VanillaRichSelectClassesKeys, VanillaRichSelectConfig } from '@/components/RichSelect/Config';
+import { ExclamationCircleIcon } from '@heroicons/vue/solid';
+import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
+import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
+import { TRichSelect } from '@variantjs/vue';
+import { popperOptions, validPlacements, sameWidthModifier } from '@/core/config/popperOptions';
+import { FetchOptionsFn, PreFetchOptionsFn, InputOptions, Measure } from '@/core/types';
+import { Options, Placement } from '@popperjs/core';
 
-export default {
-    name: "VanillaInputRichSelect",
+export default defineComponent({
+    name: 'VanillaRichSelect',
     components: {
-        VanillaFormLabel,
-        VanillaFormHelper,
+        TRichSelect,
         VanillaFormErrors,
-        VanillaInputText,
-        VanillaInputLayout,
-        Listbox,
-        ListboxButton,
-        ListboxOptions,
-        ListboxOption,
-        CheckIcon,
-        SelectorIcon,
+        VanillaFormFeedback,
+        ExclamationCircleIcon,
     },
-    mixins: [
-        UseFormInputs
-    ],
-    model: {
-        prop: "modelValue",
-        event: "change",
+    inheritAttrs: false,
+    compatConfig: {
+        MODE: 3,
     },
     props: {
-        options: {
-            type: [Object, Array],
-            default: () => {
-                return [];
-            }
+        ...useVariantProps<VanillaRichSelectProps>(),
+        modelValue: {
+            type: [
+                String,
+                Number,
+                Boolean,
+                Array,
+                Object,
+                Date,
+                Function,
+                Symbol,
+            ] as PropType<VanillaRichSelectValue>,
+            default: undefined,
         },
-        search: {
-            type: [Boolean, Function],
-            default: false
-        },
-        searchPlaceholder: {
+        name: {
             type: String,
             default: undefined,
         },
-        searchable: {
-            type: [Boolean],
-            default: true
+        options: {
+            type: [Array, Object] as PropType<InputOptions>,
+            default: undefined,
         },
-        modelValue: {
-            default: '',
-            required: true,
+        normalizeOptions: {
+            type: Boolean,
+            default: true,
         },
-        openOnClickLabel: {
+        multiple: {
             type: Boolean,
             default: false,
         },
-        noResultsLabel: {
+        disabled: {
+            type: Boolean,
+            default: false,
+        },
+        tags: {
+            type: Boolean,
+            default: false,
+        },
+        placeholder: {
             type: String,
-            required: false,
-            default: () => {
-                return '😅 Sorry but there is no records matching ":query"'
-            }
-        }
+            default: undefined,
+        },
+        dropdownPlacement: {
+            type: String as PropType<Placement>,
+            default: undefined,
+            validator: (value: string): boolean => validPlacements.includes(value),
+        },
+        dropdownPopperOptions: {
+            type: Object as PropType<Options>,
+            default: (): Options => ({
+                ...popperOptions,
+                placement: 'bottom',
+                modifiers: [
+                    {
+                        name: 'offset',
+                        options: {
+                            offset: [0, 8],
+                        },
+                    },
+                    sameWidthModifier,
+                ],
+            } as Options),
+        },
+        closeOnSelect: {
+            type: Boolean,
+            default: undefined,
+        },
+        selectOnClose: {
+            type: Boolean,
+            default: false,
+        },
+        clearSearchOnClose: {
+            type: Boolean,
+            default: undefined,
+        },
+        toggleOnFocus: {
+            type: Boolean,
+            default: false,
+        },
+        toggleOnClick: {
+            type: Boolean,
+            default: true,
+        },
+        valueAttribute: {
+            type: String,
+            default: undefined,
+        },
+        textAttribute: {
+            type: String,
+            default: undefined,
+        },
+        hideSearchBox: {
+            type: Boolean,
+            default: false,
+        },
+        searchBoxPlaceholder: {
+            type: String,
+            default: 'Search...',
+        },
+        noResultsText: {
+            type: String,
+            default: 'No options found',
+        },
+        searchingText: {
+            type: String,
+            default: 'Searching...',
+        },
+        loadingClosedPlaceholder: {
+            type: String,
+            default: 'Loading...',
+        },
+        loadingMoreResultsText: {
+            type: String,
+            default: 'Loading more options...',
+        },
+        clearable: {
+            type: Boolean,
+            default: true,
+        },
+        maxHeight: {
+            type: [Number, String] as PropType<Measure | null>,
+            default: 250,
+        },
+        fetchOptions: {
+            type: Function as PropType<FetchOptionsFn>,
+            default: undefined,
+        },
+        prefetchOptions: {
+            type: [Function, Boolean] as PropType<PreFetchOptionsFn | boolean>,
+            default: false,
+        },
+        delay: {
+            type: Number,
+            default: 250,
+        },
+        minimumInputLength: {
+            type: Number,
+            default: undefined,
+        },
+        minimumInputLengthText: {
+            type: [Function, String] as PropType<MinimumInputLengthTextProp>,
+            default: () => (minimumInputLength: number): string => `Please enter ${minimumInputLength} or more characters`,
+        },
+        minimumResultsForSearch: {
+            type: Number,
+            default: undefined,
+        },
+        teleport: {
+            type: Boolean,
+            default: false,
+        },
+        teleportTo: {
+            type: [String, Object] as PropType<string | HTMLElement>,
+            default: 'body',
+        },
     },
-    emits: ['labelClick'],
-    data() {
+    setup(props) {
+        const localValue = useVModel(props, 'modelValue');
+        const {
+            errors,
+            hasErrors,
+            localVariant,
+        } = useBootVariant(props, 'errors', localValue);
+
+        const { configuration } = useConfigurationWithClassesList<VanillaRichSelectProps>(
+            VanillaRichSelectConfig,
+            VanillaRichSelectClassesKeys,
+            localVariant,
+        );
+
         return {
-            show: false,
-            selectOptions: [],
-            query: null,
-            searching: false,
-            option: undefined,
-        }
+            configuration,
+            localValue,
+            localVariant,
+            errors,
+            hasErrors,
+            hasSlot,
+            props,
+        };
     },
-    computed: {
-        // Returns the set of classes if the input has error
-        classesForButtonIfHasErrors() {
-            return this.hasErrors ?
-                'text-red-600 border-red-300 placeholder-red-300 focus:ring-red-500 dark:focus:border-red-400' :
-                'focus:outline-none focus:ring-primary-500 focus:border-primary-500 focus:ring-1 border-gray-300 dark:border-gray-700'
-        },
-    },
-    watch: {
-        query: {
-            immediate: true,
-            handler: function(query) {
-
-                if (query === '' || !query) {
-                    this.selectOptions = this.options;
-                    return;
-                }
-
-                // If search prop is a boolean, then search by default label resolver
-                if (typeof this.search === "boolean") {
-                    this.searching = true;
-                    const fuse = new Fuse(this.selectOptions, {
-                        includeScore: false,
-                        threshold: 0.3,
-                        keys: ['id', 'label']
-                    });
-
-                    let results = fuse.search(query);
-                    let filtered = [];
-
-                    each(results, (result) => {
-                        filtered.push(result.item)
-                    })
-                    this.selectOptions = filtered;
-                }
-
-                if (typeof this.search === "function") {
-                    this.selectOptions = this.search(this.selectOptions, query);
-                }
-
-                this.searching = false;
-            }
-        },
-        modelValue: {
-            immediate: false,
-            handler(value) {
-                this.query = '';
-                this.show = false;
-                this.option = find(this.options, {'value': value}) || this.options[0]
-            }
-        },
-        options: {
-            immediate: false,
-            handler(options) {
-                this.selectOptions = options;
-            }
-        },
-        selectOptions: {
-            immediate: true,
-            handler(options) {
-                if(options.length){
-                    this.option = find(options, {'value': this.modelValue}) || options[0]
-                }
-            }
-        },
-
-    },
-    mounted() {
-        onClickOutside(this.$refs.holder,this.closeDropdownWithoutEmit)
-    },
-    methods: {
-        toggleWithLabel() {
-            this.$nextTick(() => {
-                this.$refs.select.$el.focus()
-                if (this.openOnClickLabel) {
-                    this.$refs.select.$el.click()
-                    this.show = true;
-                }
-            });
-        },
-        closeDropdown(e){
-            e.preventDefault();
-            this.internalValue = this.option.value;
-            this.query = '';
-            this.show = false;
-        },
-        closeDropdownWithoutEmit(e){
-            this.query = '';
-            this.show = false;
-        },
-        openDropdown(e){
-            this.query = '';
-            this.show = true;
-        },
-        indicatorClass(option){
-            return {
-                'green' : 'bg-green-400',
-                'gray': 'bg-gray-200',
-                'red' : 'bg-red-400',
-                'yellow': 'bg-yellow-400',
-                'blue': 'bg-blue-400',
-            }[option?.indicator || '']
-        },
-    },
-}
+});
 </script>
+

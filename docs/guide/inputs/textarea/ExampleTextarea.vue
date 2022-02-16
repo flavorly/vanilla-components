@@ -22,21 +22,14 @@
   </div>
 </template>
 
-<script>
+
+<script setup type="ts">
 import { VanillaTextarea } from '@/index';
-export default {
-    name: 'ExampleTextarea',
-    components: {
-        VanillaTextarea,
-    },
-    data(){
-        return {
-            value: '',
-            value2: null,
-        };
-    },
-    mounted() {
-        window.parent.postMessage('mounted', '*');
-    },
-};
+import { onMounted, ref, defineComponent } from 'vue';
+
+defineComponent({ name: 'ExampleTextarea' });
+onMounted(() => window.parent.postMessage('mounted', '*'));
+
+const value = ref(null);
+const value2 = ref(null);
 </script>

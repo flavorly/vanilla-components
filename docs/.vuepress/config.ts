@@ -35,7 +35,7 @@ export default {
           { text: 'Text & Password', link: '/guide/inputs/text' },
           { text: 'Textarea', link: '/guide/inputs/textarea' },
           // { text: 'Select', link: '/guide/inputs/select' },
-          // { text: 'Rich Select', link: '/guide/inputs/rich-select' },
+          { text: 'Rich Select', link: '/guide/inputs/richselect' },
           // { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },
           // { text: 'Phone Input', link: '/guide/inputs/phone-number' },
           // { text: 'Country', link: '/guide/inputs/country' },

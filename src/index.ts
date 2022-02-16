@@ -19,6 +19,7 @@
 export { default as VanillaInput } from './components/Input/Input.vue';
 export { default as VanillaDatetimePicker } from './components/DatetimePicker/DatetimePicker.vue';
 export { default as VanillaTextarea } from './components/Textarea/Textarea.vue';
+export { default as VanillaRichSelect } from './components/RichSelect/RichSelect.vue';
 
 // Form Additional Elements
 export { default as VanillaInputLayout } from './components/Forms/Layout.vue';

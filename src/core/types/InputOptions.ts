@@ -1,6 +1,6 @@
 export type NormalizedOptions = Array<NormalizedOption>;
 
-export type InputOptionValue = string | number | undefined | null;
+export type InputOptionValue = string | number | undefined | null | object | boolean;
 
 export type InputOptionText = string | number | undefined;
 

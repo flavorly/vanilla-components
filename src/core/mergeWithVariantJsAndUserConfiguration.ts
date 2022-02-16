@@ -6,6 +6,7 @@ import { VanillaDatetimePickerConfig } from '@/components/DatetimePicker/Config'
 import { VanillaTextareaConfig } from '@/components/Textarea/Config';
 import { VanillaFormErrorsConfig } from '@/components/FormErrors/Config';
 import { VanillaFormFeedbackConfig } from '@/components/FormFeedback/Config';
+import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect/Config';
 
 const MergeWithVariantJsAndUserConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
@@ -15,6 +16,7 @@ const MergeWithVariantJsAndUserConfiguration = (userConfiguration: VanillaCompon
         VanillaInput: VanillaInputConfig,
         VanillaTextarea: VanillaTextareaConfig,
         VanillaDatetimePicker: VanillaDatetimePickerConfig,
+        VanillaRichSelect: VanillaRichSelectConfig,
 
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,
@@ -25,6 +27,7 @@ const MergeWithVariantJsAndUserConfiguration = (userConfiguration: VanillaCompon
     // Mapping the Variant JS Configuration with the Vanilla Components Configuration & User Provider Configuration
     const VariantJSMapping = {
         TInput: VanillaInputConfigToVariantJs(VanillaComponentsDefaults?.VanillaInput ?? {}),
+        TRichSelect: VanillaRichSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaRichSelect ?? {}),
     };
 
     // Return Both Merged Configuration

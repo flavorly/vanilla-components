@@ -24,14 +24,24 @@
         </slot>
       </div>
     </div>
-    <VanillaFormErrors
-      v-if="hasErrors"
-      :errors="errors"
-    />
-    <VanillaFormFeedback
-      v-if="!hasErrors && feedback !== undefined"
-      :text="feedback"
-    />
+    <slot
+      name="errors"
+      v-bind="{hasErrors, errors}"
+    >
+      <VanillaFormErrors
+        v-if="hasErrors"
+        :errors="errors"
+      />
+    </slot>
+    <slot
+      name="feedback"
+      v-bind="{hasErrors, feedback}"
+    >
+      <VanillaFormFeedback
+        v-if="!hasErrors && feedback !== undefined"
+        :text="feedback"
+      />
+    </slot>
   </div>
 </template>
 <script lang="ts">

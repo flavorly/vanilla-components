@@ -34,23 +34,15 @@
   </div>
 </template>
 
-<script>
-import { VanillaInput, VanillaInputLayout } from '@/index';
-export default {
-    name: 'ExampleInputText',
-    components: {
-        VanillaInputLayout,
-        VanillaInput,
-    },
-    data(){
-        return {
-            value: '',
-            value2: null,
-            valuePassword: null,
-        };
-    },
-    mounted() {
-        window.parent.postMessage('mounted', '*');
-    },
-};
+
+<script setup type="ts">
+import { VanillaInput } from '@/index';
+import { onMounted, ref, defineComponent } from 'vue';
+
+defineComponent({ name: 'ExampleInputText' });
+onMounted(() => window.parent.postMessage('mounted', '*'));
+
+const value = ref(null);
+const value2 = ref(null);
+const valuePassword = ref(null);
 </script>
