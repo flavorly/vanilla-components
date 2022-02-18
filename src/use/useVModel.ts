@@ -1,4 +1,4 @@
-import { Data } from '@variantjs/core';
+import { Data } from '@/core/types';
 import {
   getCurrentInstance,
   Ref,

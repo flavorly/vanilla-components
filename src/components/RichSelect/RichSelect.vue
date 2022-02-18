@@ -38,18 +38,29 @@
         :teleport="teleport"
         :teleport-to="teleportTo"
       >
+        <!-- Label -->
         <template #label="{selectedOption: option, className, label}">
           <slot
             name="label"
             v-bind="{ option, className,label, hasErrors}"
           />
         </template>
-
+        <!-- Option -->
         <template #option="{ option, className, isSelected }">
           <slot
             name="option"
             v-bind="{option, className, isSelected, hasErrors}"
           />
+        </template>
+
+        <!-- Feedback for Loading, etc -->
+        <template #stateFeedback="{fetchingOptions,needsMoreCharsToFetch,noResults}">
+          <slot
+            name="stateFeedback"
+            v-bind="{fetchingOptions,needsMoreCharsToFetch,noResults}"
+          >
+            <vanilla-rich-select-state />
+          </slot>
         </template>
       </t-rich-select>
     </div>
@@ -74,26 +85,26 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, provide } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaRichSelectValue, VanillaRichSelectProps, MinimumInputLengthTextProp } from '@/components/RichSelect/Type';
 import { VanillaRichSelectClassesKeys, VanillaRichSelectConfig } from '@/components/RichSelect/Config';
-import { ExclamationCircleIcon } from '@heroicons/vue/solid';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 import { TRichSelect } from '@variantjs/vue';
 import { popperOptions, validPlacements, sameWidthModifier } from '@/core/config/popperOptions';
 import { FetchOptionsFn, PreFetchOptionsFn, InputOptions, Measure } from '@/core/types';
 import { Options, Placement } from '@popperjs/core';
+import VanillaRichSelectState from '@/components/RichSelect/RichSelectState.vue';
 
 export default defineComponent({
     name: 'VanillaRichSelect',
     components: {
+        VanillaRichSelectState,
         TRichSelect,
         VanillaFormErrors,
         VanillaFormFeedback,
-        ExclamationCircleIcon,
     },
     inheritAttrs: false,
     compatConfig: {
@@ -209,7 +220,7 @@ export default defineComponent({
         },
         loadingClosedPlaceholder: {
             type: String,
-            default: '⏲️ Loading, please wait ...',
+            default: '⏲️ Loadinggggggg, please wait ...',
         },
         loadingMoreResultsText: {
             type: String,
@@ -241,7 +252,7 @@ export default defineComponent({
         },
         minimumInputLengthText: {
             type: [Function, String] as PropType<MinimumInputLengthTextProp>,
-            default: () => (minimumInputLength: number): string => `Please enter ${minimumInputLength} or more characters`,
+            default: () => (minimumInputLength: number): string => `Search more results by entering ${minimumInputLength} or more characters`,
         },
         minimumResultsForSearch: {
             type: Number,
@@ -269,6 +280,11 @@ export default defineComponent({
             VanillaRichSelectClassesKeys,
             localVariant,
         );
+
+        /**
+         * Provided data
+         */
+        provide('configuration_vanilla', configuration);
 
         return {
             configuration,

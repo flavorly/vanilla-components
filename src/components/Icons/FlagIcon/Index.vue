@@ -3,9 +3,10 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent } from 'vue';
 
 export default {
+    name: 'VanillaFlagIcon',
     components : {
         'vanilla-flag-ad': defineAsyncComponent(() => import('./Countries/FlagAD.vue')),
         'vanilla-flag-ae': defineAsyncComponent(() => import('./Countries/FlagAE.vue')),
@@ -261,18 +262,18 @@ export default {
         'vanilla-flag-yt': defineAsyncComponent(() => import('./Countries/FlagYT.vue')),
         'vanilla-flag-za': defineAsyncComponent(() => import('./Countries/FlagZA.vue')),
         'vanilla-flag-zm': defineAsyncComponent(() => import('./Countries/FlagZM.vue')),
-        'vanilla-flag-zw': defineAsyncComponent(() => import('./Countries/FlagZW.vue'))
+        'vanilla-flag-zw': defineAsyncComponent(() => import('./Countries/FlagZW.vue')),
     },
     props: {
         country: {
             type: String,
-            default: 'en'
-        }
+            required: true,
+        },
     },
     computed: {
-        componentName () {
-            return 'vanilla-flag-' + this.country;
-        }
+        componentName() {
+            return 'vanilla-flag-' + this.country.toLowerCase();
+        },
     },
-}
+};
 </script>

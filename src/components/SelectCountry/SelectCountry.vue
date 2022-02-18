@@ -1,141 +1,98 @@
 <template>
-  <vanilla-input-layout :layout="layout">
-    <template #label>
-      <slot
-        v-if="$slots.label || label"
-        name="label"
+  <div class="vanilla-input">
+    <div>
+      <vanilla-rich-select
+        v-model="localValue"
+        :options="preFetchOptions"
+        :fetch-options="fetchCountries"
+        :minimum-input-length="2"
+        :value-attribute="'value'"
+        :text-attribute="'label'"
+        :clear-search-on-close="true"
       >
-        <vanilla-form-label
-          :label-for="name"
-          :value="label"
-        />
-      </slot>
-    </template>
-
-    <div class="relative flex-1">
-      <vanilla-input-rich-select
-        v-model="internalCountryCode"
-        :errors="internalErrors"
-        :model-value="modelValue"
-        :name="'countryCode'+name"
-        :options="countryOptions"
-        :search="searchCountries"
-        :show-errors="false"
-        layout="naked"
-      >
-        <!-- Selected Option -->
-        <template #selected="{ option }">
-          <slot name="selected">
-            <vanilla-flag-icon
-              :country="option?.value.toLowerCase()"
-              class="h-3"
-            />
-            <span
-              class="block whitespace-nowrap"
-              v-html="option?.label"
-            />
-          </slot>
+        <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
+          <VanillaSelectCountryOption
+            :name="country?.label"
+            :country="country?.value"
+            :selected="isSelected"
+            :parent-classes="className"
+            :has-errors="hasErrors"
+          />
         </template>
-
-        <!-- Option Template -->
-        <template #option="{ anOption }">
-          <slot name="option">
-            <vanilla-flag-icon
-              :country="anOption?.value.toLowerCase()"
-              class="h-3"
-            />
-            <span
-              class="block whitespace-nowrap"
-              v-html="anOption?.label"
-            />
-          </slot>
+        <template #option="{ option: { raw: country }, className, isSelected, hasErrors}">
+          <VanillaSelectCountryOption
+            class="px-3 py-2"
+            :name="country?.label"
+            :country="country?.value"
+            :selected="isSelected"
+            :parent-classes="className"
+            :has-errors="hasErrors"
+          />
         </template>
-      </vanilla-input-rich-select>
+      </vanilla-rich-select>
     </div>
-    <vanilla-form-errors
-      v-if="hasErrors && showErrors"
-      :error="internalErrors"
-    />
-    <vanilla-form-helper
-      v-if="help"
-      :text="help"
-    />
-  </vanilla-input-layout>
+  </div>
 </template>
-<script>
-import UseFormInputs from "@/utils/UseFormInputs";
-import SyncProps from "@/utils/SyncProps";
-import {filterCountriesByName, countries} from "@/utils/CountryCodes";
-import VanillaInputLayout from "@/components/Inputs/Partials/Layout.vue";
-import VanillaFormErrors from "@/components/Inputs/Partials/Errors.vue";
-import VanillaFormHelper from "@/components/Inputs/Partials/Helper.vue";
-import VanillaFormLabel from "@/components/Inputs/Partials/Label.vue";
-import VanillaInputRichSelect from "@/components/Inputs/RichSelect.vue";
-import VanillaFlagIcon from "@/components/Icons/FlagIcon/Index.vue";
-import find from 'lodash/find';
-import first from 'lodash/first';
+<script lang="ts">
+import { defineComponent, PropType } from 'vue';
+import { useBootVariant, useVModel, useVariantProps } from '@/use';
+import { hasSlot } from '@/core/helpers';
+import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
+import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
+import VanillaSelectCountryOption from '@/components/SelectCountryOption/SelectCountryOption.vue';
+import { filterCountriesByName, countries } from '@/utils/CountryCodes';
 
-export default {
-    name: 'VanillaInputCountry',
+
+export default defineComponent({
+    name: 'VanillaSelectCountry',
     components: {
-        VanillaFormLabel,
-        VanillaFormHelper,
-        VanillaFormErrors,
-        VanillaInputRichSelect,
-        VanillaInputLayout,
-        VanillaFlagIcon,
+        VanillaSelectCountryOption,
+        VanillaRichSelect,
     },
-    mixins: [
-        UseFormInputs,
-        SyncProps
-    ],
+    inheritAttrs: false,
+    compatConfig: {
+        MODE: 3,
+    },
     props: {
+        ...useVariantProps<VanillaInputProps>(),
+        modelValue: {
+            type: [String, Number] as PropType<VanillaInputValue>,
+            default: undefined,
+        },
         favoriteCountries: {
-            type: [Array, Object],
+            type: [Array, Object] as PropType<string[]>,
             required: false,
             default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
         },
     },
-    emits: [
-        'update:countryDialCode',
-        'update:countryCode',
-        'update:countryName',
-    ],
-    data() {
+    setup(props) {
+        const localValue = useVModel(props, 'modelValue');
+        const {
+            errors,
+            hasErrors,
+            localVariant,
+        } = useBootVariant(props, 'errors', localValue);
+
+        const preFetchOptions = filterCountriesByName('', localValue.value, countries, 2, props.favoriteCountries);
+
+        const fetchCountries = (query?: string, nextPage?: number) =>
+            new Promise((resolve) => {
+                resolve(filterCountriesByName(query, localValue.value, countries, 2, props.favoriteCountries));
+            }).then((response) => ({
+                results: response as Record<string, never>[],
+                hasMorePages: false,
+            }));
+
         return {
-            internalCountryCode: null,
-        }
+            localValue,
+            localVariant,
+            errors,
+            //hasErrors,
+            hasSlot,
+            fetchCountries,
+            preFetchOptions,
+        };
     },
-    computed: {
-        selectedCountry() {
-            return find(
-                countries,
-                country => country.id === this.internalCountryCode
-            ) || first(this.countryOptions)
-        },
-        countryOptions() {
-            return filterCountriesByName('', this.internalCountryCode, countries,2, this.favoriteCountries);
-        },
-    },
-    watch: {
-        internalCountryCode: {
-            immediate: true,
-            handler: function (value, oldValue) {
-                // This ensures the state is cleared when the user changes the input
-                if (value !== '' && value !== oldValue) {
-                    this.$emit('update:countryDialCode', this.selectedCountry.dialCode);
-                    this.$emit('update:countryCode', this.selectedCountry.value);
-                    this.$emit('update:countryName', this.selectedCountry.name_raw);
-                    this.internalValue = this.internalCountryCode;
-                }
-            }
-        },
-    },
-    methods: {
-        searchCountries(options, query) {
-            return filterCountriesByName(query, this.internalCountryCode, countries, 2, this.favoriteCountries)
-        },
-    },
-}
+});
 </script>
 

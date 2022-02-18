@@ -23,6 +23,9 @@ export { default as VanillaTextarea } from './components/Textarea/Textarea.vue';
 export { default as VanillaRichSelect } from './components/RichSelect/RichSelect.vue';
 export { default as VanillaRichSelectOptionWithImage } from './components/RichSelect/RichSelectOptionWithImage.vue';
 export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators.vue';
+export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState.vue';
+export { default as VanillaSelectCountry } from './components/SelectCountry/SelectCountry.vue';
+export { default as VanillaSelectCountryOption } from './components/SelectCountryOption/SelectCountryOption.vue';
 
 // Form Additional Elements
 export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
@@ -33,7 +36,7 @@ export { default as VanillaFormFeedback } from './components/FormFeedback/FormFe
 // export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 
 // Icons
-// export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
+export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
 
 
 // Plugin to Install

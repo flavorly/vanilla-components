@@ -80,7 +80,7 @@ const defaultVariant = {
 
     // State texts
     searchingText: 'px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center',
-    needsMoreCharsText: 'px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center',
+    needsMoreCharsText: 'px-3 py-1 text-xs text-gray-500 dark:text-gray-400 text-center',
     noResultsText: 'px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center',
 
     // Select button
@@ -181,8 +181,6 @@ export const VanillaRichSelectConfig = {
     },
   },
 };
-
-console.log(VanillaRichSelectConfig);
 
 /**
  * Converts our own config into VariantJS config

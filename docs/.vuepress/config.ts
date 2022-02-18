@@ -36,6 +36,7 @@ export default {
           { text: 'Textarea', link: '/guide/inputs/textarea' },
           // { text: 'Select', link: '/guide/inputs/select' },
           { text: 'Rich Select', link: '/guide/inputs/richselect' },
+          { text: 'Country Select', link: '/guide/inputs/country-select' },
           // { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },
           // { text: 'Phone Input', link: '/guide/inputs/phone-number' },
           // { text: 'Country', link: '/guide/inputs/country' },

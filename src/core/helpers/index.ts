@@ -6,3 +6,4 @@ export { default as throttle } from './throttle';
 export { default as subtractFromArray } from './subtractFromArray';
 export { default as hasProperty } from './hasProperty';
 export { default as hasSlot } from './hasSlot';
+export { default as debounce } from './debounce';

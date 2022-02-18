@@ -65,6 +65,11 @@ yarn format
 
 **FAQS**
 
+**TO CHECK**
+
+useInjectsConfiguration
+useInjectsClassesList
+
 ```
 https://github.com/ulissesferreira/moon
 https://codybontecou.com/tailwindcss-with-vitepress.html
