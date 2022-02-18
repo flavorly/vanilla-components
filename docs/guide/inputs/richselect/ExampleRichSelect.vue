@@ -4,7 +4,7 @@
     <VanillaRichSelect
       v-model="value"
       :feedback="'Im useful helper out here, choose wisely'"
-      :options="options"
+      :options="optionsNested"
       placeholder="Elon Musk"
     />
 
@@ -29,7 +29,6 @@
 
     <div class="h-1 my-5" />
 
-
     <!-- Tags -->
     <VanillaRichSelect
       v-model="valueTags"
@@ -37,7 +36,6 @@
       :options="options"
       :tags="true"
       :multiple="true"
-      :errors="'The option you selected is invalid'"
       placeholder="Elon Musk"
     />
 
@@ -110,7 +108,7 @@
     </VanillaRichSelect>
 
     <div class="flex items-center justify-center mx-auto text-center mt-2">
-      <pre>{{ JSON.stringify(valuePersons) }}</pre>
+      <pre>{{ JSON.stringify(valueIndicators) }}</pre>
     </div>
 
     <div class="h-1 my-5" />
@@ -179,7 +177,28 @@ const valueMovie = ref(null);
 const valuePersons = ref('jon-doe');
 const valueIndicators = ref('2');
 
-const options = [
+const optionsNested = [
+    { value: 'Option 1', text: 'One Option' },
+    { value: 'Option 2', text: 'Two Options' },
+    { value: { nested: true, type: 'nested' }, text: 'Complex Object' },
+    {
+        value: 'separator',
+        text: 'This is a seperator',
+        children: [
+            { value: 'Option 4', text: 'Option 4' },
+            { value: 'Option 5', text: 'Option 5' },
+            {
+                value: 'separator-2',
+                text: 'A nested separator',
+                children: [
+                    { value: 'Option 6', text: 'Option 6' },
+                ],
+            },
+        ],
+    },
+];
+
+const options =  [
     { value: 'Option 1', text: 'One Option' },
     { value: 'Option 2', text: 'Two Options' },
     { value: { nested: true, type: 'nested' }, text: 'Complex Object' },
