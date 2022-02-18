@@ -1,9 +1,6 @@
 <template>
   <div class="vanilla-input">
     <div :class="configuration.classesList.wrapper">
-      <!--      <div :class="configuration.classesList.addonBefore">-->
-      <!--        <slot name="before" />-->
-      <!--      </div>-->
       <t-rich-select
         v-model="localValue"
         v-bind="$attrs"
@@ -55,14 +52,6 @@
           />
         </template>
       </t-rich-select>
-      <!--      <div :class="configuration.classesList.addonAfter">-->
-      <!--        <slot name="after">-->
-      <!--          <ExclamationCircleIcon-->
-      <!--            v-if="hasErrors"-->
-      <!--            :class="configuration.classesList.addonClasses"-->
-      <!--          />-->
-      <!--        </slot>-->
-      <!--      </div>-->
     </div>
     <slot
       name="errors"
