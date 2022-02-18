@@ -1,9 +1,9 @@
 <template>
   <div class="vanilla-input">
     <div :class="configuration.classesList.wrapper">
-      <div :class="configuration.classesList.addonBefore">
-        <slot name="before" />
-      </div>
+      <!--      <div :class="configuration.classesList.addonBefore">-->
+      <!--        <slot name="before" />-->
+      <!--      </div>-->
       <t-rich-select
         v-model="localValue"
         v-bind="$attrs"
@@ -22,6 +22,8 @@
         :clear-search-on-close="clearSearchOnClose"
         :toggle-on-focus="toggleOnFocus"
         :toggle-on-click="toggleOnClick"
+        :value-attribute="valueAttribute"
+        :text-attribute="textAttribute"
         :hide-search-box="hideSearchBox"
         :search-box-placeholder="searchBoxPlaceholder"
         :no-results-text="noResultsText"
@@ -42,26 +44,25 @@
         <template #label="{selectedOption: option, className, label}">
           <slot
             name="label"
-            v-bind="{ option, className,label}"
+            v-bind="{ option, className,label, hasErrors}"
           />
         </template>
 
         <template #option="{ option, className, isSelected }">
           <slot
             name="option"
-            v-bind="{option, className, isSelected}"
+            v-bind="{option, className, isSelected, hasErrors}"
           />
         </template>
       </t-rich-select>
-
-      <div :class="configuration.classesList.addonAfter">
-        <slot name="after">
-          <ExclamationCircleIcon
-            v-if="hasErrors"
-            :class="configuration.classesList.addonClasses"
-          />
-        </slot>
-      </div>
+      <!--      <div :class="configuration.classesList.addonAfter">-->
+      <!--        <slot name="after">-->
+      <!--          <ExclamationCircleIcon-->
+      <!--            v-if="hasErrors"-->
+      <!--            :class="configuration.classesList.addonClasses"-->
+      <!--          />-->
+      <!--        </slot>-->
+      <!--      </div>-->
     </div>
     <slot
       name="errors"
@@ -211,15 +212,15 @@ export default defineComponent({
         },
         noResultsText: {
             type: String,
-            default: 'No options found',
+            default: '😟 Sorry but we did not find any results to your query. Try another one?',
         },
         searchingText: {
             type: String,
-            default: 'Searching...',
+            default: '⏲️ Pleas wait, searching for results...',
         },
         loadingClosedPlaceholder: {
             type: String,
-            default: 'Loading...',
+            default: '⏲️ Loading, please wait ...',
         },
         loadingMoreResultsText: {
             type: String,

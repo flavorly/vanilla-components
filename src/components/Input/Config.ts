@@ -6,7 +6,6 @@ export const VanillaInputConfig = {
   fixedClasses: {
     input: mergeClasses(
       'appearance-none block w-full',
-      commonClasses.inputsText,
       commonClasses.inputsShadows,
       commonClasses.inputsDisabled,
       commonClasses.inputsSpacing,
@@ -22,6 +21,8 @@ export const VanillaInputConfig = {
   classes: {
     input:  mergeClasses(
       '',
+      commonClasses.inputsText,
+      commonClasses.inputsTextColor,
       commonClasses.inputsBackground,
       commonClasses.inputsBorder,
       commonClasses.inputsRing,
@@ -42,7 +43,7 @@ export const VanillaInputConfig = {
         input: mergeClasses(
           commonClasses.inputsErrorText,
           commonClasses.inputsErrorsBackground,
-          commonClasses.inputsErrorBorder,
+          commonClasses.inputsErrorsBorder,
           commonClasses.inputsErrorsRing,
         ),
         wrapper : '',

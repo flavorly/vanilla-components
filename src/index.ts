@@ -19,7 +19,10 @@
 export { default as VanillaInput } from './components/Input/Input.vue';
 export { default as VanillaDatetimePicker } from './components/DatetimePicker/DatetimePicker.vue';
 export { default as VanillaTextarea } from './components/Textarea/Textarea.vue';
+
 export { default as VanillaRichSelect } from './components/RichSelect/RichSelect.vue';
+export { default as VanillaRichSelectOptionWithImage } from './components/RichSelect/RichSelectOptionWithImage.vue';
+export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators.vue';
 
 // Form Additional Elements
 export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
