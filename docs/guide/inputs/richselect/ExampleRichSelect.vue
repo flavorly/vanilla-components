@@ -37,6 +37,7 @@
       :options="options"
       :tags="true"
       :multiple="true"
+      :errors="'The option you selected is invalid'"
       placeholder="Elon Musk"
     />
 

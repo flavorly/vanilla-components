@@ -103,6 +103,7 @@ const defaultVariant = {
       commonClasses.inputsTransition,
       commonClasses.inputsDisabled,
     ),
+
     tagLabel: 'px-3',
 
     tagDeleteButton: mergeClasses(
@@ -139,20 +140,42 @@ export const VanillaRichSelectConfig = {
     error: {
       classes : {
           ...merge(defaultVariant, {
-            trigger: mergeClasses(
-              commonClasses.inputsErrorsBackground,
-              commonClasses.inputsErrorsBorder,
-              commonClasses.inputsErrorsRing,
-              commonClasses.inputsErrorText,
-              commonClasses.inputsRadius,
-            ),
-            // Clear button
-            clearButton: mergeClasses(
-              'absolute flex items-center justify-center text-red-400 dark:text-red-300 dark:text rounded mr-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-opacity-70 top-1/2 right-0 transform -translate-y-1/2',
-              commonClasses.buttonErrorsRing,
-              commonClasses.iconsSize,
-              commonClasses.inputsTransition,
-            ),
+
+              // Trigger
+              trigger: mergeClasses(
+                commonClasses.inputsErrorsBackground,
+                commonClasses.inputsErrorsBorder,
+                commonClasses.inputsErrorsRing,
+                commonClasses.inputsErrorText,
+                commonClasses.inputsRadius,
+              ),
+
+              // Clear button
+              clearButton: mergeClasses(
+                'absolute flex items-center justify-center text-red-400 dark:text-red-300 dark:text rounded mr-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-opacity-70 top-1/2 right-0 transform -translate-y-1/2',
+                commonClasses.buttonErrorsRing,
+                commonClasses.iconsSize,
+                commonClasses.inputsTransition,
+              ),
+
+              // Single tag
+              tag: mergeClasses(
+                'rounded shadow-sm flex items-center cursor-pointer',
+                'bg-red-100 dark:bg-red-500/20',
+                'm-0.5 h-8 max-w-full',
+                'text-red-900 dark:text-red-300 white-space-no text-sm white-space-no',
+                commonClasses.buttonErrorsRing + ' focus:ring-opacity-50',
+                commonClasses.inputsTransition,
+                commonClasses.inputsDisabled,
+              ),
+
+              tagDeleteButton: mergeClasses(
+                commonClasses.inputsTransition,
+                commonClasses.buttonErrorsRing + ' focus:ring-opacity-50',
+                '-ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r',
+                'text-red-900 dark:text-red-300 focus:text-white hover:text-red-800 dark:hover:text-red-200',
+                'hover:bg-red-200 focus:bg-red-500 dark:hover:bg-red-400/20 dark:focus:bg-red-500/20',
+              ),
           }),
       },
     },
