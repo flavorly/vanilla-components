@@ -95,9 +95,10 @@ const defaultVariant = {
 
     // Single tag
     tag: mergeClasses(
-      'rounded shadow-sm text-sm text-white transition white-space-no m-0.5 max-w-full h-8 flex items-center cursor-pointer',
-      'bg-primary-100 dark:bg-primary-400',
-      'text-primary-900 dark:text-white white-space-no text-sm',
+      'rounded shadow-sm flex items-center cursor-pointer',
+      'bg-primary-100 dark:bg-primary-500/20 dark:border dark:border-gray-700',
+      'm-0.5 h-8 max-w-full',
+      'text-primary-900 dark:text-white white-space-no text-sm white-space-no',
       commonClasses.buttonRing + ' focus:ring-opacity-50',
       commonClasses.inputsTransition,
       commonClasses.inputsDisabled,
@@ -108,8 +109,8 @@ const defaultVariant = {
       commonClasses.inputsTransition,
       commonClasses.buttonRing + ' focus:ring-opacity-50',
       '-ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r',
-      'text-primary-400 focus:text-white hover:text-primary-500',
-      'hover:bg-primary-200 focus:bg-primary-500',
+      'text-primary-400 focus:text-white hover:text-primary-500 dark:hover:text-white',
+      'hover:bg-primary-200 focus:bg-primary-500 dark:hover:bg-primary-400/20 dark:focus:bg-primary-500/20',
     ),
     tagDeleteButtonIcon: 'w-3 h-3',
 

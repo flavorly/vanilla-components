@@ -180,11 +180,11 @@ export default defineComponent({
         },
         selectOnClose: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         clearSearchOnClose: {
             type: Boolean,
-            default: undefined,
+            default: true,
         },
         toggleOnFocus: {
             type: Boolean,
@@ -208,7 +208,7 @@ export default defineComponent({
         },
         searchBoxPlaceholder: {
             type: String,
-            default: 'Search...',
+            default: 'Search for your items here...',
         },
         noResultsText: {
             type: String,
@@ -260,7 +260,7 @@ export default defineComponent({
         },
         teleport: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         teleportTo: {
             type: [String, Object] as PropType<string | HTMLElement>,
