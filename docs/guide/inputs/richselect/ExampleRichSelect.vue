@@ -29,6 +29,23 @@
 
     <div class="h-1 my-5" />
 
+
+    <!-- Tags -->
+    <VanillaRichSelect
+      v-model="valueTags"
+      :feedback="'In an select with tags'"
+      :options="options"
+      :tags="true"
+      :multiple="true"
+      placeholder="Elon Musk"
+    />
+
+    <div class="flex items-center justify-center mx-auto text-center mt-2">
+      <pre>{{ JSON.stringify(valueTags) }}</pre>
+    </div>
+
+    <div class="h-1 my-5" />
+
     <!-- Persons -->
     <VanillaRichSelect
       v-model="valuePersons"
@@ -131,7 +148,7 @@
           <div
             v-if="movie?.Year"
             class="w-100 text-xs text-left mt-1"
-            :class="[isSelected ? 'text-gray-200' : 'text-gray-500']"
+            :class="[isSelected ? 'font-normal opacity-60' : 'opacity-60']"
             v-html="'This movie was released in the year of '+movie?.Year"
           />
         </div>
@@ -155,6 +172,7 @@ defineComponent({ name: 'ExampleRichSelect' });
 onMounted(() => window.parent.postMessage('mounted', '*'));
 
 const value = ref('Option 1');
+const valueTags = ref(['Option 1', 'Option 2']);
 const valueWithErrors = ref('Option 2');
 const valueMovie = ref(null);
 const valuePersons = ref('jon-doe');

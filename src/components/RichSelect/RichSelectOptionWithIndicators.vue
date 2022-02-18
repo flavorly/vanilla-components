@@ -5,7 +5,7 @@
   >
     <div class="relative">
       <div
-        :class="[selected ? 'font-medium' : 'font-normal','block']"
+        :class="[selected ? 'font-semibold' : 'font-normal','block']"
         class="flex items-center space-x-2 text-sm"
       >
         <span
@@ -14,7 +14,7 @@
           aria-hidden="true"
         />
         <span
-          class="block whitespace-nowrap truncate font-medium"
+          class="block whitespace-nowrap truncate"
           v-html="name"
         />
       </div>
@@ -22,7 +22,7 @@
     <div
       v-if="description"
       class="w-100 text-xs text-left mt-1"
-      :class="[selected ? 'text-gray-200' : 'opacity-60']"
+      :class="[selected ? 'font-normal opacity-60' : 'opacity-60']"
       v-html="description"
     />
     <span

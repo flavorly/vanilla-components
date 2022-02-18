@@ -16,7 +16,7 @@ const defaultVariant = {
     ),
 
     dropdown: mergeClasses(
-      'z-10',
+      'z-10 overflow-hidden',
       commonClasses.dropdownsBackground,
       commonClasses.dropdownsBorder,
       commonClasses.dropdownsRadius,
@@ -45,12 +45,12 @@ const defaultVariant = {
     option: mergeClasses(
       'w-full disabled:opacity-50',
       'cursor-pointer disabled:cursor-not-allowed',
-      'text-sm font-normal dark:text-white',
+      'text-sm font-normal',
     ),
 
-    selectedOption: 'font-medium text-white bg-primary-500',
-    highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-400 dark:text-white',
-    selectedHighlightedOption: 'font-medium text-white bg-primary-500',
+    selectedOption: 'font-semibold',
+    highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black',
+    selectedHighlightedOption: 'font-semibold',
 
     //  Option content
     optionContent: 'flex items-center justify-between px-3 py-3',
@@ -91,16 +91,29 @@ const defaultVariant = {
     selectButtonSelectorIcon: 'flex-shrink-0 w-4 h-4 ml-1 text-gray-600',
 
     // Select button tags
-    tagsWrapper: 'flex flex-wrap overflow-hidden -mx-2 -my-2.5 py-1 pr-8',
+    tagsWrapper: 'flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8',
 
     // Single tag
-    tag: 'bg-primary-500 disabled:cursor-not-allowed disabled:opacity-50 duration-100 ease-in-out focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-opacity-50 rounded shadow-sm text-sm text-white transition white-space-no m-0.5 max-w-full h-8 flex items-center cursor-pointer',
-
+    tag: mergeClasses(
+      'rounded shadow-sm text-sm text-white transition white-space-no m-0.5 max-w-full h-8 flex items-center cursor-pointer',
+      'bg-primary-100 dark:bg-primary-400',
+      'text-primary-900 dark:text-white white-space-no text-sm',
+      commonClasses.buttonRing + ' focus:ring-opacity-50',
+      commonClasses.inputsTransition,
+      commonClasses.inputsDisabled,
+    ),
     tagLabel: 'px-3',
 
-    tagDeleteButton: '-ml-1.5 h-full hover:bg-primary-600 hover:shadow-sm inline-flex items-center px-2 transition focus:border-primary-600 focus:outline-none focus:ring-2 focus:ring-primary-600 focus:ring-opacity-50 rounded-r',
-
+    tagDeleteButton: mergeClasses(
+      commonClasses.inputsTransition,
+      commonClasses.buttonRing + ' focus:ring-opacity-50',
+      '-ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r',
+      'text-primary-400 focus:text-white hover:text-primary-500',
+      'hover:bg-primary-200 focus:bg-primary-500',
+    ),
     tagDeleteButtonIcon: 'w-3 h-3',
+
+    // Transitions
     ...enterAndLeave,
 };
 
