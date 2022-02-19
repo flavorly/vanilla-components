@@ -33,6 +33,6 @@
         "sourceType": "module",
         "project": "tsconfig.json",
         "tsconfigRootDir": "./",
-        "extraFileExtensions": [".vue"]
+        "extraFileExtensions": [".vue",".js"]
     }
 }

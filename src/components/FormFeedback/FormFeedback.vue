@@ -13,11 +13,9 @@
 </template>
 
 <script lang="ts">
-import { useBootVariant, useVariantProps } from '@/use';
+import { useBootVariant, useVariantProps, useConfiguration } from '@/core';
 import { defineComponent, PropType, ref } from 'vue';
-import { VanillaFormFeedbackProps } from '@/components/FormFeedback/Type';
-import { VanillaFormFeedbackConfig } from '@/components/FormFeedback/Config';
-import useConfiguration from '@/use/useConfiguration';
+import { VanillaFormFeedbackProps, VanillaFormFeedbackConfig } from './index';
 
 export default defineComponent({
     name: 'VanillaFormFeedback',

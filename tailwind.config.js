@@ -53,7 +53,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
-    require('./src/Utils/TailwindFormsPlugin'),
-    require('./src/Utils/TailwindFillOpacityPlugin'),
+    require('./src/tailwind/TailwindFormsPlugin'),
+    require('./src/tailwind/TailwindFillOpacityPlugin'),
   ],
 }

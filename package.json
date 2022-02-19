@@ -81,6 +81,7 @@
     "fuse.js": "^6.4.6",
     "lodash": "^4.17.21",
     "mini-svg-data-uri": "^1.4.3",
-    "mitt": "^3.0.0"
+    "mitt": "^3.0.0",
+    "moment-timezone": "^0.5.34"
   }
 }

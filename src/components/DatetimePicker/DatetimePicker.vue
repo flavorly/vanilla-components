@@ -53,11 +53,28 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, onMounted, ref, nextTick } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
-import { hasSlot } from '@/core/helpers';
-import { VanillaDatetimePickerValue, VanillaDatetimePickerProps } from '@/components/DatetimePicker/Type';
-import { VanillaDatetimePickerClassesKeys, VanillaDatetimePickerConfig } from '@/components/DatetimePicker/Config';
+import {
+    defineComponent,
+    PropType,
+    onMounted,
+    ref,
+} from 'vue';
+
+import {
+    useBootVariant,
+    useVModel,
+    useVariantProps,
+    useConfigurationWithClassesList,
+    hasSlot,
+} from '@/core';
+
+import {
+    VanillaDatetimePickerValue,
+    VanillaDatetimePickerProps,
+    VanillaDatetimePickerClassesKeys,
+    VanillaDatetimePickerConfig,
+} from './index';
+
 import { ExclamationCircleIcon } from '@heroicons/vue/solid';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';

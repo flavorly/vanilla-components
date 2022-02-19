@@ -52,7 +52,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaTextareaValue, VanillaTextareaProps } from '@/components/Textarea/Type';
 import { VanillaTextareaClassesKeys, VanillaTextareaConfig } from '@/components/Textarea/Config';

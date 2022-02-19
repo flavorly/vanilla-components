@@ -35,11 +35,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { useBootVariant, useVModel, useVariantProps } from '@/use';
+import { useBootVariant, useVModel, useVariantProps } from '@/core/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
 import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
-import VanillaSelectCountryOption from '@/components/SelectCountryOption/SelectCountryOption.vue';
+import VanillaSelectCountryOption from './SelectCountryOption.vue';
 import { filterCountriesByName, countries } from '@/utils/CountryCodes';
 
 

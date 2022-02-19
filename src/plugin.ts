@@ -1,14 +1,14 @@
 import { App } from 'vue';
 import { VanillaComponentConfiguration } from '@/core/types';
 import { variantJS } from '@variantjs/vue';
-import mergeWithVariantJsAndUserConfiguration from '@/core/mergeWithVariantJsAndUserConfiguration';
+import { mergeConfiguration } from '@/core/variants';
 
 
 const plugin = {
   install: (app: App<Element>, configuration: VanillaComponentConfiguration = {}): void => {
     // eslint-disable-next-line no-param-reassign
     app.config.globalProperties.$vanillaComponents = true;
-    const mergedConfiguration = mergeWithVariantJsAndUserConfiguration(configuration);
+    const mergedConfiguration = mergeConfiguration(configuration);
     app.provide('vanilla_configuration', mergedConfiguration);
     // Also use VariantJS with their own configuration but merged with our defaults.
     app.use(variantJS, mergedConfiguration);

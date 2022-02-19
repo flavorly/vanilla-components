@@ -12,11 +12,9 @@
 </template>
 
 <script lang="ts">
-import { useBootVariant, useVariantProps } from '@/use';
 import { defineComponent, PropType, ref } from 'vue';
-import { VanillaFormErrorsProps } from '@/components/FormErrors/Type';
-import { VanillaFormErrorsConfig } from '@/components/FormErrors/Config';
-import useConfiguration from '@/use/useConfiguration';
+import { useBootVariant, useVariantProps, useConfiguration } from '@/core';
+import { VanillaFormErrorsProps, VanillaFormErrorsConfig } from './index';
 
 export default defineComponent({
     name: 'VanillaFormErrors',

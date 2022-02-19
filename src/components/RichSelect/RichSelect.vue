@@ -86,7 +86,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, provide } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/use';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaRichSelectValue, VanillaRichSelectProps, MinimumInputLengthTextProp } from '@/components/RichSelect/Type';
 import { VanillaRichSelectClassesKeys, VanillaRichSelectConfig } from '@/components/RichSelect/Config';

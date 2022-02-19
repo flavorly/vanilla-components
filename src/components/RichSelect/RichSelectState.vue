@@ -29,8 +29,8 @@ import {
     ComputedRef, defineComponent, inject, Ref,
 } from 'vue';
 import { VanillaRichSelectProps } from '@/components/RichSelect/Type';
-import { useInjectsClassesList } from '@/use';
-import { useInjectsConfiguration } from '@/use';
+import { useInjectsClassesList } from '@/core/use';
+import { useInjectsConfiguration } from '@/core/use';
 
 export default defineComponent({
     name: 'VanillaRichSelectState',

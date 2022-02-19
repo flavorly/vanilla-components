@@ -25,10 +25,9 @@ export { default as VanillaRichSelectOptionWithImage } from './components/RichSe
 export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators.vue';
 export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState.vue';
 export { default as VanillaSelectCountry } from './components/SelectCountry/SelectCountry.vue';
-export { default as VanillaSelectCountryOption } from './components/SelectCountryOption/SelectCountryOption.vue';
 
 // Form Additional Elements
-export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
+//export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
 export { default as VanillaFormErrors } from './components/FormErrors/FormErrors.vue';
 export { default as VanillaFormFeedback } from './components/FormFeedback/FormFeedback.vue';
 

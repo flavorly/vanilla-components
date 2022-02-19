@@ -67,8 +67,9 @@ yarn format
 
 **TO CHECK**
 
-useInjectsConfiguration
-useInjectsClassesList
+[] - useInjectsConfiguration
+[] - useInjectsClassesList
+[] - Create index file for components
 
 ```
 https://github.com/ulissesferreira/moon
