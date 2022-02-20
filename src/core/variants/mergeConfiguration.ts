@@ -6,6 +6,7 @@ import { VanillaTextareaConfig } from '@/components/Textarea/Config';
 import { VanillaFormErrorsConfig } from '@/components/FormErrors/Config';
 import { VanillaFormFeedbackConfig } from '@/components/FormFeedback/Config';
 import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect/Config';
+import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage/Config';
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 

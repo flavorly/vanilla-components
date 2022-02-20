@@ -8,10 +8,15 @@
         :class="[selected ? 'font-semibold' : 'font-normal','block']"
         class="flex items-center space-x-2 text-sm"
       >
-        <div
-          class="flex-shrink-0 w-6 h-6 bg-gray-500 dark:bg-gray-800 bg-center bg-cover rounded-full border border-gray-300 dark:border-gray-500 shadow"
-          :style="{ backgroundImage: `url(${image})` }"
-        />
+        <suspense>
+          <vanilla-flag-icon
+            class="flex-shrink-0 w-6 h-6"
+            :country="country"
+          />
+          <template #fallback>
+            <div class="flex-shrink-0 w-[24px] h-[16px] bg-gray-300 animate-pulse rounded-sm" />
+          </template>
+        </suspense>
         <span
           class="block whitespace-nowrap truncate"
           v-html="name"
@@ -38,12 +43,14 @@
   </div>
 </template>
 <script lang="ts">
-import { CheckIcon } from '@heroicons/vue/solid';
 import { defineComponent, PropType } from 'vue';
+import VanillaFlagIcon from '@/components/Icons/FlagIcon/Index.vue';
+import { CheckIcon } from '@heroicons/vue/solid';
 
 export default defineComponent({
-    name: 'VanillaRichSelectOptionWithImage',
+    name: 'VanillaSelectCountryOption',
     components: {
+        VanillaFlagIcon,
         CheckIcon,
     },
     props: {
@@ -51,9 +58,9 @@ export default defineComponent({
             type: String,
             default: undefined,
         },
-        image: {
+        country: {
             type: String,
-            default: undefined,
+            required: true,
         },
         selected: {
             type: Boolean,

@@ -26,7 +26,10 @@
 <script lang="ts">
 import {
     computed,
-    ComputedRef, defineComponent, inject, Ref,
+    ComputedRef,
+    defineComponent,
+    inject,
+    Ref,
 } from 'vue';
 import { VanillaRichSelectProps } from '@/components/RichSelect/Type';
 import { useInjectsClassesList } from '@/core/use';

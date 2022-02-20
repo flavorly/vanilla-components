@@ -63,10 +63,8 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
-import { hasSlot } from '@/core/helpers';
-import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
-import { VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/Config';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList, hasSlot } from '@/core';
+import { VanillaInputValue, VanillaInputProps, VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/index';
 import { ExclamationCircleIcon, EyeIcon, EyeOffIcon } from '@heroicons/vue/solid';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';

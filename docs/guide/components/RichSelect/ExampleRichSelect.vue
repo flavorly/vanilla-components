@@ -86,7 +86,7 @@
       :options="orders"
       placeholder="Toggle to select your order"
     >
-      <template #label="{ option: { raw: order }, className, isSelected, hasErrors}">
+      <template #label="{ option: { raw: order }, className, isSelected }">
         <VanillaRichSelectOptionWithIndicators
           :name="order?.text"
           :status="order?.status"
@@ -95,7 +95,7 @@
           :parent-classes="className"
         />
       </template>
-      <template #option="{ option: { raw: order }, className, isSelected,hasErrors}">
+      <template #option="{ option: { raw: order }, className, isSelected }">
         <VanillaRichSelectOptionWithIndicators
           class="px-3 py-2"
           :name="order?.text"
@@ -124,7 +124,7 @@
       :value-attribute="'imdbID'"
       :text-attribute="'Title'"
     >
-      <template #option="{ option: { raw: movie }, className, isSelected,hasErrors }">
+      <template #option="{ option: { raw: movie }, className, isSelected }">
         <div
           class="px-3 py-2"
           :class="className"
@@ -164,8 +164,8 @@
 <script setup lang="ts">
 import { VanillaRichSelect } from '@/index';
 import { onMounted, ref, defineComponent } from 'vue';
-import VanillaRichSelectOptionWithImage from '@/components/RichSelect/RichSelectOptionWithImage.vue';
-import VanillaRichSelectOptionWithIndicators from '@/components/RichSelect/RichSelectOptionWithIndicators.vue';
+import VanillaRichSelectOptionWithImage from '@/components/RichSelect/RichSelectOptionWithImage/RichSelectOptionWithImage.vue';
+import VanillaRichSelectOptionWithIndicators from '@/components/RichSelect/RichSelectOptionWithIndicators/RichSelectOptionWithIndicators.vue';
 
 defineComponent({ name: 'ExampleRichSelect' });
 onMounted(() => window.parent.postMessage('mounted', '*'));

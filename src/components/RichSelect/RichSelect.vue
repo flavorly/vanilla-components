@@ -86,17 +86,29 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, provide } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
-import { hasSlot } from '@/core/helpers';
-import { VanillaRichSelectValue, VanillaRichSelectProps, MinimumInputLengthTextProp } from '@/components/RichSelect/Type';
-import { VanillaRichSelectClassesKeys, VanillaRichSelectConfig } from '@/components/RichSelect/Config';
+import {
+    useBootVariant,
+    useVModel,
+    useVariantProps,
+    useConfigurationWithClassesList,
+    hasSlot,
+} from '@/core';
+
+import {
+    VanillaRichSelectValue,
+    VanillaRichSelectProps,
+    MinimumInputLengthTextProp,
+    VanillaRichSelectClassesKeys,
+    VanillaRichSelectConfig,
+} from '@/components/RichSelect/index';
+
+import { popperOptions, validPlacements, sameWidthModifier } from '@/core/config/popperOptions';
+import { Options, Placement } from '@popperjs/core';
+import { FetchOptionsFn, PreFetchOptionsFn, InputOptions, Measure } from '@/core/types';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
+import VanillaRichSelectState from '@/components/RichSelect/RichSelectState/RichSelectState.vue';
 import { TRichSelect } from '@variantjs/vue';
-import { popperOptions, validPlacements, sameWidthModifier } from '@/core/config/popperOptions';
-import { FetchOptionsFn, PreFetchOptionsFn, InputOptions, Measure } from '@/core/types';
-import { Options, Placement } from '@popperjs/core';
-import VanillaRichSelectState from '@/components/RichSelect/RichSelectState.vue';
 
 export default defineComponent({
     name: 'VanillaRichSelect',

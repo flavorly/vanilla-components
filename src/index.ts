@@ -21,9 +21,9 @@ export { default as VanillaDatetimePicker } from './components/DatetimePicker/Da
 export { default as VanillaTextarea } from './components/Textarea/Textarea.vue';
 
 export { default as VanillaRichSelect } from './components/RichSelect/RichSelect.vue';
-export { default as VanillaRichSelectOptionWithImage } from './components/RichSelect/RichSelectOptionWithImage.vue';
-export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators.vue';
-export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState.vue';
+export { default as VanillaRichSelectOptionWithImage } from './components/RichSelect/RichSelectOptionWithImage/RichSelectOptionWithImage.vue';
+export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators/RichSelectOptionWithIndicators.vue';
+export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState/RichSelectState.vue';
 export { default as VanillaSelectCountry } from './components/SelectCountry/SelectCountry.vue';
 
 // Form Additional Elements

@@ -1,0 +1,10 @@
+export const VanillaRichSelectOptionWithIndicatorsConfig = {
+  fixedClasses: 'mt-2 ml-1 text-xs',
+  classes: 'text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer',
+};
+
+export const VanillaRichSelectOptionWithIndicatorsClassesKeys = Object.keys(VanillaRichSelectOptionWithIndicatorsConfig.classes);
+
+export type VanillaRichSelectOptionWithIndicatorsClassesValidKeys = keyof typeof VanillaRichSelectOptionWithIndicatorsConfig.classes;
+
+
