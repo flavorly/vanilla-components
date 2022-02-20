@@ -62,7 +62,6 @@
           />
         </template>
 
-
         <!-- Feedback for Loading, etc -->
         <template #stateFeedback="{fetchingOptions,needsMoreCharsToFetch,noResults}">
           <slot
@@ -74,6 +73,7 @@
         </template>
       </t-rich-select>
     </div>
+    <!-- Erors -->
     <slot
       name="errors"
       v-bind="{hasErrors, errors}"
@@ -83,6 +83,7 @@
         :errors="errors"
       />
     </slot>
+    <!-- Feedback -->
     <slot
       name="feedback"
       v-bind="{hasErrors, feedback}"
@@ -234,15 +235,15 @@ export default defineComponent({
         },
         noResultsText: {
             type: String,
-            default: '😟 Sorry but we did not find any results to your query. Try another one?',
+            default: '😟 Sorry but we did not find any results to your query. Try another one query?',
         },
         searchingText: {
             type: String,
-            default: '⏲️ Pleas wait, searching for results...',
+            default: 'Please wait, searching for results...',
         },
         loadingClosedPlaceholder: {
             type: String,
-            default: '⏲️ Loadinggggggg, please wait ...',
+            default: 'Loading, please wait ...',
         },
         loadingMoreResultsText: {
             type: String,

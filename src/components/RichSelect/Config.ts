@@ -80,7 +80,7 @@ const defaultVariant = {
 
     // State texts
     searchingText: 'px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center',
-    needsMoreCharsText: 'px-3 py-1 text-xs text-gray-500 dark:text-gray-400 text-center',
+    needsMoreCharsText: 'px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center',
     noResultsText: 'px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center',
 
     // Select button

@@ -154,7 +154,7 @@
     <VanillaRichSelect
       v-model="valueMovie"
       :feedback="'Type a movie name to search'"
-      placeholder="Ex: Search for hte Matrix"
+      placeholder="Ex: Search for the Matrix or Pokemon"
       :fetch-options="fetchOptions"
       :minimum-input-length="3"
       :value-attribute="'imdbID'"

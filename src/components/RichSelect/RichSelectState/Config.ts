@@ -1,6 +1,7 @@
 export const VanillaRichSelectStateConfig = {
   classes: {
-    wrapper: '',
+    wrapper: 'flex items-center justify-center space-x-1',
+    loadingIcon: 'animate-spin w-3.5 h-3.5 -mr-2',
   },
 };
 
