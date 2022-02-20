@@ -1,36 +1,34 @@
 <template>
   <div class="vanilla-input">
-    <div>
-      <vanilla-rich-select
-        v-model="localValue"
-        :options="preFetchOptions"
-        :fetch-options="fetchCountries"
-        :minimum-input-length="2"
-        :value-attribute="'value'"
-        :text-attribute="'label'"
-        :clear-search-on-close="true"
-      >
-        <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
-          <VanillaSelectCountryOption
-            :name="country?.label"
-            :country="country?.value"
-            :selected="isSelected"
-            :parent-classes="className"
-            :has-errors="hasErrors"
-          />
-        </template>
-        <template #option="{ option: { raw: country }, className, isSelected, hasErrors}">
-          <VanillaSelectCountryOption
-            class="px-3 py-2"
-            :name="country?.label"
-            :country="country?.value"
-            :selected="isSelected"
-            :parent-classes="className"
-            :has-errors="hasErrors"
-          />
-        </template>
-      </vanilla-rich-select>
-    </div>
+    <vanilla-rich-select
+      v-model="localValue"
+      :options="preFetchOptions"
+      :fetch-options="fetchCountries"
+      :minimum-input-length="2"
+      :value-attribute="'value'"
+      :text-attribute="'label'"
+      :clear-search-on-close="true"
+    >
+      <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
+        <VanillaSelectCountryOption
+          :name="country?.label"
+          :country="country?.value"
+          :selected="isSelected"
+          :parent-classes="className"
+          :has-errors="hasErrors"
+        />
+      </template>
+      <template #option="{ option: { raw: country }, className, isSelected, hasErrors}">
+        <VanillaSelectCountryOption
+          class="px-3 py-2"
+          :name="country?.label"
+          :country="country?.value"
+          :selected="isSelected"
+          :parent-classes="className"
+          :has-errors="hasErrors"
+        />
+      </template>
+    </vanilla-rich-select>
   </div>
 </template>
 <script lang="ts">
@@ -41,7 +39,6 @@ import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
 import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
 import VanillaSelectCountryOption from './SelectCountryOption.vue';
 import { filterCountriesByName, countries } from '@/utils/CountryCodes';
-
 
 export default defineComponent({
     name: 'VanillaSelectCountry',
@@ -69,15 +66,26 @@ export default defineComponent({
         const localValue = useVModel(props, 'modelValue');
         const {
             errors,
-            hasErrors,
             localVariant,
         } = useBootVariant(props, 'errors', localValue);
 
-        const preFetchOptions = filterCountriesByName('', localValue.value, countries, 2, props.favoriteCountries);
+        const preFetchOptions = filterCountriesByName(
+            '',
+            localValue.value?.toString(),
+            countries,
+            2,
+            props.favoriteCountries,
+        );
 
-        const fetchCountries = (query?: string, nextPage?: number) =>
+        const fetchCountries = (query?: string) =>
             new Promise((resolve) => {
-                resolve(filterCountriesByName(query, localValue.value, countries, 2, props.favoriteCountries));
+                resolve(filterCountriesByName(
+                    query,
+                    localValue.value?.toString(),
+                    countries,
+                    2,
+                    props.favoriteCountries,
+                ));
             }).then((response) => ({
                 results: response as Record<string, never>[],
                 hasMorePages: false,
@@ -87,7 +95,6 @@ export default defineComponent({
             localValue,
             localVariant,
             errors,
-            //hasErrors,
             hasSlot,
             fetchCountries,
             preFetchOptions,

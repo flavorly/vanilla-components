@@ -29,9 +29,9 @@ export const countries = countryCodes.map((country) => ({
 }));
 
 export const filterCountriesByName = function (
-    query:string | undefined = '',
-    current = '',
-    collection = [],
+    query: string | undefined = '',
+    current: string | undefined | Ref = '',
+    collection: any = [],
     minCharacters = 2,
     favoriteCountries = ['US', 'GB', 'PT', 'FR', 'DE'],
 ) {
@@ -53,7 +53,9 @@ export const filterCountriesByName = function (
     const filtered: Ref[] | string[]  = [];
 
     each(results, (result) => {
-        filtered.push(result.item);
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      filtered.push(result.item);
     });
 
     return filtered;
