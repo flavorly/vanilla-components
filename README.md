@@ -69,7 +69,8 @@ yarn format
 
 [] - useInjectsConfiguration
 [] - useInjectsClassesList
-[] - Create index file for components
+[x] - Create index file for components
+[ ] - Check when variant is error it should fallback to original variant and not the default one.
 
 ```
 https://github.com/ulissesferreira/moon

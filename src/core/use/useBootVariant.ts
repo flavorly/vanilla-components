@@ -9,7 +9,7 @@ import {
   watch,
   ref,
   computed,
-  ComputedRef,
+  ComputedRef, readonly,
 } from 'vue';
 
 export default function useBootVariant<Props extends Data, ErrorsKey extends string, ModelValueKey extends Ref>(
@@ -40,14 +40,16 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
 
   // Variant is either if we have errors it will be error, otherwise it uses the default variant
   const localVariant = ref(props.variant);
+  const immutableLocalVariant = localVariant.value;
+
   if (hasErrors.value) {
-    localVariant.value = 'error';
+      localVariant.value = 'error';
   }
 
   watch(modelValue, () => {
       componentErrors.value = undefined;
       parentErrors.value = undefined;
-      localVariant.value = null;
+      localVariant.value = immutableLocalVariant;
   });
 
   return {

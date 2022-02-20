@@ -33,12 +33,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { useBootVariant, useVModel, useVariantProps } from '@/core/use';
-import { hasSlot } from '@/core/helpers';
-import { VanillaInputValue, VanillaInputProps } from '@/components/Input/Type';
-import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
-import VanillaSelectCountryOption from './SelectCountryOption.vue';
+import { useBootVariant, useVModel, useVariantProps, hasSlot } from '@/core';
 import { filterCountriesByName, countries } from '@/utils/CountryCodes';
+import { VanillaRichSelectTagWithImageProps, VanillaFavoriteCountriesValue, VanillaSelectCountryValue } from './index';
+import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
+import VanillaSelectCountryOption from '@/components/SelectCountry/SelectCountryOption/SelectCountryOption.vue';
+
 
 export default defineComponent({
     name: 'VanillaSelectCountry',
@@ -51,13 +51,13 @@ export default defineComponent({
         MODE: 3,
     },
     props: {
-        ...useVariantProps<VanillaInputProps>(),
+        ...useVariantProps<VanillaRichSelectTagWithImageProps>(),
         modelValue: {
-            type: [String, Number] as PropType<VanillaInputValue>,
+            type: [String, Number] as PropType<VanillaSelectCountryValue>,
             default: undefined,
         },
         favoriteCountries: {
-            type: [Array, Object] as PropType<string[]>,
+            type: [Array, Object, undefined] as PropType<VanillaFavoriteCountriesValue>,
             required: false,
             default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
         },

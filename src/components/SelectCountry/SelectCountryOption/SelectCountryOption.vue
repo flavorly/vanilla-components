@@ -1,49 +1,58 @@
 <template>
-  <div
-    class="relative"
-    :class="parentClasses"
-  >
-    <div class="relative">
+  <div :class="[parentClasses, configuration.classesList.wrapper]">
+    <div :class="[configuration.classesList.labelAndImageWrapper]">
       <div
-        :class="[selected ? 'font-semibold' : 'font-normal','block']"
-        class="flex items-center space-x-2 text-sm"
+        :class="[
+          selected ? configuration.classesList.labelAndImageContainerSelected : '',
+          !selected ? configuration.classesList.labelAndImageContainerRegular : '',
+          configuration.classesList.labelAndImageContainer,
+        ]"
       >
         <suspense>
           <vanilla-flag-icon
-            class="flex-shrink-0 w-6 h-6"
+            :class="[
+              configuration.classesList.image
+            ]"
             :country="country"
           />
           <template #fallback>
-            <div class="flex-shrink-0 w-[24px] h-[16px] bg-gray-300 animate-pulse rounded-sm" />
+            <div :class="configuration.classesList.fallbackImage" />
           </template>
         </suspense>
         <span
-          class="block whitespace-nowrap truncate"
+          :class="[
+            configuration.classesList.label
+          ]"
           v-html="name"
         />
       </div>
     </div>
     <div
       v-if="description"
-      class="w-100 text-xs text-left mt-1"
-      :class="[selected ? 'font-normal opacity-60' : 'opacity-60']"
+      :class="[
+        configuration.classesList.description,
+        selected ? configuration.classesList.descriptionSelected : '',
+        !selected ? configuration.classesList.descriptionRegular : '',
+      ]"
       v-html="description"
     />
     <span
       v-if="selected"
-      class="absolute inset-y-0 right-0 flex items-center pl-3 pr-3 text-amber-600"
+      :class="[configuration.classesList.selectedIconContainer]"
     >
       <slot name="selectedIcon">
         <CheckIcon
           aria-hidden="true"
-          class="w-5 h-5"
+          :class="[configuration.classesList.icon]"
         />
       </slot>
     </span>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
+import { useBootVariant, useConfigurationWithClassesList } from '@/core';
+import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaFormFeedbackProps } from './index';
 import VanillaFlagIcon from '@/components/Icons/FlagIcon/Index.vue';
 import { CheckIcon } from '@heroicons/vue/solid';
 
@@ -80,8 +89,20 @@ export default defineComponent({
         },
     },
     setup(props) {
+
+        const {
+            localVariant,
+        } = useBootVariant(props, 'errors', ref(null));
+
+        const { configuration } = useConfigurationWithClassesList<VanillaFormFeedbackProps>(
+            VanillaSelectCountryOptionConfig,
+            VanillaSelectCountryOptionClassesKeys,
+            localVariant,
+        );
+
         return {
             props,
+            configuration,
         };
     },
 });

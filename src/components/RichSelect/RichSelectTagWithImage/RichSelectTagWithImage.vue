@@ -74,6 +74,7 @@ export default defineComponent({
             VanillaRichSelectTagWithImageClassesKeys,
             localVariant,
         );
+
         return {
             props,
             configuration,
