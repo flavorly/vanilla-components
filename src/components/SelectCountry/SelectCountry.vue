@@ -32,13 +32,14 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType, watch } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, hasSlot } from '@/core';
 import { filterCountriesByName, countries } from '@/utils/CountryCodes';
 import { VanillaRichSelectTagWithImageProps, VanillaFavoriteCountriesValue, VanillaSelectCountryValue } from './index';
 import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
 import VanillaSelectCountryOption from '@/components/SelectCountry/SelectCountryOption/SelectCountryOption.vue';
-
+import find from 'lodash/find';
+import first from 'lodash/first';
 
 export default defineComponent({
     name: 'VanillaSelectCountry',
@@ -62,13 +63,20 @@ export default defineComponent({
             default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
         },
     },
-    setup(props) {
+    emits: [
+        'update:countryDialCode',
+        'update:countryCode',
+        'update:countryName',
+        'update:modelValue',
+    ],
+    setup(props, { emit }) {
         const localValue = useVModel(props, 'modelValue');
         const {
             errors,
             localVariant,
         } = useBootVariant(props, 'errors', localValue);
 
+        // Pre-fetch the following Options
         const preFetchOptions = filterCountriesByName(
             '',
             localValue.value?.toString(),
@@ -77,6 +85,7 @@ export default defineComponent({
             props.favoriteCountries,
         );
 
+        // Function to fetch Countries from local object
         const fetchCountries = (query?: string) =>
             new Promise((resolve) => {
                 resolve(filterCountriesByName(
@@ -90,6 +99,21 @@ export default defineComponent({
                 results: response as Record<string, never>[],
                 hasMorePages: false,
             }));
+
+        // Actual Country Selected ( Whole object )
+        const selectedCountry = computed(() => {
+            return find(
+                countries,
+                country => country.value === localValue.value,
+            ) || first(preFetchOptions);
+        });
+
+        // Watch & Emit additional data
+        watch(localValue, () => {
+            emit('update:countryDialCode', selectedCountry.value.dialCode);
+            emit('update:countryCode', selectedCountry.value.value);
+            emit('update:countryName', selectedCountry.value.name_raw);
+        }, { immediate: true });
 
         return {
             localValue,
