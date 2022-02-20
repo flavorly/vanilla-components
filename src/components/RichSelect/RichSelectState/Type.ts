@@ -1,5 +1,6 @@
-import { Data, WithVariantProps } from '@/core/types';
+import { Data, WithVariantPropsAndClassesList } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
+import { VanillaRichSelectStateClassesValidKeys  } from './Config';
 
-export type VanillaRichSelectStateProps = WithVariantProps<{
-} & InputHTMLAttributes & Data>;
+export type VanillaRichSelectStateProps = WithVariantPropsAndClassesList<{
+} & InputHTMLAttributes & Data, VanillaRichSelectStateClassesValidKeys>;

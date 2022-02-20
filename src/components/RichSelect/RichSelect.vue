@@ -45,6 +45,15 @@
             v-bind="{ option, className,label, hasErrors}"
           />
         </template>
+
+        <!-- Option -->
+        <template #tagLabel="{ option, className, isSelected }">
+          <slot
+            name="tagLabel"
+            v-bind="{option, className, isSelected, hasErrors}"
+          />
+        </template>
+
         <!-- Option -->
         <template #option="{ option, className, isSelected }">
           <slot
@@ -52,6 +61,7 @@
             v-bind="{option, className, isSelected, hasErrors}"
           />
         </template>
+
 
         <!-- Feedback for Loading, etc -->
         <template #stateFeedback="{fetchingOptions,needsMoreCharsToFetch,noResults}">

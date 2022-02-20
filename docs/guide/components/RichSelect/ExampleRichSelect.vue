@@ -45,6 +45,42 @@
 
     <div class="h-1 my-5" />
 
+    <!-- Tags with Image -->
+    <VanillaRichSelect
+      v-model="valueTags"
+      :feedback="'In an select with tags and avatars on Tags'"
+      :options="persons"
+      :tags="true"
+      :multiple="true"
+      placeholder="Elon Musk"
+    >
+      <template #tagLabel="{ option: { raw: person }, className, isSelected, hasErrors}">
+        <VanillaRichSelectTagWithImage
+          :name="person?.text"
+          :image="person?.image"
+          :selected="isSelected"
+          :parent-classes="className"
+          :has-errors="hasErrors"
+        />
+      </template>
+      <template #option="{ option: { raw: person }, className, isSelected, hasErrors}">
+        <VanillaRichSelectOptionWithImage
+          class="px-3 py-2"
+          :name="person?.text"
+          :image="person?.image"
+          :description="person?.description"
+          :selected="isSelected"
+          :parent-classes="className"
+          :has-errors="hasErrors"
+        />
+      </template>
+    </VanillaRichSelect>
+    <div class="flex items-center justify-center mx-auto text-center mt-2">
+      <pre>{{ JSON.stringify(valueTags) }}</pre>
+    </div>
+
+    <div class="h-1 my-5" />
+
     <!-- Persons -->
     <VanillaRichSelect
       v-model="valuePersons"
@@ -166,6 +202,7 @@ import { VanillaRichSelect } from '@/index';
 import { onMounted, ref, defineComponent } from 'vue';
 import VanillaRichSelectOptionWithImage from '@/components/RichSelect/RichSelectOptionWithImage/RichSelectOptionWithImage.vue';
 import VanillaRichSelectOptionWithIndicators from '@/components/RichSelect/RichSelectOptionWithIndicators/RichSelectOptionWithIndicators.vue';
+import VanillaRichSelectTagWithImage from '@/components/RichSelect/RichSelectTagWithImage/RichSelectTagWithImage.vue';
 
 defineComponent({ name: 'ExampleRichSelect' });
 onMounted(() => window.parent.postMessage('mounted', '*'));

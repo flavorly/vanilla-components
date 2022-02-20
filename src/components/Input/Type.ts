@@ -1,9 +1,10 @@
-import { Data, WithVariantProps } from '@/core/types';
+import { Data, WithVariantPropsAndClassesList } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
+import { VanillaInputClassesValidKeys } from './Config';
 
 export type VanillaInputValue = string | number | undefined;
 
-export type VanillaInputProps = WithVariantProps<{
+export type VanillaInputProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaInputValue,
   rows?: string | number,
-} & InputHTMLAttributes & Data>;
+} & InputHTMLAttributes & Data, VanillaInputClassesValidKeys>;

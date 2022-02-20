@@ -28,19 +28,24 @@ import {
     computed,
     ComputedRef,
     defineComponent,
-    inject,
+    inject, ref,
     Ref,
 } from 'vue';
 import { VanillaRichSelectProps } from '@/components/RichSelect/Type';
-import { useInjectsClassesList } from '@/core/use';
+import { useBootVariant, useConfigurationWithClassesList, useInjectsClassesList } from '@/core/use';
 import { useInjectsConfiguration } from '@/core/use';
+import {
+    VanillaRichSelectStateClassesKeys,
+    VanillaRichSelectStateConfig,
+    VanillaRichSelectStateProps,
+} from '@/components/RichSelect/RichSelectState/index';
 
 export default defineComponent({
     name: 'VanillaRichSelectState',
     compatConfig: {
         MODE: 3,
     },
-    setup() {
+    setup(props) {
         const options = inject<ComputedRef<VanillaRichSelectProps>>('options')!;
         const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!;
         const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!;
@@ -49,6 +54,16 @@ export default defineComponent({
         const noResults = computed<boolean>((): boolean => options.value.length === 0);
         const classesList = useInjectsClassesList()!;
 
+        const {
+            localVariant,
+        } = useBootVariant(props, 'errors', ref(null));
+
+        const { configuration: ownConfiguration  } = useConfigurationWithClassesList<VanillaRichSelectStateProps>(
+            VanillaRichSelectStateConfig,
+            VanillaRichSelectStateClassesKeys,
+            localVariant,
+        );
+
         return {
             noResults,
             configuration,
@@ -56,6 +71,7 @@ export default defineComponent({
             needsMoreCharsToFetch,
             needsMoreCharsMessage,
             classesList,
+            ownConfiguration,
         };
     },
 });

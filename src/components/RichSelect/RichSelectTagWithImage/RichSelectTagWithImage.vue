@@ -24,51 +24,30 @@
         />
       </div>
     </div>
-    <div
-      v-if="description"
-      :class="[
-        configuration.classesList.description,
-        selected ? configuration.classesList.descriptionSelected : '',
-        !selected ? configuration.classesList.descriptionRegular : '',
-      ]"
-      v-html="description"
-    />
-    <span
-      v-if="selected"
-      :class="[configuration.classesList.selectedIconContainer]"
-    >
-      <slot name="selectedIcon">
-        <CheckIcon
-          aria-hidden="true"
-          :class="[configuration.classesList.icon]"
-        />
-      </slot>
-    </span>
   </div>
 </template>
 <script lang="ts">
-import { CheckIcon } from '@heroicons/vue/solid';
 import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '@/core';
-import { VanillaRichSelectOptionWithImageProps, VanillaRichSelectOptionWithImageConfig, VanillaRichSelectOptionWithImageClassesKeys } from './';
+import { useBootVariant, useConfigurationWithClassesList } from '@/core';
+import {
+    VanillaRichSelectTagWithImageClassesKeys,
+    VanillaRichSelectTagWithImageConfig,
+    VanillaRichSelectTagWithImageProps,
+} from '@/components/RichSelect/RichSelectTagWithImage';
 
 export default defineComponent({
-    name: 'VanillaRichSelectOptionWithImage',
-    components: {
-        CheckIcon,
-    },
+    name: 'VanillaRichSelectTagWithImage',
     props: {
-        ...useVariantProps<VanillaRichSelectOptionWithImageProps>(),
         name: {
-            type: String as PropType<string | undefined>,
+            type: String,
             default: undefined,
         },
         image: {
-            type: String as PropType<string | undefined>,
-            default: undefined,
+            type: String,
+            required: true,
         },
         selected: {
-            type: Boolean as PropType<boolean>,
+            type: Boolean,
             default: false,
         },
         description: {
@@ -76,7 +55,7 @@ export default defineComponent({
             default: undefined,
         },
         hasErrors: {
-            type: Boolean as PropType<boolean>,
+            type: Boolean,
             default: false,
         },
         parentClasses: {
@@ -90,13 +69,13 @@ export default defineComponent({
             localVariant,
         } = useBootVariant(props, 'errors', ref(null));
 
-        const { configuration } = useConfigurationWithClassesList<VanillaRichSelectOptionWithImageProps>(
-            VanillaRichSelectOptionWithImageConfig,
-            VanillaRichSelectOptionWithImageClassesKeys,
+        const { configuration } = useConfigurationWithClassesList<VanillaRichSelectTagWithImageProps>(
+            VanillaRichSelectTagWithImageConfig,
+            VanillaRichSelectTagWithImageClassesKeys,
             localVariant,
         );
-
         return {
+            props,
             configuration,
         };
     },
