@@ -6,7 +6,6 @@
       v-model:countryCode="valueCountryCode"
       v-model:countryDialCode="valueCountryDialCode"
       v-model:countryName="valueCountryName"
-      class="inline-flex"
       :feedback="'Im useful helper out here, choose wisely'"
       placeholder="Elon Musk"
     />
@@ -20,7 +19,6 @@
     <!-- With Errors -->
     <VanillaSelectCountry
       v-model="value2"
-      class="inline-flex"
       :feedback="'Im useful helper out here, choose wisely'"
       :errors="'Sorry but this country is not allowed.'"
     />

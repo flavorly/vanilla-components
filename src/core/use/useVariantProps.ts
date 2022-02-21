@@ -35,12 +35,22 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     default(): string {
-      return uniqueId('variant-');
+      return uniqueId('variant-component-');
     },
   },
   variant: {
     type: String as PropType<string | undefined>,
     default: undefined,
+  },
+  hasItemBellow: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+    required: false,
+  },
+  hasItemAbove: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+    required: false,
   },
 });
 

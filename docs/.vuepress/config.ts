@@ -37,6 +37,7 @@ export default {
           // { text: 'Select', link: '/guide/inputs/select' },
           { text: 'Rich Select', link: '/guide/components/RichSelect' },
           { text: 'Country Select', link: '/guide/components/SelectCountry' },
+          { text: 'Phone Number', link: '/guide/components/PhoneNumber' },
           // { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },
           // { text: 'Phone Input', link: '/guide/inputs/phone-number' },
           // { text: 'Country', link: '/guide/inputs/country' },

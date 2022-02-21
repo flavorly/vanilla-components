@@ -1,35 +1,37 @@
 <template>
-  <div class="vanilla-input">
-    <vanilla-rich-select
-      v-model="localValue"
-      :options="preFetchOptions"
-      :fetch-options="fetchCountries"
-      :minimum-input-length="2"
-      :value-attribute="'value'"
-      :text-attribute="'label'"
-      :clear-search-on-close="true"
-    >
-      <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
-        <VanillaSelectCountryOption
-          :name="country?.label"
-          :country="country?.value"
-          :selected="isSelected"
-          :parent-classes="className"
-          :has-errors="hasErrors"
-        />
-      </template>
-      <template #option="{ option: { raw: country }, className, isSelected, hasErrors}">
-        <VanillaSelectCountryOption
-          class="px-3 py-2"
-          :name="country?.label"
-          :country="country?.value"
-          :selected="isSelected"
-          :parent-classes="className"
-          :has-errors="hasErrors"
-        />
-      </template>
-    </vanilla-rich-select>
-  </div>
+  <vanilla-rich-select
+    v-model="localValue"
+    v-bind="{...$attrs}"
+    :variant="localVariant"
+    :options="preFetchOptions"
+    :fetch-options="fetchCountries"
+    :minimum-input-length="2"
+    :value-attribute="'value'"
+    :text-attribute="'label'"
+    :clear-search-on-close="true"
+    :has-item-bellow="props.hasItemBellow"
+    :has-item-above="props.hasItemAbove"
+  >
+    <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
+      <VanillaSelectCountryOption
+        :name="country?.label"
+        :country="country?.value"
+        :selected="isSelected"
+        :parent-classes="className"
+        :has-errors="hasErrors"
+      />
+    </template>
+    <template #option="{ option: { raw: country }, className, isSelected, hasErrors}">
+      <VanillaSelectCountryOption
+        class="px-3 py-2"
+        :name="country?.label"
+        :country="country?.value"
+        :selected="isSelected"
+        :parent-classes="className"
+        :has-errors="hasErrors"
+      />
+    </template>
+  </vanilla-rich-select>
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType, watch } from 'vue';
@@ -122,6 +124,7 @@ export default defineComponent({
             hasSlot,
             fetchCountries,
             preFetchOptions,
+            props,
         };
     },
 });

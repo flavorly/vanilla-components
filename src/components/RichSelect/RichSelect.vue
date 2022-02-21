@@ -1,78 +1,78 @@
 <template>
   <div class="vanilla-input">
-    <div :class="configuration.classesList.wrapper">
-      <t-rich-select
-        v-model="localValue"
-        v-bind="$attrs"
-        :variant="localVariant"
-        :name="name"
-        :options="options"
-        :normalize-otions="normalizeOptions"
-        :multiple="multiple"
-        :disabled="disabled"
-        :tags="tags"
-        :placeholder="placeholder"
-        :dropdown-placement="dropdownPlacement"
-        :dropdown-popper-options="dropdownPopperOptions"
-        :close-on-select="closeOnSelect"
-        :select-on-close="selectOnClose"
-        :clear-search-on-close="clearSearchOnClose"
-        :toggle-on-focus="toggleOnFocus"
-        :toggle-on-click="toggleOnClick"
-        :value-attribute="valueAttribute"
-        :text-attribute="textAttribute"
-        :hide-search-box="hideSearchBox"
-        :search-box-placeholder="searchBoxPlaceholder"
-        :no-results-text="noResultsText"
-        :searching-text="searchingText"
-        :loading-closed-placeholder="loadingClosedPlaceholder"
-        :loading-more-results-text="loadingMoreResultsText"
-        :clearable="clearable"
-        :max-height="maxHeight"
-        :fetch-options="fetchOptions"
-        :pre-fetch-options="prefetchOptions"
-        :delay="delay"
-        :minimum-input-length="minimumInputLength"
-        :minimum-input-length-text="minimumInputLengthText"
-        :minimum-results-for-search="minimumResultsForSearch"
-        :teleport="teleport"
-        :teleport-to="teleportTo"
-      >
-        <!-- Label -->
-        <template #label="{selectedOption: option, className, label}">
-          <slot
-            name="label"
-            v-bind="{ option, className,label, hasErrors}"
-          />
-        </template>
+    <t-rich-select
+      v-model="localValue"
+      :fixed-classes="fixedClassesOverrides"
+      v-bind="$attrs"
+      :variant="localVariant"
+      :name="name"
+      :options="options"
+      :normalize-otions="normalizeOptions"
+      :multiple="multiple"
+      :disabled="disabled"
+      :tags="tags"
+      :placeholder="placeholder"
+      :dropdown-placement="dropdownPlacement"
+      :dropdown-popper-options="dropdownPopperOptions"
+      :close-on-select="closeOnSelect"
+      :select-on-close="selectOnClose"
+      :clear-search-on-close="clearSearchOnClose"
+      :toggle-on-focus="toggleOnFocus"
+      :toggle-on-click="toggleOnClick"
+      :value-attribute="valueAttribute"
+      :text-attribute="textAttribute"
+      :hide-search-box="hideSearchBox"
+      :search-box-placeholder="searchBoxPlaceholder"
+      :no-results-text="noResultsText"
+      :searching-text="searchingText"
+      :loading-closed-placeholder="loadingClosedPlaceholder"
+      :loading-more-results-text="loadingMoreResultsText"
+      :clearable="clearable"
+      :max-height="maxHeight"
+      :fetch-options="fetchOptions"
+      :pre-fetch-options="prefetchOptions"
+      :delay="delay"
+      :minimum-input-length="minimumInputLength"
+      :minimum-input-length-text="minimumInputLengthText"
+      :minimum-results-for-search="minimumResultsForSearch"
+      :teleport="teleport"
+      :teleport-to="teleportTo"
+    >
+      <!-- Label -->
+      <template #label="{selectedOption: option, className, label}">
+        <slot
+          name="label"
+          v-bind="{ option, className,label, hasErrors}"
+        />
+      </template>
 
-        <!-- Option -->
-        <template #tagLabel="{ option, className, isSelected }">
-          <slot
-            name="tagLabel"
-            v-bind="{option, className, isSelected, hasErrors}"
-          />
-        </template>
+      <!-- Option -->
+      <template #tagLabel="{ option, className, isSelected }">
+        <slot
+          name="tagLabel"
+          v-bind="{option, className, isSelected, hasErrors}"
+        />
+      </template>
 
-        <!-- Option -->
-        <template #option="{ option, className, isSelected }">
-          <slot
-            name="option"
-            v-bind="{option, className, isSelected, hasErrors}"
-          />
-        </template>
+      <!-- Option -->
+      <template #option="{ option, className, isSelected }">
+        <slot
+          name="option"
+          v-bind="{option, className, isSelected, hasErrors}"
+        />
+      </template>
 
-        <!-- Feedback for Loading, etc -->
-        <template #stateFeedback="{fetchingOptions,needsMoreCharsToFetch,noResults}">
-          <slot
-            name="stateFeedback"
-            v-bind="{fetchingOptions,needsMoreCharsToFetch,noResults}"
-          >
-            <vanilla-rich-select-state />
-          </slot>
-        </template>
-      </t-rich-select>
-    </div>
+      <!-- Feedback for Loading, etc -->
+      <template #stateFeedback="{fetchingOptions,needsMoreCharsToFetch,noResults}">
+        <slot
+          name="stateFeedback"
+          v-bind="{fetchingOptions,needsMoreCharsToFetch,noResults}"
+        >
+          <vanilla-rich-select-state />
+        </slot>
+      </template>
+    </t-rich-select>
+
     <!-- Erors -->
     <slot
       name="errors"
@@ -96,7 +96,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, provide } from 'vue';
+import { defineComponent, PropType, provide, ref } from 'vue';
 import {
     useBootVariant,
     useVModel,
@@ -309,6 +309,24 @@ export default defineComponent({
          */
         provide('configuration_vanilla', configuration);
 
+        console.log(configuration);
+
+        // TODO : Move this to classes
+        let triggerClasses = '';
+        if (props.hasItemBellow){
+            triggerClasses += 'rounded-b-none  border-b-none focus:border-primary-500 z-10';
+        }
+
+        if (props.hasItemAbove){
+            triggerClasses += 'rounded-t-none  border-t-none focus:border-primary-500 z-10';
+        }
+
+        const fixedClassesOverrides = {
+            trigger: triggerClasses,
+        };
+
+        console.log(fixedClassesOverrides, props.hasItemBellow);
+
         return {
             configuration,
             localValue,
@@ -317,6 +335,7 @@ export default defineComponent({
             hasErrors,
             hasSlot,
             props,
+            fixedClassesOverrides,
         };
     },
 });

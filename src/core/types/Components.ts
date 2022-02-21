@@ -24,6 +24,8 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   errors?: Errors;
   feedback?: string;
   name?: string;
+  hasItemBellow?: boolean;
+  hasItemAbove?: boolean;
 }, PropsOptions extends Readonly<ComponentPropsOptions> = {
   classes: {
     type: PropType<CSSClass>;
@@ -54,6 +56,16 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
     default: string;
     required: boolean,
   },
+  hasItemBellow: {
+    type: PropType<boolean>;
+    default: boolean;
+    required: boolean,
+  },
+  hasItemAbove: {
+    type: PropType<boolean>;
+    default: boolean;
+    required: boolean,
+  },
 }> = PropsOptions & {
   classes: {
     type: PropType<CSSClass>;
@@ -82,6 +94,16 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   name: {
     type: PropType<string | undefined>;
     default: string;
+    required: boolean,
+  },
+  hasItemBellow: {
+    type: PropType<boolean>;
+    default: boolean;
+    required: boolean,
+  },
+  hasItemAbove: {
+    type: PropType<boolean>;
+    default: boolean;
     required: boolean,
   },
 };
@@ -122,6 +144,16 @@ type VanillaComponentWithClassesListProps<
       default: string;
       required: boolean,
     },
+    hasItemBellow: {
+      type: PropType<boolean>;
+      default: boolean;
+      required: boolean,
+    },
+    hasItemAbove: {
+      type: PropType<boolean>;
+      default: boolean;
+      required: boolean,
+    },
   }> = PropsOptions & {
     classes: {
       type: PropType<CSSRawClassesList<ClassesKeys>>;
@@ -150,6 +182,16 @@ type VanillaComponentWithClassesListProps<
     name: {
       type: PropType<string | undefined>;
       default: string;
+      required: boolean,
+    },
+    hasItemBellow: {
+      type: PropType<boolean>;
+      default: boolean;
+      required: boolean,
+    },
+    hasItemAbove: {
+      type: PropType<boolean>;
+      default: boolean;
       required: boolean,
     },
   };

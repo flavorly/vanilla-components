@@ -7,6 +7,7 @@ import { VanillaFormErrorsConfig } from '@/components/FormErrors/Config';
 import { VanillaFormFeedbackConfig } from '@/components/FormFeedback/Config';
 import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect/Config';
 import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage/Config';
+import { VanillaPhoneNumberConfig } from '@/components/PhoneNumber/Config';
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
@@ -17,6 +18,8 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaTextarea: VanillaTextareaConfig,
         VanillaDatetimePicker: VanillaDatetimePickerConfig,
         VanillaRichSelect: VanillaRichSelectConfig,
+        VanillaRichSelectOptionWithImage: VanillaRichSelectOptionWithImageConfig,
+        VanillaPhoneNumber: VanillaPhoneNumberConfig,
 
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,

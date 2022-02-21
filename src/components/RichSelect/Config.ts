@@ -8,11 +8,18 @@ const defaultVariant = {
 
     // TDropdown Component
     trigger: mergeClasses(
-      '',
       commonClasses.inputsBackground,
       commonClasses.inputsBorder,
       commonClasses.inputsRing,
       commonClasses.inputsRadius,
+
+      // Only way to get border-b-none and etc working :(
+      'flex items-center justify-between w-full',
+      commonClasses.inputsText,
+      commonClasses.inputsTransition,
+      commonClasses.inputsShadows,
+      commonClasses.inputsDisabled,
+      commonClasses.inputsSpacing,
     ),
 
     dropdown: mergeClasses(
@@ -120,16 +127,17 @@ const defaultVariant = {
 };
 
 export const VanillaRichSelectConfig = {
-  fixedClasses: {
-    trigger: mergeClasses(
-      'flex items-center justify-between w-full',
-      commonClasses.inputsText,
-      commonClasses.inputsTransition,
-      commonClasses.inputsShadows,
-      commonClasses.inputsDisabled,
-      commonClasses.inputsSpacing,
-    ),
-  },
+  // Until the little bits are merged or variantjs fixes this issue or provider a clear way to override the trigger
+  // fixedClasses: {
+  //   trigger: mergeClasses(
+  //     'flex items-center justify-between w-full',
+  //     commonClasses.inputsText,
+  //     commonClasses.inputsTransition,
+  //     commonClasses.inputsShadows,
+  //     commonClasses.inputsDisabled,
+  //     commonClasses.inputsSpacing,
+  //   ),
+  // },
   // Default Input appearance
   classes: {
     ...defaultVariant,
@@ -140,7 +148,6 @@ export const VanillaRichSelectConfig = {
     error: {
       classes : {
           ...merge(defaultVariant, {
-
               // Trigger
               trigger: mergeClasses(
                 commonClasses.inputsErrorsBackground,
@@ -148,6 +155,14 @@ export const VanillaRichSelectConfig = {
                 commonClasses.inputsErrorsRing,
                 commonClasses.inputsErrorText,
                 commonClasses.inputsRadius,
+
+                // Only way to get border-b-none and etc working :(
+                'flex items-center justify-between w-full',
+                commonClasses.inputsText,
+                commonClasses.inputsTransition,
+                commonClasses.inputsShadows,
+                commonClasses.inputsDisabled,
+                commonClasses.inputsSpacing,
               ),
 
               // Clear button
