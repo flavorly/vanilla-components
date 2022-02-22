@@ -79,6 +79,7 @@
     "body-scroll-lock": "^4.0.0-beta.0",
     "flatpickr": "^4.6.9",
     "fuse.js": "^6.4.6",
+    "libphonenumber-js": "^1.9.49",
     "lodash": "^4.17.21",
     "mini-svg-data-uri": "^1.4.3",
     "mitt": "^3.0.0",

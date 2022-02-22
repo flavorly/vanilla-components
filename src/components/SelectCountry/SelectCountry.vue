@@ -1,8 +1,6 @@
 <template>
   <vanilla-rich-select
     v-model="localValue"
-    v-bind="{...$attrs}"
-    :variant="localVariant"
     :options="preFetchOptions"
     :fetch-options="fetchCountries"
     :minimum-input-length="2"
@@ -11,24 +9,26 @@
     :clear-search-on-close="true"
     :has-item-bellow="props.hasItemBellow"
     :has-item-above="props.hasItemAbove"
+    :variant="props.variant"
   >
     <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
       <VanillaSelectCountryOption
-        :name="country?.label"
-        :country="country?.value"
+        :country="country"
         :selected="isSelected"
         :parent-classes="className"
         :has-errors="hasErrors"
+        :label-with-dial-code="props.labelWithDialCode"
+        :label-with-country-code="props.labelWithCountryCode"
       />
     </template>
     <template #option="{ option: { raw: country }, className, isSelected, hasErrors}">
       <VanillaSelectCountryOption
-        class="px-3 py-2"
-        :name="country?.label"
-        :country="country?.value"
+        :country="country"
         :selected="isSelected"
         :parent-classes="className"
         :has-errors="hasErrors"
+        :label-with-dial-code="props.labelWithDialCode"
+        :label-with-country-code="props.labelWithCountryCode"
       />
     </template>
   </vanilla-rich-select>
@@ -37,7 +37,7 @@
 import { computed, defineComponent, PropType, watch } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, hasSlot } from '@/core';
 import { filterCountriesByName, countries } from '@/utils/CountryCodes';
-import { VanillaRichSelectTagWithImageProps, VanillaFavoriteCountriesValue, VanillaSelectCountryValue } from './index';
+import { VanillaSelectCountryProps, VanillaFavoriteCountriesValue, VanillaSelectCountryValue } from './index';
 import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
 import VanillaSelectCountryOption from '@/components/SelectCountry/SelectCountryOption/SelectCountryOption.vue';
 import find from 'lodash/find';
@@ -54,7 +54,7 @@ export default defineComponent({
         MODE: 3,
     },
     props: {
-        ...useVariantProps<VanillaRichSelectTagWithImageProps>(),
+        ...useVariantProps<VanillaSelectCountryProps>(),
         modelValue: {
             type: [String, Number] as PropType<VanillaSelectCountryValue>,
             default: undefined,
@@ -63,6 +63,16 @@ export default defineComponent({
             type: [Array, Object, undefined] as PropType<VanillaFavoriteCountriesValue>,
             required: false,
             default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
+        },
+        labelWithDialCode: {
+            type: Boolean as PropType<boolean>,
+            required: false,
+            default: false,
+        },
+        labelWithCountryCode: {
+            type: Boolean as PropType<boolean>,
+            required: false,
+            default: false,
         },
     },
     emits: [
@@ -73,10 +83,11 @@ export default defineComponent({
     ],
     setup(props, { emit }) {
         const localValue = useVModel(props, 'modelValue');
-        const {
-            errors,
-            localVariant,
-        } = useBootVariant(props, 'errors', localValue);
+        // const {
+        //     errors,
+        //     localVariant,
+        //     hasErrors,
+        // } = useBootVariant(props, 'errors', localValue);
 
         // Pre-fetch the following Options
         const preFetchOptions = filterCountriesByName(
@@ -117,10 +128,13 @@ export default defineComponent({
             emit('update:countryName', selectedCountry.value.name_raw);
         }, { immediate: true });
 
+        console.log('On Select Country', props.variant);
+
         return {
             localValue,
-            localVariant,
-            errors,
+            //localVariant,
+            //hasErrors,
+            //errors,
             hasSlot,
             fetchCountries,
             preFetchOptions,

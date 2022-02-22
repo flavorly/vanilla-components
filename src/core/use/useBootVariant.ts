@@ -46,10 +46,16 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
       localVariant.value = 'error';
   }
 
+  watch(localVariant, () => console.log('Variant changed!!!', vm));
+
   watch(modelValue, () => {
       componentErrors.value = undefined;
       parentErrors.value = undefined;
-      localVariant.value = immutableLocalVariant;
+      if (immutableLocalVariant === 'error'){
+        localVariant.value = undefined;
+      } else {
+        localVariant.value = immutableLocalVariant;
+      }
   });
 
   return {

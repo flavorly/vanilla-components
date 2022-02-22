@@ -53,6 +53,7 @@ const defaultVariant = {
       'w-full disabled:opacity-50',
       'cursor-pointer disabled:cursor-not-allowed',
       'text-sm font-normal',
+      'px-3 py-2',
     ),
 
     selectedOption: 'font-semibold',
@@ -60,7 +61,7 @@ const defaultVariant = {
     selectedHighlightedOption: 'font-semibold',
 
     //  Option content
-    optionContent: 'flex items-center justify-between px-3 py-3',
+    optionContent: 'flex items-center justify-between',
     optionLabel: 'block truncate',
     optionSelectedIcon: mergeClasses(
       '',

@@ -14,19 +14,13 @@ export const countryCodes = allCountries.map((country) => ({
     areaCodes: country[4] || null,
 }));
 
-export const phoneCountries = countryCodes.map((country) => ({
-    value: country.iso2,
-    label: country.name + ' +' + country.dialCode,
-    name: country.name,
-    name_raw: country.name,
-    dialCode: country.dialCode,
-}));
-
 export const countries = countryCodes.map((country) => ({
     value: country.iso2,
     label: country.name,
+    name: country.name,
     name_raw: country.name,
     dialCode: country.dialCode,
+    iso2: country.iso2,
 }));
 
 export const filterCountriesByName = function (

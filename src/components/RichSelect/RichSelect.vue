@@ -1,5 +1,8 @@
 <template>
-  <div class="vanilla-input">
+  <div
+    class="vanilla-rich-select"
+    :class="configuration.classesList.wrapper"
+  >
     <t-rich-select
       v-model="localValue"
       :fixed-classes="fixedClassesOverrides"
@@ -72,7 +75,6 @@
         </slot>
       </template>
     </t-rich-select>
-
     <!-- Erors -->
     <slot
       name="errors"
@@ -309,23 +311,21 @@ export default defineComponent({
          */
         provide('configuration_vanilla', configuration);
 
-        console.log(configuration);
+        //console.log(configuration);
 
         // TODO : Move this to classes
         let triggerClasses = '';
         if (props.hasItemBellow){
-            triggerClasses += 'rounded-b-none  border-b-none focus:border-primary-500 z-10';
+            triggerClasses += 'rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10';
         }
 
         if (props.hasItemAbove){
-            triggerClasses += 'rounded-t-none  border-t-none focus:border-primary-500 z-10';
+            triggerClasses += 'rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10';
         }
 
         const fixedClassesOverrides = {
             trigger: triggerClasses,
         };
-
-        console.log(fixedClassesOverrides, props.hasItemBellow);
 
         return {
             configuration,

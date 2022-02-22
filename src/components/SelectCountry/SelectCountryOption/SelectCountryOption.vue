@@ -13,7 +13,7 @@
             :class="[
               configuration.classesList.image
             ]"
-            :country="country"
+            :country="country?.iso2"
           />
           <template #fallback>
             <div :class="configuration.classesList.fallbackImage" />
@@ -23,7 +23,7 @@
           :class="[
             configuration.classesList.label
           ]"
-          v-html="name"
+          v-html="nameLabel"
         />
       </div>
     </div>
@@ -50,9 +50,9 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList } from '@/core';
-import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaFormFeedbackProps } from './index';
+import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaCountryOptionProps } from './index';
 import VanillaFlagIcon from '@/components/Icons/FlagIcon/Index.vue';
 import { CheckIcon } from '@heroicons/vue/solid';
 
@@ -63,12 +63,16 @@ export default defineComponent({
         CheckIcon,
     },
     props: {
-        name: {
-            type: String,
-            default: undefined,
-        },
         country: {
-            type: String,
+            // TODO : move this to a exported type
+            type: [Object, Array] as PropType<{
+                value: string,
+                label: string,
+                name: string,
+                name_raw: string,
+                dialCode: string,
+                iso2: string,
+            }>,
             required: true,
         },
         selected: {
@@ -87,6 +91,16 @@ export default defineComponent({
             type: [String, Array] as PropType<string | string[]>,
             default: '',
         },
+        labelWithDialCode: {
+            type: Boolean as PropType<boolean>,
+            required: false,
+            default: false,
+        },
+        labelWithCountryCode: {
+            type: Boolean as PropType<boolean>,
+            required: false,
+            default: false,
+        },
     },
     setup(props) {
 
@@ -94,15 +108,32 @@ export default defineComponent({
             localVariant,
         } = useBootVariant(props, 'errors', ref(null));
 
-        const { configuration } = useConfigurationWithClassesList<VanillaFormFeedbackProps>(
+        const { configuration } = useConfigurationWithClassesList<VanillaCountryOptionProps>(
             VanillaSelectCountryOptionConfig,
             VanillaSelectCountryOptionClassesKeys,
             localVariant,
         );
 
+        const nameLabel = computed(() => {
+            if (props.labelWithDialCode){
+                return props.country.label + ' +' + props.country.dialCode;
+            }
+
+            if (props.labelWithCountryCode){
+                return props.country.label + ' (' + props.country.dialCode + ')';
+            }
+
+            if (props.labelWithDialCode && props.labelWithCountryCode){
+                return props.country.label + ' +' + props.country.dialCode + ' (' + props.country.dialCode + ')';
+            }
+
+            return props.country.label;
+        });
+
         return {
             props,
             configuration,
+            nameLabel,
         };
     },
 });
