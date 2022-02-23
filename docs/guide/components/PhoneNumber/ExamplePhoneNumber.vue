@@ -19,7 +19,7 @@
       v-model="value"
       :country-code="valueCountry"
       :feedback="'Im useful helper out here, choose wisely'"
-      :errors="'foooo'"
+      :errors="'Sorry but your phone number looks to be invalid.'"
       placeholder="Elon Musk"
     />
 

@@ -51,7 +51,7 @@ export const VanillaInputConfig = {
         addonAfter: '',
         addonBeforeInputClasses: '',
         addonAfterInputClasses: '',
-        addonClasses: commonClasses.inputsErrorText,
+        addonClasses: 'text-red-300 dark:text-red-300/70',
       },
     },
   },

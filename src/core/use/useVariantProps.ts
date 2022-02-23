@@ -52,6 +52,17 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
     default: false,
     required: false,
   },
+  showErrors: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+    required: false,
+  },
+  showFeedback: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+    required: false,
+  },
+
 });
 
 export default useVariantProps;

@@ -35,7 +35,7 @@
       v-bind="{hasErrors, localErrors}"
     >
       <VanillaFormErrors
-        v-if="hasErrors"
+        v-if="hasErrors && showErrors"
         :errors="localErrors"
       />
     </slot>
@@ -44,7 +44,7 @@
       v-bind="{hasErrors, feedback}"
     >
       <VanillaFormFeedback
-        v-if="!hasErrors && feedback !== undefined"
+        v-if="!hasErrors && feedback !== undefined && showFeedback"
         :text="feedback"
       />
     </slot>

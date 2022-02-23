@@ -37,6 +37,26 @@ const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKe
     required: false,
     default: Date.now().toString(36) + Math.random().toString(36).substr(2),
   },
+  hasItemBellow: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+    required: false,
+  },
+  hasItemAbove: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+    required: false,
+  },
+  showErrors: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+    required: false,
+  },
+  showFeedback: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+    required: false,
+  },
 });
 
 export default useVariantPropsWithClassesList;

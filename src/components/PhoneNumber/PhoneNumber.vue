@@ -3,41 +3,80 @@
     class="vanilla-input-phone-number"
     :class="configuration.classesList.wrapper"
   >
-    <vanilla-select-country
-      v-model="phoneCountryCode"
-      :errors="localErrors"
-      :has-item-bellow="true"
-      :label-with-dial-code="true"
-      :placeholder="countryPlaceholder"
-      :class="[
-        configuration.classesList.select,
-      ]"
-    />
-    <vanilla-input
-      v-model="phoneNumber"
-      :errors="localErrors"
-      :placeholder="phonePlaceholder"
-      :class="[
-        configuration.classesList.input,
-      ]"
-    />
+    <div>
+      <vanilla-select-country
+        v-model="phoneCountryCode"
+        :errors="localErrors"
+        :show-errors="false"
+        :has-item-bellow="true"
+        :label-with-dial-code="true"
+        :placeholder="countryPlaceholder"
+        :class="[
+          configuration.classesList.select,
+        ]"
+      />
+      <vanilla-input
+        v-model="phoneNumber"
+        :errors="localErrors"
+        :show-errors="false"
+        :placeholder="phonePlaceholder"
+        :class="[
+          configuration.classesList.input,
+        ]"
+      >
+        <template #before="{className}">
+          <slot
+            name="dialCode"
+            v-bind="{ phoneDialCode }"
+          >
+            <span
+              class="sm:text-sm"
+              :class="className"
+            >+{{ phoneDialCode }}</span>
+          </slot>
+        </template>
+      </vanilla-input>
+    </div>
+    <slot
+      name="errors"
+      v-bind="{hasErrors, localErrors}"
+    >
+      <VanillaFormErrors
+        v-if="hasErrors && showErrors"
+        :errors="localErrors"
+      />
+    </slot>
+    <slot
+      name="feedback"
+      v-bind="{hasErrors, feedback}"
+    >
+      <VanillaFormFeedback
+        v-if="!hasErrors && feedback !== undefined && showFeedback"
+        :text="feedback"
+      />
+    </slot>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref, Ref, watch } from 'vue';
+import parsePhoneNumber from 'libphonenumber-js';
+import { CountryCode, PhoneNumber, CountryCallingCode } from 'libphonenumber-js/types';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core';
 import { VanillaPhoneNumberProps, VanillaPhoneNumberConfig, VanillaPhoneNumberClassesKeys } from './index';
 import { VanillaFavoriteCountriesValue } from '@/components/SelectCountry';
 import VanillaInput from '@/components/Input/Input.vue';
 import VanillaSelectCountry from '@/components/SelectCountry/SelectCountry.vue';
-import parsePhoneNumber from 'libphonenumber-js';
-import { CountryCode, PhoneNumber, CountryCallingCode } from 'libphonenumber-js/types';
+import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
+import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
+
 
 export default defineComponent({
     name: 'VanillaPhoneNumber',
     components: {
         VanillaInput,
         VanillaSelectCountry,
+        VanillaFormErrors,
+        VanillaFormFeedback,
     },
     inheritAttrs: false,
     compatConfig: {
@@ -136,6 +175,7 @@ export default defineComponent({
             hasErrors,
             phoneCountryCode,
             phoneNumber,
+            phoneDialCode,
             isValidPhoneNumber,
         };
     },

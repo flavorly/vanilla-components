@@ -10,7 +10,31 @@ import {
   Errors,
 } from '@/core/types';
 
-import { VanillaInputProps } from '@/components/Input/Type';
+import { VanillaDatetimePickerProps } from '@/components/DatetimePicker';
+import { VanillaFormErrorsProps } from '@/components/FormErrors';
+import { VanillaFormFeedbackProps } from '@/components/FormFeedback';
+import { VanillaInputProps } from '@/components/Input';
+import { VanillaPhoneNumberProps } from '@/components/PhoneNumber';
+import { VanillaRichSelectProps } from '@/components/RichSelect';
+import { VanillaSelectCountryProps } from '@/components/SelectCountry';
+import { VanillaTextareaProps } from '@/components/Textarea';
+
+/**
+ * Stores the Type for all components available in project
+ */
+type VanillaComponentConfiguration = {
+  VanillaDatetimePicker?: VanillaDatetimePickerProps,
+  VanillaFormErrors?: VanillaFormErrorsProps,
+  VanillaFormFeedback?: VanillaFormFeedbackProps
+  VanillaInput?: VanillaInputProps,
+  VanillaPhoneNumber?: VanillaPhoneNumberProps,
+  VanillaRichSelect?: VanillaRichSelectProps,
+  VanillaSelectCountry?: VanillaSelectCountryProps,
+  VanillaTextarea?: VanillaTextareaProps,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
+};
+
 
 /**
  * Props definition for the component
@@ -26,6 +50,8 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   name?: string;
   hasItemBellow?: boolean;
   hasItemAbove?: boolean;
+  showErrors?: boolean;
+  showFeedback?: boolean;
 }, PropsOptions extends Readonly<ComponentPropsOptions> = {
   classes: {
     type: PropType<CSSClass>;
@@ -66,6 +92,16 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
     default: boolean;
     required: boolean,
   },
+  showErrors: {
+    type: PropType<boolean>;
+    default: boolean;
+    required: boolean,
+  },
+  showFeedback: {
+    type: PropType<boolean>;
+    default: boolean;
+    required: boolean,
+  },
 }> = PropsOptions & {
   classes: {
     type: PropType<CSSClass>;
@@ -102,6 +138,16 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
     required: boolean,
   },
   hasItemAbove: {
+    type: PropType<boolean>;
+    default: boolean;
+    required: boolean,
+  },
+  showErrors: {
+    type: PropType<boolean>;
+    default: boolean;
+    required: boolean,
+  },
+  showFeedback: {
     type: PropType<boolean>;
     default: boolean;
     required: boolean,
@@ -154,6 +200,16 @@ type VanillaComponentWithClassesListProps<
       default: boolean;
       required: boolean,
     },
+    showErrors: {
+      type: PropType<boolean>;
+      default: boolean;
+      required: boolean,
+    },
+    showFeedback: {
+      type: PropType<boolean>;
+      default: boolean;
+      required: boolean,
+    },
   }> = PropsOptions & {
     classes: {
       type: PropType<CSSRawClassesList<ClassesKeys>>;
@@ -194,16 +250,17 @@ type VanillaComponentWithClassesListProps<
       default: boolean;
       required: boolean,
     },
+    showErrors: {
+      type: PropType<boolean>;
+      default: boolean;
+      required: boolean,
+    },
+    showFeedback: {
+      type: PropType<boolean>;
+      default: boolean;
+      required: boolean,
+    },
   };
-
-/**
- * Stores the Type for all components available in project
- */
-type VanillaComponentConfiguration = {
-   VanillaInput?: VanillaInputProps,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
-};
 
 export {
   VanillaComponentConfiguration,
