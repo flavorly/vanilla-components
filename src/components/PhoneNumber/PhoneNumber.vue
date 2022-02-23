@@ -8,6 +8,7 @@
       :errors="localErrors"
       :has-item-bellow="true"
       :label-with-dial-code="true"
+      :placeholder="countryPlaceholder"
       :class="[
         configuration.classesList.select,
       ]"
@@ -15,6 +16,7 @@
     <vanilla-input
       v-model="phoneNumber"
       :errors="localErrors"
+      :placeholder="phonePlaceholder"
       :class="[
         configuration.classesList.input,
       ]"
@@ -55,6 +57,14 @@ export default defineComponent({
             type: [String, Number] as PropType<string | number>,
             default: undefined,
         },
+        phonePlaceholder: {
+            type: [String, Number] as PropType<string | number>,
+            default: 'Select your phone indicative',
+        },
+        countryPlaceholder: {
+            type: [String, Number] as PropType<string | number>,
+            default: 'Your national number.',
+        },
         favoriteCountries: {
             type: [Array, Object, undefined] as PropType<VanillaFavoriteCountriesValue>,
             required: false,
@@ -89,7 +99,8 @@ export default defineComponent({
         const isValidPhoneNumber: Ref<boolean> = ref(false);
         const parsedPhoneNumber: Ref<PhoneNumber> | Ref = ref(null);
 
-        // Watch Country Code
+        // Watch Country Code and Phone number together
+        // When one changes we will trigger the model value & emit back
         watch([phoneCountryCode, phoneNumber], ([newPhoneCountry, newPhoneNumber]) => {
 
             parsedPhoneNumber.value = parsePhoneNumber(

@@ -9,6 +9,7 @@
     :clear-search-on-close="true"
     :has-item-bellow="props.hasItemBellow"
     :has-item-above="props.hasItemAbove"
+    v-bind="$attrs"
   >
     <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
       <VanillaSelectCountryOption

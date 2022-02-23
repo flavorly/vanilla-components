@@ -93,7 +93,7 @@ const defaultVariant = {
 
     // Select button
     selectButtonLabel: 'block pr-4 truncate',
-    selectButtonPlaceholder: 'block text-gray-400 truncate',
+    selectButtonPlaceholder: 'block text-gray-500/90 truncate',
     selectButtonSearchingPlaceholder: 'block text-gray-400 truncate',
     selectButtonLoadingIcon: 'flex-shrink-0 w-4 h-4 ml-1 text-gray-600',
     selectButtonSelectorIcon: 'flex-shrink-0 w-4 h-4 ml-1 text-gray-600',

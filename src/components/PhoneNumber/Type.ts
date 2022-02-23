@@ -6,7 +6,9 @@ import { CountryCode } from 'libphonenumber-js/types';
 
 export type VanillaPhoneNumberProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaSelectCountryValue,
-  favoriteCountries?: string | undefined,
   countryCode?: CountryCode,
-  nationalNumber?: string | number | undefined
+  nationalNumber?: string | number | undefined,
+  phonePlaceholder?: string | undefined
+  countryPlaceholder?: string | undefined,
+  favoriteCountries?: string | undefined,
 } & InputHTMLAttributes & Data, VanillaPhoneNumberClassesValidKeys>;
