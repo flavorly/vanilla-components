@@ -9,6 +9,7 @@
     :clear-search-on-close="true"
     :has-item-bellow="props.hasItemBellow"
     :has-item-above="props.hasItemAbove"
+    :errors="localErrors"
     :show-errors="showErrors"
     v-bind="$attrs"
   >
@@ -85,7 +86,7 @@ export default defineComponent({
     setup(props, { emit }) {
 
         const localValue = useVModel(props, 'modelValue');
-        const { hasErrors } = useBootVariant(props, 'errors', localValue);
+        const { hasErrors, localErrors } = useBootVariant(props, 'errors', localValue);
 
         // Pre-fetch the following Options
         const preFetchOptions = filterCountriesByName(
@@ -128,6 +129,7 @@ export default defineComponent({
 
         return {
             localValue,
+            localErrors,
             hasErrors,
             hasSlot,
             fetchCountries,

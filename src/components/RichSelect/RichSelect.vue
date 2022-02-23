@@ -98,7 +98,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, provide, ref } from 'vue';
+import { defineComponent, PropType, provide } from 'vue';
 import {
     useBootVariant,
     useVModel,
