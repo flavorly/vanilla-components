@@ -1,3 +1,4 @@
+export { default as useAttributesAndProps } from './useAttributesAndProps';
 export { default as useBootVariant } from './useBootVariant';
 export { default as useConfigurationWithClassesList } from './useConfigurationWithClassesList';
 export { default as useFetchsOptions } from './useFetchsOptions';

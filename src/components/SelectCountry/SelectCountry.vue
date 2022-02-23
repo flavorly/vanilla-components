@@ -1,17 +1,15 @@
 <template>
   <vanilla-rich-select
     v-model="localValue"
+    v-bind="bindAttributes"
     :options="preFetchOptions"
     :fetch-options="fetchCountries"
     :minimum-input-length="2"
     :value-attribute="'value'"
     :text-attribute="'label'"
     :clear-search-on-close="true"
-    :has-item-bellow="props.hasItemBellow"
-    :has-item-above="props.hasItemAbove"
     :errors="localErrors"
     :show-errors="showErrors"
-    v-bind="$attrs"
   >
     <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
       <VanillaSelectCountryOption
@@ -37,7 +35,7 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType, watch } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, hasSlot } from '@/core';
+import { useBootVariant, useVModel, useVariantProps, hasSlot, useAttributesAndProps } from '@/core';
 import { filterCountriesByName, countries } from '@/utils/CountryCodes';
 import { VanillaSelectCountryProps, VanillaFavoriteCountriesValue, VanillaSelectCountryValue } from './index';
 import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
@@ -127,6 +125,9 @@ export default defineComponent({
             emit('update:countryName', selectedCountry.value.name_raw);
         }, { immediate: true });
 
+        // Rebind Attributes
+        const bindAttributes = useAttributesAndProps();
+
         return {
             localValue,
             localErrors,
@@ -135,6 +136,7 @@ export default defineComponent({
             fetchCountries,
             preFetchOptions,
             props,
+            bindAttributes,
         };
     },
 });

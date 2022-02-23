@@ -11,6 +11,7 @@
         :has-item-bellow="true"
         :label-with-dial-code="true"
         :placeholder="countryPlaceholder"
+        :clearable="false"
         :class="[
           configuration.classesList.select,
         ]"

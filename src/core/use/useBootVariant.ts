@@ -46,7 +46,7 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
 
   // Same happens if the parent changes
   watch(parentErrors, (newVal) => {
-    console.log('Parent Errors Changed [Parent VM / Current VM ]:', vm?.parent?.type.name, vm.type.name);
+    //console.log('Parent Errors Changed [Parent VM / Current VM ]:', vm?.parent?.type.name, vm.type.name);
     localErrors.value = newVal;
   });
 

@@ -311,8 +311,6 @@ export default defineComponent({
          */
         provide('configuration_vanilla', configuration);
 
-        //console.log(configuration);
-
         // TODO : Move this to classes
         let triggerClasses = '';
         if (props.hasItemBellow){

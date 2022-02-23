@@ -19,6 +19,7 @@
     <!-- With Errors -->
     <VanillaSelectCountry
       v-model="value2"
+      placeholder="Please select your country"
       :feedback="'Im useful helper out here, choose wisely'"
       :errors="'Sorry but this country is not allowed.'"
     />
