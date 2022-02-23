@@ -5,7 +5,7 @@
   >
     <vanilla-select-country
       v-model="phoneCountryCode"
-      :variant="localVariant"
+      :errors="localErrors"
       :has-item-bellow="true"
       :label-with-dial-code="true"
       :class="[
@@ -14,7 +14,7 @@
     />
     <vanilla-input
       v-model="phoneNumber"
-      :variant="localVariant"
+      :errors="localErrors"
       :class="[
         configuration.classesList.input,
       ]"
@@ -72,8 +72,8 @@ export default defineComponent({
     setup(props, { emit }) {
         const localValue = useVModel(props, 'modelValue');
         const {
-            errors,
             hasErrors,
+            localErrors,
             localVariant,
         } = useBootVariant(props, 'errors', localValue);
 
@@ -116,15 +116,13 @@ export default defineComponent({
 
             localValue.value = '+' + phoneDialCode.value + phoneNumber.value;
 
-        }, { immediate: false });
-
-        watch(localVariant, (variant) => console.log('variant changed', variant));
+        }, { immediate: true });
 
         return {
             configuration,
-            errors,
-            hasErrors,
             localVariant,
+            localErrors,
+            hasErrors,
             phoneCountryCode,
             phoneNumber,
             isValidPhoneNumber,

@@ -39,6 +39,6 @@ import { onMounted, ref, defineComponent } from 'vue';
 defineComponent({ name: 'ExamplePhoneNumber' });
 onMounted(() => window.parent.postMessage('mounted', '*'));
 
-const value = ref('915279172');
-const valueCountry = 'PT';
+const value = ref('+351915279172');
+const valueCountry = null;
 </script>

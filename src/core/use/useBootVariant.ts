@@ -9,7 +9,7 @@ import {
   watch,
   ref,
   computed,
-  ComputedRef, readonly,
+  ComputedRef,
 } from 'vue';
 
 export default function useBootVariant<Props extends Data, ErrorsKey extends string, ModelValueKey extends Ref>(
@@ -19,48 +19,59 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
 ) {
 
   const vm = getCurrentInstance()!;
-  // Check any errors from the component itself or parent component
+  // Booting will be aware of parent errors as well. This might lead to some errors but its usefull at this point
   const parentErrors = ref(vm.parent?.props[errorsKey]) as Ref<Errors>;
+  // Own component errors as a new reactive ref.
   const componentErrors = ref(props[errorsKey]) as Ref<Errors>;
+  // Local Errors starting as undefined
+  const localErrors = ref(undefined) as Ref<Errors>;
 
-  // Errors can be either from parent or from component itself, it gives priority to component errors
-  const errors = computed(() => {
-    if (componentErrors.value !== undefined && componentErrors.value !== '') {
-      return componentErrors.value;
-    }
-
-    if (parentErrors.value !== undefined && parentErrors.value !== '') {
-      return parentErrors.value;
-    }
-    return undefined;
-  }) as Ref<Errors>;
-
-  // Ensure we have a bool to toggle errors
-  const hasErrors = computed(() => errors.value !== undefined && errors.value !== '') as ComputedRef<boolean>;
-
-  // Variant is either if we have errors it will be error, otherwise it uses the default variant
-  const localVariant = ref(props.variant);
-  const immutableLocalVariant = localVariant.value;
-
-  if (hasErrors.value) {
-      localVariant.value = 'error';
+  // If component itself has errors, then use them
+  if (componentErrors.value !== undefined && componentErrors.value !== '') {
+      localErrors.value = componentErrors.value;
   }
 
-  watch(localVariant, () => console.log('Variant changed!!!', vm));
+  // If Parent has errors, then use them
+  if (parentErrors.value !== undefined && parentErrors.value !== '') {
+      localErrors.value = parentErrors.value;
+  }
 
+  // First variant we found initiated on this component, so we have a safe way to "rollback" the variant
+  const immutableLocalVariant = props.variant;
+
+  // If prop of the component changes, we will update the localErrors as well with that value
+  watch(() => props[errorsKey], (val: Errors) => {
+    localErrors.value = val;
+  });
+
+  // Same happens if the parent changes
+  watch(parentErrors, (newVal) => {
+    console.log('Parent Errors Changed [Parent VM / Current VM ]:', vm?.parent?.type.name, vm.type.name);
+    localErrors.value = newVal;
+  });
+
+  // In case the Model Value changes, we will then reset everything.
   watch(modelValue, () => {
       componentErrors.value = undefined;
       parentErrors.value = undefined;
-      if (immutableLocalVariant === 'error'){
-        localVariant.value = undefined;
-      } else {
-        localVariant.value = immutableLocalVariant;
-      }
+      localErrors.value = undefined;
+  });
+
+  // Component has errors if parent or local component has errors
+  const hasErrors = computed(() => localErrors.value !== undefined &&  localErrors.value !== null && localErrors.value !== '') as ComputedRef<boolean>;
+
+  // Local variant is a computed value, if it has errors then variant for errors is used
+  // Otherwise it will roll back to the previous variant
+  const localVariant = computed(() => {
+    if (hasErrors.value){
+      return 'error';
+    }
+    return immutableLocalVariant;
   });
 
   return {
     hasErrors,
-    errors,
+    localErrors,
     localVariant,
   };
 }

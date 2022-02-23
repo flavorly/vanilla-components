@@ -5,9 +5,9 @@
   >
     <span
       v-if="safe"
-      v-html="errors"
+      v-html="localErrors"
     />
-    <span v-else>{{ errors }}</span>
+    <span v-else>{{ localErrors }}</span>
   </div>
 </template>
 
@@ -32,15 +32,15 @@ export default defineComponent({
     },
     setup(props) {
         const {
-            errors,
-            hasErrors,
+            localErrors,
             localVariant,
+            hasErrors,
         } = useBootVariant(props, 'errors', ref(null));
 
         const { configuration } = useConfiguration<VanillaFormErrorsProps>(VanillaFormErrorsConfig);
 
         return {
-            errors,
+            localErrors,
             localVariant,
             hasErrors,
             configuration,

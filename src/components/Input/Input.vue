@@ -43,11 +43,11 @@
     </div>
     <slot
       name="errors"
-      v-bind="{hasErrors, errors}"
+      v-bind="{hasErrors, localErrors}"
     >
       <VanillaFormErrors
         v-if="hasErrors"
-        :errors="errors"
+        :errors="localErrors"
       />
     </slot>
     <slot
@@ -62,7 +62,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType, ref, watch } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList, hasSlot } from '@/core';
 import { VanillaInputValue, VanillaInputProps, VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/index';
 import { ExclamationCircleIcon, EyeIcon, EyeOffIcon } from '@heroicons/vue/solid';
@@ -97,9 +97,9 @@ export default defineComponent({
         const localValue = useVModel(props, 'modelValue');
         const localType = ref(props.type);
         const {
-            errors,
-            hasErrors,
+            localErrors,
             localVariant,
+            hasErrors,
         } = useBootVariant(props, 'errors', localValue);
 
         const { configuration } = useConfigurationWithClassesList<VanillaInputProps>(
@@ -120,7 +120,7 @@ export default defineComponent({
             localValue,
             localVariant,
             localType,
-            errors,
+            localErrors,
             hasErrors,
             hasSlot,
             showingPassword,

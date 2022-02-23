@@ -34,11 +34,11 @@
     </div>
     <slot
       name="errors"
-      v-bind="{hasErrors, errors}"
+      v-bind="{hasErrors, localErrors}"
     >
       <VanillaFormErrors
         v-if="hasErrors"
-        :errors="errors"
+        :errors="localErrors"
       />
     </slot>
     <slot
@@ -115,9 +115,9 @@ export default defineComponent({
         const localValue = useVModel(props, 'modelValue');
         const flatpickrInput = ref(null);
         const {
-            errors,
-            hasErrors,
+            localErrors,
             localVariant,
+            hasErrors,
         } = useBootVariant(props, 'errors', localValue);
 
         const { configuration } = useConfigurationWithClassesList<VanillaDatetimePickerProps>(
@@ -137,7 +137,7 @@ export default defineComponent({
             configuration,
             localValue,
             localVariant,
-            errors,
+            localErrors,
             hasErrors,
             hasSlot,
             flatpickrInput,

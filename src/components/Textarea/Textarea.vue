@@ -32,11 +32,11 @@
     </div>
     <slot
       name="errors"
-      v-bind="{hasErrors, errors}"
+      v-bind="{hasErrors, localErrors}"
     >
       <VanillaFormErrors
         v-if="hasErrors"
-        :errors="errors"
+        :errors="localErrors"
       />
     </slot>
     <slot
@@ -85,9 +85,9 @@ export default defineComponent({
     setup(props) {
         const localValue = useVModel(props, 'modelValue');
         const {
-            errors,
-            hasErrors,
+            localErrors,
             localVariant,
+            hasErrors,
         } = useBootVariant(props, 'errors', localValue);
 
         const { configuration } = useConfigurationWithClassesList<VanillaTextareaProps>(
@@ -100,7 +100,7 @@ export default defineComponent({
             configuration,
             localValue,
             localVariant,
-            errors,
+            localErrors,
             hasErrors,
             hasSlot,
         };

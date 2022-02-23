@@ -78,11 +78,11 @@
     <!-- Erors -->
     <slot
       name="errors"
-      v-bind="{hasErrors, errors}"
+      v-bind="{hasErrors, localErrors}"
     >
       <VanillaFormErrors
         v-if="hasErrors"
-        :errors="errors"
+        :errors="localErrors"
       />
     </slot>
     <!-- Feedback -->
@@ -295,9 +295,9 @@ export default defineComponent({
     setup(props) {
         const localValue = useVModel(props, 'modelValue');
         const {
-            errors,
-            hasErrors,
+            localErrors,
             localVariant,
+            hasErrors,
         } = useBootVariant(props, 'errors', localValue);
 
         const { configuration } = useConfigurationWithClassesList<VanillaRichSelectProps>(
@@ -331,7 +331,7 @@ export default defineComponent({
             configuration,
             localValue,
             localVariant,
-            errors,
+            localErrors,
             hasErrors,
             hasSlot,
             props,

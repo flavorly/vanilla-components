@@ -9,7 +9,6 @@
     :clear-search-on-close="true"
     :has-item-bellow="props.hasItemBellow"
     :has-item-above="props.hasItemAbove"
-    :variant="props.variant"
   >
     <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
       <VanillaSelectCountryOption
@@ -82,12 +81,9 @@ export default defineComponent({
         'update:modelValue',
     ],
     setup(props, { emit }) {
+
         const localValue = useVModel(props, 'modelValue');
-        // const {
-        //     errors,
-        //     localVariant,
-        //     hasErrors,
-        // } = useBootVariant(props, 'errors', localValue);
+        const { hasErrors } = useBootVariant(props, 'errors', localValue);
 
         // Pre-fetch the following Options
         const preFetchOptions = filterCountriesByName(
@@ -128,13 +124,9 @@ export default defineComponent({
             emit('update:countryName', selectedCountry.value.name_raw);
         }, { immediate: true });
 
-        console.log('On Select Country', props.variant);
-
         return {
             localValue,
-            //localVariant,
-            //hasErrors,
-            //errors,
+            hasErrors,
             hasSlot,
             fetchCountries,
             preFetchOptions,
