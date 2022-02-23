@@ -59,8 +59,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, Ref, watch } from 'vue';
-import parsePhoneNumber from 'libphonenumber-js';
+import { defineComponent, PropType, ref, Ref, watch, onMounted } from 'vue';
+import { parsePhoneNumber, getCountryCallingCode } from 'libphonenumber-js';
 import { CountryCode, PhoneNumber, CountryCallingCode } from 'libphonenumber-js/types';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core';
 import { VanillaPhoneNumberProps, VanillaPhoneNumberConfig, VanillaPhoneNumberClassesKeys } from './index';
@@ -70,7 +70,6 @@ import VanillaSelectCountry from '@/components/SelectCountry/SelectCountry.vue';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 
-
 export default defineComponent({
     name: 'VanillaPhoneNumber',
     components: {
@@ -79,7 +78,7 @@ export default defineComponent({
         VanillaFormErrors,
         VanillaFormFeedback,
     },
-    inheritAttrs: false,
+    //inheritAttrs: false,
     compatConfig: {
         MODE: 3,
     },
@@ -92,10 +91,6 @@ export default defineComponent({
         countryCode: {
             type: [String] as PropType<CountryCode>,
             default: '',
-        },
-        nationalNumber: {
-            type: [String, Number] as PropType<string | number>,
-            default: undefined,
         },
         phonePlaceholder: {
             type: [String, Number] as PropType<string | number>,
@@ -135,37 +130,50 @@ export default defineComponent({
 
         const phoneCountryCode: CountryCode | Ref = ref(props.countryCode);
         const phoneDialCode: CountryCallingCode | Ref = ref(null);
-        const phoneNumber: Ref | string = ref(props.nationalNumber || localValue.value);
+        const phoneNumber: Ref<string | undefined> = ref(localValue.value);
         const isValidPhoneNumber: Ref<boolean> = ref(false);
         const parsedPhoneNumber: Ref<PhoneNumber> | Ref = ref(null);
 
+        const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountryCodeValue: CountryCode) => {
+            try {
+                // Always resolve the country code to dial code
+                phoneDialCode.value = getCountryCallingCode(phoneCountryCodeValue);
+                // Attempt to parse the number and country code
+                parsedPhoneNumber.value = parsePhoneNumber(phoneNumberValue || '', phoneCountryCodeValue);
+
+                // If we are able to parse, then we will assign the new values
+                if (parsedPhoneNumber.value) {
+                    isValidPhoneNumber.value = parsedPhoneNumber.value?.isValid();
+                    phoneCountryCode.value = parsedPhoneNumber.value.country;
+                    phoneDialCode.value = parsedPhoneNumber.value?.countryCallingCode;
+                    phoneNumber.value = parsedPhoneNumber.value?.nationalNumber;
+                    localValue.value = '+' + phoneDialCode.value + phoneNumber.value;
+                }
+            } catch (e) {
+                localValue.value =  '+' + phoneDialCode.value + phoneNumber.value;
+            }
+        };
+
+        // On Mounted, attempt to convert the given number
+        onMounted(() => {
+            // This is a little hack, since if the phone number is not correct we will just trigger
+            // a model-value change, we will re-asign the errors again.
+            const temporaryErrors = props.errors;
+            attemptToParseNumber(phoneNumber.value, phoneCountryCode.value);
+            localErrors.value = temporaryErrors;
+        });
+
         // Watch Country Code and Phone number together
         // When one changes we will trigger the model value & emit back
-        watch([phoneCountryCode, phoneNumber], ([newPhoneCountry, newPhoneNumber]) => {
+        watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) => {
 
-            parsedPhoneNumber.value = parsePhoneNumber(
-                newPhoneNumber,
-                {
-                    defaultCountry: newPhoneCountry,
-                    defaultCallingCode: newPhoneCountry,
-                    extract: true,
-                },
-            );
-
-            if (parsedPhoneNumber.value) {
-                isValidPhoneNumber.value = parsedPhoneNumber.value?.isValid();
-                phoneCountryCode.value = parsedPhoneNumber.value.country;
-                phoneDialCode.value = parsedPhoneNumber.value.countryCallingCode;
-                phoneNumber.value = parsedPhoneNumber.value.nationalNumber;
-            }
+            attemptToParseNumber(newPhoneNumber, newPhoneCountryCode);
 
             // Watch & Emit additional data
             emit('update:countryDialCode', phoneDialCode.value);
             emit('update:countryCode', phoneCountryCode.value);
             emit('update:phoneNumberNational', phoneNumber.value);
             emit('update:phoneNumberInternational', localValue.value);
-
-            localValue.value = '+' + phoneDialCode.value + phoneNumber.value;
 
         }, { immediate: true });
 

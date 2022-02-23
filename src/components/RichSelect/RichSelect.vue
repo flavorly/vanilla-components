@@ -311,14 +311,14 @@ export default defineComponent({
          */
         provide('configuration_vanilla', configuration);
 
-        // TODO : Move this to classes
         let triggerClasses = '';
+
         if (props.hasItemBellow){
-            triggerClasses += 'rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10';
+            triggerClasses += configuration.classesList?.groupedBellow;
         }
 
         if (props.hasItemAbove){
-            triggerClasses += 'rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10';
+            triggerClasses += configuration.classesList?.groupedAbove;
         }
 
         const fixedClassesOverrides = {

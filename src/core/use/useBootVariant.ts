@@ -20,7 +20,7 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
 
   const vm = getCurrentInstance()!;
   // Booting will be aware of parent errors as well. This might lead to some errors but its usefull at this point
-  const parentErrors = ref(vm.parent?.props[errorsKey]) as Ref<Errors>;
+  //const parentErrors = ref(vm.parent?.props[errorsKey]) as Ref<Errors>;
   // Own component errors as a new reactive ref.
   const componentErrors = ref(props[errorsKey]) as Ref<Errors>;
   // Local Errors starting as undefined
@@ -32,28 +32,30 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
   }
 
   // If Parent has errors, then use them
-  if (parentErrors.value !== undefined && parentErrors.value !== '') {
-      localErrors.value = parentErrors.value;
-  }
+  // if (parentErrors.value !== undefined && parentErrors.value !== '') {
+  //     localErrors.value = parentErrors.value;
+  // }
 
   // First variant we found initiated on this component, so we have a safe way to "rollback" the variant
   const immutableLocalVariant = props.variant;
 
   // If prop of the component changes, we will update the localErrors as well with that value
-  watch(() => props[errorsKey], (val: Errors) => {
-    localErrors.value = val;
+  watch(() => props[errorsKey], (newErrors: Errors) => {
+    //console.log('Errors Changed [ Local VM ]: ', newErrors, vm.type.name);
+    localErrors.value = newErrors;
   });
 
   // Same happens if the parent changes
-  watch(parentErrors, (newVal) => {
-    //console.log('Parent Errors Changed [Parent VM / Current VM ]:', vm?.parent?.type.name, vm.type.name);
-    localErrors.value = newVal;
-  });
+  // watch(parentErrors, (newErrors: Errors) => {
+  //   console.log('Errors Changed [Parent VM ]:', newErrors, vm?.parent?.type.name);
+  //   localErrors.value = newErrors;
+  // });
 
   // In case the Model Value changes, we will then reset everything.
-  watch(modelValue, () => {
+  watch(modelValue, (value) => {
+      //console.log('Local Value Changed:', value, vm?.type.name);
       componentErrors.value = undefined;
-      parentErrors.value = undefined;
+      //parentErrors.value = undefined;
       localErrors.value = undefined;
   });
 
