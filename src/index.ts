@@ -27,6 +27,7 @@ export { default as VanillaRichSelectTagWithImage } from './components/RichSelec
 export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState/RichSelectState.vue';
 export { default as VanillaSelectCountry } from './components/SelectCountry/SelectCountry.vue';
 export { default as VanillaPhoneNumber } from './components/PhoneNumber/PhoneNumber.vue';
+export { default as VanillaCheckbox } from './components/Checkbox/Checkbox.vue';
 
 // Form Additional Elements
 //export { default as VanillaInputLayout } from './components/Forms/Layout.vue';

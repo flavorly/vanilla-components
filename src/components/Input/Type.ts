@@ -6,5 +6,4 @@ export type VanillaInputValue = string | number | undefined;
 
 export type VanillaInputProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaInputValue,
-  rows?: string | number,
 } & InputHTMLAttributes & Data, VanillaInputClassesValidKeys>;

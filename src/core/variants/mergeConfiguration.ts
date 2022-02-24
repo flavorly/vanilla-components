@@ -8,6 +8,7 @@ import { VanillaFormFeedbackConfig } from '@/components/FormFeedback/Config';
 import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect/Config';
 import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage/Config';
 import { VanillaPhoneNumberConfig } from '@/components/PhoneNumber/Config';
+import { VanillaCheckboxConfig, VanillaCheckboxConfigToVariantJs } from '@/components/Checkbox/Config';
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
@@ -20,6 +21,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaRichSelect: VanillaRichSelectConfig,
         VanillaRichSelectOptionWithImage: VanillaRichSelectOptionWithImageConfig,
         VanillaPhoneNumber: VanillaPhoneNumberConfig,
+        VanillaCheckbox: VanillaCheckboxConfig,
 
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,
@@ -31,6 +33,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
     const VariantJSMapping = {
         TInput: VanillaInputConfigToVariantJs(VanillaComponentsDefaults?.VanillaInput ?? {}),
         TRichSelect: VanillaRichSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaRichSelect ?? {}),
+        TCheckbox: VanillaCheckboxConfigToVariantJs(VanillaComponentsDefaults?.VanillaCheckbox ?? {}),
     };
 
     // Return Both Merged Configuration

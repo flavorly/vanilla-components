@@ -4,6 +4,7 @@
     :class="configuration.classesList.wrapper"
   >
     <t-rich-select
+      :id="name"
       v-model="localValue"
       :fixed-classes="fixedClassesOverrides"
       v-bind="$attrs"
@@ -148,10 +149,6 @@ export default defineComponent({
                 Function,
                 Symbol,
             ] as PropType<VanillaRichSelectValue>,
-            default: undefined,
-        },
-        name: {
-            type: String,
             default: undefined,
         },
         options: {
