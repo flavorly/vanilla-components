@@ -1,19 +1,54 @@
 <template>
-  <!-- Regular -->
-  <VanillaCheckbox
-    v-model="value"
-    :feedback="'Im useful helper out here, choose wisely'"
-  />
+  <div class="flex items-center justify-center mx-auto text-center mt-2">
+    <!-- Regular -->
+    <VanillaCheckbox
+      v-model="value"
+      :value="'accepted'"
+      :checked-value="'accepted'"
+      :unchecked-value="'notAccepted'"
+      :feedback="'Im useful helper out here, choose wisely'"
+    />
+  </div>
 
   <div class="flex items-center justify-center mx-auto text-center mt-2">
     <pre>{{ JSON.stringify(value) }}</pre>
   </div>
 
-  <VanillaCheckbox
-    v-model="value2"
-    :errors="'Sorry for this name is already taken'"
-    :feedback="'I only show when i dont have errors'"
-  />
+  <div class="h-1 my-5" />
+
+  <div class="flex items-center justify-center space-x-2">
+    <!-- Multiple -->
+    <VanillaCheckbox
+      v-model="valueMultiple"
+      :value="'accepted'"
+      :checked-value="'accepted'"
+      :unchecked-value="'notAccepted'"
+      class="inline-flex"
+    />
+
+    <VanillaCheckbox
+      v-model="valueMultiple"
+      :value="'accepted2'"
+      :checked-value="'accepted2'"
+      :unchecked-value="'notAccepted2'"
+      class="inline-flex"
+    />
+  </div>
+
+  <div class="flex items-center justify-center mx-auto text-center mt-2">
+    <pre>{{ JSON.stringify(valueMultiple) }}</pre>
+  </div>
+
+  <div class="h-1 my-5" />
+
+  <!-- Errors -->
+  <div class="flex items-center justify-center mx-auto text-center mt-2">
+    <VanillaCheckbox
+      v-model="value2"
+      :errors="'Sorry for this name is already taken'"
+      :feedback="'I only show when i dont have errors'"
+    />
+  </div>
 
   <div class="flex items-center justify-center mx-auto text-center mt-2">
     <pre>{{ JSON.stringify(value2) }}</pre>
@@ -23,11 +58,13 @@
 
 <script setup type="ts">
 import { VanillaCheckbox } from '@/index';
-import { onMounted, ref, defineComponent } from 'vue';
+import { onMounted, ref, reactive, defineComponent } from 'vue';
 
 defineComponent({ name: 'ExampleCheckbox' });
 onMounted(() => window.parent.postMessage('mounted', '*'));
 
-const value = ref('checked');
-const value2 = ref('not-checked');
+const value = ref('accepted');
+const value2 = ref(true);
+const valueMultiple = ref([]);
+//const valueMultiple = reactive({});
 </script>

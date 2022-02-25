@@ -3,12 +3,14 @@ import { mergeClasses } from '@/core';
 
 export const VanillaCheckboxConfig = {
   fixedClasses: {
+    wrapper: 'flex items-center justify-center',
+    container: '',
     checkbox: 'h-4 w-4 transition duration-150 ease-in-out block',
-    wrapper: 'relative',
   },
   // Default Input appearance
   classes: {
     wrapper : '',
+    container: '',
     checkbox:  mergeClasses(
       'checked:bg-primary-600 checked:text-white',
       'dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600',
@@ -20,6 +22,7 @@ export const VanillaCheckboxConfig = {
     error: {
       classes: {
         wrapper : '',
+        container: '',
         checkbox:  mergeClasses(
           'text-red-600 border-red-300 placeholder-red-300 dark:bg-gray-900',
           'focus:ring-red-500',
