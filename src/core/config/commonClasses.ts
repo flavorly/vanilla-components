@@ -17,7 +17,7 @@ export const commonClasses = {
   inputsTransition: 'transition duration-100 ease-in-out',
 
   // Inputs with Errors
-  inputsErrorText: 'text-red-400 placeholder-red-400 leading-normal sm:text-sm',
+  inputsErrorText: 'text-red-400 placeholder-red-400 leading-normal text-sm',
   inputsErrorsBackground: 'bg-white dark:bg-gray-900',
   inputsErrorsBorder: 'border border-red-400 focus:border-red-400 dark:focus:border-red-400',
   inputsErrorsRing: 'focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500',
