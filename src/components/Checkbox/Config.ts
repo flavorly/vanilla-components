@@ -27,6 +27,7 @@ export const VanillaCheckboxConfig = {
           'text-red-600 border-red-300 placeholder-red-300 dark:bg-gray-900',
           'focus:ring-red-500',
           'checked:bg-red-600 checked:text-white',
+          'dark:checked:bg-red-600 dark:focus:ring-offset-gray-900',
         ),
       },
     },

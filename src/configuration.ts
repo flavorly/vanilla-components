@@ -1,14 +1,16 @@
 import { merge } from 'lodash';
 import { VanillaComponentConfiguration } from '@/core/types';
-import { VanillaInputConfig, VanillaInputConfigToVariantJs } from '@/components/Input/Config';
-import { VanillaDatetimePickerConfig } from '@/components/DatetimePicker/Config';
-import { VanillaTextareaConfig } from '@/components/Textarea/Config';
-import { VanillaFormErrorsConfig } from '@/components/FormErrors/Config';
-import { VanillaFormFeedbackConfig } from '@/components/FormFeedback/Config';
-import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect/Config';
-import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage/Config';
-import { VanillaPhoneNumberConfig } from '@/components/PhoneNumber/Config';
-import { VanillaCheckboxConfig, VanillaCheckboxConfigToVariantJs } from '@/components/Checkbox/Config';
+
+import { VanillaInputConfig, VanillaInputConfigToVariantJs } from '@/components/Input';
+import { VanillaDatetimePickerConfig } from '@/components/DatetimePicker';
+import { VanillaTextareaConfig } from '@/components/Textarea';
+import { VanillaFormErrorsConfig } from '@/components/FormErrors';
+import { VanillaFormFeedbackConfig } from '@/components/FormFeedback';
+import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect';
+import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage';
+import { VanillaPhoneNumberConfig } from '@/components/PhoneNumber';
+import { VanillaCheckboxConfig, VanillaCheckboxConfigToVariantJs } from '@/components/Checkbox';
+import { VanillaAvatarConfig } from '@/components/Avatar';
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
@@ -22,6 +24,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaRichSelectOptionWithImage: VanillaRichSelectOptionWithImageConfig,
         VanillaPhoneNumber: VanillaPhoneNumberConfig,
         VanillaCheckbox: VanillaCheckboxConfig,
+        VanillaAvatar: VanillaAvatarConfig,
 
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,

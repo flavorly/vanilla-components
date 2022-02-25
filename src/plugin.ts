@@ -1,7 +1,7 @@
 import { App } from 'vue';
 import { VanillaComponentConfiguration } from '@/core/types';
 import { variantJS } from '@variantjs/vue';
-import { mergeConfiguration } from '@/core/variants';
+import mergeConfiguration from './configuration';
 
 
 const plugin = {
