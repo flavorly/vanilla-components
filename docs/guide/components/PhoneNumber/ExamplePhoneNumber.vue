@@ -28,20 +28,21 @@
       <pre>{{ JSON.stringify(value2) }}</pre>
     </div>
 
-    <button
-      class="px-3 py-2 border bg-white"
-      @click="clearErrors"
-    >
-      Clear Errors
-    </button>
-    <button
-      class="px-3 py-2 border bg-white"
-      @click="addErrors"
-    >
-      Add Errors
-    </button>
-
     <div class="h-1 my-5" />
+    <div class="flex items-center justify-center">
+      <button
+        class="px-3 py-2 border bg-white"
+        @click="clearErrors"
+      >
+        Clear Errors
+      </button>
+      <button
+        class="px-3 py-2 border bg-white"
+        @click="addErrors"
+      >
+        Add Errors
+      </button>
+    </div>
   </div>
 </template>
 
