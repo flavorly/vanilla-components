@@ -5,7 +5,7 @@ export const VanillaCheckboxConfig = {
   fixedClasses: {
     wrapper: 'flex items-center justify-center',
     container: '',
-    checkbox: 'h-4 w-4 transition duration-150 ease-in-out block',
+    checkbox: 'h-5 w-5 transition duration-150 ease-in-out block',
   },
   // Default Input appearance
   classes: {
