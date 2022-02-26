@@ -40,6 +40,7 @@ export default {
           { text: 'Phone Number', link: '/guide/components/PhoneNumber' },
           { text: 'Checkbox', link: '/guide/components/Checkbox' },
           { text: 'Avatar', link: '/guide/components/Avatar' },
+          { text: 'Button', link: '/guide/components/Button' },
           // { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },
           // { text: 'Phone Input', link: '/guide/inputs/phone-number' },
           // { text: 'Country', link: '/guide/inputs/country' },

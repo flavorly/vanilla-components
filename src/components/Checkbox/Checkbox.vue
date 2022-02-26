@@ -11,7 +11,6 @@
         :class="configuration.classesList.checkbox"
         :name="name"
         :value="value"
-        class="form-checkbox h-5 w-5"
         type="checkbox"
         v-bind="$attrs"
         @change="emitUpdate"

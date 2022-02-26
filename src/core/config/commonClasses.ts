@@ -23,8 +23,15 @@ export const commonClasses = {
   inputsErrorsRing: 'focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500',
 
   // Buttons
-  buttonRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600',
+  buttonRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900',
   buttonErrorsRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600',
+
+  buttonRadius: 'rounded-md',
+  buttonSpacing: 'px-4 py-2',
+  buttonShadow: 'shadow',
+  buttonText: 'text-sm md:text-base leading-6 font-medium whitespace-nowrap',
+  buttonTransition: 'transition ease-in-out duration-15',
+  buttonPosition: 'block justify-center inline-flex items-center',
 
   // Overlays & Dropdowns
   dropdownsBackground: 'bg-white dark:bg-gray-900',

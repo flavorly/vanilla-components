@@ -36,6 +36,7 @@ const defaultVariant = {
     clearButton: mergeClasses(
       'absolute flex items-center justify-center text-gray-600 dark:text-gray-300 dark:text rounded mr-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-opacity-70 top-1/2 right-0 transform -translate-y-1/2',
       commonClasses.buttonRing,
+      'focus:ring-primary-600',
       commonClasses.iconsSize,
       commonClasses.inputsTransition,
     ),
@@ -107,7 +108,8 @@ const defaultVariant = {
       'bg-primary-100 dark:bg-primary-500/20 dark:border dark:border-gray-700',
       'm-0.5 h-8 max-w-full',
       'text-primary-900 dark:text-white white-space-no text-sm white-space-no',
-      commonClasses.buttonRing + ' focus:ring-opacity-50',
+      commonClasses.buttonRing,
+      'focus:ring-opacity-50 focus:ring-primary-600',
       commonClasses.inputsTransition,
       commonClasses.inputsDisabled,
     ),
@@ -116,7 +118,8 @@ const defaultVariant = {
 
     tagDeleteButton: mergeClasses(
       commonClasses.inputsTransition,
-      commonClasses.buttonRing + ' focus:ring-opacity-50',
+      commonClasses.buttonRing,
+      'focus:ring-opacity-50 focus:ring-primary-600',
       '-ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r',
       'text-primary-400 focus:text-white hover:text-primary-500 dark:hover:text-white',
       'hover:bg-primary-200 focus:bg-primary-500 dark:hover:bg-primary-400/20 dark:focus:bg-primary-500/20',

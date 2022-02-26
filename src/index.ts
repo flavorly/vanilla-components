@@ -24,6 +24,7 @@ export { default as VanillaSelectCountry } from './components/SelectCountry/Sele
 export { default as VanillaPhoneNumber } from './components/PhoneNumber/PhoneNumber.vue';
 export { default as VanillaCheckbox } from './components/Checkbox/Checkbox.vue';
 export { default as VanillaAvatar } from './components/Avatar/Avatar.vue';
+export { default as VanillaButton } from './components/Button/Button.vue';
 
 // Form Additional Elements
 //export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
@@ -34,6 +35,7 @@ export { default as VanillaFormFeedback } from './components/FormFeedback/FormFe
 
 // Icons
 export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
+export { default as VanillaLoadingSpinner } from './components/Icons/LoadingSpinner.vue';
 
 
 // Plugin to Install
