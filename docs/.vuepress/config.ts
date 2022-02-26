@@ -39,6 +39,7 @@ export default {
           { text: 'Country Select', link: '/guide/components/SelectCountry' },
           { text: 'Phone Number', link: '/guide/components/PhoneNumber' },
           { text: 'Checkbox', link: '/guide/components/Checkbox' },
+          { text: 'Toggle', link: '/guide/components/Toggle' },
           { text: 'Avatar', link: '/guide/components/Avatar' },
           { text: 'Button', link: '/guide/components/Button' },
           // { text: 'Rich Radio Input', link: '/guide/inputs/radio-group' },

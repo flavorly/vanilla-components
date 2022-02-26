@@ -23,6 +23,7 @@ export { default as VanillaSelectCountry } from './components/SelectCountry/Sele
 
 export { default as VanillaPhoneNumber } from './components/PhoneNumber/PhoneNumber.vue';
 export { default as VanillaCheckbox } from './components/Checkbox/Checkbox.vue';
+export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 export { default as VanillaAvatar } from './components/Avatar/Avatar.vue';
 export { default as VanillaButton } from './components/Button/Button.vue';
 
@@ -36,6 +37,8 @@ export { default as VanillaFormFeedback } from './components/FormFeedback/FormFe
 // Icons
 export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
 export { default as VanillaLoadingSpinner } from './components/Icons/LoadingSpinner.vue';
+export { default as VanillaCheckedIcon } from './components/Icons/CheckedIcon.vue';
+export { default as VanillaUncheckedIcon } from './components/Icons/UncheckedIcon.vue';
 
 
 // Plugin to Install
