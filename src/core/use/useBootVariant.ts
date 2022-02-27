@@ -71,6 +71,20 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
     return immutableLocalVariant;
   });
 
+  // TODO : Must watch when variant changes to update.
+
+  // const localVariant = ref(props.variant);
+  // if (hasErrors.value){
+  //   return localVariant.value = 'error';
+  // }
+  //
+  // // If prop of the component changes, we will update the localErrors as well with that value
+  // watch(() => props.variant, (variant) => {
+  //   console.log('Local Variant should change [ Local VM ]: ', variant);
+  //   localVariant.value = variant;
+  // });
+
+
   return {
     hasErrors,
     localErrors,
