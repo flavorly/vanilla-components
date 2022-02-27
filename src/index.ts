@@ -19,14 +19,17 @@ export { default as VanillaRichSelectOptionWithImage } from './components/RichSe
 export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators/RichSelectOptionWithIndicators.vue';
 export { default as VanillaRichSelectTagWithImage } from './components/RichSelect/RichSelectTagWithImage/RichSelectTagWithImage.vue';
 export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState/RichSelectState.vue';
-export { default as VanillaSelectCountry } from './components/SelectCountry/SelectCountry.vue';
 
+export { default as VanillaSelectCountry } from './components/SelectCountry/SelectCountry.vue';
 export { default as VanillaPhoneNumber } from './components/PhoneNumber/PhoneNumber.vue';
+
 export { default as VanillaCheckbox } from './components/Checkbox/Checkbox.vue';
 export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 export { default as VanillaAvatar } from './components/Avatar/Avatar.vue';
 export { default as VanillaButton } from './components/Button/Button.vue';
+
 export { default as VanillaRichRadio } from './components/RichRadio/RichRadio.vue';
+export { default as VanillaRichRadioOption } from './components/RichRadio/RichRadioOption/RichRadioOption.vue';
 
 // Form Additional Elements
 //export { default as VanillaInputLayout } from './components/Forms/Layout.vue';

@@ -4,15 +4,24 @@ import { VanillaComponentConfiguration } from '@/core/types';
 import { VanillaInputConfig, VanillaInputConfigToVariantJs } from '@/components/Input';
 import { VanillaDatetimePickerConfig } from '@/components/DatetimePicker';
 import { VanillaTextareaConfig } from '@/components/Textarea';
+
 import { VanillaFormErrorsConfig } from '@/components/FormErrors';
 import { VanillaFormFeedbackConfig } from '@/components/FormFeedback';
+
 import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect';
 import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage';
+import { VanillaRichSelectOptionWithIndicatorsConfig } from '@/components/RichSelect/RichSelectOptionWithIndicators';
+import { VanillaRichSelectTagWithImageConfig } from '@/components/RichSelect/RichSelectTagWithImage';
+
+import { VanillaSelectCountryConfig } from '@/components/SelectCountry';
 import { VanillaPhoneNumberConfig } from '@/components/PhoneNumber';
+
 import { VanillaCheckboxConfig, VanillaCheckboxConfigToVariantJs } from '@/components/Checkbox';
 import { VanillaAvatarConfig } from '@/components/Avatar';
-import { VanillaRichRadioConfig } from '@/components/RichRadio';
 import { VanillaToggleConfig } from '@/components/Toggle';
+
+import { VanillaRichRadioConfig } from '@/components/RichRadio';
+import { VanillaRichRadioOptionConfig } from '@/components/RichRadio/RichRadioOption';
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
@@ -22,13 +31,21 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaInput: VanillaInputConfig,
         VanillaTextarea: VanillaTextareaConfig,
         VanillaDatetimePicker: VanillaDatetimePickerConfig,
+
         VanillaRichSelect: VanillaRichSelectConfig,
         VanillaRichSelectOptionWithImage: VanillaRichSelectOptionWithImageConfig,
+        VanillaRichSelectOptionWithIndicators: VanillaRichSelectOptionWithIndicatorsConfig,
+        VanillaRichSelectTagWithImage: VanillaRichSelectTagWithImageConfig,
+
         VanillaPhoneNumber: VanillaPhoneNumberConfig,
+        VanillaSelectCountry: VanillaSelectCountryConfig,
+
         VanillaCheckbox: VanillaCheckboxConfig,
         VanillaAvatar: VanillaAvatarConfig,
-        VanillaRichRadio: VanillaRichRadioConfig,
         VanillaToggle: VanillaToggleConfig,
+
+        VanillaRichRadio: VanillaRichRadioConfig,
+        VanillaRichRadioOption: VanillaRichRadioOptionConfig,
 
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,

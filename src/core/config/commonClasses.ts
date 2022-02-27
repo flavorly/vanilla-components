@@ -40,6 +40,6 @@ export const commonClasses = {
   dropdownsBorder: 'border border-1 border-gray-300 dark:border-gray-700',
 
   // Options
-  optionOrItemDisabled: 'opacity-30 cursor-not-allowed',
+  optionOrItemDisabled: 'opacity-50 cursor-not-allowed',
 
 };
