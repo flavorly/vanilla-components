@@ -145,7 +145,7 @@ export default defineComponent({
         },
         radio: {
             type: Boolean as PropType<boolean>,
-            default: false,
+            default: true,
         },
         compact: {
             type: Boolean as PropType<boolean>,

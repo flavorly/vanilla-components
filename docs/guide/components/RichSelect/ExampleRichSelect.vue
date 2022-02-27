@@ -53,6 +53,7 @@
       :tags="true"
       :multiple="true"
       placeholder="Elon Musk"
+      :errors="'im an error'"
     >
       <template #tagLabel="{ option: { raw: person }, className, isSelected, hasErrors}">
         <VanillaRichSelectTagWithImage
