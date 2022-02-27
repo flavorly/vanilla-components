@@ -7,6 +7,7 @@ export type InputOptionText = string | number | undefined;
 export type NormalizedOption = {
   value: InputOptionValue
   text: InputOptionText
+  description?: InputOptionText,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   raw?: any
   children?: NormalizedOptions
@@ -18,6 +19,7 @@ export type InputOptions = Array<InputOption> | { [key: string]: InputOptionText
 export type InputOptionObject = {
   value?: InputOptionValue
   text?: InputOptionText
+  description?: InputOptionText,
   disabled?: boolean | undefined
   children?: InputOptions
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

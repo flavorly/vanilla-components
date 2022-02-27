@@ -19,6 +19,7 @@
           v-slot="{ active, checked }"
           as="template"
           :value="option.value"
+          :disabled="option?.disabled || false"
         >
           <div
             :class="[
@@ -61,38 +62,38 @@
                 v-bind="{checked,option}"
               >
                 <div :class="configuration.classesList?.content">
-                  <slot
-                    name="optionLabel"
-                    v-bind="{checked,option}"
-                  >
-                    <RadioGroupLabel
-                      as="p"
-                      :class="[
-                        checked ? configuration.classesList?.labelChecked : configuration.classesList?.labelUnchecked,
-                        configuration.classesList?.label
-                      ]"
-                      v-html="option.text"
-                    />
-                  </slot>
-                  <slot
-                    name="optionDescription"
-                    v-bind="{checked,option}"
-                  >
-                    <RadioGroupDescription
-                      v-if="option?.raw?.description && !compact"
-                      as="span"
-                      :class="{
-                        'text-primary-700 dark:text-gray-200': checked && !hasErrors,
-                        'text-red-700 dark:text-gray-200': checked && hasErrors,
-                        'text-gray-500 dark:text-gray-400': !checked
-                      }"
-                      class="inline"
+                  <div :class="configuration.classesList?.contentInner">
+                    <slot
+                      name="optionLabel"
+                      v-bind="{checked,option}"
                     >
-                      <span
-                        v-html="option?.raw?.description"
+                      <RadioGroupLabel
+                        as="p"
+                        :class="[
+                          checked ? configuration.classesList?.labelChecked : configuration.classesList?.labelUnchecked,
+                          configuration.classesList?.label
+                        ]"
+                        v-html="option.text"
                       />
-                    </RadioGroupDescription>
-                  </slot>
+                    </slot>
+                    <slot
+                      name="optionDescription"
+                      v-bind="{checked,option}"
+                    >
+                      <RadioGroupDescription
+                        v-if="option?.raw?.description && !compact"
+                        as="span"
+                        :class="[
+                          configuration.classesList?.description,
+                          checked ? configuration.classesList?.descriptionChecked : configuration.classesList?.descriptionUnchecked
+                        ]"
+                      >
+                        <span
+                          v-html="option?.raw?.description"
+                        />
+                      </RadioGroupDescription>
+                    </slot>
+                  </div>
                 </div>
               </slot>
               <!-- Checked but not radio style -->
@@ -247,8 +248,6 @@ export default defineComponent({
             props.textAttribute,
             props.valueAttribute,
         );
-
-        console.log(normalizedOptions);
 
         return {
             configuration,

@@ -39,4 +39,7 @@ export const commonClasses = {
   dropdownsRadius: 'rounded-md',
   dropdownsBorder: 'border border-1 border-gray-300 dark:border-gray-700',
 
+  // Options
+  optionOrItemDisabled: 'opacity-30 cursor-not-allowed',
+
 };

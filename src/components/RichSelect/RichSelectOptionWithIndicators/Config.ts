@@ -2,7 +2,8 @@ import { commonClasses } from '@/core';
 
 export const VanillaRichSelectOptionWithIndicatorsConfig = {
   classes: {
-    wrapper: 'relative',
+    wrapper: 'relative group',
+    disabled: commonClasses.optionOrItemDisabled,
 
     labelAndImageWrapper: 'relative',
     labelAndImageContainer: 'flex items-center space-x-2 text-sm block',

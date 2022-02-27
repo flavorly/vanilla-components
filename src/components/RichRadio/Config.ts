@@ -6,7 +6,7 @@ export const VanillaRichRadioConfig = {
   },
   // Default Input appearance
   classes: {
-    wrapper: 'foo',
+    wrapper: '',
     container: 'relative flex-1',
 
     optionContainer: 'rounded-lg',
@@ -41,14 +41,18 @@ export const VanillaRichRadioConfig = {
     checkedIcon: 'w-6 h-6',
     checkedIconOpacity: 'fill-opacity-90 dark:fill-opacity-30 fill-[#4f46e5] dark:fill-[#fff]',
 
-
     contentWrapper: 'ml-3 flex items-center justify-between text-sm',
     contentWrapperIfNotRadio: 'w-full',
+    contentInner: '',
     content: 'flex items-center',
 
     label: 'font-medium',
     labelChecked: 'font-bold text-primary-900 dark:text-white',
     labelUnchecked: 'font-normal text-gray-900 dark:text-white',
+
+    description: 'inline',
+    descriptionChecked: 'text-primary-700 dark:text-gray-200',
+    descriptionUnchecked: 'text-gray-500 dark:text-gray-400',
 
   },
   // Variants

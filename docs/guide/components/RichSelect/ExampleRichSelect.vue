@@ -59,6 +59,7 @@
           :name="person?.text"
           :image="person?.image"
           :selected="isSelected"
+          :disabled="person?.disabled"
           :parent-classes="className"
           :has-errors="hasErrors"
         />
@@ -70,6 +71,7 @@
           :image="person?.image"
           :description="person?.description"
           :selected="isSelected"
+          :disabled="person?.disabled"
           :parent-classes="className"
           :has-errors="hasErrors"
         />
@@ -93,6 +95,7 @@
           :image="person?.image"
           :description="person?.description"
           :selected="isSelected"
+          :disabled="person?.disabled"
           :parent-classes="className"
           :has-errors="hasErrors"
         />
@@ -104,6 +107,7 @@
           :image="person?.image"
           :description="person?.description"
           :selected="isSelected"
+          :disabled="person?.disabled"
           :parent-classes="className"
           :has-errors="hasErrors"
         />
@@ -128,6 +132,7 @@
           :status="order?.status"
           :description="order?.description"
           :selected="isSelected"
+          :disabled="order?.disabled"
           :parent-classes="className"
         />
       </template>
@@ -138,6 +143,7 @@
           :status="order?.status"
           :description="order?.description"
           :selected="isSelected"
+          :disabled="order?.disabled"
           :parent-classes="className"
         />
       </template>
@@ -238,6 +244,7 @@ const optionsNested = [
 const options =  [
     { value: 'Option 1', text: 'One Option' },
     { value: 'Option 2', text: 'Two Options' },
+    { value: 'Option 3', text: 'Three Options', disabled: true },
     { value: { nested: true, type: 'nested' }, text: 'Complex Object' },
 ];
 
@@ -253,6 +260,7 @@ const persons = [
         text: 'Robert Boes',
         description: 'This an additional text for your select',
         image: 'https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+        disabled: true,
     },
     {
         value: 'armando-sharlaton',
@@ -274,6 +282,7 @@ const orders = [
         text: 'Order #2 - Completed',
         description: 'This order is completed',
         status: 'green',
+        disabled: true,
     },
     {
         value: '3',

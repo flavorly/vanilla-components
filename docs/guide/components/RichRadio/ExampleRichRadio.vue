@@ -21,10 +21,10 @@ defineComponent({ name: 'ExampleRichRadio' });
 onMounted(() => window.parent.postMessage('mounted', '*'));
 
 const options =  [
-    { value: 'Option 1', text: 'One Option', description: 'Im a description inside my option' },
-    { value: 'Option 2', text: 'Two Options', description: 'Im a description inside my option' },
-    { value: { nested: true, type: 'nested' }, text: 'Complex Object', description: 'Im a description inside my option' },
+    { value: 'paypal', text: 'Paypal', description: 'Paypal is the most secure way to make purchases' },
+    { value: 'visa', text: 'Visa, Master Card, Amex', description: 'Use your credit card with confidence via Stripe' },
+    { value: 'wire', text: 'Wire Transfer', description: 'Not familiar? Lets make a wire.' },
 ];
 
-const value = ref(['Option 1']);
+const value = ref('paypal');
 </script>

@@ -1,5 +1,11 @@
 <template>
-  <div :class="[parentClasses, configuration.classesList.wrapper]">
+  <div
+    :class="[
+      parentClasses,
+      configuration.classesList.wrapper,
+      disabled ? configuration.classesList.disabled : ''
+    ]"
+  >
     <div :class="[configuration.classesList.labelAndImageWrapper]">
       <div
         :class="[
@@ -79,6 +85,10 @@ export default defineComponent({
         },
         hasErrors: {
             type: Boolean,
+            default: false,
+        },
+        disabled: {
+            type: Boolean as PropType<boolean>,
             default: false,
         },
         parentClasses: {
