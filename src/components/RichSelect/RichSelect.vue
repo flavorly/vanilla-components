@@ -218,11 +218,11 @@ export default defineComponent({
         },
         valueAttribute: {
             type: String,
-            default: undefined,
+            default: 'value',
         },
         textAttribute: {
             type: String,
-            default: undefined,
+            default: 'text',
         },
         hideSearchBox: {
             type: Boolean,

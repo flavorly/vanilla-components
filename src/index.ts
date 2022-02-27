@@ -26,6 +26,7 @@ export { default as VanillaCheckbox } from './components/Checkbox/Checkbox.vue';
 export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 export { default as VanillaAvatar } from './components/Avatar/Avatar.vue';
 export { default as VanillaButton } from './components/Button/Button.vue';
+export { default as VanillaRichRadio } from './components/RichRadio/RichRadio.vue';
 
 // Form Additional Elements
 //export { default as VanillaInputLayout } from './components/Forms/Layout.vue';

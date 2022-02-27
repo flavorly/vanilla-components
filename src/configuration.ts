@@ -11,6 +11,8 @@ import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/
 import { VanillaPhoneNumberConfig } from '@/components/PhoneNumber';
 import { VanillaCheckboxConfig, VanillaCheckboxConfigToVariantJs } from '@/components/Checkbox';
 import { VanillaAvatarConfig } from '@/components/Avatar';
+import { VanillaRichRadioConfig } from '@/components/RichRadio';
+import { VanillaToggleConfig } from '@/components/Toggle';
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
@@ -25,6 +27,8 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaPhoneNumber: VanillaPhoneNumberConfig,
         VanillaCheckbox: VanillaCheckboxConfig,
         VanillaAvatar: VanillaAvatarConfig,
+        VanillaRichRadio: VanillaRichRadioConfig,
+        VanillaToggle: VanillaToggleConfig,
 
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,

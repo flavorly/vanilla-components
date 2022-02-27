@@ -36,10 +36,8 @@
             <div
               :class="{
                 'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-primary-600 border border-primary-200 dark:bg-primary-500 dark:border-primary-500 z-10' : active && !hasErrors,
-                'ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-red-600 border border-primary-200 dark:bg-primary-500 dark:border-red-500 z-10' : active && hasErrors,
                 'border border-gray-200 dark:border-gray-700' : !active,
                 'bg-primary-100 dark:bg-primary-500/60 text-white border-primary-200 dark:border-primary-500 z-10' : checked && !hasErrors,
-                'bg-red-100/70 dark:bg-red-400/10 text-white border-red-200 dark:border-red-500 z-10' : checked && hasErrors,
                 'bg-white dark:bg-gray-900': !checked,
                 'rounded-tl-lg rounded-tr-lg': !separated && index === 0,
                 'rounded-bl-lg rounded-br-lg': !separated && index === options.length - 1,

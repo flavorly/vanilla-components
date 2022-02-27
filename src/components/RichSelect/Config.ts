@@ -107,7 +107,7 @@ const defaultVariant = {
       'rounded shadow-sm flex items-center cursor-pointer',
       'bg-primary-100 dark:bg-primary-500/20 dark:border dark:border-gray-700',
       'm-0.5 h-8 max-w-full',
-      'text-primary-900 dark:text-white white-space-no text-sm white-space-no',
+      'text-primary-900 dark:text-white white-space-no text-sm font-semibold',
       commonClasses.buttonRing,
       'focus:ring-opacity-50 focus:ring-primary-600',
       commonClasses.inputsTransition,
