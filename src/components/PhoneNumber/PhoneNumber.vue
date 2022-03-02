@@ -6,7 +6,7 @@
     <div>
       <vanilla-select-country
         v-model="phoneCountryCode"
-        :errors="localErrors"
+        :variant="localVariant"
         :show-errors="false"
         :has-item-bellow="true"
         :label-with-dial-code="true"
@@ -18,7 +18,7 @@
       />
       <vanilla-input
         v-model="phoneNumber"
-        :errors="localErrors"
+        :variant="localVariant"
         :show-errors="false"
         :placeholder="phonePlaceholder"
         :class="[
@@ -115,19 +115,8 @@ export default defineComponent({
         'update:phoneNumberInternational',
     ],
     setup(props, { emit }) {
+
         const localValue = useVModel(props, 'modelValue');
-        const {
-            hasErrors,
-            localErrors,
-            localVariant,
-        } = useBootVariant(props, 'errors', localValue);
-
-        const { configuration } = useConfigurationWithClassesList<VanillaPhoneNumberProps>(
-            VanillaPhoneNumberConfig,
-            VanillaPhoneNumberClassesKeys,
-            localVariant,
-        );
-
         const phoneCountryCode: CountryCode | Ref = ref(props.countryCode);
         const phoneDialCode: CountryCallingCode | Ref = ref(null);
         const phoneNumber: Ref<string | undefined> = ref(localValue.value);
@@ -154,14 +143,20 @@ export default defineComponent({
             }
         };
 
-        // On Mounted, attempt to convert the given number
-        onMounted(() => {
-            // This is a little hack, since if the phone number is not correct we will just trigger
-            // a model-value change, we will re-asign the errors again.
-            const temporaryErrors = props.errors;
-            attemptToParseNumber(phoneNumber.value, phoneCountryCode.value);
-            localErrors.value = temporaryErrors;
-        });
+        attemptToParseNumber(phoneNumber.value, phoneCountryCode.value);
+
+        // Only boot here, first we must prepare the values before start to watch.
+        const {
+            hasErrors,
+            localErrors,
+            localVariant,
+        } = useBootVariant(props, 'errors', localValue);
+
+        const { configuration } = useConfigurationWithClassesList<VanillaPhoneNumberProps>(
+            VanillaPhoneNumberConfig,
+            VanillaPhoneNumberClassesKeys,
+            localVariant,
+        );
 
         // Watch Country Code and Phone number together
         // When one changes we will trigger the model value & emit back

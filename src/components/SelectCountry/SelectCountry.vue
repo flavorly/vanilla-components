@@ -8,7 +8,7 @@
     :value-attribute="'value'"
     :text-attribute="'label'"
     :clear-search-on-close="true"
-    :errors="localErrors"
+    :variant="localVariant"
     :show-errors="showErrors"
   >
     <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
@@ -84,7 +84,7 @@ export default defineComponent({
     setup(props, { emit }) {
 
         const localValue = useVModel(props, 'modelValue');
-        const { hasErrors, localErrors } = useBootVariant(props, 'errors', localValue);
+        const { hasErrors, localErrors, localVariant } = useBootVariant(props, 'errors', localValue);
 
         // Pre-fetch the following Options
         const preFetchOptions = filterCountriesByName(
@@ -131,6 +131,7 @@ export default defineComponent({
         return {
             localValue,
             localErrors,
+            localVariant,
             hasErrors,
             hasSlot,
             fetchCountries,

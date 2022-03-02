@@ -169,8 +169,6 @@ export default defineComponent({
             localVariant,
         );
 
-        console.log('Rich Option Variant', localVariant.value);
-
         return {
             configuration,
         };
