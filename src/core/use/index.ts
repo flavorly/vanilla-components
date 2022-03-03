@@ -8,5 +8,7 @@ export { default as useInjectsConfiguration } from './useInjectsConfiguration';
 export { default as useVariantProps } from './useVariantProps';
 export { default as useVariantPropsWithClassesList } from './useVariantPropsWithClassesList';
 export { default as useVModel } from './useVModel';
+export { default as useMultipleVModel } from './useMultipleVModel';
+export { default as useMultipleOptions } from './useMultipleOptions';
 export { default as useConfiguration } from './useConfiguration';
 export { useConfigurationParts, useAttributes, extractDefinedProps } from './useConfiguration';

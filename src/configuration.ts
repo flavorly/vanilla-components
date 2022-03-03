@@ -8,6 +8,7 @@ import { VanillaTextareaConfig } from '@/components/Textarea';
 import { VanillaFormErrorsConfig } from '@/components/FormErrors';
 import { VanillaFormFeedbackConfig } from '@/components/FormFeedback';
 
+import { VanillaSelectConfig, VanillaSelectConfigToVariantJs } from '@/components/Select';
 import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect';
 import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage';
 import { VanillaRichSelectOptionWithIndicatorsConfig } from '@/components/RichSelect/RichSelectOptionWithIndicators';
@@ -32,6 +33,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaTextarea: VanillaTextareaConfig,
         VanillaDatetimePicker: VanillaDatetimePickerConfig,
 
+        VanillaSelect: VanillaSelectConfig,
         VanillaRichSelect: VanillaRichSelectConfig,
         VanillaRichSelectOptionWithImage: VanillaRichSelectOptionWithImageConfig,
         VanillaRichSelectOptionWithIndicators: VanillaRichSelectOptionWithIndicatorsConfig,
@@ -58,6 +60,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         TInput: VanillaInputConfigToVariantJs(VanillaComponentsDefaults?.VanillaInput ?? {}),
         TRichSelect: VanillaRichSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaRichSelect ?? {}),
         TCheckbox: VanillaCheckboxConfigToVariantJs(VanillaComponentsDefaults?.VanillaCheckbox ?? {}),
+        TSelect: VanillaSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaSelect ?? {}),
     };
 
     // Return Both Merged Configuration

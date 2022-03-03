@@ -14,6 +14,9 @@ export { default as VanillaInput } from './components/Input/Input.vue';
 export { default as VanillaDatetimePicker } from './components/DatetimePicker/DatetimePicker.vue';
 export { default as VanillaTextarea } from './components/Textarea/Textarea.vue';
 
+export { default as VanillaSelect } from './components/Select/Select.vue';
+export { default as VanillaSelectOption } from './components/Select/SelectOption/SelectOption.vue';
+
 export { default as VanillaRichSelect } from './components/RichSelect/RichSelect.vue';
 export { default as VanillaRichSelectOptionWithImage } from './components/RichSelect/RichSelectOptionWithImage/RichSelectOptionWithImage.vue';
 export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators/RichSelectOptionWithIndicators.vue';

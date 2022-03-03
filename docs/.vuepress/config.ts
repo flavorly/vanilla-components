@@ -34,7 +34,7 @@ export default {
           { text: 'Introduction', link: '/guide/components/shared-options' },
           { text: 'Text & Password', link: '/guide/components/Input' },
           { text: 'Textarea', link: '/guide/components/Textarea' },
-          // { text: 'Select', link: '/guide/inputs/select' },
+          { text: 'Select', link: '/guide/components/select' },
           { text: 'Rich Select', link: '/guide/components/RichSelect' },
           { text: 'Country Select', link: '/guide/components/SelectCountry' },
           { text: 'Phone Number', link: '/guide/components/PhoneNumber' },
