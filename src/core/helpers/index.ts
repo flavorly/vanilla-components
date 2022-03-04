@@ -12,5 +12,6 @@ export { default as promisify } from './promisify';
 export { default as promisifyFunctionResult } from './promisifyFunctionResult';
 export { default as subtractFromArray } from './subtractFromArray';
 export { default as throttle } from './throttle';
+export { default as isTouchOnlyDevice } from './isTouchOnlyDevice';
 
 
