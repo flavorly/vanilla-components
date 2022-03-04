@@ -7,6 +7,7 @@
       loading || disabled ? configuration.classesList.busyOrInvalidState : '',
       !disabled && !loading ? configuration.classesList.enableOpacity : '',
     ]"
+    :type="type"
     v-bind="$attrs"
     @click="$emit('click',$event)"
   >
@@ -60,6 +61,10 @@ export default defineComponent({
         disabled: {
             type: [Boolean] as PropType<boolean>,
             default: false,
+        },
+        type: {
+            type: [String] as PropType<string>,
+            default: 'button',
         },
     },
     emits: [

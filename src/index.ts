@@ -30,6 +30,7 @@ export { default as VanillaCheckbox } from './components/Checkbox/Checkbox.vue';
 export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 export { default as VanillaAvatar } from './components/Avatar/Avatar.vue';
 export { default as VanillaButton } from './components/Button/Button.vue';
+export { default as VanillaDropdown } from './components/Dropdown/Dropdown.vue';
 
 export { default as VanillaRichRadio } from './components/RichRadio/RichRadio.vue';
 export { default as VanillaRichRadioOption } from './components/RichRadio/RichRadioOption/RichRadioOption.vue';
@@ -38,8 +39,6 @@ export { default as VanillaRichRadioOption } from './components/RichRadio/RichRa
 //export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
 export { default as VanillaFormErrors } from './components/FormErrors/FormErrors.vue';
 export { default as VanillaFormFeedback } from './components/FormFeedback/FormFeedback.vue';
-
-// export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 
 // Icons
 export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
