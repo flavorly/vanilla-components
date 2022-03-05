@@ -2,7 +2,7 @@ import { Modifier, ModifierArguments } from '@popperjs/core';
 import { Data } from '@/core/types';
 
 export const popperOptions = {
-  placement: 'bottom',
+  placement: 'bottom-end',
   modifiers: [
     {
       name: 'offset',

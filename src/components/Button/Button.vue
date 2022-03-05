@@ -14,11 +14,11 @@
     <slot name="default">
       <span :class="configuration.classesList.container">
         <!-- Loading Icon -->
-        <span v-show="loading">
+        <span v-if="loading">
           <VanillaLoadingSpinner :class="configuration.classesList.spinner" />
         </span>
         <!-- If not loading, show the user provided icon -->
-        <span v-show="!loading && hasSlot($slots.icon)">
+        <span v-if="!loading && hasSlot($slots.icon)">
           <slot name="icon" />
         </span>
         <!-- Actual button label -->
