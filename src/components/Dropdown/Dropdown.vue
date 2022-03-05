@@ -1,113 +1,116 @@
 <template>
-  <component :is="tagName">
-    <Menu
-      v-slot="{open}"
-      as="div"
-      class="relative"
+  <Menu
+    v-slot="{open}"
+    as="div"
+    class="relative"
+  >
+    <MenuButton
+      ref="button"
+      as="template"
     >
-      <MenuButton
-        ref="button"
-        as="template"
+      <VanillaButton
+        :variant="buttonVariant"
       >
-        <VanillaButton
-          :variant="buttonVariant"
-        >
-          <span v-text="text" />
-          <ChevronDownIcon
-            class="-mr-1 ml-2 h-5 w-5"
-            aria-hidden="true"
-          />
-        </VanillaButton>
-      </MenuButton>
+        <span v-text="text" />
+        <ChevronDownIcon
+          :class="configuration.classesList.wrapper"
+          aria-hidden="true"
+        />
+      </VanillaButton>
+    </MenuButton>
 
+    <div
+      v-if="overlay && open"
+      :class="configuration.classesList.overlay"
+      @click="closeOnClickOverlay"
+    />
+
+    <teleport
+      :to="teleportTo"
+      :disabled="teleport"
+    >
       <div
-        v-if="overlay && open"
-        :class="{'bg-black bg-opacity-50': true}"
-        style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99;"
-        @click="closeOnClickOverlay"
-      />
-
-      <teleport
-        :to="teleportTo"
-        :disabled="teleport"
+        ref="menu"
+        :class="configuration.classesList.menuWrapper"
       >
-        <div
-          ref="menu"
-          class=""
-          style="position: absolute; z-index: 100;"
-        >
-          <transition
-            enter-active-class="transition duration-100 ease-out"
-            enter-from-class="transform scale-95 opacity-0"
-            enter-to-class="transform scale-100 opacity-100"
-            leave-active-class="transition duration-75 ease-in"
-            leave-from-class="transform scale-100 opacity-100"
-            leave-to-class="transform scale-95 opacity-0"
+        <VanillaTransitionable :classes-list="configuration.classesList">
+          <MenuItems
+            :class="configuration.classesList.dropdown"
           >
-            <MenuItems class="top-5 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 py-1 w-56 focus:ring-2 focus:ring-primary-500 focus:outline-none">
-              <div ref="menuItems">
-                <div class="px-1 py-1">
-                  <MenuItem v-slot="{ active }">
-                    <button
-                      :class="[
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <DuplicateIcon
-                        :active="active"
-                        class="w-5 h-5 mr-2 text-violet-400"
-                        aria-hidden="true"
-                      />
-                      Duplicate
-                    </button>
-                  </MenuItem>
-                </div>
-                <div class="px-1 py-1">
-                  <MenuItem v-slot="{ active }">
-                    <button
-                      :class="[
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <ArchiveIcon
-                        :active="active"
-                        class="w-5 h-5 mr-2 text-violet-400"
-                        aria-hidden="true"
-                      />
-                      Archive
-                    </button>
-                  </MenuItem>
-                </div>
-                <div class="px-1 py-1">
-                  <MenuItem v-slot="{ active }">
-                    <button
-                      :class="[
-                        active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                        'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                      ]"
-                    >
-                      <TrashIcon
-                        :active="active"
-                        class="w-5 h-5 mr-2 text-violet-400"
-                        aria-hidden="true"
-                      />
-                      Delete
-                    </button>
-                  </MenuItem>
-                </div>
+            <div
+              ref="menuItems"
+              class="space-y-1"
+            >
+              <div class="px-1 py-1">
+                <MenuItem v-slot="{ active }">
+                  <button
+                    :class="[
+                      active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                      'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                    ]"
+                  >
+                    <DuplicateIcon
+                      :active="active"
+                      class="w-5 h-5 mr-2 text-violet-400"
+                      aria-hidden="true"
+                    />
+                    Duplicate
+                  </button>
+                </MenuItem>
               </div>
-            </MenuItems>
-          </transition>
-        </div>
-      </teleport>
-    </Menu>
-  </component>
+              <div class="px-1 py-1">
+                <MenuItem v-slot="{ active }">
+                  <button
+                    :class="[
+                      active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                      'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                    ]"
+                  >
+                    <ArchiveIcon
+                      :active="active"
+                      class="w-5 h-5 mr-2 text-violet-400"
+                      aria-hidden="true"
+                    />
+                    Archive
+                  </button>
+                </MenuItem>
+              </div>
+              <div class="px-1 py-1">
+                <MenuItem v-slot="{ active }">
+                  <button
+                    :class="[
+                      active ? 'bg-violet-500 text-white' : 'text-gray-900',
+                      'group flex rounded-md items-center w-full px-2 py-2 text-sm',
+                    ]"
+                  >
+                    <TrashIcon
+                      :active="active"
+                      class="w-5 h-5 mr-2 text-violet-400"
+                      aria-hidden="true"
+                    />
+                    Delete
+                  </button>
+                </MenuItem>
+              </div>
+            </div>
+          </MenuItems>
+        </VanillaTransitionable>
+      </div>
+    </teleport>
+  </Menu>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch, onMounted, onUpdated, onBeforeUnmount, computed, nextTick } from 'vue';
+import {
+    defineComponent,
+    PropType,
+    ref,
+    watch,
+    onMounted,
+    onBeforeUnmount,
+    computed,
+} from 'vue';
+
 import {
     useBootVariant,
     useVariantProps,
@@ -116,21 +119,26 @@ import {
     validPlacements,
     throttle,
 } from '@/core';
+
 import {
     VanillaDropdownProps,
     VanillaDropdownClassesKeys,
     VanillaDropdownConfig,
     VanillaDropdownPopperDefaultOptions,
 } from '@/components/Dropdown/index';
+
+import VanillaButton from '@/components/Button/Button.vue';
+import VanillaTransitionable from '@/components/Transitions/Transitionable.vue';
+import { createPopper, Options, Placement } from '@popperjs/core';
+import { Instance as PopperInstance } from '@popperjs/core/lib/types';
+
 import { Menu, MenuItem, MenuButton, MenuItems } from '@headlessui/vue';
 import { ChevronDownIcon, DuplicateIcon, ArchiveIcon, TrashIcon } from '@heroicons/vue/solid';
-import { createPopper, Options, Placement } from '@popperjs/core';
-import VanillaButton from '@/components/Button/Button.vue';
-import { Instance as PopperInstance } from '@popperjs/core/lib/types';
 
 export default defineComponent({
     name: 'VanillaDropdown',
     components: {
+        VanillaTransitionable,
         Menu,
         MenuItem,
         MenuButton,
@@ -300,17 +308,12 @@ export default defineComponent({
             }
         });
 
-        // onUpdated(() => {
-        //     refreshPopperInstance();
-        // });
-
         onBeforeUnmount(() => {
             destroyPopperInstance();
         });
 
         // Watch if the menu element is shown or hidden
         watch(menuItems, (newValue) => {
-            console.log('Menu items changed');
             localValue.value = newValue != undefined;
             refreshPopperInstance();
         });
@@ -319,7 +322,6 @@ export default defineComponent({
         // we will trigger a click to let HeadlessUi do its job
         // @see https://github.com/tailwindlabs/headlessui/issues/427#issuecomment-827403170
         watch(localValue,  () => {
-            console.log('Local Value changed');
             refreshPopperInstance();
         }, { immediate: false });
 

@@ -45,6 +45,7 @@ export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
 export { default as VanillaLoadingSpinner } from './components/Icons/LoadingSpinner.vue';
 export { default as VanillaCheckedIcon } from './components/Icons/CheckedIcon.vue';
 export { default as VanillaUncheckedIcon } from './components/Icons/UncheckedIcon.vue';
+export { default as VanillaTransition } from './components/Transitions/Transitionable.vue';
 
 
 // Plugin to Install

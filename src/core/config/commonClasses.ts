@@ -38,6 +38,7 @@ export const commonClasses = {
   dropdownsShadows: 'shadow-lg',
   dropdownsRadius: 'rounded-md',
   dropdownsBorder: 'border border-1 border-gray-300 dark:border-gray-700',
+  dropdownsFocus: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900',
 
   // Options
   optionOrItemDisabled: 'opacity-50 cursor-not-allowed',

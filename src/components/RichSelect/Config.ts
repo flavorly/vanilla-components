@@ -126,12 +126,12 @@ const defaultVariant = {
     ),
     tagDeleteButtonIcon: 'w-3 h-3',
 
-    // Transitions
-    ...enterAndLeave,
-
     // Own Configuration ( not vanilla )
     groupedBellow: 'rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10',
     groupedAbove: 'rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10',
+
+    // Transitions
+    ...enterAndLeave,
 };
 
 export const VanillaRichSelectConfig = {
