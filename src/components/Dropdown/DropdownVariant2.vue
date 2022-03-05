@@ -1,8 +1,14 @@
 <template>
+  <div
+    v-if="show"
+    :class="{'bg-black bg-opacity-50': overlay}"
+    style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998;"
+    @click="doHide"
+  />
   <component
     :is="tagName"
     ref="trigger"
-    :type="tagName === 'div' ? 'div' : undefined"
+    :type="tagName === 'button' ? 'button' : undefined"
     :aria-expanded="shown"
     :class="configuration.classesList?.trigger"
     :disabled="configuration.disabled"
@@ -19,49 +25,38 @@
       :popper="popper"
       name="trigger"
     >
-      <VanillaButton
-        :label="configuration.text"
-        :variant="buttonVariant"
-      />
+      {{ configuration.text }}
     </slot>
-
-    <teleport
-      :to="configuration.teleportTo"
-      :disabled="! configuration.teleport"
-    >
-      <div
-        v-if="localValue"
-        :class="{'bg-black bg-opacity-50': overlay}"
-        style="position: fixed; top: 0; right: 0; left: 0; bottom: 0; z-index: 99998;"
-        @click="doHide"
-      >
-        <component
-          :is="dropdownTagName"
-          v-show="shown || adjustingPopper || initAsShow"
-          ref="dropdown"
-          :style="[
-            adjustingPopper ? 'opacity:0' : undefined,
-          ]"
-          style=" z-index: 99999;"
-          :class="configuration.classesList?.dropdown"
-          :aria-hidden="!shown"
-          tabindex="-1"
-          v-bind="dropdownAttributes"
-          @blur="blurHandler"
-          @mouseover="mouseoverHandler"
-          @mouseleave="mouseleaveHandler"
-        >
-          <slot
-            :show="doShow"
-            :hide="doHide"
-            :toggle="doToggle"
-            :configuration="configuration"
-            :popper="popper"
-          />
-        </component>
-      </div>
-    </teleport>
   </component>
+
+  <teleport
+    :to="configuration.teleportTo"
+    :disabled="! configuration.teleport"
+  >
+    <component
+      :is="dropdownTagName"
+      v-show="shown || adjustingPopper || initAsShow"
+      ref="dropdown"
+      :style="adjustingPopper ? 'opacity:0' : undefined"
+      :class="configuration.classesList?.dropdown"
+      :aria-hidden="!shown"
+      tabindex="-1"
+      v-bind="dropdownAttributes"
+      style="z-index: 99999;"
+      class="top-5 rounded-md shadow-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900"
+      @blur="blurHandler"
+      @mouseover="mouseoverHandler"
+      @mouseleave="mouseleaveHandler"
+    >
+      <slot
+        :show="doShow"
+        :hide="doHide"
+        :toggle="doToggle"
+        :configuration="configuration"
+        :popper="popper"
+      />
+    </component>
+  </teleport>
 </template>
 <script lang="ts">
 import {
@@ -103,7 +98,7 @@ import {
 import { Instance as PopperInstance } from '@popperjs/core/lib/types';
 
 export default defineComponent({
-    name: 'VanillaDropdown1',
+    name: 'VanillaDropdown2',
     components: {
         VanillaButton,
         TDropdown,
