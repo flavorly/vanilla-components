@@ -1,7 +1,8 @@
 <template>
   <MenuItem
     v-slot="{ active }"
-    as="div"
+    :as="as"
+    :disabled="disabled"
   >
     <button
       :class="[
@@ -34,6 +35,16 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: undefined,
+        },
+        disabled: {
+            type: [Boolean] as PropType<boolean>,
+            required: false,
+            default: false,
+        },
+        as: {
+            type: [String] as PropType<string>,
+            required: false,
+            default: 'div',
         },
     },
     setup(props){
