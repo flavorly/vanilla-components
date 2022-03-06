@@ -4,6 +4,7 @@
     as="div"
     class="relative"
   >
+    <!-- Trigger -->
     <MenuButton
       ref="button"
       as="template"
@@ -18,7 +19,7 @@
         />
       </VanillaButton>
     </MenuButton>
-
+    <!-- Overlay if enable -->
     <div
       v-if="overlay && open"
       :class="configuration.classesList.overlay"
@@ -33,65 +34,21 @@
         ref="menu"
         :class="configuration.classesList.menuWrapper"
       >
+        <div
+          v-if="showArrow && open"
+          :class="configuration.classesList.arrow"
+          data-popper-arrow
+        />
+
         <VanillaTransitionable :classes-list="configuration.classesList">
           <MenuItems
             :class="configuration.classesList.dropdown"
           >
             <div
               ref="menuItems"
-              class="space-y-1"
+              :class="configuration.classesList.menuItemsWrapper"
             >
-              <div class="px-1 py-1">
-                <MenuItem v-slot="{ active }">
-                  <button
-                    :class="[
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                      'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                    ]"
-                  >
-                    <DuplicateIcon
-                      :active="active"
-                      class="w-5 h-5 mr-2 text-violet-400"
-                      aria-hidden="true"
-                    />
-                    Duplicate
-                  </button>
-                </MenuItem>
-              </div>
-              <div class="px-1 py-1">
-                <MenuItem v-slot="{ active }">
-                  <button
-                    :class="[
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                      'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                    ]"
-                  >
-                    <ArchiveIcon
-                      :active="active"
-                      class="w-5 h-5 mr-2 text-violet-400"
-                      aria-hidden="true"
-                    />
-                    Archive
-                  </button>
-                </MenuItem>
-              </div>
-              <div class="px-1 py-1">
-                <MenuItem v-slot="{ active }">
-                  <button
-                    :class="[
-                      active ? 'bg-violet-500 text-white' : 'text-gray-900',
-                      'group flex rounded-md items-center w-full px-2 py-2 text-sm',
-                    ]"
-                  >
-                    <TrashIcon
-                      :active="active"
-                      class="w-5 h-5 mr-2 text-violet-400"
-                      aria-hidden="true"
-                    />
-                    Delete
-                  </button>
-                </MenuItem>
-              </div>
+              <slot />
             </div>
           </MenuItems>
         </VanillaTransitionable>
@@ -108,7 +65,7 @@ import {
     watch,
     onMounted,
     onBeforeUnmount,
-    computed,
+    computed, provide,
 } from 'vue';
 
 import {
@@ -132,21 +89,17 @@ import VanillaTransitionable from '@/components/Transitions/Transitionable.vue';
 import { createPopper, Options, Placement } from '@popperjs/core';
 import { Instance as PopperInstance } from '@popperjs/core/lib/types';
 
-import { Menu, MenuItem, MenuButton, MenuItems } from '@headlessui/vue';
-import { ChevronDownIcon, DuplicateIcon, ArchiveIcon, TrashIcon } from '@heroicons/vue/solid';
+import { Menu, MenuButton, MenuItems } from '@headlessui/vue';
+import { ChevronDownIcon } from '@heroicons/vue/solid';
 
 export default defineComponent({
     name: 'VanillaDropdown',
     components: {
         VanillaTransitionable,
         Menu,
-        MenuItem,
         MenuButton,
         MenuItems,
         ChevronDownIcon,
-        DuplicateIcon,
-        ArchiveIcon,
-        TrashIcon,
         VanillaButton,
     },
     inheritAttrs: true,
@@ -209,6 +162,10 @@ export default defineComponent({
             default: (): Options => VanillaDropdownPopperDefaultOptions as Options,
         },
         overlay: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+        showArrow: {
             type: Boolean as PropType<boolean>,
             default: false,
         },
@@ -285,6 +242,11 @@ export default defineComponent({
             if (!menu.value || !button.value?.$el){
                 return;
             }
+
+            if (popperInstance.value !== null){
+                return;
+            }
+
             popperInstance.value = createPopper(button.value?.$el, menu?.value, popperComputedOptions.value);
         };
 
@@ -315,15 +277,20 @@ export default defineComponent({
         // Watch if the menu element is shown or hidden
         watch(menuItems, (newValue) => {
             localValue.value = newValue != undefined;
-            refreshPopperInstance();
+            createPopperInstance();
         });
 
         // Whenever the model value or local value changes
         // we will trigger a click to let HeadlessUi do its job
         // @see https://github.com/tailwindlabs/headlessui/issues/427#issuecomment-827403170
         watch(localValue,  () => {
-            refreshPopperInstance();
+            createPopperInstance();
         }, { immediate: false });
+
+        /**
+         * Provided data
+         */
+        provide('configuration_vanilla', configuration);
 
         return {
             configuration,

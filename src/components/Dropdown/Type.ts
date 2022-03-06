@@ -20,4 +20,5 @@ export type VanillaDropdownProps = WithVariantPropsAndClassesList<{
   placement?: Placement | string,
   popperOptions?: Options,
   overlay?: boolean,
+  showArrow?: boolean,
 } & InputHTMLAttributes & Data, VanillaDropdownClassesValidKeys>;

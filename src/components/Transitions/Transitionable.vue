@@ -26,7 +26,7 @@ export default defineComponent({
         },
         enabled: {
             type: Boolean,
-            default: false,
+            default: true,
         },
     },
 });
