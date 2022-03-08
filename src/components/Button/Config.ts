@@ -10,6 +10,7 @@ export const VanillaButtonConfig = {
       commonClasses.buttonShadow,
       commonClasses.buttonSpacing,
       'focus:ring-offset-2',
+      'cursor-pointer',
     ),
     container: 'flex items-center space-x-1',
     spinner: 'animate-spin -ml-1 mr-1 h-5 w-5 text-whit',

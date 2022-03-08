@@ -1,5 +1,5 @@
 import { commonClasses } from '@/core/config/commonClasses';
-import { enterAndLeave, mergeClasses, popperOptions } from '@/core';
+import { mergeClasses, popperOptions } from '@/core';
 
 export const VanillaDropdownConfig = {
   fixedClasses: {},

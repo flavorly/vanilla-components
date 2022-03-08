@@ -42,6 +42,10 @@ export { default as VanillaRichRadioOption } from './components/RichRadio/RichRa
 export { default as VanillaFormErrors } from './components/FormErrors/FormErrors.vue';
 export { default as VanillaFormFeedback } from './components/FormFeedback/FormFeedback.vue';
 
+// Dialog
+export { default as VanillaDialog } from './components/Dialog/Dialog.vue';
+export { default as VanillaDialogFooter } from './components/Dialog/DialogFooter/DialogFooter.vue';
+
 // Icons
 export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
 export { default as VanillaLoadingSpinner } from './components/Icons/LoadingSpinner.vue';

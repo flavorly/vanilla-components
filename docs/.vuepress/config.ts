@@ -45,6 +45,7 @@ export default {
           { text: 'Rich Radio', link: '/guide/components/RichRadio' },
           { text: 'Datetime', link: '/guide/components/DatetimePicker' },
           { text: 'Dropdown', link: '/guide/components/Dropdown' },
+          { text: 'Dialog ( Modal ) ', link: '/guide/components/Dialog' },
         ],
       },
     ],
