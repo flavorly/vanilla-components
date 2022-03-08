@@ -20,12 +20,14 @@
       <template #footer>
         <VanillaButton
           :label="isOpen ? 'Close Modal' : 'Open Modal'"
+          tabindex="2"
           @click="toggle"
         />
         <VanillaButton
           ref="initial"
           variant="primary"
           :label="'Ok Thank you'"
+          focus-on-mount
         />
       </template>
     </VanillaDialog>

@@ -46,6 +46,12 @@
                 paddingOnModal ? configuration.classesList.modalWithPadding : ''
               ]"
             >
+              <!-- Trap the focus here, some weird bug with headlessui -->
+              <div
+                style="width: 0; height: 0; visibility: hidden"
+                tabindex="99"
+              />
+
               <!-- Header -->
               <DialogTitle
                 v-if="hasSlot($slots.header) || title !== undefined"
@@ -64,6 +70,7 @@
                 </slot>
               </DialogTitle>
 
+              <!-- Body -->
               <DialogDescription
                 as="div"
                 :class="[
@@ -77,6 +84,7 @@
                   }"
                 />
               </DialogDescription>
+
               <!-- Footer -->
               <VanillaDialogFooter
                 v-if="hasSlot($slots.footer)"
@@ -88,23 +96,6 @@
                   name="footer"
                 />
               </VanillaDialogFooter>
-
-              <!--              <div class="mt-2">-->
-              <!--                <p class="text-sm text-gray-500">-->
-              <!--                  Your payment has been successfully submitted. We’ve sent you-->
-              <!--                  an email with all of the details of your order.-->
-              <!--                </p>-->
-              <!--              </div>-->
-
-              <!--              <div class="mt-4">-->
-              <!--                <button-->
-              <!--                  type="button"-->
-              <!--                  class="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"-->
-              <!--                  @click="close"-->
-              <!--                >-->
-              <!--                  Got it, thanks!-->
-              <!--                </button>-->
-              <!--              </div>-->
             </div>
           </TransitionChild>
         </div>
@@ -114,7 +105,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, provide } from 'vue';
+import { defineComponent, onMounted, PropType, provide } from 'vue';
 
 import {
     useBootVariant,
@@ -201,10 +192,6 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             default: true,
         },
-        initialFocus: {
-            type: [HTMLElement, null] as PropType<HTMLElement | null>,
-            default: null,
-        },
     },
     emits: [
         'update:modelValue',
@@ -230,6 +217,11 @@ export default defineComponent({
          * Provided data
          */
         provide('configuration_vanilla', configuration);
+
+        onMounted(() => {
+            //console.log(getCurrentInstance());
+            console.log('initial focus', props.initialFocus);
+        });
 
         return {
             configuration,

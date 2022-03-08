@@ -1,6 +1,8 @@
 <template>
   <component
     :is="as"
+    v-bind="$attrs"
+    ref="button"
     :class="[
       configuration.classesList.button,
       disabled ? configuration.classesList.disableOpacity : '',
@@ -8,7 +10,6 @@
       !disabled && !loading ? configuration.classesList.enableOpacity : '',
     ]"
     :type="type"
-    v-bind="$attrs"
     @click="$emit('click',$event)"
   >
     <slot name="default">
@@ -30,7 +31,7 @@
   </component>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, onMounted, PropType, Ref, ref } from 'vue';
 import { useBootVariant, useVariantProps, useConfigurationWithClassesList, hasSlot } from '@/core';
 import { VanillaButtonProps, VanillaButtonClassesKeys, VanillaButtonConfig } from '@/components/Button/index';
 import VanillaLoadingSpinner from '@/components/Icons/LoadingSpinner.vue';
@@ -66,6 +67,10 @@ export default defineComponent({
             type: [String] as PropType<string>,
             default: 'button',
         },
+        focusOnMount: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
     },
     emits: [
         'click',
@@ -81,12 +86,23 @@ export default defineComponent({
             localVariant,
         );
 
+        const button = ref(null) as Ref<HTMLElement | null>;
+
+
+        // Focus on mount, (useful for modals )
+        onMounted(() => {
+            if (props.focusOnMount) {
+                button.value?.focus();
+            }
+        });
+
         return {
             configuration,
             localValue,
             localVariant,
             props,
             hasSlot,
+            button,
         };
     },
 });

@@ -1,10 +1,6 @@
 import { commonClasses } from '@/core/config/commonClasses';
 import { mergeClasses } from '@/core';
 
-const defaultStyle = {
-
-
-};
 
 export const VanillaDialogConfig = {
   fixedClasses: {},
@@ -38,6 +34,13 @@ export const VanillaDialogConfig = {
     footerWithTwoButtons: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0',
     footerWithThreeButtons: 'sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense',
 
+    // Transition backdrop
+
+    // TODO
+
+    // Transition for Modal
+
+    // TODO
   },
   variants: {
     // fullscreen: {
