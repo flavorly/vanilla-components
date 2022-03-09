@@ -1,34 +1,16 @@
 import { defineClientAppEnhance } from '@vuepress/client'
-import upperFirst from 'lodash/upperFirst'
-import camelCase from 'lodash/camelCase'
+import { VanillaComponentConfiguration }  from "@/core/types";
+import { VanillaComponents } from "@/index";
 
 export default defineClientAppEnhance(({ app, router, siteData }) => {
 
-  //console.log(app);
-  // Register all components in Src folder as global
-  // const requireComponent = require.context(
-  //   './../../src/components',
-  //   true,
-  //   /\.vue$/i
-  // )
-  //
-  // requireComponent.keys().forEach(fileName => {
-  //   const componentConfig = requireComponent(fileName)
-  //   const componentName = upperFirst(
-  //     camelCase(
-  //       fileName
-  //         .split('/')
-  //         .pop()
-  //         .replace(/\.\w+$/, '')
-  //     )
-  //   )
-  //   // Register
-  //   app.component(
-  //     componentConfig?.default?.name || componentName,
-  //     componentConfig.default || componentConfig
-  //   )
-  // })
+  const configuration: VanillaComponentConfiguration = {
+    VanillaInput: {
+      ///classes: 'border-yellow-500',
+      placeholder: 'Elon Musky'
+    },
+  };
 
-  // End component registration
+  app.use(VanillaComponents, configuration)
 
 })

@@ -1,6 +1,7 @@
 # Vanilla Components
 
-A lightweight Vue 3 component library.
+A lightweight Vue 3 component library based on VariantJS & Headlessui + Vanilla Components
+
 
 ## Usage
 
@@ -63,6 +64,14 @@ yarn format
 ```
 
 **FAQS**
+
+**TO CHECK**
+
+[] - useInjectsConfiguration
+[] - useInjectsClassesList
+[x] - Create index file for components
+[x] - Check when variant is error it should fallback to original variant and not the default one.
+[ ] - Check Disabled States in all components
 
 ```
 https://github.com/ulissesferreira/moon

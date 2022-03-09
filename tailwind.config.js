@@ -1,20 +1,5 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
-const plugin = require('tailwindcss/plugin')
-
-let makeShadow = (name, rgb) => {
-  let obj = {};
-  obj[name + "-xs"] = `0 0 0 1px rgba(${rgb}, 0.05)`;
-  obj[name + "-xs"] = `0 0 0 1px rgba(${rgb}, 0.05)`;
-  obj[name + "-sm"] = `0 1px 2px 0 rgba(${rgb}, 0.05)`;
-  obj[name] = `0 1px 3px 0 rgba(${rgb}, 0.1), 0 1px 2px 0 rgba(${rgb}, 0.06)`;
-  obj[name + "-md"] = `0 4px 6px -1px rgba(${rgb}, 0.1), 0 2px 4px -1px rgba(${rgb}, 0.06)`;
-  obj[name + "-lg"] = `0 10px 15px -3px rgba(${rgb}, 0.1), 0 4px 6px -2px rgba(${rgb}, 0.05)`;
-  obj[name + "-xl"] = `0 20px 25px -5px rgba(${rgb}, 0.1), 0 10px 10px -5px rgba(${rgb}, 0.04)`;
-  obj[name + "-2xl"] = `0 25px 50px -12px rgba(${rgb}, 0.25)`;
-  obj[name + "-inner"] = `inset 0 2px 4px 0 rgba(${rgb}, 0.06)`;
-  return obj;
-};
 
 module.exports = {
   mode: 'jit',
@@ -22,6 +7,7 @@ module.exports = {
   content: [
     './docs/.vuepress/components/**/*.{js,jsx,ts,tsx,vue}',
     './docs/.vuepress/theme/**/*.{js,jsx,ts,tsx,vue}',
+    './docs/.vuepress/*.{js,jsx,ts,tsx,vue}',
     './docs/guide/**/*.{js,jsx,ts,tsx,vue,md}',
     './src/**/*.{js,jsx,ts,tsx,vue}',
   ],
@@ -36,6 +22,7 @@ module.exports = {
       green: colors.emerald,
       indigo: colors.indigo,
       blue: colors.blue,
+      pink: colors.pink,
       gray:{
         50: '#f9fafb',
         100: '#f3f4f6',
@@ -62,27 +49,12 @@ module.exports = {
         'xxs': {'min': '200px', 'max': '374px'},
         'xs': {'min': '375px', 'max': '639px'},
       },
-      boxShadow: {
-        ...makeShadow("cool-gray", "71, 85, 104"),
-        ...makeShadow("gray", "75, 85, 98"),
-        ...makeShadow("red", "223, 39, 44"),
-        ...makeShadow("orange", "207, 57, 24"),
-        ...makeShadow("yellow", "158, 88, 28"),
-        ...makeShadow("green", "16, 122, 87"),
-        ...makeShadow("teal", "13, 116, 128"),
-        ...makeShadow("blue", "29, 100, 236"),
-        ...makeShadow("indigo", "87, 81, 230"),
-        ...makeShadow("purple", "125, 59, 236"),
-        ...makeShadow("pink", "213, 34, 105"),
-        ...makeShadow("white", "255, 255, 255"),
-        ...makeShadow("dark", "0, 0, 0"),
-      }
     },
   },
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
-    require('./src/Utils/TailwindFormsPlugin'),
-    require('./src/Utils/TailwindFillOpacityPlugin'),
+    require('./src/tailwind/TailwindFormsPlugin'),
+    require('./src/tailwind/TailwindFillOpacityPlugin'),
   ],
 }
