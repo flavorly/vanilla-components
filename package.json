@@ -1,14 +1,22 @@
 {
   "name": "@indigit/vanilla-components",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/igerslike/vanilla-components"
   },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
   "author": "Jon <support@indigit.pt>",
   "license": "MIT",
-  "private": false,
+  "engines": {
+    "node": ">=10"
+  },
+  "sideEffects": false,
+  "private": true,
   "files": [
     "dist/**/*",
     "src/**/*"
@@ -22,7 +30,6 @@
       "require": "./dist/index.umd.js"
     }
   },
-  "sideEffects": false,
   "scripts": {
     "lib:build": "vite build",
     "lib:publish": "npm publish --access public",
@@ -63,9 +70,5 @@
     "rollup-plugin-visualizer": "^5.5.2",
     "typescript": "^4.5.4",
     "vite": "^2.4.3"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
   }
 }
