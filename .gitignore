@@ -70,9 +70,6 @@ jspm_packages/
 .env
 .env.test
 
-# vuepress build output
-.vuepress/dist
-
 # TernJS port file
 .tern-port
 
@@ -85,9 +82,3 @@ jspm_packages/
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
-
-# Vuepress
-docs/.vuepress/node_modules
-docs/.vuepress/.temp
-docs/.vuepress/.cache
-docs/.vuepress/dist

@@ -1,88 +1,71 @@
 {
-  "name": "@igerslike/vanilla-components",
-  "version": "0.4.1",
-  "description": "🤌 A lightweight Vue 3 Component Library",
-  "repository": "https://github.com/igerslike/vanilla-components.git",
-  "author": "Pedro MArtins <nikuscs@gmail.com>",
+  "name": "@indigit/vanilla-components",
+  "version": "0.6.0",
+  "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/igerslike/vanilla-components"
+  },
+  "author": "Jon <support@indigit.pt>",
   "license": "MIT",
+  "private": false,
   "files": [
-    "dist"
+    "dist/**/*",
+    "src/**/*"
   ],
-  "main": "./dist/vanilla-components.umd.js",
-  "module": "./dist/vanilla-components.es.js",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vanilla-components.es.js",
-      "require": "./dist/vanilla-components.umd.js"
+      "import": "./dist/index.es.js",
+      "require": "./dist/index.umd.js"
     }
   },
-  "unpkg": "./dist/vanilla-components.umd.js",
-  "jsdelivr": "./dist/vanilla-components.umd.js",
+  "sideEffects": false,
   "scripts": {
-    "docs:dev": "vuepress dev docs -p=3000",
-    "docs:build": "vuepress build docs",
-    "build:library": "vite build",
+    "lib:build": "vite build",
+    "lib:publish": "npm publish --access public",
     "analyze": "vite build --config analyze.config.js",
-    "publish:library": "npm publish --access public",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"
   },
-  "sideEffects": false,
   "peerDependencies": {
     "@headlessui/vue": "^1.5.0",
     "@heroicons/vue": "^1.0.1",
-    "@popperjs/core": "^2.10.2",
+    "@popperjs/core": "^2.11.2",
+    "@variantjs/core": "^0.0.87",
+    "@variantjs/vue": "^0.0.21",
+    "@vueuse/core": "^7.5.5",
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "flatpickr": "^4.6.9",
+    "fuse.js": "^6.4.6",
+    "libphonenumber-js": "^1.9.49",
+    "lodash": "^4.17.21",
+    "mitt": "^3.0.0",
+    "moment-timezone": "^0.5.34",
     "vue": "^3.1.5"
   },
   "devDependencies": {
-    "@headlessui/vue": "^1.4.2",
-    "@heroicons/vue": "^1.0.1",
     "@rollup/plugin-typescript": "^8.3.0",
-    "@tailwindcss/aspect-ratio": "^0.4.0",
-    "@tailwindcss/forms": "^0.5.0",
-    "@tailwindcss/typography": "^0.5.0",
     "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^2.1.0",
     "@vue/compiler-sfc": "^3.1.5",
-    "@vuepress/bundler-vite": "^2.0.0-beta.27",
-    "@vuepress/bundler-webpack": "^2.0.0-beta.27",
-    "@vuepress/cli": "^2.0.0-alpha.8",
-    "@vuepress/plugin-register-components": "^2.0.0-beta.27",
-    "@vuepress/utils": "^2.0.0-alpha.1",
     "eslint": "^8.7.0",
     "eslint-config-airbnb-typescript": "^16.1.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-tree-shaking": "^1.9.2",
     "eslint-plugin-vue": "^8.3.0",
-    "markdown-it-include": "^2.0.0",
-    "postcss": "^8.3.11",
-    "postcss-import": "^14.0.2",
-    "postcss-nested": "^5.0.6",
     "prettier": "^2.3.2",
     "rollup-plugin-visualizer": "^5.5.2",
-    "tailwindcss": "^3.0.16",
     "typescript": "^4.5.4",
-    "vite": "^2.4.3",
-    "vue-shadow-dom": "^4.0.0",
-    "vuepress": "^2.0.0-beta.27",
-    "vuepress-plugin-demoblock-plus": "^1.5.1"
+    "vite": "^2.4.3"
   },
-  "dependencies": {
-    "@popperjs/core": "^2.11.2",
-    "@variantjs/core": "^0.0.87",
-    "@variantjs/vue": "^0.0.21",
-    "@vueuse/core": "^7.5.5",
-    "autoprefixer": "^10.3.7",
-    "body-scroll-lock": "^4.0.0-beta.0",
-    "flatpickr": "^4.6.9",
-    "fuse.js": "^6.4.6",
-    "libphonenumber-js": "^1.9.49",
-    "lodash": "^4.17.21",
-    "mini-svg-data-uri": "^1.4.3",
-    "mitt": "^3.0.0",
-    "moment-timezone": "^0.5.34"
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
   }
 }

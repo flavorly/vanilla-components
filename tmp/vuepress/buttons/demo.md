@@ -1,5 +1,0 @@
----
-layout: Blank
----
-
-<example-buttons />

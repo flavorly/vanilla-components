@@ -13,7 +13,7 @@
     "lib": ["esnext", "dom"],
     "types": ["vite/client", "jest"],
     "paths": {
-      "@/*": ["src/*"],
+      "@/*": ["./src/*"],
     }
   },
   "include": [
@@ -22,12 +22,6 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/**/*.js",
-    // Vitepress
-    "docs/**/*.ts",
-    "docs/**/*.d.ts",
-    "docs/**/*.tsx",
-    "docs/**/*.vue",
-    "docs/**/*.js"
   ],
   "exclude": ["node_modules"],
 }
