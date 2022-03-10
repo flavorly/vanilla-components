@@ -18,24 +18,33 @@
   "sideEffects": false,
   "private": true,
   "files": [
-    "dist/**/*",
-    "src/**/*"
+    "dist/**/*"
   ],
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
+  "main": "dist/index.cjs",
+  "typings": "dist/index.d.ts",
+  "module": "dist/headlessui.esm.js",
   "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
+    "import": "./dist/headlessui.esm.js",
+    "require": "./dist/index.cjs",
+    "types": "./dist/index.d.ts"
   },
+  "type": "module",
   "scripts": {
     "lib:build": "vite build",
     "lib:publish": "npm publish --access public",
     "analyze": "vite build --config analyze.config.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.5.0",
+    "@heroicons/vue": "^1.0.1",
+    "@popperjs/core": "^2.11.2",
+    "@variantjs/vue": "^0.0.21",
+    "flatpickr": "^4.6.9",
+    "libphonenumber-js": "^1.9.49",
+    "moment-timezone": "^0.5.34",
+    "vue": "^3.2.31"
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.5.0",
@@ -51,7 +60,7 @@
     "lodash": "^4.17.21",
     "mitt": "^3.0.0",
     "moment-timezone": "^0.5.34",
-    "vue": "^3.1.5"
+    "vue": "^3.2.31"
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",
@@ -69,6 +78,7 @@
     "prettier": "^2.3.2",
     "rollup-plugin-visualizer": "^5.5.2",
     "typescript": "^4.5.4",
-    "vite": "^2.4.3"
+    "vite": "^2.4.3",
+    "vite-plugin-dts": "^0.9.9"
   }
 }

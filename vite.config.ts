@@ -2,10 +2,22 @@ import vue from '@vitejs/plugin-vue';
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import typescript from '@rollup/plugin-typescript';
+import dts from 'vite-plugin-dts'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-    plugins: [vue()],
+    plugins: [
+      vue(),
+      dts({
+        cleanVueFileName: false,
+        staticImport: true,
+        beforeWriteFile(filePath, content){
+          return {
+            filePath: filePath.replace(`src`, ``),
+            content,
+          };
+        }
+      }),
+    ],
     resolve:{
         alias: [
             { find: '/^~/', replacement: ''},

@@ -42,5 +42,3 @@ export { default as VanillaTransition } from './components/Transitions/Transitio
 
 // Plugin to Install
 export { default as VanillaComponents } from './plugin';
-
-
