@@ -49,3 +49,7 @@ yarn lint
 ```bash
 yarn format
 ```
+
+**Using the Package on Vuepress or Locally**
+
+`yarn link` then on your vuepress `yarn link "@indigit/vanilla-components"`
