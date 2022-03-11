@@ -42,7 +42,6 @@ import { useBootVariant, useVariantProps, useConfigurationWithClassesList, useVM
 import { VanillaCheckboxValue, VanillaCheckboxProps, VanillaCheckboxClassesKeys, VanillaCheckboxConfig } from '@/components/Checkbox/index';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
-import { isObject } from '@vueuse/core';
 
 export default defineComponent({
     name: 'VanillaCheckbox',
@@ -107,7 +106,7 @@ export default defineComponent({
             }
 
             // It's an object
-            if (isObject(localValue.value)){
+            if (typeof localValue.value === 'object' && localValue.value !== null){
                 let temporaryValue = props.value;
                 let temporaryObject = localValue.value;
                 if (isChecked){

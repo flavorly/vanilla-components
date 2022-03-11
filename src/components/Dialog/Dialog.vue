@@ -218,11 +218,6 @@ export default defineComponent({
          */
         provide('configuration_vanilla', configuration);
 
-        onMounted(() => {
-            //console.log(getCurrentInstance());
-            console.log('initial focus', props.initialFocus);
-        });
-
         return {
             configuration,
             localValue,

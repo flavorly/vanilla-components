@@ -121,7 +121,7 @@ export default defineComponent({
             }
 
             // It's an object
-            if (isObject(localValue.value)){
+            if (typeof localValue.value === 'object' && localValue.value !== null){
                 let temporaryValue = props.value;
                 let temporaryObject = localValue.value;
                 if (isChecked){
