@@ -3,10 +3,12 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import typescript from '@rollup/plugin-typescript';
 import dts from 'vite-plugin-dts'
+import copy from 'rollup-plugin-copy'
 
 export default defineConfig({
     plugins: [
       vue(),
+      // Generate Definitions
       dts({
         cleanVueFileName: false,
         staticImport: true,
@@ -16,6 +18,14 @@ export default defineConfig({
             content,
           };
         }
+      }),
+      // Copy vue files so Webstorm can be happy.
+      copy({
+        targets: [
+          { src: 'src/components/**/*.vue', dest: 'dist' }
+        ],
+        hook: 'writeBundle',
+        flatten: false, // Keep directory structure
       }),
     ],
     resolve:{
@@ -39,8 +49,6 @@ export default defineConfig({
               }),
             ],
             //inlineDynamicImports: true,
-            // make sure to externalize deps that shouldn't be bundled
-            // into your library
             external: [
               'vue',
               '@headlessui/vue',
@@ -55,12 +63,9 @@ export default defineConfig({
               'fuse.js',
               'libphonenumber-js',
               'lodash',
-              'mitt',
               'moment-timezone',
             ],
             output: {
-                // Provide global variables to use in the UMD build
-                // for externalized deps
                 globals: {
                     vue: 'Vue',
                 },
