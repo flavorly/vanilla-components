@@ -61,7 +61,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType, provide, ref } from 'vue';
 import { useBootVariant, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaCardProps, VanillaCardClassesKeys, VanillaCardConfig } from '@/components/Card';
@@ -92,6 +92,11 @@ export default defineComponent({
             VanillaCardClassesKeys,
             localVariant,
         );
+
+        /**
+         * Provided data
+         */
+        provide('configuration_vanilla', configuration);
 
         return {
             configuration,

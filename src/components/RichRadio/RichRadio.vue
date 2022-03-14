@@ -89,8 +89,18 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { useBootVariant, useVariantProps, useConfigurationWithClassesList, useVModel } from '@/core';
-import { VanillaRichRadioValue, VanillaRichRadioProps, VanillaRichRadioClassesKeys, VanillaRichRadioConfig } from '@/components/RichRadio/index';
+import {
+    useBootVariant,
+    useVariantProps,
+    useConfigurationWithClassesList,
+    useVModel,
+} from '@/core';
+import {
+    VanillaRichRadioValue,
+    VanillaRichRadioProps,
+    VanillaRichRadioClassesKeys,
+    VanillaRichRadioConfig,
+} from '@/components/RichRadio/index';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 import VanillaRichRadioOption from '@/components/RichRadio/RichRadioOption/RichRadioOption.vue';

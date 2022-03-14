@@ -17,7 +17,6 @@ export const VanillaCardConfig = {
     actions: 'sm:ml-4 mt-4 flex-shrink flex',
 
     footer: 'px-4 py-3 flex items-center justify-end text-right sm:px-6 border-t border-gray-200 dark:border-gray-700',
-
     footerBorder: 'border-t border-gray-200 dark:border-gray-700',
 
     footerSimple: 'p-4 sm:p-6',
@@ -30,7 +29,7 @@ export const VanillaCardConfig = {
     footerWithTwoGrids: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0',
     footerWithThreeGrids: 'sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense',
 
-    footerSplitContainer: 'grid-with-2-columns px-4 py-4 sm:px-6',
+    footerSplitContainer: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense px-4 py-4 sm:px-6',
     footerSplitLeft: 'flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0',
     footerSplitRight: 'flex mt-0 sm:mt-0 items-center justify-center sm:justify-end',
 
