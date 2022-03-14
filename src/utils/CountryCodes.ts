@@ -23,6 +23,16 @@ export const countries = countryCodes.map((country) => ({
     iso2: country.iso2,
 }));
 
+export const getFlagEmoji = (countryCode: string) => {
+  const codePoints = countryCode
+    .toUpperCase()
+    .split('')
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    .map(char =>  127397 + char.charCodeAt());
+  return String.fromCodePoint(...codePoints);
+};
+
 export const filterCountriesByName = function (
     query: string | undefined = '',
     current: string | undefined | Ref = '',

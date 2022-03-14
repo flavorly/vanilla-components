@@ -53,7 +53,6 @@
 import { computed, defineComponent, PropType } from 'vue';
 import { useBootVariant, useVariantProps, useConfigurationWithClassesList, useVModel } from '@/core';
 import { VanillaToggleValue, VanillaToggleProps, VanillaToggleClassesKeys, VanillaToggleConfig } from '@/components/Toggle/index';
-import { isObject } from '@vueuse/core';
 import VanillaCheckedIcon from '@/components/Icons/CheckedIcon.vue';
 import VanillaUncheckedIcon from '@/components/Icons/UncheckedIcon.vue';
 

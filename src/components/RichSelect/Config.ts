@@ -1,5 +1,5 @@
 import { enterAndLeave } from '@/core/config/transitions';
-import {  merge } from 'lodash';
+import merge from 'lodash/merge';
 import { mergeClasses } from '@/core';
 import { commonClasses } from '@/core/config/commonClasses';
 

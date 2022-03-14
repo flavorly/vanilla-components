@@ -78,7 +78,6 @@ export default defineComponent({
         VanillaFormErrors,
         VanillaFormFeedback,
     },
-    //inheritAttrs: false,
     compatConfig: {
         MODE: 3,
     },

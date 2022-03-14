@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash';
+import mapValues from 'lodash/mapValues';
 import { commonClasses, mergeClasses } from '@/core';
 
 export const VanillaButtonConfig = {

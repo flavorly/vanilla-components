@@ -1,4 +1,3 @@
-//import { mapValues } from 'lodash';
 import { commonClasses, mergeClasses } from '@/core';
 
 export const VanillaToggleConfig = {

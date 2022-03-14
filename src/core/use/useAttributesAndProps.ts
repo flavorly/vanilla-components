@@ -1,7 +1,10 @@
 import {
-  getCurrentInstance, unref,
+  getCurrentInstance,
+  unref,
 } from 'vue';
-import { pick, omit } from 'lodash';
+
+import pick from 'lodash/pick';
+import omit from 'lodash/omit';
 
 export default function useAttributesAndProps(only: string[] = [], except: string[] = []) {
 

@@ -1,4 +1,4 @@
-import { merge } from 'lodash';
+import merge from 'lodash/merge';
 import { VanillaComponentConfiguration } from '@/core/types';
 
 import { VanillaInputConfig, VanillaInputConfigToVariantJs } from '@/components/Input';

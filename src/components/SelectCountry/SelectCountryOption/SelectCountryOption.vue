@@ -9,7 +9,7 @@
         ]"
       >
         <suspense>
-          <vanilla-flag-icon
+          <VanillaFlag
             :class="[
               configuration.classesList.image
             ]"
@@ -53,13 +53,13 @@
 import { computed, defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList } from '@/core';
 import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaCountryOptionProps } from './index';
-import VanillaFlagIcon from '@/components/Icons/FlagIcon/Index.vue';
+import VanillaFlag from '@/components/Icons/Flag.vue';
 import { CheckIcon } from '@heroicons/vue/solid';
 
 export default defineComponent({
     name: 'VanillaSelectCountryOption',
     components: {
-        VanillaFlagIcon,
+        VanillaFlag,
         CheckIcon,
     },
     props: {

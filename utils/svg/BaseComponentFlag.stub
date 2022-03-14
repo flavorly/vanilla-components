@@ -1,0 +1,27 @@
+<template>
+  <component :is="componentName" />
+</template>
+
+<script lang="ts">
+import { defineComponent } from 'vue';
+// Components
+{{topImports}}
+
+export default defineComponent({
+  name: 'VanillaFlag',
+  components : {
+    {{imports}}
+  },
+  props: {
+    country: {
+      type: String,
+      required: true,
+    }
+  },
+  computed: {
+    componentName () {
+      return 'VanillaFlag' + this.country;
+    }
+  },
+})
+</script>

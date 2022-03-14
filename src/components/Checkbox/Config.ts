@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash';
+import mapValues from 'lodash/mapValues';
 import { mergeClasses } from '@/core';
 
 export const VanillaCheckboxConfig = {

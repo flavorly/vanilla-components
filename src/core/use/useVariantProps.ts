@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-import { uniqueId } from 'lodash';
+import uniqueId from 'lodash/uniqueId';
 import {
   CSSClass,
   Data,

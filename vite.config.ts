@@ -57,7 +57,6 @@ export default defineConfig({
               '@popperjs/core',
               '@variantjs/core',
               '@variantjs/vue',
-              '@vueuse/core',
               'body-scroll-lock',
               'flatpickr',
               'fuse.js',

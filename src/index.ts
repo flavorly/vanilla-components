@@ -34,7 +34,7 @@ export { default as VanillaDialog } from './components/Dialog/Dialog.vue';
 export { default as VanillaDialogFooter } from './components/Dialog/DialogFooter/DialogFooter.vue';
 
 // Icons
-export { default as VanillaFlags } from './components/Icons/FlagIcon/Index.vue';
+export { default as VanillaFlag } from './components/Icons/Flag.vue';
 export { default as VanillaLoadingSpinner } from './components/Icons/LoadingSpinner.vue';
 export { default as VanillaCheckedIcon } from './components/Icons/CheckedIcon.vue';
 export { default as VanillaUncheckedIcon } from './components/Icons/UncheckedIcon.vue';

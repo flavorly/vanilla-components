@@ -1,4 +1,4 @@
-import { mapValues } from 'lodash';
+import mapValues from 'lodash/mapValues';
 import { commonClasses } from '@/core/config/commonClasses';
 import { mergeClasses } from '@/core';
 
