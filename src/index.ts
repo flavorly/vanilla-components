@@ -40,5 +40,10 @@ export { default as VanillaCheckedIcon } from './components/Icons/CheckedIcon.vu
 export { default as VanillaUncheckedIcon } from './components/Icons/UncheckedIcon.vue';
 export { default as VanillaTransition } from './components/Transitions/Transitionable.vue';
 
+// Cards
+export { default as VanillaCard } from './components/Card/Card.vue';
+export { default as VanillaCardFooter } from './components/Card/CardFooter/CardFooter.vue';
+export { default as VanillaCardEmpty } from './components/Card/CardEmpty/CardEmpty.vue';
+
 // Plugin to Install
 export { default as VanillaComponents } from './plugin';

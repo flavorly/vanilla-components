@@ -14,12 +14,12 @@
         <div :class="configuration.classesList.inner">
           <TransitionChild
             as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0"
-            enter-to="opacity-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100"
-            leave-to="opacity-0"
+            :enter="configuration.classesList.overlayEnter"
+            :enter-from="configuration.classesList.overlayEnterFrom"
+            :enter-to="configuration.classesList.overlayEnterTo"
+            :leave="configuration.classesList.overlayLeave"
+            :leave-from="configuration.classesList.overlayLeaveFrom"
+            :leave-to="configuration.classesList.overlayLeaveTo"
           >
             <DialogOverlay :class="configuration.classesList.overlay" />
           </TransitionChild>
@@ -33,12 +33,12 @@
 
           <TransitionChild
             as="template"
-            enter="duration-300 ease-out"
-            enter-from="opacity-0 scale-95"
-            enter-to="opacity-100 scale-100"
-            leave="duration-200 ease-in"
-            leave-from="opacity-100 scale-100"
-            leave-to="opacity-0 scale-95"
+            :enter="configuration.classesList.dialogEnter"
+            :enter-from="configuration.classesList.dialogEnterFrom"
+            :enter-to="configuration.classesList.dialogEnterTo"
+            :leave="configuration.classesList.dialogLeave"
+            :leave-from="configuration.classesList.dialogLeaveFrom"
+            :leave-to="configuration.classesList.dialogLeaveTo"
           >
             <div
               :class="[
@@ -56,15 +56,17 @@
               <DialogTitle
                 v-if="hasSlot($slots.header) || title !== undefined"
                 as="div"
-                :class="{'border-b dark:border-gray-700': divided}"
-                class="px-4 py-5 sm:px-6 text-gray-700 card-title"
+                :class="[
+                  configuration.classesList.title,
+                  divided ? configuration.classesList.titleDivided : ''
+                ]"
               >
                 <slot
                   :close="close"
                   name="header"
                 >
                   <h3
-                    class="text-lg leading-6 font-medium text-gray-900 dark:text-white"
+                    :class="configuration.classesList.titleText"
                     v-html="title"
                   />
                 </slot>
@@ -105,7 +107,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, PropType, provide } from 'vue';
+import { defineComponent, PropType, provide } from 'vue';
 
 import {
     useBootVariant,
@@ -207,10 +209,7 @@ export default defineComponent({
             localVariant,
         );
 
-        const close = (event) => {
-            localValue.value = false;
-        };
-
+        const close = () => localValue.value = false;
         const open = () => localValue.value = true;
 
         /**

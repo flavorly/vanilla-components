@@ -23,6 +23,11 @@ export const VanillaDialogConfig = {
       'dark:border dark:border-gray-700',
     ),
 
+    // Header / Title
+    title: 'px-4 py-5 sm:px-6 text-gray-700',
+    titleDivided: 'border-b dark:border-gray-700',
+    titleText: 'text-lg leading-6 font-medium text-gray-900 dark:text-white',
+
     // Body
     bodyWithPadding: 'px-4 py-5',
     body: 'mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300',
@@ -35,21 +40,20 @@ export const VanillaDialogConfig = {
     footerWithThreeButtons: 'sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense',
 
     // Transition backdrop
-
-    // TODO
+    overlayEnter: 'duration-300 ease-out',
+    overlayEnterFrom: 'opacity-0',
+    overlayEnterTo: 'opacity-100',
+    overlayLeave: 'duration-200 ease-in',
+    overlayLeaveFrom: 'opacity-100',
+    overlayLeaveTo: 'opacity-0',
 
     // Transition for Modal
-
-    // TODO
-  },
-  variants: {
-    // fullscreen: {
-    //   classes: {
-    //     modal: mergeClasses(
-    //       'flex flex-col block left-0 top-0 w-full h-full divide-y divide-y-gray-200',
-    //     ),
-    //   },
-    // },
+    dialogEnter: 'duration-300 ease-out',
+    dialogEnterFrom: 'opacity-0 scale-95',
+    dialogEnterTo: 'opacity-100 scale-100',
+    dialogLeave: 'duration-200 ease-in',
+    dialogLeaveFrom: 'opacity-100 scale-100',
+    dialogLeaveTo: 'opacity-0 scale-95',
   },
 };
 

@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, Ref, ref, computed, onBeforeMount, onMounted } from 'vue';
+import { defineComponent, PropType, ref, onMounted } from 'vue';
 import { useInjectsClassesList } from '@/core';
 
 export default defineComponent({
@@ -26,7 +26,7 @@ export default defineComponent({
             default: true,
         },
     },
-    setup(props, { slots }){
+    setup(props){
 
         const classesList = useInjectsClassesList()!;
         const footer = ref(null);
@@ -34,9 +34,7 @@ export default defineComponent({
         const footerClasses = ref('');
 
         onMounted(() => {
-            //children.value = slots.default;
-            children.value = footer.value.children.length;
-
+            children.value = footer.value?.children.length;
 
             if (children.value === 1){
                 footerClasses.value = classesList.value.footerWithOneButton;
