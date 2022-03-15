@@ -2,7 +2,7 @@ import { Data, WithVariantPropsAndClassesList } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 import { VanillaAvatarClassesValidKeys } from './Config';
 
-export type VanillaAvatarValue = Blob | undefined;
+export type VanillaAvatarValue = never | undefined;
 export type VanillaAvatarPreview = string | ArrayBuffer | null | undefined;
 
 export type VanillaAvatarProps = WithVariantPropsAndClassesList<{

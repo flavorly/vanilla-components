@@ -140,7 +140,7 @@ export default defineComponent({
     props: {
         ...useVariantProps<VanillaAvatarProps>(),
         modelValue: {
-            type: [Blob] as PropType<VanillaAvatarValue>,
+            //type: [String, undefined] as PropType<VanillaAvatarValue>,
             default: undefined,
         },
         currentPhotoUrl: {
