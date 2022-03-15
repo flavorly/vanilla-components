@@ -46,7 +46,7 @@
       <template #label="{selectedOption: option, className, label}">
         <slot
           name="label"
-          v-bind="{ option, className,label, hasErrors}"
+          v-bind="{option, className,label, hasErrors}"
         />
       </template>
 

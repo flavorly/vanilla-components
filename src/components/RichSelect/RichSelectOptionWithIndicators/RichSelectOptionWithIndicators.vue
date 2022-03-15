@@ -53,7 +53,7 @@
 </template>
 <script lang="ts">
 import { CheckIcon } from '@heroicons/vue/solid';
-import { defineComponent, PropType, ref } from 'vue';
+import { defineComponent, PropType, ref, computed, watch } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList } from '@/core';
 import {
     VanillaRichSelectOptionWithIndicatorsClassesKeys,
@@ -108,13 +108,16 @@ export default defineComponent({
             localVariant,
         );
 
-        const indicatorClass = {
-            'green' : configuration.classesList?.indicatorGreen,
-            'gray': configuration.classesList?.indicatorGray,
-            'red' : configuration.classesList?.indicatorRed,
-            'yellow': configuration.classesList?.indicatorYellow,
-            'blue': configuration.classesList?.indicatorBlue,
-        }[props.status];
+
+        const indicatorClass = computed(() => {
+            return {
+              'green' : configuration.classesList?.indicatorGreen,
+              'gray': configuration.classesList?.indicatorGray,
+              'red' : configuration.classesList?.indicatorRed,
+              'yellow': configuration.classesList?.indicatorYellow,
+              'blue': configuration.classesList?.indicatorBlue,
+            }[props.status];
+        })
 
         return {
             props,
