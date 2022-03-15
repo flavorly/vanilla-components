@@ -282,7 +282,8 @@ export default defineComponent({
         },
         teleport: {
             type: Boolean,
-            default: true,
+            // This gives issue with vuepress, not sure yet why.
+            default: false,
         },
         teleportTo: {
             type: [String, Object] as PropType<string | HTMLElement>,
