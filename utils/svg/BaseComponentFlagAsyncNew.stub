@@ -1,0 +1,25 @@
+<template>
+  <component :is="componentName" />
+</template>
+
+<script lang="ts">
+import { defineAsyncComponent, defineComponent, computed } from 'vue';
+export default defineComponent({
+    name: 'VanillaFlagAsync',
+    components: {
+      {{imports}}
+    },
+    props: {
+        country: {
+            type: String,
+            default: 'en',
+        },
+    },
+    setup(props) {
+        const componentName = computed(() => 'vanilla-flag-' + props.country);
+        return {
+            componentName,
+        };
+    },
+});
+</script>
