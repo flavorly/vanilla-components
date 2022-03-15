@@ -22,7 +22,12 @@ export default defineConfig({
       // Copy vue files so Webstorm can be happy.
       copy({
         targets: [
-          { src: 'src/components/**/*.vue', dest: 'dist' }
+          // Vue Components
+          { src: 'src/components/**/*.vue', dest: 'dist' },
+          // Vanilla Components Configuration
+          { src: 'src/components/**/Config.ts', dest: 'dist' },
+          // Vanilla Base Configuration
+          { src: 'src/core/config/*.ts', dest: 'dist' },
         ],
         hook: 'writeBundle',
         flatten: false, // Keep directory structure
