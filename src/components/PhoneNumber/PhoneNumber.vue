@@ -21,6 +21,7 @@
         :variant="localVariant"
         :show-errors="false"
         :placeholder="phonePlaceholder"
+        :autocomplete="autocomplete"
         :class="[
           configuration.classesList.input,
         ]"

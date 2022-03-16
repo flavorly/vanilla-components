@@ -1,5 +1,5 @@
 import { PropType } from 'vue';
-import uniqueId from 'lodash/uniqueId';
+
 import {
   CSSClass,
   Data,
@@ -7,6 +7,8 @@ import {
   Variants,
   VanillaComponentProps,
 } from '@/core/types';
+
+import { useDefaultName } from '@/core';
 
 const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProps => ({
   classes: {
@@ -34,8 +36,17 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
     required: false,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    default(): string {
-      return uniqueId('variant-component-');
+    default(props): string | unknown {
+      return useDefaultName(props);
+    },
+  },
+  autocomplete: {
+    type: [String, Boolean] as PropType<string | boolean>,
+    required: false,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    default(props): string {
+      return props.name || false;
     },
   },
   variant: {

@@ -17,10 +17,6 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
   modelValue: ModelValueKey,
 ) {
 
-  //const vm = getCurrentInstance()!;
-  // Booting will be aware of parent errors as well. This might lead to some errors but its usefull at this point
-  // const parentErrors = ref(vm.parent?.props[errorsKey]) as Ref<Errors>;
-
   // Own component errors as a new reactive ref.
   const componentErrors = ref(props[errorsKey]) as Ref<Errors>;
 

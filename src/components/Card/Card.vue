@@ -1,5 +1,8 @@
 <template>
-  <div :class="configuration.classesList.card">
+  <component
+    :is="as"
+    :class="configuration.classesList.card"
+  >
     <div
       v-if="hasSlot($slots.title) || hasSlot($slots.subtitle) || hasSlot($slots.actions) || title !== undefined || subtitle !== undefined"
       :class="[
@@ -48,7 +51,7 @@
       </div>
     </div>
 
-    <div>
+    <div v-bind="$attrs">
       <slot name="default" />
     </div>
 
@@ -58,16 +61,29 @@
     >
       <slot name="footer" />
     </div>
-  </div>
+
+    <div
+      v-if="hasSlot($slots.footerActions)"
+      :class="configuration.classesList.footer"
+    >
+      <VanillaCardFooter>
+        <slot name="footerActions" />
+      </VanillaCardFooter>
+    </div>
+  </component>
 </template>
 <script lang="ts">
 import { defineComponent, PropType, provide, ref } from 'vue';
 import { useBootVariant, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaCardProps, VanillaCardClassesKeys, VanillaCardConfig } from '@/components/Card';
+import VanillaCardFooter from './CardFooter/CardFooter.vue';
 
 export default defineComponent({
     name: 'VanillaCard',
+    components: {
+        VanillaCardFooter,
+    },
     inheritAttrs: false,
     compatConfig: {
         MODE: 3,
@@ -81,6 +97,10 @@ export default defineComponent({
         subtitle: {
             type: [String] as PropType<string>,
             default: undefined,
+        },
+        as: {
+            type: [String] as PropType<string>,
+            default: 'div',
         },
     },
     setup(props) {

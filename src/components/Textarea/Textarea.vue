@@ -11,6 +11,7 @@
         :id="name"
         v-model="localValue"
         :name="name"
+        :autocomplete="autocomplete"
         :class="[
           hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
           hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',

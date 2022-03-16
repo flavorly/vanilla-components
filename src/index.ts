@@ -25,9 +25,10 @@ export { default as VanillaDropdownOption } from './components/Dropdown/Dropdown
 export { default as VanillaRichRadio } from './components/RichRadio/RichRadio.vue';
 export { default as VanillaRichRadioOption } from './components/RichRadio/RichRadioOption/RichRadioOption.vue';
 
-//export { default as VanillaInputLayout } from './components/Forms/Layout.vue';
+export { default as VanillaInputGroup } from './components/InputGroup/InputGroup.vue';
 export { default as VanillaFormErrors } from './components/FormErrors/FormErrors.vue';
 export { default as VanillaFormFeedback } from './components/FormFeedback/FormFeedback.vue';
+export { default as VanillaFormLabel } from './components/FormLabel/FormLabel.vue';
 
 // Dialog
 export { default as VanillaDialog } from './components/Dialog/Dialog.vue';

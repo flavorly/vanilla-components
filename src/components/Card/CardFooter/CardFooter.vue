@@ -79,7 +79,7 @@ export default defineComponent({
         },
         border: {
             type: [Boolean, String],
-            default: true,
+            default: false,
             required: false,
         },
     },

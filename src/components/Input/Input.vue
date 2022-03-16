@@ -1,5 +1,7 @@
 <template>
-  <div class="vanilla-input">
+  <div
+    class="vanilla-input"
+  >
     <div :class="configuration.classesList.wrapper">
       <div
         v-if="hasSlot($slots.before)"
@@ -14,6 +16,8 @@
         :id="name"
         v-model="localValue"
         :name="name"
+        :autocomplete="autocomplete"
+        :placeholder="placeholder"
         :class="[
           hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
           hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
@@ -92,6 +96,10 @@ export default defineComponent({
             default: undefined,
         },
         type: {
+            type: [String] as PropType<string>,
+            default: 'text',
+        },
+        placeholder: {
             type: [String] as PropType<string>,
             default: 'text',
         },

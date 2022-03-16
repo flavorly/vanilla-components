@@ -2,7 +2,10 @@
   <div class="vanilla-input">
     <div :class="configuration.classesList.wrapper">
       <select
+        :id="name"
         v-model="localValue"
+        :name="name"
+        :autocomplete="autocomplete"
         v-bind="$attrs"
         :class="[
           configuration.classesList.select,

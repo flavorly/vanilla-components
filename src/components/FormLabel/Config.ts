@@ -1,8 +1,6 @@
-import { commonClasses } from '@/core/config/commonClasses';
-export const VanillaFormErrorsConfig = {
-  fixedClasses: 'mt-2 text-xs',
-  // Default Input appearance
-  classes: commonClasses.inputsErrorText,
+export const VanillaFormLabelConfig = {
+  fixedClasses: '',
+  classes: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer',
   // Variants
   variants: {
     error: {
@@ -11,8 +9,8 @@ export const VanillaFormErrorsConfig = {
   },
 };
 
-export const VanillaFormErrorsClassesKeys = Object.keys(VanillaFormErrorsConfig.classes);
+export const VanillaFormLabelClassesKeys = Object.keys(VanillaFormLabelConfig.classes);
 
-export type VanillaFormErrorsClassesValidKeys = keyof typeof VanillaFormErrorsConfig.classes;
+export type VanillaFormLabelClassesValidKeys = keyof typeof VanillaFormLabelConfig.classes;
 
 

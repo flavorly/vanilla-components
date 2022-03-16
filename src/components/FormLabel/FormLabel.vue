@@ -3,11 +3,9 @@
     :for="for"
     :class="configuration.class"
   >
-    <span
-      v-if="safe"
-      v-html="label"
-    />
-    <span v-else>{{ label }}</span>
+    <slot>
+      {{ label }}
+    </slot>
   </label>
 </template>
 

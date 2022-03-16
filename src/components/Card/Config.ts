@@ -4,7 +4,7 @@ export const VanillaCardConfig = {
   },
   classes: {
 
-    card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-750 dark:text-white dark:shadow-dark-xl',
+    card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-750 dark:text-white dark:shadow-dark-xl dark:ring-1 dark:ring-inset dark:ring-white/10',
 
     header: 'px-4 py-5 border-b border-gray-200 sm:px-6 dark:border-gray-700',
     headerInner: 'flex justify-between items-center flex-wrap sm:flex-nowrap',
@@ -20,16 +20,16 @@ export const VanillaCardConfig = {
     footerBorder: 'border-t border-gray-200 dark:border-gray-700',
 
     footerSimple: 'p-4 sm:p-6',
-    footerSimpleRight: 'justify-end text-right px-4 py-3 flex items-center text-right sm:px-6',
-    footerSimpleLeft: 'justify-start text-left px-4 py-3 flex items-center text-right sm:px-6',
-    footerSimpleCenter: 'justify-center text-center px-4 py-3 flex items-center text-right sm:px-6',
+    footerSimpleRight: 'justify-end text-right flex items-center text-right sm:space-x-2',
+    footerSimpleLeft: 'justify-start text-left flex items-center text-right sm:space-x-2',
+    footerSimpleCenter: 'justify-center text-center flex items-center text-right sm:space-x-2',
 
     footerWithGrid: 'p-4 sm:p-6',
     footerWithOneGrid: 'sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense',
     footerWithTwoGrids: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0',
     footerWithThreeGrids: 'sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense',
 
-    footerSplitContainer: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense px-4 py-4 sm:px-6',
+    footerSplitContainer: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense',
     footerSplitLeft: 'flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0',
     footerSplitRight: 'flex mt-0 sm:mt-0 items-center justify-center sm:justify-end',
 

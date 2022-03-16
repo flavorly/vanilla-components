@@ -48,6 +48,7 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   errors?: Errors;
   feedback?: string;
   name?: string;
+  autocomplete?: string | boolean;
   hasItemBellow?: boolean;
   hasItemAbove?: boolean;
   showErrors?: boolean;
@@ -80,6 +81,11 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   name: {
     type: PropType<string | undefined>;
     default: string;
+    required: boolean,
+  },
+  autocomplete: {
+    type: PropType<string | boolean>;
+    default: string | boolean;
     required: boolean,
   },
   hasItemBellow: {
@@ -130,6 +136,11 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   name: {
     type: PropType<string | undefined>;
     default: string;
+    required: boolean,
+  },
+  autocomplete: {
+    type: PropType<string | boolean>;
+    default: string | boolean;
     required: boolean,
   },
   hasItemBellow: {
@@ -190,6 +201,11 @@ type VanillaComponentWithClassesListProps<
       default: string;
       required: boolean,
     },
+    autocomplete: {
+      type: PropType<string | boolean>;
+      default: string | boolean;
+      required: boolean,
+    },
     hasItemBellow: {
       type: PropType<boolean>;
       default: boolean;
@@ -238,6 +254,11 @@ type VanillaComponentWithClassesListProps<
     name: {
       type: PropType<string | undefined>;
       default: string;
+      required: boolean,
+    },
+    autocomplete: {
+      type: PropType<string | boolean>;
+      default: string | boolean;
       required: boolean,
     },
     hasItemBellow: {
