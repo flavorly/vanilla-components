@@ -1,6 +1,6 @@
 {
   "name": "@indigit/vanilla-components",
-  "version": "0.6.15",
+  "version": "0.6.16",
   "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
   "repository": {
     "type": "git",
