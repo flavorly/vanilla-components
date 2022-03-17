@@ -9,15 +9,24 @@
       ref="button"
       as="template"
     >
-      <VanillaButton
-        :variant="buttonVariant"
+      <slot
+        name="trigger"
+        v-bind="{
+          buttonVariant,
+          text,
+          iconClasses: configuration.classesList.wrapper
+        }"
       >
-        <span v-text="text" />
-        <ChevronDownIcon
-          :class="configuration.classesList.wrapper"
-          aria-hidden="true"
-        />
-      </VanillaButton>
+        <VanillaButton
+          :variant="buttonVariant"
+        >
+          <span v-text="text" />
+          <ChevronDownIcon
+            :class="configuration.classesList.wrapper"
+            aria-hidden="true"
+          />
+        </VanillaButton>
+      </slot>
     </MenuButton>
     <!-- Overlay if enable -->
     <div

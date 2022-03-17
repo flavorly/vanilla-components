@@ -47,5 +47,8 @@ export { default as VanillaCard } from './components/Card/Card.vue';
 export { default as VanillaCardFooter } from './components/Card/CardFooter/CardFooter.vue';
 export { default as VanillaCardEmpty } from './components/Card/CardEmpty/CardEmpty.vue';
 
+// Datatable
+export { default as VanillaDatatable } from './components/Datatable/Datatable.vue';
+
 // Plugin to Install
 export { default as VanillaComponents } from './plugin';
