@@ -42,6 +42,7 @@
     "@heroicons/vue": "^1.0.1",
     "@popperjs/core": "^2.11.2",
     "@variantjs/vue": "^0.0.21",
+    "axios": "^0.26.1",
     "flatpickr": "^4.6.9",
     "fuse.js": "^6.4.6",
     "libphonenumber-js": "^1.9.49",
