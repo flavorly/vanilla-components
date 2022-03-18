@@ -1,16 +1,18 @@
 import axios from 'axios';
-import {hasProperty} from "@/core";
+import { hasProperty } from '@/core';
 
 const useFetchData = (
   config: object,
-  data: object
+  data: object,
 ) => {
 
   const isAction = hasProperty(data, 'action');
   const method = isAction ? config?.actionsMethod : config?.fetchMethod;
   const url = isAction ? config?.actionsEndpoint : config?.fetchEndpoint;
-  const postParams = isAction ? data : {};
-  const queryParams = !isAction ? data : {};
+  const postParams = method === 'POST' ? data : {};
+  const queryParams = method === 'GET' ? data : {};
+
+  console.log(method);
 
   return axios({
     method: method,
@@ -25,6 +27,6 @@ const useFetchData = (
     responses: response.data?.responses,
     resolved: true,
   }));
-}
+};
 
 export default useFetchData;

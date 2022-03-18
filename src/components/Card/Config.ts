@@ -4,7 +4,7 @@ export const VanillaCardConfig = {
   },
   classes: {
 
-    card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-750 dark:text-white dark:shadow-dark-xl dark:ring-1 dark:ring-inset dark:ring-white/10',
+    card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-750 dark:text-white dark:shadow-dark-xl dark:ring-1 dark:ring-inset dark:ring-white/10 overflow-x-hidden',
 
     header: 'px-4 py-5 border-b border-gray-200 sm:px-6 dark:border-gray-700',
     headerInner: 'flex justify-between items-center flex-wrap sm:flex-nowrap',

@@ -7,7 +7,7 @@
     <!-- Trigger -->
     <MenuButton
       ref="button"
-      as="template"
+      as="div"
     >
       <slot
         name="trigger"

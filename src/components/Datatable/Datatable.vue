@@ -11,35 +11,29 @@
           class="min-w-full m-0 table-auto"
         >
           <!-- Table Head -->
-          <thead>
-            <tr>
-              <!-- Toggle All/None Checked -->
-              <th
-                v-if="datatable.options.selectable"
-                class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700"
-              >
-                <input
-                  :checked="isAllItemsInPageSelected && !isFetching"
-                  :disabled="isFetching"
-                  :indeterminate="!isAllItemsInPageSelected && hasAnyItemsSelectedForCurrentPage && !isFetching"
-                  class="block transition duration-150 ease-in-out checked:bg-indigo-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-indigo-600 h-4 w-4"
-                  type="checkbox"
-                  @change="selectAllItemsInPage"
-                >
-              </th>
-              <!-- Header Column Render -->
-              <th
-                v-for="(column) in datatable.columns"
-                v-show="true"
-                :key="column.name"
-                class="bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700 dark:text-white"
-              >
-                <!-- Is Sortable -->
-                {{ column.label }}
-              </th>
-            </tr>
-          </thead>
-
+          <slot
+            name="tableHeader"
+            v-bind="{
+              datatable,
+              isFetching,
+              isAllItemsInPageSelected,
+              hasAnyItemsSelectedForCurrentPage,
+              selectAllItemsInPage,
+              columns
+            }"
+          >
+            <VanillaDatatableHead
+              :columns="datatable.columns"
+              :columns-with-sorting="queryData.sorting"
+              :columns-with-hidden-state="[]"
+              :is-fetching="isFetching"
+              :selectable="datatable.options.selectable"
+              :all-items-checked="isAllItemsInPageSelected && !isFetching"
+              :some-items-checked="!isAllItemsInPageSelected && hasAnyItemsSelectedForCurrentPage && !isFetching"
+              @checked="selectAllItemsInPage"
+              @sorted="onSortingUpdated"
+            />
+          </slot>
 
           <!-- Table Body -->
           <tbody
@@ -134,10 +128,12 @@ import each from 'lodash/each';
 import find from 'lodash/find';
 import xor from 'lodash/xor';
 import omit from 'lodash/omit';
+import VanillaDatatableHead from './DatatableHead/DatatableHead.vue';
 
 export default defineComponent({
     name: 'VanillaDatatable',
     components: {
+        VanillaDatatableHead,
         VanillaButton,
         VanillaCard,
         VanillaDropdown,
@@ -208,7 +204,7 @@ export default defineComponent({
         fetchMethod: {
             type: [String] as PropType<string>,
             required: false,
-            default: 'GET',
+            default: 'POST',
             validator(method: string){
                 return ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method);
             },
@@ -290,7 +286,8 @@ export default defineComponent({
             selected: [],
             selectedAll: false,
             filters: [],
-            sorting: [],
+            sorting: [{ column: 'id', direction: 'desc' }],
+            //sorting: null,
         });
 
         /** POST data being sent when an action is sent */
@@ -379,7 +376,7 @@ export default defineComponent({
         /** Resets the sorting  */
         const resetSorting = () => {
             // TODO : Check this to reset link
-            queryData.sorting = [];
+            queryData.sorting = null;
         };
 
         /** Resets the per page items  */
@@ -496,6 +493,13 @@ export default defineComponent({
 
         };
 
+        /**
+         * On sorting updated, we will update the query data with the new sorting
+         **/
+        const onSortingUpdated = (sorting: never) => {
+            queryData.sorting = sorting;
+        };
+
         /** Wrapper for the main call to the server, so we can perform additional stuff */
         const fetchFromServer = () => {
             isFetching.value = true;
@@ -525,13 +529,11 @@ export default defineComponent({
 
         watch(queryData, (value) => {
             console.log('Changed Query Data', value);
+            fetchFromServer();
         });
 
-
-        // ----- Provide data to sub components -----  //
-        provide('configuration_vanilla', configuration);
-
-        return {
+        // ----- Actual props to share -----  //
+        const sharing =  {
             // Configuration
             configuration,
             localVariant,
@@ -542,6 +544,7 @@ export default defineComponent({
 
             // Reactive / Refs
             isFetching,
+            queryData,
 
             // Computed
             isAllItemsInPageSelected,
@@ -551,7 +554,17 @@ export default defineComponent({
             selectAllItemsInPage,
             isRowSelected,
             selectItem,
+            onSortingUpdated,
         };
+
+
+        // ----- Provide data to sub components -----  //
+        provide('configuration_vanilla', configuration);
+
+        // ----- Provide data to sub components -----  //
+        provide('datatable_configuration', sharing);
+
+        return sharing;
     },
 });
 </script>

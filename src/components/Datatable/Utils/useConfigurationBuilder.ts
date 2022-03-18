@@ -87,7 +87,7 @@ export default function useConfigurationBuilder<Props extends Data>(props: Props
 
     fetchData: props?.fetchData || props.config?.fetchData || undefined,
     fetchEndpoint: props?.fetchEndpoint || props?.config?.fetchEndpoint || undefined,
-    fetchMethod: props?.fetchMethod || props?.config?.fetchMethod || 'GET',
+    fetchMethod: props?.fetchMethod || props?.config?.fetchMethod || 'POST',
 
     actionsEndpoint: props?.actionsEndpoint || props?.actionsEndpoint?.method || undefined,
     actionsMethod: props?.actionsMethod || props?.actionsMethod?.method || 'POST',
