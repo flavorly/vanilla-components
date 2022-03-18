@@ -97,7 +97,7 @@ import {
     provide,
     PropType,
     reactive,
-    computed, onMounted,
+    computed, onMounted, watch,
 } from 'vue';
 
 import {
@@ -441,7 +441,7 @@ export default defineComponent({
             queryData.selectedAll = false;
 
             // If the ID is not yet selected, select it
-            let itemKey = sanitizePrimaryKey(item[datatable.primaryKey]);
+            let itemKey = item[datatable.primaryKey];
             if (!queryData.selected.includes(itemKey)) {
                 return queryData.selected.push(itemKey);
             }
@@ -456,7 +456,24 @@ export default defineComponent({
         };
 
         const isRowSelected = (item: object) => {
-            return queryData.selectedAll || queryData.selected.indexOf(sanitizePrimaryKey(item[datatable.primaryKey])) > -1;
+            return queryData.selectedAll || queryData.selected.indexOf(item[datatable.primaryKey]) > -1;
+        };
+
+
+        /** Deselect all the items in the current page  */
+        const deselectAllItemsInPage = () => {
+            each(currentPageIds.value, item => {
+                const index = queryData.selected.indexOf(item);
+                if (index > -1) {
+                    return queryData.selected.splice(index, 1);
+                }
+            });
+        };
+
+        /** Deselect all the items in all pages */
+        const deselectAllItems = () => {
+            queryData.selected = [];
+            queryData.selectedAll = false;
         };
 
         /**
@@ -468,30 +485,15 @@ export default defineComponent({
             queryData.selectedAll = false;
 
             if (isAllItemsInPageSelected.value) {
-                this.resetSelectedInCurrentPage();
+                deselectAllItemsInPage();
                 return;
-            } else {
-                // Select all items being displayed
-                each(results.data, (item) => {
-                    selectItem(item, false);
-                });
             }
-        };
 
-        /** Deselect all the items in the current page  */
-        const deselectAllItemsInPage = () => {
-            each(currentPageIds.value, item => {
-                const index = queryData.selected.indexOf(sanitizePrimaryKey(item[datatable.primaryKey]));
-                if (index > -1) {
-                    return queryData.selected.splice(index, 1);
-                }
+            // Select all items being displayed
+            each(results.data, (item) => {
+                selectItem(item, false);
             });
-        };
 
-        /** Deselect all the items in all pages */
-        const deselectAllItems = () => {
-            queryData.selected = [];
-            queryData.selectedAll = false;
         };
 
         /** Wrapper for the main call to the server, so we can perform additional stuff */
@@ -519,6 +521,10 @@ export default defineComponent({
 
         onMounted(() => {
             fetchFromServer();
+        });
+
+        watch(queryData, (value) => {
+            console.log('Changed Query Data', value);
         });
 
 
