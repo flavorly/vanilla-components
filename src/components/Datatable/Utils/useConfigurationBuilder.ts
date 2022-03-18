@@ -1,6 +1,5 @@
-import {reactive, Ref} from "vue";
-import {Data} from "@/core/types";
-import merge from "lodash/merge";
+import { Data } from '@/core/types';
+import merge from 'lodash/merge';
 
 export default function useConfigurationBuilder<Props extends Data>(props: Props){
 
@@ -19,7 +18,7 @@ export default function useConfigurationBuilder<Props extends Data>(props: Props
     striped: false,
     compact: true,
     refreshable: true,
-  }
+  };
 
   const defaultTranslations = {
     title: 'Items',
@@ -48,19 +47,19 @@ export default function useConfigurationBuilder<Props extends Data>(props: Props
   };
 
   const defaultPerPageOptions = [
-      {value: 5, label: '5 Items per page'},
-      {value: 10, label: '10 Items per page'},
-      {value: 50, label: '50 Items per page'},
-      {value: 100, label: '100 Items per page'},
-      {value: 300, label: '300 Items per page'},
+      { value: 5, label: '5 Items per page' },
+      { value: 10, label: '10 Items per page' },
+      { value: 50, label: '50 Items per page' },
+      { value: 100, label: '100 Items per page' },
+      { value: 300, label: '300 Items per page' },
   ];
 
   return {
     name: props?.uniqueName || props.config?.name,
     primaryKey: props?.primaryKey || props.config?.primaryKey,
-    columns: merge(props?.columns,props.config?.columns),
-    actions: merge(props?.actions,props.config?.actions),
-    filters: merge(props?.filters,props.config?.filters),
+    columns: merge(props?.columns, props.config?.columns),
+    actions: merge(props?.actions, props.config?.actions),
+    filters: merge(props?.filters, props.config?.filters),
 
     options: merge(
       defaultOptions,
