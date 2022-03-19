@@ -17,7 +17,7 @@
       </th>
       <!-- Header Column Render -->
       <th
-        v-for="(column) in columnsComputed"
+        v-for="(column) in columns"
         v-show="column.visible"
         :key="column.name"
         scope="col"
@@ -63,7 +63,7 @@
   </thead>
 </template>
 <script lang="ts">
-import { computed, ref, defineComponent, PropType } from 'vue';
+import { ref, defineComponent, PropType } from 'vue';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/solid';
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
@@ -136,21 +136,6 @@ export default defineComponent({
             };
         }));
 
-        /**
-         * Map the columns, so we can include if the column is visible or not
-         * if it's sorted or not and so on, so we dont need to evaluate it each time we need.
-         **/
-        const columnsComputed = computed(() => {
-            return props.columns.map((column) => {
-                return {
-                    ...column,
-                    visible: !props.columnsWithHiddenState.includes(column.name),
-                    isSorted: localSorting.value.some(c => c.column === column.name),
-                    isSortedAsc: localSorting.value.some(c => c.column === column.name && c.direction === 'asc'),
-                    isSortedDesc: localSorting.value.some(c => c.column === column.name && c.direction === 'desc'),
-                };
-            });
-        });
 
         /**
          * Sorting Column by name
@@ -196,7 +181,6 @@ export default defineComponent({
         return {
             onCheckAllToggled,
             toggleSorting,
-            columnsComputed,
             localSorting,
         };
     },

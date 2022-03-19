@@ -24,6 +24,10 @@ import { VanillaToggleConfig } from '@/components/Toggle';
 import { VanillaRichRadioConfig } from '@/components/RichRadio';
 import { VanillaRichRadioOptionConfig } from '@/components/RichRadio/RichRadioOption';
 
+import { VanillaSkeletonBarConfig } from '@/components/Skeletons/SkeletonBar';
+
+
+
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
     // Merge Vanilla Components Configuration with the user configuration
@@ -51,6 +55,8 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
 
         VanillaFormErrors: VanillaFormErrorsConfig,
         VanillaFormFeedback: VanillaFormFeedbackConfig,
+
+        VanillaSkeletonBar: VanillaSkeletonBarConfig,
       },
       userConfiguration,
     );

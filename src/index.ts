@@ -42,6 +42,9 @@ export { default as VanillaCheckedIcon } from './components/Icons/CheckedIcon.vu
 export { default as VanillaUncheckedIcon } from './components/Icons/UncheckedIcon.vue';
 export { default as VanillaTransition } from './components/Transitions/Transitionable.vue';
 
+// Skeletons
+export { default as VanillaSkeletonBar } from './components/Skeletons/SkeletonBar/SkeletonBar.vue';
+
 // Cards
 export { default as VanillaCard } from './components/Card/Card.vue';
 export { default as VanillaCardFooter } from './components/Card/CardFooter/CardFooter.vue';

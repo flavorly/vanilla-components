@@ -4,6 +4,68 @@
       :title="datatable.translations.title"
       :subtitle="datatable.translations.subtitle"
     >
+      <!-- Search Bar -->
+      <div
+        v-if="options.searchable"
+        class="px-5 mt-3 mb-3"
+      >
+        <VanillaInput
+          ref="search"
+          v-model="searchQuery"
+          name="search"
+          :class="{'cursor-not-allowed': !canSearch}"
+          :disabled="!canSearch"
+          :placeholder="translations.searchPlaceholder"
+          class="text-xs"
+          type="search"
+        >
+          <template #before>
+            <SearchIcon class="-mr-2 h-4 w-4 text-gray-400" />
+          </template>
+        </VanillaInput>
+      </div>
+
+
+      <!-- Items selected Information -->
+      <div
+        v-if="hasAnyItemsSelected"
+        class="bg-indigo-100 dark:bg-indigo-500"
+      >
+        <div class="px-4 sm:px-8 py-3 flex items-center">
+          <div class="flex items-center">
+            <div class="flex">
+              <div class="text-center text-sm text-indigo-900 dark:text-white space-x-1 space-y-1 sm:space-y-0">
+                <span v-html="replaceTranslationPlaceHolders(translations.selectRows, {rows: 5})" />
+                <a
+                  class="cursor-pointer inline-flex items-center rounded-md bg-transparent border border-indigo-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-900 focus:ring-offset-indigo-100 dark:focus:ring-offset-indigo-500"
+                  tabindex="0"
+                  @click="resetSelected"
+                  v-html="replaceTranslationPlaceHolders(translations.selectedUndo)"
+                />
+                <span
+                  class="hidden sm:inline mx-1"
+                  v-html="replaceTranslationPlaceHolders(translations.selectAllOr)"
+                />
+                <a
+                  v-if="!queryData.selectedAll"
+                  class="cursor-pointer inline-flex items-center rounded-md bg-transparent border border-indigo-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-900 focus:ring-offset-indigo-100 dark:focus:ring-offset-indigo-500"
+                  tabindex="0"
+                  @click="toggleSelectAllMatching"
+                  v-html="replaceTranslationPlaceHolders(translations.selectAllMatching, {rows: 100})"
+                />
+                <a
+                  v-if="queryData.selectedAll"
+                  class="cursor-pointer inline-flex items-center rounded-md bg-transparent border border-indigo-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-900 focus:ring-offset-indigo-100 dark:focus:ring-offset-indigo-500"
+                  tabindex="0"
+                  @click="toggleSelectAllMatching"
+                  v-html="replaceTranslationPlaceHolders(translations.selectAllMatchingUndo, {rows: 100})"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="datatable overflow-x-auto border-t dark:border-gray-700">
         <!-- Table -->
         <table
@@ -23,7 +85,7 @@
             }"
           >
             <VanillaDatatableHead
-              :columns="datatable.columns"
+              :columns="columnsComputed"
               :columns-with-sorting="queryData.sorting"
               :columns-with-hidden-state="[]"
               :is-fetching="isFetching"
@@ -35,52 +97,53 @@
             />
           </slot>
 
+          <!-- Table Skeleton when its loading -->
+          <slot
+            name="tableBodySkeleton"
+            v-bind="{
+              isFetching,
+              columnsCount: visibleColumnsCount,
+              rowsCount: results.data.length || queryData.perPage
+            }"
+          >
+            <VanillaDatatableRowSkeleton
+              v-if="isFetching"
+              :number-of-columns="visibleColumnsCount"
+              :number-of-rows="results.data.length || queryData.perPage"
+            />
+          </slot>
+
           <!-- Table Body -->
           <tbody
             v-if="!isFetching && results.data.length > 0"
             class="divide-y bg-gray-50 dark:bg-gray-800"
           >
-            <tr
-              v-for="(item) in results.data"
-              :key="item.id"
+            <template
+              v-for="(result) in results.data"
+              :key="result.id"
             >
-              <!-- Row Checkbox -->
-              <td
-                v-if="options.selectable"
-                class="px-6 py-4 whitespace-nowrap text-sm leading-5 font-medium text-gray-900 w-[10px]"
+              <slot
+                name="tableRow"
+                v-bind="{
+                  result,
+                  columns: columnsComputed,
+                  selectable: datatable.options.selectable,
+                  selected: isRowSelected(result),
+                }"
               >
-                <input
-                  :checked="isRowSelected(item)"
-                  class="block transition duration-150 ease-in-out checked:bg-indigo-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-indigo-600 h-4 w-4"
-                  type="checkbox"
-                  @change="selectItem(item)"
-                >
-              </td>
-
-              <!-- Row Loop -->
-              <td
-                v-for="(column) in columns"
-                v-show="true"
-                :key="column.name"
-                class="whitespace-nowrap text-sm leading-5 text-gray-500 dark:text-white"
-              >
-                <div
-                  v-if="column.raw && !column.component"
-                  v-html="item[column.name]"
+                <VanillaDatatableRow
+                  :columns="columnsComputed"
+                  :selected="isRowSelected(result)"
+                  :selectable="datatable.options.selectable"
+                  :result="result"
+                  @row-selected="selectItem"
                 />
-                <div v-else-if="!column.raw">
-                  {{ item[column.name] }}
-                </div>
-                <div v-else-if="column.component && column.component !== ''">
-                  Its a component
-                </div>
-              </td>
-              <!-- End Row Loop -->
-            </tr>
+              </slot>
+            </template>
           </tbody>
         </table>
       </div>
-    </vanillacard>
+    </VanillaCard>
   </div>
 </template>
 
@@ -120,24 +183,31 @@ import {
     VanillaButton,
     VanillaDropdown,
     VanillaDropdownOption,
+    VanillaInput,
 } from '@/index';
 
-import { ChevronDownIcon } from '@heroicons/vue/solid';
+import { ChevronDownIcon, SearchIcon } from '@heroicons/vue/solid';
 
 import each from 'lodash/each';
 import find from 'lodash/find';
 import xor from 'lodash/xor';
 import omit from 'lodash/omit';
 import VanillaDatatableHead from './DatatableHead/DatatableHead.vue';
+import VanillaDatatableRow from './DatatableRow/DatatableRow.vue';
+import VanillaDatatableRowSkeleton from './DatatableRowSkeleton/DatatableRowSkeleton.vue';
 
 export default defineComponent({
     name: 'VanillaDatatable',
     components: {
+        VanillaInput,
         VanillaDatatableHead,
+        VanillaDatatableRow,
+        VanillaDatatableRowSkeleton,
         VanillaButton,
         VanillaCard,
         VanillaDropdown,
         ChevronDownIcon,
+        SearchIcon,
     },
     inheritAttrs: true,
     compatConfig: {
@@ -368,10 +438,45 @@ export default defineComponent({
             return activeFiltersObject;
         });
 
+        /**
+         * Map the columns, so we can include if the column is visible or not
+         * if it's sorted or not and so on, so we dont need to evaluate it each time we need.
+         **/
+        const columnsComputed = computed(() => {
+            return props.columns.map((column) => {
+                return {
+                    ...column,
+                    visible: !columnsHidden.value.includes(column.name),
+                    isSorted: queryData.sorting.some(c => c.column === column.name),
+                    isSortedAsc: queryData.sorting.some(c => c.column === column.name && c.direction === 'asc'),
+                    isSortedDesc: queryData.sorting.some(c => c.column === column.name && c.direction === 'desc'),
+                };
+            });
+        });
+
 
         // ---------------------------- //
         // ----- Methods -----  //
         // ---------------------------- //
+
+        /** Replaces the Translation Keys available on the strings  */
+        const replaceTranslationPlaceHolders = (translation: string, replace: string[] | object = {}) => {
+            if (typeof translation === 'object' || (Object.keys(replace).length === 0 && replace.constructor === Object)) {
+                return translation;
+            }
+
+            for (let placeholder in replace) {
+                try {
+                    translation = translation.toString()
+                        .replace(`:${placeholder}`, replace[placeholder])
+                        .replace(`:${placeholder.toUpperCase()}`, replace[placeholder].toString().toUpperCase())
+                        .replace(`:${placeholder.charAt(0).toUpperCase()}${placeholder.slice(1)}`, replace[placeholder].toString().charAt(0).toUpperCase() + replace[placeholder].toString().slice(1));
+                } catch (e) {
+                }
+            }
+
+            return translation.toString().trim();
+        };
 
         /** Resets the sorting  */
         const resetSorting = () => {
@@ -392,6 +497,7 @@ export default defineComponent({
 
         /** Resets a specific filter by name  */
         const resetFilter = (filter: object) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             // @ts-ignore
             queryData.filters[filter.name] = null;
             //queryData.filters = omit(queryData.filters, [filter.name]);
@@ -455,7 +561,6 @@ export default defineComponent({
         const isRowSelected = (item: object) => {
             return queryData.selectedAll || queryData.selected.indexOf(item[datatable.primaryKey]) > -1;
         };
-
 
         /** Deselect all the items in the current page  */
         const deselectAllItemsInPage = () => {
@@ -547,14 +652,19 @@ export default defineComponent({
             queryData,
 
             // Computed
+            hasAnyItemsSelected,
+            canSearch,
+            visibleColumnsCount,
             isAllItemsInPageSelected,
             hasAnyItemsSelectedForCurrentPage,
+            columnsComputed,
 
             // Functions & Helpers
             selectAllItemsInPage,
             isRowSelected,
             selectItem,
             onSortingUpdated,
+            replaceTranslationPlaceHolders,
         };
 
 
