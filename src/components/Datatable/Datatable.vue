@@ -5,67 +5,36 @@
       :subtitle="datatable.translations.subtitle"
     >
       <!-- Search Bar -->
-      <div
-        v-if="options.searchable"
-        class="px-5 mt-3 mb-3"
-      >
-        <VanillaInput
-          ref="search"
-          v-model="searchQuery"
-          name="search"
-          :class="{'cursor-not-allowed': !canSearch}"
-          :disabled="!canSearch"
-          :placeholder="translations.searchPlaceholder"
-          class="text-xs"
-          type="search"
+      <VanillaDatatableSearch
+        v-if="options.searchable && !hasAnyItemsSelected"
+        v-model="queryData.search"
+        :searchable="canSearch"
+        :placeholder="translations.searchPlaceholder"
+      />
+
+      <!-- Current items selected -->
+      <template v-if="hasAnyItemsSelected">
+        <slot
+          name="selection"
+          v-bind="{
+
+          }"
         >
-          <template #before>
-            <SearchIcon class="-mr-2 h-4 w-4 text-gray-400" />
-          </template>
-        </VanillaInput>
-      </div>
+          <VanillaDatatableSelectionBar
+            :is-all-selected="queryData.selectedAll"
+            :text-selected-rows="replaceTranslationPlaceHolders(translations.selectRows, {rows: selectedItemsCount})"
+            :text-deselect="replaceTranslationPlaceHolders(translations.selectedUndo)"
+            :text-or-select-matching="replaceTranslationPlaceHolders(translations.selectAllOr)"
+            :text-select-matching="replaceTranslationPlaceHolders(translations.selectAllMatching, {rows: results?.meta.total})"
+            :text-deselect-matching="replaceTranslationPlaceHolders(translations.selectAllMatchingUndo, {rows: results?.meta.total})"
+            @deselect-all="deselectAllItems"
+            @select-matching="toggleSelectAll"
+            @deselect-matching="toggleSelectAll"
+          />
+        </slot>
+      </template>
 
-
-      <!-- Items selected Information -->
-      <div
-        v-if="hasAnyItemsSelected"
-        class="bg-indigo-100 dark:bg-indigo-500"
-      >
-        <div class="px-4 sm:px-8 py-3 flex items-center">
-          <div class="flex items-center">
-            <div class="flex">
-              <div class="text-center text-sm text-indigo-900 dark:text-white space-x-1 space-y-1 sm:space-y-0">
-                <span v-html="replaceTranslationPlaceHolders(translations.selectRows, {rows: 5})" />
-                <a
-                  class="cursor-pointer inline-flex items-center rounded-md bg-transparent border border-indigo-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-900 focus:ring-offset-indigo-100 dark:focus:ring-offset-indigo-500"
-                  tabindex="0"
-                  @click="resetSelected"
-                  v-html="replaceTranslationPlaceHolders(translations.selectedUndo)"
-                />
-                <span
-                  class="hidden sm:inline mx-1"
-                  v-html="replaceTranslationPlaceHolders(translations.selectAllOr)"
-                />
-                <a
-                  v-if="!queryData.selectedAll"
-                  class="cursor-pointer inline-flex items-center rounded-md bg-transparent border border-indigo-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-900 focus:ring-offset-indigo-100 dark:focus:ring-offset-indigo-500"
-                  tabindex="0"
-                  @click="toggleSelectAllMatching"
-                  v-html="replaceTranslationPlaceHolders(translations.selectAllMatching, {rows: 100})"
-                />
-                <a
-                  v-if="queryData.selectedAll"
-                  class="cursor-pointer inline-flex items-center rounded-md bg-transparent border border-indigo-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-indigo-900 focus:ring-offset-indigo-100 dark:focus:ring-offset-indigo-500"
-                  tabindex="0"
-                  @click="toggleSelectAllMatching"
-                  v-html="replaceTranslationPlaceHolders(translations.selectAllMatchingUndo, {rows: 100})"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <!-- Actual Table -->
       <div class="datatable overflow-x-auto border-t dark:border-gray-700">
         <!-- Table -->
         <table
@@ -74,7 +43,7 @@
         >
           <!-- Table Head -->
           <slot
-            name="tableHeader"
+            name="header"
             v-bind="{
               datatable,
               isFetching,
@@ -98,51 +67,84 @@
           </slot>
 
           <!-- Table Skeleton when its loading -->
-          <slot
-            name="tableBodySkeleton"
-            v-bind="{
-              isFetching,
-              columnsCount: visibleColumnsCount,
-              rowsCount: results.data.length || queryData.perPage
-            }"
-          >
-            <VanillaDatatableRowSkeleton
-              v-if="isFetching"
-              :number-of-columns="visibleColumnsCount"
-              :number-of-rows="results.data.length || queryData.perPage"
-            />
-          </slot>
+          <template v-if="isFetching">
+            <slot
+              name="skeleton"
+              v-bind="{
+                isFetching,
+                columnsCount: visibleColumnsCount,
+                rowsCount: results.data.length || queryData.perPage
+              }"
+            >
+              <VanillaDatatableRowSkeleton
+
+                :number-of-columns="visibleColumnsCount"
+                :number-of-rows="results.data.length || queryData.perPage"
+              />
+            </slot>
+          </template>
 
           <!-- Table Body -->
           <tbody
             v-if="!isFetching && results.data.length > 0"
             class="divide-y bg-gray-50 dark:bg-gray-800"
           >
-            <template
+            <!-- Each record Main loop -->
+            <tr
               v-for="(result) in results.data"
               :key="result.id"
             >
+              <!-- Checkbox is not slotable -->
+              <td
+                v-if="options.selectable"
+                class="px-6 py-3 text-sm w-[10px]"
+              >
+                <input
+                  :checked="isRowSelected(result)"
+                  class="block transition duration-150 ease-in-out checked:bg-indigo-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-indigo-600 h-4 w-4"
+                  type="checkbox"
+                  @change="selectItem(result)"
+                >
+              </td>
+              <!-- Rest of the records -->
               <slot
-                name="tableRow"
+                name="default"
                 v-bind="{
                   result,
                   columns: columnsComputed,
                   selectable: datatable.options.selectable,
-                  selected: isRowSelected(result),
+                  selected: isRowSelected(result)
                 }"
               >
                 <VanillaDatatableRow
                   :columns="columnsComputed"
-                  :selected="isRowSelected(result)"
                   :selectable="datatable.options.selectable"
                   :result="result"
-                  @row-selected="selectItem"
                 />
               </slot>
-            </template>
+            </tr>
           </tbody>
         </table>
       </div>
+
+      <!-- Pagination -->
+      <VanillaDatatablePagination
+        :is-fetching="isFetching"
+        :pages="results.links?.pages"
+        :next-page="results.links?.next"
+        :previous-page="results.links?.previous"
+        :current-page="results.meta?.current_page"
+        :showing-from="results.meta?.from"
+        :showing-to="results.meta?.to"
+        :total="results.meta?.total"
+        :text-number-of-results="replaceTranslationPlaceHolders(translations.showingFrom,{
+          from: results.meta?.from,
+          to: results.meta?.to,
+          total: results.meta?.total
+        })"
+        :text-next="translations.nextPage"
+        :text-previous="translations.previousPage"
+      />
     </VanillaCard>
   </div>
 </template>
@@ -168,8 +170,6 @@ import {
     VanillaDatatableProps,
     VanillaDatatableClassesKeys,
     VanillaDatatableConfig,
-    VanillaDatatableActions,
-    VanillaDatatableColumns,
 } from './index';
 
 import {
@@ -180,34 +180,28 @@ import {
 
 import {
     VanillaCard,
-    VanillaButton,
-    VanillaDropdown,
-    VanillaDropdownOption,
-    VanillaInput,
 } from '@/index';
-
-import { ChevronDownIcon, SearchIcon } from '@heroicons/vue/solid';
 
 import each from 'lodash/each';
 import find from 'lodash/find';
 import xor from 'lodash/xor';
-import omit from 'lodash/omit';
-import VanillaDatatableHead from './DatatableHead/DatatableHead.vue';
-import VanillaDatatableRow from './DatatableRow/DatatableRow.vue';
-import VanillaDatatableRowSkeleton from './DatatableRowSkeleton/DatatableRowSkeleton.vue';
+import VanillaDatatableHead from './Partials/DatatableHead.vue';
+import VanillaDatatableRow from './Partials/DatatableRow.vue';
+import VanillaDatatableRowSkeleton from './Partials/DatatableRowSkeleton.vue';
+import VanillaDatatableSearch from './Partials/DatatableSearch.vue';
+import VanillaDatatableSelectionBar from './Partials/DatatableSelectionBar.vue';
+import VanillaDatatablePagination from './Partials/DatatablePagination.vue';
 
 export default defineComponent({
     name: 'VanillaDatatable',
     components: {
-        VanillaInput,
         VanillaDatatableHead,
         VanillaDatatableRow,
         VanillaDatatableRowSkeleton,
-        VanillaButton,
+        VanillaDatatableSearch,
+        VanillaDatatableSelectionBar,
+        VanillaDatatablePagination,
         VanillaCard,
-        VanillaDropdown,
-        ChevronDownIcon,
-        SearchIcon,
     },
     inheritAttrs: true,
     compatConfig: {
@@ -595,7 +589,11 @@ export default defineComponent({
             each(results.data, (item) => {
                 selectItem(item, false);
             });
+        };
 
+        /** Toggles the select all matching feature on/off */
+        const toggleSelectAll = () => {
+            queryData.selectedAll = !queryData.selectedAll;
         };
 
         /**
@@ -634,7 +632,7 @@ export default defineComponent({
 
         watch(queryData, (value) => {
             console.log('Changed Query Data', value);
-            fetchFromServer();
+            //fetchFromServer();
         });
 
         // ----- Actual props to share -----  //
@@ -644,8 +642,6 @@ export default defineComponent({
             localVariant,
             props,
             datatable,
-            // Data from API
-            results,
 
             // Reactive / Refs
             isFetching,
@@ -658,6 +654,8 @@ export default defineComponent({
             isAllItemsInPageSelected,
             hasAnyItemsSelectedForCurrentPage,
             columnsComputed,
+            selectedItemsCount,
+            selectedItemsCountFormatted,
 
             // Functions & Helpers
             selectAllItemsInPage,
@@ -665,6 +663,8 @@ export default defineComponent({
             selectItem,
             onSortingUpdated,
             replaceTranslationPlaceHolders,
+            deselectAllItems,
+            toggleSelectAll,
         };
 
 
@@ -674,7 +674,11 @@ export default defineComponent({
         // ----- Provide data to sub components -----  //
         provide('datatable_configuration', sharing);
 
-        return sharing;
+        return {
+            ...sharing,
+            // Data from API
+            results,
+        };
     },
 });
 </script>

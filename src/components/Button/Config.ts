@@ -5,7 +5,7 @@ export const VanillaButtonConfig = {
   fixedClasses: {
     button: mergeClasses(
       commonClasses.buttonRadius,
-      commonClasses.buttonTransition,
+      //commonClasses.buttonTransition,
       commonClasses.buttonPosition,
       commonClasses.buttonShadow,
       commonClasses.buttonSpacing,

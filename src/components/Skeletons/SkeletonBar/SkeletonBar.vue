@@ -46,8 +46,6 @@ export default defineComponent({
             localVariant,
         );
 
-        console.log(configuration);
-
         return {
             localVariant,
             configuration,

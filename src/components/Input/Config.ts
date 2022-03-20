@@ -2,13 +2,31 @@ import mapValues from 'lodash/mapValues';
 import { commonClasses } from '@/core/config/commonClasses';
 import { mergeClasses } from '@/core';
 
+const defaultInput = {
+  input:  mergeClasses(
+    '',
+    commonClasses.inputsText,
+    commonClasses.inputsTextColor,
+    commonClasses.inputsBackground,
+    commonClasses.inputsBorder,
+    commonClasses.inputsRing,
+    commonClasses.inputsRadius,
+    commonClasses.inputsSpacing,
+  ),
+  wrapper : '',
+  addonBefore: '',
+  addonAfter: '',
+  addonBeforeInputClasses: '',
+  addonAfterInputClasses: '',
+  addonClasses: 'text-gray-300 dark:text-gray-600',
+};
+
 export const VanillaInputConfig = {
   fixedClasses: {
     input: mergeClasses(
       'appearance-none block w-full',
       commonClasses.inputsShadows,
       commonClasses.inputsDisabled,
-      commonClasses.inputsSpacing,
     ),
     wrapper: 'relative',
     addonBefore: 'absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer',
@@ -19,24 +37,25 @@ export const VanillaInputConfig = {
   },
   // Default Input appearance
   classes: {
-    input:  mergeClasses(
-      '',
-      commonClasses.inputsText,
-      commonClasses.inputsTextColor,
-      commonClasses.inputsBackground,
-      commonClasses.inputsBorder,
-      commonClasses.inputsRing,
-      commonClasses.inputsRadius,
-    ),
-    wrapper : '',
-    addonBefore: '',
-    addonAfter: '',
-    addonBeforeInputClasses: '',
-    addonAfterInputClasses: '',
-    addonClasses: 'text-gray-300 dark:text-gray-600',
+    ...defaultInput,
   },
   // Variants
   variants: {
+    compact: {
+      classes: {
+        ...defaultInput,
+        input:  mergeClasses(
+          '',
+          commonClasses.inputsText,
+          commonClasses.inputsTextColor,
+          commonClasses.inputsBackground,
+          commonClasses.inputsBorder,
+          commonClasses.inputsRing,
+          commonClasses.inputsRadius,
+          'px-4 py-2',
+        ),
+      },
+    },
     // Used for Errors
     error: {
       classes: {

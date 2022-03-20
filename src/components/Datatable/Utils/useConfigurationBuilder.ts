@@ -44,6 +44,10 @@ export default function useConfigurationBuilder<Props extends Data>(props: Props
 
     recordsEmpty: 'Seems like its quiet here! No Records were found',
     settingsPerPage: ':count Items per page',
+
+    showingFrom: 'Showing :from to :to of :total results',
+    nextPage: 'Next',
+    previousPage: 'Previous',
   };
 
   const defaultPerPageOptions = [

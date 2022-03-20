@@ -1,7 +1,6 @@
 <template>
   <component
     :is="as"
-    v-bind="$attrs"
     ref="button"
     :class="[
       configuration.classesList.button,
@@ -9,6 +8,7 @@
       loading || disabled ? configuration.classesList.busyOrInvalidState : '',
       !disabled && !loading ? configuration.classesList.enableOpacity : '',
     ]"
+    v-bind="$attrs"
     :type="type"
     @click="$emit('click',$event)"
   >
