@@ -16,16 +16,17 @@
             :actions="actionsComputed"
             :text-actions="translations.actionsButton"
             :count-selected="selectedItemsCount"
+            @action-selected="onActionSelected"
           >
             <template
               v-for="(action) in actionsComputed"
               :key="action.name"
-              #[action.slotName]
+              #[action.slotName]="{selectAction}"
             >
               <slot
                 :name="action.slotName"
                 :action="action"
-                v-bind="{action}"
+                v-bind="{action, selectAction}"
               />
             </template>
           </VanillaDatatableActions>
@@ -52,7 +53,7 @@
         <VanillaDropdown
           class="inline-flex"
         >
-          <template #trigger="{iconClasses}">
+          <template #trigger>
             <VanillaButton>
               <DotsVerticalIcon class="h-4 w-4" />
             </VanillaButton>
@@ -69,7 +70,7 @@
             />
             <span>{{ 'Refresh' }}</span>
           </VanillaDropdownOption>
-          <VanillaDropdownOption @click="refresh">
+          <VanillaDropdownOption @click="isShowingSettings = true">
             <CogIcon class="h-4 h-4" />
             <span>{{ 'Settings' }}</span>
           </VanillaDropdownOption>
@@ -92,11 +93,11 @@
           name="selection"
           v-bind="{
             isAllSelected: queryData.selectedAll,
-            textSelectedRows: replaceTranslationPlaceHolders(translations.selectRows, {rows: selectedItemsCount}),
-            textDeselect: replaceTranslationPlaceHolders(translations.selectedUndo),
-            textOrSelectMatching: replaceTranslationPlaceHolders(translations.selectAllOr),
-            textSelectMatching: replaceTranslationPlaceHolders(translations.selectAllMatching, {rows: results?.meta.total}),
-            textDeselectMatching: replaceTranslationPlaceHolders(translations.selectAllMatchingUndo, {rows: results?.meta.total}),
+            textSelectedRows: useReplacePlaceholders(translations.selectRows, {rows: selectedItemsCount}),
+            textDeselect: useReplacePlaceholders(translations.selectedUndo),
+            textOrSelectMatching: useReplacePlaceholders(translations.selectAllOr),
+            textSelectMatching: useReplacePlaceholders(translations.selectAllMatching, {rows: results?.meta.total}),
+            textDeselectMatching: useReplacePlaceholders(translations.selectAllMatchingUndo, {rows: results?.meta.total}),
             deselectAll: deselectAllItems,
             selectMatching: toggleSelectAll,
             deselectMatching: toggleSelectAll,
@@ -104,11 +105,11 @@
         >
           <VanillaDatatableSelectionBar
             :is-all-selected="queryData.selectedAll"
-            :text-selected-rows="replaceTranslationPlaceHolders(translations.selectRows, {rows: selectedItemsCount})"
-            :text-deselect="replaceTranslationPlaceHolders(translations.selectedUndo)"
-            :text-or-select-matching="replaceTranslationPlaceHolders(translations.selectAllOr)"
-            :text-select-matching="replaceTranslationPlaceHolders(translations.selectAllMatching, {rows: results?.meta.total})"
-            :text-deselect-matching="replaceTranslationPlaceHolders(translations.selectAllMatchingUndo, {rows: results?.meta.total})"
+            :text-selected-rows="useReplacePlaceholders(translations.selectRows, {rows: selectedItemsCount})"
+            :text-deselect="useReplacePlaceholders(translations.selectedUndo)"
+            :text-or-select-matching="useReplacePlaceholders(translations.selectAllOr)"
+            :text-select-matching="useReplacePlaceholders(translations.selectAllMatching, {rows: results?.meta.total})"
+            :text-deselect-matching="useReplacePlaceholders(translations.selectAllMatchingUndo, {rows: results?.meta.total})"
             @deselect-all="deselectAllItems"
             @select-matching="toggleSelectAll"
             @deselect-matching="toggleSelectAll"
@@ -202,7 +203,7 @@
                   v-for="(column) in columnsComputed"
                   v-show="true"
                   :key="column.name"
-                  class="whitespace-nowrap px-3 py-2 text-sm text-gray-500 dark:text-white"
+                  class="whitespace-nowrap py-2 text-sm text-gray-500 dark:text-white"
                 >
                   <!-- Slot for the row -->
                   <slot
@@ -242,7 +243,7 @@
           :showing-from="results.meta?.from"
           :showing-to="results.meta?.to"
           :total="results.meta?.total"
-          :text-number-of-results="replaceTranslationPlaceHolders(translations.showingFrom,{
+          :text-number-of-results="useReplacePlaceholders(translations.showingFrom,{
             from: results.meta?.from,
             to: results.meta?.to,
             total: results.meta?.total
@@ -252,6 +253,47 @@
         />
       </slot>
     </VanillaCard>
+
+    <!-- Action Confirmation Modal -->
+    <slot
+      name="actionsDialog"
+      v-bind="{
+        isShowingActionConfirmation,
+        currentAction,
+        selectedItemsCount,
+        translations,
+        onActionConfirmed
+      }"
+    >
+      <VanillaDatatableDialogConfirmAction
+        v-model="isShowingActionConfirmation"
+        :action="currentAction"
+        :count-selected="selectedItemsCount"
+        :text-title="translations.actionConfirmTitle"
+        :text-confirm-action-text="translations.actionConfirmText"
+        :text-confirm-action-button="translations.actionConfirmButton"
+        :text-cancel-action-button="translations.actionCancelButton"
+        @action-confirmed="onActionConfirmed"
+      />
+    </slot>
+
+    <!-- Settings Modal -->
+    <slot
+      name="settingsDialog"
+      v-bind="{}"
+    >
+      <!-- Action Confirmation Modal -->
+      <VanillaDatatableDialogSettings
+        v-model="isShowingSettings"
+        :action="currentAction"
+        :count-selected="selectedItemsCount"
+        :text-title="translations.actionConfirmTitle"
+        :text-confirm-action-text="translations.actionConfirmText"
+        :text-confirm-action-button="translations.actionConfirmButton"
+        :text-cancel-action-button="translations.actionCancelButton"
+        @action-confirmed="onActionConfirmed"
+      />
+    </slot>
   </div>
 </template>
 
@@ -264,8 +306,9 @@ import {
     reactive,
     computed,
     onMounted,
+    onUnmounted,
     watch,
-    getCurrentInstance,
+    Ref,
 } from 'vue';
 
 import {
@@ -273,6 +316,7 @@ import {
     useVariantProps,
     useConfigurationWithClassesList,
     useDynamicSlots,
+    useReplacePlaceholders,
     firstOf,
 } from '@/core';
 
@@ -295,18 +339,28 @@ import {
     VanillaButton,
 } from '@/index';
 
-import { ChevronDownIcon, DotsVerticalIcon, CogIcon } from '@heroicons/vue/solid';
-import { FilterIcon, RefreshIcon } from '@heroicons/vue/outline';
+import {
+    DotsVerticalIcon,
+    CogIcon,
+} from '@heroicons/vue/solid';
 
-import each from 'lodash/each';
-import find from 'lodash/find';
-import xor from 'lodash/xor';
+import {
+    FilterIcon,
+    RefreshIcon,
+} from '@heroicons/vue/outline';
+
 import VanillaDatatableHead from './Partials/DatatableHead.vue';
 import VanillaDatatableRowSkeleton from './Partials/DatatableRowSkeleton.vue';
 import VanillaDatatableSearch from './Partials/DatatableSearch.vue';
 import VanillaDatatableSelectionBar from './Partials/DatatableSelectionBar.vue';
 import VanillaDatatablePagination from './Partials/DatatablePagination.vue';
 import VanillaDatatableActions from './Partials/DatatableActions.vue';
+import VanillaDatatableDialogConfirmAction from './Partials/DatatableDialogConfirmAction.vue';
+import VanillaDatatableDialogSettings from './Partials/DatatableDialogSettings.vue';
+
+import each from 'lodash/each';
+import find from 'lodash/find';
+import xor from 'lodash/xor';
 
 export default defineComponent({
     name: 'VanillaDatatable',
@@ -317,11 +371,12 @@ export default defineComponent({
         VanillaDatatableSelectionBar,
         VanillaDatatablePagination,
         VanillaDatatableActions,
+        VanillaDatatableDialogConfirmAction,
+        VanillaDatatableDialogSettings,
         VanillaCard,
         VanillaDropdown,
         VanillaDropdownOption,
         VanillaButton,
-        ChevronDownIcon,
         FilterIcon,
         RefreshIcon,
         DotsVerticalIcon,
@@ -421,9 +476,11 @@ export default defineComponent({
         // ----- Boot Config & Validate -----  //
         // ---------------------------- //
         const datatable = reactive(useConfigurationBuilder(props));
+
+        // Validate the data
         useValidator(datatable);
 
-        console.log('Configuration Booted', datatable);
+        //console.log('Configuration Booted', datatable);
 
         // ---------------------------- //
         // ----- Reactive Data -----  //
@@ -450,21 +507,21 @@ export default defineComponent({
         });
 
         /** Stores the current hash of the API Response */
-        const resultsHash = ref(null);
+        const resultsHash = ref(undefined) as Ref<undefined | string>;
 
         /** Stores the current hidden columns
          TODO: Might not be necessary
          **/
-        const columnsHidden = ref([]);
+        const columnsHidden = ref([]) as Ref<undefined | string[]>;
 
         /** Stores the current action object that was selected */
-        const currentAction = ref(null);
+        const currentAction = ref(undefined) as Ref<undefined | object>;
 
         /** Stores the current search query */
-        const searchQuery = ref(null);
+        const searchQuery = ref(undefined) as Ref<undefined | string>;
 
         /** Stores the pooling interval */
-        const poolingInterval = ref(null);
+        const poolingInterval = ref(undefined) as Ref<undefined | number>;
 
         /** Query Data being passed to the server */
         const queryData = reactive({
@@ -573,7 +630,6 @@ export default defineComponent({
             });
         });
 
-
         const actionsComputed = computed(() => {
             return props.actions.map((action) => {
                 return {
@@ -588,29 +644,10 @@ export default defineComponent({
         // ----- Methods -----  //
         // ---------------------------- //
 
-        /** Replaces the Translation Keys available on the strings  */
-        const replaceTranslationPlaceHolders = (translation: string, replace: string[] | object = {}) => {
-            if (typeof translation === 'object' || (Object.keys(replace).length === 0 && replace.constructor === Object)) {
-                return translation;
-            }
-
-            for (let placeholder in replace) {
-                try {
-                    translation = translation.toString()
-                        .replace(`:${placeholder}`, replace[placeholder])
-                        .replace(`:${placeholder.toUpperCase()}`, replace[placeholder].toString().toUpperCase())
-                        .replace(`:${placeholder.charAt(0).toUpperCase()}${placeholder.slice(1)}`, replace[placeholder].toString().charAt(0).toUpperCase() + replace[placeholder].toString().slice(1));
-                } catch (e) {
-                }
-            }
-
-            return translation.toString().trim();
-        };
-
         /** Resets the sorting  */
         const resetSorting = () => {
             // TODO : Check this to reset link
-            queryData.sorting = null;
+            queryData.sorting = [];
         };
 
         /** Resets the per page items  */
@@ -653,12 +690,7 @@ export default defineComponent({
         /** ResetThe current action  */
         const resetAction = () => {
             isShowingActionConfirmation.value = false;
-            currentAction.value = null;
-        };
-
-        /** Sanitize the Primary key and convert from string to integer  */
-        const sanitizePrimaryKey = (str: string) => {
-            return parseInt(str.toString().replace(/\D/g, ''));
+            currentAction.value = undefined;
         };
 
         /**
@@ -687,6 +719,9 @@ export default defineComponent({
             }
         };
 
+        /**
+         * Check if a given row is selected
+         **/
         const isRowSelected = (item: object) => {
             return queryData.selectedAll || queryData.selected.indexOf(item[datatable.primaryKey]) > -1;
         };
@@ -731,13 +766,6 @@ export default defineComponent({
             queryData.selectedAll = !queryData.selectedAll;
         };
 
-        /**
-         * On sorting updated, we will update the query data with the new sorting
-         **/
-        const onSortingUpdated = (sorting: never) => {
-            queryData.sorting = sorting;
-        };
-
         /** Wrapper for the main call to the server, so we can perform additional stuff */
         const fetchFromServer = () => {
             isFetching.value = true;
@@ -761,16 +789,156 @@ export default defineComponent({
                 });
         };
 
+        /** Refresh the datatable */
         const refresh = () => {
             if (!isFetching.value){
                 fetchFromServer();
             }
         };
 
+        /**
+         * Starts a table pool until a certain condition is met.
+         * Configurable to :
+         * - Pool every X Seconds
+         * - During X Time
+         * - Stop when hash of the data changed
+         */
+        const poolUntil = (enable = false, every = 20, during = 120, stopWhenChanged = true) => {
+
+            if (!enable) {
+                return;
+            }
+
+            let started = Date.now();
+            let initialItemsHash = resultsHash.value;
+
+            poolingInterval.value = setInterval(() => {
+                let timeExpired = Date.now() - started > (during * 1000);
+                let hashChanged = initialItemsHash !== resultsHash.value;
+                if (timeExpired || (hashChanged && stopWhenChanged)) {
+                    clearInterval(poolingInterval.value);
+                } else {
+                    refresh();
+                }
+            }, every * 1000);
+        };
+
+        /** Pool but forever */
+        const poolForever = (enable = false, every = 20) => {
+            if (!enable) {
+                return;
+            }
+            poolingInterval.value = setInterval(() => { refresh();}, every * 1000);
+        };
+
+        /**
+         * Execute the actual action
+         **/
+        const executeAction = (action: object) => {
+
+            // No permission to execute the action
+            if (!action.permissions.execute) {
+                return;
+            }
+
+            if (action?.before?.callback !== null){
+                action.before.callback(action);
+            }
+
+            // Assign to action data & send
+            actionsData.action = action.name;
+
+            // Stuff to execute after the action
+            const afterActionCallback = () => {
+                // Reset the selected items if it was defined on the action scope
+                if (action?.after?.clearSelected){
+                    deselectAllItems();
+                }
+
+                // Clear all the filters in case it was defined on the action scope
+                if (action?.after?.resetFilters){
+                    resetAllFilters(false);
+                }
+
+                // Clear all the filters in case it was defined on the action scope
+                if (action?.after?.callback !== null) {
+                    action.after.callback(action);
+                }
+
+                // If we need to pull data after an action has been started
+                if (
+                    action?.after?.pooling &&
+                    action?.after?.pooling?.enable &&
+                    action?.after?.pooling?.during > 0
+                ) {
+                    poolUntil(
+                        action?.after?.pooling?.enable,
+                        action?.after?.pooling?.interval,
+                        action?.after?.pooling?.during,
+                        action?.after?.pooling?.stopWhenDataChanges,
+                    );
+                }
+            };
+
+            // Execute the action
+            fetchFromServer().then(afterActionCallback);
+        };
+
+        /** Sanitize the Primary key and convert from string to integer  */
+        const sanitizePrimaryKey = (str: string) => {
+            return parseInt(str.toString().replace(/\D/g, ''));
+        };
+
+        /**
+         * On sorting updated, we will update the query data with the new sorting
+         **/
+        const onSortingUpdated = (sorting: never) => {
+            queryData.sorting = sorting;
+        };
+
+        /**
+         * On action selected, we will check if requires confirmation
+         * - If it does, we will show the confirmation modal
+         **/
+        const onActionSelected = (action: object) => {
+            if (action.before.confirm.enable) {
+                isShowingActionConfirmation.value = true;
+                currentAction.value = action;
+                return;
+            }
+            return executeAction(action);
+        };
+
+        /**
+         * On action selected, check if has permissions, its confirmed, etc
+         **/
+        const onActionConfirmed = (action: object) => {
+            return executeAction(action);
+        };
+
+        /**
+         * On Mounted, execute the stack
+         **/
         onMounted(() => {
             // Fetch the first page
-            console.log(getCurrentInstance()!);
-            fetchFromServer();
+            if (props?.pooling?.enable && props?.pooling?.interval > 0) {
+                fetchFromServer()
+                    .then(() => {
+                        poolForever(
+                            props?.pooling?.enable,
+                            props?.pooling?.interval,
+                        );
+                    });
+            } else {
+                fetchFromServer();
+            }
+        });
+
+        /**
+         * On Unmounted, clear the pooling interval
+         **/
+        onUnmounted(() => {
+            clearInterval(poolingInterval.value);
         });
 
         watch(queryData, (value) => {
@@ -792,6 +960,7 @@ export default defineComponent({
             isShowingSettings,
             isShowingActionConfirmation,
             queryData,
+            currentAction,
 
             // Computed
             hasAnyItemsSelected,
@@ -812,9 +981,11 @@ export default defineComponent({
             isRowSelected,
             selectItem,
             onSortingUpdated,
-            replaceTranslationPlaceHolders,
+            onActionSelected,
+            onActionConfirmed,
             deselectAllItems,
             toggleSelectAll,
+            useReplacePlaceholders,
             useDynamicSlots,
             refresh,
         };

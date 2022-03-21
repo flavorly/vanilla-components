@@ -21,12 +21,15 @@
       v-for="(action) in actions"
       :key="action.name"
     >
-      <slot :name="action.slotName">
-        <!-- Option -->
-        <VanillaDropdownOption>
+      <!-- Option -->
+      <VanillaDropdownOption @click="selectAction(action)">
+        <slot
+          :name="action.slotName"
+          v-bind="{selectAction}"
+        >
           <span>{{ action.name }} - {{ action.slotName }}</span>
-        </VanillaDropdownOption>
-      </slot>
+        </slot>
+      </VanillaDropdownOption>
     </template>
   </VanillaDropdown>
 </template>
@@ -62,9 +65,6 @@ export default defineComponent({
     setup(props, { emit }){
 
         const isDropdownOpen = ref(false);
-
-        console.log(props.actions);
-
         const selectAction = (action: object) => {
             emit('actionSelected', action);
         };

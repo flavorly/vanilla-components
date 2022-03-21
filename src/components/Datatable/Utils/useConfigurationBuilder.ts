@@ -29,6 +29,11 @@ export default function useConfigurationBuilder<Props extends Data>(props: Props
     actionsButton: 'Actions',
     actionsSelectedRows: 'With :rows selected',
 
+    actionConfirmTitle: 'Confirm your action',
+    actionConfirmText: 'Are you sure you want to :action on the :itemsSelected item(s) selected? Please confirm',
+    actionConfirmButton: 'Yes, I\'v Confirmed',
+    actionCancelButton: 'Nah, Cancel',
+
     search: 'Search',
     searchPlaceholder: 'Search your latest Payments',
 
