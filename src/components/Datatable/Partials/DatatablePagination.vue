@@ -1,24 +1,36 @@
 <template>
   <div class="px-4 py-3 flex items-center justify-between border-gray-200 border-t sm:px-6 dark:border-gray-700">
     <div class="flex-1 flex justify-between sm:hidden">
-      <button
-        :class="{'cursor-not-allowed': isFetching}"
-        :disabled="isFetching"
-        class="pagination-button"
+      <VanillaButton
+        variant="paginationButton"
+        :class="[
+          isFetching || previousPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
+          buttonShortClass,
+        ]"
+        aria-label="Previous"
         @click.prevent="goToPage(previousPage)"
       >
         <ChevronLeftIcon class="h-5 w-5" />
-        <span v-html="textPrevious" />
-      </button>
-      <button
-        :class="{'cursor-not-allowed': isFetching}"
-        :disabled="isFetching"
-        class="pagination-button ml-3"
+        <span
+          class="mr-2"
+          v-html="textPrevious"
+        />
+      </VanillaButton>
+      <VanillaButton
+        variant="paginationButton"
+        :class="[
+          isFetching || nextPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
+          buttonShortClass,
+        ]"
+        aria-label="Previous"
         @click.prevent="goToPage(nextPage)"
       >
-        <span v-html="textNext" />
+        <span
+          class="ml-2"
+          v-html="textNext"
+        />
         <ChevronRightIcon class="h-5 w-5" />
-      </button>
+      </VanillaButton>
     </div>
     <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
       <div>
@@ -34,7 +46,7 @@
       <div>
         <nav class="relative z-0 inline-flex shadow-sm cursor-pointer">
           <VanillaButton
-            variant="default"
+            variant="paginationButton"
             :class="[
               isFetching || previousPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
               buttonShortClass,
@@ -43,49 +55,21 @@
             aria-label="Previous"
             @click.prevent="goToPage(previousPage)"
           >
-            <ChevronLeftIcon class="h-5 w-5" />
+            <ChevronLeftIcon class="h-6 w-5" />
           </VanillaButton>
-
-          <!--          <button-->
-          <!--            :class="[-->
-          <!--              isFetching || previousPage === null ? 'cursor-not-allowed' : '',-->
-          <!--              buttonShortClass,-->
-          <!--            ]"-->
-          <!--            class="rounded-l-md"-->
-          <!--            :disabled="previousPage === null || isFetching"-->
-          <!--            aria-label="Previous"-->
-          <!--            @click.prevent="goToPage(previousPage)"-->
-          <!--          >-->
-          <!--            <ChevronLeftIcon class="h-5 w-5" />-->
-          <!--          </button>-->
-
-          <div v-if="showPages">
-            <a
-              v-for="(page, key) in pages"
+          <template v-if="showPages && pages.length > 0">
+            <VanillaButton
+              v-for="(page, key) in pages.slice(Number(currentPage),Number(showPagesMaximum))"
               :key="key"
-              :class="{'bg-indigo-500 text-white hover:text-white': page.active,'hover:text-gray-500' : !page.active}"
-              class="pagination-button-page"
+              variant="paginationButtonPage"
+              :class="{'bg-indigo-50 text-indigo-600': page.active, 'focus:bg-gray-300/10': !page.active}"
               @click.prevent="goToPage(page.url)"
             >
               {{ page.label }}
-            </a>
-          </div>
-
-          <!--          <button-->
-          <!--            :class="[-->
-          <!--              isFetching || nextPage === null ? 'cursor-not-allowed' : '',-->
-          <!--              buttonShortClass,-->
-          <!--            ]"-->
-          <!--            class="-ml-px rounded-r-md"-->
-          <!--            :disabled="isFetching"-->
-          <!--            aria-label="Next"-->
-          <!--            @click.prevent="goToPage(nextPage)"-->
-          <!--          >-->
-          <!--            <ChevronRightIcon class="h-5 w-5" />-->
-          <!--          </button>-->
-
+            </VanillaButton>
+          </template>
           <VanillaButton
-            variant="default"
+            variant="paginationButton"
             :class="[
               isFetching || nextPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
               buttonShortClass,
@@ -94,7 +78,7 @@
             aria-label="Previous"
             @click.prevent="goToPage(nextPage)"
           >
-            <ChevronRightIcon class="h-5 w-5" />
+            <ChevronRightIcon class="h-6 w-5" />
           </VanillaButton>
         </nav>
       </div>
@@ -155,7 +139,12 @@ export default defineComponent({
         showPages: {
             type: Boolean as PropType<boolean>,
             required: false,
-            default: false,
+            default: true,
+        },
+        showPagesMaximum: {
+            type: [String, Number] as PropType<string | number>,
+            required: false,
+            default: 5,
         },
         showNumberOfItems: {
             type: Boolean as PropType<boolean>,
@@ -185,6 +174,7 @@ export default defineComponent({
         const goToPage = (page: string | number) => {
             emit('navigate', page);
         };
+
         return {
             goToPage,
             buttonShortClass,

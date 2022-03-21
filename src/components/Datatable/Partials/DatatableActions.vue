@@ -1,0 +1,79 @@
+<template>
+  <!-- Regular -->
+  <VanillaDropdown
+    v-model="isDropdownOpen"
+    class="inline-flex"
+  >
+    <template #trigger="{iconClasses}">
+      <VanillaButton variant="primary">
+        <span v-text="textActions" />
+        <span
+          v-if="countSelected !== undefined"
+          class="ml-1 text-xxs text-white xxs:hidden"
+        >( {{ countSelected }} )</span>
+        <ChevronDownIcon
+          :class="iconClasses"
+          aria-hidden="true"
+        />
+      </VanillaButton>
+    </template>
+    <template
+      v-for="(action) in actions"
+      :key="action.name"
+    >
+      <slot :name="action.slotName">
+        <!-- Option -->
+        <VanillaDropdownOption>
+          <span>{{ action.name }} - {{ action.slotName }}</span>
+        </VanillaDropdownOption>
+      </slot>
+    </template>
+  </VanillaDropdown>
+</template>
+<script lang="ts">
+import { defineComponent, PropType, ref } from 'vue';
+import { VanillaDropdown, VanillaDropdownOption, VanillaButton } from '@/index';
+import { ChevronDownIcon } from '@heroicons/vue/solid';
+import { useDynamicSlots } from '@/core';
+
+export default defineComponent({
+    name: 'VanillaDatatableActions',
+    components: {
+        ChevronDownIcon,
+        VanillaButton,
+        VanillaDropdown,
+        VanillaDropdownOption,
+    },
+    props: {
+        actions: {
+            type: [Array, Object] as PropType<object[]>,
+            required: true,
+        },
+        countSelected: {
+            type: [String, Number, undefined] as PropType<string | number | undefined>,
+            default: undefined,
+        },
+        textActions: {
+            type: [String] as PropType<string>,
+            default: 'Actions',
+        },
+    },
+    emits: ['actionSelected'],
+    setup(props, { emit }){
+
+        const isDropdownOpen = ref(false);
+
+        console.log(props.actions);
+
+        const selectAction = (action: object) => {
+            emit('actionSelected', action);
+        };
+
+        return {
+            isDropdownOpen,
+            selectAction,
+            useDynamicSlots,
+        };
+    },
+});
+</script>

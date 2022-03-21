@@ -4,13 +4,13 @@ import { commonClasses, mergeClasses } from '@/core';
 export const VanillaButtonConfig = {
   fixedClasses: {
     button: mergeClasses(
-      commonClasses.buttonRadius,
       //commonClasses.buttonTransition,
       commonClasses.buttonPosition,
       commonClasses.buttonShadow,
       commonClasses.buttonSpacing,
       'focus:ring-offset-2',
       'cursor-pointer',
+      'h-full',
     ),
     container: 'flex items-center space-x-1',
     spinner: 'animate-spin -ml-1 mr-1 h-5 w-5 text-whit',
@@ -21,6 +21,7 @@ export const VanillaButtonConfig = {
   // Default Input appearance
   classes: {
     button: mergeClasses(
+      commonClasses.buttonRadius,
       commonClasses.buttonText,
       commonClasses.buttonRing,
       'focus:ring-primary-600',
@@ -40,6 +41,7 @@ export const VanillaButtonConfig = {
     error: {
       classes: {
         button: mergeClasses(
+          commonClasses.buttonRadius,
           commonClasses.buttonText,
           commonClasses.buttonRing,
           'focus:ring-red-500',
@@ -57,6 +59,7 @@ export const VanillaButtonConfig = {
     errorSoft: {
       classes: {
         button: mergeClasses(
+          commonClasses.buttonRadius,
           commonClasses.buttonText,
           commonClasses.buttonRing,
           'focus:ring-red-500 dark:focus:ring-red-400',
@@ -75,6 +78,7 @@ export const VanillaButtonConfig = {
     primary: {
       classes: {
         button: mergeClasses(
+          commonClasses.buttonRadius,
           commonClasses.buttonText,
           commonClasses.buttonRing,
           'focus:ring-primary-500',
@@ -92,6 +96,7 @@ export const VanillaButtonConfig = {
     success: {
       classes: {
         button: mergeClasses(
+          commonClasses.buttonRadius,
           commonClasses.buttonText,
           commonClasses.buttonRing,
           'focus:ring-green-500',
@@ -109,12 +114,43 @@ export const VanillaButtonConfig = {
     transparent: {
       classes: {
         button: mergeClasses(
+          commonClasses.buttonRadius,
           commonClasses.buttonText,
           commonClasses.buttonRing,
           'focus:ring-primary-600',
           'text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white',
           'bg-transparent',
           'border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600',
+        ),
+        container: '',
+        spinner: '',
+        disableOpacity: '',
+        enableOpacity: '',
+        busyOrInvalidState: '',
+      },
+    },
+    paginationButton: {
+      classes: {
+        button: mergeClasses(
+          commonClasses.buttonRadius,
+          commonClasses.buttonText,
+          commonClasses.buttonRing,
+          'cursor-pointer relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 dark:bg-gray-800 dark:text-white dark:hover:text-white dark:border-gray-600 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-indigo-300 focus:ring-indigo-500 active:bg-gray-100 active:text-gray-500',
+        ),
+        container: '',
+        spinner: '',
+        disableOpacity: '',
+        enableOpacity: '',
+        busyOrInvalidState: '',
+      },
+    },
+    paginationButtonPage: {
+      classes: {
+        button: mergeClasses(
+          'text-sm leading-6 whitespace-nowrap',
+          'text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white',
+          'border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600',
+          '-ml-px',
         ),
         container: '',
         spinner: '',

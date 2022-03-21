@@ -14,7 +14,7 @@ export const VanillaCardConfig = {
 
     subtitle: 'mt-1 max-w-2xl text-sm leading-5 text-gray-500 dark:text-gray-400',
 
-    actions: 'sm:ml-4 mt-4 flex-shrink flex',
+    actions: 'sm:ml-4 mt-4 sm:mt-0 flex space-x-1 content-center flex-wrap flex-shrink',
 
     footer: 'px-4 py-3 flex items-center justify-end text-right sm:px-6 border-t border-gray-200 dark:border-gray-700',
     footerBorder: 'border-t border-gray-200 dark:border-gray-700',

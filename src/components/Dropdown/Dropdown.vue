@@ -2,19 +2,20 @@
   <Menu
     v-slot="{open}"
     as="div"
-    class="relative"
+    :class="configuration.classesList.wrapper"
   >
     <!-- Trigger -->
     <MenuButton
       ref="button"
       as="div"
+      :class="configuration.classesList.container"
     >
       <slot
         name="trigger"
         v-bind="{
           buttonVariant,
           text,
-          iconClasses: configuration.classesList.wrapper
+          iconClasses: configuration.classesList.chevronIcon
         }"
       >
         <VanillaButton
@@ -22,7 +23,7 @@
         >
           <span v-text="text" />
           <ChevronDownIcon
-            :class="configuration.classesList.wrapper"
+            :class="configuration.classesList.chevronIcon"
             aria-hidden="true"
           />
         </VanillaButton>

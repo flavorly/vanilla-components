@@ -4,6 +4,80 @@
       :title="datatable.translations.title"
       :subtitle="datatable.translations.subtitle"
     >
+      <!-- Actions -->
+      <template #actions>
+        <!-- Bulk Actions -->
+        <slot
+          name="actions"
+          v-bind="{actions,hasActions,hasAnyItemsSelected}"
+        >
+          <VanillaDatatableActions
+            v-if="hasActions && hasAnyItemsSelected"
+            :actions="actionsComputed"
+            :text-actions="translations.actionsButton"
+            :count-selected="selectedItemsCount"
+          >
+            <template
+              v-for="(action) in actionsComputed"
+              :key="action.name"
+              #[action.slotName]
+            >
+              <slot
+                :name="action.slotName"
+                :action="action"
+                v-bind="{action}"
+              />
+            </template>
+          </VanillaDatatableActions>
+        </slot>
+
+        <!-- Filters-->
+        <div
+          v-if="hasFilters"
+          class="inline-flex"
+        >
+          <VanillaButton
+            @click="isShowingFilters = true"
+          >
+            <FilterIcon class="h-4 h-4 sm:mr-1" />
+            <span class="hidden sm:block">{{ 'Filters' }}</span>
+            <span
+              v-if="filtersActiveCount > 0"
+              class="ml-1 text-xxs"
+            >( {{ filtersActiveCount }} )</span>
+          </VanillaButton>
+        </div>
+
+        <!-- Table Settings -->
+        <VanillaDropdown
+          class="inline-flex"
+        >
+          <template #trigger="{iconClasses}">
+            <VanillaButton>
+              <DotsVerticalIcon class="h-4 w-4" />
+            </VanillaButton>
+          </template>
+
+          <!-- Refresh -->
+          <VanillaDropdownOption
+            v-if="options.refreshable"
+            @click="refresh"
+          >
+            <RefreshIcon
+              class="h-4 h-4"
+              :class="[isFetching ? 'animate-spin' : '']"
+            />
+            <span>{{ 'Refresh' }}</span>
+          </VanillaDropdownOption>
+          <VanillaDropdownOption @click="refresh">
+            <CogIcon class="h-4 h-4" />
+            <span>{{ 'Settings' }}</span>
+          </VanillaDropdownOption>
+        </VanillaDropdown>
+
+        <!-- Table Config -->
+      </template>
+
       <!-- Search Bar -->
       <VanillaDatatableSearch
         v-if="options.searchable && !hasAnyItemsSelected"
@@ -17,7 +91,15 @@
         <slot
           name="selection"
           v-bind="{
-
+            isAllSelected: queryData.selectedAll,
+            textSelectedRows: replaceTranslationPlaceHolders(translations.selectRows, {rows: selectedItemsCount}),
+            textDeselect: replaceTranslationPlaceHolders(translations.selectedUndo),
+            textOrSelectMatching: replaceTranslationPlaceHolders(translations.selectAllOr),
+            textSelectMatching: replaceTranslationPlaceHolders(translations.selectAllMatching, {rows: results?.meta.total}),
+            textDeselectMatching: replaceTranslationPlaceHolders(translations.selectAllMatchingUndo, {rows: results?.meta.total}),
+            deselectAll: deselectAllItems,
+            selectMatching: toggleSelectAll,
+            deselectMatching: toggleSelectAll,
           }"
         >
           <VanillaDatatableSelectionBar
@@ -106,7 +188,7 @@
                   @change="selectItem(result)"
                 >
               </td>
-              <!-- Rest of the records -->
+              <!-- Rest of the columns -->
               <slot
                 name="default"
                 v-bind="{
@@ -116,35 +198,59 @@
                   selected: isRowSelected(result)
                 }"
               >
-                <VanillaDatatableRow
-                  :columns="columnsComputed"
-                  :selectable="datatable.options.selectable"
-                  :result="result"
-                />
+                <td
+                  v-for="(column) in columnsComputed"
+                  v-show="true"
+                  :key="column.name"
+                  class="whitespace-nowrap px-3 py-2 text-sm text-gray-500 dark:text-white"
+                >
+                  <!-- Slot for the row -->
+                  <slot
+                    :name="column.slotName"
+                    v-bind="{
+                      column: column,
+                      result: result[column.name],
+                      resultRaw: result,
+                    }"
+                  >
+                    <div
+                      v-if="column.raw && !column.component"
+                      v-html="result[column.name]"
+                    />
+                    <div v-else-if="!column.raw">
+                      {{ result[column.name] }}
+                    </div>
+                    <div v-else-if="column.component && column.component !== ''">
+                      Its a component, inject v-runtime template
+                    </div>
+                  </slot>
+                </td>
               </slot>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Pagination -->
-      <VanillaDatatablePagination
-        :is-fetching="isFetching"
-        :pages="results.links?.pages"
-        :next-page="results.links?.next"
-        :previous-page="results.links?.previous"
-        :current-page="results.meta?.current_page"
-        :showing-from="results.meta?.from"
-        :showing-to="results.meta?.to"
-        :total="results.meta?.total"
-        :text-number-of-results="replaceTranslationPlaceHolders(translations.showingFrom,{
-          from: results.meta?.from,
-          to: results.meta?.to,
-          total: results.meta?.total
-        })"
-        :text-next="translations.nextPage"
-        :text-previous="translations.previousPage"
-      />
+      <slot name="pagination">
+        <!-- Pagination -->
+        <VanillaDatatablePagination
+          :is-fetching="isFetching"
+          :pages="results.links?.pages"
+          :next-page="results.links?.next"
+          :previous-page="results.links?.previous"
+          :current-page="results.meta?.current_page"
+          :showing-from="results.meta?.from"
+          :showing-to="results.meta?.to"
+          :total="results.meta?.total"
+          :text-number-of-results="replaceTranslationPlaceHolders(translations.showingFrom,{
+            from: results.meta?.from,
+            to: results.meta?.to,
+            total: results.meta?.total
+          })"
+          :text-next="translations.nextPage"
+          :text-previous="translations.previousPage"
+        />
+      </slot>
     </VanillaCard>
   </div>
 </template>
@@ -156,13 +262,17 @@ import {
     provide,
     PropType,
     reactive,
-    computed, onMounted, watch,
+    computed,
+    onMounted,
+    watch,
+    getCurrentInstance,
 } from 'vue';
 
 import {
     useBootVariant,
     useVariantProps,
     useConfigurationWithClassesList,
+    useDynamicSlots,
     firstOf,
 } from '@/core';
 
@@ -180,28 +290,42 @@ import {
 
 import {
     VanillaCard,
+    VanillaDropdown,
+    VanillaDropdownOption,
+    VanillaButton,
 } from '@/index';
+
+import { ChevronDownIcon, DotsVerticalIcon, CogIcon } from '@heroicons/vue/solid';
+import { FilterIcon, RefreshIcon } from '@heroicons/vue/outline';
 
 import each from 'lodash/each';
 import find from 'lodash/find';
 import xor from 'lodash/xor';
 import VanillaDatatableHead from './Partials/DatatableHead.vue';
-import VanillaDatatableRow from './Partials/DatatableRow.vue';
 import VanillaDatatableRowSkeleton from './Partials/DatatableRowSkeleton.vue';
 import VanillaDatatableSearch from './Partials/DatatableSearch.vue';
 import VanillaDatatableSelectionBar from './Partials/DatatableSelectionBar.vue';
 import VanillaDatatablePagination from './Partials/DatatablePagination.vue';
+import VanillaDatatableActions from './Partials/DatatableActions.vue';
 
 export default defineComponent({
     name: 'VanillaDatatable',
     components: {
         VanillaDatatableHead,
-        VanillaDatatableRow,
         VanillaDatatableRowSkeleton,
         VanillaDatatableSearch,
         VanillaDatatableSelectionBar,
         VanillaDatatablePagination,
+        VanillaDatatableActions,
         VanillaCard,
+        VanillaDropdown,
+        VanillaDropdownOption,
+        VanillaButton,
+        ChevronDownIcon,
+        FilterIcon,
+        RefreshIcon,
+        DotsVerticalIcon,
+        CogIcon,
     },
     inheritAttrs: true,
     compatConfig: {
@@ -444,6 +568,17 @@ export default defineComponent({
                     isSorted: queryData.sorting.some(c => c.column === column.name),
                     isSortedAsc: queryData.sorting.some(c => c.column === column.name && c.direction === 'asc'),
                     isSortedDesc: queryData.sorting.some(c => c.column === column.name && c.direction === 'desc'),
+                    slotName: useDynamicSlots('row', column.name),
+                };
+            });
+        });
+
+
+        const actionsComputed = computed(() => {
+            return props.actions.map((action) => {
+                return {
+                    ...action,
+                    slotName: useDynamicSlots('action', action.name),
                 };
             });
         });
@@ -626,7 +761,15 @@ export default defineComponent({
                 });
         };
 
+        const refresh = () => {
+            if (!isFetching.value){
+                fetchFromServer();
+            }
+        };
+
         onMounted(() => {
+            // Fetch the first page
+            console.log(getCurrentInstance()!);
             fetchFromServer();
         });
 
@@ -645,15 +788,22 @@ export default defineComponent({
 
             // Reactive / Refs
             isFetching,
+            isShowingFilters,
+            isShowingSettings,
+            isShowingActionConfirmation,
             queryData,
 
             // Computed
             hasAnyItemsSelected,
+            hasActions,
+            hasFilters,
+            filtersActiveCount,
             canSearch,
             visibleColumnsCount,
             isAllItemsInPageSelected,
             hasAnyItemsSelectedForCurrentPage,
             columnsComputed,
+            actionsComputed,
             selectedItemsCount,
             selectedItemsCountFormatted,
 
@@ -665,6 +815,8 @@ export default defineComponent({
             replaceTranslationPlaceHolders,
             deselectAllItems,
             toggleSelectAll,
+            useDynamicSlots,
+            refresh,
         };
 
 

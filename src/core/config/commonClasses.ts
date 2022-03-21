@@ -29,7 +29,7 @@ export const commonClasses = {
   buttonRadius: 'rounded-md',
   buttonSpacing: 'px-4 py-2',
   buttonShadow: 'shadow',
-  buttonText: 'text-sm md:text-base leading-6 font-medium whitespace-nowrap',
+  buttonText: 'sm:text-sm text-base leading-6 whitespace-nowrap',
   buttonTransition: 'transition ease-in-out duration-15',
   buttonPosition: 'block justify-center inline-flex items-center',
 
