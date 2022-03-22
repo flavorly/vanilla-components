@@ -7,6 +7,7 @@ import {
 } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 import { VanillaDatatableClassesValidKeys } from './Config';
+import { extend } from 'lodash';
 
 
 //declare type ActionAfterCallback = (response: Array<string> | Record<string, unknown>) => void;
@@ -90,11 +91,20 @@ export type VanillaDatatableColumn = {
   raw: boolean,
 };
 
+export type VanillaDatatableColumnComputed = {
+  visible: boolean,
+  isSorted: boolean,
+  isSortedAsc: boolean,
+  isSortedDesc: boolean,
+  slotName: string
+} & VanillaDatatableColumn;
+
 declare type ActionCallback = (action: VanillaDatatableAction) => void;
 
 export type VanillaDatatableAction = {
   name: string,
   label: string,
+  slotName?: string
   limit: number | string,
   permissions?: {
     view?: boolean,
@@ -175,6 +185,7 @@ export type VanillaDatatableResponse = {
 
 export type VanillaDatatableActions = VanillaDatatableAction[];
 export type VanillaDatatableColumns = VanillaDatatableColumn[];
+export type VanillaDatatableColumnsComputed = VanillaDatatableColumnComputed[];
 export type VanillaDatatableFilters = VanillaDatatableFilter[];
 export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] | { [key: string]: string | number | undefined };
 

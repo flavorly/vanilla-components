@@ -59,6 +59,7 @@ import { useReplacePlaceholders } from '@/core';
 import { ExclamationIcon } from '@heroicons/vue/outline';
 import VanillaDialog from '@/components/Dialog/Dialog.vue';
 import VanillaButton from '@/components/Button/Button.vue';
+import { VanillaDatatableAction } from '../index';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogConfirmAction',
@@ -69,7 +70,7 @@ export default defineComponent({
     },
     props: {
         action: {
-            type: [Object, undefined] as PropType<object | undefined>,
+            type: [Object, undefined] as PropType<VanillaDatatableAction>,
             required: false,
             default: undefined,
         },

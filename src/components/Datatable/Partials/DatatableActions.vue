@@ -41,6 +41,7 @@ import { useDynamicSlots } from '@/core';
 import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
 import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
 import VanillaButton from '@/components/Button/Button.vue';
+import { VanillaDatatableActions } from '../index';
 
 export default defineComponent({
     name: 'VanillaDatatableActions',
@@ -52,7 +53,7 @@ export default defineComponent({
     },
     props: {
         actions: {
-            type: [Array, Object] as PropType<object[]>,
+            type: [Array, Object] as PropType<VanillaDatatableActions>,
             required: true,
         },
         countSelected: {

@@ -5,7 +5,7 @@ const useValidator = (config: VanillaDatatableConfiguration) => {
     //console.log('Validating Configuration', config);
 
     // Validate if columns exists
-    if (config?.columns.length){
+    if (config?.columns.length <= 0){
       throw new Error('You must define the columns for this table');
     }
 

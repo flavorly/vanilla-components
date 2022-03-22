@@ -334,7 +334,7 @@ import {
     VanillaDatatableTranslations,
     VanillaDatatableResponse,
     VanillaDatatableSortedColumns,
-    VanillaDatatableResultData,
+    VanillaDatatableResultData, VanillaDatatableColumnsComputed,
 } from './index';
 
 import {
@@ -645,16 +645,19 @@ export default defineComponent({
                     slotName: useDynamicSlots('row', column.name),
                 };
             });
-        });
+        }) as Ref<VanillaDatatableColumnsComputed>;
 
+        /**
+         * Map the actions to add slot name
+         **/
         const actionsComputed = computed(() => {
-            return props.actions.map((action: VanillaDatatableAction) => {
+            return props.actions.map((action: VanillaDatatableActionType) => {
                 return {
                     ...action,
                     slotName: useDynamicSlots('action', action.name),
                 };
             });
-        });
+        }) as Ref<VanillaDatatableActionsType>;
 
 
         // ---------------------------- //
@@ -851,7 +854,7 @@ export default defineComponent({
         /**
          * Execute the actual action
          **/
-        const executeAction = (action: VanillaDatatableAction) => {
+        const executeAction = (action: VanillaDatatableActionType) => {
 
             // No permission to execute the action
             if (!action?.permissions?.execute) {
@@ -913,7 +916,7 @@ export default defineComponent({
          * On action selected, we will check if requires confirmation
          * - If it does, we will show the confirmation modal
          **/
-        const onActionSelected = (action: VanillaDatatableAction) => {
+        const onActionSelected = (action: VanillaDatatableActionType) => {
             if (action.before?.confirm?.enable) {
                 isShowingActionConfirmation.value = true;
                 currentAction.value = action;
@@ -925,7 +928,7 @@ export default defineComponent({
         /**
          * On action selected, check if has permissions, its confirmed, etc
          **/
-        const onActionConfirmed = (action: VanillaDatatableAction) => {
+        const onActionConfirmed = (action: VanillaDatatableActionType) => {
             return executeAction(action);
         };
 

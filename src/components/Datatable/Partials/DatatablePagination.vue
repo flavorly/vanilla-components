@@ -5,7 +5,6 @@
         variant="paginationButton"
         :class="[
           isFetching || previousPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
-          buttonShortClass,
         ]"
         aria-label="Previous"
         @click.prevent="goToPage(previousPage)"
@@ -20,7 +19,6 @@
         variant="paginationButton"
         :class="[
           isFetching || nextPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
-          buttonShortClass,
         ]"
         aria-label="Previous"
         @click.prevent="goToPage(nextPage)"
@@ -49,7 +47,6 @@
             variant="paginationButton"
             :class="[
               isFetching || previousPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
-              buttonShortClass,
             ]"
             class="rounded-l-md rounded-r-none focus:ring-0"
             aria-label="Previous"
@@ -72,7 +69,6 @@
             variant="paginationButton"
             :class="[
               isFetching || nextPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
-              buttonShortClass,
             ]"
             class="-ml-px rounded-r-md rounded-l-none focus:ring-0"
             aria-label="Previous"
@@ -89,6 +85,11 @@
 import { defineComponent, PropType } from 'vue';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid';
 import VanillaButton from '@/components/Button/Button.vue';
+import {
+    VanillaDatatableResponsePage,
+    VanillaDatatableColumnComputed,
+    VanillaDatatableSortedColumns,
+} from '../index';
 
 export default defineComponent({
     name: 'VanillaDatatablePagination',
@@ -103,7 +104,7 @@ export default defineComponent({
             default: false,
         },
         pages: {
-            type: [Array] as PropType<object[]>,
+            type: [Array] as PropType<VanillaDatatableResponsePage[]>,
             required: false,
             default(){
                 return [];

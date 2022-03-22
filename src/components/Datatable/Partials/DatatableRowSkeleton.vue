@@ -40,10 +40,6 @@ export default defineComponent({
             required: true,
         },
     },
-    setup(props){
-        return {
-        };
-    },
 });
 
 </script>

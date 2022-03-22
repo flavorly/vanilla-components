@@ -65,8 +65,14 @@
 <script lang="ts">
 import { ref, defineComponent, PropType } from 'vue';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/solid';
+import {
+    VanillaDatatableColumnsComputed,
+    VanillaDatatableColumnComputed,
+    VanillaDatatableSortedColumns,
+} from '../index';
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
+
 
 export default defineComponent({
     name: 'VanillaDatatableHead',
@@ -77,19 +83,19 @@ export default defineComponent({
     props: {
         columns: {
             // Todo: Infer Type here
-            type: [Array] as PropType<string[]>,
+            type: [Array] as PropType<VanillaDatatableColumnsComputed>,
             required: true,
         },
         columnsWithHiddenState: {
             // Todo: Infer Type here
-            type: [Array] as PropType<string[]>,
+            type: [Array] as PropType<VanillaDatatableColumnsComputed>,
             required: false,
             default() {
                 return [];
             },
         },
         columnsWithSorting : {
-            type: [Array] as PropType<object[]>,
+            type: [Array] as PropType<VanillaDatatableSortedColumns>,
             required: false,
             default() {
                 return [];
@@ -129,7 +135,7 @@ export default defineComponent({
          * Map the user initial columns with our own internal representation
          * All columns start with a sorting times set to 1
          **/
-        const localSorting = ref(props.columnsWithSorting.map((column) => {
+        const localSorting = ref(props.columnsWithSorting.map((column: VanillaDatatableColumnComputed) => {
             return {
                 ...column,
                 sortedTimes: 1,
