@@ -62,11 +62,11 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
   } as VanillaDatatableTranslations;
 
   const defaultPerPageOptions = [
-      { value: 5, label: '5 Items per page' },
-      { value: 10, label: '10 Items per page' },
-      { value: 50, label: '50 Items per page' },
-      { value: 100, label: '100 Items per page' },
-      { value: 300, label: '300 Items per page' },
+      { value: 5, text: '5 Items per page' },
+      { value: 10, text: '10 Items per page' },
+      { value: 50, text: '50 Items per page' },
+      { value: 100, text: '100 Items per page' },
+      { value: 300, text: '300 Items per page' },
   ] as VanillaDatatablePageOptions;
 
   return {

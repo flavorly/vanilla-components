@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios';
-import { hasProperty } from '@/core';
+
 import {
   VanillaDatatableFetchDataPromise,
   VanillaDatatableConfiguration,
@@ -10,7 +10,8 @@ const useFetchData = <T extends VanillaDatatableConfiguration, Data extends Vani
   config: T,
   data: Data,
 ): VanillaDatatableFetchDataPromise => {
-  const isAction = hasProperty(data, 'action');
+
+  const isAction = data.action !== null;
   const method = isAction ? config?.actionsMethod : config?.fetchMethod;
   const url = isAction ? config?.actionsEndpoint : config?.fetchEndpoint;
   const postParams = method === 'POST' ? data : {};

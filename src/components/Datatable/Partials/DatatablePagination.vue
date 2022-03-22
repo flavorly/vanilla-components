@@ -56,7 +56,8 @@
           </VanillaButton>
           <template v-if="showPages && pages.length > 0">
             <VanillaButton
-              v-for="(page, key) in pages.slice(Number(currentPage),Number(showPagesMaximum))"
+              v-for="(page, key) in pagesLimited"
+
               :key="key"
               variant="paginationButtonPage"
               :class="{'bg-indigo-50 text-indigo-600': page.active, 'focus:bg-gray-300/10': !page.active}"
@@ -82,7 +83,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, computed } from 'vue';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid';
 import VanillaButton from '@/components/Button/Button.vue';
 import {
@@ -140,12 +141,16 @@ export default defineComponent({
         showPages: {
             type: Boolean as PropType<boolean>,
             required: false,
-            default: true,
+            default: false,
         },
         showPagesMaximum: {
             type: [String, Number] as PropType<string | number>,
             required: false,
             default: 5,
+        },
+        limitPages: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
         },
         showNumberOfItems: {
             type: Boolean as PropType<boolean>,
@@ -170,15 +175,35 @@ export default defineComponent({
     emits: ['navigate'],
     setup(props, { emit }){
 
-        const buttonShortClass = 'cursor-pointer relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 dark:bg-gray-800 dark:text-white dark:hover:text-white dark:border-gray-600 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-indigo-300 focus:ring-indigo-500 active:bg-gray-100 active:text-gray-500';
-
         const goToPage = (page: string | number) => {
+            console.log('goToPage', page);
             emit('navigate', page);
         };
 
+        // pages.slice(Number(currentPage),Number(showPagesMaximum))
+        const pagesLimited = computed(() => {
+            if (prop.limitPages === false){
+                return prop.pages;
+            }
+            const pages = props.pages;
+            const currentPage = Number(props.currentPage) - 1;
+            const showPagesMaximum = Number(props.showPagesMaximum);
+            const pagesLength = pages.length;
+            const pagesSliced = pages.slice(currentPage, currentPage + showPagesMaximum);
+            if (pagesSliced.length < showPagesMaximum) {
+                const pagesToAdd = showPagesMaximum - pagesSliced.length;
+                const pagesToAddStart = pagesSliced.length;
+                const pagesToAddEnd = pagesSliced.length + pagesToAdd;
+                const pagesToAddStartLimited = pages.slice(0, pagesToAddStart);
+                const pagesToAddEndLimited = pages.slice(pagesLength - pagesToAddEnd, pagesLength);
+                return [...pagesToAddStartLimited, ...pagesSliced, ...pagesToAddEndLimited];
+            }
+            return pagesSliced;
+        });
+
         return {
             goToPage,
-            buttonShortClass,
+            pagesLimited,
         };
     },
 });

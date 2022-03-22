@@ -248,6 +248,7 @@
           })"
           :text-next="translations.nextPage"
           :text-previous="translations.previousPage"
+          @navigate="onPageNavigated"
         />
       </slot>
     </VanillaCard>
@@ -283,13 +284,12 @@
       <!-- Action Confirmation Modal -->
       <VanillaDatatableDialogSettings
         v-model="isShowingSettings"
-        :action="currentAction"
-        :count-selected="selectedItemsCount"
-        :text-title="translations.actionConfirmTitle"
-        :text-confirm-action-text="translations.actionConfirmText"
-        :text-confirm-action-button="translations.actionConfirmButton"
-        :text-cancel-action-button="translations.actionCancelButton"
-        @action-confirmed="onActionConfirmed"
+        v-model:perPage="queryData.perPage"
+        v-model:columnsHidden="columnsHidden"
+        :current-per-page="queryData.perPage"
+        :per-page-options="perPageOptions"
+        :columns="columnsComputed"
+        :columns-with-hidden-state="columnsHidden"
       />
     </slot>
   </div>
@@ -337,7 +337,7 @@ import {
     VanillaDatatableResultData,
     VanillaDatatableColumnsComputed,
     VanillaDatatableFetchDataFunction,
-    VanillaDatatablePooling,
+    VanillaDatatablePooling, VanillaDatatableAction,
 } from './index';
 
 import {
@@ -539,7 +539,7 @@ export default defineComponent({
         const columnsHidden = ref([]) as Ref<undefined | string[]>;
 
         /** Stores the current action object that was selected */
-        const currentAction = ref(undefined) as Ref<undefined | object>;
+        const currentAction = ref(undefined) as Ref<undefined | VanillaDatatableAction>;
 
         /** Stores the current search query */
         const searchQuery = ref(undefined) as Ref<undefined | string>;
@@ -557,12 +557,7 @@ export default defineComponent({
             filters: [],
             sorting: [{ column: 'id', direction: 'desc' }],
             //sorting: null,
-        }) as VanillaDatatableQueryData;
-
-        /** POST data being sent when an action is sent */
-        const actionsData = reactive({
             action: null,
-            ...queryData,
         }) as VanillaDatatableQueryData;
 
         /** Actual function to perform the request */
@@ -796,6 +791,7 @@ export default defineComponent({
         /** Wrapper for the main call to the server, so we can perform additional stuff */
         const fetchFromServer = (then = () => {}) => {
             isFetching.value = true;
+
             return fetchData(datatable, queryData)
                 // Resolve
                 .then((response) => {
@@ -874,7 +870,7 @@ export default defineComponent({
             }
 
             // Assign to action data & send
-            actionsData.action = action.name;
+            queryData.action = action.name;
 
             // Stuff to execute after the action
             const afterActionCallback = () => {
@@ -940,6 +936,21 @@ export default defineComponent({
             return executeAction(action);
         };
 
+        const onPageNavigated = (link: string) => {
+
+            if (null == link){
+                return;
+            }
+
+            let fetchEndpoint = datatable.fetchEndpoint;
+            let actionsEndpoint = datatable.actionsEndpoint;
+            datatable.fetchEndpoint = link;
+            datatable.actionsEndpoint = link;
+            refresh();
+            datatable.fetchEndpoint = fetchEndpoint;
+            datatable.actionsEndpoint = actionsEndpoint;
+        };
+
         /**
          * On Mounted, execute the stack
          **/
@@ -967,7 +978,7 @@ export default defineComponent({
 
         watch(queryData, (value) => {
             console.log('Changed Query Data', value);
-            //fetchFromServer();
+            fetchFromServer();
         });
 
         // ----- Actual props to share -----  //
@@ -985,6 +996,7 @@ export default defineComponent({
             isShowingActionConfirmation,
             queryData,
             currentAction,
+            columnsHidden,
 
             // Computed
             hasAnyItemsSelected,
@@ -1007,6 +1019,7 @@ export default defineComponent({
             onSortingUpdated,
             onActionSelected,
             onActionConfirmed,
+            onPageNavigated,
             deselectAllItems,
             toggleSelectAll,
             useReplacePlaceholders,

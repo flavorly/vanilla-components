@@ -51,7 +51,13 @@
       </div>
     </div>
 
-    <div v-bind="$attrs">
+    <div
+      v-bind="$attrs"
+      :class="[
+        configuration.classesList.body,
+        bodyDivided ? configuration.classesList.bodyDivided : ''
+      ]"
+    >
       <slot name="default" />
     </div>
 
@@ -101,6 +107,10 @@ export default defineComponent({
         as: {
             type: [String] as PropType<string>,
             default: 'div',
+        },
+        bodyDivided: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
         },
     },
     setup(props) {

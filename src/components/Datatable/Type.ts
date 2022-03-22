@@ -38,8 +38,8 @@ export type VanillaDatatableFilter = {
 
 export type VanillaDatatablePageOption = {
   value: string | number | undefined | null | object | boolean,
-  label: string | number | undefined,
-};
+  text: string | number | undefined,
+} & InputOptions | NormalizedOption[] | NormalizedOptions;
 
 export type VanillaDatatableTranslations = {
   title?: string,
@@ -193,7 +193,7 @@ export type VanillaDatatableColumnsComputed = VanillaDatatableColumnComputed[];
 
 export type VanillaDatatableFilters = VanillaDatatableFilter[];
 
-export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] | { [key: string]: string | number | undefined };
+export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] | { [key: string | number]: string | number | undefined };
 
 export type VanillaDatatableConfiguration = {
   name: string | number,

@@ -106,8 +106,8 @@ export default defineComponent({
             required: false,
         },
         layout: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: 'inline',
+            type: [String, undefined] as PropType<'row' | 'inline' | 'content' | string | undefined>,
+            default: 'row',
             required: false,
             validator: (layout: string) => {
                 return ['row', 'inline', 'content', undefined].includes(layout);

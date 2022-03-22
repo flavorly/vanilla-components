@@ -70,7 +70,7 @@ export default defineComponent({
     },
     props: {
         action: {
-            type: [Object, undefined] as PropType<VanillaDatatableAction>,
+            type: [Object, undefined] as PropType<VanillaDatatableAction | undefined>,
             required: false,
             default: undefined,
         },

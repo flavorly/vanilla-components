@@ -73,7 +73,6 @@ import {
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 
-
 export default defineComponent({
     name: 'VanillaDatatableHead',
     components: {
@@ -82,12 +81,10 @@ export default defineComponent({
     },
     props: {
         columns: {
-            // Todo: Infer Type here
             type: [Array] as PropType<VanillaDatatableColumnsComputed>,
             required: true,
         },
         columnsWithHiddenState: {
-            // Todo: Infer Type here
             type: [Array] as PropType<VanillaDatatableColumnsComputed>,
             required: false,
             default() {

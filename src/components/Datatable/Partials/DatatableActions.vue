@@ -37,7 +37,6 @@
 import { defineComponent, PropType, ref } from 'vue';
 import { ChevronDownIcon } from '@heroicons/vue/solid';
 import { useDynamicSlots } from '@/core';
-
 import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
 import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
 import VanillaButton from '@/components/Button/Button.vue';

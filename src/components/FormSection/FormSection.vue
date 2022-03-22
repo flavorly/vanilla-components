@@ -1,7 +1,7 @@
 <template>
-  <div class="sm:divide-y sm:divide-gray-200 dark:divide-gray-800 bg-gray-50 dark:bg-gray-800/50">
+  <form :class="configuration.class">
     <slot />
-  </div>
+  </form>
 </template>
 
 <script lang="ts">
@@ -26,6 +26,8 @@ export default defineComponent({
     setup(props) {
         const { localVariant } = useBootVariant(props, 'errors', ref(null));
         const { configuration } = useConfiguration<VanillaFormSectionProps>(VanillaFormSectionConfig);
+
+        console.log(configuration);
 
         return {
             localVariant,
