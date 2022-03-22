@@ -88,7 +88,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid';
-import { VanillaButton } from '@/index';
+import VanillaButton from '@/components/Button/Button.vue';
 
 export default defineComponent({
     name: 'VanillaDatatablePagination',

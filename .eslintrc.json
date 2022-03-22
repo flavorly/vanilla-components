@@ -24,7 +24,8 @@
         "import/no-extraneous-dependencies": "off",
         "import/extensions": "off",
         "@typescript-eslint/indent": "off",
-        "@typescript-eslint/no-non-null-assertion": "off"
+        "@typescript-eslint/no-non-null-assertion": "off",
+        "@typescript/no-unused-vars": "off"
     },
     "parser": "vue-eslint-parser",
     "parserOptions": {

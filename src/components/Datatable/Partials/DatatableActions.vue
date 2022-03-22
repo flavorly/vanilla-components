@@ -35,9 +35,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue';
-import { VanillaDropdown, VanillaDropdownOption, VanillaButton } from '@/index';
 import { ChevronDownIcon } from '@heroicons/vue/solid';
 import { useDynamicSlots } from '@/core';
+
+import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
+import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
+import VanillaButton from '@/components/Button/Button.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableActions',

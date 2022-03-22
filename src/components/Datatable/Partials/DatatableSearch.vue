@@ -18,9 +18,9 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref, watch } from 'vue';
-import { VanillaInput } from '@/index';
 import { SearchIcon } from '@heroicons/vue/solid';
 import debounce from 'lodash/debounce';
+import VanillaInput from '@/components/Input/Input.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableSearch',

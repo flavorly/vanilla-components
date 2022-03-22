@@ -23,5 +23,7 @@
     "src/**/*.vue",
     "src/**/*.js",
   ],
-  "exclude": ["node_modules"],
+  "exclude": [
+    "node_modules"
+  ],
 }

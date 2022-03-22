@@ -55,9 +55,10 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed, ref, watch } from 'vue';
-import { VanillaDialog, VanillaButton } from '@/index';
 import { useReplacePlaceholders } from '@/core';
 import { ExclamationIcon } from '@heroicons/vue/outline';
+import VanillaDialog from '@/components/Dialog/Dialog.vue';
+import VanillaButton from '@/components/Button/Button.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogConfirmAction',

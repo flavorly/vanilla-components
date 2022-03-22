@@ -50,9 +50,7 @@
         </div>
 
         <!-- Table Settings -->
-        <VanillaDropdown
-          class="inline-flex"
-        >
+        <VanillaDropdown class="inline-flex">
           <template #trigger>
             <VanillaButton>
               <DotsVerticalIcon class="h-4 w-4" />
@@ -324,6 +322,19 @@ import {
     VanillaDatatableProps,
     VanillaDatatableClassesKeys,
     VanillaDatatableConfig,
+    VanillaDatatableColumn,
+    VanillaDatatableColumns,
+    VanillaDatatableConfiguration,
+    VanillaDatatableAction as VanillaDatatableActionType,
+    VanillaDatatableActions as VanillaDatatableActionsType,
+    VanillaDatatableQueryData,
+    VanillaDatatableOptions,
+    VanillaDatatableFilters,
+    VanillaDatatablePageOptions,
+    VanillaDatatableTranslations,
+    VanillaDatatableResponse,
+    VanillaDatatableSortedColumns,
+    VanillaDatatableResultData,
 } from './index';
 
 import {
@@ -331,13 +342,6 @@ import {
     useConfigurationBuilder,
     useFetchData,
 } from './Utils';
-
-import {
-    VanillaCard,
-    VanillaDropdown,
-    VanillaDropdownOption,
-    VanillaButton,
-} from '@/index';
 
 import {
     DotsVerticalIcon,
@@ -348,6 +352,11 @@ import {
     FilterIcon,
     RefreshIcon,
 } from '@heroicons/vue/outline';
+
+import VanillaCard from '@/components/Card/Card.vue';
+import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
+import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
+import VanillaButton from '@/components/Button/Button.vue';
 
 import VanillaDatatableHead from './Partials/DatatableHead.vue';
 import VanillaDatatableRowSkeleton from './Partials/DatatableRowSkeleton.vue';
@@ -389,7 +398,7 @@ export default defineComponent({
     props: {
         ...useVariantProps<VanillaDatatableProps>(),
         config: {
-            type: [Object] as PropType<any>,
+            type: [Object] as PropType<VanillaDatatableConfiguration>,
             required: false,
             default(){
                 return {};
@@ -405,33 +414,33 @@ export default defineComponent({
             default: 'id',
         },
         columns: {
-            type: [Array, Object] as PropType<any>,
+            type: [Array] as PropType<VanillaDatatableColumns>,
             required: true,
         },
         options: {
-            type: [Object] as PropType<any>,
+            type: [Object] as PropType<VanillaDatatableOptions>,
             required: true,
         },
         actions: {
-            type: [Array, Object] as PropType<any>,
+            type: [Array] as PropType<VanillaDatatableActionsType>,
             default(){
                 return [];
             },
         },
         filters: {
-            type: [Array, Object] as PropType<any>,
+            type: [Array] as PropType<VanillaDatatableFilters>,
             default(){
                 return [];
             },
         },
         perPageOptions: {
-            type: [Array, Object] as PropType<any>,
+            type: [Array] as PropType<VanillaDatatablePageOptions>,
             default(){
                 return [];
             },
         },
         translations: {
-            type: [Object] as PropType<any>,
+            type: [Object] as PropType<VanillaDatatableTranslations>,
             required: true,
         },
         fetchData: {
@@ -475,7 +484,7 @@ export default defineComponent({
         // ---------------------------- //
         // ----- Boot Config & Validate -----  //
         // ---------------------------- //
-        const datatable = reactive(useConfigurationBuilder(props));
+        const datatable = reactive(useConfigurationBuilder(props)) as VanillaDatatableConfiguration;
 
         // Validate the data
         useValidator(datatable);
@@ -501,10 +510,18 @@ export default defineComponent({
         /** Stores if table is currently fetching */
         const results = reactive({
             data: [],
-            links: {},
-            meta: {},
-            responses: {},
-        });
+            links: {
+                next: null,
+                previous: null,
+                pages: [],
+            },
+            meta: {
+                current_page: 0,
+                from: 0,
+                to: 0,
+                total: 0,
+            },
+        }) as VanillaDatatableResponse;
 
         /** Stores the current hash of the API Response */
         const resultsHash = ref(undefined) as Ref<undefined | string>;
@@ -526,20 +543,20 @@ export default defineComponent({
         /** Query Data being passed to the server */
         const queryData = reactive({
             search: null,
-            perPage: datatable?.perPageOptions[0]?.value || 5,
+            perPage: datatable.perPageOptions[0]?.value || 5,
             page: 1,
             selected: [],
             selectedAll: false,
             filters: [],
             sorting: [{ column: 'id', direction: 'desc' }],
             //sorting: null,
-        });
+        }) as VanillaDatatableQueryData;
 
         /** POST data being sent when an action is sent */
         const actionsData = reactive({
             action: null,
             ...queryData,
-        });
+        }) as VanillaDatatableQueryData;
 
         /** Actual function to perform the request */
         const fetchData: Promise<any> = datatable?.fetchData || useFetchData;
@@ -589,7 +606,7 @@ export default defineComponent({
         /** Returns the current filters applied with default value & normalized */
         const filtersActive = computed(() => {
             // Returns the active filters on form mapped to filters object
-            let activeFiltersObject = [];
+            let activeFiltersObject = [] as string[];
             each(queryData.filters, (value, filter) => {
 
                 // attempt to find the filter
@@ -602,9 +619,9 @@ export default defineComponent({
 
                     // Ensure we resolve the value from options
                     if (filterFound?.options && filterFound.options[value]){
-                        filterFound.value_resolved = filterFound.options[value];
+                        filterFound.valueResolved = filterFound.options[value];
                     } else {
-                        filterFound.value_resolved = value;
+                        filterFound.valueResolved = value;
                     }
                     activeFiltersObject.push(filterFound);
                 }
@@ -618,7 +635,7 @@ export default defineComponent({
          * if it's sorted or not and so on, so we dont need to evaluate it each time we need.
          **/
         const columnsComputed = computed(() => {
-            return props.columns.map((column) => {
+            return props.columns.map((column: VanillaDatatableColumn) => {
                 return {
                     ...column,
                     visible: !columnsHidden.value.includes(column.name),
@@ -631,7 +648,7 @@ export default defineComponent({
         });
 
         const actionsComputed = computed(() => {
-            return props.actions.map((action) => {
+            return props.actions.map((action: VanillaDatatableAction) => {
                 return {
                     ...action,
                     slotName: useDynamicSlots('action', action.name),
@@ -652,7 +669,7 @@ export default defineComponent({
 
         /** Resets the per page items  */
         const resetPerPageItems = () => {
-            queryData.perPage = firstOf(datatable.options.perPageOptions).value || 5;
+            queryData.perPage = firstOf(datatable.perPageOptions).value || 5;
             // TODO : Check this to reset link
         };
 
@@ -699,7 +716,7 @@ export default defineComponent({
          * - If the item is selected it will deselect it
          * - Disables the select all checkbox if all items are selected
          **/
-        const selectItem = (item: any, uncheckIfChecked = true) => {
+        const selectItem = (item: VanillaDatatableResultData, uncheckIfChecked = true) => {
 
             // If everything was checked, remove it.
             queryData.selectedAll = false;
@@ -722,7 +739,7 @@ export default defineComponent({
         /**
          * Check if a given row is selected
          **/
-        const isRowSelected = (item: object) => {
+        const isRowSelected = (item: VanillaDatatableResultData) => {
             return queryData.selectedAll || queryData.selected.indexOf(item[datatable.primaryKey]) > -1;
         };
 
@@ -771,8 +788,8 @@ export default defineComponent({
             isFetching.value = true;
             return fetchData(datatable, queryData)
                 // Resolve
-                .then((response: object) => {
-                    results.data = response?.data;
+                .then((response: VanillaDatatableResponse) => {
+                    results.data = response.data;
                     results.links = response?.links;
                     results.meta = response?.meta;
                     results.responses = response?.meta;
@@ -834,14 +851,14 @@ export default defineComponent({
         /**
          * Execute the actual action
          **/
-        const executeAction = (action: object) => {
+        const executeAction = (action: VanillaDatatableAction) => {
 
             // No permission to execute the action
-            if (!action.permissions.execute) {
+            if (!action?.permissions?.execute) {
                 return;
             }
 
-            if (action?.before?.callback !== null){
+            if (action?.before?.callback !== undefined){
                 action.before.callback(action);
             }
 
@@ -861,7 +878,7 @@ export default defineComponent({
                 }
 
                 // Clear all the filters in case it was defined on the action scope
-                if (action?.after?.callback !== null) {
+                if (action?.after?.callback !== undefined) {
                     action.after.callback(action);
                 }
 
@@ -869,6 +886,7 @@ export default defineComponent({
                 if (
                     action?.after?.pooling &&
                     action?.after?.pooling?.enable &&
+                    action?.after?.pooling?.during !== undefined &&
                     action?.after?.pooling?.during > 0
                 ) {
                     poolUntil(
@@ -884,15 +902,10 @@ export default defineComponent({
             fetchFromServer().then(afterActionCallback);
         };
 
-        /** Sanitize the Primary key and convert from string to integer  */
-        const sanitizePrimaryKey = (str: string) => {
-            return parseInt(str.toString().replace(/\D/g, ''));
-        };
-
         /**
          * On sorting updated, we will update the query data with the new sorting
          **/
-        const onSortingUpdated = (sorting: never) => {
+        const onSortingUpdated = (sorting: VanillaDatatableSortedColumns) => {
             queryData.sorting = sorting;
         };
 
@@ -900,8 +913,8 @@ export default defineComponent({
          * On action selected, we will check if requires confirmation
          * - If it does, we will show the confirmation modal
          **/
-        const onActionSelected = (action: object) => {
-            if (action.before.confirm.enable) {
+        const onActionSelected = (action: VanillaDatatableAction) => {
+            if (action.before?.confirm?.enable) {
                 isShowingActionConfirmation.value = true;
                 currentAction.value = action;
                 return;
@@ -912,7 +925,7 @@ export default defineComponent({
         /**
          * On action selected, check if has permissions, its confirmed, etc
          **/
-        const onActionConfirmed = (action: object) => {
+        const onActionConfirmed = (action: VanillaDatatableAction) => {
             return executeAction(action);
         };
 

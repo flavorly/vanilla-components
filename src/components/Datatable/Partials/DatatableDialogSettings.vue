@@ -18,9 +18,11 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed, ref, watch } from 'vue';
-import { VanillaDialog, VanillaSelect, VanillaCheckbox, VanillaInputGroup } from '@/index';
-import { useReplacePlaceholders } from '@/core';
 import { ExclamationIcon } from '@heroicons/vue/outline';
+import VanillaDialog from '@/components/Dialog/Dialog.vue';
+import VanillaSelect from '@/components/Select/Select.vue';
+import VanillaCheckbox from '@/components/Checkbox/Checkbox.vue';
+import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogSettings',

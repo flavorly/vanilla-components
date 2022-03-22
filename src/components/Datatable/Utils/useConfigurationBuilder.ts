@@ -1,7 +1,7 @@
-import { Data } from '@/core/types';
 import merge from 'lodash/merge';
+import { VanillaDatatableConfiguration } from '@/components/Datatable';
 
-export default function useConfigurationBuilder<Props extends Data>(props: Props){
+export default function useConfigurationBuilder<Props extends VanillaDatatableConfiguration>(props: Props){
 
   const defaultPooling = {
     enable: false,
@@ -98,8 +98,8 @@ export default function useConfigurationBuilder<Props extends Data>(props: Props
     fetchEndpoint: props?.fetchEndpoint || props?.config?.fetchEndpoint || undefined,
     fetchMethod: props?.fetchMethod || props?.config?.fetchMethod || 'POST',
 
-    actionsEndpoint: props?.actionsEndpoint || props?.actionsEndpoint?.method || undefined,
-    actionsMethod: props?.actionsMethod || props?.actionsMethod?.method || 'POST',
+    actionsEndpoint: props?.actionsEndpoint || props.config?.actionsEndpoint?.method || undefined,
+    actionsMethod: props?.actionsMethod || props.config?.actionsMethod?.method || 'POST',
   };
 
 }
