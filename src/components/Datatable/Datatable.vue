@@ -334,7 +334,10 @@ import {
     VanillaDatatableTranslations,
     VanillaDatatableResponse,
     VanillaDatatableSortedColumns,
-    VanillaDatatableResultData, VanillaDatatableColumnsComputed,
+    VanillaDatatableResultData,
+    VanillaDatatableColumnsComputed,
+    VanillaDatatableFetchDataFunction,
+    VanillaDatatablePooling,
 } from './index';
 
 import {
@@ -427,6 +430,10 @@ export default defineComponent({
                 return [];
             },
         },
+        pooling: {
+            type: [Object] as PropType<VanillaDatatablePooling | undefined>,
+            default: undefined,
+        },
         filters: {
             type: [Array] as PropType<VanillaDatatableFilters>,
             default(){
@@ -444,7 +451,7 @@ export default defineComponent({
             required: true,
         },
         fetchData: {
-            type: [Function, undefined] as PropType<any | undefined>,
+            type: [Function, undefined] as PropType<VanillaDatatableFetchDataFunction | undefined>,
             required: false,
             default: undefined,
         },
@@ -559,49 +566,49 @@ export default defineComponent({
         }) as VanillaDatatableQueryData;
 
         /** Actual function to perform the request */
-        const fetchData: Promise<any> = datatable?.fetchData || useFetchData;
+        const fetchData: VanillaDatatableFetchDataFunction = datatable?.fetchData || useFetchData;
 
         // ---------------------------- //
         // ----- Computed Data -----  //
         // ---------------------------- //
 
         /** Current Ids being shown on hte page */
-        const currentPageIds = computed(() => results.data.map(item => item.id) || []);
+        const currentPageIds = computed(() => results.data.map(item => item.id) || []) as Ref<string[]>;
 
         /** If there is currently selected items on the config */
-        const hasAnyItemsSelected = computed(() => queryData.selectedAll || queryData.selected.length > 0);
+        const hasAnyItemsSelected = computed(() => queryData.selectedAll || queryData.selected.length > 0) as Ref<boolean>;
 
         /** Returns if the user configured any filters */
-        const hasFilters = computed(() => datatable.filters.length > 0);
+        const hasFilters = computed(() => datatable.filters.length > 0) as Ref<boolean>;
 
         /** Returns if the user configured any actions */
-        const hasActions = computed(() => datatable.actions.length > 0);
+        const hasActions = computed(() => datatable.actions.length > 0) as Ref<boolean>;
 
         /** Returns the current count of visible columns, excluding the hidden ones and the select column */
-        const visibleColumnsCount = computed(() => datatable.columns.length + (datatable.options.selectable ? 1 : 0) - (columnsHidden.value.length || 0));
+        const visibleColumnsCount = computed(() => datatable.columns.length + (datatable.options.selectable ? 1 : 0) - (columnsHidden.value.length || 0)) as Ref<number>;
 
         /** Returns the number of items selected, in case all is selected, we return the total number of rows matching */
-        const selectedItemsCount = computed(() => queryData.selectedAll ? results?.meta.total : queryData.selected.length);
+        const selectedItemsCount = computed(() => queryData.selectedAll ? results?.meta?.total : queryData.selected.length) as Ref<number>;
 
         /** Formatted Count of the selected items
          * TODO : Format the actual number
          **/
-        const selectedItemsCountFormatted = computed(() => selectedItemsCount.value);
+        const selectedItemsCountFormatted = computed(() => selectedItemsCount.value)  as Ref<string | number>;
 
         /** Checks if the user can search on the table, if its searched, not currently fetching, and no items are selected */
-        const canSearch = computed(() => datatable.options.searchable && !isFetching.value && !hasAnyItemsSelected.value);
+        const canSearch = computed(() => datatable.options.searchable && !isFetching.value && !hasAnyItemsSelected.value)  as Ref<boolean>;
 
         /** Boolean that returns if the check all checkbox should be checked, it means select all is selected and the current page of items is all selected  */
-        const isSelectAllChecked = computed(() => queryData.selectedAll || xor(queryData.selected, currentPageIds.value).length <= 0);
+        const isSelectAllChecked = computed(() => queryData.selectedAll || xor(queryData.selected, currentPageIds.value).length <= 0)  as Ref<boolean>;
 
         /** Boolean that returns if the check all checkbox should be checked, it means select all is selected and the current page of items is all selected  */
-        const isAllItemsInPageSelected = computed(() => queryData.selectedAll || currentPageIds.value.every(id => queryData.selected.includes(id)));
+        const isAllItemsInPageSelected = computed(() => queryData.selectedAll || currentPageIds.value.every(id => queryData.selected.includes(id))) as Ref<boolean>;
 
         /** Boolean that returns if the check all checkbox should be checked, it means select all is selected and the current page of items is all selected  */
-        const hasAnyItemsSelectedForCurrentPage = computed(() => queryData.selected.some(id => currentPageIds.value.indexOf(id) >= 0));
+        const hasAnyItemsSelectedForCurrentPage = computed(() => queryData.selected.some(id => currentPageIds.value.indexOf(id) >= 0)) as Ref<boolean>;
 
         /** Returns how the number of filters currently applied */
-        const filtersActiveCount = computed(() => Object.keys(queryData.filters.length));
+        const filtersActiveCount = computed(() => Object.keys(queryData.filters).length) as Ref<number>;
 
         /** Returns the current filters applied with default value & normalized */
         const filtersActive = computed(() => {
@@ -787,11 +794,11 @@ export default defineComponent({
         };
 
         /** Wrapper for the main call to the server, so we can perform additional stuff */
-        const fetchFromServer = () => {
+        const fetchFromServer = (then = () => {}) => {
             isFetching.value = true;
             return fetchData(datatable, queryData)
                 // Resolve
-                .then((response: VanillaDatatableResponse) => {
+                .then((response) => {
                     results.data = response.data;
                     results.links = response?.links;
                     results.meta = response?.meta;
@@ -806,7 +813,8 @@ export default defineComponent({
                 .then(() => {
                     isFetching.value = false;
                     resetAction();
-                });
+                })
+                .then(then);
         };
 
         /** Refresh the datatable */

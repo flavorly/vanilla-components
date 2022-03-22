@@ -7,10 +7,6 @@ import {
 } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 import { VanillaDatatableClassesValidKeys } from './Config';
-import { extend } from 'lodash';
-
-
-//declare type ActionAfterCallback = (response: Array<string> | Record<string, unknown>) => void;
 
 export type VanillaDatatableOptions = {
   selectable?: boolean,
@@ -44,7 +40,6 @@ export type VanillaDatatablePageOption = {
   value: string | number | undefined | null | object | boolean,
   label: string | number | undefined,
 };
-
 
 export type VanillaDatatableTranslations = {
   title?: string,
@@ -85,10 +80,10 @@ export type VanillaDatatableColumn = {
   name: string,
   label: string,
   sortable: boolean,
-  native: boolean,
+  native?: boolean,
   hidden?: boolean,
-  defaultSortAs: 'asc' | 'desc' | undefined,
-  raw: boolean,
+  defaultSortAs?: 'asc' | 'desc' | undefined | string,
+  raw?: boolean,
 };
 
 export type VanillaDatatableColumnComputed = {
@@ -99,34 +94,40 @@ export type VanillaDatatableColumnComputed = {
   slotName: string
 } & VanillaDatatableColumn;
 
-declare type ActionCallback = (action: VanillaDatatableAction) => void;
+declare type VanillaActionCallback = (action: VanillaDatatableAction) => void;
 
 export type VanillaDatatableAction = {
   name: string,
-  label: string,
-  slotName?: string
-  limit: number | string,
+  label?: string,
+  //slotName?: string
+  //limit?: number | string,
   permissions?: {
     view?: boolean,
     execute?: boolean
   },
   before?: {
-     confirm?: {
-       enable: boolean,
-       title: string,
-       subtitle: string,
-       text: string,
-       icon?: string,
-       confirmButton?: string
-       cancelButton?: string,
+      confirm?: {
+        enable: boolean,
+        title?: string,
+        subtitle?: string | undefined,
+        text?: string,
+        icon?: string | undefined,
+        confirmButton?: string
+        cancelButton?: string,
+        safe?: boolean,
+        classes? : {
+         title?: string,
+         text?: string,
+         icon?: string,
+        }
      },
-     callback?: ActionCallback,
+     callback?: VanillaActionCallback,
   },
   after?: {
     clearSelected?: boolean,
     resetFilters?: boolean,
     pooling?: VanillaDatatablePooling,
-    callback?: ActionCallback,
+    callback?: VanillaActionCallback,
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
@@ -144,7 +145,7 @@ export type VanillaDatatableQueryData = {
   search: null | undefined | string,
   perPage: number | string | keyof VanillaDatatablePageOption,
   page: number | string,
-  selected: (string | number)[],
+  selected: (string)[],
   selectedAll: boolean,
   filters: string[],
   sorting: VanillaDatatableSortedColumn[],
@@ -170,23 +171,28 @@ export type VanillaDatatableLinks = {
   pages?: VanillaDatatableResponsePage[] | null,
 };
 
+export type VanillaDatatableMeta = {
+  current_page: number,
+  from: number,
+  to: number,
+  total: number
+};
+
 export type VanillaDatatableResponse = {
   data: VanillaDatatableResultData[],
-  links: VanillaDatatableLinks,
-  meta: {
-    current_page: number,
-    from: number,
-    to: number,
-    total: number
-  }
+  links: VanillaDatatableLinks | undefined,
+  meta: VanillaDatatableMeta | undefined,
   [key: string]: any
 };
 
-
 export type VanillaDatatableActions = VanillaDatatableAction[];
+
 export type VanillaDatatableColumns = VanillaDatatableColumn[];
+
 export type VanillaDatatableColumnsComputed = VanillaDatatableColumnComputed[];
+
 export type VanillaDatatableFilters = VanillaDatatableFilter[];
+
 export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] | { [key: string]: string | number | undefined };
 
 export type VanillaDatatableConfiguration = {
@@ -199,15 +205,24 @@ export type VanillaDatatableConfiguration = {
   translations: VanillaDatatableTranslations,
   perPageOptions: VanillaDatatablePageOptions
   pooling: VanillaDatatablePooling,
-  fetchData?: any,
-  fetchEndpoint: string,
-  fetchMethod: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
+  fetchData?: VanillaDatatableFetchDataFunction,
+  fetchEndpoint?: string,
+  fetchMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
 
-  actionsEndpoint: string,
-  actionsMethod: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
+  actionsEndpoint?: string,
+  actionsMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };
+
+export type VanillaDatatableFetchDataFunction = (configuration: VanillaDatatableConfiguration, data: VanillaDatatableQueryData) => VanillaDatatableFetchDataPromise;
+
+export type VanillaDatatableFetchDataPromise = Promise<{
+  data: VanillaDatatableResultData[];
+  links?: VanillaDatatableLinks | undefined;
+  meta?: VanillaDatatableMeta;
+  [key: string]: any;
+}>;
 
 export type VanillaDatatableProps = WithVariantPropsAndClassesList<{
   config?: VanillaDatatableConfiguration,

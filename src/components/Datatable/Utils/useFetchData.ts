@@ -1,6 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { hasProperty } from '@/core';
 import {
+  VanillaDatatableFetchDataPromise,
   VanillaDatatableConfiguration,
   VanillaDatatableQueryData,
 } from '../index';
@@ -8,7 +9,7 @@ import {
 const useFetchData = <T extends VanillaDatatableConfiguration, Data extends VanillaDatatableQueryData>(
   config: T,
   data: Data,
-) => {
+): VanillaDatatableFetchDataPromise => {
   const isAction = hasProperty(data, 'action');
   const method = isAction ? config?.actionsMethod : config?.fetchMethod;
   const url = isAction ? config?.actionsEndpoint : config?.fetchEndpoint;
@@ -24,7 +25,7 @@ const useFetchData = <T extends VanillaDatatableConfiguration, Data extends Vani
 
   return axios(axiosConfig)
   .then((response) => ({
-    data: response.data?.data as Record<string, any>[],
+    data: response.data?.data,
     links: response.data?.links,
     meta: response.data?.meta,
     responses: response.data?.responses,

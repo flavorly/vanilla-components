@@ -1,14 +1,20 @@
 import merge from 'lodash/merge';
-import { VanillaDatatableConfiguration } from '@/components/Datatable';
+import {
+  VanillaDatatableConfiguration,
+  VanillaDatatableOptions,
+  VanillaDatatablePooling,
+  VanillaDatatableTranslations,
+  VanillaDatatablePageOptions,
+} from '@/components/Datatable';
+import { Data } from '@/core/types';
 
-export default function useConfigurationBuilder<Props extends VanillaDatatableConfiguration>(props: Props){
-
+export default function useConfigurationBuilder<Props extends VanillaDatatableConfiguration | Data>(props: Props): VanillaDatatableConfiguration{
   const defaultPooling = {
     enable: false,
     interval: 5,
     during: 60,
     stopWhenDataChanges: true,
-  };
+  } as VanillaDatatablePooling;
 
   const defaultOptions = {
     selectable: true,
@@ -18,7 +24,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     striped: false,
     compact: true,
     refreshable: true,
-  };
+  } as VanillaDatatableOptions;
 
   const defaultTranslations = {
     title: 'Items',
@@ -53,7 +59,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     showingFrom: 'Showing :from to :to of :total results',
     nextPage: 'Next',
     previousPage: 'Previous',
-  };
+  } as VanillaDatatableTranslations;
 
   const defaultPerPageOptions = [
       { value: 5, label: '5 Items per page' },
@@ -61,7 +67,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
       { value: 50, label: '50 Items per page' },
       { value: 100, label: '100 Items per page' },
       { value: 300, label: '300 Items per page' },
-  ];
+  ] as VanillaDatatablePageOptions;
 
   return {
     name: props?.uniqueName || props.config?.name,
