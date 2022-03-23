@@ -14,6 +14,7 @@ export type VanillaDatatableUserSettings = {
   useStorage: boolean,
   saveSelection: boolean,
   selectedIds: string[],
+  filters: VanillaDatatableSavedFilters,
 };
 
 export type VanillaDatatableOptions = {
@@ -36,12 +37,23 @@ export type VanillaDatatablePooling = {
 export type VanillaDatatableFilter = {
   name: string,
   label: string,
+  layout: string,
   component: string,
   placeholder?: string,
   value?: string | undefined | null | number,
   valueResolved?: string | undefined | null | number
   options?: undefined | InputOptions | NormalizedOption[] | NormalizedOptions,
   rules?: undefined | string[]
+  props?: VanillaDatatableFilterProp[],
+};
+
+export type VanillaDatatableFilterProp = {
+  key: string,
+  value: unknown,
+};
+
+export type VanillaDatatableSavedFilter = {
+  [key: string]: unknown
 };
 
 export type VanillaDatatablePageOption = {
@@ -153,7 +165,6 @@ export type VanillaDatatableSortedColumns = VanillaDatatableSortedColumn[];
 export type VanillaDatatableQueryData = {
   search: null | undefined | string,
   perPage: number | string | keyof VanillaDatatablePageOption,
-  page: number | string,
   selected: (string)[],
   selectedAll: boolean,
   filters: string[],
@@ -201,6 +212,8 @@ export type VanillaDatatableColumns = VanillaDatatableColumn[];
 export type VanillaDatatableColumnsComputed = VanillaDatatableColumnComputed[];
 
 export type VanillaDatatableFilters = VanillaDatatableFilter[];
+
+export type VanillaDatatableSavedFilters = VanillaDatatableSavedFilter[];
 
 export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] | { [key: string | number]: string | number | undefined };
 

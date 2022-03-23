@@ -37,6 +37,10 @@ export default defineComponent({
             type: [Object] as PropType<NormalizedOption>,
             required: true,
         },
+        safe: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
     },
     setup(props){
         const classesList = useInjectsClassesList()!;

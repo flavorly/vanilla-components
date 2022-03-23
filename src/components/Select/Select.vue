@@ -13,6 +13,10 @@
         ]"
         :multiple="configuration.multiple"
       >
+        <VanillaSelectOption
+          v-if="empty && showEmpty"
+          :option="empty"
+        />
         <slot
           name="option"
           v-bind="{normalizedOptions}"
@@ -51,7 +55,7 @@ import { useBootVariant, useMultipleOptions, useMultipleVModel, useVariantProps,
 import { VanillaSelectValue, VanillaSelectProps, VanillaSelectClassesKeys, VanillaSelectConfig } from '@/components/Select/index';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
-import { InputOptions } from '@/core/types';
+import { InputOptions, NormalizedOption } from '@/core/types';
 import VanillaSelectOption from '@/components/Select/SelectOption/SelectOption.vue';
 
 export default defineComponent({
@@ -104,6 +108,19 @@ export default defineComponent({
         disabled: {
             type: Boolean as PropType<boolean>,
             default: false,
+        },
+        showEmpty: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        empty: {
+            type: Object as PropType<NormalizedOption>,
+            default: () => {
+                return {
+                    value: null,
+                    text: '-',
+                };
+            },
         },
     },
     setup(props) {
