@@ -3,7 +3,14 @@
     class="vanilla-input"
     :class="configuration.classesList.container"
   >
-    <div :class="configuration.classesList.wrapper">
+    <div
+      :class="[
+        configuration.classesList.wrapper,
+        align === 'center' ? configuration.classesList.wrapperCenter : '',
+        align === 'left' ? configuration.classesList.wrapperLeft : '',
+        align === 'right' ? configuration.classesList.wrapperRight : '',
+      ]"
+    >
       <input
         :id="name"
         ref="input"
@@ -78,6 +85,14 @@ export default defineComponent({
         uncheckedValue: {
             type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<VanillaCheckboxValue>,
             default: false,
+        },
+        align: {
+            type: [String] as PropType<string>,
+            required: false,
+            default: 'left',
+            validator(align: string){
+                return ['left', 'right', 'center'].includes(align);
+            },
         },
     },
     emits: [

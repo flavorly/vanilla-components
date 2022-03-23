@@ -1,5 +1,12 @@
 <template>
-  <div :class="configuration.classesList.wrapper">
+  <div
+    :class="[
+      configuration.classesList.wrapper,
+      align === 'center' ? configuration.classesList.wrapperCenter : '',
+      align === 'left' ? configuration.classesList.wrapperLeft : '',
+      align === 'right' ? configuration.classesList.wrapperRight : '',
+    ]"
+  >
     <input
       :id="name"
       ref="checkbox"
@@ -92,6 +99,14 @@ export default defineComponent({
         uncheckedValue: {
             type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<VanillaToggleValue>,
             default: false,
+        },
+        align: {
+            type: [String] as PropType<string>,
+            required: false,
+            default: 'left',
+            validator(align: string){
+                return ['left', 'right', 'center'].includes(align);
+            },
         },
     },
     emits: [

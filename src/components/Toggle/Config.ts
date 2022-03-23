@@ -2,7 +2,12 @@ import { commonClasses, mergeClasses } from '@/core';
 
 export const VanillaToggleConfig = {
   fixedClasses: {
-    wrapper: 'flex items-center justify-center',
+
+    wrapper: '',
+    wrapperLeft: 'flex items-center justify-start',
+    wrapperCenter: 'flex items-center justify-center',
+    wrapperRight: 'flex items-center justify-end',
+
     toggle: mergeClasses(
       'relative inline-flex flex-shrink-0  cursor-pointer',
       'border-2 border-transparent',
@@ -18,7 +23,12 @@ export const VanillaToggleConfig = {
   },
   // Default Input appearance
   classes: {
+
     wrapper : '',
+    wrapperLeft: '',
+    wrapperCenter: '',
+    wrapperRight: '',
+
     toggle: 'focus:ring-offset-2 focus:ring-primary-600',
     checked: 'bg-primary-600',
     unchecked: 'bg-gray-200 dark:bg-gray-900 dark:border-gray-700',
@@ -40,23 +50,6 @@ export const VanillaToggleConfig = {
     },
   },
 };
-
-/**
- * Converts our own config into VariantJS config
- * @param configuration
- * @constructor
- */
-// export const VanillaToggleConfigToVariantJs = (configuration: any) => {
-//   return {
-//     fixedClasses: configuration.fixedClasses.checkbox,
-//     classes: VanillaToggleConfig.classes.checkbox,
-//     variants: mapValues(configuration.variants, (value) => {
-//       return {
-//         classes: value.classes.checkbox,
-//       };
-//     }),
-//   };
-// };
 
 export const VanillaToggleClassesKeys = Object.keys(VanillaToggleConfig.classes);
 

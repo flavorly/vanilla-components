@@ -1,6 +1,4 @@
-import { commonClasses } from '@/core/config/commonClasses';
 import { mergeClasses } from '@/core';
-
 
 export const VanillaDialogConfig = {
   fixedClasses: {},
@@ -12,16 +10,22 @@ export const VanillaDialogConfig = {
     overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-700/50 backdrop-blur-sm',
 
     modalWithPadding: 'px-4 pt-5 pb-4 sm:my-8 sm:p-6',
+
     modal: mergeClasses(
       '',
       'relative inline-block align-bottom sm:align-middle overflow-hidden ',
       'bg-white dark:bg-gray-750',
       'shadow-xl',
       'rounded-lg',
-      'max-w-sm w-full sm:max-w-sm sm:w-full',
       'transform transition-all',
       'dark:border dark:border-gray-700',
     ),
+
+    sizeDefault: 'max-w-sm w-full sm:max-w-sm sm:w-full',
+    sizeSmall: 'max-w-xs w-full sm:max-w-xs sm:w-full',
+    sizeMedium: 'max-w-md w-full sm:max-w-md sm:w-full',
+    sizeLarge: 'max-w-lg w-full sm:max-w-lg sm:w-full',
+    sizeFull: ' w-full',
 
     // Header / Title
     title: 'px-4 py-5 sm:px-6 text-gray-700',

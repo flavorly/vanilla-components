@@ -5,7 +5,7 @@
     as="template"
   >
     <Dialog
-      as="div"
+      :as="as"
       :open="localValue"
       :initial-focus="null"
       @close="close"
@@ -43,7 +43,12 @@
             <div
               :class="[
                 configuration.classesList.modal,
-                paddingOnModal ? configuration.classesList.modalWithPadding : ''
+                paddingOnModal ? configuration.classesList.modalWithPadding : '',
+                size === 'default' ? configuration.classesList.sizeDefault : '',
+                size === 'small' ? configuration.classesList.sizeSmall : '',
+                size === 'medium' ? configuration.classesList.sizeMedium : '',
+                size === 'large' ? configuration.classesList.sizeLarge : '',
+                size === 'full' ? configuration.classesList.sizeFull : '',
               ]"
             >
               <!-- Trap the focus here, some weird bug with headlessui -->
@@ -193,6 +198,18 @@ export default defineComponent({
         divided: {
             type: Boolean as PropType<boolean>,
             default: true,
+        },
+        as: {
+            type: [String] as PropType<string>,
+            default: 'div',
+        },
+        size: {
+            type: [String] as PropType<string>,
+            required: false,
+            default: 'default',
+            validator(align: string){
+                return ['default', 'small', 'medium', 'large', 'full'].includes(align);
+            },
         },
     },
     emits: [

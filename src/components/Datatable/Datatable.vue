@@ -199,7 +199,7 @@
               >
                 <td
                   v-for="(column) in columnsComputed"
-                  v-show="true"
+                  v-show="userSettings.visibleColumns.includes(column.name)"
                   :key="column.name"
                   class="whitespace-nowrap py-2 text-sm text-gray-500 dark:text-white"
                 >
@@ -252,7 +252,6 @@
         />
       </slot>
     </VanillaCard>
-
     <!-- Action Confirmation Modal -->
     <slot
       name="actionsDialog"
@@ -275,21 +274,24 @@
         @action-confirmed="onActionConfirmed"
       />
     </slot>
-
     <!-- Settings Modal -->
     <slot
       name="settingsDialog"
-      v-bind="{}"
+      v-bind="{
+        isShowingSettings,
+        userSettings,
+        perPageOptions,
+        columnsComputed
+      }"
     >
       <!-- Action Confirmation Modal -->
       <VanillaDatatableDialogSettings
         v-model="isShowingSettings"
-        v-model:perPage="queryData.perPage"
-        v-model:columnsHidden="columnsHidden"
-        :current-per-page="queryData.perPage"
+        :user-settings="userSettings"
+        :default-settings="userSettingsDefault"
         :per-page-options="perPageOptions"
         :columns="columnsComputed"
-        :columns-with-hidden-state="columnsHidden"
+        @settings-reset="resetAllSettings"
       />
     </slot>
   </div>
@@ -337,7 +339,7 @@ import {
     VanillaDatatableResultData,
     VanillaDatatableColumnsComputed,
     VanillaDatatableFetchDataFunction,
-    VanillaDatatablePooling, VanillaDatatableAction,
+    VanillaDatatablePooling, VanillaDatatableAction, VanillaDatatableUserSettings,
 } from './index';
 
 import {
@@ -373,6 +375,8 @@ import VanillaDatatableDialogSettings from './Partials/DatatableDialogSettings.v
 import each from 'lodash/each';
 import find from 'lodash/find';
 import xor from 'lodash/xor';
+import filter from 'lodash/filter';
+import { MaybeRef, RemovableRef, useSessionStorage, useStorage } from '@vueuse/core';
 
 export default defineComponent({
     name: 'VanillaDatatable',
@@ -482,7 +486,14 @@ export default defineComponent({
             },
         },
     },
-    setup(props) {
+    emits: [
+        'fetchedSuccess',
+        'fetchError',
+        'actionExecuted',
+        'sortingUpdated',
+        'navigateToPage',
+    ],
+    setup(props, { emit }) {
 
         // ----- Start the Variant -----  //
         const { localVariant } = useBootVariant(props, 'errors', ref(null));
@@ -533,30 +544,42 @@ export default defineComponent({
         /** Stores the current hash of the API Response */
         const resultsHash = ref(undefined) as Ref<undefined | string>;
 
-        /** Stores the current hidden columns
-         TODO: Might not be necessary
-         **/
-        const columnsHidden = ref([]) as Ref<undefined | string[]>;
-
         /** Stores the current action object that was selected */
         const currentAction = ref(undefined) as Ref<undefined | VanillaDatatableAction>;
-
-        /** Stores the current search query */
-        const searchQuery = ref(undefined) as Ref<undefined | string>;
 
         /** Stores the pooling interval */
         const poolingInterval = ref(undefined) as Ref<undefined | number>;
 
+        /** Default Settings */
+        const userSettingsDefault = {
+            visibleColumns: filter(props.columns, { hidden: false }).map(c => c.name) as string[],
+            perPage: datatable.perPageOptions[0]?.value || 5 as number,
+            useStorage: true as boolean,
+            saveSelection: true as boolean,
+            selectedIds: [] as string[],
+        } as VanillaDatatableUserSettings;
+
+        /** Stores the user given settings & local/session storage */
+        const userSettings = reactive({
+            visibleColumns: filter(props.columns, { hidden: false }).map(c => c.name) as string[],
+            perPage: datatable.perPageOptions[0]?.value || 5 as number,
+            useStorage: true as boolean,
+            saveSelection: true as boolean,
+            selectedIds: [] as string[],
+        }) as VanillaDatatableUserSettings;
+
+        /** Stores the user given settings & local/session storage */
+        const userStorage = useSessionStorage(datatable.primaryKey.toString(), userSettings);
+
         /** Query Data being passed to the server */
         const queryData = reactive({
             search: null,
-            perPage: datatable.perPageOptions[0]?.value || 5,
+            perPage: computed(() => userSettings.perPage),
             page: 1,
             selected: [],
             selectedAll: false,
             filters: [],
             sorting: [{ column: 'id', direction: 'desc' }],
-            //sorting: null,
             action: null,
         }) as VanillaDatatableQueryData;
 
@@ -580,7 +603,7 @@ export default defineComponent({
         const hasActions = computed(() => datatable.actions.length > 0) as Ref<boolean>;
 
         /** Returns the current count of visible columns, excluding the hidden ones and the select column */
-        const visibleColumnsCount = computed(() => datatable.columns.length + (datatable.options.selectable ? 1 : 0) - (columnsHidden.value.length || 0)) as Ref<number>;
+        const visibleColumnsCount = computed(() => userSettings.visibleColumns?.length + (datatable.options.selectable ? 1 : 0)) as Ref<number>;
 
         /** Returns the number of items selected, in case all is selected, we return the total number of rows matching */
         const selectedItemsCount = computed(() => queryData.selectedAll ? results?.meta?.total : queryData.selected.length) as Ref<number>;
@@ -640,7 +663,7 @@ export default defineComponent({
             return props.columns.map((column: VanillaDatatableColumn) => {
                 return {
                     ...column,
-                    visible: !columnsHidden.value.includes(column.name),
+                    visible: userSettings.visibleColumns.includes(column.name),
                     isSorted: queryData.sorting.some(c => c.column === column.name),
                     isSortedAsc: queryData.sorting.some(c => c.column === column.name && c.direction === 'asc'),
                     isSortedDesc: queryData.sorting.some(c => c.column === column.name && c.direction === 'desc'),
@@ -697,16 +720,11 @@ export default defineComponent({
             // TODO: call this only if refresh is true
         };
 
-        /** Resets all hidden columns  */
-        const resetHiddenColumns = () => {
-            columnsHidden.value = [];
-        };
-
         /** Reset all settings  */
         const resetAllSettings = () => {
-            resetPerPageItems();
-            resetHiddenColumns();
-            // TODO: Update the storage items
+            console.log('Should reset settings');
+            Object.assign(userSettings, userSettingsDefault);
+            console.log(userSettings, userSettingsDefault);
         };
 
         /** ResetThe current action  */
@@ -799,11 +817,20 @@ export default defineComponent({
                     results.links = response?.links;
                     results.meta = response?.meta;
                     results.responses = response?.meta;
+
+                    // Emit that fetch was scucess
+                    emit('fetchedSuccess', {
+                        results: results,
+                        success: true,
+                    });
                 })
                 // Catch Errors
                 .catch((error: object) => {
-                    console.log('Error happened');
-                    console.log(error);
+                    // Emit  error
+                    emit('fetchError', {
+                        error: error,
+                        success: false,
+                    });
                 })
                 // Finally
                 .then(() => {
@@ -905,6 +932,11 @@ export default defineComponent({
                 }
             };
 
+            // Emit Action
+            emit('actionExecuted', {
+                action: action,
+            });
+
             // Execute the action
             fetchFromServer().then(afterActionCallback);
         };
@@ -914,6 +946,9 @@ export default defineComponent({
          **/
         const onSortingUpdated = (sorting: VanillaDatatableSortedColumns) => {
             queryData.sorting = sorting;
+            emit('sortingUpdated', {
+                sorting: sorting,
+            });
         };
 
         /**
@@ -936,11 +971,18 @@ export default defineComponent({
             return executeAction(action);
         };
 
+        /**
+         * When the user presses a navigation item
+         **/
         const onPageNavigated = (link: string) => {
 
             if (null == link){
                 return;
             }
+
+            emit('navigateToPage', {
+                link: link,
+            });
 
             let fetchEndpoint = datatable.fetchEndpoint;
             let actionsEndpoint = datatable.actionsEndpoint;
@@ -952,9 +994,30 @@ export default defineComponent({
         };
 
         /**
+         * Converts the local storage to the local user settings on mounted
+         **/
+        const fromUserStorageToUserSettings = () => {
+            // User don't want to use storage
+            if (userStorage.value?.useStorage === false){
+                return;
+            }
+            // Merge into user settings
+            Object.assign(userSettings, userStorage.value);
+            // Get the selected Ids
+            if (userSettings.selectedIds.length){
+                queryData.selected = userSettings.selectedIds;
+            }
+            return;
+        };
+
+        /**
          * On Mounted, execute the stack
          **/
         onMounted(() => {
+
+            // Mount the session
+            fromUserStorageToUserSettings();
+
             // Fetch the first page
             if (props?.pooling?.enable && props?.pooling?.interval > 0) {
                 fetchFromServer()
@@ -976,9 +1039,17 @@ export default defineComponent({
             clearInterval(poolingInterval.value);
         });
 
+        watch(() => queryData.selected, (value) => {
+            console.log('Selection was changed', value);
+            userSettings.selectedIds = queryData.selected;
+        }, { deep: true });
+
         watch(queryData, (value) => {
-            console.log('Changed Query Data', value);
-            fetchFromServer();
+            //fetchFromServer();
+        });
+
+        watch(userSettings, (value) => {
+            userStorage.value = value;
         });
 
         // ----- Actual props to share -----  //
@@ -996,7 +1067,8 @@ export default defineComponent({
             isShowingActionConfirmation,
             queryData,
             currentAction,
-            columnsHidden,
+            userSettings,
+            userSettingsDefault,
 
             // Computed
             hasAnyItemsSelected,
@@ -1024,6 +1096,7 @@ export default defineComponent({
             toggleSelectAll,
             useReplacePlaceholders,
             useDynamicSlots,
+            resetAllSettings,
             refresh,
         };
 

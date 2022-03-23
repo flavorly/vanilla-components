@@ -9,6 +9,7 @@ export { default as VanillaCardFooter } from './components/Card/CardFooter/CardF
 export { default as VanillaCardEmpty } from './components/Card/CardEmpty/CardEmpty.vue';
 
 export { default as VanillaCheckbox } from './components/Checkbox/Checkbox.vue';
+export { default as VanillaCheckboxGroup } from './components/Checkbox/CheckboxGroup.vue';
 
 export { default as VanillaDatatable } from './components/Datatable/Datatable.vue';
 export { default as VanillaDatatableActions } from './components/Datatable/Partials/DatatableActions.vue';

@@ -8,6 +8,14 @@ import {
 import { InputHTMLAttributes } from 'vue';
 import { VanillaDatatableClassesValidKeys } from './Config';
 
+export type VanillaDatatableUserSettings = {
+  visibleColumns: string[],
+  perPage: number,
+  useStorage: boolean,
+  saveSelection: boolean,
+  selectedIds: string[],
+};
+
 export type VanillaDatatableOptions = {
   selectable?: boolean,
   searchable?: boolean,
@@ -84,6 +92,7 @@ export type VanillaDatatableColumn = {
   hidden?: boolean,
   defaultSortAs?: 'asc' | 'desc' | undefined | string,
   raw?: boolean,
+  component?: string,
 };
 
 export type VanillaDatatableColumnComputed = {

@@ -1,29 +1,31 @@
 <template>
-  <div class="vanilla-input">
-    <div :class="configuration.classesList.wrapper">
-      <select
-        :id="name"
-        v-model="localValue"
-        :name="name"
-        :autocomplete="autocomplete"
-        v-bind="$attrs"
-        :class="[
-          configuration.classesList.select,
-          configuration.multiple ? configuration.classesList.selectIfMultiple : '',
-        ]"
-        :multiple="configuration.multiple"
-      >
-        <slot
-          name="option"
-          v-bind="{normalizedOptions}"
-        >
-          <VanillaSelectOption
-            v-for="(option, index) in normalizedOptions"
-            :key="`${option.value}-${index}`"
-            :option="option"
+  <div
+    class="vanilla-checkbox-group"
+    :class="[
+      configuration.classesList.container,
+      configuration.classesList.groupContainer,
+    ]"
+  >
+    <div
+      v-for="(option, index) in normalizedOptions"
+      :key="index"
+    >
+      <div :class="configuration.classesList.groupCheckboxWrapper">
+        <div :class="configuration.classesList.groupCheckbox">
+          <VanillaCheckbox
+            v-model="localValue"
+            :name="option.value"
+            :value="option.value"
+            :variant="localVariant"
           />
-        </slot>
-      </select>
+        </div>
+        <div :class="configuration.classesList.groupLabel">
+          <VanillaFormLabel
+            :for="option.value.toString()"
+            :label="option.text.toString()"
+          />
+        </div>
+      </div>
     </div>
     <slot
       name="errors"
@@ -46,28 +48,36 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, PropType, provide } from 'vue';
-import { useBootVariant, useMultipleOptions, useMultipleVModel, useVariantProps, useConfigurationWithClassesList, hasSlot } from '@/core';
-import { VanillaSelectValue, VanillaSelectProps, VanillaSelectClassesKeys, VanillaSelectConfig } from '@/components/Select/index';
+import { computed, defineComponent, PropType } from 'vue';
+import {
+    useBootVariant,
+    useVariantProps,
+    useConfigurationWithClassesList,
+    useMultipleVModel,
+    useMultipleOptions,
+} from '@/core';
+import { VanillaCheckboxProps, VanillaCheckboxClassesKeys, VanillaCheckboxConfig } from '@/components/Checkbox/index';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
+import VanillaFormLabel from '@/components/FormLabel/FormLabel.vue';
+import VanillaCheckbox from '@/components/Checkbox/Checkbox.vue';
+import { VanillaSelectValue } from '@/components/Select';
 import { InputOptions } from '@/core/types';
-import VanillaSelectOption from '@/components/Select/SelectOption/SelectOption.vue';
 
 export default defineComponent({
-    name: 'VanillaSelect',
+    name: 'VanillaCheckboxGroup',
     components: {
-        VanillaSelectOption,
         VanillaFormErrors,
         VanillaFormFeedback,
-
+        VanillaFormLabel,
+        VanillaCheckbox,
     },
     inheritAttrs: false,
     compatConfig: {
         MODE: 3,
     },
     props: {
-        ...useVariantProps<VanillaSelectProps>(),
+        ...useVariantProps<VanillaCheckboxProps>(),
         modelValue: {
             type: [
                 String,
@@ -97,15 +107,10 @@ export default defineComponent({
             type: String as PropType<string | undefined>,
             default: 'text',
         },
-        multiple: {
-            type: [String, Boolean] as PropType<boolean | string>,
-            default: false,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
     },
+    emits: [
+        'update:modelValue',
+    ],
     setup(props) {
 
         const { localValue } = useMultipleVModel(props, 'modelValue', props);
@@ -116,9 +121,9 @@ export default defineComponent({
             hasErrors,
         } = useBootVariant(props, 'errors', localValue);
 
-        const { configuration } = useConfigurationWithClassesList<VanillaSelectProps>(
-            VanillaSelectConfig,
-            VanillaSelectClassesKeys,
+        const { configuration } = useConfigurationWithClassesList<VanillaCheckboxProps>(
+            VanillaCheckboxConfig,
+            VanillaCheckboxClassesKeys,
             localVariant,
         );
 
@@ -129,20 +134,14 @@ export default defineComponent({
             computed(() => props.normalizeOptions!),
         );
 
-        /**
-         * Provided data
-         */
-        provide('configuration_vanilla', configuration);
-
         return {
             configuration,
-            normalizedOptions,
             localValue,
             localVariant,
             localErrors,
             hasErrors,
-            hasSlot,
             props,
+            normalizedOptions,
         };
     },
 });

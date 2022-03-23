@@ -2,78 +2,110 @@
   <VanillaDialog
     v-model="isOpen"
     title="Settings"
+    as="form"
+    size="medium"
+    @submit.prevent="saveSettings"
   >
     <VanillaInputGroup
-      label="Per Page"
+      label="Items p/ Page"
       name="perPage"
       layout="inline"
-      class="space-y-2"
     >
       <VanillaSelect
-        v-model="perPage"
-        name="perPage"
+        v-model="localSettings.perPage"
         :options="perPageOptions"
-        @update:model-value="updatePerPage"
       />
     </VanillaInputGroup>
 
     <VanillaInputGroup
       label="Visibility"
-      class="mt-4 space-y-4"
-      name="hiddenColumns"
+      name="visibleColumns"
       layout="inline"
     >
-      <div
-        v-for="(column,index) in columns"
-        :key="index"
-        :class="{'mt-4': index > 0}"
-      >
-        <div class="relative flex items-start">
-          <div class="flex items-center h-5">
-            <VanillaCheckbox
-              :name="column.name"
-              :value="column.name"
-              :checked="!hiddenColumns.includes(column.name)"
-              @update:model-value="updateColumnsHidden($event, column)"
-            />
-          </div>
-          <div class="ml-3 text-sm leading-5">
-            <VanillaFormLabel
-              :for="column.label"
-              :label=" column.label"
-            />
-          </div>
-        </div>
-      </div>
+      <VanillaCheckboxGroup
+        v-model="localSettings.visibleColumns"
+        :options="columnsNormalized"
+      />
     </VanillaInputGroup>
+
+    <VanillaInputGroup
+      label="Persist Settings"
+      name="useStorage"
+      layout="inline"
+    >
+      <VanillaToggle
+        v-model="localSettings.useStorage"
+      />
+    </VanillaInputGroup>
+
+    <VanillaInputGroup
+      label="Persist Selection"
+      name="saveSelection"
+      layout="inline"
+    >
+      <VanillaToggle
+        v-model="localSettings.saveSelection"
+      />
+    </VanillaInputGroup>
+
+    <VanillaInputGroup layout="content">
+      <span
+        class="flex items-center justify-center space-x-1 text-xs"
+        @click="resetSettings"
+      >
+        <TrashIcon class="h-4 w-4" />
+        <span>{{ 'Reset Default Settings' }}</span>
+      </span>
+    </VanillaInputGroup>
+
+    <!-- Footer -->
+    <template #footer>
+      <VanillaButton
+        tabindex="2"
+        type="submit"
+        :label="'Close'"
+      />
+    </template>
   </VanillaDialog>
 </template>
 <script lang="ts">
 import { computed, defineComponent, PropType, Ref, ref, watch } from 'vue';
 import VanillaDialog from '@/components/Dialog/Dialog.vue';
 import VanillaSelect from '@/components/Select/Select.vue';
-import VanillaCheckbox from '@/components/Checkbox/Checkbox.vue';
+import VanillaCheckboxGroup from '@/components/Checkbox/CheckboxGroup.vue';
+import VanillaToggle from '@/components/Toggle/Toggle.vue';
 import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue';
-import VanillaFormLabel from '@/components/FormLabel/FormLabel.vue';
-import { VanillaDatatableColumnComputed, VanillaDatatableColumnsComputed, VanillaDatatablePageOptions } from '../index';
-import find from 'lodash/find';
+import VanillaButton from '@/components/Button/Button.vue';
+import {
+    VanillaDatatableColumnComputed,
+    VanillaDatatableColumnsComputed,
+    VanillaDatatablePageOptions,
+    VanillaDatatableUserSettings,
+} from '../index';
+import { TrashIcon } from '@heroicons/vue/outline';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogSettings',
     components: {
         VanillaDialog,
         VanillaSelect,
-        VanillaCheckbox,
+        VanillaCheckboxGroup,
+        VanillaToggle,
         VanillaInputGroup,
-        VanillaFormLabel,
+        VanillaButton,
+        TrashIcon,
     },
     props: {
-        perPageOptions: {
-            type: [Object] as PropType<VanillaDatatablePageOptions>,
+        userSettings: {
+            type: [Object] as PropType<VanillaDatatableUserSettings>,
             required: true,
         },
-        currentPerPage: {
-            type: [Number] as PropType<number | string>,
+        defaultSettings: {
+            type: [Object] as PropType<VanillaDatatableUserSettings>,
+            required: true,
+        },
+        perPageOptions: {
+            type: [Object] as PropType<VanillaDatatablePageOptions>,
             required: true,
         },
         columns: {
@@ -83,39 +115,33 @@ export default defineComponent({
     },
     emits: [
         'update:modelValue',
-        'update:perPage',
-        'update:columnsHidden',
+        'update:settings',
+        'settingsReset',
     ],
     setup(props, { emit }){
 
         const isOpen = ref(false);
-        const perPage = ref(props.currentPerPage);
-        const useStorage = ref(true);
-        const hiddenColumns = ref(find(props.columns, { visible: false }) || []) as Ref<string[]>;
+        const localSettings = ref(props.userSettings) as Ref<VanillaDatatableUserSettings>;
 
-        //console.log(props.columns, hiddenColumns);
+        const columnsNormalized = computed(() => {
+            let columns = [] as { text: string, value: string }[];
+            props.columns.forEach((column: VanillaDatatableColumnComputed) => {
+                columns.push({
+                    text: column.label,
+                    value: column.name,
+                });
+            });
+            return columns;
+        });
 
-        const updatePerPage = (value: number) => {
-            emit('update:perPage', value);
+        const saveSettings = () => {
+            isOpen.value = false;
+            emit('update:settings', localSettings.value);
         };
 
-        const updateColumnsHidden = (status: boolean, column : VanillaDatatableColumnComputed) => {
-            console.log(status, column);
-
-            if (!status && !hiddenColumns.value.includes(column.name)) {
-                hiddenColumns.value.push(column.name);
-            }
-
-            if (status) {
-                const index = hiddenColumns.value.indexOf(column.name);
-                if (index > -1) {
-                    hiddenColumns.value.splice(index, 1);
-                }
-            }
-
-            console.log(hiddenColumns.value);
-
-            emit('update:columnsHidden', hiddenColumns.value);
+        const resetSettings = () => {
+            isOpen.value = false;
+            emit('settingsReset', true);
         };
 
         watch(isOpen, (val: boolean) => {
@@ -124,11 +150,10 @@ export default defineComponent({
 
         return {
             isOpen,
-            perPage,
-            hiddenColumns,
-            useStorage,
-            updatePerPage,
-            updateColumnsHidden,
+            localSettings,
+            columnsNormalized,
+            saveSettings,
+            resetSettings,
         };
     },
 });
