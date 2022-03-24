@@ -304,6 +304,7 @@
       <!-- Action Confirmation Modal -->
       <VanillaDatatableDialogFilters
         v-model="isShowingFilters"
+        :user-settings="userSettings"
         :filters="filtersComputed"
         @filters-reset="resetAllSettings"
       />
@@ -570,23 +571,17 @@ export default defineComponent({
 
         /** Default Settings */
         const userSettingsDefault = {
-            visibleColumns: filter(props.columns, { hidden: false }).map(c => c.name) as string[],
+            visibleColumns: filter(datatable.columns, { hidden: false }).map(c => c.name) as string[],
             perPage: datatable.perPageOptions[0]?.value || 5 as number,
             useStorage: true as boolean,
             saveSelection: true as boolean,
             selectedIds: [] as string[],
-            filters: [] as VanillaDatatableSavedFilters,
+            //filters: datatable.filters as VanillaDatatableFilters,
+            filters: [],
         } as VanillaDatatableUserSettings;
 
         /** Stores the user given settings & local/session storage */
-        const userSettings = reactive({
-            visibleColumns: filter(props.columns, { hidden: false }).map(c => c.name) as string[],
-            perPage: datatable.perPageOptions[0]?.value || 5 as number,
-            useStorage: true as boolean,
-            saveSelection: true as boolean,
-            selectedIds: [] as string[],
-            filters: [] as VanillaDatatableSavedFilters,
-        }) as VanillaDatatableUserSettings;
+        const userSettings = reactive(userSettingsDefault) as VanillaDatatableUserSettings;
 
         /** Stores the user given settings & local/session storage */
         const userStorage = useSessionStorage(datatable.primaryKey.toString(), userSettings);
@@ -675,7 +670,7 @@ export default defineComponent({
         // });
 
         const filtersComputed = computed(() => {
-            return props.filters.map((filterItem: VanillaDatatableFilter) => {
+            return datatable.filters.map((filterItem: VanillaDatatableFilter) => {
                 return {
                     ...filterItem,
                     value: userSettings.filters[filterItem.name] || filterItem.value,
@@ -688,7 +683,7 @@ export default defineComponent({
          * if it's sorted or not and so on, so we dont need to evaluate it each time we need.
          **/
         const columnsComputed = computed(() => {
-            return props.columns.map((column: VanillaDatatableColumn) => {
+            return datatable.columns.map((column: VanillaDatatableColumn) => {
                 return {
                     ...column,
                     visible: userSettings.visibleColumns.includes(column.name),
@@ -704,7 +699,7 @@ export default defineComponent({
          * Map the actions to add slot name
          **/
         const actionsComputed = computed(() => {
-            return props.actions.map((action: VanillaDatatableActionType) => {
+            return datatable.actions.map((action: VanillaDatatableActionType) => {
                 return {
                     ...action,
                     slotName: useDynamicSlots('action', action.name),
@@ -1045,12 +1040,12 @@ export default defineComponent({
             fromUserStorageToUserSettings();
 
             // Fetch the first page
-            if (props?.pooling?.enable && props?.pooling?.interval > 0) {
+            if (datatable?.pooling?.enable && datatable?.pooling?.interval !== undefined) {
                 fetchFromServer()
                     .then(() => {
                         poolForever(
-                            props?.pooling?.enable,
-                            props?.pooling?.interval,
+                            datatable?.pooling?.enable,
+                            datatable?.pooling?.interval,
                         );
                     });
             } else {
@@ -1069,7 +1064,7 @@ export default defineComponent({
          * Watch selected ids, on select update the user settings
          * with the selected ids.
          **/
-        watch(() => queryData.selected, (value) => {
+        watch(() => queryData.selected, () => {
             userSettings.selectedIds = queryData.selected;
         }, { deep: true });
 

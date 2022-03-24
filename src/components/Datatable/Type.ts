@@ -14,7 +14,7 @@ export type VanillaDatatableUserSettings = {
   useStorage: boolean,
   saveSelection: boolean,
   selectedIds: string[],
-  filters: VanillaDatatableSavedFilters,
+  filters: VanillaDatatableFilters,
 };
 
 export type VanillaDatatableOptions = {
@@ -37,7 +37,7 @@ export type VanillaDatatablePooling = {
 export type VanillaDatatableFilter = {
   name: string,
   label: string,
-  layout: string,
+  layout?: string,
   component: string,
   placeholder?: string,
   value?: string | undefined | null | number,

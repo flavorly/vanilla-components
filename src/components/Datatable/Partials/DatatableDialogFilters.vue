@@ -66,7 +66,7 @@ import VanillaTextarea from '@/components/Textarea/Textarea.vue';
 import VanillaDatetimePicker from '@/components/DatetimePicker/DatetimePicker.vue';
 import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue';
 import VanillaButton from '@/components/Button/Button.vue';
-import { VanillaDatatableFilters, VanillaDatatableSavedFilters } from '../index';
+import { VanillaDatatableFilters, VanillaDatatableSavedFilters, VanillaDatatableUserSettings } from '../index';
 import { TrashIcon } from '@heroicons/vue/outline';
 
 export default defineComponent({
@@ -89,6 +89,10 @@ export default defineComponent({
             type: [Array] as PropType<VanillaDatatableFilters>,
             required: true,
         },
+        userSettings: {
+            type: [Object] as PropType<VanillaDatatableUserSettings>,
+            required: true,
+        },
     },
     emits: [
         'update:modelValue',
@@ -100,6 +104,9 @@ export default defineComponent({
         const isOpen = ref(false);
 
         const localFilters = ref({}) as Ref<VanillaDatatableSavedFilters>;
+        const localSettings = ref(props.userSettings) as Ref<VanillaDatatableUserSettings>;
+
+        //console.log('Settings from filters', localSettings.value);
 
         const saveSettings = () => {
             isOpen.value = false;
@@ -118,6 +125,7 @@ export default defineComponent({
         return {
             isOpen,
             localFilters,
+            localSettings,
             saveSettings,
             resetSettings,
         };
