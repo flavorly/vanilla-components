@@ -14,7 +14,7 @@ export type VanillaDatatableUserSettings = {
   useStorage: boolean,
   saveSelection: boolean,
   selectedIds: string[],
-  filters: VanillaDatatableFilters,
+  filters: VanillaDatatableSavedFilter,
 };
 
 export type VanillaDatatableOptions = {
@@ -55,11 +55,12 @@ export type VanillaDatatableFilterProp = {
 export type VanillaDatatableSavedFilter = {
   [key: string]: unknown
 };
+//export type VanillaDatatableSavedFilter = object;
 
 export type VanillaDatatablePageOption = {
   value: string | number | undefined | null | object | boolean,
   text: string | number | undefined,
-} & InputOptions | NormalizedOption[] | NormalizedOptions;
+} & NormalizedOption;
 
 export type VanillaDatatableTranslations = {
   title?: string,
@@ -167,7 +168,7 @@ export type VanillaDatatableQueryData = {
   perPage: number | string | keyof VanillaDatatablePageOption,
   selected: (string)[],
   selectedAll: boolean,
-  filters: string[],
+  filters: VanillaDatatableSavedFilter,
   sorting: VanillaDatatableSortedColumn[],
   action?: null | undefined | string
 };
@@ -215,7 +216,7 @@ export type VanillaDatatableFilters = VanillaDatatableFilter[];
 
 export type VanillaDatatableSavedFilters = VanillaDatatableSavedFilter[];
 
-export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] | { [key: string | number]: string | number | undefined };
+export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[];
 
 export type VanillaDatatableConfiguration = {
   name: string | number,

@@ -14,5 +14,6 @@ export { default as subtractFromArray } from './subtractFromArray';
 export { default as throttle } from './throttle';
 export { default as isTouchOnlyDevice } from './isTouchOnlyDevice';
 export { default as firstOf } from './firstOf';
+export { default as objectToArrayMap } from './objectToArrayMap';
 
 

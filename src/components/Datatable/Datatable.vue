@@ -304,9 +304,10 @@
       <!-- Action Confirmation Modal -->
       <VanillaDatatableDialogFilters
         v-model="isShowingFilters"
-        :user-settings="userSettings"
-        :filters="filtersComputed"
+        :user-settings="JSON.parse(JSON.stringify(userSettings))"
+        :filters="datatable.filters"
         @filters-reset="resetAllSettings"
+        @filters-saved="onFiltersSaved"
       />
     </slot>
   </div>
@@ -323,7 +324,7 @@ import {
     onMounted,
     onUnmounted,
     watch,
-    Ref,
+    Ref, unref,
 } from 'vue';
 
 import {
@@ -333,7 +334,14 @@ import {
     useDynamicSlots,
     useReplacePlaceholders,
     firstOf,
+    objectToArrayMap,
 } from '@/core';
+
+import {
+    useValidator,
+    useConfigurationBuilder,
+    useFetchData,
+} from './Utils';
 
 import {
     VanillaDatatableProps,
@@ -358,26 +366,8 @@ import {
     VanillaDatatableAction,
     VanillaDatatableUserSettings,
     VanillaDatatableFilter,
-    VanillaDatatableSavedFilters,
+    VanillaDatatableSavedFilter,
 } from './index';
-
-import {
-    useValidator,
-    useConfigurationBuilder,
-    useFetchData,
-} from './Utils';
-
-import { useSessionStorage } from '@vueuse/core';
-
-import {
-    DotsVerticalIcon,
-    CogIcon,
-} from '@heroicons/vue/solid';
-
-import {
-    FilterIcon,
-    RefreshIcon,
-} from '@heroicons/vue/outline';
 
 import VanillaCard from '@/components/Card/Card.vue';
 import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
@@ -393,10 +383,14 @@ import VanillaDatatableDialogConfirmAction from './Partials/DatatableDialogConfi
 import VanillaDatatableDialogSettings from './Partials/DatatableDialogSettings.vue';
 import VanillaDatatableDialogFilters from './Partials/DatatableDialogFilters.vue';
 
+import { DotsVerticalIcon, CogIcon } from '@heroicons/vue/solid';
+import { FilterIcon, RefreshIcon } from '@heroicons/vue/outline';
+
+import { useSessionStorage } from '@vueuse/core';
+
 import each from 'lodash/each';
-import find from 'lodash/find';
-import xor from 'lodash/xor';
 import filter from 'lodash/filter';
+import merge from 'lodash/merge';
 
 export default defineComponent({
     name: 'VanillaDatatable',
@@ -439,7 +433,7 @@ export default defineComponent({
         primaryKey: {
             type: [String] as PropType<string>,
             required: false,
-            default: 'id',
+            default: undefined,
         },
         columns: {
             type: [Array] as PropType<VanillaDatatableColumns>,
@@ -513,6 +507,7 @@ export default defineComponent({
         'actionExecuted',
         'sortingUpdated',
         'navigateToPage',
+        'filtersSaved',
     ],
     setup(props, { emit }) {
 
@@ -572,29 +567,28 @@ export default defineComponent({
         /** Default Settings */
         const userSettingsDefault = {
             visibleColumns: filter(datatable.columns, { hidden: false }).map(c => c.name) as string[],
-            perPage: datatable.perPageOptions[0]?.value || 5 as number,
+            perPage: datatable.perPageOptions[0]?.value as number,
             useStorage: true as boolean,
             saveSelection: true as boolean,
             selectedIds: [] as string[],
-            //filters: datatable.filters as VanillaDatatableFilters,
-            filters: [],
+            filters: objectToArrayMap(datatable.filters, 'name', 'value') as VanillaDatatableSavedFilter,
         } as VanillaDatatableUserSettings;
 
         /** Stores the user given settings & local/session storage */
         const userSettings = reactive(userSettingsDefault) as VanillaDatatableUserSettings;
 
         /** Stores the user given settings & local/session storage */
-        const userStorage = useSessionStorage(datatable.primaryKey.toString(), userSettings);
+        const userStorage = useSessionStorage(datatable.primaryKey.toString(), userSettings, {});
 
         /** Query Data being passed to the server */
         const queryData = reactive({
-            search: null,
+            search: null as string | null,
             perPage: computed(() => userSettings.perPage),
-            selected: [],
-            selectedAll: false,
-            filters: [],
-            sorting: [{ column: 'id', direction: 'desc' }],
-            action: null,
+            selected: [] as string[],
+            selectedAll: false as boolean,
+            filters: {} as VanillaDatatableSavedFilter,
+            sorting: [],
+            action: null as string | null,
         }) as VanillaDatatableQueryData;
 
         /** Actual function to perform the request */
@@ -631,9 +625,6 @@ export default defineComponent({
         const canSearch = computed(() => datatable.options.searchable && !isFetching.value && !hasAnyItemsSelected.value)  as Ref<boolean>;
 
         /** Boolean that returns if the check all checkbox should be checked, it means select all is selected and the current page of items is all selected  */
-        const isSelectAllChecked = computed(() => queryData.selectedAll || xor(queryData.selected, currentPageIds.value).length <= 0)  as Ref<boolean>;
-
-        /** Boolean that returns if the check all checkbox should be checked, it means select all is selected and the current page of items is all selected  */
         const isAllItemsInPageSelected = computed(() => queryData.selectedAll || currentPageIds.value.every(id => queryData.selected.includes(id))) as Ref<boolean>;
 
         /** Boolean that returns if the check all checkbox should be checked, it means select all is selected and the current page of items is all selected  */
@@ -642,33 +633,7 @@ export default defineComponent({
         /** Returns how the number of filters currently applied */
         const filtersActiveCount = computed(() => Object.keys(queryData.filters).length) as Ref<number>;
 
-        /** Returns the current filters applied with default value & normalized */
-        // const filtersActive = computed(() => {
-        //     // Returns the active filters on form mapped to filters object
-        //     let activeFiltersObject = [] as string[];
-        //     each(queryData.filters, (value, filter) => {
-        //
-        //         // attempt to find the filter
-        //         let filterFound = find(queryData.filters, { 'name': filter });
-        //
-        //         if (value !== null && value !== '' && filterFound){
-        //
-        //             // Ensure we still set the original value
-        //             filterFound.value = value;
-        //
-        //             // Ensure we resolve the value from options
-        //             if (filterFound?.options && filterFound.options[value]){
-        //                 filterFound.valueResolved = filterFound.options[value];
-        //             } else {
-        //                 filterFound.valueResolved = value;
-        //             }
-        //             activeFiltersObject.push(filterFound);
-        //         }
-        //     });
-        //
-        //     return activeFiltersObject;
-        // });
-
+        /** Returns the current filters applied with default value & normalized & also in sync with user settings */
         const filtersComputed = computed(() => {
             return datatable.filters.map((filterItem: VanillaDatatableFilter) => {
                 return {
@@ -730,17 +695,16 @@ export default defineComponent({
         };
 
         /** Resets a specific filter by name  */
-        const resetFilter = (filter: object) => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore
-            queryData.filters[filter.name] = null;
-            //queryData.filters = omit(queryData.filters, [filter.name]);
+        const resetFilter = (filterToClear: VanillaDatatableFilter) => {
+            queryData.filters[filterToClear.name] = null;
         };
 
         /** Reset all filters  */
-        const resetAllFilters = (refresh = true) => {
-            queryData.filters = [];
-            // TODO: call this only if refresh is true
+        const resetAllFilters = (shouldRefresh = true) => {
+            queryData.filters = {};
+            if (shouldRefresh){
+                refresh();
+            }
         };
 
         /** Reset all settings  */
@@ -1014,6 +978,15 @@ export default defineComponent({
             datatable.actionsEndpoint = actionsEndpoint;
         };
 
+        const onFiltersSaved = (filters: VanillaDatatableSavedFilter) => {
+            userSettings.filters = filters;
+            queryData.filters = filters;
+            emit('filtersSaved', {
+                filters: filters,
+            });
+            refresh();
+        };
+
         /**
          * Converts the local storage to the local user settings on mounted
          **/
@@ -1023,10 +996,18 @@ export default defineComponent({
                 return;
             }
             // Merge into user settings
-            Object.assign(userSettings, userStorage.value);
+            // We need also to ensure we merge the ones from storage into the defaults
+            // Storage has priority over the default filter value.
+            Object.assign(userSettings, merge(userSettingsDefault, userStorage.value));
+
             // Get the selected Ids
             if (userSettings.selectedIds.length){
                 queryData.selected = userSettings.selectedIds;
+            }
+
+            // Filters
+            if (Object.keys(userSettings.filters).length > 0){
+                queryData.filters = userSettings.filters;
             }
             return;
         };
@@ -1080,7 +1061,6 @@ export default defineComponent({
                   );
               },
               () => {
-                  console.log('need to fetch');
                   fetchFromServer();
               },
               {
@@ -1092,8 +1072,9 @@ export default defineComponent({
          * If the user settings change, we need to update the storage
          **/
         watch(userSettings, (value) => {
+            console.log('Settings changed');
             userStorage.value = value;
-        });
+        }, { deep: true });
 
         // ----- Actual props to share -----  //
         const sharing =  {
@@ -1136,6 +1117,7 @@ export default defineComponent({
             onActionSelected,
             onActionConfirmed,
             onPageNavigated,
+            onFiltersSaved,
             deselectAllItems,
             toggleSelectAll,
             useReplacePlaceholders,
