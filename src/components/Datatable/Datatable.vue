@@ -304,8 +304,8 @@
       <!-- Action Confirmation Modal -->
       <VanillaDatatableDialogFilters
         v-model="isShowingFilters"
-        :user-settings="JSON.parse(JSON.stringify(userSettings))"
-        :filters="datatable.filters"
+        :user-settings="userSettingsReadOnly"
+        :filters="filtersComputed"
         @filters-reset="resetAllSettings"
         @filters-saved="onFiltersSaved"
       />
@@ -324,7 +324,8 @@ import {
     onMounted,
     onUnmounted,
     watch,
-    Ref, unref,
+    Ref,
+    camelize,
 } from 'vue';
 
 import {
@@ -433,7 +434,7 @@ export default defineComponent({
         primaryKey: {
             type: [String] as PropType<string>,
             required: false,
-            default: undefined,
+            default: 'id',
         },
         columns: {
             type: [Array] as PropType<VanillaDatatableColumns>,
@@ -576,9 +577,10 @@ export default defineComponent({
 
         /** Stores the user given settings & local/session storage */
         const userSettings = reactive(userSettingsDefault) as VanillaDatatableUserSettings;
+        const userSettingsReadOnly = computed(() => userSettings) as Ref<VanillaDatatableUserSettings>;
 
         /** Stores the user given settings & local/session storage */
-        const userStorage = useSessionStorage(datatable.primaryKey.toString(), userSettings, {});
+        const userStorage = useSessionStorage(camelize(datatable.name.toString()), userSettings, {});
 
         /** Query Data being passed to the server */
         const queryData = reactive({
@@ -726,11 +728,16 @@ export default defineComponent({
          **/
         const selectItem = (item: VanillaDatatableResultData, uncheckIfChecked = true) => {
 
+            let itemKey = item[datatable.primaryKey] || null;
+            if (null === itemKey){
+                throw new Error('Please make sure the config "primaryKey" exists on your resource data.');
+            }
+
             // If everything was checked, remove it.
             queryData.selectedAll = false;
 
             // If the ID is not yet selected, select it
-            let itemKey = item[datatable.primaryKey];
+
             if (!queryData.selected.includes(itemKey)) {
                 return queryData.selected.push(itemKey);
             }
@@ -979,11 +986,9 @@ export default defineComponent({
         };
 
         const onFiltersSaved = (filters: VanillaDatatableSavedFilter) => {
-            userSettings.filters = filters;
-            queryData.filters = filters;
-            emit('filtersSaved', {
-                filters: filters,
-            });
+            Object.assign(userSettings.filters, filters);
+            //Object.assign(queryData.filters, filters);
+            emit('filtersSaved', { filters: filters });
             refresh();
         };
 
@@ -1072,7 +1077,7 @@ export default defineComponent({
          * If the user settings change, we need to update the storage
          **/
         watch(userSettings, (value) => {
-            console.log('Settings changed');
+            console.log('Settings changed', value);
             userStorage.value = value;
         }, { deep: true });
 
@@ -1093,6 +1098,7 @@ export default defineComponent({
             currentAction,
             userSettings,
             userSettingsDefault,
+            userSettingsReadOnly,
 
             // Computed
             hasAnyItemsSelected,

@@ -55,7 +55,7 @@
   </VanillaDialog>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, Ref, ref, watch, unref } from 'vue';
+import { defineComponent, PropType, ref, watch } from 'vue';
 import VanillaDialog from '@/components/Dialog/Dialog.vue';
 import VanillaSelect from '@/components/Select/Select.vue';
 import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
@@ -67,10 +67,8 @@ import VanillaDatetimePicker from '@/components/DatetimePicker/DatetimePicker.vu
 import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import {
-    VanillaDatatableFilter,
     VanillaDatatableFilters,
     VanillaDatatableSavedFilter,
-    VanillaDatatableSavedFilters,
     VanillaDatatableUserSettings,
 } from '../index';
 import { TrashIcon } from '@heroicons/vue/outline';
@@ -118,7 +116,7 @@ export default defineComponent({
 
         const saveSettings = () => {
             isOpen.value = false;
-            if (Object.keys(localFilters).length > 0){
+            if (Object.keys(localFilters).length > 0 && !isEqual(localFilters, props.userSettings.filters)){
                 emit('filtersSaved', localFilters);
             }
         };
