@@ -1,7 +1,7 @@
 <template>
   <VanillaDialog
     v-model="isOpen"
-    title="Filters"
+    :title="translations.filters"
     as="form"
     size="medium"
     @submit.prevent="saveSettings"
@@ -24,11 +24,53 @@
           :show-empty="true"
         />
 
+        <VanillaRichSelect
+          v-if="filter.component === 'VanillaRichSelect'"
+          v-model="localFilters[filter.name]"
+          :model-value="getFilterValue(filter.name) || null"
+          :placeholder="filter.placeholder"
+          :options="filter.options"
+          v-bind="filter.props"
+        />
+
         <VanillaInput
           v-if="filter.component === 'VanillaInput'"
           v-model="localFilters[filter.name]"
           :model-value="getFilterValue(filter.name) || null"
           :placeholder="filter.placeholder"
+          v-bind="filter.props"
+        />
+
+        <VanillaCheckbox
+          v-if="filter.component === 'VanillaCheckbox'"
+          v-model="localFilters[filter.name]"
+          :model-value="getFilterValue(filter.name) || null"
+          :placeholder="filter.placeholder"
+          v-bind="filter.props"
+        />
+
+        <VanillaToggle
+          v-if="filter.component === 'VanillaToggle'"
+          v-model="localFilters[filter.name]"
+          :model-value="getFilterValue(filter.name) || null"
+          :placeholder="filter.placeholder"
+          v-bind="filter.props"
+        />
+
+        <VanillaTextarea
+          v-if="filter.component === 'VanillaTextarea'"
+          v-model="localFilters[filter.name]"
+          :model-value="getFilterValue(filter.name) || null"
+          :placeholder="filter.placeholder"
+          v-bind="filter.props"
+        />
+
+        <VanillaDatetimePicker
+          v-if="filter.component === 'VanillaDatetimePicker'"
+          v-model="localFilters[filter.name]"
+          :model-value="getFilterValue(filter.name) || null"
+          :placeholder="filter.placeholder"
+          v-bind="filter.props"
         />
       </VanillaInputGroup>
     </template>
@@ -41,10 +83,14 @@
             class="underline flex items-center justify-center space-x-1"
             @click="resetSettings"
           >
-            <TrashIcon class="h-4 w-4" />{{ 'Reset Filters' }}
+            <TrashIcon class="h-4 w-4" />
+            <span v-text="translations.filtersReset" />
           </span>
-          <span>{{ 'or' }}</span>
-          <span class="underline flex items-center justify-center space-x-1"> {{ 'Copy Link' }}</span>
+          <span v-text="translations.filtersResetOr" />
+          <span
+            class="underline flex items-center justify-center"
+            v-text="translations.filtersCopy"
+          />
         </div>
       </div>
     </VanillaInputGroup>
@@ -54,7 +100,7 @@
       <VanillaButton
         tabindex="2"
         type="submit"
-        :label="'Save & Close'"
+        :label="translations.filtersSaveAndClose"
       />
     </template>
   </VanillaDialog>
@@ -79,6 +125,7 @@ import {
 import { TrashIcon } from '@heroicons/vue/outline';
 import find from 'lodash/find';
 import { isEqual } from '@/core';
+import { useInjectDatatableTranslations } from '../utils';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogFilters',
@@ -156,16 +203,20 @@ export default defineComponent({
             }
         };
 
-        // Reset Locall
+        // Reset Filters
         const resetSettings = () => {
             isOpen.value = false;
             localFilters.value = {};
             emit('filtersReset', true);
         };
 
+        // Open / Close Modal
         watch(isOpen, (val: boolean) => {
             emit('update:modelValue', val);
         });
+
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!;
 
         return {
             isOpen,
@@ -173,6 +224,7 @@ export default defineComponent({
             getFilterValue,
             saveSettings,
             resetSettings,
+            translations,
         };
     },
 });

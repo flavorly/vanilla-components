@@ -79,11 +79,11 @@ export type VanillaDatatableTranslations = {
   selectAllMatchingUndo?: string,
 
   filters?: string,
+  filtersBarLabel?: string,
   filtersWithEmptyData?: string,
   filtersReset?: string,
 
   recordsEmpty?: string,
-  settingsPerPage?: string,
 
   showingFrom?: string,
   nextPage?: string,

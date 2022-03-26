@@ -8,13 +8,16 @@
       <template #actions>
         <!-- Bulk Actions -->
         <slot
-          name="actions"
-          v-bind="{actions,hasActions,hasAnyItemsSelected}"
+          name="headerActions"
+          v-bind="{
+            actions,
+            hasActions,
+            hasAnyItemsSelected
+          }"
         >
           <VanillaDatatableActions
             v-if="hasActions && hasAnyItemsSelected"
             :actions="actionsComputed"
-            :text-actions="translations.actionsButton"
             :count-selected="selectedItemsCount"
             @action-selected="onActionSelected"
           >
@@ -33,77 +36,116 @@
         </slot>
 
         <!-- Filters-->
-        <div
-          v-if="hasFilters"
-          class="inline-flex"
+        <slot
+          name="headerFilters"
+          v-bind="{hasFilters,isShowingFilters,filtersActiveCount}"
         >
-          <VanillaButton
-            @click="isShowingFilters = true"
+          <div
+            v-if="hasFilters"
+            class="inline-flex"
           >
-            <FilterIcon class="h-4 h-4 sm:mr-1" />
-            <span class="hidden sm:block">{{ 'Filters' }}</span>
-            <span
-              v-if="filtersActiveCount > 0"
-              class="ml-1 text-xxs"
-            >( {{ filtersActiveCount }} )</span>
-          </VanillaButton>
-        </div>
+            <VanillaButton
+              @click="isShowingFilters = true"
+            >
+              <FilterIcon class="h-4 h-4 sm:mr-1" />
+              <span
+                class="hidden sm:block"
+                v-text="translations.filters"
+              />
+              <span
+                v-if="filtersActiveCount > 0"
+                class="ml-1 text-xxs"
+              >( {{ filtersActiveCount }} )</span>
+            </VanillaButton>
+          </div>
+        </slot>
 
         <!-- Table Settings -->
-        <VanillaDropdown class="inline-flex">
-          <template #trigger>
-            <VanillaButton>
-              <DotsVerticalIcon class="h-4 w-4" />
-            </VanillaButton>
-          </template>
+        <slot
+          name="headerSettings"
+          v-bind="{
+            refreshable: options.refreshable,
+            isFetching,
+            isShowingSettings
+          }"
+        >
+          <VanillaDropdown class="inline-flex">
+            <template #trigger>
+              <VanillaButton>
+                <DotsVerticalIcon class="h-4 w-4" />
+              </VanillaButton>
+            </template>
 
-          <!-- Refresh -->
-          <VanillaDropdownOption
-            v-if="options.refreshable"
-            @click="refresh"
-          >
-            <RefreshIcon
-              class="h-4 h-4"
-              :class="[isFetching ? 'animate-spin' : '']"
-            />
-            <span>{{ 'Refresh' }}</span>
-          </VanillaDropdownOption>
-          <VanillaDropdownOption @click="isShowingSettings = true">
-            <CogIcon class="h-4 h-4" />
-            <span>{{ 'Settings' }}</span>
-          </VanillaDropdownOption>
-        </VanillaDropdown>
+            <!-- Refresh -->
+            <VanillaDropdownOption
+              v-if="options.refreshable"
+              @click="refresh"
+            >
+              <RefreshIcon
+                class="h-4 h-4"
+                :class="[isFetching ? 'animate-spin' : '']"
+              />
+              <span>{{ 'Refresh' }}</span>
+            </VanillaDropdownOption>
+            <VanillaDropdownOption @click="isShowingSettings = true">
+              <CogIcon class="h-4 h-4" />
+              <span>{{ 'Settings' }}</span>
+            </VanillaDropdownOption>
+          </VanillaDropdown>
+        </slot>
 
         <!-- Table Config -->
       </template>
 
       <!-- Search Bar -->
-      <VanillaDatatableSearch
-        v-if="options.searchable && !hasAnyItemsSelected"
-        :query="queryData.search"
-        :searchable="canSearch"
-        :placeholder="translations.searchPlaceholder"
-        @search="onSearch"
-      />
+      <template v-if="options.searchable && !hasAnyItemsSelected">
+        <slot
+          name="headerSearch"
+          v-bind="{
+            searchable: options.searchable,
+            hasAnyItemsSelected,
+            query: queryData.search,
+            placeholder: translations.searchPlaceholder,
+            onSearch
+          }"
+        >
+          <VanillaDatatableSearch
+            :query="queryData.search"
+            :searchable="canSearch"
+            :placeholder="translations.searchPlaceholder"
+            @search="onSearch"
+          />
+        </slot>
+      </template>
 
       <!-- Active Filters Bar -->
-      <div
-        v-if="hasFilters && filtersActiveCount > 0"
-        class="px-5 mt-2 my-3"
-      >
-        <div class="flex items-center space-x-1">
-          <span class="text-xs">Filters: </span>
-          <div class="flex flex-wrap items-center gap-1">
-            <VanillaDatatableFilterBadge
-              v-for="filter in filtersComputed"
-              :key="filter.name+''+filter.value"
-              :filter="filter"
-              :value="filter.value"
-              @filter-remove="resetFilter(filter)"
-            />
+      <template v-if="hasFilters && filtersActiveCount > 0">
+        <slot
+          name="headerFiltersActive"
+          v-bind="{
+            hasFilters,
+            filtersActiveCount,
+            resetFilter,
+            filters: filtersComputed,
+          }"
+        >
+          <div class="px-5 mt-2 my-3">
+            <div class="flex items-center space-x-1 text-xs">
+              <span v-text="translations.filtersBarLabel" />
+              <span>:</span>
+              <div class="flex flex-wrap items-center gap-1">
+                <VanillaDatatableFilterBadge
+                  v-for="filter in filtersComputed"
+                  :key="filter.name+''+filter.value"
+                  :filter="filter"
+                  :value="filter.value"
+                  @filter-remove="resetFilter(filter)"
+                />
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
+        </slot>
+      </template>
 
       <!-- Current items selected -->
       <template v-if="hasAnyItemsSelected">
@@ -111,11 +153,8 @@
           name="selection"
           v-bind="{
             isAllSelected: queryData.selectedAll,
-            textSelectedRows: useReplacePlaceholders(translations.selectRows, {rows: selectedItemsCount}),
-            textDeselect: useReplacePlaceholders(translations.selectedUndo),
-            textOrSelectMatching: useReplacePlaceholders(translations.selectAllOr),
-            textSelectMatching: useReplacePlaceholders(translations.selectAllMatching, {rows: results?.meta.total}),
-            textDeselectMatching: useReplacePlaceholders(translations.selectAllMatchingUndo, {rows: results?.meta.total}),
+            countSelected: selectedItemsCount,
+            countTotal: results?.meta.total,
             deselectAll: deselectAllItems,
             selectMatching: toggleSelectAll,
             deselectMatching: toggleSelectAll,
@@ -123,11 +162,8 @@
         >
           <VanillaDatatableSelectionBar
             :is-all-selected="queryData.selectedAll"
-            :text-selected-rows="useReplacePlaceholders(translations.selectRows, {rows: selectedItemsCount})"
-            :text-deselect="useReplacePlaceholders(translations.selectedUndo)"
-            :text-or-select-matching="useReplacePlaceholders(translations.selectAllOr)"
-            :text-select-matching="useReplacePlaceholders(translations.selectAllMatching, {rows: results?.meta.total})"
-            :text-deselect-matching="useReplacePlaceholders(translations.selectAllMatchingUndo, {rows: results?.meta.total})"
+            :count-selected="selectedItemsCount"
+            :count-total="results?.meta.total"
             @deselect-all="deselectAllItems"
             @select-matching="toggleSelectAll"
             @deselect-matching="toggleSelectAll"
@@ -201,7 +237,7 @@
                 class="px-6 py-3 text-sm w-[10px]"
               >
                 <input
-                  :checked="isRowSelected(result)"
+                  :checked="isItemSelected(result)"
                   class="block transition duration-150 ease-in-out checked:bg-indigo-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-indigo-600 h-4 w-4"
                   type="checkbox"
                   @change="selectItem(result)"
@@ -250,7 +286,19 @@
         </table>
       </div>
 
-      <slot name="pagination">
+      <slot
+        name="pagination"
+        v-bind="{
+          isFetching,
+          pages: results.links?.pages,
+          previousPage: results.links?.previous,
+          nextPage: results.links?.next,
+          currentPage: results.meta?.current_page,
+          showingFrom: results.meta?.from,
+          showingTo: results.meta?.to,
+          total: results.meta?.total,
+        }"
+      >
         <!-- Pagination -->
         <VanillaDatatablePagination
           :is-fetching="isFetching"
@@ -261,13 +309,6 @@
           :showing-from="results.meta?.from"
           :showing-to="results.meta?.to"
           :total="results.meta?.total"
-          :text-number-of-results="useReplacePlaceholders(translations.showingFrom,{
-            from: results.meta?.from,
-            to: results.meta?.to,
-            total: results.meta?.total
-          })"
-          :text-next="translations.nextPage"
-          :text-previous="translations.previousPage"
           @navigate="onPageNavigated"
         />
       </slot>
@@ -279,7 +320,6 @@
         isShowingActionConfirmation,
         currentAction,
         selectedItemsCount,
-        translations,
         onActionConfirmed
       }"
     >
@@ -287,10 +327,6 @@
         v-model="isShowingActionConfirmation"
         :action="currentAction"
         :count-selected="selectedItemsCount"
-        :text-title="translations.actionConfirmTitle"
-        :text-confirm-action-text="translations.actionConfirmText"
-        :text-confirm-action-button="translations.actionConfirmButton"
-        :text-cancel-action-button="translations.actionCancelButton"
         @action-confirmed="onActionConfirmed"
       />
     </slot>
@@ -319,6 +355,9 @@
     <slot
       name="filtersDialog"
       v-bind="{
+        isShowingFilters,
+        userSettings,
+        filters
       }"
     >
       <!-- Action Confirmation Modal -->
@@ -356,12 +395,14 @@ import {
     useReplacePlaceholders,
 } from '@/core';
 
+// Datatable Utilities
 import {
     useValidator,
     useConfigurationBuilder,
     useFetchData,
 } from './Utils';
 
+// Types & Config
 import {
     VanillaDatatableProps,
     VanillaDatatableClassesKeys,
@@ -388,10 +429,13 @@ import {
     VanillaDatatableSavedFilter,
 } from './index';
 
+// Vanilla Components
 import VanillaCard from '@/components/Card/Card.vue';
 import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
 import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
 import VanillaButton from '@/components/Button/Button.vue';
+
+// Partial Components
 import VanillaDatatableHead from './Partials/DatatableHead.vue';
 import VanillaDatatableRowSkeleton from './Partials/DatatableRowSkeleton.vue';
 import VanillaDatatableSearch from './Partials/DatatableSearch.vue';
@@ -403,12 +447,13 @@ import VanillaDatatableDialogSettings from './Partials/DatatableDialogSettings.v
 import VanillaDatatableDialogFilters from './Partials/DatatableDialogFilters.vue';
 import VanillaDatatableFilterBadge from './Partials/DatatableFilterBadge.vue';
 
+// Icons
 import { DotsVerticalIcon, CogIcon } from '@heroicons/vue/solid';
 import { FilterIcon, RefreshIcon } from '@heroicons/vue/outline';
 
+// Other 3rd Party Packages
 import { useSessionStorage } from '@vueuse/core';
 import { NormalizedOption } from '@/core/types';
-
 import each from 'lodash/each';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
@@ -1070,7 +1115,7 @@ export default defineComponent({
             datatable.actionsEndpoint = link;
 
             // Refresh the results
-            // Cant use value trigger otherwise it happens later on the event bubbling
+            // Can't use value trigger otherwise it happens later on the event bubbling
             refresh();
 
             datatable.fetchEndpoint = fetchEndpoint;
@@ -1230,6 +1275,7 @@ export default defineComponent({
             localVariant,
             props,
             datatable,
+            translations: datatable.translations,
 
             // Reactive / Refs
             isFetching,
@@ -1280,7 +1326,8 @@ export default defineComponent({
         provide('configuration_vanilla', configuration);
 
         // ----- Provide data to sub components -----  //
-        provide('datatable_configuration', sharing);
+        //provide('datatable_configuration', sharing);
+        provide('datatable_translations', datatable.translations);
 
         return {
             ...sharing,

@@ -6,7 +6,7 @@
   >
     <template #trigger="{iconClasses}">
       <VanillaButton variant="primary">
-        <span v-text="textActions" />
+        <span v-text="translations.actionsButton" />
         <span
           v-if="countSelected !== undefined"
           class="ml-1 text-xxs text-white xxs:hidden"
@@ -41,6 +41,7 @@ import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
 import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableActions } from '../index';
+import { useInjectDatatableTranslations } from '../utils';
 
 export default defineComponent({
     name: 'VanillaDatatableActions',
@@ -72,10 +73,14 @@ export default defineComponent({
             emit('actionSelected', action);
         };
 
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!;
+
         return {
             isDropdownOpen,
             selectAction,
             useDynamicSlots,
+            translations,
         };
     },
 });

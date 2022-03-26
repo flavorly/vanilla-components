@@ -12,7 +12,7 @@
         <ChevronLeftIcon class="h-5 w-5" />
         <span
           class="mr-2"
-          v-html="textPrevious"
+          v-html="translations.previousPage"
         />
       </VanillaButton>
       <VanillaButton
@@ -25,7 +25,7 @@
       >
         <span
           class="ml-2"
-          v-html="textNext"
+          v-html="translations.nextPage"
         />
         <ChevronRightIcon class="h-5 w-5" />
       </VanillaButton>
@@ -37,7 +37,11 @@
           class="text-sm leading-5 text-gray-700 dark:text-gray-400"
         >
           <span
-            v-html="textNumberOfResults"
+            v-html="useReplacePlaceholders(translations.showingFrom,{
+              from: showingFrom,
+              to: showingTo,
+              total: total
+            })"
           />
         </p>
       </div>
@@ -86,11 +90,9 @@
 import { defineComponent, PropType, computed } from 'vue';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid';
 import VanillaButton from '@/components/Button/Button.vue';
-import {
-    VanillaDatatableResponsePage,
-    VanillaDatatableColumnComputed,
-    VanillaDatatableSortedColumns,
-} from '../index';
+import { VanillaDatatableResponsePage } from '../index';
+import { useReplacePlaceholders } from '@/core';
+import { useInjectDatatableTranslations } from '../utils';
 
 export default defineComponent({
     name: 'VanillaDatatablePagination',
@@ -157,20 +159,6 @@ export default defineComponent({
             required: false,
             default: true,
         },
-        textNumberOfResults: {
-            type: [String] as PropType<string>,
-            required: true,
-        },
-        textNext: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: 'Next',
-        },
-        textPrevious: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: 'Previous',
-        },
     },
     emits: ['navigate'],
     setup(props, { emit }){
@@ -179,6 +167,9 @@ export default defineComponent({
             console.log('goToPage', page);
             emit('navigate', page);
         };
+
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!;
 
         const pagesLimited = computed(() => {
             if (prop.limitPages === false){
@@ -203,6 +194,8 @@ export default defineComponent({
         return {
             goToPage,
             pagesLimited,
+            translations,
+            useReplacePlaceholders,
         };
     },
 });

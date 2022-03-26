@@ -1,5 +1,3 @@
-import { camelize } from 'vue';
-
 export default function useReplacePlaceholders(translation: string, replace: object = {}): string {
   if (typeof translation === 'object' || (Object.keys(replace).length === 0 && replace.constructor === Object)) {
     return translation;
@@ -8,8 +6,14 @@ export default function useReplacePlaceholders(translation: string, replace: obj
   for (const placeholder in replace) {
     try {
       translation = translation.toString()
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         .replace(`:${placeholder}`, replace[placeholder])
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         .replace(`:${placeholder.toUpperCase()}`, replace[placeholder].toString().toUpperCase())
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
         .replace(`:${placeholder.charAt(0).toUpperCase()}${placeholder.slice(1)}`, replace[placeholder].toString().charAt(0).toUpperCase() + replace[placeholder].toString().slice(1));
     } catch (e) {
     }

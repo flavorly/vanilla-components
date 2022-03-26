@@ -55,11 +55,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed, ref, watch } from 'vue';
-import { useReplacePlaceholders } from '@/core';
 import { ExclamationIcon } from '@heroicons/vue/outline';
 import VanillaDialog from '@/components/Dialog/Dialog.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableAction } from '../index';
+import { useReplacePlaceholders } from '@/core';
+import { useInjectDatatableTranslations } from '../utils';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogConfirmAction',
@@ -77,25 +78,6 @@ export default defineComponent({
         countSelected: {
             type: [Number, String] as PropType<number | string>,
             required: true,
-        },
-        textTitle: {
-            type: [String] as PropType<string>,
-            required: true,
-        },
-        textConfirmActionText: {
-            type: [String] as PropType<string>,
-            required: true,
-            default: 'Are you sure you want to perform this action?',
-        },
-        textConfirmActionButton: {
-            type: [String] as PropType<string>,
-            required: true,
-            default: 'Yes, I\'v Confirmed',
-        },
-        textCancelActionButton: {
-            type: [String] as PropType<string>,
-            required: true,
-            default: 'Nah, Cancel',
         },
     },
     emits: [
@@ -117,23 +99,26 @@ export default defineComponent({
             emit('actionConfirmed', props.action);
         };
 
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!;
+
         const title = computed(() => {
-            const value =  props.action?.before?.confirm?.title || props.textTitle;
+            const value =  props.action?.before?.confirm?.title || translations.value.actionConfirmTitle;
             return useReplacePlaceholders(value, { name: props.action?.label });
         });
 
         const text = computed(() => {
-            const value =  props.action?.before?.confirm?.text || props.textConfirmActionText;
+            const value =  props.action?.before?.confirm?.text || translations.value.actionConfirmText;
             return useReplacePlaceholders(value, { name: '<b>' + props.action?.label + '</b>', itemsSelected: '<b>' + props.countSelected + '</b>' });
         });
 
         const confirmText = computed(() => {
-            const value =  props.action?.before?.confirm?.confirmButton || props.textConfirmActionButton;
+            const value =  props.action?.before?.confirm?.confirmButton || translations.value.actionConfirmButton;
             return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected });
         });
 
         const cancelText = computed(() => {
-            const value =  props.action?.before?.confirm?.cancelButton || props.textCancelActionButton;
+            const value =  props.action?.before?.confirm?.cancelButton || translations.value.actionCancelButton;
             return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected });
         });
 
@@ -149,6 +134,7 @@ export default defineComponent({
             isOpen,
             cancelAction,
             confirmAction,
+            translations,
         };
     },
 });

@@ -1,4 +1,5 @@
 import merge from 'lodash/merge';
+import assign from 'lodash/assign';
 import {
   VanillaDatatableConfiguration,
   VanillaDatatableOptions,
@@ -50,8 +51,20 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     selectAllMatchingUndo: 'Select only current page',
 
     filters: 'Filters',
+    filtersBarLabel: 'Filters',
     filtersWithEmptyData: 'Oops, seems like there is no records after filtering',
     filtersReset: 'Reset Filters',
+    filtersResetOr: 'or',
+    filtersCopy: 'Copy Filters Link',
+    filtersSaveAndClose: 'Save & Close',
+
+    settings: 'Settings',
+    settingsItemsPerPage: 'Items p/ Page',
+    settingsVisibility: 'Visibility',
+    settingsPersist: 'Persist Settings',
+    settingsPersistSelection: 'Save Selected',
+    settingsReset: 'Reset to Default Settings',
+    settingsSaveAndClose: 'Save & Close',
 
     recordsEmpty: 'Seems like its quiet here! No Records were found',
     settingsPerPage: ':count Items per page',
@@ -83,7 +96,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
       props.config?.options,
     ),
 
-    translations: merge(
+    translations: assign(
       defaultTranslations,
       props?.translations,
       props.config?.translations,

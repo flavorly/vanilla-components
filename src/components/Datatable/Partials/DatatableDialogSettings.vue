@@ -1,13 +1,13 @@
 <template>
   <VanillaDialog
     v-model="isOpen"
-    title="Settings"
+    :title="translations.settings"
     as="form"
     size="medium"
     @submit.prevent="saveSettings"
   >
     <VanillaInputGroup
-      label="Items p/ Page"
+      :label="translations.settingsItemsPerPage"
       name="perPage"
       layout="inline"
     >
@@ -18,7 +18,7 @@
     </VanillaInputGroup>
 
     <VanillaInputGroup
-      label="Visibility"
+      :label="translations.settingsItemsPerPage"
       name="visibleColumns"
       layout="inline"
     >
@@ -29,7 +29,7 @@
     </VanillaInputGroup>
 
     <VanillaInputGroup
-      label="Persist Settings"
+      :label="translations.settingsItemsPerPage"
       name="useStorage"
       layout="inline"
     >
@@ -39,7 +39,7 @@
     </VanillaInputGroup>
 
     <VanillaInputGroup
-      label="Persist Selection"
+      :label="translations.settingsPersistSelection"
       name="saveSelection"
       layout="inline"
     >
@@ -54,7 +54,7 @@
         @click="resetSettings"
       >
         <TrashIcon class="h-4 w-4" />
-        <span>{{ 'Reset Default Settings' }}</span>
+        <span v-text="translations.settingsReset" />
       </span>
     </VanillaInputGroup>
 
@@ -63,7 +63,7 @@
       <VanillaButton
         tabindex="2"
         type="submit"
-        :label="'Close'"
+        :label="translations.settingsSaveAndClose"
       />
     </template>
   </VanillaDialog>
@@ -83,6 +83,7 @@ import {
     VanillaDatatableUserSettings,
 } from '../index';
 import { TrashIcon } from '@heroicons/vue/outline';
+import { useInjectDatatableTranslations } from '../utils';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogSettings',
@@ -123,6 +124,7 @@ export default defineComponent({
         const isOpen = ref(false);
         const localSettings = ref(props.userSettings) as Ref<VanillaDatatableUserSettings>;
 
+        // Normalize the columns with Label & Text
         const columnsNormalized = computed(() => {
             let columns = [] as { text: string, value: string }[];
             props.columns.forEach((column: VanillaDatatableColumnComputed) => {
@@ -134,19 +136,25 @@ export default defineComponent({
             return columns;
         });
 
+        // Save Settings
         const saveSettings = () => {
             isOpen.value = false;
             emit('update:settings', localSettings.value);
         };
 
+        // Reset Settings
         const resetSettings = () => {
             isOpen.value = false;
             emit('settingsReset', true);
         };
 
+        // Open / Close Modal
         watch(isOpen, (val: boolean) => {
             emit('update:modelValue', val);
         });
+
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!;
 
         return {
             isOpen,
@@ -154,6 +162,7 @@ export default defineComponent({
             columnsNormalized,
             saveSettings,
             resetSettings,
+            translations,
         };
     },
 });
