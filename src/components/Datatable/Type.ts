@@ -221,10 +221,11 @@ export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] & Normal
 export type VanillaDatatableConfiguration = {
   name: string | number,
   primaryKey: string | number,
-  filtersKey?: string | number
   columns: VanillaDatatableColumns,
   actions: VanillaDatatableActions,
   filters: VanillaDatatableFilters,
+  filtersKey?: string | number
+  filtersBaseUrl?: string | undefined,
   options: VanillaDatatableOptions
   translations: VanillaDatatableTranslations,
   perPageOptions: VanillaDatatablePageOptions

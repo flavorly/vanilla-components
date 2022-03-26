@@ -29,6 +29,10 @@ export default defineComponent({
         SearchIcon,
     },
     props: {
+        query: {
+            type: [String, null, undefined] as PropType<string>,
+            required: true,
+        },
         placeholder: {
             type: [String] as PropType<string>,
             required: true,
@@ -37,23 +41,25 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             required: true,
         },
-        initialSearchQuery: {
-            type: [String, undefined] as PropType<string | undefined>,
-            required: false,
-            default: null,
-        },
     },
-    emits: ['update:modelValue'],
+    emits: [
+        'search',
+    ],
     setup(props, { emit }){
 
-        const searchQuery = ref(props.initialSearchQuery);
+        const searchQuery = ref(props.query);
 
-        watch(searchQuery, debounce(function (query){
+        watch(searchQuery, debounce(function (query: string | null){
             // Only search if we're not tabbing into the field
-            if (props.searchable) {
-                emit('update:modelValue', query);
+            if (props.searchable && query !== '' && query !== null) {
+                console.log('searching', query);
+                emit('search', query);
             }
         }, 700));
+
+        watch(() => props.query, () => {
+            searchQuery.value = props.query;
+        });
 
         return {
             searchQuery,

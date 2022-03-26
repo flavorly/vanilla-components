@@ -80,9 +80,10 @@
       <!-- Search Bar -->
       <VanillaDatatableSearch
         v-if="options.searchable && !hasAnyItemsSelected"
-        v-model="queryData.search"
+        :query="queryData.search"
         :searchable="canSearch"
         :placeholder="translations.searchPlaceholder"
+        @search="onSearch"
       />
 
       <!-- Active Filters Bar -->
@@ -352,7 +353,7 @@ import {
     useVariantProps,
     useConfigurationWithClassesList,
     useDynamicSlots,
-    useReplacePlaceholders,
+    useReplacePlaceholders, firstOf,
 } from '@/core';
 
 import {
@@ -414,7 +415,6 @@ import find from 'lodash/find';
 import assign from 'lodash/assign';
 
 
-
 export default defineComponent({
     name: 'VanillaDatatable',
     components: {
@@ -459,13 +459,6 @@ export default defineComponent({
             required: false,
             default: 'id',
         },
-        filtersKey: {
-            type: [String] as PropType<string | number>,
-            required: false,
-            default(rawProps: { primaryKey: string | number; }){
-                return rawProps.primaryKey;
-            },
-        },
         columns: {
             type: [Array] as PropType<VanillaDatatableColumns>,
             required: true,
@@ -489,6 +482,18 @@ export default defineComponent({
             default(){
                 return [];
             },
+        },
+        filtersKey: {
+            type: [String] as PropType<string | number>,
+            required: false,
+            default(rawProps: { primaryKey: string | number; }){
+                return rawProps.primaryKey;
+            },
+        },
+        filtersBaseUrl: {
+            type: [String] as PropType<string | undefined>,
+            required: false,
+            default: undefined,
         },
         perPageOptions: {
             type: [Array] as PropType<VanillaDatatablePageOptions>,
@@ -557,7 +562,6 @@ export default defineComponent({
         // ---------------------------- //
         // ----- Reactive Data -----  //
         // ---------------------------- //
-        const shouldRefresh = ref(false);
 
         /** Stores if table is currently fetching */
         const isFetching = ref(false);
@@ -599,7 +603,7 @@ export default defineComponent({
         /** Default Settings */
         const userSettingsDefault = {
             visibleColumns: filter(datatable.columns, { hidden: false }).map(c => c.name) as string[],
-            perPage: datatable.perPageOptions[0]?.value as number,
+            perPage: firstOf(datatable.perPageOptions)?.value as number,
             useStorage: true as boolean,
             saveSelection: true as boolean,
             selectedIds: [] as string[],
@@ -734,6 +738,22 @@ export default defineComponent({
         // ----- Methods -----  //
         // ---------------------------- //
 
+        /** Resets the sorting  */
+        const resetSorting = () => {
+            // TODO : Check this to reset link
+            queryData.sorting = [];
+        };
+
+        /** Resets the per page items  */
+        const resetPerPageItems = () => {
+            queryData.perPage = datatable.perPageOptions[0].value as number;
+        };
+
+        /** Resets the search query  */
+        const resetSearchQuery = () => {
+            queryData.search = null;
+        };
+
         /** Resets a specific filter by name  */
         const resetFilter = (filterToClear: VanillaDatatableFilter) => {
 
@@ -746,7 +766,7 @@ export default defineComponent({
             delete queryData.filters[filterToClear.name];
 
             // Refresh the items
-            shouldRefresh.value = true;
+            refresh();
         };
 
         /** Reset all filters  */
@@ -758,14 +778,16 @@ export default defineComponent({
             }
 
             queryData.filters = {};
+
             // Refresh the items
-            shouldRefresh.value = true;
+            refresh();
         };
 
         /** Reset all settings  */
         const resetAllSettings = () => {
-            queryData.sorting = [];
-            queryData.filters = {};
+            resetAllFilters();
+            resetSorting();
+            deselectAllItems();
             Object.assign(userSettings, userSettingsDefault);
         };
 
@@ -855,6 +877,9 @@ export default defineComponent({
 
         /** Wrapper for the main call to the server, so we can perform additional stuff */
         const fetchFromServer = (then = () => {}) => {
+
+            console.log('[REST] 🚀 Calling the server');
+
             isFetching.value = true;
             return fetchData(datatable, queryData)
                 // Resolve
@@ -887,9 +912,9 @@ export default defineComponent({
         };
 
         /** Refresh the datatable */
-        const refresh = () => {
+        const refresh = (then = () => {}) => {
             if (!isFetching.value){
-                fetchFromServer();
+                fetchFromServer(then);
             }
         };
 
@@ -916,7 +941,7 @@ export default defineComponent({
                     clearInterval(poolingInterval.value);
                 } else {
                     // Refresh the results
-                    shouldRefresh.value = true;
+                    refresh();
                 }
             }, every * 1000);
         };
@@ -926,7 +951,7 @@ export default defineComponent({
             if (!enable) {
                 return;
             }
-            poolingInterval.value = setInterval(() => shouldRefresh.value = true, every * 1000);
+            poolingInterval.value = setInterval(() => refresh(), every * 1000);
         };
 
         /**
@@ -996,6 +1021,7 @@ export default defineComponent({
             emit('sortingUpdated', {
                 sorting: sorting,
             });
+            refresh();
         };
 
         /**
@@ -1033,11 +1059,13 @@ export default defineComponent({
 
             let fetchEndpoint = datatable.fetchEndpoint;
             let actionsEndpoint = datatable.actionsEndpoint;
+
             datatable.fetchEndpoint = link;
             datatable.actionsEndpoint = link;
 
             // Refresh the results
-            shouldRefresh.value = true;
+            // Cant use value trigger otherwise it happens later on the event bubbling
+            refresh();
 
             datatable.fetchEndpoint = fetchEndpoint;
             datatable.actionsEndpoint = actionsEndpoint;
@@ -1057,11 +1085,12 @@ export default defineComponent({
             // Things we want to reset
             resetAction();
             deselectAllItems();
+            resetSearchQuery();
 
             emit('filtersSaved', { filters: filters });
 
             // Refresh the results
-            shouldRefresh.value = true;
+            refresh();
         };
 
         /**
@@ -1075,8 +1104,19 @@ export default defineComponent({
             queryData.filters = {};
             resetAction();
             deselectAllItems();
+            resetSearchQuery();
 
-            shouldRefresh.value = true;
+            // Refresh the results
+            refresh();
+        };
+
+        /**
+        * When the user search
+        **/
+        const onSearch = (query: string) => {
+            queryData.search = query;
+            resetPerPageItems();
+            refresh();
         };
 
         /**
@@ -1144,13 +1184,13 @@ export default defineComponent({
         /**
          * When we toggle the should refresh, it will toggle the table
          **/
-        watch(shouldRefresh, (refreshValue: boolean) => {
-            if (refreshValue){
-                refresh();
-                shouldRefresh.value = false;
-                return;
-            }
-        });
+        // watch(shouldRefresh, (refreshValue: boolean) => {
+        //     if (refreshValue){
+        //         refresh();
+        //         shouldRefresh.value = false;
+        //         return;
+        //     }
+        // });
 
         /**
          * Watch selected ids, on select update the user settings
@@ -1161,23 +1201,22 @@ export default defineComponent({
         }, { deep: true });
 
         /**
-         * Watch pages, filters, and etc
-         * with the selected ids.
-         * Anything added to the array will trigger
-         * a server reload with the current fresh query data
+         * Watch Per page being changed
+         * NOTE: Only watch AFTER mounted to avoid initial triggers from storage
          **/
-        watch(() => {
-                  return (
-                      (queryData?.search || '') + queryData.perPage + queryData.sorting
-                  );
-              },
-              () => {
-                  fetchFromServer();
-              },
-              {
-                  deep: true,
-              },
-        );
+        onMounted(() => {
+            watch(() => {
+                      return (queryData.perPage);
+                  },
+                  () => {
+                      fetchFromServer();
+                  },
+                  {
+                      deep: true,
+                  },
+            );
+        });
+
 
         /**
          * If the user settings change, we need to update the storage
@@ -1229,6 +1268,7 @@ export default defineComponent({
             onPageNavigated,
             onFiltersSaved,
             onFiltersReset,
+            onSearch,
             deselectAllItems,
             toggleSelectAll,
             useReplacePlaceholders,
