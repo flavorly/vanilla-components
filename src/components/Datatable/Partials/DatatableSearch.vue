@@ -51,7 +51,7 @@ export default defineComponent({
 
         watch(searchQuery, debounce(function (query: string | null){
             // Only search if we're not tabbing into the field
-            if (props.searchable && query !== '' && query !== null) {
+            if (props.searchable) {
                 console.log('searching', query);
                 emit('search', query);
             }

@@ -214,7 +214,7 @@
                   result,
                   columns: columnsComputed,
                   selectable: datatable.options.selectable,
-                  selected: isRowSelected(result)
+                  selected: isItemSelected(result)
                 }"
               >
                 <td
@@ -353,7 +353,7 @@ import {
     useVariantProps,
     useConfigurationWithClassesList,
     useDynamicSlots,
-    useReplacePlaceholders, firstOf,
+    useReplacePlaceholders,
 } from '@/core';
 
 import {
@@ -413,7 +413,8 @@ import each from 'lodash/each';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
 import assign from 'lodash/assign';
-
+import md5 from 'crypto-js/md5';
+import omit from 'lodash/omit';
 
 export default defineComponent({
     name: 'VanillaDatatable',
@@ -544,6 +545,8 @@ export default defineComponent({
         'sortingUpdated',
         'navigateToPage',
         'filtersSaved',
+        'mounted',
+        'unmounted',
     ],
     setup(props, { emit }) {
 
@@ -592,7 +595,7 @@ export default defineComponent({
         }) as VanillaDatatableResponse;
 
         /** Stores the current hash of the API Response */
-        const resultsHash = ref(undefined) as Ref<undefined | string>;
+        //const resultsHash = ref(undefined) as Ref<undefined | string>;
 
         /** Stores the current action object that was selected */
         const currentAction = ref(undefined) as Ref<undefined | VanillaDatatableAction>;
@@ -603,11 +606,10 @@ export default defineComponent({
         /** Default Settings */
         const userSettingsDefault = {
             visibleColumns: filter(datatable.columns, { hidden: false }).map(c => c.name) as string[],
-            perPage: firstOf(datatable.perPageOptions)?.value as number,
+            perPage: datatable.perPageOptions[0]?.value as number,
             useStorage: true as boolean,
             saveSelection: true as boolean,
             selectedIds: [] as string[],
-            //filters: objectToArrayMap(datatable.filters, 'name', 'value') as VanillaDatatableSavedFilter,
             filters: {} as VanillaDatatableSavedFilter,
         } as VanillaDatatableUserSettings;
 
@@ -620,7 +622,7 @@ export default defineComponent({
         /** Query Data being passed to the server */
         const queryData = reactive({
             search: null as string | null,
-            perPage: computed(() => userSettings.perPage),
+            perPage: userSettings.perPage,
             selected: [] as string[],
             selectedAll: false as boolean,
             filters: {} as VanillaDatatableSavedFilter,
@@ -637,6 +639,8 @@ export default defineComponent({
 
         /** Current Ids being shown on hte page */
         const currentPageIds = computed(() => results.data.map(item => item.id) || []) as Ref<string[]>;
+
+        const resultsHash = computed(() => md5(JSON.stringify(results.data)).toString()) as Ref<string>;
 
         /** If there is currently selected items on the config */
         const hasAnyItemsSelected = computed(() => queryData.selectedAll || queryData.selected.length > 0) as Ref<boolean>;
@@ -738,63 +742,46 @@ export default defineComponent({
         // ----- Methods -----  //
         // ---------------------------- //
 
-        /** Resets the sorting  */
-        const resetSorting = () => {
-            // TODO : Check this to reset link
-            queryData.sorting = [];
+        /** Wrapper for the main call to the server, so we can perform additional stuff */
+        const fetchFromServer = (then = () => {}) => {
+
+            //console.log('[REST] 🚀 Calling the server');
+
+            isFetching.value = true;
+            return fetchData(datatable, queryData)
+                // Resolve
+                .then((response) => {
+                    results.data = response.data;
+                    results.links = response?.links;
+                    results.meta = response?.meta;
+                    results.responses = response?.meta;
+
+                    // Emit that fetch was success
+                    emit('fetchedSuccess', {
+                        results: results,
+                        success: true,
+                    });
+                })
+                // Catch Errors
+                .catch((error: object) => {
+                    // Emit  error
+                    emit('fetchError', {
+                        error: error,
+                        success: false,
+                    });
+                })
+                // Finally
+                .then(() => {
+                    isFetching.value = false;
+                })
+                .then(then);
         };
 
-        /** Resets the per page items  */
-        const resetPerPageItems = () => {
-            queryData.perPage = datatable.perPageOptions[0].value as number;
-        };
-
-        /** Resets the search query  */
-        const resetSearchQuery = () => {
-            queryData.search = null;
-        };
-
-        /** Resets a specific filter by name  */
-        const resetFilter = (filterToClear: VanillaDatatableFilter) => {
-
-            // Already empty or does not exist in the user settings
-            if (!(filterToClear.name in userSettings.filters)){
-                return;
+        /** Refresh the datatable */
+        const refresh = (then = () => {}) => {
+            if (!isFetching.value){
+                fetchFromServer(then);
             }
-
-            delete userSettings.filters[filterToClear.name];
-            delete queryData.filters[filterToClear.name];
-
-            // Refresh the items
-            refresh();
-        };
-
-        /** Reset all filters  */
-        const resetAllFilters = () => {
-
-            // Already empty
-            if (!Object.keys(queryData.filters).length){
-                return;
-            }
-
-            queryData.filters = {};
-
-            // Refresh the items
-            refresh();
-        };
-
-        /** Reset all settings  */
-        const resetAllSettings = () => {
-            resetAllFilters();
-            resetSorting();
-            deselectAllItems();
-            Object.assign(userSettings, userSettingsDefault);
-        };
-
-        /** ResetThe current action  */
-        const resetAction = () => {
-            isShowingActionConfirmation.value = false;
-            currentAction.value = undefined;
         };
 
         /**
@@ -831,7 +818,7 @@ export default defineComponent({
         /**
          * Check if a given row is selected
          **/
-        const isRowSelected = (item: VanillaDatatableResultData) => {
+        const isItemSelected = (item: VanillaDatatableResultData) => {
             return queryData.selectedAll || queryData.selected.indexOf(item[datatable.primaryKey]) > -1;
         };
 
@@ -875,49 +862,6 @@ export default defineComponent({
             queryData.selectedAll = !queryData.selectedAll;
         };
 
-        /** Wrapper for the main call to the server, so we can perform additional stuff */
-        const fetchFromServer = (then = () => {}) => {
-
-            console.log('[REST] 🚀 Calling the server');
-
-            isFetching.value = true;
-            return fetchData(datatable, queryData)
-                // Resolve
-                .then((response) => {
-                    results.data = response.data;
-                    results.links = response?.links;
-                    results.meta = response?.meta;
-                    results.responses = response?.meta;
-
-                    // Emit that fetch was scucess
-                    emit('fetchedSuccess', {
-                        results: results,
-                        success: true,
-                    });
-                })
-                // Catch Errors
-                .catch((error: object) => {
-                    // Emit  error
-                    emit('fetchError', {
-                        error: error,
-                        success: false,
-                    });
-                })
-                // Finally
-                .then(() => {
-                    isFetching.value = false;
-                    resetAction();
-                })
-                .then(then);
-        };
-
-        /** Refresh the datatable */
-        const refresh = (then = () => {}) => {
-            if (!isFetching.value){
-                fetchFromServer(then);
-            }
-        };
-
         /**
          * Starts a table pool until a certain condition is met.
          * Configurable to :
@@ -952,6 +896,65 @@ export default defineComponent({
                 return;
             }
             poolingInterval.value = setInterval(() => refresh(), every * 1000);
+        };
+
+        /** Resets the sorting  */
+        const resetSorting = () => {
+            // TODO : Check this to reset link
+            queryData.sorting = [];
+        };
+
+        /** Resets the per page items  */
+        const resetPerPageItems = () => {
+            queryData.perPage = datatable.perPageOptions[0]?.value as number;
+        };
+
+        /** Resets the search query  */
+        const resetSearchQuery = () => {
+            queryData.search = null;
+        };
+
+        /** Resets a specific filter by name  */
+        const resetFilter = (filterToClear: VanillaDatatableFilter) => {
+
+            // Already empty or does not exist in the user settings
+            if (!(filterToClear.name in userSettings.filters)){
+                return;
+            }
+
+            userSettings.filters = { ... omit(userSettings.filters, filterToClear.name) };
+            queryData.filters = { ... omit(queryData.filters, filterToClear.name) };
+
+            // Refresh the items
+            refresh();
+        };
+
+        /** Reset all filters  */
+        const resetAllFilters = () => {
+
+            // Already empty
+            if (!Object.keys(queryData.filters).length){
+                return;
+            }
+
+            queryData.filters = {};
+
+            // Refresh the items
+            refresh();
+        };
+
+        /** Reset all settings  */
+        const resetAllSettings = () => {
+            resetAllFilters();
+            resetSorting();
+            deselectAllItems();
+            Object.assign(userSettings, userSettingsDefault);
+        };
+
+        /** ResetThe current action  */
+        const resetAction = () => {
+            isShowingActionConfirmation.value = false;
+            currentAction.value = undefined;
         };
 
         /**
@@ -1002,6 +1005,9 @@ export default defineComponent({
                         action?.after?.pooling?.stopWhenDataChanges,
                     );
                 }
+
+                // Reset the action
+                resetAction();
             };
 
             // Emit Action
@@ -1010,7 +1016,7 @@ export default defineComponent({
             });
 
             // Execute the action
-            fetchFromServer().then(afterActionCallback);
+            refresh(afterActionCallback);
         };
 
         /**
@@ -1102,6 +1108,8 @@ export default defineComponent({
             // Flash the new values
             userSettings.filters = {};
             queryData.filters = {};
+
+            // More to do here
             resetAction();
             deselectAllItems();
             resetSearchQuery();
@@ -1128,17 +1136,17 @@ export default defineComponent({
                 return;
             }
 
-            console.log('Settings the storage');
-            console.log('[ Storage ] User settings is ', userSettings);
-            console.log('[ Storage ] User Defaults are ', userSettingsDefault);
-            console.log('[ Storage ] User on Storage is ', userStorage.value);
+            // console.log('Settings the storage');
+            // console.log('[ Storage ] User settings is ', userSettings);
+            // console.log('[ Storage ] User Defaults are ', userSettingsDefault);
+            // console.log('[ Storage ] User on Storage is ', userStorage.value);
 
             // Merge into user settings
             // We need also to ensure we merge the ones from storage into the defaults
             // Storage has priority over the default filter value.
             Object.assign(userSettings, assign(userSettingsDefault, userStorage.value));
 
-            console.log('Finished Merging', userSettings);
+            //console.log('Finished Merging', userSettings);
 
             // Get the selected Ids
             if (userSettings.selectedIds.length){
@@ -1162,43 +1170,18 @@ export default defineComponent({
 
             // Fetch the first page
             if (datatable?.pooling?.enable && datatable?.pooling?.interval !== undefined) {
-                fetchFromServer()
-                    .then(() => {
-                        poolForever(
-                            datatable?.pooling?.enable,
-                            datatable?.pooling?.interval,
-                        );
-                    });
+                refresh(() => {
+                    poolForever(
+                        datatable?.pooling?.enable,
+                        datatable?.pooling?.interval,
+                    );
+                });
             } else {
-                fetchFromServer();
+                refresh();
             }
+
+            emit('mounted');
         });
-
-        /**
-         * On Unmounted, clear the pooling interval
-         **/
-        onUnmounted(() => {
-            clearInterval(poolingInterval.value);
-        });
-
-        /**
-         * When we toggle the should refresh, it will toggle the table
-         **/
-        // watch(shouldRefresh, (refreshValue: boolean) => {
-        //     if (refreshValue){
-        //         refresh();
-        //         shouldRefresh.value = false;
-        //         return;
-        //     }
-        // });
-
-        /**
-         * Watch selected ids, on select update the user settings
-         * with the selected ids.
-         **/
-        watch(() => queryData.selected, () => {
-            userSettings.selectedIds = queryData.selected;
-        }, { deep: true });
 
         /**
          * Watch Per page being changed
@@ -1209,7 +1192,7 @@ export default defineComponent({
                       return (queryData.perPage);
                   },
                   () => {
-                      fetchFromServer();
+                      refresh();
                   },
                   {
                       deep: true,
@@ -1217,6 +1200,21 @@ export default defineComponent({
             );
         });
 
+        /**
+         * On Unmounted, clear the pooling interval
+         **/
+        onUnmounted(() => {
+            clearInterval(poolingInterval.value);
+            emit('unmounted');
+        });
+
+        /**
+         * Watch selected ids, on select update the user settings
+         * with the selected ids.
+         **/
+        watch(() => queryData.selected, () => {
+            userSettings.selectedIds = queryData.selected;
+        }, { deep: true });
 
         /**
          * If the user settings change, we need to update the storage
@@ -1238,10 +1236,11 @@ export default defineComponent({
             isShowingFilters,
             isShowingSettings,
             isShowingActionConfirmation,
-            queryData,
-            currentAction,
+            isAllItemsInPageSelected,
             userSettings,
             userSettingsDefault,
+            queryData,
+            currentAction,
 
             // Computed
             hasAnyItemsSelected,
@@ -1250,7 +1249,6 @@ export default defineComponent({
             filtersActiveCount,
             canSearch,
             visibleColumnsCount,
-            isAllItemsInPageSelected,
             hasAnyItemsSelectedForCurrentPage,
             columnsComputed,
             actionsComputed,
@@ -1260,15 +1258,8 @@ export default defineComponent({
 
             // Functions & Helpers
             selectAllItemsInPage,
-            isRowSelected,
+            isItemSelected,
             selectItem,
-            onSortingUpdated,
-            onActionSelected,
-            onActionConfirmed,
-            onPageNavigated,
-            onFiltersSaved,
-            onFiltersReset,
-            onSearch,
             deselectAllItems,
             toggleSelectAll,
             useReplacePlaceholders,
@@ -1276,6 +1267,13 @@ export default defineComponent({
             resetAllSettings,
             resetFilter,
             refresh,
+            onSortingUpdated,
+            onActionSelected,
+            onActionConfirmed,
+            onPageNavigated,
+            onFiltersSaved,
+            onFiltersReset,
+            onSearch,
         };
 
         // ----- Provide data to sub components -----  //

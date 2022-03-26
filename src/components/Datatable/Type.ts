@@ -1,10 +1,4 @@
-import {
-  Data,
-  InputOptions,
-  NormalizedOption,
-  NormalizedOptions,
-  WithVariantPropsAndClassesList,
-} from '@/core/types';
+import { Data, InputOptions, NormalizedOption, NormalizedOptions, WithVariantPropsAndClassesList } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 import { VanillaDatatableClassesValidKeys } from './Config';
 
@@ -55,7 +49,6 @@ export type VanillaDatatableFilterProp = {
 export type VanillaDatatableSavedFilter = {
   [key: string]: unknown
 };
-//export type VanillaDatatableSavedFilter = object;
 
 export type VanillaDatatablePageOption = {
   value: string | number | undefined | null | object | boolean,
@@ -121,29 +114,27 @@ declare type VanillaActionCallback = (action: VanillaDatatableAction) => void;
 export type VanillaDatatableAction = {
   name: string,
   label?: string,
-  //slotName?: string
-  //limit?: number | string,
   permissions?: {
     view?: boolean,
     execute?: boolean
   },
   before?: {
-      confirm?: {
-        enable: boolean,
+    confirm?: {
+      enable: boolean,
+      title?: string,
+      subtitle?: string | undefined,
+      text?: string,
+      icon?: string | undefined,
+      confirmButton?: string
+      cancelButton?: string,
+      safe?: boolean,
+      classes?: {
         title?: string,
-        subtitle?: string | undefined,
         text?: string,
-        icon?: string | undefined,
-        confirmButton?: string
-        cancelButton?: string,
-        safe?: boolean,
-        classes? : {
-         title?: string,
-         text?: string,
-         icon?: string,
-        }
-     },
-     callback?: VanillaActionCallback,
+        icon?: string,
+      }
+    },
+    callback?: VanillaActionCallback,
   },
   after?: {
     clearSelected?: boolean,
@@ -216,7 +207,7 @@ export type VanillaDatatableFilters = VanillaDatatableFilter[];
 
 export type VanillaDatatableSavedFilters = VanillaDatatableSavedFilter[];
 
-export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] & NormalizedOptions & InputOptions;
+export type VanillaDatatablePageOptions = VanillaDatatablePageOption[] & NormalizedOptions & InputOptions;
 
 export type VanillaDatatableConfiguration = {
   name: string | number,

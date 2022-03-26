@@ -121,6 +121,7 @@ export default defineComponent({
             (newValue) => {
                 localFilters.value = { ...newValue };
             },
+            { deep: true },
         );
 
         // Resolve the value for the filter
