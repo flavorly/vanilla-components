@@ -37,7 +37,12 @@
     <VanillaInputGroup layout="content">
       <div class="form-content">
         <div class="flex items-center justify-center space-x-1 text-xs select-none">
-          <span class="underline flex items-center justify-center space-x-1"> <TrashIcon class="h-4 w-4" />{{ 'Reset Filters' }}</span>
+          <span
+            class="underline flex items-center justify-center space-x-1"
+            @click="resetSettings"
+          >
+            <TrashIcon class="h-4 w-4" />{{ 'Reset Filters' }}
+          </span>
           <span>{{ 'or' }}</span>
           <span class="underline flex items-center justify-center space-x-1"> {{ 'Copy Link' }}</span>
         </div>
@@ -55,7 +60,7 @@
   </VanillaDialog>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from 'vue';
+import { defineComponent, PropType, Ref, ref, watch } from 'vue';
 import VanillaDialog from '@/components/Dialog/Dialog.vue';
 import VanillaSelect from '@/components/Select/Select.vue';
 import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
@@ -107,22 +112,53 @@ export default defineComponent({
     ],
     setup(props, { emit }){
 
-        const isOpen = ref(false);
-        const localFilters = {} as VanillaDatatableSavedFilter;
+        const isOpen = ref(false) as Ref<boolean>;
+        const localFilters = ref({}) as Ref<VanillaDatatableSavedFilter>;
 
-        const getFilterValue = (name: string): unknown => {
-            return props.userSettings.filters[name] || find(props.filters, { name: name })?.value;
+        // Once props changes, destruct the local filters value
+        watch(
+            () => props.userSettings.filters,
+            (newValue) => {
+                localFilters.value = { ...newValue };
+            },
+        );
+
+        // Resolve the value for the filter
+        const getFilterDefaultValue = (name: string): unknown => {
+            return find(props.filters, { name: name })?.defaultValue || '';
         };
 
+        // Resolve the value for the filter
+        const getFilterProvidedValue = (name: string): unknown => {
+            return find(props.filters, { name: name })?.value || '';
+        };
+
+        // Resolve the value for the filter
+        const getFilterValue = (name: string): unknown => {
+            return props.userSettings.filters[name] || getFilterProvidedValue(name) || getFilterDefaultValue(name);
+        };
+
+        // Cleanup empty filters on save
+        const cleanupEmptyFilters = (filters: object) => {
+            return Object.fromEntries(Object.entries(filters).filter(([key, v]) => {
+                console.log('🛰️ filtering before submit', key, v, getFilterDefaultValue(key));
+                return v != null && v !== '' && v != getFilterDefaultValue(key);
+            }));
+        };
+
+        // Save the settings & Emit when necessary
         const saveSettings = () => {
             isOpen.value = false;
-            if (Object.keys(localFilters).length > 0 && !isEqual(localFilters, props.userSettings.filters)){
-                emit('filtersSaved', localFilters);
+            if (Object.keys(localFilters).length > 0 && !isEqual(localFilters.value, props.userSettings.filters)){
+                localFilters.value = cleanupEmptyFilters(localFilters.value);
+                emit('filtersSaved',  { ...localFilters.value });
             }
         };
 
+        // Reset Locall
         const resetSettings = () => {
             isOpen.value = false;
+            localFilters.value = {};
             emit('filtersReset', true);
         };
 

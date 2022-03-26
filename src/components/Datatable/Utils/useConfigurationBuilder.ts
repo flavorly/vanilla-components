@@ -72,6 +72,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
   return {
     name: props?.uniqueName || props.config?.name,
     primaryKey: props?.primaryKey || props.config?.primaryKey,
+    filtersKey: props?.primaryKey || props.config?.primaryKey || props?.primaryKey || props.config?.primaryKey,
     columns: merge(props?.columns, props.config?.columns),
     actions: merge(props?.actions, props.config?.actions),
     filters: merge(props?.filters, props.config?.filters),

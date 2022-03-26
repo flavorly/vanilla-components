@@ -180,7 +180,6 @@ export default defineComponent({
             emit('navigate', page);
         };
 
-        // pages.slice(Number(currentPage),Number(showPagesMaximum))
         const pagesLimited = computed(() => {
             if (prop.limitPages === false){
                 return prop.pages;

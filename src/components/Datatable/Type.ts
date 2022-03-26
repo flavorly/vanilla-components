@@ -41,7 +41,7 @@ export type VanillaDatatableFilter = {
   component: string,
   placeholder?: string,
   value?: string | undefined | null | number,
-  valueResolved?: string | undefined | null | number
+  defaultValue?: string | undefined | null | number
   options?: undefined | InputOptions | NormalizedOption[] | NormalizedOptions,
   rules?: undefined | string[]
   props?: VanillaDatatableFilterProp[],
@@ -216,11 +216,12 @@ export type VanillaDatatableFilters = VanillaDatatableFilter[];
 
 export type VanillaDatatableSavedFilters = VanillaDatatableSavedFilter[];
 
-export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[];
+export type VanillaDatatablePageOptions =  VanillaDatatablePageOption[] & NormalizedOptions & InputOptions;
 
 export type VanillaDatatableConfiguration = {
   name: string | number,
   primaryKey: string | number,
+  filtersKey?: string | number
   columns: VanillaDatatableColumns,
   actions: VanillaDatatableActions,
   filters: VanillaDatatableFilters,

@@ -63,7 +63,7 @@
   </thead>
 </template>
 <script lang="ts">
-import { ref, defineComponent, PropType } from 'vue';
+import { ref, defineComponent, PropType, watch } from 'vue';
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/solid';
 import {
     VanillaDatatableColumnsComputed,
@@ -139,6 +139,14 @@ export default defineComponent({
             };
         }));
 
+        // Once props changes, destruct the local filters value
+        watch(
+            () => props.columnsWithSorting,
+            (newValue) => {
+                localSorting.value = [...newValue];
+            },
+        );
+
 
         /**
          * Sorting Column by name
@@ -178,7 +186,7 @@ export default defineComponent({
             // Update the original object & Emit
             localSorting.value = finalSorting;
 
-            emit('sorted', localSorting.value);
+            emit('sorted', [...localSorting.value]);
         };
 
         return {
