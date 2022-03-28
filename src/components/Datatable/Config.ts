@@ -4,6 +4,11 @@ export const VanillaDatatableConfig = {
   // Default appearance
   classes: {
 
+    cardVariant: '',
+
+    something: 'foo',
+
+
   },
 };
 

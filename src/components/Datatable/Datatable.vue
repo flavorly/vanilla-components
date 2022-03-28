@@ -3,6 +3,7 @@
     <VanillaCard
       :title="datatable.translations.title"
       :subtitle="datatable.translations.subtitle"
+      :variant="configuration.classesList.cardVariant"
     >
       <!-- Actions -->
       <template #actions>
@@ -173,6 +174,68 @@
 
       <!-- Actual Table -->
       <div class="datatable overflow-x-auto border-t dark:border-gray-700">
+        <template v-if="!isFetching && results.data.length <= 0 ">
+          <VanillaDatatableEmptyState
+            :has-filters-or-search="filtersActiveCount > 0 && queryData.search !== ''"
+            @reset-filters="resetFiltersAndSearch"
+          >
+            <!-- Empty with Filters or Search Set -->
+            <template #emptyWithFilters>
+              <slot
+                name="emptyWithFilters"
+                v-bind="{
+                  resetFiltersAndSearch,
+                  filters: filtersComputed,
+                  filtersActiveCount,
+                }"
+              />
+            </template>
+            <template #emptyWithFiltersIcon>
+              <slot
+                name="emptyWithFiltersIcon"
+                v-bind="{
+                  resetFiltersAndSearch,
+                  filters: filtersComputed,
+                  filtersActiveCount,
+                }"
+              />
+            </template>
+            <template #emptyWithFiltersTitle>
+              <slot
+                name="emptyWithFiltersTitle"
+                v-bind="{
+                  resetFiltersAndSearch,
+                  filters: filtersComputed,
+                  filtersActiveCount,
+                }"
+              />
+            </template>
+            <template #emptyWithFiltersButton>
+              <slot
+                name="emptyWithFiltersButton"
+                v-bind="{
+                  resetFiltersAndSearch,
+                  filters: filtersComputed,
+                  filtersActiveCount,
+                }"
+              />
+            </template>
+            <!-- Empty but really empty -->
+            <template #emptyWithoutRecords>
+              <slot name="emptyWithoutRecords" />
+            </template>
+            <template #emptyWithoutRecordsIcon>
+              <slot name="emptyWithoutRecordsIcon" />
+            </template>
+            <template #emptyWithoutRecordsTitle>
+              <slot name="emptyWithoutRecordsTitle" />
+            </template>
+            <template #emptyWithoutRecordsButton>
+              <slot name="emptyWithoutRecordsButton" />
+            </template>
+          </VanillaDatatableEmptyState>
+        </template>
+
         <!-- Table -->
         <table
           v-if="results.data.length > 0 || isFetching"
@@ -214,7 +277,6 @@
               }"
             >
               <VanillaDatatableRowSkeleton
-
                 :number-of-columns="visibleColumnsCount"
                 :number-of-rows="results.data.length || queryData.perPage"
               />
@@ -446,6 +508,7 @@ import VanillaDatatableDialogConfirmAction from './Partials/DatatableDialogConfi
 import VanillaDatatableDialogSettings from './Partials/DatatableDialogSettings.vue';
 import VanillaDatatableDialogFilters from './Partials/DatatableDialogFilters.vue';
 import VanillaDatatableFilterBadge from './Partials/DatatableFilterBadge.vue';
+import VanillaDatatableEmptyState from './Partials/DatatableEmptyState.vue';
 
 // Icons
 import { DotsVerticalIcon, CogIcon } from '@heroicons/vue/solid';
@@ -474,6 +537,7 @@ export default defineComponent({
         VanillaDatatableDialogSettings,
         VanillaDatatableDialogFilters,
         VanillaDatatableFilterBadge,
+        VanillaDatatableEmptyState,
         VanillaCard,
         VanillaDropdown,
         VanillaDropdownOption,
@@ -597,7 +661,11 @@ export default defineComponent({
 
         // ----- Start the Variant -----  //
         const { localVariant } = useBootVariant(props, 'errors', ref(null));
-        const { configuration } = useConfigurationWithClassesList<VanillaDatatableProps>(VanillaDatatableConfig, VanillaDatatableClassesKeys, localVariant);
+        const { configuration } = useConfigurationWithClassesList<VanillaDatatableProps>(
+            VanillaDatatableConfig,
+            VanillaDatatableClassesKeys,
+            localVariant,
+        );
 
         // ---------------------------- //
         // ----- Boot Config & Validate -----  //
@@ -955,12 +1023,16 @@ export default defineComponent({
         };
 
         /** Resets the search query  */
-        const resetSearchQuery = () => {
+        const resetSearchQuery = (shouldRefresh = false) => {
             queryData.search = null;
+            if (!shouldRefresh){
+                return;
+            }
+            refresh();
         };
 
         /** Resets a specific filter by name  */
-        const resetFilter = (filterToClear: VanillaDatatableFilter) => {
+        const resetFilter = (filterToClear: VanillaDatatableFilter, shouldRefresh = true) => {
 
             // Already empty or does not exist in the user settings
             if (!(filterToClear.name in userSettings.filters)){
@@ -971,11 +1043,14 @@ export default defineComponent({
             queryData.filters = { ... omit(queryData.filters, filterToClear.name) };
 
             // Refresh the items
+            if (!shouldRefresh){
+                return;
+            }
             refresh();
         };
 
         /** Reset all filters  */
-        const resetAllFilters = () => {
+        const resetAllFilters = (shouldRefresh = true) => {
 
             // Already empty
             if (!Object.keys(queryData.filters).length){
@@ -985,7 +1060,17 @@ export default defineComponent({
             queryData.filters = {};
 
             // Refresh the items
+            if (!shouldRefresh){
+                return;
+            }
             refresh();
+        };
+
+        /** Reset all filters & search query  */
+        const resetFiltersAndSearch = () => {
+            console.log('Reset the Filters & Search');
+            resetAllFilters(false);
+            resetSearchQuery(true);
         };
 
         /** Reset all settings  */
@@ -1181,11 +1266,6 @@ export default defineComponent({
                 return;
             }
 
-            // console.log('Settings the storage');
-            // console.log('[ Storage ] User settings is ', userSettings);
-            // console.log('[ Storage ] User Defaults are ', userSettingsDefault);
-            // console.log('[ Storage ] User on Storage is ', userStorage.value);
-
             // Merge into user settings
             // We need also to ensure we merge the ones from storage into the defaults
             // Storage has priority over the default filter value.
@@ -1312,6 +1392,7 @@ export default defineComponent({
             useDynamicSlots,
             resetAllSettings,
             resetFilter,
+            resetFiltersAndSearch,
             refresh,
             onSortingUpdated,
             onActionSelected,
@@ -1329,8 +1410,11 @@ export default defineComponent({
         //provide('datatable_configuration', sharing);
         provide('datatable_translations', datatable.translations);
 
+        console.log('Datatable Configuration', configuration);
+
         return {
             ...sharing,
+
             // Data from API
             results,
         };

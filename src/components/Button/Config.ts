@@ -29,7 +29,7 @@ export const VanillaButtonConfig = {
       'bg-white dark:bg-gray-800',
       'border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600',
     ),
-    container: '',
+    container: ' ',
     spinner: '',
     disableOpacity: '',
     enableOpacity: '',

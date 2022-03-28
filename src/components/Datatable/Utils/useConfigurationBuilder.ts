@@ -66,7 +66,10 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     settingsReset: 'Reset to Default Settings',
     settingsSaveAndClose: 'Save & Close',
 
-    recordsEmpty: 'Seems like its quiet here! No Records were found',
+    recordsEmpty: 'Seems like there is no records to show you. Please come back later or try inserting some records.',
+    recordsEmptyWithFiltersOrSearch: 'Sorry but there is no records matching your search or filters.',
+    recordsEmptyWithFiltersOrSearchAction: 'Reset Query',
+
     settingsPerPage: ':count Items per page',
 
     showingFrom: 'Showing :from to :to of :total results',

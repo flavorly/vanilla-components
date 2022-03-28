@@ -12,22 +12,24 @@
     :type="type"
     @click="$emit('click',$event)"
   >
-    <slot name="default">
-      <span :class="configuration.classesList.container">
-        <!-- Loading Icon -->
-        <span v-if="loading">
-          <VanillaLoadingSpinner :class="configuration.classesList.spinner" />
-        </span>
-        <!-- If not loading, show the user provided icon -->
-        <span v-if="!loading && hasSlot($slots.icon)">
-          <slot name="icon" />
-        </span>
-        <!-- Actual button label -->
+    <div :class="configuration.classesList.container">
+      <slot name="default">
         <span>
-          {{ label }}
+          <!-- Loading Icon -->
+          <span v-if="loading">
+            <VanillaLoadingSpinner :class="configuration.classesList.spinner" />
+          </span>
+          <!-- If not loading, show the user provided icon -->
+          <span v-if="!loading && hasSlot($slots.icon)">
+            <slot name="icon" />
+          </span>
+          <!-- Actual button label -->
+          <span>
+            {{ label }}
+          </span>
         </span>
-      </span>
-    </slot>
+      </slot>
+    </div>
   </component>
 </template>
 <script lang="ts">

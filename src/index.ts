@@ -36,6 +36,8 @@ export { default as VanillaFormSection } from './components/FormSection/FormSect
 export { default as VanillaFlag } from './components/Icons/Flag.vue';
 export { default as VanillaFlagAsync } from './components/Icons/FlagAsync.vue';
 export { default as VanillaLoadingSpinner } from './components/Icons/LoadingSpinner.vue';
+export { default as VanillaUFOIcon } from './components/Icons/UFOIcon.vue';
+export { default as VanillaRadarIcon } from './components/Icons/RadarIcon.vue';
 export { default as VanillaCheckedIcon } from './components/Icons/CheckedIcon.vue';
 export { default as VanillaUncheckedIcon } from './components/Icons/UncheckedIcon.vue';
 
