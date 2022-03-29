@@ -111,10 +111,9 @@
           }"
         >
           <VanillaDatatableSearch
-            :query="queryData.search"
+            v-model="queryData.search"
             :searchable="canSearch"
             :placeholder="translations.searchPlaceholder"
-            @update:query="onSearch"
           />
         </slot>
       </template>
@@ -174,7 +173,7 @@
 
       <!-- Actual Table -->
       <div class="datatable overflow-x-auto border-t dark:border-gray-700">
-        <template v-if="!isFetching && results.data.length <= 0 ">
+        <template v-if="!showBeInLoadingState && results.data.length <= 0 ">
           <VanillaDatatableEmptyState
             :has-filters-or-search="hasFiltersOrSearchApplied"
             :is-fetching="isFetching"
@@ -239,7 +238,7 @@
 
         <!-- Table -->
         <table
-          v-if="results.data.length > 0 || isFetching"
+          v-else
           class="min-w-full m-0 table-auto"
         >
           <!-- Table Head -->
@@ -268,11 +267,12 @@
           </slot>
 
           <!-- Table Skeleton when its loading -->
-          <template v-if="isFetching">
+          <template v-if="showBeInLoadingState">
             <slot
               name="skeleton"
               v-bind="{
                 isFetching,
+                showBeInLoadingState,
                 columnsCount: visibleColumnsCount,
                 rowsCount: results.data.length || queryData.perPage
               }"
@@ -286,7 +286,7 @@
 
           <!-- Table Body -->
           <tbody
-            v-if="!isFetching && results.data.length > 0"
+            v-else
             class="divide-y bg-gray-50 dark:bg-gray-800"
           >
             <!-- Each record Main loop -->
@@ -683,16 +683,19 @@ export default defineComponent({
         // ---------------------------- //
 
         /** Stores if table is currently fetching */
-        const isFetching = ref(false);
+        const isFetching = ref(false) as Ref<boolean>;
 
         /** Stores if it's currently showing filters */
-        const isShowingFilters = ref(false);
+        const isShowingFilters = ref(false) as Ref<boolean>;
 
         /** Stores if it's currently showing the action confirmation */
-        const isShowingActionConfirmation = ref(false);
+        const isShowingActionConfirmation = ref(false) as Ref<boolean>;
 
         /** Stores if it's currently showing the table settings modal */
-        const isShowingSettings = ref(false);
+        const isShowingSettings = ref(false) as Ref<boolean>;
+
+        /** Temporary value to control if a refresh can be performed or not. */
+        const showLoadingAnimation = ref(false) as Ref<boolean>;
 
         /** Stores if table is currently fetching */
         const results = reactive({
@@ -709,9 +712,6 @@ export default defineComponent({
                 total: 0,
             },
         }) as VanillaDatatableResponse;
-
-        /** Stores the current hash of the API Response */
-        //const resultsHash = ref(undefined) as Ref<undefined | string>;
 
         /** Stores the current action object that was selected */
         const currentAction = ref(undefined) as Ref<undefined | VanillaDatatableAction>;
@@ -793,6 +793,8 @@ export default defineComponent({
         /** Returns if there is any filters or search applied */
         const hasFiltersOrSearchApplied = computed(() => filtersActiveCount.value > 0 || queryData.search !== '') as Ref<boolean>;
 
+        /** Whenever to show the loading state or not */
+        const showBeInLoadingState = computed(() => isFetching.value || showLoadingAnimation.value);
 
         /**
          * Map the columns, so we can include if the column is visible or not
@@ -1076,6 +1078,9 @@ export default defineComponent({
 
         /** Reset all filters & search query  */
         const resetFiltersAndSearch = (shouldRefresh = true) => {
+
+            showLoadingAnimation.value = true;
+
             resetAllFilters(false);
             resetSearchQuery(false);
 
@@ -1083,7 +1088,8 @@ export default defineComponent({
             if (!shouldRefresh){
                 return;
             }
-            //refresh();
+            refresh();
+            showLoadingAnimation.value = false;
         };
 
         /** Reset all settings  */
@@ -1264,8 +1270,7 @@ export default defineComponent({
         /**
         * When the user search
         **/
-        const onSearch = debounce((newQuery: string | undefined) => {
-
+        const onSearch = debounce((newQuery: string | null | undefined) => {
             // If the query is the same, do nothing
             if (newQuery === undefined){
                 newQuery = '';
@@ -1273,8 +1278,7 @@ export default defineComponent({
 
             // Only search if we're not tabbing into the field
             if (canSearch.value) {
-                queryData.search = newQuery;
-                //resetPerPageItems(); // TODO : check if its required
+                deselectAllItems();
                 refresh();
                 emit('search', newQuery || '');
             }
@@ -1368,7 +1372,17 @@ export default defineComponent({
         }, { deep: true });
 
         /**
-         * When the user settings per page changes, update the query data to trigger a reload
+         * Watch selected ids, on select update the user settings
+         * with the selected ids.
+         **/
+        watch(() => queryData.search, (searchQuery) => {
+            if (!isFetching.value){
+                onSearch(searchQuery);
+            }
+        }, { deep: true });
+
+        /**
+         * When the user settings per page changes, update the query data to trigger reload
          **/
         watch(() => userSettings.perPage, () => {
             queryData.perPage = userSettings.perPage;
@@ -1415,6 +1429,7 @@ export default defineComponent({
             filtersComputed,
             selectedItemsCount,
             selectedItemsCountFormatted,
+            showBeInLoadingState,
 
             // Functions & Helpers
             selectAllItemsInPage,
@@ -1441,10 +1456,7 @@ export default defineComponent({
         provide('configuration_vanilla', configuration);
 
         // ----- Provide data to sub components -----  //
-        //provide('datatable_configuration', sharing);
         provide('datatable_translations', datatable.translations);
-
-        console.log('Datatable Configuration', configuration);
 
         return {
             ...sharing,

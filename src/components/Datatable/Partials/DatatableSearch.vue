@@ -17,9 +17,8 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { SearchIcon } from '@heroicons/vue/solid';
-import debounce from 'lodash/debounce';
 import VanillaInput from '@/components/Input/Input.vue';
 import { useVModel } from '@/core';
 
@@ -30,7 +29,7 @@ export default defineComponent({
         SearchIcon,
     },
     props: {
-        query: {
+        modelValue: {
             type: [String, null, undefined] as PropType<string | null | undefined>,
             required: true,
         },
@@ -44,12 +43,10 @@ export default defineComponent({
         },
     },
     emits: [
-        'update:query',
+        'update:modelValue',
     ],
-    setup(props, { emit }){
-
-        const localValue = useVModel(props, 'query');
-
+    setup(props){
+        const localValue = useVModel(props, 'modelValue');
         return {
             localValue,
         };
