@@ -2,7 +2,7 @@
   <div class="px-5 mt-3 mb-3">
     <VanillaInput
       ref="search"
-      v-model="searchQuery"
+      v-model="localValue"
       name="search"
       :class="{'cursor-not-allowed': !searchable}"
       :disabled="!searchable"
@@ -21,6 +21,7 @@ import { defineComponent, PropType, ref, watch } from 'vue';
 import { SearchIcon } from '@heroicons/vue/solid';
 import debounce from 'lodash/debounce';
 import VanillaInput from '@/components/Input/Input.vue';
+import { useVModel } from '@/core';
 
 export default defineComponent({
     name: 'VanillaDatatableSearch',
@@ -30,7 +31,7 @@ export default defineComponent({
     },
     props: {
         query: {
-            type: [String, null, undefined] as PropType<string>,
+            type: [String, null, undefined] as PropType<string | null | undefined>,
             required: true,
         },
         placeholder: {
@@ -43,26 +44,14 @@ export default defineComponent({
         },
     },
     emits: [
-        'search',
+        'update:query',
     ],
     setup(props, { emit }){
 
-        const searchQuery = ref(props.query);
-
-        watch(searchQuery, debounce(function (query: string | null){
-            // Only search if we're not tabbing into the field
-            if (props.searchable) {
-                console.log('searching', query);
-                emit('search', query);
-            }
-        }, 700));
-
-        watch(() => props.query, () => {
-            searchQuery.value = props.query;
-        });
+        const localValue = useVModel(props, 'query');
 
         return {
-            searchQuery,
+            localValue,
         };
     },
 });

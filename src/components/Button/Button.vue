@@ -14,20 +14,20 @@
   >
     <div :class="configuration.classesList.container">
       <slot name="default">
-        <span>
-          <!-- Loading Icon -->
-          <span v-if="loading">
-            <VanillaLoadingSpinner :class="configuration.classesList.spinner" />
-          </span>
-          <!-- If not loading, show the user provided icon -->
-          <span v-if="!loading && hasSlot($slots.icon)">
-            <slot name="icon" />
-          </span>
-          <!-- Actual button label -->
+        <!-- Loading Icon -->
+        <span v-if="loading">
+          <VanillaLoadingSpinner :class="configuration.classesList.spinner" />
+        </span>
+        <!-- If not loading, show the user provided icon -->
+        <span v-if="!loading && hasSlot($slots.icon)">
+          <slot name="icon" />
+        </span>
+        <!-- Actual button label -->
+        <slot name="label">
           <span>
             {{ label }}
           </span>
-        </span>
+        </slot>
       </slot>
     </div>
   </component>

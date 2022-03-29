@@ -27,9 +27,16 @@
           @click="resetFilters"
         >
           <slot name="emptyWithFiltersButton">
-            <VanillaButton :variant="'primary'">
-              <ReplyIcon class="h-4 w-4" />
-              <span v-text="translations.recordsEmptyWithFiltersOrSearchAction" />
+            <VanillaButton
+              :variant="'primary'"
+              :loading="isFetching || isLocallyLoading"
+            >
+              <template #icon>
+                <ReplyIcon class="h-4 w-4" />
+              </template>
+              <template #label>
+                <span v-text="translations.recordsEmptyWithFiltersOrSearchAction" />
+              </template>
             </VanillaButton>
           </slot>
         </div>
@@ -68,7 +75,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, nextTick, PropType, ref } from 'vue';
 import { ReplyIcon } from '@heroicons/vue/solid';
 import VanillaUFOIcon from '@/components/Icons/UFOIcon.vue';
 import VanillaRadarIcon from '@/components/Icons/RadarIcon.vue';
@@ -88,18 +95,27 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             default: false,
         },
+        isFetching: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
     },
     emits: [
         'resetFilters',
         'actionWithoutRecords',
     ],
-    setup(props, { emit }){
+    setup(props, { emit }) {
 
         // Provide Translations
         const translations = useInjectDatatableTranslations()!;
+        const isLocallyLoading = ref(false);
 
         const resetFilters = () => {
+            isLocallyLoading.value = true;
             emit('resetFilters');
+            nextTick(() => {
+                isLocallyLoading.value = false;
+            });
         };
 
         const actionWithoutRecords = () => {
@@ -108,6 +124,7 @@ export default defineComponent({
 
         return {
             translations,
+            isLocallyLoading,
             resetFilters,
             actionWithoutRecords,
         };

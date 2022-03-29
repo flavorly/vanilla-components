@@ -114,7 +114,7 @@
             :query="queryData.search"
             :searchable="canSearch"
             :placeholder="translations.searchPlaceholder"
-            @search="onSearch"
+            @update:query="onSearch"
           />
         </slot>
       </template>
@@ -176,7 +176,8 @@
       <div class="datatable overflow-x-auto border-t dark:border-gray-700">
         <template v-if="!isFetching && results.data.length <= 0 ">
           <VanillaDatatableEmptyState
-            :has-filters-or-search="filtersActiveCount > 0 && queryData.search !== ''"
+            :has-filters-or-search="hasFiltersOrSearchApplied"
+            :is-fetching="isFetching"
             @reset-filters="resetFiltersAndSearch"
           >
             <!-- Empty with Filters or Search Set -->
@@ -293,7 +294,7 @@
               v-for="(result) in results.data"
               :key="result.id"
             >
-              <!-- Checkbox is not slotable -->
+              <!-- Checkbox is not slottable -->
               <td
                 v-if="options.selectable"
                 class="px-6 py-3 text-sm w-[10px]"
@@ -523,6 +524,7 @@ import find from 'lodash/find';
 import assign from 'lodash/assign';
 import md5 from 'crypto-js/md5';
 import omit from 'lodash/omit';
+import debounce from 'lodash/debounce';
 
 export default defineComponent({
     name: 'VanillaDatatable',
@@ -656,6 +658,7 @@ export default defineComponent({
         'filtersSaved',
         'mounted',
         'unmounted',
+        'search',
     ],
     setup(props, { emit }) {
 
@@ -734,7 +737,7 @@ export default defineComponent({
 
         /** Query Data being passed to the server */
         const queryData = reactive({
-            search: null as string | null,
+            search: '' as string | null,
             perPage: userSettings.perPage,
             selected: [] as string[],
             selectedAll: false as boolean,
@@ -787,9 +790,13 @@ export default defineComponent({
         /** Returns how the number of filters currently applied */
         const filtersActiveCount = computed(() => Object.keys(userSettings.filters).length || Object.keys(queryData.filters).length) as Ref<number>;
 
+        /** Returns if there is any filters or search applied */
+        const hasFiltersOrSearchApplied = computed(() => filtersActiveCount.value > 0 || queryData.search !== '') as Ref<boolean>;
+
+
         /**
          * Map the columns, so we can include if the column is visible or not
-         * if it's sorted or not and so on, so we dont need to evaluate it each time we need.
+         * if it's sorted or not and so on, so we don't need to evaluate it each time we need.
          **/
         const columnsComputed = computed(() => {
             return datatable.columns.map((column: VanillaDatatableColumn) => {
@@ -833,7 +840,7 @@ export default defineComponent({
                 let finalFilterValue = value as string | undefined | null | number;
 
                 // If the filter is a select, attempt to resolve the option in a nice way
-                // So we dont resolve the "raw" value but the label.
+                // So we don't resolve the "raw" value but the label.
                 if (filterObject?.options?.length || 0  > 0){
                     let option = find(filterObject?.options, { value: value }) as NormalizedOption | undefined;
                     if (option !== undefined){
@@ -919,7 +926,7 @@ export default defineComponent({
                 return queryData.selected.push(itemKey);
             }
 
-            // If we should untoggle if its already selected then do it.
+            // If we should toggle if it's already selected then do it.
             if (uncheckIfChecked){
                 const index = queryData.selected.indexOf(itemKey);
                 if (index > -1) {
@@ -1018,13 +1025,13 @@ export default defineComponent({
         };
 
         /** Resets the per page items  */
-        const resetPerPageItems = () => {
-            queryData.perPage = datatable.perPageOptions[0]?.value as number;
-        };
+        // const resetPerPageItems = () => {
+        //     queryData.perPage = datatable.perPageOptions[0]?.value as number;
+        // };
 
         /** Resets the search query  */
         const resetSearchQuery = (shouldRefresh = false) => {
-            queryData.search = null;
+            queryData.search = '';
             if (!shouldRefresh){
                 return;
             }
@@ -1050,7 +1057,7 @@ export default defineComponent({
         };
 
         /** Reset all filters  */
-        const resetAllFilters = (shouldRefresh = true) => {
+        const resetAllFilters = (shouldRefresh = false) => {
 
             // Already empty
             if (!Object.keys(queryData.filters).length){
@@ -1058,6 +1065,7 @@ export default defineComponent({
             }
 
             queryData.filters = {};
+            userSettings.filters = {};
 
             // Refresh the items
             if (!shouldRefresh){
@@ -1067,10 +1075,15 @@ export default defineComponent({
         };
 
         /** Reset all filters & search query  */
-        const resetFiltersAndSearch = () => {
-            console.log('Reset the Filters & Search');
+        const resetFiltersAndSearch = (shouldRefresh = true) => {
             resetAllFilters(false);
-            resetSearchQuery(true);
+            resetSearchQuery(false);
+
+            // Refresh the items
+            if (!shouldRefresh){
+                return;
+            }
+            //refresh();
         };
 
         /** Reset all settings  */
@@ -1161,7 +1174,7 @@ export default defineComponent({
         };
 
         /**
-         * On action selected, we will check if requires confirmation
+         * On action selected, we will check if it requires confirmation
          * - If it does, we will show the confirmation modal
          **/
         const onActionSelected = (action: VanillaDatatableActionType) => {
@@ -1174,7 +1187,7 @@ export default defineComponent({
         };
 
         /**
-         * On action selected, check if has permissions, its confirmed, etc
+         * On action selected, check if it has permissions, its confirmed, etc
          **/
         const onActionConfirmed = (action: VanillaDatatableActionType) => {
             return executeAction(action);
@@ -1251,11 +1264,21 @@ export default defineComponent({
         /**
         * When the user search
         **/
-        const onSearch = (query: string) => {
-            queryData.search = query;
-            resetPerPageItems();
-            refresh();
-        };
+        const onSearch = debounce((newQuery: string | undefined) => {
+
+            // If the query is the same, do nothing
+            if (newQuery === undefined){
+                newQuery = '';
+            }
+
+            // Only search if we're not tabbing into the field
+            if (canSearch.value) {
+                queryData.search = newQuery;
+                //resetPerPageItems(); // TODO : check if its required
+                refresh();
+                emit('search', newQuery || '');
+            }
+        }, 700);
 
         /**
          * Converts the local storage to the local user settings on mounted
@@ -1271,8 +1294,6 @@ export default defineComponent({
             // Storage has priority over the default filter value.
             Object.assign(userSettings, assign(userSettingsDefault, userStorage.value));
 
-            //console.log('Finished Merging', userSettings);
-
             // Get the selected Ids
             if (userSettings.selectedIds.length){
                 queryData.selected = userSettings.selectedIds;
@@ -1281,6 +1302,11 @@ export default defineComponent({
             // Filters
             if (Object.keys(userSettings.filters).length > 0){
                 queryData.filters = userSettings.filters;
+            }
+
+            // Per Page
+            if (userSettings.perPage){
+                queryData.perPage = userSettings.perPage;
             }
             return;
         };
@@ -1342,6 +1368,13 @@ export default defineComponent({
         }, { deep: true });
 
         /**
+         * When the user settings per page changes, update the query data to trigger a reload
+         **/
+        watch(() => userSettings.perPage, () => {
+            queryData.perPage = userSettings.perPage;
+        }, { deep: false });
+
+        /**
          * If the user settings change, we need to update the storage
          **/
         watch(userSettings, (value) => {
@@ -1372,6 +1405,7 @@ export default defineComponent({
             hasAnyItemsSelected,
             hasActions,
             hasFilters,
+            hasFiltersOrSearchApplied,
             filtersActiveCount,
             canSearch,
             visibleColumnsCount,
