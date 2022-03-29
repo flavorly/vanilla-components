@@ -86,11 +86,11 @@
                 class="h-4 h-4"
                 :class="[isFetching ? 'animate-spin' : '']"
               />
-              <span>{{ 'Refresh' }}</span>
+              <span v-text="translations.refresh" />
             </VanillaDropdownOption>
             <VanillaDropdownOption @click="isShowingSettings = true">
               <CogIcon class="h-4 h-4" />
-              <span>{{ 'Settings' }}</span>
+              <span v-text="translations.settings" />
             </VanillaDropdownOption>
           </VanillaDropdown>
         </slot>
@@ -489,7 +489,7 @@ import {
     VanillaDatatableAction,
     VanillaDatatableUserSettings,
     VanillaDatatableFilter,
-    VanillaDatatableSavedFilter,
+    VanillaDatatableSavedFilter, VanillaDatatableActionExecutedFunction, VanillaDatatableExceptionFunction,
 } from './index';
 
 // Vanilla Components
@@ -647,6 +647,16 @@ export default defineComponent({
             validator(method: string){
                 return ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method);
             },
+        },
+        onActionExecutedCallback: {
+            type: [Function, undefined] as PropType<VanillaDatatableActionExecutedFunction | undefined>,
+            required: false,
+            default: undefined,
+        },
+        onExceptionCallback: {
+            type: [Function, undefined] as PropType<VanillaDatatableExceptionFunction | undefined>,
+            required: false,
+            default: undefined,
         },
     },
     emits: [
@@ -886,6 +896,12 @@ export default defineComponent({
                 })
                 // Catch Errors
                 .catch((error: object) => {
+
+                    // If user provided a callback after each exception
+                    if (datatable?.onExceptionCallback !== undefined){
+                        datatable.onExceptionCallback(error);
+                    }
+
                     // Emit  error
                     emit('fetchError', {
                         error: error,
@@ -1153,6 +1169,11 @@ export default defineComponent({
                         action?.after?.pooling?.during,
                         action?.after?.pooling?.stopWhenDataChanges,
                     );
+                }
+
+                // Always execute the given callback after the action is fired.
+                if (datatable?.onActionExecutedCallback !== undefined){
+                    datatable.onActionExecutedCallback(action);
                 }
 
                 // Reset the action

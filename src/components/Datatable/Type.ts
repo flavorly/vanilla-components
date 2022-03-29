@@ -82,8 +82,25 @@ export type VanillaDatatableTranslations = {
   filtersBarLabel?: string,
   filtersWithEmptyData?: string,
   filtersReset?: string,
+  filtersResetOr?: string,
+  filtersCopy?: string,
+  filtersSaveAndClose?: string,
+
+  settings?: string,
+  settingsItemsPerPage?: string,
+  settingsVisibility?: string,
+  settingsPersist?: string,
+  settingsPersistSelection?: string,
+  settingsReset?: string,
+  settingsSaveAndClose?: string,
+
+  refresh?: string,
 
   recordsEmpty?: string,
+  recordsEmptyWithFiltersOrSearch?: string,
+  recordsEmptyWithFiltersOrSearchAction?: string,
+
+  settingsPerPage?: string,
 
   showingFrom?: string,
   nextPage?: string,
@@ -168,6 +185,7 @@ export type VanillaDatatableResultData = {
   id: string | number,
   created_at?: string,
   updated_at?: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };
 
@@ -194,6 +212,7 @@ export type VanillaDatatableResponse = {
   data: VanillaDatatableResultData[],
   links: VanillaDatatableLinks | undefined,
   meta: VanillaDatatableMeta | undefined,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };
 
@@ -214,29 +233,39 @@ export type VanillaDatatableConfiguration = {
   primaryKey: string | number,
   columns: VanillaDatatableColumns,
   actions: VanillaDatatableActions,
+
   filters: VanillaDatatableFilters,
   filtersKey?: string | number
   filtersBaseUrl?: string | undefined,
+
   options: VanillaDatatableOptions
   translations: VanillaDatatableTranslations,
   perPageOptions: VanillaDatatablePageOptions
   pooling: VanillaDatatablePooling,
+
   fetchData?: VanillaDatatableFetchDataFunction,
   fetchEndpoint?: string,
   fetchMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
 
   actionsEndpoint?: string,
-  actionsMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
+  actionsMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE',
+
+  onActionExecutedCallback?: VanillaDatatableActionExecutedFunction,
+  onExceptionCallback?: VanillaDatatableExceptionFunction
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };
 
 export type VanillaDatatableFetchDataFunction = (configuration: VanillaDatatableConfiguration, data: VanillaDatatableQueryData) => VanillaDatatableFetchDataPromise;
+export type VanillaDatatableActionExecutedFunction = (action: VanillaDatatableAction) => Promise<never>;
+export type VanillaDatatableExceptionFunction = (error: object) => Promise<never>;
 
 export type VanillaDatatableFetchDataPromise = Promise<{
   data: VanillaDatatableResultData[];
   links?: VanillaDatatableLinks | undefined;
   meta?: VanillaDatatableMeta;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }>;
 

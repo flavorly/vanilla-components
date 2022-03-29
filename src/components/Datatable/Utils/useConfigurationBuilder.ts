@@ -9,7 +9,8 @@ import {
 } from '@/components/Datatable';
 import { Data } from '@/core/types';
 
-export default function useConfigurationBuilder<Props extends VanillaDatatableConfiguration | Data>(props: Props): VanillaDatatableConfiguration{
+export default function useConfigurationBuilder<Props extends VanillaDatatableConfiguration | Data>(props: Props): VanillaDatatableConfiguration {
+
   const defaultPooling = {
     enable: false,
     interval: 5,
@@ -65,6 +66,8 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     settingsPersistSelection: 'Save Selected',
     settingsReset: 'Reset to Default Settings',
     settingsSaveAndClose: 'Save & Close',
+
+    refresh: 'Refresh',
 
     recordsEmpty: 'Seems like there is no records to show you. Please come back later or try inserting some records.',
     recordsEmptyWithFiltersOrSearch: 'Sorry but there is no records matching your search or filters.',
@@ -123,6 +126,10 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
 
     actionsEndpoint: props?.actionsEndpoint || props.config?.actionsEndpoint?.method || undefined,
     actionsMethod: props?.actionsMethod || props.config?.actionsMethod?.method || 'POST',
+
+    onActionExecutedCallback: props?.onActionExecutedCallback || props.config?.onActionExecutedCallback || undefined,
+    onExceptionCallback: props?.onExceptionCallback || props.config?.onExceptionCallback || undefined,
+
   };
 
 }

@@ -66,7 +66,14 @@ export { default as VanillaToggle } from './components/Toggle/Toggle.vue';
 export { default as VanillaTransition } from './components/Transitions/Transitionable.vue';
 
 // ----------------- //
+// Types
+// ----------------- //
+
+
+// ----------------- //
 // Plugin to Install
 // ----------------- //
 
 export { default as VanillaComponents } from './plugin';
+
+

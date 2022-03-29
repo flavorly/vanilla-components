@@ -7,8 +7,6 @@ export const VanillaDatatableConfig = {
     cardVariant: '',
 
     something: 'foo',
-
-
   },
 };
 
