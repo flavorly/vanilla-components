@@ -489,7 +489,9 @@ import {
     VanillaDatatableAction,
     VanillaDatatableUserSettings,
     VanillaDatatableFilter,
-    VanillaDatatableSavedFilter, VanillaDatatableActionExecutedFunction, VanillaDatatableExceptionFunction,
+    VanillaDatatableSavedFilter,
+    VanillaDatatableActionExecutedFunction,
+    VanillaDatatableExceptionFunction,
 } from './index';
 
 // Vanilla Components

@@ -26,8 +26,6 @@ import { VanillaRichRadioOptionConfig } from '@/components/RichRadio/RichRadioOp
 
 import { VanillaSkeletonBarConfig } from '@/components/Skeletons/SkeletonBar';
 
-
-
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
     // Merge Vanilla Components Configuration with the user configuration
