@@ -2,7 +2,7 @@ import { Data, InputOptions, NormalizedOption, NormalizedOptions, WithVariantPro
 import { InputHTMLAttributes } from 'vue';
 import { VanillaDatatableClassesValidKeys } from './Config';
 
-export type VanillaDatatableUserSettings = {
+export declare type VanillaDatatableUserSettings = {
   visibleColumns: string[],
   perPage: number,
   useStorage: boolean,
@@ -11,7 +11,7 @@ export type VanillaDatatableUserSettings = {
   filters: VanillaDatatableSavedFilter,
 };
 
-export type VanillaDatatableOptions = {
+export declare type VanillaDatatableOptions = {
   selectable?: boolean,
   searchable?: boolean,
   refreshable?: boolean,
@@ -21,14 +21,14 @@ export type VanillaDatatableOptions = {
   striped?: boolean,
 };
 
-export type VanillaDatatablePooling = {
+export declare type VanillaDatatablePooling = {
   enable?: boolean,
   interval?: number,
   during?: number,
   stopWhenDataChanges?: boolean
 };
 
-export type VanillaDatatableFilter = {
+export declare type VanillaDatatableFilter = {
   name: string,
   label: string,
   layout?: string,
@@ -41,21 +41,21 @@ export type VanillaDatatableFilter = {
   props?: VanillaDatatableFilterProp[],
 };
 
-export type VanillaDatatableFilterProp = {
+export declare type VanillaDatatableFilterProp = {
   key: string,
   value: unknown,
 };
 
-export type VanillaDatatableSavedFilter = {
+export declare type VanillaDatatableSavedFilter = {
   [key: string]: unknown
 };
 
-export type VanillaDatatablePageOption = {
+export declare type VanillaDatatablePageOption = {
   value: string | number | undefined | null | object | boolean,
   text: string | number | undefined,
 } & NormalizedOption;
 
-export type VanillaDatatableTranslations = {
+export declare type VanillaDatatableTranslations = {
   title?: string,
   subtitle?: string,
   resource?: string,
@@ -107,7 +107,7 @@ export type VanillaDatatableTranslations = {
   previousPage?: string,
 };
 
-export type VanillaDatatableColumn = {
+export declare type VanillaDatatableColumn = {
   name: string,
   label: string,
   sortable: boolean,
@@ -118,7 +118,7 @@ export type VanillaDatatableColumn = {
   component?: string,
 };
 
-export type VanillaDatatableColumnComputed = {
+export declare type VanillaDatatableColumnComputed = {
   visible: boolean,
   isSorted: boolean,
   isSortedAsc: boolean,
@@ -128,7 +128,7 @@ export type VanillaDatatableColumnComputed = {
 
 declare type VanillaActionCallback = (action: VanillaDatatableAction) => void;
 
-export type VanillaDatatableAction = {
+export declare type VanillaDatatableAction = {
   name: string,
   label?: string,
   permissions?: {
@@ -163,15 +163,15 @@ export type VanillaDatatableAction = {
   [key: string]: any
 };
 
-export type VanillaDatatableSortedColumn = {
+export declare type VanillaDatatableSortedColumn = {
   column: string,
   direction: 'asc' | 'desc' | null
   sortedTimes?: number
 };
 
-export type VanillaDatatableSortedColumns = VanillaDatatableSortedColumn[];
+export declare type VanillaDatatableSortedColumns = VanillaDatatableSortedColumn[];
 
-export type VanillaDatatableQueryData = {
+export declare type VanillaDatatableQueryData = {
   search: null | undefined | string,
   perPage: number | string | keyof VanillaDatatablePageOption,
   selected: (string)[],
@@ -181,7 +181,7 @@ export type VanillaDatatableQueryData = {
   action?: null | undefined | string
 };
 
-export type VanillaDatatableResultData = {
+export declare type VanillaDatatableResultData = {
   id: string | number,
   created_at?: string,
   updated_at?: string,
@@ -189,26 +189,26 @@ export type VanillaDatatableResultData = {
   [key: string]: any
 };
 
-export type VanillaDatatableResponsePage = {
+export declare type VanillaDatatableResponsePage = {
   url: string,
   label: string | number,
   active: boolean,
 };
 
-export type VanillaDatatableLinks = {
+export declare type VanillaDatatableLinks = {
   next: string | null,
   previous: string | null,
   pages?: VanillaDatatableResponsePage[] | null,
 };
 
-export type VanillaDatatableMeta = {
+export declare type VanillaDatatableMeta = {
   current_page: number,
   from: number,
   to: number,
   total: number
 };
 
-export type VanillaDatatableResponse = {
+export declare type VanillaDatatableResponse = {
   data: VanillaDatatableResultData[],
   links: VanillaDatatableLinks | undefined,
   meta: VanillaDatatableMeta | undefined,
@@ -216,19 +216,19 @@ export type VanillaDatatableResponse = {
   [key: string]: any
 };
 
-export type VanillaDatatableActions = VanillaDatatableAction[];
+export declare type VanillaDatatableActions = VanillaDatatableAction[];
 
-export type VanillaDatatableColumns = VanillaDatatableColumn[];
+export declare type VanillaDatatableColumns = VanillaDatatableColumn[];
 
-export type VanillaDatatableColumnsComputed = VanillaDatatableColumnComputed[];
+export declare type VanillaDatatableColumnsComputed = VanillaDatatableColumnComputed[];
 
-export type VanillaDatatableFilters = VanillaDatatableFilter[];
+export declare type VanillaDatatableFilters = VanillaDatatableFilter[];
 
-export type VanillaDatatableSavedFilters = VanillaDatatableSavedFilter[];
+export declare type VanillaDatatableSavedFilters = VanillaDatatableSavedFilter[];
 
-export type VanillaDatatablePageOptions = VanillaDatatablePageOption[] & NormalizedOptions & InputOptions;
+export declare type VanillaDatatablePageOptions = VanillaDatatablePageOption[] & NormalizedOptions & InputOptions;
 
-export type VanillaDatatableConfiguration = {
+export declare type VanillaDatatableConfiguration = {
   name: string | number,
   primaryKey: string | number,
   columns: VanillaDatatableColumns,
@@ -257,11 +257,11 @@ export type VanillaDatatableConfiguration = {
   [key: string]: any
 };
 
-export type VanillaDatatableFetchDataFunction = (configuration: VanillaDatatableConfiguration, data: VanillaDatatableQueryData) => VanillaDatatableFetchDataPromise;
-export type VanillaDatatableActionExecutedFunction = (action: VanillaDatatableAction) => Promise<never>;
-export type VanillaDatatableExceptionFunction = (error: object) => Promise<never>;
+export declare type VanillaDatatableFetchDataFunction = (configuration: VanillaDatatableConfiguration, data: VanillaDatatableQueryData) => VanillaDatatableFetchDataPromise;
+export declare type VanillaDatatableActionExecutedFunction = (action: VanillaDatatableAction) => Promise<never>;
+export declare type VanillaDatatableExceptionFunction = (error: object) => Promise<never>;
 
-export type VanillaDatatableFetchDataPromise = Promise<{
+export declare type VanillaDatatableFetchDataPromise = Promise<{
   data: VanillaDatatableResultData[];
   links?: VanillaDatatableLinks | undefined;
   meta?: VanillaDatatableMeta;
@@ -269,6 +269,6 @@ export type VanillaDatatableFetchDataPromise = Promise<{
   [key: string]: any;
 }>;
 
-export type VanillaDatatableProps = WithVariantPropsAndClassesList<{
+export declare type VanillaDatatableProps = WithVariantPropsAndClassesList<{
   config?: VanillaDatatableConfiguration,
 } & InputHTMLAttributes & Data, VanillaDatatableClassesValidKeys>;

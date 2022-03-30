@@ -3,9 +3,9 @@ import { InputHTMLAttributes } from 'vue';
 import { VanillaDropdownClassesValidKeys } from './Config';
 import { Options, Placement } from '@popperjs/core';
 
-export type VanillaDropdownValue = boolean;
+export declare type VanillaDropdownValue = boolean;
 
-export type VanillaDropdownProps = WithVariantPropsAndClassesList<{
+export declare type VanillaDropdownProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaDropdownValue,
   text?: string,
   buttonVariant?: string,

@@ -4,7 +4,7 @@ import { VanillaPhoneNumberClassesValidKeys } from './Config';
 import { VanillaSelectCountryValue } from '@/components/SelectCountry';
 import { CountryCode } from 'libphonenumber-js/types';
 
-export type VanillaPhoneNumberProps = WithVariantPropsAndClassesList<{
+export declare type VanillaPhoneNumberProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaSelectCountryValue,
   countryCode?: CountryCode,
   phonePlaceholder?: string | undefined

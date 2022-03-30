@@ -5,9 +5,9 @@ import { ObjectWithProperties } from '@/core/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type  VanillaToggleSimpleValue = string | number | boolean | undefined | null | Date | Function | symbol | object | string[];
-export type VanillaToggleValue = VanillaToggleSimpleValue | VanillaToggleSimpleValue[] | ObjectWithProperties<VanillaToggleSimpleValue>;
+export declare type VanillaToggleValue = VanillaToggleSimpleValue | VanillaToggleSimpleValue[] | ObjectWithProperties<VanillaToggleSimpleValue>;
 
-export type VanillaToggleProps = WithVariantPropsAndClassesList<{
+export declare type VanillaToggleProps = WithVariantPropsAndClassesList<{
     modelValue?: VanillaToggleValue,
     value?: VanillaToggleValue,
     checkedValue?: VanillaToggleValue,

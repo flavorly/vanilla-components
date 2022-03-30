@@ -5,9 +5,9 @@ import { ObjectWithProperties } from '@/core/types';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 type  VanillaRichRadioSimpleValue = string | number | boolean | undefined | null | Date | Function | symbol | object | string[];
-export type VanillaRichRadioValue = VanillaRichRadioSimpleValue | VanillaRichRadioSimpleValue[] | ObjectWithProperties<VanillaRichRadioSimpleValue>;
+export declare type VanillaRichRadioValue = VanillaRichRadioSimpleValue | VanillaRichRadioSimpleValue[] | ObjectWithProperties<VanillaRichRadioSimpleValue>;
 
-export type VanillaRichRadioProps = WithVariantPropsAndClassesList<{
+export declare type VanillaRichRadioProps = WithVariantPropsAndClassesList<{
     modelValue?: VanillaRichRadioValue,
     value?: VanillaRichRadioValue,
     checkedValue?: VanillaRichRadioValue,

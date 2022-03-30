@@ -1,7 +1,7 @@
 import { Data, WithVariantProps } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 
-export type VanillaCountryOptionProps = WithVariantProps<{
+export declare type VanillaSelectCountryOptionProps = WithVariantProps<{
   country?: object,
   selected?: boolean,
   description?: string | undefined,

@@ -52,7 +52,7 @@
 <script lang="ts">
 import { computed, defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList } from '@/core';
-import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaCountryOptionProps } from './index';
+import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaSelectCountryOptionProps } from './index';
 import VanillaFlag from '@/components/Icons/Flag.vue';
 import { CheckIcon } from '@heroicons/vue/solid';
 
@@ -108,7 +108,7 @@ export default defineComponent({
             localVariant,
         } = useBootVariant(props, 'errors', ref(null));
 
-        const { configuration } = useConfigurationWithClassesList<VanillaCountryOptionProps>(
+        const { configuration } = useConfigurationWithClassesList<VanillaSelectCountryOptionProps>(
             VanillaSelectCountryOptionConfig,
             VanillaSelectCountryOptionClassesKeys,
             localVariant,

@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from 'vue';
 
 import { VanillaRichRadioOptionClassesValidKeys } from './Config';
 
-export type VanillaRichRadioOptionProps = WithVariantPropsAndClassesList<{
+export declare type VanillaRichRadioOptionProps = WithVariantPropsAndClassesList<{
   name?: string | undefined,
   image?: string | undefined,
   selected?: boolean,

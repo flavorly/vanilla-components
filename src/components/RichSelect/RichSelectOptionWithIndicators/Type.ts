@@ -2,7 +2,7 @@ import { Data, WithVariantPropsAndClassesList } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 import { VanillaRichSelectOptionWithIndicatorsClassesValidKeys } from './Config';
 
-export type VanillaRichSelectOptionWithIndicatorsProps = WithVariantPropsAndClassesList<{
+export declare type VanillaRichSelectOptionWithIndicatorsProps = WithVariantPropsAndClassesList<{
   name?: string | undefined,
   status?: string | undefined,
   selected?: boolean,

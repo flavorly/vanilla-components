@@ -68,7 +68,6 @@ export { default as VanillaTransition } from './components/Transitions/Transitio
 // ----------------- //
 // Types
 // ----------------- //
-
 export * from './types';
 
 // ----------------- //

@@ -3,7 +3,7 @@ import { InputHTMLAttributes } from 'vue';
 
 import { VanillaRichSelectOptionWithImageClassesValidKeys } from './Config';
 
-export type VanillaRichSelectOptionWithImageProps = WithVariantPropsAndClassesList<{
+export declare type VanillaRichSelectOptionWithImageProps = WithVariantPropsAndClassesList<{
   name?: string | undefined,
   image?: string | undefined,
   selected?: boolean,

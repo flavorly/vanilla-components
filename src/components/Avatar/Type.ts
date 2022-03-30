@@ -2,10 +2,10 @@ import { Data, WithVariantPropsAndClassesList } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 import { VanillaAvatarClassesValidKeys } from './Config';
 
-export type VanillaAvatarValue = never | undefined;
-export type VanillaAvatarPreview = string | ArrayBuffer | null | undefined;
+export declare type VanillaAvatarValue = never | undefined;
+export declare type VanillaAvatarPreview = string | ArrayBuffer | null | undefined;
 
-export type VanillaAvatarProps = WithVariantPropsAndClassesList<{
+export declare type VanillaAvatarProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaAvatarValue,
   currentPhotoUrl?: string | undefined,
   currentPhotoAltTag?: string | undefined,

@@ -1,60 +1,89 @@
 import merge from 'lodash/merge';
 import { VanillaComponentConfiguration } from '@/core/types';
 
-import { VanillaInputConfig, VanillaInputConfigToVariantJs } from '@/components/Input';
-import { VanillaDatetimePickerConfig } from '@/components/DatetimePicker';
-import { VanillaTextareaConfig } from '@/components/Textarea';
+import {
+  VanillaAvatarConfig,
+  VanillaButtonConfig,
+  VanillaCardConfig,
+  VanillaCheckboxConfig,
+  VanillaCheckboxConfigToVariantJs,
+  VanillaDatatableConfig,
+  VanillaDatetimePickerConfig,
+  VanillaDialogConfig,
+  VanillaDropdownConfig,
 
-import { VanillaFormErrorsConfig } from '@/components/FormErrors';
-import { VanillaFormFeedbackConfig } from '@/components/FormFeedback';
+  VanillaFormErrorsConfig,
+  VanillaFormFeedbackConfig,
+  VanillaFormLabelConfig,
+  VanillaFormSectionConfig,
 
-import { VanillaSelectConfig, VanillaSelectConfigToVariantJs } from '@/components/Select';
-import { VanillaRichSelectConfig, VanillaRichSelectConfigToVariantJs } from '@/components/RichSelect';
-import { VanillaRichSelectOptionWithImageConfig } from '@/components/RichSelect/RichSelectOptionWithImage';
-import { VanillaRichSelectOptionWithIndicatorsConfig } from '@/components/RichSelect/RichSelectOptionWithIndicators';
-import { VanillaRichSelectTagWithImageConfig } from '@/components/RichSelect/RichSelectTagWithImage';
+  VanillaInputConfig,
+  VanillaInputConfigToVariantJs,
+  VanillaInputGroupConfig,
 
-import { VanillaSelectCountryConfig } from '@/components/SelectCountry';
-import { VanillaPhoneNumberConfig } from '@/components/PhoneNumber';
+  VanillaPhoneNumberConfig,
+  VanillaRichRadioConfig,
+  VanillaRichRadioOptionConfig,
 
-import { VanillaCheckboxConfig, VanillaCheckboxConfigToVariantJs } from '@/components/Checkbox';
-import { VanillaAvatarConfig } from '@/components/Avatar';
-import { VanillaToggleConfig } from '@/components/Toggle';
+  VanillaRichSelectConfig,
+  VanillaRichSelectConfigToVariantJs,
+  VanillaRichSelectOptionWithImageConfig,
+  VanillaRichSelectOptionWithIndicatorsConfig,
+  VanillaRichSelectStateConfig,
+  VanillaRichSelectTagWithImageConfig,
 
-import { VanillaRichRadioConfig } from '@/components/RichRadio';
-import { VanillaRichRadioOptionConfig } from '@/components/RichRadio/RichRadioOption';
+  VanillaSelectConfig,
+  VanillaSelectConfigToVariantJs,
+  VanillaSelectCountryConfig,
+  VanillaSelectCountryOptionConfig,
 
-import { VanillaSkeletonBarConfig } from '@/components/Skeletons/SkeletonBar';
+  VanillaSkeletonBarConfig,
+
+  VanillaTextareaConfig,
+  VanillaToggleConfig,
+
+} from './configs';
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
 
     // Merge Vanilla Components Configuration with the user configuration
     const VanillaComponentsDefaults = merge(
       {
-        VanillaInput: VanillaInputConfig,
-        VanillaTextarea: VanillaTextareaConfig,
+        VanillaAvatar: VanillaAvatarConfig,
+        VanillaButton: VanillaButtonConfig,
+        VanillaCard: VanillaCardConfig,
+        VanillaCheckbox: VanillaCheckboxConfig,
+        VanillaDatatable: VanillaDatatableConfig,
         VanillaDatetimePicker: VanillaDatetimePickerConfig,
+        VanillaDialog: VanillaDialogConfig,
+        VanillaDropdown: VanillaDropdownConfig,
 
-        VanillaSelect: VanillaSelectConfig,
-        VanillaRichSelect: VanillaRichSelectConfig,
-        VanillaRichSelectOptionWithImage: VanillaRichSelectOptionWithImageConfig,
-        VanillaRichSelectOptionWithIndicators: VanillaRichSelectOptionWithIndicatorsConfig,
-        VanillaRichSelectTagWithImage: VanillaRichSelectTagWithImageConfig,
+        VanillaFormErrors: VanillaFormErrorsConfig,
+        VanillaFormFeedback: VanillaFormFeedbackConfig,
+        VanillaFormLabel: VanillaFormLabelConfig,
+        VanillaFormSection: VanillaFormSectionConfig,
+
+        VanillaInput: VanillaInputConfig,
+        VanillaInputGroup: VanillaInputGroupConfig,
 
         VanillaPhoneNumber: VanillaPhoneNumberConfig,
-        VanillaSelectCountry: VanillaSelectCountryConfig,
-
-        VanillaCheckbox: VanillaCheckboxConfig,
-        VanillaAvatar: VanillaAvatarConfig,
-        VanillaToggle: VanillaToggleConfig,
 
         VanillaRichRadio: VanillaRichRadioConfig,
         VanillaRichRadioOption: VanillaRichRadioOptionConfig,
 
-        VanillaFormErrors: VanillaFormErrorsConfig,
-        VanillaFormFeedback: VanillaFormFeedbackConfig,
+        VanillaRichSelect: VanillaRichSelectConfig,
+        VanillaRichSelectOptionWithImage: VanillaRichSelectOptionWithImageConfig,
+        VanillaRichSelectOptionWithIndicators: VanillaRichSelectOptionWithIndicatorsConfig,
+        VanillaRichSelectState: VanillaRichSelectStateConfig,
+        VanillaRichSelectTagWithImage: VanillaRichSelectTagWithImageConfig,
+
+        VanillaSelect: VanillaSelectConfig,
+        VanillaSelectCountry: VanillaSelectCountryConfig,
+        VanillaSelectCountryOption: VanillaSelectCountryOptionConfig,
 
         VanillaSkeletonBar: VanillaSkeletonBarConfig,
+        VanillaTextarea: VanillaTextareaConfig,
+        VanillaToggle: VanillaToggleConfig,
       },
       userConfiguration,
     );

@@ -3,9 +3,9 @@ import { InputHTMLAttributes } from 'vue';
 import { VanillaDialogClassesValidKeys } from './Config';
 import { Options, Placement } from '@popperjs/core';
 
-export type VanillaDialogValue = boolean;
+export declare type VanillaDialogValue = boolean;
 
-export type VanillaDialogProps = WithVariantPropsAndClassesList<{
+export declare type VanillaDialogProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaDialogValue,
   text?: string,
   buttonVariant?: string,

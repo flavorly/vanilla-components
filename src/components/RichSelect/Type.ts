@@ -17,12 +17,12 @@ import {
 
 import { VanillaRichSelectClassesValidKeys } from '@/components/RichSelect/Config';
 
-export type MinimumInputLengthTextProp = ((minimumInputLength: number, query?: string) => string) | string;
+export declare type MinimumInputLengthTextProp = ((minimumInputLength: number, query?: string) => string) | string;
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export type VanillaRichSelectValue = string | number | boolean | undefined | null | Date | Function | symbol | VanillaRichSelectValue[];
+export declare type VanillaRichSelectValue = string | number | boolean | undefined | null | Date | Function | symbol | VanillaRichSelectValue[];
 
-export type VanillaRichSelectProps = WithVariantPropsAndClassesList<{
+export declare type VanillaRichSelectProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaRichSelectValue,
   options?: InputOptions | NormalizedOption[] | NormalizedOptions,
   multiple?: boolean

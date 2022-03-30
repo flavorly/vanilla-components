@@ -8,29 +8,75 @@ import {
   WithVariantPropsAndClassesList,
   Data,
   Errors,
-} from '@/core/types';
+ } from '@/core/types';
 
-import { VanillaDatetimePickerProps } from '@/components/DatetimePicker';
-import { VanillaFormErrorsProps } from '@/components/FormErrors';
-import { VanillaFormFeedbackProps } from '@/components/FormFeedback';
-import { VanillaInputProps } from '@/components/Input';
-import { VanillaPhoneNumberProps } from '@/components/PhoneNumber';
-import { VanillaRichSelectProps } from '@/components/RichSelect';
-import { VanillaSelectCountryProps } from '@/components/SelectCountry';
-import { VanillaTextareaProps } from '@/components/Textarea';
-
+import { VanillaAvatarProps } from '@/components/Avatar/Type';
+import { VanillaButtonProps } from '@/components/Button/Type';
+import { VanillaCardProps } from '@/components/Card/Type';
+import { VanillaCheckboxProps } from '@/components/Checkbox/Type';
+import { VanillaDatatableProps } from '@/components/Datatable/Type';
+import { VanillaDatetimePickerProps } from '@/components/DatetimePicker/Type';
+import { VanillaDialogProps } from '@/components/Dialog/Type';
+import { VanillaDropdownProps } from '@/components/Dropdown/Type';
+import { VanillaFormErrorsProps } from '@/components/FormErrors/Type';
+import { VanillaFormFeedbackProps } from '@/components/FormFeedback/Type';
+import { VanillaFormLabelProps } from '@/components/FormLabel/Type';
+import { VanillaFormSectionProps } from '@/components/FormSection/Type';
+import { VanillaInputProps } from '@/components/Input/Type';
+import { VanillaInputGroupProps } from '@/components/InputGroup/Type';
+import { VanillaPhoneNumberProps } from '@/components/PhoneNumber/Type';
+import { VanillaRichRadioProps } from '@/components/RichRadio/Type';
+import { VanillaRichRadioOptionProps } from '@/components/RichRadio/RichRadioOption/Type';
+import { VanillaRichSelectProps } from '@/components/RichSelect/Type';
+import { VanillaRichSelectOptionWithImageProps } from '@/components/RichSelect/RichSelectOptionWithImage/Type';
+import { VanillaRichSelectOptionWithIndicatorsProps } from '@/components/RichSelect/RichSelectOptionWithIndicators/Type';
+import { VanillaRichSelectStateProps } from '@/components/RichSelect/RichSelectState/Type';
+import { VanillaRichSelectTagWithImageProps } from '@/components/RichSelect/RichSelectTagWithImage/Type';
+import { VanillaSelectProps } from '@/components/Select/Type';
+import { VanillaSelectCountryProps } from '@/components/SelectCountry/Type';
+import { VanillaSelectCountryOptionProps } from '@/components/SelectCountry/SelectCountryOption/Type';
+import { VanillaSkeletonBarProps } from '@/components/Skeletons/SkeletonBar/Type';
+import { VanillaTextareaProps } from '@/components/Textarea/Type';
+import { VanillaToggleProps } from '@/components/Toggle/Type';
 /**
  * Stores the Type for all components available in project
  */
 type VanillaComponentConfiguration = {
+  VanillaAvatar?: VanillaAvatarProps,
+  VanillaButton?: VanillaButtonProps,
+  VanillaCard?: VanillaCardProps,
+  VanillaCheckbox?: VanillaCheckboxProps,
+  VanillaDatatable?: VanillaDatatableProps,
   VanillaDatetimePicker?: VanillaDatetimePickerProps,
+  VanillaDialog?: VanillaDialogProps,
+  VanillaDropdown?: VanillaDropdownProps,
+
   VanillaFormErrors?: VanillaFormErrorsProps,
-  VanillaFormFeedback?: VanillaFormFeedbackProps
+  VanillaFormFeedback?: VanillaFormFeedbackProps,
+  VanillaFormLabel?: VanillaFormLabelProps,
+  VanillaFormSection?: VanillaFormSectionProps,
+
   VanillaInput?: VanillaInputProps,
+  VanillaInputGroup?: VanillaInputGroupProps,
+
   VanillaPhoneNumber?: VanillaPhoneNumberProps,
+
+  VanillaRichRadio?: VanillaRichRadioProps,
+  VanillaRichRadioOption?: VanillaRichRadioOptionProps,
+
   VanillaRichSelect?: VanillaRichSelectProps,
+  VanillaRichSelectOptionWithImage?: VanillaRichSelectOptionWithImageProps,
+  VanillaRichSelectOptionWithIndicators?: VanillaRichSelectOptionWithIndicatorsProps,
+  VanillaRichSelectState?: VanillaRichSelectStateProps,
+  VanillaRichSelectTagWithImage?: VanillaRichSelectTagWithImageProps,
+
+  VanillaSelect?: VanillaSelectProps,
   VanillaSelectCountry?: VanillaSelectCountryProps,
+  VanillaSelectCountryOption?: VanillaSelectCountryOptionProps,
+
+  VanillaSkeletonBar?: VanillaSkeletonBarProps,
   VanillaTextarea?: VanillaTextareaProps,
+  VanillaToggle?: VanillaToggleProps,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
 };

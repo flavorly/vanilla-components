@@ -15,6 +15,7 @@ export * from './components/Input/Type';
 export * from './components/InputGroup/Type';
 export * from './components/PhoneNumber/Type';
 export * from './components/RichRadio/Type';
+export * from './components/RichRadio/RichRadioOption/Type';
 export * from './components/RichSelect/Type';
 export * from './components/RichSelect/RichSelectOptionWithImage/Type';
 export * from './components/RichSelect/RichSelectOptionWithIndicators/Type';
