@@ -4,13 +4,16 @@
       <!-- Toggle All/None Checked -->
       <th
         v-if="selectable"
-        class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700"
+        :class="[classesList.tableHeadColumnCheckbox]"
       >
         <input
           :checked="allItemsChecked"
           :disabled="isFetching"
           :indeterminate="someItemsChecked"
-          class="block transition duration-150 ease-in-out checked:bg-indigo-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-indigo-600 h-4 w-4"
+          :class="[
+            classesList.tableCheckbox,
+            classesList.tableHeadCheckbox,
+          ]"
           type="checkbox"
           @change="onCheckAllToggled"
         >
@@ -20,38 +23,38 @@
         v-for="(column) in columns"
         v-show="column.visible"
         :key="column.name"
+        :class="[classesList.tableHeadColumn]"
         scope="col"
-        class="bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700 dark:text-white"
       >
         <slot
           name="column"
           v-bind="{ column }"
         >
-          <div class="group inline-flex">
-            <span>
+          <div :class="[classesList.tableHeadColumnContainer]">
+            <span :class="[classesList.tableHeadColumnLabel]">
               {{ column.label }}
             </span>
             <span
               v-if="column.sortable"
-              class="ml-2 flex-none rounded"
               :class="[
-                column.isSorted ? 'bg-gray-200 text-gray-900 group-hover:bg-gray-300' : 'invisible group-focus:visible text-gray-400 group-hover:visible '
+                classesList.tableHeadColumnSortContainer,
+                column.isSorted ? classesList.tableHeadColumnSorted : classesList.tableHeadColumnNotSorted
               ]"
               @click="toggleSorting(column.name)"
             >
               <ChevronUpIcon
                 v-if="column.isSorted && !column.isSortedDesc"
-                class=" h-4 w-4 flex-none rounded"
                 :class="[
-                  column.isSortedAsc ? '': 'text-gray-400 group-hover:visible group-focus:visible invisible'
+                  classesList.tableHeadColumnSortedIconClasses,
+                  column.isSortedAsc ? '': classesList.tableHeadColumnSortedIcon,
                 ]"
                 aria-hidden="true"
               />
               <ChevronDownIcon
                 v-if="(column.isSorted && !column.isSortedAsc) || !column.isSorted"
-                class=" h-4 w-4 flex-none rounded"
                 :class="[
-                  column.isSortedDesc ? '': 'text-gray-400 group-hover:visible group-focus:visible invisible'
+                  classesList.tableHeadColumnSortedIconClasses,
+                  column.isSortedDesc ? '': classesList.tableHeadColumnSortedIcon
                 ]"
                 aria-hidden="true"
               />
@@ -72,6 +75,7 @@ import {
 } from '../index';
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
+import { useInjectsClassesList } from '@/core';
 
 export default defineComponent({
     name: 'VanillaDatatableHead',
@@ -189,7 +193,10 @@ export default defineComponent({
             emit('sorted', [...localSorting.value]);
         };
 
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
+
         return {
+            classesList,
             onCheckAllToggled,
             toggleSorting,
             localSorting,

@@ -3,7 +3,7 @@
     <VanillaCard
       :title="datatable.translations.title"
       :subtitle="datatable.translations.subtitle"
-      :variant="configuration.classesList.cardVariant"
+      :variant="classesList.cardVariant"
     >
       <!-- Actions -->
       <template #actions>
@@ -43,19 +43,19 @@
         >
           <div
             v-if="hasFilters"
-            class="inline-flex"
+            :class="[classesList.headerFiltersContainer]"
           >
             <VanillaButton
               @click="isShowingFilters = true"
             >
-              <FilterIcon class="h-4 h-4 sm:mr-1" />
+              <FilterIcon :class="[classesList.headerFiltersIcon]" />
               <span
-                class="hidden sm:block"
+                :class="[classesList.headerFiltersLabel]"
                 v-text="translations.filters"
               />
               <span
                 v-if="filtersActiveCount > 0"
-                class="ml-1 text-xxs"
+                :class="[classesList.headerFiltersCount]"
               >( {{ filtersActiveCount }} )</span>
             </VanillaButton>
           </div>
@@ -70,10 +70,10 @@
             isShowingSettings
           }"
         >
-          <VanillaDropdown class="inline-flex">
+          <VanillaDropdown :class="[classesList.headerSettingsContainer]">
             <template #trigger>
               <VanillaButton>
-                <DotsVerticalIcon class="h-4 w-4" />
+                <DotsVerticalIcon :class="[classesList.headerSettingsIcon]" />
               </VanillaButton>
             </template>
 
@@ -83,13 +83,16 @@
               @click="refresh"
             >
               <RefreshIcon
-                class="h-4 h-4"
-                :class="[isFetching ? 'animate-spin' : '']"
+                :class="[
+                  classesList.headerSettingsRefreshIcon,
+                  isFetching ? classesList.headerSettingsRefreshIconAnimation : ''
+                ]"
               />
               <span v-text="translations.refresh" />
             </VanillaDropdownOption>
+            <!-- Edit Settings -->
             <VanillaDropdownOption @click="isShowingSettings = true">
-              <CogIcon class="h-4 h-4" />
+              <CogIcon :class="[classesList.headerSettingsEditIcon]" />
               <span v-text="translations.settings" />
             </VanillaDropdownOption>
           </VanillaDropdown>
@@ -129,11 +132,11 @@
             filters: filtersComputed,
           }"
         >
-          <div class="px-5 mt-2 my-3">
-            <div class="flex items-center space-x-1 text-xs">
+          <div :class="classesList.filtersBarContainer">
+            <div :class="classesList.filtersBarInner">
               <span v-text="translations.filtersBarLabel" />
               <span>:</span>
-              <div class="flex flex-wrap items-center gap-1">
+              <div :class="classesList.filtersBarBadgesContainer">
                 <VanillaDatatableFilterBadge
                   v-for="filter in filtersComputed"
                   :key="filter.name+''+filter.value"
@@ -172,7 +175,7 @@
       </template>
 
       <!-- Actual Table -->
-      <div class="datatable overflow-x-auto border-t dark:border-gray-700">
+      <div :class="classesList.tableContainer">
         <template v-if="!showBeInLoadingState && results.data.length <= 0 ">
           <VanillaDatatableEmptyState
             :has-filters-or-search="hasFiltersOrSearchApplied"
@@ -239,7 +242,7 @@
         <!-- Table -->
         <table
           v-else
-          class="min-w-full m-0 table-auto"
+          :class="[classesList.tableClass]"
         >
           <!-- Table Head -->
           <slot
@@ -287,21 +290,26 @@
           <!-- Table Body -->
           <tbody
             v-else
-            class="divide-y bg-gray-50 dark:bg-gray-800"
+            :class="[classesList.tableBody]"
           >
             <!-- Each record Main loop -->
             <tr
               v-for="(result) in results.data"
               :key="result.id"
+              :class="[classesList.tableRow]"
             >
               <!-- Checkbox is not slottable -->
               <td
                 v-if="options.selectable"
-                class="px-6 py-3 text-sm w-[10px]"
+                :class="[
+                  classesList.tableColumnCheckbox
+                ]"
               >
                 <input
                   :checked="isItemSelected(result)"
-                  class="block transition duration-150 ease-in-out checked:bg-indigo-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-indigo-600 h-4 w-4"
+                  :class="[
+                    classesList.tableCheckbox
+                  ]"
                   type="checkbox"
                   @change="selectItem(result)"
                 >
@@ -320,7 +328,7 @@
                   v-for="(column) in columnsComputed"
                   v-show="userSettings.visibleColumns.includes(column.name)"
                   :key="column.name"
-                  class="whitespace-nowrap py-2 text-sm text-gray-500 dark:text-white"
+                  :class="classesList.tableColumn"
                 >
                   <!-- Slot for the row -->
                   <slot
@@ -339,7 +347,7 @@
                       {{ result[column.name] }}
                     </div>
                     <div v-else-if="column.component && column.component !== ''">
-                      Its a component, inject v-runtime template
+                      <!-- Components support coming soon-->
                     </div>
                   </slot>
                 </td>
@@ -391,7 +399,50 @@
         :action="currentAction"
         :count-selected="selectedItemsCount"
         @action-confirmed="onActionConfirmed"
-      />
+      >
+        <!-- Action Icon Slot -->
+        <template
+          #icon="{
+            action,
+            title,
+            text,
+            confirmText,
+            cancelText
+          }"
+        >
+          <slot
+            name="actionsIcon"
+            v-bind="{
+              action,
+              title,
+              text,
+              confirmText,
+              cancelText
+            }"
+          />
+        </template>
+        <!-- Action Body/Default Slot -->
+        <template
+          #default="{
+            action,
+            title,
+            text,
+            confirmText,
+            cancelText
+          }"
+        >
+          <slot
+            name="actionBody"
+            v-bind="{
+              action,
+              title,
+              text,
+              confirmText,
+              cancelText
+            }"
+          />
+        </template>
+      </VanillaDatatableDialogConfirmAction>
     </slot>
     <!-- Settings Modal -->
     <slot
@@ -491,7 +542,7 @@ import {
     VanillaDatatableFilter,
     VanillaDatatableSavedFilter,
     VanillaDatatableActionExecutedFunction,
-    VanillaDatatableExceptionFunction,
+    VanillaDatatableExceptionFunction, VanillaDatatableClassesValidKeys,
 } from './index';
 
 // Vanilla Components
@@ -1473,10 +1524,11 @@ export default defineComponent({
             onFiltersSaved,
             onFiltersReset,
             onSearch,
+            classesList: configuration.classesList as VanillaDatatableClassesValidKeys,
         };
 
         // ----- Provide data to sub components -----  //
-        provide('configuration_vanilla', configuration);
+        provide('configuration_vanilla_datatable', configuration);
 
         // ----- Provide data to sub components -----  //
         provide('datatable_translations', datatable.translations);

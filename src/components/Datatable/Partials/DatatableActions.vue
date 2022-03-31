@@ -2,14 +2,14 @@
   <!-- Regular -->
   <VanillaDropdown
     v-model="isDropdownOpen"
-    class="inline-flex"
+    :class="[classesList.actionsContainer]"
   >
     <template #trigger="{iconClasses}">
-      <VanillaButton variant="primary">
+      <VanillaButton :variant="classesList.actionsButtonVariant">
         <span v-text="translations.actionsButton" />
         <span
           v-if="countSelected !== undefined"
-          class="ml-1 text-xxs text-white xxs:hidden"
+          :class="[classesList.actionsButtonCount]"
         >( {{ countSelected }} )</span>
         <ChevronDownIcon
           :class="iconClasses"
@@ -27,7 +27,7 @@
           :name="action.slotName"
           v-bind="{selectAction}"
         >
-          <span>{{ action.name }} - {{ action.slotName }}</span>
+          <span>{{ action.name }}</span>
         </slot>
       </VanillaDropdownOption>
     </template>
@@ -35,13 +35,13 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue';
-import { ChevronDownIcon } from '@heroicons/vue/solid';
-import { useDynamicSlots } from '@/core';
+import { useDynamicSlots, useInjectsClassesList } from '@/core';
 import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
 import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableActions } from '../index';
 import { useInjectDatatableTranslations } from '../utils';
+import { ChevronDownIcon } from '@heroicons/vue/solid';
 
 export default defineComponent({
     name: 'VanillaDatatableActions',
@@ -76,11 +76,14 @@ export default defineComponent({
         // Provide Translations
         const translations = useInjectDatatableTranslations()!;
 
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
+
         return {
             isDropdownOpen,
             selectAction,
             useDynamicSlots,
             translations,
+            classesList,
         };
     },
 });

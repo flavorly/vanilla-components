@@ -58,6 +58,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     filtersResetOr: 'or',
     filtersCopy: 'Copy Filters Link',
     filtersSaveAndClose: 'Save & Close',
+    filtersRemove: 'Remove',
 
     settings: 'Settings',
     settingsItemsPerPage: 'Items p/ Page',

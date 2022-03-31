@@ -50,10 +50,10 @@
 
     <VanillaInputGroup layout="content">
       <span
-        class="flex items-center justify-center space-x-1 text-xs"
+        :class="[classesList.genericFormsContentContainer]"
         @click="resetSettings"
       >
-        <TrashIcon class="h-4 w-4" />
+        <TrashIcon :class="[classesList.genericFormsContentIcons]" />
         <span v-text="translations.settingsReset" />
       </span>
     </VanillaInputGroup>
@@ -84,6 +84,7 @@ import {
 } from '../index';
 import { TrashIcon } from '@heroicons/vue/outline';
 import { useInjectDatatableTranslations } from '../utils';
+import { useInjectsClassesList } from '@/core';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogSettings',
@@ -155,6 +156,7 @@ export default defineComponent({
 
         // Provide Translations
         const translations = useInjectDatatableTranslations()!;
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
 
         return {
             isOpen,
@@ -163,6 +165,7 @@ export default defineComponent({
             saveSettings,
             resetSettings,
             translations,
+            classesList,
         };
     },
 });

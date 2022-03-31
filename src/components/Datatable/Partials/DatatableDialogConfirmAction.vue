@@ -1,40 +1,97 @@
 <template>
   <VanillaDialog v-model="isOpen">
-    <div class="mx-auto flex flex-shrink-0  items-center justify-center h-12 w-12 rounded-full bg-red-100">
-      <ExclamationIcon class="text-red-600 h-6 w-6" />
-    </div>
-
-    <div class="mt-3 text-center sm:mt-5">
-      <!-- Title-->
-      <h3
-        v-if="title !== null && title !== ''"
-        :class="[
-          'text-lg leading-6 font-medium text-gray-900 dark:text-white',
-          action?.before?.confirm?.classes?.title
-        ]"
-      >
-        <span
-          v-if="action?.before?.confirm?.safe"
-          v-html="title"
-        />
-        <span v-else>{{ title }}</span>
-      </h3>
-      <!-- Body -->
+    <slot
+      name="icon"
+      v-bind="{
+        action,
+        title,
+        text,
+        confirmText,
+        cancelText
+      }"
+    >
       <div
         :class="[
-          'mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300',
-          action?.before?.confirm?.classes?.text
+          classesList.actionIconContainer,
+          action?.icon === 'success' ? classesList.actionIconContainerSuccess : '',
+          action?.icon === 'danger' || action?.icon === undefined ? classesList.actionIconContainerDanger : '',
+          action?.icon === 'warning' ? classesList.actionIconContainerWarning : '',
+          action?.icon === 'info' ? classesList.actionIconContainerInfo : '',
         ]"
       >
-        <p
-          v-if="action?.before?.confirm?.safe"
-          v-html="text"
+        <ExclamationIcon
+          v-if="action?.icon === undefined || action?.icon === 'danger'"
+          :class="[
+            classesList.actionIcon,
+            classesList.actionIconDanger,
+          ]"
         />
-        <p v-else>
-          {{ text }}
-        </p>
+        <CheckIcon
+          v-if="action?.icon === 'success'"
+          :class="[
+            classesList.actionIcon,
+            classesList.actionIconSuccess,
+          ]"
+        />
+        <StatusOnlineIcon
+          v-if="action?.icon === 'warning'"
+          :class="[
+            classesList.actionIcon,
+            classesList.actionIconWarning,
+          ]"
+        />
+        <InformationCircleIcon
+          v-if="action?.icon === 'info'"
+          :class="[
+            classesList.actionIcon,
+            classesList.actionIconInfo,
+          ]"
+        />
       </div>
-    </div>
+    </slot>
+
+    <slot
+      name="default"
+      v-bind="{
+        action,
+        title,
+        text,
+        confirmText,
+        cancelText
+      }"
+    >
+      <div :class="classesList.actionsContentContainer">
+        <!-- Title-->
+        <h3
+          v-if="title !== null && title !== ''"
+          :class="[
+            classesList.actionsTitle,
+            action?.before?.confirm?.classes?.title
+          ]"
+        >
+          <span
+            v-if="action?.before?.confirm?.safe"
+            v-html="title"
+          />
+          <span v-else>{{ title }}</span>
+        </h3>
+        <!-- Body -->
+        <div
+          :class="[
+            classesList.actionsText,
+            action?.before?.confirm?.classes?.text
+          ]"
+        >
+          <p
+            v-if="action?.before?.confirm?.safe"
+            v-html="text"
+          />
+          <p v-else>
+            {{ text }}
+          </p>
+        </div>
+      </div>
+    </slot>
 
     <!-- Footer -->
     <template #footer>
@@ -55,12 +112,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed, ref, watch } from 'vue';
-import { ExclamationIcon } from '@heroicons/vue/outline';
 import VanillaDialog from '@/components/Dialog/Dialog.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableAction } from '../index';
-import { useReplacePlaceholders } from '@/core';
+import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
+import { ExclamationIcon, CheckIcon, StatusOnlineIcon, InformationCircleIcon } from '@heroicons/vue/outline';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogConfirmAction',
@@ -68,6 +125,9 @@ export default defineComponent({
         VanillaDialog,
         VanillaButton,
         ExclamationIcon,
+        CheckIcon,
+        StatusOnlineIcon,
+        InformationCircleIcon,
     },
     props: {
         action: {
@@ -101,6 +161,7 @@ export default defineComponent({
 
         // Provide Translations
         const translations = useInjectDatatableTranslations()!;
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
 
         const title = computed(() => {
             const value =  props.action?.before?.confirm?.title || translations.value.actionConfirmTitle;
@@ -135,6 +196,7 @@ export default defineComponent({
             cancelAction,
             confirmAction,
             translations,
+            classesList,
         };
     },
 });

@@ -77,21 +77,19 @@
 
 
     <VanillaInputGroup layout="content">
-      <div class="form-content">
-        <div class="flex items-center justify-center space-x-1 text-xs select-none">
-          <span
-            class="underline flex items-center justify-center space-x-1"
-            @click="resetSettings"
-          >
-            <TrashIcon class="h-4 w-4" />
-            <span v-text="translations.filtersReset" />
-          </span>
-          <span v-text="translations.filtersResetOr" />
-          <span
-            class="underline flex items-center justify-center"
-            v-text="translations.filtersCopy"
-          />
-        </div>
+      <div :class="[classesList.genericFormsContentContainer]">
+        <span
+          :class="[classesList.genericFormsContentLink]"
+          @click="resetSettings"
+        >
+          <TrashIcon :class="[classesList.genericFormsContentIcons]" />
+          <span v-text="translations.filtersReset" />
+        </span>
+        <span v-text="translations.filtersResetOr" />
+        <span
+          :class="[classesList.genericFormsContentLink]"
+          v-text="translations.filtersCopy"
+        />
       </div>
     </VanillaInputGroup>
 
@@ -124,7 +122,7 @@ import {
 } from '../index';
 import { TrashIcon } from '@heroicons/vue/outline';
 import find from 'lodash/find';
-import { isEqual } from '@/core';
+import { isEqual, useInjectsClassesList } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
 
 export default defineComponent({
@@ -217,6 +215,7 @@ export default defineComponent({
 
         // Provide Translations
         const translations = useInjectDatatableTranslations()!;
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
 
         return {
             isOpen,
@@ -225,6 +224,7 @@ export default defineComponent({
             saveSettings,
             resetSettings,
             translations,
+            classesList,
         };
     },
 });

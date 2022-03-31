@@ -85,6 +85,7 @@ export declare type VanillaDatatableTranslations = {
   filtersResetOr?: string,
   filtersCopy?: string,
   filtersSaveAndClose?: string,
+  filtersRemove?: string,
 
   settings?: string,
   settingsItemsPerPage?: string,
@@ -131,6 +132,7 @@ declare type VanillaActionCallback = (action: VanillaDatatableAction) => void;
 export declare type VanillaDatatableAction = {
   name: string,
   label?: string,
+  icon?: string | 'danger' | 'success' | 'warning' | 'info' | undefined,
   permissions?: {
     view?: boolean,
     execute?: boolean

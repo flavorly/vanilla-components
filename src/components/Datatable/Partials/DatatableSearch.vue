@@ -1,26 +1,31 @@
 <template>
-  <div class="px-5 mt-3 mb-3">
+  <div :class="[classesList.searchContainer]">
     <VanillaInput
       ref="search"
       v-model="localValue"
       name="search"
-      :class="{'cursor-not-allowed': !searchable}"
+      :class="[
+        classesList.searchInputClasses,
+        !searchable ? classesList.genericForbidden : ''
+      ]"
       :disabled="!searchable"
       :placeholder="placeholder"
-      variant="compact"
+      :variant="classesList.searchInputVariant"
       type="search"
     >
       <template #before>
-        <SearchIcon class="-mr-2 h-4 w-4 text-gray-400" />
+        <SearchIcon
+          :class="[classesList.searchIcon]"
+        />
       </template>
     </VanillaInput>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { SearchIcon } from '@heroicons/vue/solid';
+import { useInjectsClassesList, useVModel } from '@/core';
 import VanillaInput from '@/components/Input/Input.vue';
-import { useVModel } from '@/core';
+import { SearchIcon } from '@heroicons/vue/solid';
 
 export default defineComponent({
     name: 'VanillaDatatableSearch',
@@ -47,8 +52,10 @@ export default defineComponent({
     ],
     setup(props){
         const localValue = useVModel(props, 'modelValue');
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
         return {
             localValue,
+            classesList,
         };
     },
 });

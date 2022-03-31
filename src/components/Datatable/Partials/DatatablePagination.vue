@@ -1,40 +1,41 @@
 <template>
-  <div class="px-4 py-3 flex items-center justify-between border-gray-200 border-t sm:px-6 dark:border-gray-700">
-    <div class="flex-1 flex justify-between sm:hidden">
+  <div :class="[classesList.paginationContainer]">
+    <div :class="[classesList.paginationShortContainer]">
       <VanillaButton
         variant="paginationButton"
         :class="[
-          isFetching || previousPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
+          isFetching || previousPage === null ? classesList.genericForbidden : classesList.genericPointer,
         ]"
         aria-label="Previous"
         @click.prevent="goToPage(previousPage)"
       >
-        <ChevronLeftIcon class="h-5 w-5" />
+        <ChevronLeftIcon :class="[classesList.paginationShortIcon]" />
         <span
-          class="mr-2"
+          :class="classesList.paginationShortLeft"
           v-html="translations.previousPage"
         />
       </VanillaButton>
       <VanillaButton
         variant="paginationButton"
         :class="[
-          isFetching || nextPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
+          isFetching || nextPage === null ? classesList.genericForbidden : classesList.genericPointer,
         ]"
-        aria-label="Previous"
+        aria-label="Next"
         @click.prevent="goToPage(nextPage)"
       >
         <span
-          class="ml-2"
+          :class="classesList.paginationShortRight"
           v-html="translations.nextPage"
         />
-        <ChevronRightIcon class="h-5 w-5" />
+        <ChevronRightIcon :class="[classesList.paginationShortIcon]" />
       </VanillaButton>
     </div>
-    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+
+    <div :class="[classesList.paginationFullContainer]">
       <div>
         <p
           v-if="showNumberOfItems"
-          class="text-sm leading-5 text-gray-700 dark:text-gray-400"
+          :class="[classesList.paginationFullNumberOfRecords]"
         >
           <span
             v-html="useReplacePlaceholders(translations.showingFrom,{
@@ -46,25 +47,26 @@
         </p>
       </div>
       <div>
-        <nav class="relative z-0 inline-flex shadow-sm cursor-pointer">
+        <nav :class="[classesList.paginationFullButtonsContainer]">
           <VanillaButton
             variant="paginationButton"
             :class="[
-              isFetching || previousPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
+              classesList.paginationFullLeft,
+              isFetching || previousPage === null ? classesList.genericForbidden : classesList.genericPointer,
             ]"
-            class="rounded-l-md rounded-r-none focus:ring-0"
             aria-label="Previous"
             @click.prevent="goToPage(previousPage)"
           >
-            <ChevronLeftIcon class="h-6 w-5" />
+            <ChevronLeftIcon :class="[classesList.paginationFullIcon]" />
           </VanillaButton>
           <template v-if="showPages && pages.length > 0">
             <VanillaButton
               v-for="(page, key) in pagesLimited"
-
               :key="key"
               variant="paginationButtonPage"
-              :class="{'bg-indigo-50 text-indigo-600': page.active, 'focus:bg-gray-300/10': !page.active}"
+              :class="[
+                page.active ? classesList.paginationFullPageActive : classesList.paginationFullPage,
+              ]"
               @click.prevent="goToPage(page.url)"
             >
               {{ page.label }}
@@ -73,13 +75,13 @@
           <VanillaButton
             variant="paginationButton"
             :class="[
-              isFetching || nextPage === null ? 'cursor-not-allowed' : 'cursor-pointer',
+              classesList.paginationFullRight,
+              isFetching || nextPage === null ? classesList.genericForbidden : classesList.genericPointer,
             ]"
-            class="-ml-px rounded-r-md rounded-l-none focus:ring-0"
             aria-label="Previous"
             @click.prevent="goToPage(nextPage)"
           >
-            <ChevronRightIcon class="h-6 w-5" />
+            <ChevronRightIcon :class="[classesList.paginationFullIcon]" />
           </VanillaButton>
         </nav>
       </div>
@@ -91,7 +93,7 @@ import { defineComponent, PropType, computed } from 'vue';
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableResponsePage } from '../index';
-import { useReplacePlaceholders } from '@/core';
+import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
 
 export default defineComponent({
@@ -170,6 +172,7 @@ export default defineComponent({
 
         // Provide Translations
         const translations = useInjectDatatableTranslations()!;
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
 
         const pagesLimited = computed(() => {
             if (prop.limitPages === false){
@@ -193,9 +196,10 @@ export default defineComponent({
 
         return {
             goToPage,
+            useReplacePlaceholders,
             pagesLimited,
             translations,
-            useReplacePlaceholders,
+            classesList,
         };
     },
 });

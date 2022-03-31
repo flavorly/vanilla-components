@@ -1,7 +1,7 @@
 <template>
-  <div class="flex-shrink-0 inline-flex items-center py-0.5 pl-2 pr-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-700">
+  <div :class="[classesList.filtersBadge]">
     <slot>
-      <div class="flex space-x-1">
+      <div :class="[classesList.filtersBadgeLabel]">
         <span
           v-if="withLabel && filter?.label"
           v-html="filter.label+': '"
@@ -11,12 +11,15 @@
     </slot>
     <button
       type="button"
-      class="flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-indigo-400 hover:bg-indigo-200 hover:text-indigo-500 focus:outline-none focus:bg-indigo-500 focus:text-white"
+      :class="[classesList.filtersBadgeRemoveButton]"
       @click="$emit('filterRemove')"
     >
-      <span class="sr-only">Remove</span>
+      <span
+        class="sr-only"
+        v-text="translations.filtersRemove"
+      />
       <svg
-        class="h-2 w-2"
+        :class="[classesList.filtersBadgeRemoveIcon]"
         stroke="currentColor"
         fill="none"
         viewBox="0 0 8 8"
@@ -33,6 +36,8 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 import { VanillaDatatableFilter } from '@/components/Datatable';
+import { useInjectsClassesList } from '@/core';
+import { useInjectDatatableTranslations } from './../Utils';
 
 export default defineComponent({
     name: 'VanillaDatatableFilterBadge',
@@ -54,5 +59,16 @@ export default defineComponent({
     emits: [
         'filterRemove',
     ],
+    setup(){
+
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!;
+
+        return {
+            classesList,
+            translations,
+        };
+    },
 });
 </script>

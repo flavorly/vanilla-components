@@ -1,38 +1,38 @@
 <template>
   <!-- Table Empty / No results -->
-  <div class="flex items-center justify-center text-center bg-gray-50 px-6 py-8 dark:bg-gray-800">
+  <div :class="[classesList.emptyStateContainer]">
     <!-- Empty due to searching or filtering -->
     <slot
       v-if="hasFiltersOrSearch"
       name="emptyWithFilters"
     >
-      <div class="text-sm w-full space-y-2">
-        <div class="flex items-center justify-center">
+      <div :class="[classesList.emptyStateInner]">
+        <div :class="[classesList.emptyStateRow]">
           <slot name="emptyWithFiltersIcon">
-            <VanillaUFOIcon class="text-gray-200 w-28 h-28" />
+            <VanillaUFOIcon :class="[classesList.emptyStateIcon]" />
           </slot>
         </div>
 
-        <div class="flex items-center justify-center">
+        <div :class="[classesList.emptyStateRow]">
           <slot name="emptyWithFiltersTitle">
             <h3
-              class="text-small text-gray-500 mb-3 mt-3"
+              :class="[classesList.emptyStateTitle]"
               v-text="translations.recordsEmptyWithFiltersOrSearch"
             />
           </slot>
         </div>
 
         <div
-          class="flex items-center justify-center"
+          :class="[classesList.emptyStateRow]"
           @click="resetFilters"
         >
           <slot name="emptyWithFiltersButton">
             <VanillaButton
-              :variant="'primary'"
+              :variant="classesList.emptyStateResetFiltersButtonVariant"
               :loading="isFetching || isLocallyLoading"
             >
               <template #icon>
-                <ReplyIcon class="h-4 w-4" />
+                <ReplyIcon :class="classesList.emptyStateResetFiltersButtonIcon" />
               </template>
               <template #label>
                 <span v-text="translations.recordsEmptyWithFiltersOrSearchAction" />
@@ -48,24 +48,24 @@
       v-else
       name="emptyWithoutRecords"
     >
-      <div class="text-sm w-full space-y-2">
-        <div class="flex items-center justify-center">
+      <div :class="[classesList.emptyStateInner]">
+        <div :class="[classesList.emptyStateRow]">
           <slot name="emptyWithoutRecordsIcon">
-            <VanillaRadarIcon class="text-gray-200 w-28 h-28" />
+            <VanillaRadarIcon :class="[classesList.emptyStateIcon]" />
           </slot>
         </div>
 
-        <div class="flex items-center justify-center">
+        <div :class="[classesList.emptyStateRow]">
           <slot name="emptyWithoutRecordsTitle">
             <h3
-              class="text-small text-gray-500 mb-3 mt-3"
+              :class="[classesList.emptyStateTitle]"
               v-text="translations.recordsEmpty"
             />
           </slot>
         </div>
 
         <div
-          class="flex items-center justify-center"
+          :class="[classesList.emptyStateRow]"
           @click="actionWithoutRecords"
         >
           <slot name="emptyWithoutRecordsButton" />
@@ -76,11 +76,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, nextTick, PropType, ref } from 'vue';
-import { ReplyIcon } from '@heroicons/vue/solid';
 import VanillaUFOIcon from '@/components/Icons/UFOIcon.vue';
 import VanillaRadarIcon from '@/components/Icons/RadarIcon.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import { useInjectDatatableTranslations } from '../utils';
+import { useInjectsClassesList } from '@/core';
+import { ReplyIcon } from '@heroicons/vue/solid';
 
 export default defineComponent({
     name: 'VanillaDatatableEmptyState',
@@ -108,6 +109,8 @@ export default defineComponent({
 
         // Provide Translations
         const translations = useInjectDatatableTranslations()!;
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
+
         const isLocallyLoading = ref(false);
 
         const resetFilters = () => {
@@ -124,6 +127,7 @@ export default defineComponent({
 
         return {
             translations,
+            classesList,
             isLocallyLoading,
             resetFilters,
             actionWithoutRecords,
