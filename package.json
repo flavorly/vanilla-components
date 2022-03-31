@@ -1,6 +1,6 @@
 {
   "name": "@indigit/vanilla-components",
-  "version": "0.6.16",
+  "version": "0.6.17",
   "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
   "repository": {
     "type": "git",
@@ -67,8 +67,8 @@
   },
   "devDependencies": {
     "@rollup/plugin-typescript": "^8.3.0",
-    "@types/lodash": "^4.14.178",
     "@types/crypto-js": "^4.1.1",
+    "@types/lodash": "^4.14.178",
     "@typescript-eslint/eslint-plugin": "^5.8.0",
     "@typescript-eslint/parser": "^5.8.0",
     "@vitejs/plugin-vue": "^2.1.0",
