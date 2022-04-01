@@ -1,0 +1,62 @@
+body {
+	--vt-c-brand: #667eea;
+	--vt-c-brand-light: #a3bffa;
+	--vt-c-brand-dark: #7f9cf5;
+	--vt-c-brand-highlight: #667eea;
+	--vt-c-green: #6988e6;
+}
+
+.dark body {
+	--vt-c-brand: #a3bffa;
+	--vt-c-brand-light: #7f9cf5;
+	--vt-c-brand-dark: #667eea;
+	--vt-c-brand-highlight: #667eea;
+	--vt-c-green: #7f9cf5;
+	--docsearch-container-background: rgba(0, 0, 0, 0.5);
+}
+
+a.VPNavBarTitle span {
+	display: none;
+}
+
+a.VPNavBarTitle svg {
+	display: none;
+}
+
+a.VPNavBarTitle {
+	width: 40px;
+	background-image: url(/logo.svg);
+	background-position: center;
+	background-size: 30px;
+	background-repeat: no-repeat;
+}
+
+/* Fix for code blocks' one-too-many line */
+.vt-doc pre code > span:last-of-type {
+	display: none;
+}
+
+/* Add missing PHP in code blocks */
+.vt-doc [class~='language-php']::before {
+	content: 'php';
+}
+
+#VPContent,
+#VPContent > .VPContentPage {
+	height: 100%;
+	min-height: calc(100vh - var(--vt-nav-height));
+}
+
+#VPContent > .VPContentPage {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#VPContent > .VPContentPage main {
+	flex-grow: 1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

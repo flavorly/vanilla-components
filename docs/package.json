@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev --port=3005",
+    "build": "vitepress build",
+    "serve": "vitepress serve"
+  },
+  "devDependencies": {
+    "@vue/theme": "^1.0.1",
+    "vitepress": "^0.22.3",
+    "vue": "^3.2.31"
+  }
+}
