@@ -3,11 +3,14 @@
   "scripts": {
     "dev": "vitepress dev --port=3005",
     "build": "vitepress build",
-    "serve": "vitepress serve"
+    "serve": "vitepress serve",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@vue/theme": "^1.0.1",
     "vitepress": "^0.22.3",
-    "vue": "^3.2.31"
+    "vue": "^3.2.31",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0"
   }
 }

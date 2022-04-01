@@ -53,3 +53,14 @@ yarn format
 **Using the Package on Vuepress or Locally**
 
 `yarn link` then on your vuepress `yarn link "@indigit/vanilla-components"`
+
+** Patching **
+
+https://github.com/ds300/patch-package
+
+```bash
+Edit the files in node_modules
+
+npx patch-package @vue/theme
+npx patch-package
+```

@@ -1,0 +1,15 @@
+diff --git a/node_modules/@vue/theme/src/vitepress/components/VPNavBarSearch.vue b/node_modules/@vue/theme/src/vitepress/components/VPNavBarSearch.vue
+index 55b2e2b..ac9537c 100644
+--- a/node_modules/@vue/theme/src/vitepress/components/VPNavBarSearch.vue
++++ b/node_modules/@vue/theme/src/vitepress/components/VPNavBarSearch.vue
+@@ -16,9 +16,7 @@ const metaKey = ref()
+ 
+ onMounted(() => {
+   // meta key detect (same logic as in @docsearch/js)
+-  metaKey.value.textContent = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)
+-    ? '⌘'
+-    : 'Ctrl'
++  metaKey.value= '⌘';
+   const handleSearchHotKey = (e: KeyboardEvent) => {
+     if (e.key === 'k' && (e.ctrlKey || e.metaKey)) {
+       e.preventDefault()
