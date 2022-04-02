@@ -1,5 +1,6 @@
 ---
 outline: deep
+layout: foo
 ---
 
 # Apply nested preset

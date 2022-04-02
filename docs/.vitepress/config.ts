@@ -13,7 +13,7 @@ const image = `${site}/banner.png`
 const head: HeadConfig[] = [
 	['meta', { name: 'author', content: 'INDIGIT' }],
 	['meta', { name: 'keywords', content: 'components, vue, headless-ui, variantjs, datatables, tailwind' }],
-	['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }],
+	['link', { rel: 'icon', type: 'image/svg+xml', href: '/symbol-gradient.svg' }],
 	['meta', { name: 'HandheldFriendly', content: 'True' }],
 	['meta', { name: 'MobileOptimized', content: '320' }],
 	['meta', { name: 'theme-color', content: '#d8b4fe' }],
@@ -126,8 +126,8 @@ export default defineConfigWithTheme<Config>({
 
 
 		socialLinks: [
-			{ icon: 'github', link: 'https://github.com/preset/preset' },
-			{ icon: 'twitter', link: 'https://twitter.com/enzoinnocenzi' },
+			{ icon: 'github', link: 'https://github.com/igerslike/vanilla-components' },
+			// { icon: 'twitter', link: 'https://twitter.com/enzoinnocenzi' },
 		],
 
 		// https://github.com/vuejs/theme/pull/44

@@ -1,12 +1,14 @@
 <template>
 	<ClientOnly>
 		<section id="hero">
-			<img class="logo" src="/logo.svg" />
+
+      <img class="logo" alt="Vanilla Components" src="/symbol-gradient.svg"/>
+
 			<h1 class="tagline">
 				<span class="tagline--bold">Vanilla Components</span>
 			</h1>
 			<p class="description">
-        A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS
+        A lightweight, flexible & customizable components library for Vue, styled with Tailwind CSS.
 			</p>
 			<p class="actions">
 				<a class="get-started" href="/introduction">
@@ -47,7 +49,7 @@ section {
 
 .tagline {
 	text-transform: uppercase;
-  font-size: 70px;
+  font-size: 40px;
   line-height: 1.25;
   font-weight: 300;
   letter-spacing: -1.5px;
@@ -61,18 +63,18 @@ section {
 
 html:not(.dark) .accent,
 .dark .tagline {
-  background: -webkit-linear-gradient(315deg, #667eea 45%, #a3bffa);
+  background: -webkit-linear-gradient(315deg, #5154a4 45%, #61cdf6);
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .description {
-  max-width: 960px;
-  line-height: 1;
+  max-width: 760px;
+  line-height: 1.3;
   color: var(--vt-c-text-2);
   transition: color 0.5s;
-  font-size: 30px;
+  font-size: 20px;
   margin: 10px 0px 60px 0px;
 }
 

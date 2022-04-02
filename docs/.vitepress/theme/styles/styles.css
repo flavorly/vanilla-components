@@ -23,11 +23,19 @@ a.VPNavBarTitle svg {
 	display: none;
 }
 
+.dark a.VPNavBarTitle {
+	width: 40px;
+	background-image: url(/symbol-gradient.svg);
+	background-position: center;
+	background-size: 40px;
+	background-repeat: no-repeat;
+}
+
 a.VPNavBarTitle {
 	width: 40px;
-	background-image: url(/logo.svg);
+	background-image: url(/symbol-gradient.svg);
 	background-position: center;
-	background-size: 30px;
+	background-size: 40px;
 	background-repeat: no-repeat;
 }
 

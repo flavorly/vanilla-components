@@ -5,8 +5,8 @@ import { VPTheme } from '@vue/theme';
 
 export default {
   ...VPTheme,
-  // enhanceApp({ app }) {
-  //   app.component('VPNavBarSearchzzz', VPNavBarSearch)
-  //   console.log(app);
-  // }
+  enhanceApp({ app }) {
+    // register global components
+    //app.component('MyGlobalComponent' /* ... */)
+  }
 }
