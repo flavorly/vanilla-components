@@ -1,6 +1,7 @@
 @import '../core/styles/index.css';
 @import './fonts.css';
 @import './variables.css';
+@import './copy.css';
 
 body {
     --vt-c-brand: #667eea;

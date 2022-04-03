@@ -1,8 +1,9 @@
 <template>
-    <div class="flex content-center items-center h-full w-full max-w-full">
+    <div style="flex: auto; width: 100%; height: 100%; max-width: 100%; background: transparent;">
       <iframe
         v-if="mounted"
         ref="frame"
+        style="background: transparent; width: 100%; height: 100%; border: none;"
         :src="'/'+src+'.html'"
         :style="{
           width: '100%',

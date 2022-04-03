@@ -144,6 +144,20 @@ export default defineConfigWithTheme<Config>({
 			copyright: 'Made with ❤️ by Pedro Martins',
 		},
 	},
+  markdown: {
+    config(md) {
+      md.use(require('markdown-it-copy'),{
+        btnText: '', // 'copy' | button text
+        failText: 'Failed to Copy', // 'copy fail' | copy-fail text
+        successText: 'Copied to Clipboard', // 'copy success' | copy-success text
+        // successTextDelay: Number, // 2000 | successText show time [ms]
+        //extraHtmlBeforeBtn: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>', // '' | a html-fragment before <button>
+        // extraHtmlAfterBtn: String, // '' | a html-fragment after <button>
+        // showCodeLanguage: Boolean, // false | show code language before [btn || extraHtmlBeforeBtn] | [add-after-1.1.0]
+        // attachText: String, // '' | some text append copyText， Such as: copyright | [add-after-1.2.0]
+      })
+    }
+  },
 
 	vite: {
     resolve: {
