@@ -7,8 +7,9 @@ import VPSkipLink from './VPSkipLink.vue'
 import VPAnnouncer from './VPAnnouncer.vue'
 import VPSidebar from './VPSidebar.vue'
 import VPContent from './VPContent.vue'
-import {onMounted, onUnmounted, provide, Ref, ref, watchEffect} from 'vue'
-import {useData} from "vitepress";
+import {onMounted, onUnmounted, provide, onBeforeMount, Ref, ref, watchEffect} from 'vue'
+import {useData, useRouter} from "vitepress";
+import {removeTailwindIfNotPresentOnProduction} from "/@theme/support/stylesHelper";
 
 const {
   isOpen: isSidebarOpen,
@@ -45,7 +46,10 @@ provide('close-sidebar', closeSidebar)
 const CustomLayout = ref(undefined) as Ref<undefined|string>;
 
 onMounted(() => {
-  const { frontmatter } = useData()
+  const { frontmatter } = useData();
+
+  removeTailwindIfNotPresentOnProduction();
+
   if(frontmatter?.value?.layout  !== undefined){
     CustomLayout.value = frontmatter?.value?.layout;
   }

@@ -2,7 +2,6 @@ import baseConfig from '@vue/theme/config'
 import { defineConfigWithTheme, HeadConfig, UserConfig } from 'vitepress'
 import type { Config } from '@vue/theme'
 import { NavItem, SidebarConfig } from '@vue/theme/src/vitepress/config'
-const path = require('path');
 
 const production = process.env.NODE_ENV === 'production'
 const title = 'Vanilla Components'
@@ -29,6 +28,7 @@ const head: HeadConfig[] = [
 	['meta', { property: 'og:title', content: title }],
 	['meta', { property: 'og:image', content: image }],
 	['meta', { property: 'og:description', content: description }],
+  ...(production ? [['link', {href: '/assets/tailwind.css', rel: 'stylesheet'}]] : [])
 ]
 
 const nav: NavItem[] = [

@@ -2,9 +2,11 @@
   "private": true,
   "scripts": {
     "dev": "vitepress dev --port=3005",
-    "build": "vitepress build",
+    "build": "vitepress build && yarn tw:build",
     "serve": "vitepress serve",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package",
+    "tw:watch": "npx tailwindcss -i ./.vitepress/theme/styles/tailwind.css -o ./.vitepress/dist/assets/tailwind.css --watch",
+    "tw:build": "npx tailwindcss -i ./.vitepress/theme/styles/tailwind.css -o ./.vitepress/dist/assets/tailwind.css"
   },
   "devDependencies": {
     "@vue/theme": "^1.0.1",

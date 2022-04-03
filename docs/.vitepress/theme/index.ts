@@ -6,7 +6,6 @@ import { withConfigProvider } from './composables/config'
 import {VanillaComponents} from "@indigit/vanilla-components";
 import LayoutBlank from "./components/LayoutBlank.vue";
 import LayoutDemoWrapper from "./components/LayoutDemoWrapper.vue";
-import {watch} from "vue";
 
 const VPTheme: Theme = {
   Layout: withConfigProvider(VPApp),

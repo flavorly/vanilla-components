@@ -1,8 +1,6 @@
 ---
-{
-    layout: "LayoutBlank",
-    head: [['link', {href: '/assets/tailwind.css', rel: 'stylesheet'}]],
-}
+layout: LayoutBlank
+tailwind: true
 ---
 
 <script setup>
