@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useData } from 'vitepress'
 import { inject } from 'vue'
-import { MenuItemWithLink } from '../../core'
+import { MenuItemWithLink } from '../core'
 import { isActive } from '../support/utils'
 
 defineProps<{

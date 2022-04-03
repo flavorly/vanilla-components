@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useData } from 'vitepress'
-import { VTLink } from '../../core'
+import { VTLink } from '../core'
 
 const { theme } = useData()
 </script>

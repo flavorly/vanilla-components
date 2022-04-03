@@ -2,7 +2,7 @@ import {
   MenuItemChildWithChildren,
   MenuItemWithLink,
   SocialLink
-} from '../core'
+} from './core'
 
 export interface Config {
   /**

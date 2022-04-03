@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { VTFlyout, VTSwitchAppearance, VTSocialLinks } from '../../core'
+import { VTFlyout, VTSwitchAppearance, VTSocialLinks } from '../core'
 import { useConfig } from '../composables/config'
 
 const { config } = useConfig()

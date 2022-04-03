@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VTBackdrop } from '../../core'
+import { VTBackdrop } from '../core'
 import { useSidebar } from '../composables/sidebar'
 import VPNav from './VPNav.vue'
 import VPLocalNav from './VPLocalNav.vue'
@@ -7,7 +7,7 @@ import VPSkipLink from './VPSkipLink.vue'
 import VPAnnouncer from './VPAnnouncer.vue'
 import VPSidebar from './VPSidebar.vue'
 import VPContent from './VPContent.vue'
-import { onMounted, onUnmounted, provide, ref, watchEffect } from 'vue'
+import {onMounted, onUnmounted, provide, Ref, ref, watchEffect} from 'vue'
 import {useData} from "vitepress";
 
 const {
@@ -41,20 +41,20 @@ onUnmounted(() => {
 
 provide('close-sidebar', closeSidebar)
 
-const useBlankLayout = ref(false);
+// Little tweak to support layouts
+const CustomLayout = ref(undefined) as Ref<undefined|string>;
 
 onMounted(() => {
-  if(useData().frontmatter?.value?.demo === 'blank'){
-    useBlankLayout.value = true;
+  const { frontmatter } = useData()
+  if(frontmatter?.value?.layout  !== undefined){
+    CustomLayout.value = frontmatter?.value?.layout;
   }
 })
 
 </script>
 
 <template>
-  <div class="blank" v-if="useBlankLayout">
-    <Content />
-  </div>
+  <component v-if="CustomLayout !== undefined" :is="CustomLayout"/>
   <div v-else class="VPApp">
     <VPSkipLink />
     <VTBackdrop class="backdrop" :show="isSidebarOpen" @click="closeSidebar" />

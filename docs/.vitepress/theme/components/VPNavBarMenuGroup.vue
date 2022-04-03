@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VTFlyout } from '../../core'
+import { VTFlyout } from '../core'
 import { isActive } from '../support/utils'
 import { useData } from 'vitepress'
 import { NavItemWithChildren } from '../config'

@@ -15,7 +15,7 @@ import {
   SidebarConfig,
   SidebarGroup
 } from '../config'
-import { MenuItem, MenuItemChild } from '../../core'
+import { MenuItem, MenuItemChild } from '../core'
 import { normalizeLink } from '../support/utils'
 
 const configSymbol: InjectionKey<Ref<Config>> = Symbol('config')

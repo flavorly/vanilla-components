@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "VanillaWrapper",
+  name: "LayoutDemoWrapper",
   components: {
   },
   props: {

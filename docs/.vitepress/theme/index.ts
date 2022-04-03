@@ -4,7 +4,8 @@ import VPNotFound from './components/VPNotFound.vue'
 import { Theme } from 'vitepress'
 import { withConfigProvider } from './composables/config'
 import {VanillaComponents} from "@indigit/vanilla-components";
-import VanillaWrapper from "../__theme/components/Wrapper.vue";
+import LayoutBlank from "./components/LayoutBlank.vue";
+import LayoutDemoWrapper from "./components/LayoutDemoWrapper.vue";
 import {watch} from "vue";
 
 const VPTheme: Theme = {
@@ -13,10 +14,10 @@ const VPTheme: Theme = {
   enhanceApp({ app, router, siteData }) {
 
     app.use(VanillaComponents);
-    app.component('VanillaWrapper', VanillaWrapper);
+    app.component('Wrapper', LayoutDemoWrapper);
+    app.component('LayoutBlank', LayoutBlank);
   },
 }
 
 export default VPTheme;
-
 export type { Config } from './config'

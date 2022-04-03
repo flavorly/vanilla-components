@@ -1,7 +1,6 @@
 <template>
 	<ClientOnly>
 		<section id="hero">
-
       <img class="logo" alt="Vanilla Components" src="/symbol-gradient.svg"/>
 
 			<h1 class="tagline">

@@ -5,7 +5,7 @@ import VPContentDocOutline from './VPContentDocOutline.vue'
 import VPContentDocFooter from './VPContentDocFooter.vue'
 import VPCarbonAds from './VPCarbonAds.vue'
 import type { Config } from '../config'
-import { VTLink, VTIconEdit } from '../../core'
+import { VTLink, VTIconEdit } from '../core'
 
 const { page, frontmatter, theme } = useData<Config>()
 

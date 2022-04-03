@@ -8,7 +8,7 @@ import {
   VTIconChevronLeft,
   VTIconChevronRight,
   MenuItemWithLink
-} from '../../core'
+} from '../core'
 
 const { page, theme } = useData()
 

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VTLink } from '../../core'
+import { VTLink } from '../core'
 import { useData } from 'vitepress'
 import { isActive } from '../support/utils'
 import { NavItemWithLink } from '../config'

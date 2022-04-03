@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { VTIconAlignLeft } from '../../core'
+import { VTIconAlignLeft } from '../core'
 import { useSidebar } from '../composables/sidebar'
 import { useData } from 'vitepress'
 

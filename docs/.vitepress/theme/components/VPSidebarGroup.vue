@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { MenuItemWithLink } from '../../core'
+import { MenuItemWithLink } from '../core'
 import VPSidebarLink from './VPSidebarLink.vue'
 import { isActive } from '../support/utils'
 import { useData } from 'vitepress'

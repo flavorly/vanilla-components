@@ -7,9 +7,9 @@ title: Vanilla Components - A beautiful set of Vanilla Components for Vue 3 + Ta
 ---
 
 <script setup>
-import Home from '/@theme/components/Home.vue';
+import Home from '/@theme/pages/Home.vue';
 </script>
 
 <Home />
 
-<VanillaWrapper src="demo" />
+<Wrapper src="demo" />

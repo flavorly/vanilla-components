@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { MenuItemWithLink } from '../../core'
+import { MenuItemWithLink } from '../core'
 import VPNavScreenMenuGroupLink from './VPNavScreenMenuGroupLink.vue'
 
 defineProps<{

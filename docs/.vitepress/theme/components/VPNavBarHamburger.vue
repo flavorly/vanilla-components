@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
-import { VTHamburger } from '../../core'
+import { VTHamburger } from '../core'
 import { useConfig } from '../composables/config'
 
 defineProps<{

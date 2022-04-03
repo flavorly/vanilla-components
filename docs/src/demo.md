@@ -1,5 +1,5 @@
 ---
-demo: blank
+layout: LayoutBlank
 ---
 
 moo
