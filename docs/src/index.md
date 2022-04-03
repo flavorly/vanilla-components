@@ -8,8 +8,11 @@ title: Vanilla Components - A beautiful set of Vanilla Components for Vue 3 + Ta
 
 <script setup>
 import Home from '/@theme/pages/Home.vue';
+import {VanillaInput} from '@indigit/vanilla-components'
 </script>
 
 <Home />
+
+<VanillaInput/>
 
 <Wrapper src="demo" />

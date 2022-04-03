@@ -5,11 +5,10 @@ module.exports = {
   mode: 'jit',
   darkMode: 'class', // or 'media' or 'class'*,
   content: [
-    './docs/.vuepress/components/**/*.{js,jsx,ts,tsx,vue}',
-    './docs/.vuepress/theme/**/*.{js,jsx,ts,tsx,vue}',
-    './docs/.vuepress/*.{js,jsx,ts,tsx,vue}',
-    './docs/guide/**/*.{js,jsx,ts,tsx,vue,md}',
-    './node_modules/@indigit/vanilla-components/dist/**/*.{js,ts,tsx,vue}',
+    './.vitepress/theme/**/*.{js,jsx,ts,tsx,vue}',
+    './src/**/*.{js,jsx,ts,tsx,vue}',
+    './../src/**/*.{js,jsx,ts,tsx,vue}',
+    //'./node_modules/@indigit/vanilla-components/dist/**/*.{js,ts,tsx,vue}',
   ],
   theme: {
     colors: {

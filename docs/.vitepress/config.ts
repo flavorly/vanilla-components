@@ -67,23 +67,15 @@ const sidebar: SidebarConfig = {
 		{
 			text: 'Concepts',
 			items: [
-				{ text: 'Preset file', link: '/concepts/preset-file' },
-				{ text: 'Actions', link: '/concepts/actions' },
-				{ text: 'Templates', link: '/concepts/templates' },
+				{ text: 'Variants', link: '/concepts/variants' },
+				{ text: 'Configuration', link: '/concepts/configuration' },
+				{ text: 'Layouts', link: '/concepts/layouts' },
 			],
 		},
 		{
-			text: 'Guides',
+			text: 'Inputs & Forms',
 			items: [
-				{ text: 'Writing a preset', link: '/guide/writing-a-preset' },
-				{ text: 'Using aliases', link: '/guide/using-aliases' },
-				{ text: 'Hosting', link: '/guide/hosting' },
-			],
-		},
-		{
-			text: 'Actions',
-			items: [
-				{ text: 'Extract templates', link: '/action/extract-templates' },
+				{ text: 'Input', link: '/components/input/input' },
 				{ text: 'Install packages', link: '/action/install-packages' },
 				{ text: 'Execute command', link: '/action/execute-command' },
 				{ text: 'Edit files', link: '/action/edit-files' },
@@ -94,7 +86,7 @@ const sidebar: SidebarConfig = {
 			],
 		},
 		{
-			text: 'Extra topics',
+			text: 'Other & UI',
 			items: [
 				{ text: 'Programmatic API', link: '/extra-topics/programmatic-api' },
 				{ text: 'Alternatives', link: '/extra-topics/alternatives' },
@@ -150,11 +142,6 @@ export default defineConfigWithTheme<Config>({
         btnText: '', // 'copy' | button text
         failText: 'Failed to Copy', // 'copy fail' | copy-fail text
         successText: 'Copied to Clipboard', // 'copy success' | copy-success text
-        // successTextDelay: Number, // 2000 | successText show time [ms]
-        //extraHtmlBeforeBtn: '<svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="white" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>', // '' | a html-fragment before <button>
-        // extraHtmlAfterBtn: String, // '' | a html-fragment after <button>
-        // showCodeLanguage: Boolean, // false | show code language before [btn || extraHtmlBeforeBtn] | [add-after-1.1.0]
-        // attachText: String, // '' | some text append copyText， Such as: copyright | [add-after-1.2.0]
       })
     }
   },
@@ -171,6 +158,7 @@ export default defineConfigWithTheme<Config>({
 			},
 		},
 		build: {
+      //cssCodeSplit: true,
 			minify: 'terser',
 			chunkSizeWarningLimit: Infinity,
 			rollupOptions: {

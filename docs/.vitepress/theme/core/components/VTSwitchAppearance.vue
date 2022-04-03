@@ -10,8 +10,7 @@ function useAppearance() {
   let userPreference = localStorage.getItem(storageKey) || 'auto'
   const query = window.matchMedia(`(prefers-color-scheme: dark)`)
   const classList = document.documentElement.classList
-  let isDark =
-    userPreference === 'auto' ? query.matches : userPreference === 'dark'
+  let isDark = userPreference === 'auto' ? query.matches : userPreference === 'dark'
   const setClass = (dark: boolean) => classList[dark ? 'add' : 'remove']('dark')
 
   query.onchange = (e) => {

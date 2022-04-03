@@ -31,9 +31,6 @@ Unless you use the `--no-git` flag, a repository will be created and the initial
 
 ## Adding actions
 
-In the `handler` function of the object exported by `preset.ts`, you can use [actions](/concepts/actions). Note that both `handler` and action functions are asynchronous, which means that the latter must be `await`ed. 
-
-To learn more about actions and how they are used, refer to their [documentation page](/concepts/actions).
 
 ```ts
 export default definePreset({
@@ -96,7 +93,6 @@ preset apply /path/to/your/preset/project
 
 ## Next steps
 
-The next step is to build your preset. You can learn more about actions in their [documentation](/concepts/actions).
 
 :::tip Archiving edited files
 When creating a preset from a test project, if you committed its initial state and started editing it, you can use `git diff` to list the modified files.
@@ -107,5 +103,3 @@ Combined with `git archive`, you can zip up all of the files you edited and unzi
 git archive -o update.zip HEAD $(git diff --diff-filter=M --name-only)
 ```
 :::
-
-Then, you will need to [publish your preset](/guide/hosting), or you can keep it local for your personal use. You can even use an [alias](/guide/using-aliases) to make it easier.

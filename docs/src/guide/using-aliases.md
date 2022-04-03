@@ -67,4 +67,3 @@ For instance, the following configuration will make the `preset apply config` co
 }
 ```
 
-The `directory` type is the same, but you can specify the directory instead of the preset file, which will be found automatically if [configured properly](/concepts/preset-file).
