@@ -149,6 +149,10 @@ export default defineConfigWithTheme<Config>({
 	vite: {
     resolve: {
       alias: {
+        // "@indigit/vanilla-components": "../../../src",
+        // "@/core": './../../src/core',
+        // "@/components": './../../src/components',
+        // "@/utils": './../../src/utils',
       },
     },
 		server: {

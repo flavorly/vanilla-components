@@ -18,9 +18,11 @@
     "postinstall-postinstall": "^2.1.0",
     "vue": "^3.2.31"
   },
+  "peerDependencies": {
+  },
   "dependencies": {
+    "@indigit/vanilla-components": "link:../src",
     "@faker-js/faker": "^6.0.0",
-    "@indigit/vanilla-components": "^0.6.17",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.0",
@@ -30,6 +32,6 @@
     "vitepress": "^0.22.3"
   },
   "msw": {
-    "workerDirectory": ".vuepress/public"
+    "workerDirectory": ".vitepress/public"
   }
 }
