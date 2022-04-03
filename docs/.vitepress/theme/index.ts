@@ -1,12 +1,22 @@
-import './styles/styles.css'
-//export { VPTheme as default } from '@vue/theme'
-import { VPTheme } from '@vue/theme';
-//import VPNavBarSearch from './components/VPNavBarSearch.vue';
+import './styles/index.css'
+import VPApp from './components/VPApp.vue'
+import VPNotFound from './components/VPNotFound.vue'
+import { Theme } from 'vitepress'
+import { withConfigProvider } from './composables/config'
+import {VanillaComponents} from "@indigit/vanilla-components";
+import VanillaWrapper from "../__theme/components/Wrapper.vue";
+import {watch} from "vue";
 
-export default {
-  ...VPTheme,
-  enhanceApp({ app }) {
-    // register global components
-    //app.component('MyGlobalComponent' /* ... */)
-  }
+const VPTheme: Theme = {
+  Layout: withConfigProvider(VPApp),
+  NotFound: VPNotFound,
+  enhanceApp({ app, router, siteData }) {
+
+    app.use(VanillaComponents);
+    app.component('VanillaWrapper', VanillaWrapper);
+  },
 }
+
+export default VPTheme;
+
+export type { Config } from './config'
