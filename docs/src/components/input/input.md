@@ -6,13 +6,13 @@ outline: deep
 
 A Native `<input />` for text, number, etc. with additional features for password input with hide & show button.
 
-## 🎨  Preview & Playground
+## Preview & Playground :framed_picture:
 
 Here you may find a preview of the component, with error & possible variants.
 
 <wrapper src="components/input/demo" />
 
-## 📥 Props
+## Props :inbox_tray:
 
 Props available for this component extending the default variant & global props.
 
@@ -22,21 +22,20 @@ Props available for this component extending the default variant & global props.
 | `placeholder` | Placeholder for this input | `String`        | `''`     |
 | `type`        | Type of input              | `String`        | `'text'` |
 
-## 🧬 Slots
+## Slots :dna:
 
 Extends the default slots but binds the following properties to the `after`
 
 
-| Prop              | Description/Type  |
-|:------------------|:------------------|
-| `hasErrors`       | true / false      | 
-| `type`            | Type of input     |
-| `showingPassword` | true/false        |
+| Slot    | Attribute                  | Description |
+|:--------|:---------------------------|:------------|
+| `after` | Placeholder for this input | `String`    | 
+| `after` | Type of input              | `String`    |
 
 
 Slots available for this component extending the default variant & global slots.
 
-## 🙇‍♂️ Example & Snippet
+## Snippet :surfer:
 
 Here you may find a preview of the component, with error & possible variants.
 
