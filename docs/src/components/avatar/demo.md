@@ -4,7 +4,7 @@ tailwind: true
 ---
 
 <script setup>
-import ExampleInput from './ExampleInput.vue';
+import ExampleAvatar from './ExampleAvatar.vue';
 </script>
 
-<ExampleInput />
+<ExampleAvatar />

@@ -40,7 +40,6 @@ import { VanillaInput } from '@indigit/vanilla-components';
 import { onMounted, ref, defineComponent } from 'vue';
 
 defineComponent({ name: 'ExampleInput' });
-onMounted(() => window.parent.postMessage('mounted', '*'));
 
 const value = ref(null);
 const value2 = ref(null);

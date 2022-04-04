@@ -1,13 +1,11 @@
 <template>
-  <div class="p-6 rounded  border border-gray-200 bg-gray-100 dark:bg-[#282c34] dark:border-gray-700 font-inter antialiased">
-    <slot>
+  <div class="p-6 rounded border border-gray-200 bg-gray-100 dark:bg-[#282c34] dark:border-gray-700 font-inter antialiased text-gray-800 dark:text-white">
       <Content/>
-    </slot>
   </div>
 </template>
 
 <script setup lang="ts">
-import {onMounted, onBeforeMount, watch} from 'vue';
+import {onMounted, watch, ref, nextTick} from 'vue';
 import { useStorage } from '@vueuse/core';
 import { importTailwindOnDev, removeVitePressStylesOnDemo } from "/@theme/support/stylesHelper";
 
@@ -22,6 +20,8 @@ const watchThemeMode = (mode: string) => {
 onMounted(() => {
   const flag = useStorage('vue-theme-appearance', 'light') // returns Ref<boolean>
   watch(flag, watchThemeMode, {immediate: true});
+
+  window.parent.postMessage('mounted', '*');
 
   importTailwindOnDev()
   removeVitePressStylesOnDemo();

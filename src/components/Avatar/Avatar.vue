@@ -70,27 +70,27 @@
           name="uploadButton"
           v-bind="{triggerFileUploadAction, hasErrors, photoPreview}"
         >
-          <button
+          <VanillaButton
             v-if="!photoPreview"
-            class="mt-2 px-4 py-2"
             type="button"
+            :variant="uploadButtonVariant"
             @click="triggerFileUploadAction"
           >
             {{ uploadButtonLabel }}
-          </button>
+          </VanillaButton>
         </slot>
         <slot
           name="resetButton"
           v-bind="{resetPhoto, hasErrors, photoPreview}"
         >
-          <button
+          <VanillaButton
             v-if="photoPreview"
-            class="mt-2 px-4 py-2"
             type="button"
+            :variant="resetButtonVariant"
             @click="resetPhoto"
           >
             {{ resetButtonLabel }}
-          </button>
+          </VanillaButton>
         </slot>
       </div>
     </div>
@@ -126,12 +126,14 @@ import {
 } from '@/components/Avatar/index';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
+import VanillaButton from '@/components/Button/Button.vue';
 
 export default defineComponent({
     name: 'VanillaAvatar',
     components: {
         VanillaFormErrors,
         VanillaFormFeedback,
+        VanillaButton,
     },
     inheritAttrs: false,
     compatConfig: {
@@ -162,6 +164,14 @@ export default defineComponent({
         resetButtonLabel: {
             type: [String, undefined] as PropType<string | undefined>,
             default: 'Clear Photo',
+        },
+        uploadButtonVariant: {
+            type: [String, undefined] as PropType<string | undefined>,
+            default: undefined,
+        },
+        resetButtonVariant: {
+            type: [String, undefined] as PropType<string | undefined>,
+            default: undefined,
         },
     },
     setup(props) {

@@ -33,7 +33,7 @@ export default {
   },
   mounted() {
     window.addEventListener('message', this.receiveMessage)
-    this.mounted = true
+    this.mounted = true;
   },
   beforeUnmount() {
     window.removeEventListener('message', this.receiveMessage)
@@ -41,11 +41,14 @@ export default {
   methods: {
     receiveMessage(message) {
       if (['vue-devtools-proxy', 'vue-devtools-backend', 'vue-devtools-backend-injection'].includes(message.data.source)) {
-        return
+          return;
       }
 
       if (message.data === 'mounted') {
-        this.height = `${this.$refs.frame.contentWindow.document.body.scrollHeight}px`
+
+        setTimeout(() => {
+          this.height = `${this.$refs.frame.contentWindow.document.body.scrollHeight}px`
+        }, 500);
       }
     }
   }

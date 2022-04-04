@@ -75,6 +75,7 @@ const sidebar: SidebarConfig = {
 		{
 			text: 'Inputs & Forms',
 			items: [
+				{ text: 'Avatar', link: '/components/avatar/avatar' },
 				{ text: 'Input', link: '/components/input/input' },
 				{ text: 'Install packages', link: '/action/install-packages' },
 				{ text: 'Execute command', link: '/action/execute-command' },
