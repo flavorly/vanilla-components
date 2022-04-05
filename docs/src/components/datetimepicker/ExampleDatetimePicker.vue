@@ -23,7 +23,7 @@
 
 <script setup type="ts">
 import { VanillaDatetimePicker } from '@indigit/vanilla-components';
-import { onMounted, ref, defineComponent } from 'vue';
+import { ref, defineComponent } from 'vue';
 
 defineComponent({ name: 'ExampleDatetimePicker' });
 
