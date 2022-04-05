@@ -40,7 +40,6 @@ But enough of talk, lets see it in action!
 
 !!!include(./src/_includes/title-props.md)!!!
 
-
 | Prop                       | Description                              | Accepted Values       | Default            |
 |:---------------------------|:-----------------------------------------|:----------------------|:-------------------|
 | `config`                   | Array of configuration to the table      | [Object]              | `{}`               |
@@ -62,6 +61,67 @@ But enough of talk, lets see it in action!
 | `actionsMethod`            | HTTP Method to send Actions              | ['get','put','post']  | `post`             |
 | `onActionExecutedCallback` | Hook/Function after Action executed      | [Function, undefined] | `undefined`        |
 | `onExceptionCallback`      | Hook/Function after Axios Exception      | [Function, undefined] | `undefined`        |
+
+
+## Configuration :joystick:
+
+Here you will find a sample of JSON configuration that you can pass on prop `config`. For a more in depth example please check the demo available on the snippet.
+
+<<< @/components/datatables/demo-config.json
+
+## API Response & Requests :desert_island:
+
+### Server Side Response
+
+While we don't dictate how you should handle your data response, and you are still free to override the default **fetchData** method. You are still required to follow some patterns when it comes to pagination. 
+
+While making this library my main use case was to use it along with Laravel ® + InertiaJS ®. Bellow you find a demo data of what your API should reply for the default fetchData, you can also find more details in the source code of the MirageJS mock server on this repository:
+
+<<< @/components/datatables/demo-response.json
+
+Response must include : 
+
+| Key     | Description                                        |
+|:--------|:---------------------------------------------------|
+| `data`  | Array of of items, representing your resources     |
+| `links` | next, previous, and array of pages and their links |
+| `meta`  | Total number of records, current, etc              |
+
+### Client Side Request
+
+All requests made by the table are using Axios, this way you can hook your credentials or authorization with Axios Interceptor
+Bellow you will find what parameters are sent to server-side so you can build any server side adaptors.
+
+<<< @/components/datatables/demo-request.json
+
+Request Params explained :
+
+| Key           | Description                                     |
+|:--------------|:------------------------------------------------|
+| `search`      | Search Query when the user searches             |
+| `perPage`     | How many items to show for the  page / take     |
+| `selected`    | Array of the primary keys selected              |
+| `selectedAll` | If all items matching the criteria are selected |
+| `filters`     | Array with Key, Value of the applied filters    |
+| `sorting`     | Array with sorting's applied & their direction  |
+| `action`      | Action selected to perform bulk actions         |
+
+!!!include(./src/_includes/title-events.md)!!!
+
+| Event            | Description                 | Value            |
+|:-----------------|:----------------------------|:-----------------|
+| `fetchedSuccess` | API call finishes           | `Array<Results>` |
+| `fetchError`     | API call fails              | `Exception`      |
+| `actionExecuted` | Action was executed         | `Action`         |
+| `sortingUpdated` | Sorting was updated         | `Column`         |
+| `navigateToPage` | Navigates/switch pages      | `String<Page>`   |
+| `filtersSaved`   | Filters was applied & saved | `Array<Filter>`  |
+| `mounted`        | Datatable was initialized   | `Boolean`        |
+| `unmounted`      | Datatable was destroyed     | `Boolean`        |
+| `search`         | Search was performed        | `String`         |
+| `openedFilters`  | Filters Dialog Opened       | `Boolean`        |
+| `openedSettings` | Settings Dialog Opened      | `Boolean`        |
+
 
 
 !!!include(./src/_includes/title-slots.md)!!!
@@ -224,7 +284,7 @@ this slot let you override the current skeleton.
 
 ### Slot `default`
 
-The main slow for each row / record / <td> being displayed. 
+The main slow for each row / record / td being displayed. 
 
 | Attribute    | Description                | Type      |
 |:-------------|:---------------------------|:----------|
@@ -297,9 +357,11 @@ Dialog that shows the filters to apply
 | `filters`          | Array of Filters Available | `Array`   |
 
 
-# Caveats
 
-- When using GET on fetch..
+## Caveats & Bugs :bug:
+
+- When using method GET to fetch items, we are unable to send filters in a proper way, for the time being please use post
+- Overriding certain slots can still cause issues, please kindly double-check has the library lacks of tests.
 
 
 

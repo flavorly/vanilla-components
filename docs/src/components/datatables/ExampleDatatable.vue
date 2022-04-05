@@ -1,36 +1,36 @@
 <template>
-		<div class="">
-				<VanillaDatatable
-						:config="config"
-						:unique-name="'payments'"
-						:columns="columns"
-						:options="options"
-						:translations="translations"
-						:actions="actions"
-						:per-page-options="perPageItemsOptions"
-						:filters="filters"
-						:fetch-endpoint="'/datatables'"
-						:actions-endpoint="'/datatables'"
-            @fetchedSuccess="onFetched"
-            @fetchError="onFetched"
-            @openedSettings="onFetched"
-            @openedFilters="onFetched"
-				>
-						<template #rowId="{result, resultRaw}">
-								<span><u>{{ result }}</u></span>
-						</template>
+  <div>
+      <VanillaDatatable
+        :config="config"
+        :unique-name="'payments'"
+        :columns="columns"
+        :options="options"
+        :translations="translations"
+        :actions="actions"
+        :per-page-options="perPageItemsOptions"
+        :filters="filters"
+        :fetch-endpoint="'/datatables'"
+        :actions-endpoint="'/datatables'"
+        @fetchedSuccess="onFetched"
+        @fetchError="onFetched"
+        @openedSettings="onFetched"
+        @openedFilters="onFetched"
+      >
+          <template #rowId="{result, resultRaw}">
+              <span><u>{{ result }}</u></span>
+          </template>
 
-						<template #actionDeleteItems="{action}">
-								<TrashIcon class="h-4 w-4"/><span>{{ action.label }}</span>
-						</template>
-
-				</VanillaDatatable>
-		</div>
+          <template #actionDeleteItems="{action}">
+              <TrashIcon class="h-4 w-4"/><span>{{ action.label }}</span>
+          </template>
+      </VanillaDatatable>
+  </div>
 </template>
 <script type="ts">
-import {VanillaDatatable, VanillaDropdownOption } from '@indigit/vanilla-components';
-import {onMounted, defineComponent} from 'vue';
-import { TrashIcon } from '@heroicons/vue/outline'
+import {VanillaDatatable, VanillaDropdownOption} from '@indigit/vanilla-components';
+import {defineComponent} from 'vue';
+import {TrashIcon} from '@heroicons/vue/outline'
+
 export default defineComponent({
 		name: 'ExampleDatatables',
 		components: {
@@ -150,7 +150,6 @@ export default defineComponent({
 								value: 5,
 								defaultValue: 5,
 								options: [],
-								rules: []
 						},
 						{
 								name: 'amount',
