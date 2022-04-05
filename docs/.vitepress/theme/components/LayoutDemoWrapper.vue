@@ -1,4 +1,5 @@
 <template>
+  <ClientOnly>
     <div class="flex content-center items-center h-full w-full max-w-full">
       <iframe
         v-if="mounted"
@@ -12,6 +13,7 @@
         }">
       </iframe>
     </div>
+  </ClientOnly>
 </template>
 
 <script>
