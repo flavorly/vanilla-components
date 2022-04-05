@@ -6,6 +6,7 @@ import { withConfigProvider } from './composables/config'
 import {VanillaComponents} from "@indigit/vanilla-components";
 import LayoutBlank from "./components/LayoutBlank.vue";
 import LayoutDemoWrapper from "./components/LayoutDemoWrapper.vue";
+import { makeServer } from "../../mocks/server";
 
 const VPTheme: Theme = {
   Layout: withConfigProvider(VPApp),
@@ -15,6 +16,9 @@ const VPTheme: Theme = {
     app.use(VanillaComponents);
     app.component('Wrapper', LayoutDemoWrapper);
     app.component('LayoutBlank', LayoutBlank);
+
+    // Start the fake API server
+    makeServer();
   },
 }
 

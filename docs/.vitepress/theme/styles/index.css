@@ -73,3 +73,12 @@ a.VPNavBarTitle {
     justify-content: center;
     align-items: center;
 }
+
+.vt-doc td{
+    font-size:13px;
+    line-height: 13px;
+}
+
+/*.vt-doc :not(pre) > code{*/
+/*    background-color: #a3bffa*/
+/*}*/

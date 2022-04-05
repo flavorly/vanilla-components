@@ -70,29 +70,42 @@ const sidebar: SidebarConfig = {
 				{ text: 'Variants', link: '/concepts/variants' },
 				{ text: 'Configuration', link: '/concepts/configuration' },
 				{ text: 'Layouts', link: '/concepts/layouts' },
+        { text: 'Properties', link: '/concepts/layouts' },
 			],
 		},
 		{
 			text: 'Inputs & Forms',
 			items: [
-				{ text: 'Avatar', link: '/components/avatar/avatar' },
-				{ text: 'Input', link: '/components/input/input' },
-				{ text: 'Install packages', link: '/action/install-packages' },
-				{ text: 'Execute command', link: '/action/execute-command' },
-				{ text: 'Edit files', link: '/action/edit-files' },
-				{ text: 'Delete paths', link: '/action/delete-paths' },
-				{ text: 'Apply nested preset', link: '/action/apply-nested-preset' },
-				{ text: 'Group', link: '/action/group' },
-				{ text: 'Prompt (experimental)', link: '/action/prompt' },
+				{ text: 'Avatar', link: '/components/avatar/index' },
+				{ text: 'Button', link: '/components/button/index' },
+				{ text: 'Input', link: '/components/input/index' },
+				{ text: 'Checkbox', link: '/components/checkbox/index' },
 			],
 		},
 		{
 			text: 'Other & UI',
 			items: [
-				{ text: 'Programmatic API', link: '/extra-topics/programmatic-api' },
-				{ text: 'Alternatives', link: '/extra-topics/alternatives' },
+        { text: 'Card', link: '/components/card/index' },
+        { text: 'Datatables', link: '/components/datatables/index' },
 			],
 		},
+
+    {
+      text: 'Other Demos',
+      items : [
+
+        { text: 'Programmatic API', link: '/extra-topics/programmatic-api' },
+        { text: 'Alternatives', link: '/extra-topics/alternatives' },
+
+        { text: 'Install packages', link: '/action/install-packages' },
+        { text: 'Execute command', link: '/action/execute-command' },
+        { text: 'Edit files', link: '/action/edit-files' },
+        { text: 'Delete paths', link: '/action/delete-paths' },
+        { text: 'Apply nested preset', link: '/action/apply-nested-preset' },
+        { text: 'Group', link: '/action/group' },
+        { text: 'Prompt (experimental)', link: '/action/prompt' },
+      ]
+    }
 	],
 }
 
@@ -144,6 +157,7 @@ export default defineConfigWithTheme<Config>({
         failText: 'Failed to Copy', // 'copy fail' | copy-fail text
         successText: 'Copied to Clipboard', // 'copy success' | copy-success text
       })
+      md.use(require('markdown-it-include'))
     }
   },
 

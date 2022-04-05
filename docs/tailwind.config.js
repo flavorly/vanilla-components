@@ -36,6 +36,11 @@ module.exports = {
         850: '#1D2532',
         900: '#1a202c',
       },
+      // gray:{
+      //   ...colors.zinc,
+      //   750: '#404040',
+      //   850: '#262626',
+      // },
       // Primary color, change to your own
       primary: colors.indigo,
     },

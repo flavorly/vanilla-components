@@ -33,6 +33,8 @@
     "lib:build": "vite build",
     "lib:watch": "vite build --watch",
     "lib:publish": "npm publish --access public",
+    "watch:both": "concurrently \"yarn lib:watch\" \"yarn watch:docs\"",
+    "watch:docs": "yarn --cwd \"docs\" dev",
     "analyze": "vite build --config analyze.config.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"

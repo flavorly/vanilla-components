@@ -29,9 +29,12 @@
     "@vueuse/core": "^8.2.4",
     "markdown-it-copy": "^1.2.0",
     "tailwindcss": "^3.0.16",
-    "vitepress": "^0.22.3"
-  },
-  "msw": {
-    "workerDirectory": ".vitepress/public"
+    "vitepress": "^0.22.3",
+    "markdown-it-include": "^2.0.0",
+    "collect.js": "^4.32.0",
+    "fuse.js": "^6.4.6",
+    "lodash": "^4.17.21",
+    "miragejs": "^0.1.43",
+    "paginatedjs": "^1.1.1"
   }
 }
