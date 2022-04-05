@@ -80,6 +80,7 @@ const sidebar: SidebarConfig = {
 				{ text: 'Button', link: '/components/button/index' },
 				{ text: 'Input', link: '/components/input/index' },
 				{ text: 'Checkbox', link: '/components/checkbox/index' },
+				{ text: 'Date Time Picker', link: '/components/datetimepicker/index' },
 			],
 		},
 		{
