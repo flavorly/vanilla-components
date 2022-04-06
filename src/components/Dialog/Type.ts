@@ -1,24 +1,21 @@
 import { Data, WithVariantPropsAndClassesList } from '@/core/types';
 import { InputHTMLAttributes } from 'vue';
 import { VanillaDialogClassesValidKeys } from './Config';
-import { Options, Placement } from '@popperjs/core';
 
 export declare type VanillaDialogValue = boolean;
 
 export declare type VanillaDialogProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaDialogValue,
-  text?: string,
-  buttonVariant?: string,
+  title?: string,
   teleport?: boolean,
   teleportTo?: string | HTMLElement,
-  tagName?: string,
-  dropdownTagName?: string,
-  disabled?: boolean,
-  toggleOnFocus?: boolean,
-  toggleOnClick?: boolean,
-  toggleOnHover?: boolean,
-  placement?: Placement | string,
-  popperOptions?: Options,
   overlay?: boolean,
-  showArrow?: boolean,
+  closeable?: boolean,
+  closeableOnClickOutside?: boolean,
+  closeableOnPressEscape?: boolean,
+  paddingOnModal?: boolean,
+  paddingOnBody?: boolean,
+  divided?: boolean,
+  as?: string,
+  size: 'default' | 'small' | 'medium' | 'large' | 'full',
 } & InputHTMLAttributes & Data, VanillaDialogClassesValidKeys>;

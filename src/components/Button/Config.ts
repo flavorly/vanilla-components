@@ -135,7 +135,7 @@ export const VanillaButtonConfig = {
           commonClasses.buttonRadius,
           commonClasses.buttonText,
           commonClasses.buttonRing,
-          'cursor-pointer relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 dark:bg-gray-800 dark:text-white dark:hover:text-white dark:border-gray-600 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-indigo-300 focus:ring-indigo-500 active:bg-gray-100 active:text-gray-500',
+          'cursor-pointer relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 dark:bg-gray-800 dark:text-white dark:hover:text-white dark:border-gray-600 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-primary-300 focus:ring-primary-500 active:bg-gray-100 active:text-gray-500',
         ),
         container: '',
         spinner: '',

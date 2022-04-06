@@ -1,6 +1,6 @@
 <template>
   <ClientOnly>
-    <div class="flex content-center items-center h-full w-full max-w-full">
+    <div class="demo-container">
       <iframe
         v-if="mounted"
         ref="frame"

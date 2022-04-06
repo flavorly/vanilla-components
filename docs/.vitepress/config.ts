@@ -88,6 +88,7 @@ const sidebar: SidebarConfig = {
 			items: [
         { text: 'Card', link: '/components/card/index' },
         { text: 'Datatables', link: '/components/datatables/index' },
+        { text: 'Slideover', link: '/components/slideover/index' },
 			],
 		},
 

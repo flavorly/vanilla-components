@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 rounded border border-gray-200 bg-gray-100 dark:bg-[#282c34] dark:border-gray-700 font-inter antialiased text-gray-800 dark:text-white">
+  <div class="p-6 bg-gray-100 dark:bg-[#282c34] font-inter antialiased text-gray-800 dark:text-white">
       <Content/>
   </div>
 </template>
