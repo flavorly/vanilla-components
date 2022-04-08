@@ -55,7 +55,6 @@
   <!-- Content Line centered -->
   <div
     v-if="layout === 'content'"
-    class="px-6 py-3 sm:mt-0 sm:grid"
     :class="[
       configuration.classesList.contentContainer,
       withPadding ? configuration.classesList.contentWithPadding : '',
