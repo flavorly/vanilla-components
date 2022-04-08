@@ -2,11 +2,16 @@
   <!-- Inline - Label -> Input -->
   <div
     v-if="layout === 'inline'"
-    class="sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6 px-6 py-5"
+    :class="[
+      configuration.classesList.inlineContainer,
+      withPadding ? configuration.classesList.inlineWithPadding : '',
+    ]"
   >
     <div
       v-if="hasSlot($slots.label) || label !== undefined"
-      class="flex items-center text-sm leading-3 font-medium text-gray-500 dark:text-white"
+      :class="[
+        configuration.classesList.inlineLabel,
+      ]"
     >
       <slot name="label">
         <VanillaFormLabel
@@ -16,7 +21,9 @@
       </slot>
     </div>
     <div
-      class="text-sm leading-5 sm:col-span-2 mt-2 sm:mt-0"
+      :class="[
+        configuration.classesList.inlineInput,
+      ]"
       v-bind="$attrs"
     >
       <slot
@@ -28,7 +35,10 @@
   <!-- Standard Label in a line, Input in a new line -->
   <div
     v-if="layout === 'row'"
-    class="px-6 py-3 mt-0 grid space-y-2"
+    :class="[
+      configuration.classesList.rowContainer,
+      withPadding ? configuration.classesList.rowWithPadding : '',
+    ]"
   >
     <slot name="label">
       <VanillaFormLabel
@@ -46,6 +56,10 @@
   <div
     v-if="layout === 'content'"
     class="px-6 py-3 sm:mt-0 sm:grid"
+    :class="[
+      configuration.classesList.contentContainer,
+      withPadding ? configuration.classesList.contentWithPadding : '',
+    ]"
   >
     <slot name="label">
       <VanillaFormLabel
@@ -112,6 +126,11 @@ export default defineComponent({
             validator: (layout: string) => {
                 return ['row', 'inline', 'content', undefined].includes(layout);
             },
+        },
+        withPadding: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+            required: false,
         },
     },
     setup(props) {

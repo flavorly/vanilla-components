@@ -34,7 +34,7 @@
     "lib:watch-old": "vite build --watch",
     "lib:publish": "npm publish --access public",
     "watch:lib": "nodemon --exec 'yarn lib:build'",
-    "watch:both": "concurrently \"yarn lib:watch\" \"yarn watch:docs\"",
+    "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
     "watch:docs": "yarn --cwd \"docs\" dev",
     "analyze": "vite build --config analyze.config.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
