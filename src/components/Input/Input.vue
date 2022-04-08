@@ -30,7 +30,10 @@
         v-if="hasSlot($slots.after) || hasErrors || type === 'password'"
         :class="configuration.classesList.addonAfter"
       >
-        <slot name="after">
+        <slot
+          name="after"
+          v-bind="{hasErrors, type, showingPassword }"
+        >
           <ExclamationCircleIcon
             v-if="hasErrors && type !== 'password'"
             :class="configuration.classesList.addonClasses"

@@ -1,0 +1,21 @@
+{
+  "search":"An Amazing Search query",
+  "perPage":5,
+  "selected":[
+    "1",
+    "2",
+    "3",
+  ],
+  "selectedAll":false,
+  "filters":{
+    "id":"10"
+  },
+  "sorting":[
+    {
+      "column":"gateway",
+      "direction":"desc",
+      "sortedTimes":1
+    }
+  ],
+  "action":"delete-items"
+}

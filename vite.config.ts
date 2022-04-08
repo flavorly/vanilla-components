@@ -71,9 +71,9 @@ export default defineConfig(({ command, mode }) => {
       },
       rollupOptions: {
         plugins: [
-          typescript({
-            "exclude": ["node_modules"]
-          }),
+          // typescript({
+          //   "exclude": ["node_modules"]
+          // }),
         ],
         //inlineDynamicImports: true,
         external: [

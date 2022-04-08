@@ -102,7 +102,7 @@ export const VanillaDatatableConfig = {
     paginationFullLeft: 'rounded-l-md rounded-r-none focus:ring-0',
     paginationFullRight: '-ml-px rounded-r-md rounded-l-none focus:ring-0',
     paginationFullPage: 'focus:bg-gray-300/10',
-    paginationFullPageActive: 'bg-indigo-50 text-indigo-600',
+    paginationFullPageActive: 'bg-primary-50 text-primary-600',
 
     skeletonTableBody: 'bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700',
     skeletonTableColumn: 'px-2 py-3 whitespace-nowrap leading-5',

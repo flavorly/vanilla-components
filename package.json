@@ -1,6 +1,6 @@
 {
   "name": "@indigit/vanilla-components",
-  "version": "0.6.17",
+  "version": "0.6.18",
   "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
   "repository": {
     "type": "git",
@@ -31,8 +31,11 @@
   },
   "scripts": {
     "lib:build": "vite build",
-    "lib:watch": "vite build --watch",
+    "lib:watch-old": "vite build --watch",
     "lib:publish": "npm publish --access public",
+    "watch:lib": "nodemon --exec 'yarn lib:build'",
+    "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
+    "watch:docs": "yarn --cwd \"docs\" dev",
     "analyze": "vite build --config analyze.config.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"

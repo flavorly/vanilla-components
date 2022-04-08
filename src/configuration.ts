@@ -38,6 +38,7 @@ import {
   VanillaSelectCountryOptionConfig,
 
   VanillaSkeletonBarConfig,
+  VanillaSlideoverConfig,
 
   VanillaTextareaConfig,
   VanillaToggleConfig,
@@ -82,6 +83,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaSelectCountryOption: VanillaSelectCountryOptionConfig,
 
         VanillaSkeletonBar: VanillaSkeletonBarConfig,
+        VanillaSlideover: VanillaSlideoverConfig,
         VanillaTextarea: VanillaTextareaConfig,
         VanillaToggle: VanillaToggleConfig,
       },

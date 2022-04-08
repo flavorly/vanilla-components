@@ -6,8 +6,8 @@ export const commonClasses = {
   // Inputs, selects, textarea on default theme
   inputsBackground: 'bg-white dark:bg-gray-900',
   inputsBackgroundDarkerOrSofter: 'bg-gray-50 dark:bg-gray-800',
-  inputsText: 'leading-normal sm:text-sm',
-  inputsTextColor: 'placeholder-gray-500/90',
+  inputsText: 'leading-normal sm:text-sm ',
+  inputsTextColor: 'text-gray-700 dark:text-white placeholder-gray-500/90',
   inputsBorder: 'border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400',
   inputsSpacing: 'px-4 py-2.5',
   inputsShadows: 'shadow',

@@ -128,12 +128,12 @@
       <!-- Items selected Information -->
       <div
         v-if="hasItemsSelected"
-        class="bg-indigo-100 dark:bg-indigo-500"
+        class="bg-primary-100 dark:bg-primary-500"
       >
         <div class="px-4 sm:px-8 py-3 flex items-center">
           <div class="flex items-center">
             <div class="flex">
-              <div class="text-center text-sm text-indigo-900 dark:text-white space-x-1 space-y-1 sm:space-y-0">
+              <div class="text-center text-sm text-primary-900 dark:text-white space-x-1 space-y-1 sm:space-y-0">
                 <span v-html="$t('datatables.select-all-text',{count: countSelectedRowsFormatted})" />
                 <a
                   class="table-selected-action"

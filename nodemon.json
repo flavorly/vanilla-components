@@ -1,0 +1,14 @@
+{
+  "verbose": false,
+  "ext": "js,vue,css",
+  "ignore": [
+    "dist/*",
+    "docs/*",
+    "utils/*"
+  ],
+  "exec": "yarn lib:build",
+  "delay": 3500,
+  "events": {
+    "restart": "osascript -e 'display notification \"Component Changed - Building\" with title \"Vanilla Components\"'"
+  }
+}

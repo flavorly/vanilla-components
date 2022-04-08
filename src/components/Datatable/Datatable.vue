@@ -13,7 +13,8 @@
           v-bind="{
             actions,
             hasActions,
-            hasAnyItemsSelected
+            hasAnyItemsSelected,
+            onActionSelected
           }"
         >
           <VanillaDatatableActions
@@ -39,14 +40,19 @@
         <!-- Filters-->
         <slot
           name="headerFilters"
-          v-bind="{hasFilters,isShowingFilters,filtersActiveCount}"
+          v-bind="{
+            filters: filtersComputed,
+            hasFilters,
+            isShowingFilters,
+            filtersActiveCount
+          }"
         >
           <div
             v-if="hasFilters"
             :class="[classesList.headerFiltersContainer]"
           >
             <VanillaButton
-              @click="isShowingFilters = true"
+              @click="onFiltersVisit"
             >
               <FilterIcon :class="[classesList.headerFiltersIcon]" />
               <span
@@ -67,7 +73,9 @@
           v-bind="{
             refreshable: options.refreshable,
             isFetching,
-            isShowingSettings
+            isShowingSettings,
+            userSettings,
+            refresh,
           }"
         >
           <VanillaDropdown :class="[classesList.headerSettingsContainer]">
@@ -91,7 +99,7 @@
               <span v-text="translations.refresh" />
             </VanillaDropdownOption>
             <!-- Edit Settings -->
-            <VanillaDropdownOption @click="isShowingSettings = true">
+            <VanillaDropdownOption @click="onSettingsVisit">
               <CogIcon :class="[classesList.headerSettingsEditIcon]" />
               <span v-text="translations.settings" />
             </VanillaDropdownOption>
@@ -252,8 +260,8 @@
               isFetching,
               isAllItemsInPageSelected,
               hasAnyItemsSelectedForCurrentPage,
+              columns: columnsComputed,
               selectAllItemsInPage,
-              columns
             }"
           >
             <VanillaDatatableHead
@@ -451,7 +459,7 @@
         isShowingSettings,
         userSettings,
         perPageOptions,
-        columnsComputed
+        columns: columnsComputed
       }"
     >
       <!-- Action Confirmation Modal -->
@@ -626,11 +634,17 @@ export default defineComponent({
         },
         columns: {
             type: [Array] as PropType<VanillaDatatableColumns>,
-            required: true,
+            required: false,
+            default(){
+                return [];
+            },
         },
         options: {
             type: [Object] as PropType<VanillaDatatableOptions>,
-            required: true,
+            required: false,
+            default(){
+                return [];
+            },
         },
         actions: {
             type: [Array] as PropType<VanillaDatatableActionsType>,
@@ -651,8 +665,8 @@ export default defineComponent({
         filtersKey: {
             type: [String] as PropType<string | number>,
             required: false,
-            default(rawProps: { primaryKey: string | number; }){
-                return rawProps.primaryKey;
+            default(rawProps: { uniqueName: string | number; }){
+                return rawProps.uniqueName;
             },
         },
         filtersBaseUrl: {
@@ -668,7 +682,8 @@ export default defineComponent({
         },
         translations: {
             type: [Object] as PropType<VanillaDatatableTranslations>,
-            required: true,
+            default: undefined,
+            required: false,
         },
         fetchData: {
             type: [Function, undefined] as PropType<VanillaDatatableFetchDataFunction | undefined>,
@@ -722,6 +737,8 @@ export default defineComponent({
         'mounted',
         'unmounted',
         'search',
+        'openedFilters',
+        'openedSettings',
     ],
     setup(props, { emit }) {
 
@@ -1359,6 +1376,22 @@ export default defineComponent({
         }, 700);
 
         /**
+        * On click to visit/open settings
+        **/
+        const onSettingsVisit = () => {
+            isShowingSettings.value = true;
+            emit('openedSettings', true);
+        };
+
+        /**
+         * On click to visit/open filters
+         **/
+        const onFiltersVisit = () => {
+            isShowingFilters.value = true;
+            emit('openedFilters', true);
+        };
+
+        /**
          * Converts the local storage to the local user settings on mounted
          **/
         const fromUserStorageToUserSettings = () => {
@@ -1523,6 +1556,8 @@ export default defineComponent({
             onPageNavigated,
             onFiltersSaved,
             onFiltersReset,
+            onSettingsVisit,
+            onFiltersVisit,
             onSearch,
             classesList: configuration.classesList as VanillaDatatableClassesValidKeys,
         };
