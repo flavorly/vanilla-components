@@ -1,70 +1,47 @@
 <template>
-  <div class="flex items-center justify-center mx-auto text-center mt-2">
-    <!-- Regular -->
-    <VanillaCheckbox
+  <div class="h-[500px]">
+    <VanillaPhoneNumber
       v-model="value"
-      :value="'accepted'"
-      :checked-value="'accepted'"
-      :unchecked-value="'notAccepted'"
+      :country-code="valueCountry"
       :feedback="'Im useful helper out here, choose wisely'"
-      align="center"
-    />
-  </div>
-
-  <div class="flex items-center justify-center mx-auto text-center mt-2">
-    <pre>{{ JSON.stringify(value) }}</pre>
-  </div>
-
-  <div class="h-1 my-5" />
-
-  <div class="flex items-center justify-center space-x-2">
-    <!-- Multiple -->
-    <VanillaCheckbox
-      v-model="valueMultiple"
-      :value="'accepted'"
-      :checked-value="'accepted'"
-      :unchecked-value="'notAccepted'"
-      class="inline-flex"
+      :favorite-countries="['PT','ES','US']"
+      country-placeholder="Pick your phone country"
+      phone-placeholder="National Number"
     />
 
-    <VanillaCheckbox
-      v-model="valueMultiple"
-      :value="'accepted2'"
-      :checked-value="'accepted2'"
-      :unchecked-value="'notAccepted2'"
-      class="inline-flex"
-    />
-  </div>
+    <div class="flex items-center justify-center mx-auto text-center mt-2">
+      <pre>{{ JSON.stringify(value) }}</pre>
+    </div>
 
-  <div class="flex items-center justify-center mx-auto text-center mt-2">
-    <pre>{{ JSON.stringify(valueMultiple) }}</pre>
-  </div>
+    <div class="h-1 my-5" />
 
-  <div class="h-1 my-5" />
-
-  <!-- Errors -->
-  <div class="flex items-center justify-center mx-auto text-center mt-2">
-    <VanillaCheckbox
+    <!-- Regular -->
+    <VanillaPhoneNumber
       v-model="value2"
-      :errors="'Sorry for this name is already taken'"
-      :feedback="'I only show when i dont have errors'"
-      align="center"
+      :country-code="value2Country"
+      :feedback="'Im useful helper out here, choose wisely'"
+      :errors="'Sorry but your phone number looks to be invalid.'"
+      country-placeholder="Pick your phone country"
+      phone-placeholder="National Number"
     />
-  </div>
 
-  <div class="flex items-center justify-center mx-auto text-center mt-2">
-    <pre>{{ JSON.stringify(value2) }}</pre>
+    <div class="flex items-center justify-center mx-auto text-center mt-2">
+      <pre>{{ JSON.stringify(value2) }}</pre>
+    </div>
   </div>
 </template>
 
 
 <script setup type="ts">
-import { VanillaCheckbox } from '@indigit/vanilla-components';
-import { ref, defineComponent } from 'vue';
+import { VanillaPhoneNumber } from '@indigit/vanilla-components';
+import { onMounted, ref, defineComponent } from 'vue';
 
-defineComponent({ name: 'ExampleCheckbox' });
+defineComponent({ name: 'ExamplePhoneNumber' });
+onMounted(() => window.parent.postMessage('mounted', '*'));
 
-const value = ref('accepted');
-const value2 = ref(true);
-const valueMultiple = ref([]);
+const value = ref('+35191523813');
+const valueCountry = 'PT';
+
+const value2 = ref('915279172');
+const value2Country = 'PT';
 </script>

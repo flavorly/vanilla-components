@@ -4,7 +4,7 @@ tailwind: true
 ---
 
 <script setup>
-import ExampleCheckbox from './ExampleCheckbox.vue';
+import ExamplePhoneInput from './ExamplePhoneInput.vue';
 </script>
 
-<ExampleCheckbox />
+<ExamplePhoneInput />

@@ -6,6 +6,7 @@
     <div>
       <vanilla-select-country
         v-model="phoneCountryCode"
+        :favorite-countries="favoriteCountries"
         :variant="localVariant"
         :show-errors="false"
         :has-item-bellow="true"
@@ -60,7 +61,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref, Ref, watch, onMounted } from 'vue';
+import { defineComponent, PropType, ref, Ref, watch } from 'vue';
 import { parsePhoneNumber, getCountryCallingCode } from 'libphonenumber-js';
 import { CountryCode, PhoneNumber, CountryCallingCode } from 'libphonenumber-js/types';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core';

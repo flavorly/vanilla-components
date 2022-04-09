@@ -4,7 +4,14 @@
     :class="configuration.class"
   >
     <slot>
-      {{ label }}
+      <span
+        v-if="safe"
+        v-html="label"
+      />
+      <span
+        v-else
+        v-text="label"
+      />
     </slot>
   </label>
 </template>
