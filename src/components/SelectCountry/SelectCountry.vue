@@ -19,7 +19,7 @@
     :clearable="false"
     :select-on-close="false"
   >
-    <template #label="{ option: selectedCountry, className, isSelected, hasErrors }">
+    <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
       <VanillaSelectCountryOption
         :country="selectedCountry"
         :selected="isSelected"
