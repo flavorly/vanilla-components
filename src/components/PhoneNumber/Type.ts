@@ -10,4 +10,11 @@ export declare type VanillaPhoneNumberProps = WithVariantPropsAndClassesList<{
   phonePlaceholder?: string | undefined
   countryPlaceholder?: string | undefined,
   favoriteCountries?: string | undefined,
+  placeholder?: string,
+  searchBoxPlaceholder?: string,
+  noResultsText?: string,
+  searchingText?: string,
+  loadingClosedPlaceholder?: string,
+  loadingMoreResultsText?: string,
+  minimumInputLengthText?: string,
 } & InputHTMLAttributes & Data, VanillaPhoneNumberClassesValidKeys>;

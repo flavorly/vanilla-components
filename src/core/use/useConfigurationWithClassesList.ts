@@ -33,7 +33,7 @@ export default function useConfigurationWithClassesList<ComponentOptions extends
   const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>();
 
   const computedConfiguration = computed(() => ({
-    ...vm.props,
+    ...vm?.props || {},
     ...parseVariantWithClassesList(
       propsValues.value,
       classesListKeys,

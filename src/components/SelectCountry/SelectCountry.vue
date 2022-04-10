@@ -10,10 +10,18 @@
     :clear-search-on-close="true"
     :variant="localVariant"
     :show-errors="showErrors"
+    :search-box-placeholder="searchBoxPlaceholder"
+    :no-results-text="noResultsText"
+    :searching-text="searchingText"
+    :loading-closed-placeholder="loadingClosedPlaceholder"
+    :loading-more-results-text="loadingMoreResultsText"
+    :minimum-input-length-text="minimumInputLengthText"
+    :clearable="false"
+    :select-on-close="false"
   >
-    <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
+    <template #label="{ option: selectedCountry, className, isSelected, hasErrors }">
       <VanillaSelectCountryOption
-        :country="country"
+        :country="selectedCountry"
         :selected="isSelected"
         :parent-classes="className"
         :has-errors="hasErrors"
@@ -42,6 +50,7 @@ import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
 import VanillaSelectCountryOption from '@/components/SelectCountry/SelectCountryOption/SelectCountryOption.vue';
 import find from 'lodash/find';
 import first from 'lodash/first';
+import { MinimumInputLengthTextProp } from '@/components/RichSelect';
 
 export default defineComponent({
     name: 'VanillaSelectCountry',
@@ -73,6 +82,30 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             required: false,
             default: false,
+        },
+        searchBoxPlaceholder: {
+            type: String,
+            default: 'Search for your country here...',
+        },
+        noResultsText: {
+            type: String,
+            default: '😟 Sorry but we did not find any countries to your query. Try another one query?',
+        },
+        searchingText: {
+            type: String,
+            default: 'Please wait, searching for countries...',
+        },
+        loadingClosedPlaceholder: {
+            type: String,
+            default: 'Loading, please wait ...',
+        },
+        loadingMoreResultsText: {
+            type: String,
+            default: 'Loading more options...',
+        },
+        minimumInputLengthText: {
+            type: [Function, String] as PropType<MinimumInputLengthTextProp>,
+            default: () => (minimumInputLength: number): string => `Search more countries by entering ${minimumInputLength} or more characters`,
         },
     },
     emits: [
@@ -138,6 +171,7 @@ export default defineComponent({
             preFetchOptions,
             props,
             bindAttributes,
+            selectedCountry,
         };
     },
 });

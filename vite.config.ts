@@ -82,14 +82,27 @@ export default defineConfig(({ command, mode }) => {
           '@heroicons/vue',
           '@heroicons/vue',
           '@popperjs/core',
-          '@variantjs/core',
-          '@variantjs/vue',
           'body-scroll-lock',
           'flatpickr',
           'fuse.js',
           'libphonenumber-js',
-          'lodash',
           'moment-timezone',
+          'lodash',
+          'lodash/each',
+          'lodash/filter',
+          'lodash/orderBy',
+          'lodash/merge',
+          'lodash/mapValues',
+          'lodash/find',
+          'lodash/assign',
+          'lodash/debounce',
+          'lodash/findIndex',
+          'lodash/merge',
+          'lodash/first',
+          'lodash/pick',
+          'lodash/omit',
+          'lodash/uniqueId',
+          'lodash/filter',
         ],
         output: {
           globals: {
@@ -100,76 +113,3 @@ export default defineConfig(({ command, mode }) => {
     },
   }
 })
-
-// export default defineConfig({
-//     plugins: [
-//       vue(),
-//       // Generate Definitions
-//       dts({
-//         cleanVueFileName: false,
-//         staticImport: true,
-//         beforeWriteFile(filePath, content){
-//           return {
-//             filePath: filePath.replace(`src`, ``),
-//             content,
-//           };
-//         }
-//       }),
-//       // Copy vue files so Webstorm can be happy.
-//       copy({
-//         targets: [
-//           // Vue Components
-//           { src: 'src/components/**/*.vue', dest: 'dist' },
-//           // Vanilla Components Configuration
-//           { src: 'src/components/**/Config.ts', dest: 'dist' },
-//           // Vanilla Base Configuration
-//           { src: 'src/core/config/*.ts', dest: 'dist' },
-//         ],
-//         hook: 'writeBundle',
-//         flatten: false, // Keep directory structure
-//       }),
-//     ],
-//     resolve:{
-//         alias: [
-//             { find: '/^~/', replacement: ''},
-//             { find: '@', replacement: resolve(__dirname,'src') }
-//         ]
-//     },
-//     build: {
-//         minify: false,
-//         sourcemap: true,
-//         lib: {
-//             entry: resolve(__dirname, 'src/index.ts'),
-//             name: 'vanilla-components',
-//             fileName: (format) => `index.${format}.js`
-//         },
-//         rollupOptions: {
-//             plugins: [
-//               // typescript({
-//               //   "exclude": ["node_modules"]
-//               // }),
-//             ],
-//             //inlineDynamicImports: true,
-//             external: [
-//               'vue',
-//               '@headlessui/vue',
-//               '@heroicons/vue',
-//               '@heroicons/vue',
-//               '@popperjs/core',
-//               '@variantjs/core',
-//               '@variantjs/vue',
-//               'body-scroll-lock',
-//               'flatpickr',
-//               'fuse.js',
-//               'libphonenumber-js',
-//               'lodash',
-//               'moment-timezone',
-//             ],
-//             output: {
-//                 globals: {
-//                     vue: 'Vue',
-//                 },
-//             },
-//         },
-//     },
-// })

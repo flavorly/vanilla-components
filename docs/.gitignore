@@ -1,3 +1,4 @@
 node_modules
 .vitepress/dist
 yarn.lock
+pnpm.lock.yaml

@@ -16,6 +16,11 @@
         :class="[
           configuration.classesList.select,
         ]"
+        :search-box-placeholder="searchBoxPlaceholder"
+        :no-results-text="noResultsText"
+        :searching-text="searchingText"
+        :loading-closed-placeholder="loadingClosedPlaceholder"
+        :loading-more-results-text="loadingMoreResultsText"
       />
       <vanilla-input
         v-model="phoneNumber"
@@ -71,6 +76,7 @@ import VanillaInput from '@/components/Input/Input.vue';
 import VanillaSelectCountry from '@/components/SelectCountry/SelectCountry.vue';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
+import { MinimumInputLengthTextProp } from '@/components/RichSelect';
 
 export default defineComponent({
     name: 'VanillaPhoneNumber',
@@ -95,16 +101,40 @@ export default defineComponent({
         },
         phonePlaceholder: {
             type: [String, Number] as PropType<string | number>,
-            default: 'Select your phone indicative',
+            default: 'Your national number',
         },
         countryPlaceholder: {
             type: [String, Number] as PropType<string | number>,
-            default: 'Your national number.',
+            default: 'Select your phone indicative',
         },
         favoriteCountries: {
             type: [Array, Object, undefined] as PropType<VanillaFavoriteCountriesValue>,
             required: false,
             default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
+        },
+        searchBoxPlaceholder: {
+            type: String,
+            default: 'Your Phone Number country',
+        },
+        noResultsText: {
+            type: String,
+            default: '😟 Sorry but we did not find any countries to your query. Try another one query?',
+        },
+        searchingText: {
+            type: String,
+            default: 'Please wait, searching for results...',
+        },
+        loadingClosedPlaceholder: {
+            type: String,
+            default: 'Loading, please wait ...',
+        },
+        loadingMoreResultsText: {
+            type: String,
+            default: 'Loading more options...',
+        },
+        minimumInputLengthText: {
+            type: [Function, String] as PropType<MinimumInputLengthTextProp>,
+            default: () => (minimumInputLength: number): string => `Search more countries by entering ${minimumInputLength} or more characters`,
         },
     },
     emits: [

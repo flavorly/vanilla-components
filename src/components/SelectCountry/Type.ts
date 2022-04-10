@@ -1,5 +1,5 @@
 import { Data, WithVariantPropsAndClassesList } from '@/core/types';
-import { InputHTMLAttributes, PropType } from 'vue';
+import { InputHTMLAttributes } from 'vue';
 import { VanillaSelectCountryClassesValidKeys } from './Config';
 
 
@@ -10,10 +10,13 @@ export declare type VanillaFavoriteCountriesValue =  undefined | string | string
 export declare type VanillaSelectCountryProps = WithVariantPropsAndClassesList<{
   modelValue?: VanillaSelectCountryValue,
   favoriteCountries?: string | undefined,
-  labelWithDialCode: {
-    type: boolean,
-    required: boolean,
-    default: boolean,
-  },
-  labelWithCountryCode: boolean
+  labelWithDialCode?: boolean,
+  labelWithCountryCode: boolean,
+  placeholder?: string,
+  searchBoxPlaceholder?: string,
+  noResultsText?: string,
+  searchingText?: string,
+  loadingClosedPlaceholder?: string,
+  loadingMoreResultsText?: string,
+  minimumInputLengthText?: string,
 } & InputHTMLAttributes & Data, VanillaSelectCountryClassesValidKeys>;

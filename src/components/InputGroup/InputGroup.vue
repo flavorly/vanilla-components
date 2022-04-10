@@ -123,7 +123,7 @@ export default defineComponent({
             default: 'row',
             required: false,
             validator: (layout: string) => {
-                return ['row', 'inline', 'content', undefined].includes(layout);
+                return ['row', 'inline', 'content'].includes(layout);
             },
         },
         withPadding: {
