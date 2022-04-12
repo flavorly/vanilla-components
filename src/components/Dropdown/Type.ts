@@ -21,4 +21,5 @@ export declare type VanillaDropdownProps = WithVariantPropsAndClassesList<{
   popperOptions?: Options,
   overlay?: boolean,
   showArrow?: boolean,
+  size?: string | undefined | 'default' | 'medium' | 'large' | 'extra-large' | 'super-large' | 'full-width',
 } & InputHTMLAttributes & Data, VanillaDropdownClassesValidKeys>;

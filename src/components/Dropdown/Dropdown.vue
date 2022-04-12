@@ -52,7 +52,15 @@
 
         <VanillaTransitionable :classes-list="configuration.classesList">
           <MenuItems
-            :class="configuration.classesList.dropdown"
+            :class="[
+              configuration.classesList.dropdown,
+              size === 'default' ? configuration.classesList.sizeDefault : '',
+              size === 'medium' ? configuration.classesList.sizeMedium : '',
+              size === 'large' ? configuration.classesList.sizeLarge : '',
+              size === 'extra-large' ? configuration.classesList.sizeXLarge : '',
+              size === 'super-large' ? configuration.classesList.sizeXXLarge : '',
+              size === 'full-width' ? configuration.classesList.sizeFull : '',
+            ]"
           >
             <div
               ref="menuItems"
@@ -179,6 +187,13 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             default: false,
         },
+        size: {
+            type: [String] as PropType<string>,
+            default: 'default',
+            validator(value: string) {
+                return ['default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value);
+            },
+        },
     },
     emits: [
         'update:modelValue',
@@ -214,46 +229,46 @@ export default defineComponent({
         };
 
         const hideDropdown = () => {
-            if (localValue.value === false){
+            if (localValue.value === false) {
                 return;
             }
             toggleDropdown();
         };
 
         const showDropdown = () => {
-            if (localValue.value === true){
+            if (localValue.value === true) {
                 return;
             }
             toggleDropdown();
         };
 
         const toggleOnHoverHandler = throttle(() => {
-            if (!props.toggleOnHover){
+            if (!props.toggleOnHover) {
                 return;
             }
             toggleDropdown();
         }, 1000);
 
         const toggleOnFocusHandler = () => {
-            if (!props.toggleOnFocus){
+            if (!props.toggleOnFocus) {
                 return;
             }
             toggleDropdown();
         };
 
         const closeOnClickOverlay = () => {
-            if (!props.overlay){
+            if (!props.overlay) {
                 return;
             }
             hideDropdown();
         };
 
         const createPopperInstance = () => {
-            if (!menu.value || !button.value?.$el){
+            if (!menu.value || !button.value?.$el) {
                 return;
             }
 
-            if (popperInstance.value !== null){
+            if (popperInstance.value !== null) {
                 return;
             }
 
@@ -266,7 +281,7 @@ export default defineComponent({
 
         const refreshPopperInstance = () => {
             const headlessUIState = menu.value != undefined;
-            if (headlessUIState){
+            if (headlessUIState) {
                 createPopperInstance();
             } else {
                 destroyPopperInstance();
@@ -274,7 +289,7 @@ export default defineComponent({
         };
 
         onMounted(() => {
-            if (localValue.value){
+            if (localValue.value) {
                 createPopperInstance();
                 toggleDropdown();
             }

@@ -17,10 +17,17 @@ export const VanillaDropdownConfig = {
       commonClasses.dropdownsBorder,
       commonClasses.dropdownsRadius,
       commonClasses.dropdownsShadows,
-      'top-5 w-56',
+      'top-5',
       'focus:ring-0 focus:outline-none',
       'overflow-hidden',
     ),
+
+    sizeDefault: 'w-56',
+    sizeMedium: 'w-64',
+    sizeLarge: 'w-72',
+    sizeXLarge: 'w-80',
+    sizeXXLarge: 'w-96',
+    sizeFull: 'w-full',
 
     menuItemsWrapper: 'space-y-1',
     menuItem : 'group flex items-center w-full px-4 py-3 text-sm leading-5 space-x-1',
