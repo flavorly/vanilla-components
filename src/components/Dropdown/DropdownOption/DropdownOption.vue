@@ -7,6 +7,7 @@
     <div
       :class="[
         classesList.menuItem,
+        classesList.menuItemSpacing,
         active ? classesList.menuItemHighlighted : classesList.menuItemNotHighlighted
       ]"
     >
