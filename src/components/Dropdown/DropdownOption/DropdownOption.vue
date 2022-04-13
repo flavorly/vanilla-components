@@ -4,7 +4,7 @@
     :as="as"
     :disabled="disabled"
   >
-    <button
+    <div
       :class="[
         classesList.menuItem,
         active ? classesList.menuItemHighlighted : classesList.menuItemNotHighlighted
@@ -13,7 +13,7 @@
       <slot v-bind="{ active }">
         <span v-text="text" />
       </slot>
-    </button>
+    </div>
   </MenuItem>
 </template>
 
@@ -44,10 +44,10 @@ export default defineComponent({
         as: {
             type: [String] as PropType<string>,
             required: false,
-            default: 'div',
+            default: 'template',
         },
     },
-    setup(props){
+    setup(props) {
         const classesList = useInjectsClassesList()!;
 
         return {

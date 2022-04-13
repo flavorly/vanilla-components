@@ -30,7 +30,7 @@ export const VanillaDropdownConfig = {
     sizeFull: 'w-full',
 
     menuItemsWrapper: 'space-y-1',
-    menuItem : 'group flex items-center w-full px-4 py-3 text-sm leading-5 space-x-1',
+    menuItem : 'group flex items-center w-full px-4 py-3 text-sm leading-5 space-x-1 cursor-pointer',
     menuItemHighlighted: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black z-10',
     menuItemNotHighlighted: 'text-gray-700 dark:text-white',
 
