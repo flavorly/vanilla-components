@@ -10,7 +10,8 @@ export const VanillaInputGroupConfig = {
     rowContainer: 'grid space-y-2',
     rowLabel: '',
     rowInput: '',
-    rowWithPadding: 'px-6 py-3 mt-0',
+    rowWithPadding: 'px-6 py-3.5 mt-0',
+
 
     contentContainer: 'sm:grid',
     contentLabel: '',

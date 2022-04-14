@@ -7,11 +7,16 @@
     <div
       :class="[
         classesList.menuItem,
-        classesList.menuItemSpacing,
+        withDefaultPadding ? classesList.menuItemSpacing : '',
         active ? classesList.menuItemHighlighted : classesList.menuItemNotHighlighted
       ]"
     >
-      <slot v-bind="{ active }">
+      <slot
+        v-bind="{
+          active,
+          classes: classesList.menuItemSpacing
+        }"
+      >
         <span v-text="text" />
       </slot>
     </div>
@@ -46,6 +51,11 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'template',
+        },
+        withDefaultPadding: {
+            type: [Boolean] as PropType<boolean>,
+            required: false,
+            default: false,
         },
     },
     setup(props) {
