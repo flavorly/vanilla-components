@@ -57,7 +57,8 @@
         configuration.classesList.body,
         bodyDivided ? configuration.classesList.bodyDivided : '',
         bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
-        bodyDarker ? configuration.classesList.bodyDarker : ''
+        bodyDarker ? configuration.classesList.bodyDarker : '',
+        bodyClasses,
       ]"
     >
       <slot name="default" />
@@ -121,6 +122,10 @@ export default defineComponent({
         bodyWithPadding: {
             type: [Boolean] as PropType<boolean>,
             default: false,
+        },
+        bodyClasses: {
+            type: [String] as PropType<string>,
+            default: '',
         },
     },
     setup(props) {

@@ -24,7 +24,6 @@
       :class="[
         configuration.classesList.inlineInput,
       ]"
-      v-bind="$attrs"
     >
       <slot
         v-bind="{label,name,layout}"

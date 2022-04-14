@@ -30,10 +30,10 @@
     }
   },
   "scripts": {
-    "lib:build": "vite build",
-    "lib:watch-old": "vite build --watch",
-    "lib:publish": "npm publish --access public",
-    "watch:lib": "nodemon --exec 'yarn lib:build'",
+    "build": "vite build",
+    "build:watch": "vite build --watch",
+    "build:watch-mon": "nodemon --exec 'yarn lib:build'",
+    "lib:publish": "yarn publish",
     "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
     "watch:docs": "yarn --cwd \"docs\" dev",
     "analyze": "vite build --config analyze.config.js",
