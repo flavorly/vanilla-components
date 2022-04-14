@@ -12,6 +12,8 @@ const defaultCard = {
 
   body: '',
   bodyDivided: '',
+  bodyDarker: 'bg-gray-50 dark:bg-gray-800',
+  bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
 
   footer: 'px-4 py-3 flex items-center justify-end text-right sm:px-6 border-t border-gray-200 dark:border-gray-700',
   footerBorder: 'border-t border-gray-200 dark:border-gray-700',

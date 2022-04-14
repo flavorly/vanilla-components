@@ -2,6 +2,7 @@
   <component
     :is="as"
     :class="configuration.classesList.card"
+    v-bind="$attrs"
   >
     <div
       v-if="hasSlot($slots.title) || hasSlot($slots.subtitle) || hasSlot($slots.actions) || title !== undefined || subtitle !== undefined"
@@ -52,10 +53,11 @@
     </div>
 
     <div
-      v-bind="$attrs"
       :class="[
         configuration.classesList.body,
-        bodyDivided ? configuration.classesList.bodyDivided : ''
+        bodyDivided ? configuration.classesList.bodyDivided : '',
+        bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
+        bodyDarker ? configuration.classesList.bodyDarker : ''
       ]"
     >
       <slot name="default" />
@@ -90,7 +92,7 @@ export default defineComponent({
     components: {
         VanillaCardFooter,
     },
-    inheritAttrs: false,
+    inheritAttrs: true,
     compatConfig: {
         MODE: 3,
     },
@@ -109,6 +111,14 @@ export default defineComponent({
             default: 'div',
         },
         bodyDivided: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyDarker: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyWithPadding: {
             type: [Boolean] as PropType<boolean>,
             default: false,
         },

@@ -98,7 +98,7 @@ export default defineComponent({
     components: {
         VanillaFormLabel,
     },
-    inheritAttrs: false,
+    inheritAttrs: true,
     compatConfig: {
         MODE: 3,
     },
@@ -128,7 +128,7 @@ export default defineComponent({
         },
         withPadding: {
             type: [Boolean] as PropType<boolean>,
-            default: false,
+            default: true,
             required: false,
         },
     },
