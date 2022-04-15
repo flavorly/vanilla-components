@@ -5,6 +5,7 @@
   >
     <div>
       <vanilla-select-country
+        ref="localRefCountry"
         v-model="phoneCountryCode"
         :favorite-countries="favoriteCountries"
         :variant="localVariant"
@@ -23,6 +24,7 @@
         :loading-more-results-text="loadingMoreResultsText"
       />
       <vanilla-input
+        ref="localRefPhone"
         v-model="phoneNumber"
         :variant="localVariant"
         :show-errors="false"
@@ -146,7 +148,8 @@ export default defineComponent({
         'update:phoneNumberInternational',
     ],
     setup(props, { emit }) {
-
+        const localRefPhone = ref(null);
+        const localRefCountry = ref(null);
         const localValue = useVModel(props, 'modelValue');
         const phoneCountryCode: CountryCode | Ref = ref(props.countryCode);
         const phoneDialCode: CountryCallingCode | Ref = ref(null);
@@ -205,6 +208,8 @@ export default defineComponent({
 
         return {
             configuration,
+            localRefPhone,
+            localRefCountry,
             localVariant,
             localErrors,
             hasErrors,

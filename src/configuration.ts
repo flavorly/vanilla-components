@@ -39,6 +39,7 @@ import {
 
   VanillaSkeletonBarConfig,
   VanillaSlideoverConfig,
+  VanillaStatusIndicatorConfig,
 
   VanillaTextareaConfig,
   VanillaToggleConfig,
@@ -84,6 +85,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
 
         VanillaSkeletonBar: VanillaSkeletonBarConfig,
         VanillaSlideover: VanillaSlideoverConfig,
+        VanillaStatusIndicator: VanillaStatusIndicatorConfig,
         VanillaTextarea: VanillaTextareaConfig,
         VanillaToggle: VanillaToggleConfig,
       },

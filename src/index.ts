@@ -61,7 +61,8 @@ export { default as VanillaSelectCountry } from './components/SelectCountry/Sele
 
 export { default as VanillaSkeletonBar } from './components/Skeletons/SkeletonBar/SkeletonBar.vue';
 
-export { default as VanillaSlideover } from './components/slideover/Slideover.vue';
+export { default as VanillaSlideover } from './components/Slideover/Slideover.vue';
+export { default as VanillaStatusIndicator } from './components/StatusIndicator/StatusIndicator.vue';
 
 export { default as VanillaTextarea } from './components/Textarea/Textarea.vue';
 export { default as VanillaToggle } from './components/Toggle/Toggle.vue';

@@ -81,7 +81,10 @@
               <DialogDescription
                 as="div"
                 :class="[
-                  paddingOnBody ? configuration.classesList.bodyWithPadding : '',
+                  bodyDivided ? configuration.classesList.bodyDivided : '',
+                  bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
+                  bodyDarker ? configuration.classesList.bodyDarker : '',
+                  bodyClasses,
                 ]"
               >
                 <slot
@@ -191,9 +194,21 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             default: false,
         },
-        paddingOnBody: {
-            type: Boolean as PropType<boolean>,
-            default: true,
+        bodyDivided: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyDarker: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyWithPadding: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyClasses: {
+            type: [String] as PropType<string>,
+            default: '',
         },
         divided: {
             type: Boolean as PropType<boolean>,
@@ -207,7 +222,7 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'default',
-            validator(align: string){
+            validator(align: string) {
                 return ['default', 'small', 'medium', 'large', 'full'].includes(align);
             },
         },

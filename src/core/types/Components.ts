@@ -36,6 +36,8 @@ import { VanillaSelectProps } from '@/components/Select/Type';
 import { VanillaSelectCountryProps } from '@/components/SelectCountry/Type';
 import { VanillaSelectCountryOptionProps } from '@/components/SelectCountry/SelectCountryOption/Type';
 import { VanillaSkeletonBarProps } from '@/components/Skeletons/SkeletonBar/Type';
+import { VanillaSlideoverProps } from '@/components/Slideover/Type';
+import { VanillaStatusIndicatorProps } from '@/components/StatusIndicator/Type';
 import { VanillaTextareaProps } from '@/components/Textarea/Type';
 import { VanillaToggleProps } from '@/components/Toggle/Type';
 /**
@@ -75,6 +77,9 @@ type VanillaComponentConfiguration = {
   VanillaSelectCountryOption?: VanillaSelectCountryOptionProps,
 
   VanillaSkeletonBar?: VanillaSkeletonBarProps,
+  VanillaSlideover?: VanillaSlideoverProps,
+  VanillaStatusIndicator?: VanillaStatusIndicatorProps,
+
   VanillaTextarea?: VanillaTextareaProps,
   VanillaToggle?: VanillaToggleProps,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

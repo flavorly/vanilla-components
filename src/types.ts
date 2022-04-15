@@ -25,5 +25,7 @@ export * from './components/Select/Type';
 export * from './components/SelectCountry/Type';
 export * from './components/SelectCountry/SelectCountryOption/Type';
 export * from './components/Skeletons/SkeletonBar/Type';
+export * from './components/Slideover/Type';
+export * from './components/StatusIndicator/Type';
 export * from './components/Textarea/Type';
 export * from './components/Toggle/Type';
