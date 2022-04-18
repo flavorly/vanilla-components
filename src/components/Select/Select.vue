@@ -114,12 +114,16 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             default: true,
         },
+        placeholder: {
+            type: String as PropType<string | undefined>,
+            default: 'Select an option',
+        },
         empty: {
             type: Object as PropType<NormalizedOption>,
-            default: () => {
+            default: (props) => {
                 return {
-                    value: null,
-                    text: '-',
+                    value: undefined,
+                    text: props.placeholder,
                 };
             },
         },
