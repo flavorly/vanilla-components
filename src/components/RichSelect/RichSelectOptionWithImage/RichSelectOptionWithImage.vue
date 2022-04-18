@@ -30,7 +30,7 @@
         />
       </div>
     </div>
-    <div
+    <p
       v-if="description"
       :class="[
         configuration.classesList.description,

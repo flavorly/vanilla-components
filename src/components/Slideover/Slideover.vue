@@ -20,7 +20,10 @@
           :leave-from="configuration.classesList.overlayLeaveFrom"
           :leave-to="configuration.classesList.overlayLeaveTo"
         >
-          <DialogOverlay :class="configuration.classesList.overlay" />
+          <DialogOverlay
+            :class="configuration.classesList.overlay"
+            @click="closeOnClickOutside"
+          />
         </TransitionChild>
         <div
           :class="[
@@ -66,32 +69,37 @@
                 >
                   <!-- Header -->
                   <div
-                    v-if="showHeader && title !== undefined"
+                    v-if="showHeader || hasSlot($slots.header)"
                     :class="configuration.classesList.titleWrapper"
                   >
                     <div :class="configuration.classesList.titleContainer">
-                      <div :class="configuration.classesList.titleInner">
-                        <!-- Title -->
-                        <slot
-                          name="title"
-                          v-bind="{title}"
-                        >
-                          <DialogTitle
-                            :class="configuration.classesList.title"
-                            v-text="title"
-                          />
-                        </slot>
-                        <!-- Subtitle -->
-                        <slot
-                          name="subtitle"
-                          v-bind="{subtitle}"
-                        >
-                          <p
-                            :class="configuration.classesList.subtitle"
-                            v-text="subtitle"
-                          />
-                        </slot>
-                      </div>
+                      <slot
+                        name="top"
+                        v-bind="{title, subtitle}"
+                      >
+                        <div :class="configuration.classesList.titleInner">
+                          <!-- Title -->
+                          <slot
+                            name="title"
+                            v-bind="{title}"
+                          >
+                            <DialogTitle
+                              :class="configuration.classesList.titleText"
+                              v-text="title"
+                            />
+                          </slot>
+                          <!-- Subtitle -->
+                          <slot
+                            name="subtitle"
+                            v-bind="{subtitle}"
+                          >
+                            <p
+                              :class="configuration.classesList.subtitle"
+                              v-text="subtitle"
+                            />
+                          </slot>
+                        </div>
+                      </slot>
                       <!-- Close Icon -->
                       <div
                         v-if="closeable"
@@ -235,7 +243,7 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'right',
-            validator(position: string){
+            validator(position: string) {
                 return ['left', 'right'].includes(position);
             },
         },
@@ -243,7 +251,7 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'medium',
-            validator(align: string){
+            validator(align: string) {
                 return ['default', 'small', 'medium', 'large', 'full'].includes(align);
             },
         },
@@ -264,6 +272,7 @@ export default defineComponent({
 
         const close = () => localValue.value = false;
         const open = () => localValue.value = true;
+        const closeOnClickOutside = () => props.closeableOnClickOutside && close();
 
         /**
          * Provided data

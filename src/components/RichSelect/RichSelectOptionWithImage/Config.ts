@@ -13,7 +13,7 @@ export const VanillaRichSelectOptionWithImageConfig = {
     image: 'flex-shrink-0 w-6 h-6 bg-gray-500 dark:bg-gray-800 bg-center bg-cover rounded-full border border-gray-300 dark:border-gray-500 shadow',
     label: 'block whitespace-nowrap truncate',
 
-    description: 'w-100 text-xs text-left mt-1',
+    description: 'w-100 text-xs text-left mt-1 truncate',
     descriptionSelected: 'font-normal opacity-60',
     descriptionRegular: 'opacity-60',
 
