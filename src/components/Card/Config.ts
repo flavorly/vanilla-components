@@ -1,5 +1,5 @@
 const defaultCard = {
-  card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-750 dark:text-white dark:shadow-dark-xl dark:border dark:border-white/10 overflow-x-hidden',
+  card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-750 dark:text-white dark:shadow-dark-xl dark:border dark:border-white/10',
 
   header: 'px-4 py-5 border-b border-gray-200 sm:px-6 dark:border-gray-700',
   headerInner: 'flex justify-between items-center flex-wrap sm:flex-nowrap',
@@ -11,7 +11,7 @@ const defaultCard = {
   actions: 'sm:ml-4 mt-4 sm:mt-0 flex space-x-1 content-center flex-wrap flex-shrink',
 
   body: '',
-  bodyDivided: '',
+  bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
   bodyDarker: 'bg-gray-50 dark:bg-gray-800',
   bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
 
@@ -19,9 +19,9 @@ const defaultCard = {
   footerBorder: 'border-t border-gray-200 dark:border-gray-700',
 
   footerSimple: 'p-4 sm:p-6',
-  footerSimpleRight: 'justify-end text-right flex items-center text-right sm:space-x-2',
-  footerSimpleLeft: 'justify-start text-left flex items-center text-right sm:space-x-2',
-  footerSimpleCenter: 'justify-center text-center flex items-center text-right sm:space-x-2',
+  footerSimpleRight: 'justify-end text-right flex items-center text-right space-x-2',
+  footerSimpleLeft: 'justify-start text-left flex items-center text-right space-x-2',
+  footerSimpleCenter: 'justify-center text-center flex items-center text-right space-x-2',
 
   footerWithGrid: 'p-4 sm:p-6',
   footerWithOneGrid: 'sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense',
@@ -39,7 +39,7 @@ const defaultCard = {
 
 export const VanillaCardConfig = {
   fixedClasses: {
-    bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
+    bodyDivided: '',
   },
   classes: defaultCard,
   variants: {

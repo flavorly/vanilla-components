@@ -9,7 +9,7 @@
   >
     <input
       :id="name"
-      ref="checkbox"
+      ref="localRef"
       :checked="isChecked"
       :value="value"
       style="display: none;"
@@ -25,7 +25,7 @@
       ]"
       type="button"
       v-bind="$attrs"
-      @click="$refs.checkbox.click()"
+      @click="$refs.localRef.click()"
     >
       <span
         :class="[isChecked ? 'translate-x-5' : 'translate-x-0']"
@@ -34,7 +34,7 @@
       >
         <!-- Checked Slot -->
         <slot
-          :isChecked="isChecked"
+          :is-checked="isChecked"
           name="unchecked"
         >
           <VanillaUncheckedIcon
@@ -44,7 +44,7 @@
         </slot>
         <!-- Un-Checked Slot -->
         <slot
-          :isChecked="isChecked"
+          :is-checked="isChecked"
           name="checked"
         >
           <VanillaCheckedIcon
@@ -57,7 +57,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, PropType } from 'vue';
+import { computed, defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useVariantProps, useConfigurationWithClassesList, useVModel } from '@/core';
 import { VanillaToggleValue, VanillaToggleProps, VanillaToggleClassesKeys, VanillaToggleConfig } from '@/components/Toggle/index';
 import VanillaCheckedIcon from '@/components/Icons/CheckedIcon.vue';
@@ -68,7 +68,6 @@ export default defineComponent({
     components: {
         VanillaUncheckedIcon,
         VanillaCheckedIcon,
-
     },
     inheritAttrs: false,
     compatConfig: {
@@ -104,7 +103,7 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'left',
-            validator(align: string){
+            validator(align: string) {
                 return ['left', 'right', 'center'].includes(align);
             },
         },
@@ -113,7 +112,7 @@ export default defineComponent({
         'update:modelValue',
     ],
     setup(props) {
-
+        const localRef = ref(null);
         const localValue = useVModel(props, 'modelValue');
 
         // When toggle changes, emit the update in a different way.
@@ -135,10 +134,10 @@ export default defineComponent({
             }
 
             // It's an object
-            if (typeof localValue.value === 'object' && localValue.value !== null){
+            if (typeof localValue.value === 'object' && localValue.value !== null) {
                 let temporaryValue = props.value;
                 let temporaryObject = localValue.value;
-                if (isChecked){
+                if (isChecked) {
                     // @ts-expect-error: We assume its a string or will throw an error
                     temporaryObject[temporaryValue] = true;
                 } else {
@@ -179,6 +178,7 @@ export default defineComponent({
             localValue,
             localVariant,
             localErrors,
+            localRef,
             hasErrors,
             props,
             emitUpdate,

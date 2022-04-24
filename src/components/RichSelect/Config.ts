@@ -23,7 +23,7 @@ const defaultVariant = {
     ),
 
     dropdown: mergeClasses(
-      'z-10 overflow-hidden',
+      'z-50 overflow-hidden',
       commonClasses.dropdownsBackground,
       commonClasses.dropdownsBorder,
       commonClasses.dropdownsRadius,
@@ -57,7 +57,7 @@ const defaultVariant = {
       'px-3 py-2',
     ),
 
-    selectedOption: 'font-semibold',
+    selectedOption: 'font-bold bg-gray-50',
     highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black',
     selectedHighlightedOption: 'font-semibold',
 

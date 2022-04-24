@@ -54,7 +54,7 @@
           v-bind="{photoPreview}"
         >
           <div
-            v-show="photoPreview"
+            v-if="photoPreview"
             class="mt-2"
           >
             <span
@@ -92,6 +92,10 @@
             {{ resetButtonLabel }}
           </VanillaButton>
         </slot>
+        <slot
+          name="otherButtons"
+          v-bind="{resetPhoto,triggerFileUploadAction}"
+        />
       </div>
     </div>
     <slot
@@ -115,7 +119,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, Ref, ref } from 'vue';
+import { defineComponent, PropType, Ref, ref, watch } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core';
 import {
     VanillaAvatarValue,
@@ -192,12 +196,17 @@ export default defineComponent({
         const photoInput: any = ref(null);
 
         const updateAvatarPreview = () => {
+            console.log('im here');
+
             const reader = new FileReader();
             reader.onload = (event: ProgressEvent<FileReader>) => {
                 photoPreview.value = event?.target?.result;
             };
+
             localValue.value = photoInput?.value?.files[0];
-            reader.readAsDataURL(<Blob>localValue.value);
+            if (localValue.value) {
+                reader.readAsDataURL(<Blob><unknown>localValue.value);
+            }
         };
 
         const triggerFileUploadAction = () => {
@@ -206,8 +215,15 @@ export default defineComponent({
 
         const resetPhoto = () => {
             localValue.value = undefined;
-            photoPreview.value = undefined;
+            photoPreview.value = null;
+            photoInput.value.value = null;
         };
+
+        watch(() => props.currentPhotoUrl, (newValue: string | undefined) => {
+            if (newValue) {
+                photoPreview.value = null;
+            }
+        });
 
         return {
             configuration,

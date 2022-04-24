@@ -311,11 +311,11 @@ export default defineComponent({
 
         let triggerClasses = '';
 
-        if (props.hasItemBellow){
+        if (props.hasItemBellow) {
             triggerClasses += configuration.classesList?.groupedBellow;
         }
 
-        if (props.hasItemAbove){
+        if (props.hasItemAbove) {
             triggerClasses += configuration.classesList?.groupedAbove;
         }
 

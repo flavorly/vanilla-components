@@ -3,6 +3,7 @@
     <div :class="configuration.classesList.wrapper">
       <select
         :id="name"
+        ref="localRef"
         v-model="localValue"
         :name="name"
         :autocomplete="autocomplete"
@@ -50,7 +51,7 @@
   </div>
 </template>
 <script lang="ts">
-import { computed, defineComponent, PropType, provide } from 'vue';
+import { computed, defineComponent, PropType, provide, ref } from 'vue';
 import { useBootVariant, useMultipleOptions, useMultipleVModel, useVariantProps, useConfigurationWithClassesList, hasSlot } from '@/core';
 import { VanillaSelectValue, VanillaSelectProps, VanillaSelectClassesKeys, VanillaSelectConfig } from '@/components/Select/index';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
@@ -113,18 +114,22 @@ export default defineComponent({
             type: Boolean as PropType<boolean>,
             default: true,
         },
+        placeholder: {
+            type: String as PropType<string | undefined>,
+            default: 'Select an option',
+        },
         empty: {
             type: Object as PropType<NormalizedOption>,
-            default: () => {
+            default: (props) => {
                 return {
-                    value: null,
-                    text: '-',
+                    value: undefined,
+                    text: props.placeholder,
                 };
             },
         },
     },
     setup(props) {
-
+        const localRef = ref(null);
         const { localValue } = useMultipleVModel(props, 'modelValue', props);
 
         const {
@@ -154,6 +159,7 @@ export default defineComponent({
         return {
             configuration,
             normalizedOptions,
+            localRef,
             localValue,
             localVariant,
             localErrors,

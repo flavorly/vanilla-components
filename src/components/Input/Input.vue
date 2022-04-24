@@ -14,6 +14,7 @@
       </div>
       <input
         :id="name"
+        ref="localRef"
         v-model="localValue"
         :name="name"
         :autocomplete="autocomplete"
@@ -108,6 +109,7 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const localRef = ref(null);
         const localValue = useVModel(props, 'modelValue');
         const localType = ref(props.type);
         const {
@@ -135,6 +137,7 @@ export default defineComponent({
             localVariant,
             localType,
             localErrors,
+            localRef,
             hasErrors,
             hasSlot,
             showingPassword,

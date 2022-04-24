@@ -1,7 +1,7 @@
 <template>
   <component
     :is="as"
-    ref="button"
+    ref="localRef"
     :class="[
       configuration.classesList.button,
       disabled ? configuration.classesList.disableOpacity : '',
@@ -78,7 +78,7 @@ export default defineComponent({
         'click',
     ],
     setup(props) {
-
+        const localRef = ref(null) as Ref<HTMLElement | null>;
         const localValue = ref(props.variant);
         const { localVariant } = useBootVariant(props, 'errors', localValue);
 
@@ -88,13 +88,10 @@ export default defineComponent({
             localVariant,
         );
 
-        const button = ref(null) as Ref<HTMLElement | null>;
-
-
         // Focus on mount, (useful for modals )
         onMounted(() => {
             if (props.focusOnMount) {
-                button.value?.focus();
+                localRef.value?.focus();
             }
         });
 
@@ -104,7 +101,7 @@ export default defineComponent({
             localVariant,
             props,
             hasSlot,
-            button,
+            localRef,
         };
     },
 });

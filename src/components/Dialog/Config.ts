@@ -7,7 +7,7 @@ export const VanillaDialogConfig = {
     wrapper: 'fixed inset-0 z-10 overflow-y-auto',
     inner: 'min-h-screen px-4 text-center',
     closeButton: 'inline-block h-screen align-middle',
-    overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-700/50 backdrop-blur-sm',
+    overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-900/50 backdrop-blur-sm',
 
     modalWithPadding: 'px-4 pt-5 pb-4 sm:my-8 sm:p-6',
 
@@ -33,8 +33,10 @@ export const VanillaDialogConfig = {
     titleText: 'text-lg leading-6 font-medium text-gray-900 dark:text-white',
 
     // Body
-    bodyWithPadding: 'px-4 py-5',
     body: 'mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300',
+    bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
+    bodyDarker: 'bg-gray-50 dark:bg-gray-800',
+    bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
 
     // Footer
     footer: 'px-4 py-5',

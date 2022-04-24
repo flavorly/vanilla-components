@@ -79,6 +79,8 @@
         <slot name="footerActions" />
       </VanillaCardFooter>
     </div>
+
+    <slot name="footerVanilla" />
   </component>
 </template>
 <script lang="ts">

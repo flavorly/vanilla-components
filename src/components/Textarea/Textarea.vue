@@ -9,6 +9,7 @@
       </div>
       <textarea
         :id="name"
+        ref="localRef"
         v-model="localValue"
         :name="name"
         :autocomplete="autocomplete"
@@ -52,7 +53,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
+import { defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
 import { hasSlot } from '@/core/helpers';
 import { VanillaTextareaValue, VanillaTextareaProps } from '@/components/Textarea/Type';
@@ -84,6 +85,7 @@ export default defineComponent({
         },
     },
     setup(props) {
+        const localRef = ref(null);
         const localValue = useVModel(props, 'modelValue');
         const {
             localErrors,
@@ -99,6 +101,7 @@ export default defineComponent({
 
         return {
             configuration,
+            localRef,
             localValue,
             localVariant,
             localErrors,

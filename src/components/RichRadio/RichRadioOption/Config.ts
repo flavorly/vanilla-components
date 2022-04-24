@@ -62,7 +62,7 @@ export const VanillaRichRadioOptionConfig = {
     compact: '',
     nonCompact: '',
 
-    radio: 'h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center',
+    radio: 'h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center flex-shrink-0',
     radioHighlighted: 'ring-primary-500',
     radioChecked: 'bg-primary-600 border-transparent dark:bg-gray-900 ring-offset-white dark:ring-offset-gray-900',
     radioUnchecked: 'bg-white dark:bg-gray-700 border-gray-300',
