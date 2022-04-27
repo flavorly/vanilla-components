@@ -10,7 +10,8 @@
     ]"
     v-bind="$attrs"
     :type="type"
-    @click="$emit('click',$event)"
+    :disabled="disabled"
+    @click="handleClickEvent"
   >
     <div :class="configuration.classesList.container">
       <slot name="default">
@@ -77,7 +78,7 @@ export default defineComponent({
     emits: [
         'click',
     ],
-    setup(props) {
+    setup(props, { emit }) {
         const localRef = ref(null) as Ref<HTMLElement | null>;
         const localValue = ref(props.variant);
         const { localVariant } = useBootVariant(props, 'errors', localValue);
@@ -87,6 +88,15 @@ export default defineComponent({
             VanillaButtonClassesKeys,
             localVariant,
         );
+
+        // If its disable, just ignore it
+        const handleClickEvent = (event: MouseEvent) => {
+            if (props.disabled || props.loading) {
+                event.preventDefault();
+                event.stopPropagation();
+            }
+            emit('click', event);
+        };
 
         // Focus on mount, (useful for modals )
         onMounted(() => {
@@ -102,6 +112,7 @@ export default defineComponent({
             props,
             hasSlot,
             localRef,
+            handleClickEvent,
         };
     },
 });
