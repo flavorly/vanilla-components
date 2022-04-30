@@ -229,8 +229,10 @@ export default defineComponent({
     },
     emits: [
         'update:modelValue',
+        'close',
+        'open',
     ],
-    setup(props) {
+    setup(props, { emit }) {
 
         const localValue = useVModel(props, 'modelValue');
         const { localVariant } = useBootVariant(props, 'errors', localValue);
@@ -241,8 +243,25 @@ export default defineComponent({
             localVariant,
         );
 
-        const close = () => localValue.value = false;
-        const open = () => localValue.value = true;
+        const close = () => {
+
+            if (!props.closeable) {
+                localValue.value = true;
+                return;
+            }
+
+            if (!props.closeableOnClickOutside) {
+                localValue.value = true;
+                return;
+            }
+            localValue.value = false;
+            emit('close');
+        };
+
+        const open = () => {
+            localValue.value = true;
+            emit('open');
+        };
 
         /**
          * Provided data
