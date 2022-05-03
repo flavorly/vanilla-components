@@ -12,6 +12,12 @@ export const VanillaDropdownConfig = {
 
     menuWrapper: 'absolute z-[100]',
 
+    // Wrapper when no popper is used
+    menuWrapperLeft: 'absolute origin-top-left left-0',
+    menuWrapperRight: 'absolute origin-top-right right-0',
+    menuWrapperCenter: 'absolute origin-top-right right-0 left-0 sm:left-auto sm:w-sm',
+    menuWrapperCenterFull: 'absolute origin-top-right right-0 mx-4 left-0 sm:left-auto sm:w-sm',
+
     dropdown: mergeClasses(
       commonClasses.dropdownsBackground,
       commonClasses.dropdownsBorder,
@@ -29,7 +35,9 @@ export const VanillaDropdownConfig = {
     sizeXXLarge: 'w-96',
     sizeFull: 'w-full',
 
-    menuItemsWrapper: 'space-y-1',
+    menuItemsWrapper: '',
+    menuItemsWrapperSpaced: 'space-y-1',
+
     menuItem : 'group flex items-center w-full  text-sm leading-5 space-x-1 cursor-pointer',
     menuItemHighlighted: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black z-10',
     menuItemNotHighlighted: 'text-gray-700 dark:text-white',

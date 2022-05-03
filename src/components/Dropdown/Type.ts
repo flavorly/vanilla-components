@@ -19,7 +19,10 @@ export declare type VanillaDropdownProps = WithVariantPropsAndClassesList<{
   toggleOnHover?: boolean,
   placement?: Placement | string,
   popperOptions?: Options,
+  usePopper: boolean,
   overlay?: boolean,
+  spacedItems?: boolean,
   showArrow?: boolean,
   size?: string | undefined | 'default' | 'medium' | 'large' | 'extra-large' | 'super-large' | 'full-width',
+  position?: string | undefined | 'center' | 'left' | 'right' | 'full-width',
 } & InputHTMLAttributes & Data, VanillaDropdownClassesValidKeys>;

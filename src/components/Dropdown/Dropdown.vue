@@ -2,7 +2,9 @@
   <Menu
     v-slot="{open}"
     as="div"
-    :class="configuration.classesList.wrapper"
+    :class="[
+      teleport ? configuration.classesList.wrapper : '',
+    ]"
   >
     <!-- Trigger -->
     <MenuButton
@@ -38,11 +40,17 @@
 
     <teleport
       :to="teleportTo"
-      :disabled="teleport"
+      :disabled="!teleport"
     >
       <div
         ref="menu"
-        :class="configuration.classesList.menuWrapper"
+        :class="[
+          configuration.classesList.menuWrapper,
+          !usePopper && position === 'left' ? configuration.classesList.menuWrapperLeft : '',
+          !usePopper && position === 'right' ? configuration.classesList.menuWrapperRight : '',
+          !usePopper && position === 'center' ? configuration.classesList.menuWrapperCenter : '',
+          !usePopper && position === 'full-width' ? configuration.classesList.menuWrapperCenterFull : '',
+        ]"
       >
         <div
           v-if="showArrow && open"
@@ -64,7 +72,10 @@
           >
             <div
               ref="menuItems"
-              :class="configuration.classesList.menuItemsWrapper"
+              :class="[
+                configuration.classesList.menuItemsWrapper,
+                spacedItems ? configuration.classesList.menuItemsWrapperSpaced : '',
+              ]"
             >
               <slot />
             </div>
@@ -140,7 +151,7 @@ export default defineComponent({
         },
         teleport: {
             type: Boolean,
-            default: false,
+            default: true,
         },
         teleportTo: {
             type: [String, Object] as PropType<string | HTMLElement>,
@@ -179,9 +190,17 @@ export default defineComponent({
             type: Object as PropType<Options>,
             default: (): Options => VanillaDropdownPopperDefaultOptions as Options,
         },
+        usePopper: {
+            type: Boolean,
+            default: true,
+        },
         overlay: {
             type: Boolean as PropType<boolean>,
             default: false,
+        },
+        spacedItems: {
+            type: Boolean as PropType<boolean>,
+            default: true,
         },
         showArrow: {
             type: Boolean as PropType<boolean>,
@@ -192,6 +211,13 @@ export default defineComponent({
             default: 'default',
             validator(value: string) {
                 return ['default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value);
+            },
+        },
+        position: {
+            type: [String] as PropType<string>,
+            default: 'center',
+            validator(value: string) {
+                return ['center', 'left', 'right', 'full-width'].includes(value);
             },
         },
     },
@@ -264,7 +290,7 @@ export default defineComponent({
         };
 
         const createPopperInstance = () => {
-            if (!menu.value || !button.value?.$el) {
+            if (!props.usePopper || !menu.value || !button.value?.$el) {
                 return;
             }
 
