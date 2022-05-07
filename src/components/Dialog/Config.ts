@@ -13,7 +13,7 @@ export const VanillaDialogConfig = {
 
     modal: mergeClasses(
       '',
-      'relative inline-block align-bottom sm:align-middle overflow-hidden ',
+      'relative inline-block align-middle overflow-hidden',
       'bg-white dark:bg-gray-750',
       'shadow-xl',
       'rounded-lg',
@@ -36,14 +36,17 @@ export const VanillaDialogConfig = {
     body: 'mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300',
     bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
     bodyDarker: 'bg-gray-50 dark:bg-gray-800',
-    bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
+    //bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
+    bodyWithPadding: 'px-4',
+    bodyWithPaddingBottom: 'pb-4',
+    bodyWithPaddingTop: 'pt-5',
 
     // Footer
     footer: 'px-4 py-5',
     footerDivided: 'border-t border-gray-200 dark:border-gray-700',
-    footerWithOneButton: 'sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense',
-    footerWithTwoButtons: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0',
-    footerWithThreeButtons: 'sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense',
+    footerWithOneButton: 'sm:grid sm:grid-cols-1 sm:gap-2 sm:grid-flow-row-dense',
+    footerWithTwoButtons: 'sm:grid sm:grid-cols-2 sm:gap-2 sm:grid-flow-row-dense space-y-2 sm:space-y-0',
+    footerWithThreeButtons: 'sm:grid sm:grid-cols-3 sm:gap-2 sm:grid-flow-row-dense',
 
     // Transition backdrop
     overlayEnter: 'duration-300 ease-out',

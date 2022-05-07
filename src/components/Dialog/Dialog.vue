@@ -83,6 +83,8 @@
                 :class="[
                   bodyDivided ? configuration.classesList.bodyDivided : '',
                   bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
+                  bodyWithPadding && (!hasSlot($slots.header) || title === undefined ) ? configuration.classesList.bodyWithPaddingTop : '',
+                  bodyWithPadding && !hasSlot($slots.footer) ? configuration.classesList.bodyWithPaddingBottom : '',
                   bodyDarker ? configuration.classesList.bodyDarker : '',
                   bodyClasses,
                 ]"
