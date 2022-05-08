@@ -101,7 +101,11 @@ export default defineComponent({
         // Focus on mount, (useful for modals )
         onMounted(() => {
             if (props.focusOnMount) {
-                localRef.value?.focus();
+                try {
+                    localRef?.value?.focus();
+                } catch (e) {
+                    localRef?.value?.$el?.focus();
+                }
             }
         });
 
