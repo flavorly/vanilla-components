@@ -6,7 +6,8 @@ export const VanillaDropdownConfig = {
   // Default appearance
   classes: {
     wrapper: 'relative',
-    container: 'inline-flex items-center content-center',
+    container: 'flex items-center content-center',
+    //container: 'inline-flex items-center content-center',
     chevronIcon: '-mr-1 ml-2 h-5 w-5',
     overlay: 'fixed top-0 right-0 left-0 bottom-0 z-[99] bg-black/50',
 
