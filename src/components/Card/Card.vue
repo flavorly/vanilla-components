@@ -55,7 +55,8 @@
     <div
       :class="[
         configuration.classesList.body,
-        bodyDivided ? configuration.classesList.bodyDivided : '',
+        bodyDivided && !bodyDarker ? configuration.classesList.bodyDivided : '',
+        bodyDivided && bodyDarker ? configuration.classesList.bodyDividedDarker : '',
         bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
         bodyDarker ? configuration.classesList.bodyDarker : '',
         bodyClasses,

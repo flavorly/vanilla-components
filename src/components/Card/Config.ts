@@ -12,6 +12,7 @@ const defaultCard = {
 
   body: '',
   bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
+  bodyDividedDarker: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-900',
   bodyDarker: 'bg-gray-50 dark:bg-gray-800',
   bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
 
