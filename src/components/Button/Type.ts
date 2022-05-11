@@ -4,6 +4,7 @@ import { VanillaButtonClassesValidKeys } from './Config';
 
 export declare type VanillaButtonProps = WithVariantPropsAndClassesList<{
     as?: string,
+    asDeep?: string,
     label?: string
     loading?: boolean,
     disabled?: boolean | string,

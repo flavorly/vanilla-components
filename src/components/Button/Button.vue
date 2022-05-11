@@ -2,6 +2,7 @@
   <component
     :is="as"
     ref="localRef"
+    :as="asDeep"
     :class="[
       configuration.classesList.button,
       disabled ? configuration.classesList.disableOpacity : '',
@@ -51,6 +52,10 @@ export default defineComponent({
     props: {
         ...useVariantProps<VanillaButtonProps>(),
         as: {
+            type: [String] as PropType<string>,
+            default: 'button',
+        },
+        asDeep: {
             type: [String] as PropType<string>,
             default: 'button',
         },
