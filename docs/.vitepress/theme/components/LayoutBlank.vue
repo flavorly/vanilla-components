@@ -5,9 +5,9 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted, watch, ref, nextTick} from 'vue';
+import {onMounted, watch } from 'vue';
 import { useStorage } from '@vueuse/core';
-import { importTailwindOnDev, removeVitePressStylesOnDemo } from "/@theme/support/stylesHelper";
+import { importTailwindOnDev, removeVitePressStylesOnDemo } from "./../support/stylesHelper";
 
 const watchThemeMode = (mode: string) => {
   if (mode === 'dark' || mode === 'auto') {
@@ -17,14 +17,15 @@ const watchThemeMode = (mode: string) => {
   }
 };
 
+const flag = useStorage('vitepress-theme-appearance', 'light') // returns Ref<boolean>
+
 onMounted(() => {
-  const flag = useStorage('vue-theme-appearance', 'light') // returns Ref<boolean>
-  watch(flag, watchThemeMode, {immediate: true});
-
   window.parent.postMessage('mounted', '*');
-
   importTailwindOnDev()
   removeVitePressStylesOnDemo();
 
 });
+
+watch(flag, watchThemeMode, {immediate: true});
+
 </script>

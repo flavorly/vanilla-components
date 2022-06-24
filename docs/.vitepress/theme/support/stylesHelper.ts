@@ -1,9 +1,10 @@
+// @ts-nocheck
 import {useData} from "vitepress";
 
 /** Dynamic Import Tailwind CSS on Hot Reload */
 export function importTailwindOnDev(): void {
     if(import.meta.env.DEV){
-        import('../styles/tailwind.css').then((module) => {
+        import('./../styles/tailwind.css').then((module) => {
             let nodes = document.getElementsByTagName('style'), index;
             for (index = nodes.length - 1; index >= 0; index--) {
                 if (nodes[index].innerText !== '' && nodes[index].innerText !== null && !nodes[index].innerText.includes('tailwind')) {
@@ -14,7 +15,7 @@ export function importTailwindOnDev(): void {
     }
 }
 
-/** Remove Vitepress Styles on Production */
+/** Remove Vite press Styles on Production */
 export function removeVitePressStylesOnDemo(): void {
     if(import.meta.env.PROD){
         document.querySelectorAll('style,link[rel="stylesheet"],link[rel="modulepreload"]').forEach((element) => {

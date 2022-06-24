@@ -1,5 +1,6 @@
 ---
-layout: LayoutBlank
+layout: page
+component: LayoutBlank
 tailwind: true
 ---
 
