@@ -4,6 +4,7 @@ import LayoutDemoWrapper from "./components/LayoutDemoWrapper.vue";
 import LayoutBlank from "./components/LayoutBlank.vue";
 import Layout from "./components/Layout.vue";
 import {VanillaComponents} from "@indigit/vanilla-components";
+import './styles/custom.css'
 
 export default {
   ...DefaultTheme,

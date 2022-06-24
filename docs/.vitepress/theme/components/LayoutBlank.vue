@@ -23,9 +23,8 @@ onMounted(() => {
   window.parent.postMessage('mounted', '*');
   importTailwindOnDev()
   removeVitePressStylesOnDemo();
-
 });
 
-watch(flag, watchThemeMode, {immediate: true});
+watch(flag, watchThemeMode, {immediate: false});
 
 </script>

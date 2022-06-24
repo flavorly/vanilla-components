@@ -1,10 +1,36 @@
 import { defineConfig } from 'vitepress'
 
+const production = process.env.NODE_ENV === 'production'
+const site = production ? 'https://vanillacomponents.dev' : 'http://localhost:3000'
+const image = `${site}/banner.png`
+const title = 'Vanilla Components'
+const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
+
 export default defineConfig({
   title: 'Vanilla Components',
   description: 'Next Generation Frontend Tooling',
-
-  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
+  head: [
+    ['meta', { name: 'author', content: 'INDIGIT' }],
+    ['meta', { name: 'keywords', content: 'components, vue, headless-ui, variantjs, datatables, tailwind' }],
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/symbol-gradient.svg' }],
+    ['meta', { name: 'HandheldFriendly', content: 'True' }],
+    ['meta', { name: 'MobileOptimized', content: '320' }],
+    ['meta', { name: 'theme-color', content: '#d8b4fe' }],
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:site', content: site }],
+    ['meta', { name: 'twitter:title', value: title }],
+    ['meta', { name: 'twitter:description', value: description }],
+    ['meta', { name: 'twitter:image', content: image }],
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:locale', content: 'en_US' }],
+    ['meta', { property: 'og:site', content: site }],
+    ['meta', { property: 'og:site_name', content: title }],
+    ['meta', { property: 'og:title', content: title }],
+    ['meta', { property: 'og:image', content: image }],
+    ['meta', { property: 'og:description', content: description }],
+    // @ts-ignore
+    ...(production ? [['link', {href: '/assets/tailwind.css', rel: 'stylesheet'}]] : [])
+  ],
 
   vue: {
     reactivityTransform: true
@@ -111,6 +137,7 @@ export default defineConfig({
       '/': [
         {
           text: 'Getting started',
+          collapsible: true,
           items: [
             { text: 'Introduction', link: '/introduction' },
             { text: 'Quick start', link: '/quick-start' },
@@ -118,6 +145,7 @@ export default defineConfig({
         },
         {
           text: 'Concepts',
+          collapsible: true,
           items: [
             { text: 'Variants', link: '/concepts/variants' },
             { text: 'Configuration', link: '/concepts/configuration' },
@@ -127,6 +155,7 @@ export default defineConfig({
         },
         {
           text: 'Inputs & Forms',
+          collapsible: true,
           items: [
             { text: 'Avatar', link: '/components/avatar/index' },
             { text: 'Button', link: '/components/button/index' },
@@ -138,6 +167,7 @@ export default defineConfig({
         },
         {
           text: 'Other & UI',
+          collapsible: true,
           items: [
             { text: 'Card', link: '/components/card/index' },
             { text: 'Datatables', link: '/components/datatables/index' },
@@ -148,6 +178,7 @@ export default defineConfig({
 
         {
           text: 'Other Demos',
+          collapsible: true,
           items : [
 
             { text: 'Programmatic API', link: '/extra-topics/programmatic-api' },
