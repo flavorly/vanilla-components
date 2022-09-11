@@ -19,7 +19,7 @@
           action?.icon === 'info' ? classesList.actionIconContainerInfo : '',
         ]"
       >
-        <ExclamationIcon
+        <ExclamationTriangleIcon
           v-if="action?.icon === undefined || action?.icon === 'danger'"
           :class="[
             classesList.actionIcon,
@@ -33,7 +33,7 @@
             classesList.actionIconSuccess,
           ]"
         />
-        <StatusOnlineIcon
+        <SignalIcon
           v-if="action?.icon === 'warning'"
           :class="[
             classesList.actionIcon,
@@ -117,16 +117,16 @@ import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableAction } from '../index';
 import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
-import { ExclamationIcon, CheckIcon, StatusOnlineIcon, InformationCircleIcon } from '@heroicons/vue/outline';
+import { ExclamationTriangleIcon, CheckIcon, SignalIcon, InformationCircleIcon } from '@heroicons/vue/24/outline/index.js';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogConfirmAction',
     components: {
         VanillaDialog,
         VanillaButton,
-        ExclamationIcon,
+        ExclamationTriangleIcon,
         CheckIcon,
-        StatusOnlineIcon,
+        SignalIcon,
         InformationCircleIcon,
     },
     props: {
@@ -145,7 +145,7 @@ export default defineComponent({
         'actionCanceled',
         'actionConfirmed',
     ],
-    setup(props, { emit }){
+    setup(props, { emit }) {
 
         const isOpen = ref(false);
 

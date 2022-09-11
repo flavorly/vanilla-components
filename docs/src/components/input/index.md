@@ -8,7 +8,12 @@ A Native `<input />` for text, number, etc. with additional features for passwor
 
 !!!include(./src/_includes/title-preview.md)!!!
 
-<wrapper src="components/input/demo" />
+<script setup>
+import ExampleInput from './ExampleInput.vue';
+</script>
+
+
+<ExampleInput />
 
 !!!include(./src/_includes/title-snippet.md)!!!
 

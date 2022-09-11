@@ -115,7 +115,7 @@
                             @click="close"
                           >
                             <span class="sr-only">Close</span>
-                            <XIcon
+                            <XMarkIcon
                               :class="configuration.classesList.closeButtonIcon"
                               aria-hidden="true"
                             />
@@ -169,7 +169,7 @@ import {
     DialogTitle,
 } from '@headlessui/vue';
 
-import { XIcon } from '@heroicons/vue/outline';
+import { XMarkIcon } from '@heroicons/vue/24/outline/index.js';
 
 export default defineComponent({
     name: 'VanillaSlideover',
@@ -179,7 +179,7 @@ export default defineComponent({
         Dialog,
         DialogOverlay,
         DialogTitle,
-        XIcon,
+        XMarkIcon,
     },
     inheritAttrs: true,
     compatConfig: {

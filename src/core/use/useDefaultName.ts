@@ -12,8 +12,8 @@ export default function useDefaultName<Props extends Data>(props: Props): string
 
   if (
     props.name === undefined &&
-    vm.parent?.props?.name !== undefined &&
-    vm.parent?.type?.name === 'VanillaInputGroup' &&
+    vm?.parent?.props?.name !== undefined &&
+    vm?.parent?.type?.name === 'VanillaInputGroup' &&
     vm?.type.name !== 'VanillaInputGroup' &&
     vm?.type.name !== 'VanillaFormLabel'
   ) {

@@ -82,7 +82,7 @@ import {
     VanillaDatatablePageOptions,
     VanillaDatatableUserSettings,
 } from '../index';
-import { TrashIcon } from '@heroicons/vue/outline';
+import { TrashIcon } from '@heroicons/vue/24/outline/index.js';
 import { useInjectDatatableTranslations } from '../utils';
 import { useInjectsClassesList } from '@/core';
 
@@ -120,7 +120,7 @@ export default defineComponent({
         'update:settings',
         'settingsReset',
     ],
-    setup(props, { emit }){
+    setup(props, { emit }) {
 
         const isOpen = ref(false);
         const localSettings = ref(props.userSettings) as Ref<VanillaDatatableUserSettings>;

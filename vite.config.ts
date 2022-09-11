@@ -62,6 +62,9 @@ export default defineConfig(({ command, mode }) => {
       ]
     },
     build: {
+      // commonjsOptions: {
+      //   transformMixedEsModules: true
+      // },
       minify: false,
       sourcemap: true,
       lib: {
@@ -75,7 +78,7 @@ export default defineConfig(({ command, mode }) => {
           //   "exclude": ["node_modules"]
           // }),
         ],
-        //inlineDynamicImports: true,
+        inlineDynamicImports: true,
         external: [
           'vue',
           '@headlessui/vue',

@@ -14,7 +14,7 @@
       type="search"
     >
       <template #before>
-        <SearchIcon
+        <MagnifyingGlassIcon
           :class="[classesList.searchIcon]"
         />
       </template>
@@ -25,13 +25,13 @@
 import { defineComponent, PropType } from 'vue';
 import { useInjectsClassesList, useVModel } from '@/core';
 import VanillaInput from '@/components/Input/Input.vue';
-import { SearchIcon } from '@heroicons/vue/solid';
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid/index.js';
 
 export default defineComponent({
     name: 'VanillaDatatableSearch',
     components: {
         VanillaInput,
-        SearchIcon,
+        MagnifyingGlassIcon,
     },
     props: {
         modelValue: {
@@ -50,7 +50,7 @@ export default defineComponent({
     emits: [
         'update:modelValue',
     ],
-    setup(props){
+    setup(props) {
         const localValue = useVModel(props, 'modelValue');
         const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
         return {

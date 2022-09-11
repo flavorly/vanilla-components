@@ -120,7 +120,7 @@ import {
     VanillaDatatableSavedFilter,
     VanillaDatatableUserSettings,
 } from '../index';
-import { TrashIcon } from '@heroicons/vue/outline';
+import { TrashIcon } from '@heroicons/vue/24/outline/index.js';
 import find from 'lodash/find';
 import { isEqual, useInjectsClassesList } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
@@ -155,7 +155,7 @@ export default defineComponent({
         'filtersSaved',
         'filtersReset',
     ],
-    setup(props, { emit }){
+    setup(props, { emit }) {
 
         const isOpen = ref(false) as Ref<boolean>;
         const localFilters = ref({}) as Ref<VanillaDatatableSavedFilter>;
@@ -195,7 +195,7 @@ export default defineComponent({
         // Save the settings & Emit when necessary
         const saveSettings = () => {
             isOpen.value = false;
-            if (Object.keys(localFilters).length > 0 && !isEqual(localFilters.value, props.userSettings.filters)){
+            if (Object.keys(localFilters).length > 0 && !isEqual(localFilters.value, props.userSettings.filters)) {
                 localFilters.value = cleanupEmptyFilters(localFilters.value);
                 emit('filtersSaved',  { ...localFilters.value });
             }

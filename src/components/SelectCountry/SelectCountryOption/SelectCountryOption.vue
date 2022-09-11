@@ -54,7 +54,7 @@ import { computed, defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList } from '@/core';
 import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaSelectCountryOptionProps } from './index';
 import VanillaFlag from '@/components/Icons/Flag.vue';
-import { CheckIcon } from '@heroicons/vue/solid';
+import { CheckIcon } from '@heroicons/vue/24/solid/index.js';
 
 export default defineComponent({
     name: 'VanillaSelectCountryOption',
@@ -115,15 +115,15 @@ export default defineComponent({
         );
 
         const nameLabel = computed(() => {
-            if (props.labelWithDialCode){
+            if (props.labelWithDialCode) {
                 return props.country.label + ' +' + props.country.dialCode;
             }
 
-            if (props.labelWithCountryCode){
+            if (props.labelWithCountryCode) {
                 return props.country.label + ' (' + props.country.dialCode + ')';
             }
 
-            if (props.labelWithDialCode && props.labelWithCountryCode){
+            if (props.labelWithDialCode && props.labelWithCountryCode) {
                 return props.country.label + ' +' + props.country.dialCode + ' (' + props.country.dialCode + ')';
             }
 

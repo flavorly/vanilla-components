@@ -7,32 +7,39 @@
     "postinstall": "patch-package"
   },
   "devDependencies": {
-    "@vue/theme": "^1.0.1",
     "autoprefixer": "^10.3.7",
     "patch-package": "^6.4.7",
     "postcss": "^8.4.16",
     "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.6",
     "postcss-prefix-selector": "^1.16.0",
-    "postinstall-postinstall": "^2.1.0",
-    "vue": "^3.2.37"
+    "postinstall-postinstall": "^2.1.0"
   },
   "peerDependencies": {},
   "dependencies": {
     "@faker-js/faker": "^6.0.0",
+    "@headlessui/vue": "^1.7.0",
+    "@heroicons/vue": "^1.0.1",
     "@indigit/vanilla-components": "^0.6.20",
+    "@popperjs/core": "^2.11.2",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.0",
+    "@variantjs/core": "^0.0.87",
+    "@variantjs/vue": "^0.0.21",
     "@vueuse/core": "^8.2.4",
+    "body-scroll-lock": "^4.0.0-beta.0",
     "collect.js": "^4.32.0",
+    "flatpickr": "^4.6.9",
     "fuse.js": "^6.4.6",
+    "libphonenumber-js": "^1.9.49",
     "lodash": "^4.17.21",
-    "markdown-it-copy": "^1.2.0",
     "markdown-it-include": "^2.0.0",
     "miragejs": "^0.1.43",
+    "moment-timezone": "^0.5.34",
     "paginatedjs": "^1.1.1",
     "tailwindcss": "^3.0.16",
-    "vitepress": "^1.0.0-alpha.13"
+    "vitepress": "^1.0.0-alpha.13",
+    "vue": "^3.2.39"
   }
 }

@@ -42,7 +42,7 @@ export function useAttributes<ComponentOptions extends Data>(configuration: Comp
   const vm = getCurrentInstance()!;
 
   const computedAttributes: ComputedRef<Data> = computed<Data>(():Data => {
-    const availableProps = Object.keys(vm.props);
+    const availableProps = Object.keys(vm?.props ?? {});
 
     return pick(configuration, (value, key) => isPrimitive(value) && !availableProps.includes(String(key)));
   });
@@ -71,6 +71,8 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
   // Get the current instance
   const vm = getCurrentInstance()!;
 
+  console.log(vm, getCurrentInstance());
+
   // Inject the Default Configuration
   const variantGlobalConfiguration = inject<VanillaComponentConfiguration>('vanilla_configuration', {});
 
@@ -81,10 +83,12 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
   // Set the props
   const propsValues = computed(() => {
     const values: Data = {};
-    extractDefinedProps(vm).forEach((attributeName) => {
-      const normalizedAttribute = camelize(attributeName);
-      values[normalizedAttribute] = vm.props[normalizedAttribute];
-    });
+    if (vm) {
+      extractDefinedProps(vm).forEach((attributeName) => {
+        const normalizedAttribute = camelize(attributeName);
+        values[normalizedAttribute] = vm.props[normalizedAttribute];
+      });
+    }
     return values;
   });
 

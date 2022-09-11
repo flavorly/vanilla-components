@@ -54,7 +54,7 @@
             <VanillaButton
               @click="onFiltersVisit"
             >
-              <FilterIcon :class="[classesList.headerFiltersIcon]" />
+              <FunnelIcon :class="[classesList.headerFiltersIcon]" />
               <span
                 :class="[classesList.headerFiltersLabel]"
                 v-text="translations.filters"
@@ -81,7 +81,7 @@
           <VanillaDropdown :class="[classesList.headerSettingsContainer]">
             <template #trigger>
               <VanillaButton>
-                <DotsVerticalIcon :class="[classesList.headerSettingsIcon]" />
+                <EllipsisVerticalIcon :class="[classesList.headerSettingsIcon]" />
               </VanillaButton>
             </template>
 
@@ -90,7 +90,7 @@
               v-if="options.refreshable"
               @click="refresh"
             >
-              <RefreshIcon
+              <ArrowPathIcon
                 :class="[
                   classesList.headerSettingsRefreshIcon,
                   isFetching ? classesList.headerSettingsRefreshIconAnimation : ''
@@ -573,8 +573,8 @@ import VanillaDatatableFilterBadge from './Partials/DatatableFilterBadge.vue';
 import VanillaDatatableEmptyState from './Partials/DatatableEmptyState.vue';
 
 // Icons
-import { DotsVerticalIcon, CogIcon } from '@heroicons/vue/solid';
-import { FilterIcon, RefreshIcon } from '@heroicons/vue/outline';
+import { EllipsisVerticalIcon, CogIcon } from '@heroicons/vue/24/solid/index.js';
+import { FunnelIcon, ArrowPathIcon } from '@heroicons/vue/24/outline/index.js';
 
 // Other 3rd Party Packages
 import { useSessionStorage } from '@vueuse/core';
@@ -583,7 +583,6 @@ import each from 'lodash/each';
 import filter from 'lodash/filter';
 import find from 'lodash/find';
 import assign from 'lodash/assign';
-import md5 from 'crypto-js/md5';
 import omit from 'lodash/omit';
 import debounce from 'lodash/debounce';
 
@@ -605,9 +604,9 @@ export default defineComponent({
         VanillaDropdown,
         VanillaDropdownOption,
         VanillaButton,
-        FilterIcon,
-        RefreshIcon,
-        DotsVerticalIcon,
+        FunnelIcon,
+        ArrowPathIcon,
+        EllipsisVerticalIcon,
         CogIcon,
     },
     inheritAttrs: true,
@@ -619,7 +618,7 @@ export default defineComponent({
         config: {
             type: [Object] as PropType<VanillaDatatableConfiguration>,
             required: false,
-            default(){
+            default() {
                 return {};
             },
         },
@@ -635,20 +634,20 @@ export default defineComponent({
         columns: {
             type: [Array] as PropType<VanillaDatatableColumns>,
             required: false,
-            default(){
+            default() {
                 return [];
             },
         },
         options: {
             type: [Object] as PropType<VanillaDatatableOptions>,
             required: false,
-            default(){
+            default() {
                 return [];
             },
         },
         actions: {
             type: [Array] as PropType<VanillaDatatableActionsType>,
-            default(){
+            default() {
                 return [];
             },
         },
@@ -658,14 +657,14 @@ export default defineComponent({
         },
         filters: {
             type: [Array] as PropType<VanillaDatatableFilters>,
-            default(){
+            default() {
                 return [];
             },
         },
         filtersKey: {
             type: [String] as PropType<string | number>,
             required: false,
-            default(rawProps: { uniqueName: string | number; }){
+            default(rawProps: { uniqueName: string | number; }) {
                 return rawProps.uniqueName;
             },
         },
@@ -676,7 +675,7 @@ export default defineComponent({
         },
         perPageOptions: {
             type: [Array] as PropType<VanillaDatatablePageOptions>,
-            default(){
+            default() {
                 return [];
             },
         },
@@ -699,7 +698,7 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'POST',
-            validator(method: string){
+            validator(method: string) {
                 return ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method);
             },
         },
@@ -712,7 +711,7 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'POST',
-            validator(method: string){
+            validator(method: string) {
                 return ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method);
             },
         },
@@ -836,7 +835,7 @@ export default defineComponent({
         /** Current Ids being shown on hte page */
         const currentPageIds = computed(() => results.data.map(item => item.id) || []) as Ref<string[]>;
 
-        const resultsHash = computed(() => md5(JSON.stringify(results.data)).toString()) as Ref<string>;
+        const resultsHash = computed(() => JSON.stringify(results.data)).toString() as Ref<string>;
 
         /** If there is currently selected items on the config */
         const hasAnyItemsSelected = computed(() => queryData.selectedAll || queryData.selected.length > 0) as Ref<boolean>;
@@ -914,7 +913,7 @@ export default defineComponent({
                 let filterObject = find(datatable.filters, { name: key }) as VanillaDatatableFilter | undefined;
 
                 // Filter wasn't found, skip it.
-                if (undefined === filterObject){
+                if (undefined === filterObject) {
                     return;
                 }
 
@@ -923,9 +922,9 @@ export default defineComponent({
 
                 // If the filter is a select, attempt to resolve the option in a nice way
                 // So we don't resolve the "raw" value but the label.
-                if (filterObject?.options?.length || 0  > 0){
+                if (filterObject?.options?.length || 0  > 0) {
                     let option = find(filterObject?.options, { value: value }) as NormalizedOption | undefined;
-                    if (option !== undefined){
+                    if (option !== undefined) {
                         finalFilterValue = option.text;
                     }
                 }
@@ -968,7 +967,7 @@ export default defineComponent({
                 .catch((error: object) => {
 
                     // If user provided a callback after each exception
-                    if (datatable?.onExceptionCallback !== undefined){
+                    if (datatable?.onExceptionCallback !== undefined) {
                         datatable.onExceptionCallback(error);
                     }
 
@@ -987,7 +986,7 @@ export default defineComponent({
 
         /** Refresh the datatable */
         const refresh = (then = () => {}) => {
-            if (!isFetching.value){
+            if (!isFetching.value) {
                 fetchFromServer(then);
             }
         };
@@ -1001,7 +1000,7 @@ export default defineComponent({
         const selectItem = (item: VanillaDatatableResultData, uncheckIfChecked = true) => {
 
             let itemKey = item[datatable.primaryKey] || null;
-            if (null === itemKey){
+            if (null === itemKey) {
                 throw new Error('Please make sure the config "primaryKey" exists on your resource data.');
             }
 
@@ -1015,7 +1014,7 @@ export default defineComponent({
             }
 
             // If we should toggle if it's already selected then do it.
-            if (uncheckIfChecked){
+            if (uncheckIfChecked) {
                 const index = queryData.selected.indexOf(itemKey);
                 if (index > -1) {
                     return queryData.selected.splice(index, 1);
@@ -1120,7 +1119,7 @@ export default defineComponent({
         /** Resets the search query  */
         const resetSearchQuery = (shouldRefresh = false) => {
             queryData.search = '';
-            if (!shouldRefresh){
+            if (!shouldRefresh) {
                 return;
             }
             refresh();
@@ -1130,7 +1129,7 @@ export default defineComponent({
         const resetFilter = (filterToClear: VanillaDatatableFilter, shouldRefresh = true) => {
 
             // Already empty or does not exist in the user settings
-            if (!(filterToClear.name in userSettings.filters)){
+            if (!(filterToClear.name in userSettings.filters)) {
                 return;
             }
 
@@ -1138,7 +1137,7 @@ export default defineComponent({
             queryData.filters = { ... omit(queryData.filters, filterToClear.name) };
 
             // Refresh the items
-            if (!shouldRefresh){
+            if (!shouldRefresh) {
                 return;
             }
             refresh();
@@ -1148,7 +1147,7 @@ export default defineComponent({
         const resetAllFilters = (shouldRefresh = false) => {
 
             // Already empty
-            if (!Object.keys(queryData.filters).length){
+            if (!Object.keys(queryData.filters).length) {
                 return;
             }
 
@@ -1156,7 +1155,7 @@ export default defineComponent({
             userSettings.filters = {};
 
             // Refresh the items
-            if (!shouldRefresh){
+            if (!shouldRefresh) {
                 return;
             }
             refresh();
@@ -1171,7 +1170,7 @@ export default defineComponent({
             resetSearchQuery(false);
 
             // Refresh the items
-            if (!shouldRefresh){
+            if (!shouldRefresh) {
                 return;
             }
             refresh();
@@ -1202,7 +1201,7 @@ export default defineComponent({
                 return;
             }
 
-            if (action?.before?.callback !== undefined){
+            if (action?.before?.callback !== undefined) {
                 action.before.callback(action);
             }
 
@@ -1212,12 +1211,12 @@ export default defineComponent({
             // Stuff to execute after the action
             const afterActionCallback = () => {
                 // Reset the selected items if it was defined on the action scope
-                if (action?.after?.clearSelected){
+                if (action?.after?.clearSelected) {
                     deselectAllItems();
                 }
 
                 // Clear all the filters in case it was defined on the action scope
-                if (action?.after?.resetFilters){
+                if (action?.after?.resetFilters) {
                     resetAllFilters();
                 }
 
@@ -1242,7 +1241,7 @@ export default defineComponent({
                 }
 
                 // Always execute the given callback after the action is fired.
-                if (datatable?.onActionExecutedCallback !== undefined){
+                if (datatable?.onActionExecutedCallback !== undefined) {
                     datatable.onActionExecutedCallback(action);
                 }
 
@@ -1295,7 +1294,7 @@ export default defineComponent({
          **/
         const onPageNavigated = (link: string) => {
 
-            if (null == link){
+            if (null == link) {
                 return;
             }
 
@@ -1363,7 +1362,7 @@ export default defineComponent({
         **/
         const onSearch = debounce((newQuery: string | null | undefined) => {
             // If the query is the same, do nothing
-            if (newQuery === undefined){
+            if (newQuery === undefined) {
                 newQuery = '';
             }
 
@@ -1396,7 +1395,7 @@ export default defineComponent({
          **/
         const fromUserStorageToUserSettings = () => {
             // User don't want to use storage
-            if (userStorage.value?.useStorage === false){
+            if (userStorage.value?.useStorage === false) {
                 return;
             }
 
@@ -1406,17 +1405,17 @@ export default defineComponent({
             Object.assign(userSettings, assign(userSettingsDefault, userStorage.value));
 
             // Get the selected Ids
-            if (userSettings.selectedIds.length){
+            if (userSettings.selectedIds.length) {
                 queryData.selected = userSettings.selectedIds;
             }
 
             // Filters
-            if (Object.keys(userSettings.filters).length > 0){
+            if (Object.keys(userSettings.filters).length > 0) {
                 queryData.filters = userSettings.filters;
             }
 
             // Per Page
-            if (userSettings.perPage){
+            if (userSettings.perPage) {
                 queryData.perPage = userSettings.perPage;
             }
             return;
@@ -1483,7 +1482,7 @@ export default defineComponent({
          * with the selected ids.
          **/
         watch(() => queryData.search, (searchQuery) => {
-            if (!isFetching.value){
+            if (!isFetching.value) {
                 onSearch(searchQuery);
             }
         }, { deep: true });

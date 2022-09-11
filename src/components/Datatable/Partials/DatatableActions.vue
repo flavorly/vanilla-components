@@ -41,7 +41,7 @@ import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/Dropdown
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableActions } from '../index';
 import { useInjectDatatableTranslations } from '../utils';
-import { ChevronDownIcon } from '@heroicons/vue/solid';
+import { ChevronDownIcon } from '@heroicons/vue/24/solid/index.js';
 
 export default defineComponent({
     name: 'VanillaDatatableActions',
@@ -66,7 +66,7 @@ export default defineComponent({
         },
     },
     emits: ['actionSelected'],
-    setup(props, { emit }){
+    setup(props, { emit }) {
 
         const isDropdownOpen = ref(false);
         const selectAction = (action: object) => {

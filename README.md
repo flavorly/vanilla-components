@@ -8,6 +8,13 @@ yarn install && yarn build
 cd docs
 yarn watch
 
+# Peer Depds
+```
+npm install -g npm-install-peers
+npm-install-peers
+
+yarn add @headlessui/vue@^1.5.0 @heroicons/vue@^1.0.1 @popperjs/core@^2.11.2 @variantjs/core@^0.0.87 @variantjs/vue@^0.0.21 body-scroll-lock@^4.0.0-beta.0 flatpickr@^4.6.9 libphonenumber-js@^1.9.49 moment-timezone@^0.5.34 
+```
 
 ## Usage
 

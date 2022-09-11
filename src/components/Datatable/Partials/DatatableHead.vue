@@ -67,7 +67,7 @@
 </template>
 <script lang="ts">
 import { ref, defineComponent, PropType, watch } from 'vue';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/solid';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid/index.js';
 import {
     VanillaDatatableColumnsComputed,
     VanillaDatatableColumnComputed,
@@ -123,7 +123,7 @@ export default defineComponent({
         'checked',
         'sorted',
     ],
-    setup(props, { emit }){
+    setup(props, { emit }) {
 
         const onCheckAllToggled = (event: Event) => {
             emit('checked', event.target?.checked);
@@ -175,7 +175,7 @@ export default defineComponent({
                 let timesSorted = columnSort.sortedTimes;
 
                 // Tapped 2 times, remove it from the array
-                if (timesSorted >= 2){
+                if (timesSorted >= 2) {
                     finalSorting.splice(index, 1);
                 } else {
                     // Tapped 1 time, toggle the direction

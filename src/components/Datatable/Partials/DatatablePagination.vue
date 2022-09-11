@@ -90,7 +90,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid/index.js';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableResponsePage } from '../index';
 import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
@@ -111,7 +111,7 @@ export default defineComponent({
         pages: {
             type: [Array] as PropType<VanillaDatatableResponsePage[]>,
             required: false,
-            default(){
+            default() {
                 return [];
             },
         },
@@ -163,7 +163,7 @@ export default defineComponent({
         },
     },
     emits: ['navigate'],
-    setup(props, { emit }){
+    setup(props, { emit }) {
 
         const goToPage = (page: string | number) => {
             console.log('goToPage', page);
@@ -175,7 +175,7 @@ export default defineComponent({
         const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
 
         const pagesLimited = computed(() => {
-            if (prop.limitPages === false){
+            if (prop.limitPages === false) {
                 return prop.pages;
             }
             const pages = props.pages;

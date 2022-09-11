@@ -32,7 +32,7 @@
               :loading="isFetching || isLocallyLoading"
             >
               <template #icon>
-                <ReplyIcon :class="classesList.emptyStateResetFiltersButtonIcon" />
+                <DocumentDuplicateIcon :class="classesList.emptyStateResetFiltersButtonIcon" />
               </template>
               <template #label>
                 <span v-text="translations.recordsEmptyWithFiltersOrSearchAction" />
@@ -81,14 +81,14 @@ import VanillaRadarIcon from '@/components/Icons/RadarIcon.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import { useInjectDatatableTranslations } from '../utils';
 import { useInjectsClassesList } from '@/core';
-import { ReplyIcon } from '@heroicons/vue/solid';
+import { DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js';
 
 export default defineComponent({
     name: 'VanillaDatatableEmptyState',
     components: {
         VanillaUFOIcon,
         VanillaRadarIcon,
-        ReplyIcon,
+        DocumentDuplicateIcon,
         VanillaButton,
     },
     props: {

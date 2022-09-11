@@ -44,7 +44,7 @@
             :class="configuration.classesList.addonClasses"
             @click="togglePassword"
           />
-          <EyeOffIcon
+          <EyeSlashIcon
             v-if="showingPassword"
             :class="configuration.classesList.addonClasses"
             @click="togglePassword"
@@ -76,7 +76,7 @@
 import { defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList, hasSlot } from '@/core';
 import { VanillaInputValue, VanillaInputProps, VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/index';
-import { ExclamationCircleIcon, EyeIcon, EyeOffIcon } from '@heroicons/vue/solid';
+import { ExclamationCircleIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid/index.js';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 
@@ -87,7 +87,7 @@ export default defineComponent({
         VanillaFormFeedback,
         ExclamationCircleIcon,
         EyeIcon,
-        EyeOffIcon,
+        EyeSlashIcon,
     },
     inheritAttrs: false,
     compatConfig: {
