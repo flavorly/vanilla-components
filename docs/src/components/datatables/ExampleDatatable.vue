@@ -29,7 +29,7 @@
 <script type="ts">
 import {VanillaDatatable, VanillaDropdownOption} from '@indigit/vanilla-components';
 import {defineComponent} from 'vue';
-import {TrashIcon} from '@heroicons/vue/outline'
+import {TrashIcon} from '@heroicons/vue/24/outline'
 
 export default defineComponent({
 		name: 'ExampleDatatables',
@@ -41,7 +41,6 @@ export default defineComponent({
 		setup(props){
         const onFetched = () => {
           // Update our little demo height.
-          console.log('im executed');
           window.parent.postMessage('mounted', '*');
         }
 

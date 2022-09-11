@@ -71,8 +71,6 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
   // Get the current instance
   const vm = getCurrentInstance()!;
 
-  console.log(vm, getCurrentInstance());
-
   // Inject the Default Configuration
   const variantGlobalConfiguration = inject<VanillaComponentConfiguration>('vanilla_configuration', {});
 

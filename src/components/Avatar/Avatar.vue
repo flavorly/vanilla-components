@@ -196,8 +196,6 @@ export default defineComponent({
         const photoInput: any = ref(null);
 
         const updateAvatarPreview = () => {
-            console.log('im here');
-
             const reader = new FileReader();
             reader.onload = (event: ProgressEvent<FileReader>) => {
                 photoPreview.value = event?.target?.result;

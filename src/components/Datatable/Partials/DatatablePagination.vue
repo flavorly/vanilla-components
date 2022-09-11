@@ -166,7 +166,6 @@ export default defineComponent({
     setup(props, { emit }) {
 
         const goToPage = (page: string | number) => {
-            console.log('goToPage', page);
             emit('navigate', page);
         };
 

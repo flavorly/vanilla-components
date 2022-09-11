@@ -187,7 +187,6 @@ export default defineComponent({
         // Cleanup empty filters on save
         const cleanupEmptyFilters = (filters: object) => {
             return Object.fromEntries(Object.entries(filters).filter(([key, v]) => {
-                console.log('🛰️ filtering before submit', key, v, getFilterDefaultValue(key));
                 return v != null && v !== '' && v != getFilterDefaultValue(key);
             }));
         };

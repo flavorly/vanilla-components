@@ -7,6 +7,32 @@ const title = 'Vanilla Components'
 const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
 
 export default defineConfig({
+  // Vite Config
+  vite: {
+    ssr: {
+      noExternal: [
+        '@heroicons/vue'
+      ]
+    },
+    server: {
+      host: true,
+      fs: {
+        allow: ['../..'],
+      },
+    },
+    json: {
+      stringify: true,
+    },
+  },
+
+  // Vue Config
+  vue: {
+    reactivityTransform: true
+  },
+
+  // Vitepress Config
+  srcDir: './src',
+  base: '/',
   title: 'Vanilla Components',
   description: 'Next Generation Frontend Tooling',
   head: [
@@ -28,40 +54,16 @@ export default defineConfig({
     ['meta', { property: 'og:title', content: title }],
     ['meta', { property: 'og:image', content: image }],
     ['meta', { property: 'og:description', content: description }],
-    // @ts-ignore
-    //...(production ? [['link', {href: '/assets/tailwind.css', rel: 'stylesheet'}]] : [])
   ],
 
-  vue: {
-    reactivityTransform: true
-  },
-
-  srcDir: './src',
-  base: '/',
-
-  vite: {
-    server: {
-      host: true,
-      fs: {
-        allow: ['../..'],
-      },
-    },
-    json: {
-      stringify: true,
-    },
-  },
-
+  // Plugins Configuration
   markdown: {
     config(md) {
-      // md.use(require('markdown-it-copy'),{
-      //   btnText: '', // 'copy' | button text
-      //   failText: 'Failed to Copy', // 'copy fail' | copy-fail text
-      //   successText: 'Copied to Clipboard', // 'copy success' | copy-success text
-      // })
       md.use(require('markdown-it-include'))
     }
   },
 
+  // Theme Configuration
   themeConfig: {
     logo: '/symbol-gradient.svg',
 

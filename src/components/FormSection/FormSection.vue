@@ -27,8 +27,6 @@ export default defineComponent({
         const { localVariant } = useBootVariant(props, 'errors', ref(null));
         const { configuration } = useConfiguration<VanillaFormSectionProps>(VanillaFormSectionConfig);
 
-        console.log(configuration);
-
         return {
             localVariant,
             configuration,
