@@ -4,7 +4,7 @@
     "dev": "vitepress dev --port=3005",
     "build": "vitepress build",
     "serve": "vitepress serve",
-    "postinstall": "patch-package",
+    "postinstall": "patch-package"
   },
   "devDependencies": {
     "@vue/theme": "^1.0.1",

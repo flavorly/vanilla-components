@@ -80,7 +80,6 @@ export default defineConfig(({ command, mode }) => {
           'vue',
           '@headlessui/vue',
           '@heroicons/vue',
-          '@heroicons/vue',
           '@popperjs/core',
           'body-scroll-lock',
           'flatpickr',

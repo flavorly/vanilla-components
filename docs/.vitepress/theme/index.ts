@@ -9,9 +9,7 @@ import './styles/components/vp-sponsor.css';
 import './styles/tailwind.pcss';
 import Layout from './Layout.vue';
 import NotFound from './NotFound.vue';
-import {VanillaComponents} from "@indigit/vanilla-components";
-// import LayoutDemoWrapper from "../_old_theme/components/LayoutDemoWrapper";
-// import LayoutBlank from "../_old_theme/components/LayoutBlank";
+import { VanillaComponents } from "@indigit/vanilla-components";
 import {makeServer} from "../../mocks/server";
 export { default as VPHomeHero } from './components/VPHomeHero.vue';
 export { default as VPHomeFeatures } from './components/VPHomeFeatures.vue';
@@ -24,10 +22,11 @@ export { default as VPTeamMembers } from './components/VPTeamMembers.vue';
 const theme = {
     Layout,
     NotFound,
+    // @ts-ignore
     enhanceApp({ app, router, siteData }) {
       app.use(VanillaComponents);
       // Start the fake API server
-      makeServer();
+      //makeServer();
     }
 };
 export default theme;
