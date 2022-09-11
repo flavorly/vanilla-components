@@ -1,6 +1,12 @@
 # Vanilla Components
 
-A lightweight Vue 3 component library based on VariantJS & HeadlessUi + Vanilla Components
+A lightweight Vue 3 component library based merging the best components around to enjoy seamless integr
+
+# Quick Start
+
+yarn install && yarn build
+cd docs
+yarn watch
 
 
 ## Usage
@@ -64,6 +70,6 @@ https://github.com/ds300/patch-package
 ```bash
 Edit the files in node_modules
 
-npx patch-package @vue/theme
+npx patch-package @vue/_old_theme
 npx patch-package
 ```

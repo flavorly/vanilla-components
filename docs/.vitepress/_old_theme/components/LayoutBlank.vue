@@ -17,7 +17,7 @@ const watchThemeMode = (mode: string) => {
   }
 };
 
-const flag = useStorage('vitepress-theme-appearance', 'light') // returns Ref<boolean>
+const flag = useStorage('vitepress-_old_theme-appearance', 'light') // returns Ref<boolean>
 
 onMounted(() => {
   window.parent.postMessage('mounted', '*');

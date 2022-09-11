@@ -3,7 +3,7 @@ export const commonClasses = {
   // Icons and Misc
   iconsSize: 'w-5 h-5',
 
-  // Inputs, selects, textarea on default theme
+  // Inputs, selects, textarea on default _old_theme
   inputsBackground: 'bg-white dark:bg-gray-900',
   inputsBackgroundDarkerOrSofter: 'bg-gray-50 dark:bg-gray-800',
   inputsText: 'leading-normal sm:text-sm ',

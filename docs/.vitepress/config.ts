@@ -15,7 +15,7 @@ export default defineConfig({
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/symbol-gradient.svg' }],
     ['meta', { name: 'HandheldFriendly', content: 'True' }],
     ['meta', { name: 'MobileOptimized', content: '320' }],
-    ['meta', { name: 'theme-color', content: '#d8b4fe' }],
+    ['meta', { name: '_old_theme-color', content: '#d8b4fe' }],
     ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
     ['meta', { name: 'twitter:site', content: site }],
     ['meta', { name: 'twitter:title', value: title }],
@@ -29,7 +29,7 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: image }],
     ['meta', { property: 'og:description', content: description }],
     // @ts-ignore
-    ...(production ? [['link', {href: '/assets/tailwind.css', rel: 'stylesheet'}]] : [])
+    //...(production ? [['link', {href: '/assets/tailwind.css', rel: 'stylesheet'}]] : [])
   ],
 
   vue: {
@@ -53,11 +53,11 @@ export default defineConfig({
 
   markdown: {
     config(md) {
-      md.use(require('markdown-it-copy'),{
-        btnText: '', // 'copy' | button text
-        failText: 'Failed to Copy', // 'copy fail' | copy-fail text
-        successText: 'Copied to Clipboard', // 'copy success' | copy-success text
-      })
+      // md.use(require('markdown-it-copy'),{
+      //   btnText: '', // 'copy' | button text
+      //   failText: 'Failed to Copy', // 'copy fail' | copy-fail text
+      //   successText: 'Copied to Clipboard', // 'copy success' | copy-success text
+      // })
       md.use(require('markdown-it-include'))
     }
   },

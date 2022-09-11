@@ -2,13 +2,14 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
+  //important: '.vp-raw',
   mode: 'jit',
   darkMode: 'class', // or 'media' or 'class'*,
   content: [
-    './.vitepress/theme/**/*.{js,jsx,ts,tsx,vue}',
-    './src/**/*.{js,jsx,ts,tsx,vue}',
-    './../src/**/*.{js,jsx,ts,tsx,vue}',
-    //'./node_modules/@indigit/vanilla-components/dist/**/*.{js,ts,tsx,vue}',
+    './.vitepress/_old_theme/**/*.{js,jsx,ts,tsx,vue,md}',
+    './src/**/*.{js,jsx,ts,tsx,vue,md}',
+    './../src/**/*.{js,jsx,ts,tsx,vue,md}',
+    //'./node_modules/@indigit/vanilla-components/**/*.{js,ts,tsx,vue}',
   ],
   theme: {
     colors: {

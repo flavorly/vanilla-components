@@ -130,13 +130,13 @@ export function makeServer({ environment = "development" } = {}) {
                     return i;
                 },
                 gateway(i) {
-                    return faker.random.arrayElement(['Paypal','Bank Transfer','Credit Card','Bitcoin','Ethereum']);
+                    return faker.helpers.arrayElement(['Paypal','Bank Transfer','Credit Card','Bitcoin','Ethereum']);
                 },
                 amount(i){
                     return faker.datatype.number({min: 10, max: 230})+'€'
                 },
                 status(i){
-                    return faker.random.arrayElement(['Completed','Pending','Refunded']);
+                    return faker.helpers.arrayElement(['Completed','Pending','Refunded']);
                 }
             }),
         },

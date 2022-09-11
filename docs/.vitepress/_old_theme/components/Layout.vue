@@ -8,7 +8,7 @@ import VPLocalNav from './../../../node_modules/vitepress/dist/client/theme-defa
 import VPSidebar from './../../../node_modules/vitepress/dist/client/theme-default/components/VPSidebar.vue'
 import VPContent from './../../../node_modules/vitepress/dist/client/theme-default/components/VPContent.vue'
 import VPFooter from './../../../node_modules/vitepress/dist/client/theme-default/components/VPFooter.vue'
-import {useData} from "vitepress";
+import { useData } from "vitepress";
 import {removeTailwindIfNotPresentOnProduction} from "./../support/stylesHelper";
 
 const {
@@ -24,7 +24,7 @@ const CustomLayout = ref(undefined) as Ref<undefined|string>;
 onMounted(() => {
   const { frontmatter } = useData();
 
-  removeTailwindIfNotPresentOnProduction();
+  //removeTailwindIfNotPresentOnProduction();
 
   if(frontmatter?.value?.component  !== undefined){
     CustomLayout.value = frontmatter?.value?.component;

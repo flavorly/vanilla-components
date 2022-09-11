@@ -4,6 +4,25 @@ outline: deep
 
 # Avatar
 
+<script setup>
+    import ExampleAvatar from './ExampleAvatar.vue';
+    import {VanillaButton} from '@indigit/vanilla-components';
+</script>
+
+<div class="vp-raw">
+<h1>test</h1>
+    <button class="rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600 block justify-center inline-flex items-center shadow px-4 py-2 focus:ring-offset-2 cursor-pointer h-full opacity-100">
+    Im   test
+    </button>
+</div>
+<div class="vp-raw">
+    <div class="p-6 bg-gray-100 dark:bg-[#282c34] font-inter antialiased text-gray-800 dark:text-white">
+        <div class="relative">
+            <ExampleAvatar />
+        </div>
+    </div>
+</div>
+
 A Avatar component useful for User Profile Pictures, support uploading new pictures or display an existing one.
 
 !!!include(./src/_includes/title-preview.md)!!!

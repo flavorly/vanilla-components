@@ -2,39 +2,37 @@
   "private": true,
   "scripts": {
     "dev": "vitepress dev --port=3005",
-    "build": "vitepress build && yarn tw:build",
+    "build": "vitepress build",
     "serve": "vitepress serve",
     "postinstall": "patch-package",
-    "tw:watch": "npx tailwindcss -i ./.vitepress/theme/styles/tailwind.css -o ./.vitepress/dist/assets/tailwind.css --watch",
-    "tw:build": "npx tailwindcss -i ./.vitepress/theme/styles/tailwind.css -o ./.vitepress/dist/assets/tailwind.css"
   },
   "devDependencies": {
     "@vue/theme": "^1.0.1",
     "autoprefixer": "^10.3.7",
     "patch-package": "^6.4.7",
-    "postcss": "^8.3.11",
+    "postcss": "^8.4.16",
     "postcss-import": "^14.0.2",
     "postcss-nested": "^5.0.6",
+    "postcss-prefix-selector": "^1.16.0",
     "postinstall-postinstall": "^2.1.0",
-    "vue": "^3.2.31"
+    "vue": "^3.2.37"
   },
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "dependencies": {
-    "@indigit/vanilla-components": "^0.6.20",
     "@faker-js/faker": "^6.0.0",
+    "@indigit/vanilla-components": "^0.6.20",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/forms": "^0.5.0",
     "@tailwindcss/typography": "^0.5.0",
     "@vueuse/core": "^8.2.4",
-    "markdown-it-copy": "^1.2.0",
-    "tailwindcss": "^3.0.16",
-    "vitepress": "^1.0.0-alpha.2",
-    "markdown-it-include": "^2.0.0",
     "collect.js": "^4.32.0",
     "fuse.js": "^6.4.6",
     "lodash": "^4.17.21",
+    "markdown-it-copy": "^1.2.0",
+    "markdown-it-include": "^2.0.0",
     "miragejs": "^0.1.43",
-    "paginatedjs": "^1.1.1"
+    "paginatedjs": "^1.1.1",
+    "tailwindcss": "^3.0.16",
+    "vitepress": "^1.0.0-alpha.13"
   }
 }
