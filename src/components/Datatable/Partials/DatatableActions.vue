@@ -41,7 +41,7 @@ import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/Dropdown
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableActions } from '../index';
 import { useInjectDatatableTranslations } from '../utils';
-import { ChevronDownIcon } from '@heroicons/vue/24/solid/index.js';
+import { ChevronDownIcon } from '@heroicons/vue/24/solid';
 
 export default defineComponent({
     name: 'VanillaDatatableActions',

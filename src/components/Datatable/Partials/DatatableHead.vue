@@ -67,7 +67,7 @@
 </template>
 <script lang="ts">
 import { ref, defineComponent, PropType, watch } from 'vue';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid/index.js';
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid';
 import {
     VanillaDatatableColumnsComputed,
     VanillaDatatableColumnComputed,

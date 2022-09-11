@@ -81,7 +81,7 @@ import VanillaRadarIcon from '@/components/Icons/RadarIcon.vue';
 import VanillaButton from '@/components/Button/Button.vue';
 import { useInjectDatatableTranslations } from '../utils';
 import { useInjectsClassesList } from '@/core';
-import { DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js';
+import { DocumentDuplicateIcon } from '@heroicons/vue/24/solid';
 
 export default defineComponent({
     name: 'VanillaDatatableEmptyState',

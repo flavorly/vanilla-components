@@ -119,7 +119,7 @@ import { createPopper, Options, Placement } from '@popperjs/core';
 import { Instance as PopperInstance } from '@popperjs/core/lib/types';
 
 import { Menu, MenuButton, MenuItems } from '@headlessui/vue';
-import { ChevronDownIcon } from '@heroicons/vue/24/solid/index.js';
+import { ChevronDownIcon } from '@heroicons/vue/24/solid';
 
 export default defineComponent({
     name: 'VanillaDropdown',

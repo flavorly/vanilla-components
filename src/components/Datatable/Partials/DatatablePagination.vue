@@ -90,7 +90,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid/index.js';
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableResponsePage } from '../index';
 import { useInjectsClassesList, useReplacePlaceholders } from '@/core';

@@ -58,7 +58,7 @@ import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClasses
 import { hasSlot } from '@/core/helpers';
 import { VanillaTextareaValue, VanillaTextareaProps } from '@/components/Textarea/Type';
 import { VanillaTextareaClassesKeys, VanillaTextareaConfig } from '@/components/Textarea/Config';
-import { ExclamationCircleIcon } from '@heroicons/vue/24/solid/index.js';
+import { ExclamationCircleIcon } from '@heroicons/vue/24/solid';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 

@@ -573,8 +573,8 @@ import VanillaDatatableFilterBadge from './Partials/DatatableFilterBadge.vue';
 import VanillaDatatableEmptyState from './Partials/DatatableEmptyState.vue';
 
 // Icons
-import { EllipsisVerticalIcon, CogIcon } from '@heroicons/vue/24/solid/index.js';
-import { FunnelIcon, ArrowPathIcon } from '@heroicons/vue/24/outline/index.js';
+import { EllipsisVerticalIcon, CogIcon } from '@heroicons/vue/24/solid';
+import { FunnelIcon, ArrowPathIcon } from '@heroicons/vue/24/outline';
 
 // Other 3rd Party Packages
 import { useSessionStorage } from '@vueuse/core';

@@ -25,7 +25,7 @@
 import { defineComponent, PropType } from 'vue';
 import { useInjectsClassesList, useVModel } from '@/core';
 import VanillaInput from '@/components/Input/Input.vue';
-import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid/index.js';
+import { MagnifyingGlassIcon } from '@heroicons/vue/24/solid';
 
 export default defineComponent({
     name: 'VanillaDatatableSearch',

@@ -53,7 +53,7 @@
   </div>
 </template>
 <script lang="ts">
-import { CheckIcon } from '@heroicons/vue/24/solid/index.js';
+import { CheckIcon } from '@heroicons/vue/24/solid';
 import { defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '@/core';
 import { VanillaRichSelectOptionWithImageProps, VanillaRichSelectOptionWithImageConfig, VanillaRichSelectOptionWithImageClassesKeys } from './';

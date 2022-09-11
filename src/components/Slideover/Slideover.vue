@@ -169,7 +169,7 @@ import {
     DialogTitle,
 } from '@headlessui/vue';
 
-import { XMarkIcon } from '@heroicons/vue/24/outline/index.js';
+import { XMarkIcon } from '@heroicons/vue/24/outline';
 
 export default defineComponent({
     name: 'VanillaSlideover',

@@ -120,7 +120,7 @@ import {
     VanillaDatatableSavedFilter,
     VanillaDatatableUserSettings,
 } from '../index';
-import { TrashIcon } from '@heroicons/vue/24/outline/index.js';
+import { TrashIcon } from '@heroicons/vue/24/outline';
 import find from 'lodash/find';
 import { isEqual, useInjectsClassesList } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';

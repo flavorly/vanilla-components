@@ -76,7 +76,7 @@
 import { defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList, hasSlot } from '@/core';
 import { VanillaInputValue, VanillaInputProps, VanillaInputClassesKeys, VanillaInputConfig } from '@/components/Input/index';
-import { ExclamationCircleIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid/index.js';
+import { ExclamationCircleIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid';
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
 
