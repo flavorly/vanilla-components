@@ -20,6 +20,7 @@
                 "baseIndent": 0
             }
         ],
+        "vue/valid-attribute-name": "off",
         "max-len": "off",
         "import/no-extraneous-dependencies": "off",
         "import/extensions": "off",

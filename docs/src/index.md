@@ -14,7 +14,7 @@ hero:
     actions:
       - theme: brand
         text: Get Started
-        link: /guide/
+        link: /introduction
       - theme: alt
         text: Why Vanilla?
         link: /guide/why

@@ -57,6 +57,11 @@ const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKe
     default: true,
     required: false,
   },
+  autocomplete: {
+    type: Boolean as PropType<string | boolean>,
+    default: false,
+    required: false,
+  },
 });
 
 export default useVariantPropsWithClassesList;

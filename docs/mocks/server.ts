@@ -10,6 +10,10 @@ import collect from 'collect.js';
 /** Fake a look a like Laravel Pagination */
 const paginate = (records: Record<string, any>[], request: Request, baseUrl: string) => {
 
+    if(!request){
+      return
+    }
+
     let postData = JSON.parse(request.requestBody);
 
     if(postData) {

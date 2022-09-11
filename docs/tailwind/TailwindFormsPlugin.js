@@ -80,7 +80,7 @@ const forms = plugin(function ({ addBase, theme }) {
             'background-repeat': 'no-repeat',
             'background-size': '1.5em 1.5em',
             'padding-right': spacing[10],
-            'color-adjust': 'exact',
+            'print-color-adjust': 'exact',
         },
 
         '[multiple]': {
@@ -89,7 +89,7 @@ const forms = plugin(function ({ addBase, theme }) {
             'background-repeat': 'unset',
             'background-size': 'initial',
             'padding-right': spacing[3],
-            'color-adjust': 'unset',
+            'print-color-adjust': 'unset',
         },
 
         [`
@@ -98,7 +98,7 @@ const forms = plugin(function ({ addBase, theme }) {
     `]: {
             appearance: 'none',
             padding: '0',
-            'color-adjust': 'exact',
+            'print-color-adjust': 'exact',
             display: 'inline-block',
             'vertical-align': 'middle',
             'background-origin': 'border-box',
