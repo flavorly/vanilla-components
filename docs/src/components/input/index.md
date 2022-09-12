@@ -6,20 +6,19 @@ outline: deep
 
 A Native `<input />` for text, number, etc. with additional features for password input with hide & show button.
 
-!!!include(./src/_includes/title-preview.md)!!!
+!!!include(./src/parts/title-preview.md)!!!
 
 <script setup>
 import ExampleInput from './ExampleInput.vue';
 </script>
 
-
 <ExampleInput />
 
-!!!include(./src/_includes/title-snippet.md)!!!
+!!!include(./src/parts/title-snippet.md)!!!
 
 <<< @/components/input/ExampleInput.vue
 
-!!!include(./src/_includes/title-props.md)!!!
+!!!include(./src/parts/title-props.md)!!!
 
 | Prop          | Description                | Accepted Values | Default     |
 |:--------------|:---------------------------|:----------------|:------------|
@@ -28,9 +27,9 @@ import ExampleInput from './ExampleInput.vue';
 | `type`        | Type of input              | `String`        | `'text'`    |
 
 
-!!!include(./src/_includes/title-slots.md)!!!
+!!!include(./src/parts/title-slots.md)!!!
 
-!!!include(./src/_includes/default-slots.md)!!!
+!!!include(./src/parts/default-slots.md)!!!
 
 
 

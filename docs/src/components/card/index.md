@@ -6,15 +6,15 @@ outline: deep
 
 A beautiful card to use on your application to display resource, forms or anything on your imagination :smile:
 
-!!!include(./src/_includes/title-preview.md)!!!
+!!!include(./src/parts/title-preview.md)!!!
 
 <wrapper src="components/card/demo" />
 
-!!!include(./src/_includes/title-snippet.md)!!!
+!!!include(./src/parts/title-snippet.md)!!!
 
 <<< @/components/card/ExampleCard.vue
 
-!!!include(./src/_includes/title-props.md)!!!
+!!!include(./src/parts/title-props.md)!!!
 
 | Prop          | Description                        | Accepted Values       | Default     |
 |:--------------|:-----------------------------------|:----------------------|:------------|
@@ -24,7 +24,7 @@ A beautiful card to use on your application to display resource, forms or anythi
 | `bodyDivided` | Divide the items insides card body | `Boolean`             | `false`     |
 
 
-!!!include(./src/_includes/title-slots.md)!!!
+!!!include(./src/parts/title-slots.md)!!!
 
 ### Slot `title`
 

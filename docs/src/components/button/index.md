@@ -6,15 +6,15 @@ outline: deep
 
 A Native `<button />`  with batteries included for loading state, variants & many more.
 
-!!!include(./src/_includes/title-preview.md)!!!
+!!!include(./src/parts/title-preview.md)!!!
 
 <wrapper src="components/button/demo" />
 
-!!!include(./src/_includes/title-snippet.md)!!!
+!!!include(./src/parts/title-snippet.md)!!!
 
 <<< @/components/button/ExampleButton.vue
 
-!!!include(./src/_includes/title-props.md)!!!
+!!!include(./src/parts/title-props.md)!!!
 
 | Prop           | Description                   | Accepted Values | Default    |
 |:---------------|:------------------------------|:----------------|:-----------|
@@ -26,7 +26,7 @@ A Native `<button />`  with batteries included for loading state, variants & man
 | `focusOnMount` | Auto-focus on mount           | `Boolean`       | `false`    |
 
 
-!!!include(./src/_includes/title-slots.md)!!!
+!!!include(./src/parts/title-slots.md)!!!
 
 ### Slot `default`
 
@@ -40,7 +40,7 @@ Appends an icon, allowing an icon to be inserted together with the loading state
 
 Label to use inside the button, as you would expect from a normal button
 
-!!!include(./src/_includes/title-events.md)!!!
+!!!include(./src/parts/title-events.md)!!!
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|

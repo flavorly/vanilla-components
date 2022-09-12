@@ -11,6 +11,7 @@ import Layout from './Layout.vue';
 import NotFound from './NotFound.vue';
 import { VanillaComponents } from "@indigit/vanilla-components";
 import {makeServer} from "../../mocks/server";
+import PreviewWrapper from './components/PreviewWrapper.vue';
 export { default as VPHomeHero } from './components/VPHomeHero.vue';
 export { default as VPHomeFeatures } from './components/VPHomeFeatures.vue';
 export { default as VPHomeSponsors } from './components/VPHomeSponsors.vue';
@@ -22,8 +23,9 @@ export { default as VPTeamMembers } from './components/VPTeamMembers.vue';
 const theme = {
     Layout,
     NotFound,
-    enhanceApp({ app, router, siteData }) {
+    enhanceApp({app}) {
       app.use(VanillaComponents);
+      app.component('PreviewWrapper',PreviewWrapper);
       // Start the fake API server
       makeServer();
     }

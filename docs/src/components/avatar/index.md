@@ -10,21 +10,15 @@ outline: deep
 
 A Avatar component useful for User Profile Pictures, support uploading new pictures or display an existing one.
 
-!!!include(./src/_includes/title-preview.md)!!!
+!!!include(./src/parts/title-preview.md)!!!
 
-<div class="vp-raw">
-    <div class="p-6 bg-gray-100 dark:bg-[#282c34] font-inter antialiased text-gray-800 dark:text-white">
-        <div class="relative">
-            <ExampleAvatar />
-        </div>
-    </div>
-</div>
+<ExampleAvatar />
 
-!!!include(./src/_includes/title-snippet.md)!!!
+!!!include(./src/parts/title-snippet.md)!!!
 
 <<< @/components/avatar/ExampleAvatar.vue
 
-!!!include(./src/_includes/title-props.md)!!!
+!!!include(./src/parts/title-props.md)!!!
 
 | Prop                  | Description                    | Accepted Values      | Default       |
 |:----------------------|:-------------------------------|:---------------------|:--------------|
@@ -37,7 +31,7 @@ A Avatar component useful for User Profile Pictures, support uploading new pictu
 | `uploadButtonVariant` | Variant for the upload button  | `[String,undefined]` | `undefined`   |
 | `resetButtonVariant`  | Variant for the reset button   | `[String,undefined]` | `'undefined'` |
 
-!!!include(./src/_includes/title-slots.md)!!!
+!!!include(./src/parts/title-slots.md)!!!
 
 ### Slot `photo`
 
@@ -77,5 +71,5 @@ Slot to override the default reset button next to the profile photo and when a p
 | `photoPreview` | Base64 enconded blob         | `[Blog, String]` |
 
 
-!!!include(./src/_includes/slots-feedback-errors.md)!!!
+!!!include(./src/parts/slots-feedback-errors.md)!!!
 

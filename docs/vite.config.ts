@@ -1,4 +1,6 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
+import { whyframe } from '@whyframe/core';
+import { whyframeVue } from '@whyframe/vue';
 
 export default defineConfig({
   ssr: {
@@ -15,5 +17,8 @@ export default defineConfig({
   json: {
     stringify: true,
   },
-  plugins: []
+  plugins: [
+    whyframe({defaultSrc: '/frames/default'}),
+    whyframeVue({include: /\.(?:vue|md)$/})
+  ]
 })

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress';
+import MarkitDownInclude from 'markdown-it-include';
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanillacomponents.dev' : 'http://localhost:3000'
@@ -41,7 +42,7 @@ export default defineConfig({
   // Plugins Configuration
   markdown: {
     config(md) {
-      md.use(require('markdown-it-include'))
+      md.use(MarkitDownInclude)
     }
   },
 

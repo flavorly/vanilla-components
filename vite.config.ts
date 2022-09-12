@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts'
 import copy from 'rollup-plugin-copy'
-import { visualizer } from 'rollup-plugin-visualizer';
+//import { visualizer } from 'rollup-plugin-visualizer';
 // @ts-ignore
 import * as pkg from './package.json'
 
@@ -63,34 +63,34 @@ export default defineConfig(({ command, mode }) => {
       },
       rollupOptions: {
         inlineDynamicImports: true,
-        //external: externals,
-        external: [
-          'vue',
-          '@headlessui/vue',
-          //'@heroicons/vue',
-          '@popperjs/core',
-          'body-scroll-lock',
-          'flatpickr',
-          'fuse.js',
-          'libphonenumber-js',
-          'moment-timezone',
-          'lodash',
-          'lodash/each',
-          'lodash/filter',
-          'lodash/orderBy',
-          'lodash/merge',
-          'lodash/mapValues',
-          'lodash/find',
-          'lodash/assign',
-          'lodash/debounce',
-          'lodash/findIndex',
-          'lodash/merge',
-          'lodash/first',
-          'lodash/pick',
-          'lodash/omit',
-          'lodash/uniqueId',
-          'lodash/filter',
-        ],
+        external: externals,
+        // external: [
+        //   'vue',
+        //   '@headlessui/vue',
+        //   '@heroicons/vue',
+        //   '@popperjs/core',
+        //   'body-scroll-lock',
+        //   'flatpickr',
+        //   'fuse.js',
+        //   'libphonenumber-js',
+        //   'moment-timezone',
+        //   'lodash',
+        //   'lodash/each',
+        //   'lodash/filter',
+        //   'lodash/orderBy',
+        //   'lodash/merge',
+        //   'lodash/mapValues',
+        //   'lodash/find',
+        //   'lodash/assign',
+        //   'lodash/debounce',
+        //   'lodash/findIndex',
+        //   'lodash/merge',
+        //   'lodash/first',
+        //   'lodash/pick',
+        //   'lodash/omit',
+        //   'lodash/uniqueId',
+        //   'lodash/filter',
+        // ],
         output: {
           globals: {
             vue: 'Vue',

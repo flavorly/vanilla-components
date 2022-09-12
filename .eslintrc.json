@@ -36,5 +36,6 @@
         "project": "tsconfig.json",
         "tsconfigRootDir": "./",
         "extraFileExtensions": [".vue"]
-    }
+    },
+    "ignorePatterns": [".eslintrc.js"]
 }

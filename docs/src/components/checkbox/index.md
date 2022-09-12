@@ -6,15 +6,15 @@ outline: deep
 
 A Native `<input type="checkbox" />` to check items or multiple items at once, once again batteries included!
 
-!!!include(./src/_includes/title-preview.md)!!!
+!!!include(./src/parts/title-preview.md)!!!
 
 <wrapper src="components/checkbox/demo" />
 
-!!!include(./src/_includes/title-snippet.md)!!!
+!!!include(./src/parts/title-snippet.md)!!!
 
 <<< @/components/checkbox/ExampleCheckbox.vue
 
-!!!include(./src/_includes/title-props.md)!!!
+!!!include(./src/parts/title-props.md)!!!
 
 | Prop             | Description                | Accepted Values               | Default     |
 |:-----------------|:---------------------------|:------------------------------|:------------|
@@ -26,9 +26,9 @@ A Native `<input type="checkbox" />` to check items or multiple items at once, o
 | `align`          | Position of the checkbox   | `['left', 'right', 'center']` | `left'`     |
 
 
-!!!include(./src/_includes/title-slots.md)!!!
+!!!include(./src/parts/title-slots.md)!!!
 
-!!!include(./src/_includes/slots-feedback-errors.md)!!!
+!!!include(./src/parts/slots-feedback-errors.md)!!!
 
 
 

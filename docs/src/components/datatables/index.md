@@ -30,15 +30,15 @@ feel free to explore most of them but some highlights:
 
 But enough of talk, lets see it in action!
 
-!!!include(./src/_includes/title-preview.md)!!!
+!!!include(./src/parts/title-preview.md)!!!
 
 <wrapper src="components/datatables/demo" />
 
-!!!include(./src/_includes/title-snippet.md)!!!
+!!!include(./src/parts/title-snippet.md)!!!
 
 <<< @/components/datatables/ExampleDatatable.vue
 
-!!!include(./src/_includes/title-props.md)!!!
+!!!include(./src/parts/title-props.md)!!!
 
 | Prop                       | Description                              | Accepted Values       | Default            |
 |:---------------------------|:-----------------------------------------|:----------------------|:-------------------|
@@ -106,7 +106,7 @@ Request Params explained :
 | `sorting`     | Array with sorting's applied & their direction  |
 | `action`      | Action selected to perform bulk actions         |
 
-!!!include(./src/_includes/title-events.md)!!!
+!!!include(./src/parts/title-events.md)!!!
 
 | Event            | Description                 | Value            |
 |:-----------------|:----------------------------|:-----------------|
@@ -124,7 +124,7 @@ Request Params explained :
 
 
 
-!!!include(./src/_includes/title-slots.md)!!!
+!!!include(./src/parts/title-slots.md)!!!
 
 Besides, the regular static slots, datatable also provides dynamic slots for rows columns & actions
 

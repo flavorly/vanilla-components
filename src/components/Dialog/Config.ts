@@ -14,7 +14,7 @@ export const VanillaDialogConfig = {
     modal: mergeClasses(
       '',
       'relative inline-block align-middle overflow-hidden',
-      'bg-white dark:bg-gray-750',
+      'bg-white dark:bg-gray-800/70',
       'shadow-xl',
       'rounded-lg',
       'transform transition-all',

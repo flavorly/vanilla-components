@@ -7,15 +7,15 @@ outline: deep
 A date time picker bootstrap by the only and only library [Flatpickr](https://flatpickr.js.org/). Beautiful styled with Tailwind CSS & Made Vanilla just for you! :smile:
 This component extends the default [VanillaInput](/components/input/index)
 
-!!!include(./src/_includes/title-preview.md)!!!
+!!!include(./src/parts/title-preview.md)!!!
 
 <wrapper src="components/datetimepicker/demo" />
 
-!!!include(./src/_includes/title-snippet.md)!!!
+!!!include(./src/parts/title-snippet.md)!!!
 
 <<< @/components/datetimepicker/ExampleDatetimePicker.vue
 
-!!!include(./src/_includes/title-props.md)!!!
+!!!include(./src/parts/title-props.md)!!!
 
 | Prop         | Description               | Accepted Values | Default     |
 |:-------------|:--------------------------|:----------------|:------------|
@@ -24,9 +24,9 @@ This component extends the default [VanillaInput](/components/input/index)
 | `type`       | Type of input             | `String`        | `'text'`    |
 
 
-!!!include(./src/_includes/title-slots.md)!!!
+!!!include(./src/parts/title-slots.md)!!!
 
-!!!include(./src/_includes/default-slots.md)!!!
+!!!include(./src/parts/default-slots.md)!!!
 
 
 

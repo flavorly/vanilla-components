@@ -2,14 +2,12 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 
 module.exports = {
-  //important: '.vp-raw',
   mode: 'jit',
-  darkMode: 'class', // or 'media' or 'class'*,
+  darkMode: 'class',
   content: [
-    './.vitepress/_old_theme/**/*.{js,jsx,ts,tsx,vue,md}',
+    './.vitepress/theme/**/*.{js,jsx,ts,tsx,vue,md}',
     './src/**/*.{js,jsx,ts,tsx,vue,md}',
     './../src/**/*.{js,jsx,ts,tsx,vue,md}',
-    //'./node_modules/@indigit/vanilla-components/**/*.{js,ts,tsx,vue}',
   ],
   theme: {
     colors: {
@@ -23,25 +21,7 @@ module.exports = {
       indigo: colors.indigo,
       blue: colors.blue,
       pink: colors.pink,
-      gray:{
-        50: '#f9fafb',
-        100: '#f3f4f6',
-        200: '#e5e7eb',
-        300: '#d1d5db',
-        400: '#9ca3af',
-        500: '#6b7280',
-        600: '#4b5563',
-        700: '#374151',
-        750: '#2B3544',
-        800: '#1f2937',
-        850: '#1D2532',
-        900: '#1a202c',
-      },
-      // gray:{
-      //   ...colors.zinc,
-      //   750: '#404040',
-      //   850: '#262626',
-      // },
+      gray: colors.zinc, // To match Vitepresss Dark mode
       // Primary color, change to your own
       primary: colors.indigo,
     },
@@ -59,7 +39,7 @@ module.exports = {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/aspect-ratio'),
-    require('./tailwind/TailwindFormsPlugin'),
-    require('./tailwind/TailwindFillOpacityPlugin'),
+    require('./tailwind/TailwindFormsPlugin.cjs'),
+    require('./tailwind/TailwindFillOpacityPlugin.cjs'),
   ],
 }
