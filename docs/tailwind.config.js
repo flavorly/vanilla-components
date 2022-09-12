@@ -9,7 +9,7 @@ module.exports = {
     './.vitepress/_old_theme/**/*.{js,jsx,ts,tsx,vue,md}',
     './src/**/*.{js,jsx,ts,tsx,vue,md}',
     './../src/**/*.{js,jsx,ts,tsx,vue,md}',
-    './node_modules/@indigit/vanilla-components/**/*.{js,ts,tsx,vue}',
+    //'./node_modules/@indigit/vanilla-components/**/*.{js,ts,tsx,vue}',
   ],
   theme: {
     colors: {

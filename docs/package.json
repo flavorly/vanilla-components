@@ -16,7 +16,6 @@
     "postcss-prefix-selector": "^1.16.0",
     "postinstall-postinstall": "^2.1.0"
   },
-  "peerDependencies": {},
   "dependencies": {
     "@faker-js/faker": "^7.5.0",
     "@headlessui/vue": "^1.7.0",

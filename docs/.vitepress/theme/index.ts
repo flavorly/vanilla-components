@@ -6,7 +6,7 @@ import './styles/components/custom-block.css';
 import './styles/components/vp-code.css';
 import './styles/components/vp-doc.css';
 import './styles/components/vp-sponsor.css';
-import './styles/tailwind.pcss';
+import './styles/tailwind.css';
 import Layout from './Layout.vue';
 import NotFound from './NotFound.vue';
 import { VanillaComponents } from "@indigit/vanilla-components";
@@ -22,11 +22,10 @@ export { default as VPTeamMembers } from './components/VPTeamMembers.vue';
 const theme = {
     Layout,
     NotFound,
-    // @ts-ignore
     enhanceApp({ app, router, siteData }) {
       app.use(VanillaComponents);
       // Start the fake API server
-      //makeServer();
+      makeServer();
     }
 };
 export default theme;

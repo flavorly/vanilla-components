@@ -1,4 +1,4 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from 'vitepress';
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanillacomponents.dev' : 'http://localhost:3000'
@@ -7,27 +7,9 @@ const title = 'Vanilla Components'
 const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
 
 export default defineConfig({
-  // Vite Config
-  vite: {
-    ssr: {
-      noExternal: [
-        '@heroicons/vue'
-      ]
-    },
-    server: {
-      host: true,
-      fs: {
-        allow: ['../..'],
-      },
-    },
-    json: {
-      stringify: true,
-    },
-  },
-
   // Vue Config
   vue: {
-    reactivityTransform: true
+    reactivityTransform: false
   },
 
   // Vitepress Config
@@ -157,7 +139,7 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Inputs & Forms',
+          text: 'Components',
           collapsible: true,
           items: [
             { text: 'Avatar', link: '/components/avatar/index' },
@@ -166,27 +148,18 @@ export default defineConfig({
             { text: 'Phone Input', link: '/components/phone-input/index' },
             { text: 'Checkbox', link: '/components/checkbox/index' },
             { text: 'Date Time Picker', link: '/components/datetimepicker/index' },
-          ],
-        },
-        {
-          text: 'Other & UI',
-          collapsible: true,
-          items: [
             { text: 'Card', link: '/components/card/index' },
             { text: 'Datatables', link: '/components/datatables/index' },
             { text: 'Dropdown', link: '/components/dropdown/index' },
             { text: 'Slideover', link: '/components/slideover/index' },
           ],
         },
-
         {
           text: 'Other Demos',
           collapsible: true,
           items : [
-
             { text: 'Programmatic API', link: '/extra-topics/programmatic-api' },
             { text: 'Alternatives', link: '/extra-topics/alternatives' },
-
             { text: 'Install packages', link: '/action/install-packages' },
             { text: 'Execute command', link: '/action/execute-command' },
             { text: 'Edit files', link: '/action/edit-files' },
