@@ -8,7 +8,11 @@ A dialog with a slideover behaviour backed by HeadlessUI dialogs :smile:
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<wrapper src="components/slideover/demo" />
+<script setup>
+    import ExampleSlideover from './ExampleSlideover.vue';
+</script>
+
+<ExampleSlideover />
 
 !!!include(./src/parts/title-snippet.md)!!!
 

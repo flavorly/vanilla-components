@@ -56,7 +56,7 @@ export const VanillaDatatableConfig = {
 
     tableContainer: 'datatable overflow-x-auto border-t dark:border-gray-700',
     tableClass: 'min-w-full m-0 table-auto',
-    tableBody: 'divide-y bg-gray-50 dark:bg-gray-800',
+    tableBody: 'divide-y bg-gray-50 dark:bg-gray-800 divide-gray-200 dark:divide-gray-700/90',
     tableRow: '',
     tableColumn: 'whitespace-nowrap py-2 text-sm text-gray-500 dark:text-white',
     tableColumnCheckbox: 'px-6 py-3 text-sm w-[10px]',

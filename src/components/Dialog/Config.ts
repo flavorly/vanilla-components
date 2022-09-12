@@ -4,7 +4,7 @@ export const VanillaDialogConfig = {
   fixedClasses: {},
   // Default appearance
   classes: {
-    wrapper: 'fixed inset-0 z-10 overflow-y-auto',
+    wrapper: 'fixed inset-0 z-30 overflow-y-auto',
     inner: 'min-h-screen px-4 text-center',
     closeButton: 'inline-block h-screen align-middle',
     overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-900/80 backdrop-blur-sm',

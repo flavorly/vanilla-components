@@ -32,7 +32,11 @@ But enough of talk, lets see it in action!
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<wrapper src="components/datatables/demo" />
+<script setup>
+    import ExampleDatatable from './ExampleDatatable.vue';
+</script>
+
+<ExampleDatatable />
 
 !!!include(./src/parts/title-snippet.md)!!!
 

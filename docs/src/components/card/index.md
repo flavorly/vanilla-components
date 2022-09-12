@@ -8,7 +8,11 @@ A beautiful card to use on your application to display resource, forms or anythi
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<wrapper src="components/card/demo" />
+<script setup>
+    import ExampleCard from './ExampleCard.vue';
+</script>
+
+<ExampleCard />
 
 !!!include(./src/parts/title-snippet.md)!!!
 

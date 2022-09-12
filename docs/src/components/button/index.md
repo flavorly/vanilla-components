@@ -8,7 +8,11 @@ A Native `<button />`  with batteries included for loading state, variants & man
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<wrapper src="components/button/demo" />
+<script setup>
+    import ExampleButton from './ExampleButton.vue';
+</script>
+
+<ExampleButton />
 
 !!!include(./src/parts/title-snippet.md)!!!
 

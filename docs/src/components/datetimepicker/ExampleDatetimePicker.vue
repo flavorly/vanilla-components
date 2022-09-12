@@ -1,24 +1,26 @@
 <template>
-  <div class="h-[400px]">
-    <!-- Regular -->
-    <VanillaDatetimePicker
-      v-model="value"
-    />
+  <PreviewWrapper>
+    <div class="h-[400px]">
+      <!-- Regular -->
+      <VanillaDatetimePicker
+        v-model="value"
+      />
 
-    <div class="flex items-center justify-center mx-auto text-center mt-2">
-      <pre>{{ JSON.stringify(value) }}</pre>
+      <div class="flex items-center justify-center mx-auto text-center mt-2">
+        <pre>{{ JSON.stringify(value) }}</pre>
+      </div>
+
+      <!-- Regular -->
+      <VanillaDatetimePicker
+        v-model="value2"
+        :errors="'Sorry for this name is already taken'"
+      />
+
+      <div class="flex items-center justify-center mx-auto text-center mt-2">
+        <pre>{{ JSON.stringify(value2) }}</pre>
+      </div>
     </div>
-
-    <!-- Regular -->
-    <VanillaDatetimePicker
-      v-model="value2"
-      :errors="'Sorry for this name is already taken'"
-    />
-
-    <div class="flex items-center justify-center mx-auto text-center mt-2">
-      <pre>{{ JSON.stringify(value2) }}</pre>
-    </div>
-  </div>
+  </PreviewWrapper>
 </template>
 
 <script setup type="ts">

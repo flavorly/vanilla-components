@@ -8,7 +8,11 @@ A Native `<input type="checkbox" />` to check items or multiple items at once, o
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<wrapper src="components/checkbox/demo" />
+<script setup>
+    import ExampleCheckbox from './ExampleCheckbox.vue';
+</script>
+
+<ExampleCheckbox />
 
 !!!include(./src/parts/title-snippet.md)!!!
 

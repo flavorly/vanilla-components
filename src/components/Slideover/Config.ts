@@ -3,7 +3,7 @@ export const VanillaSlideoverConfig = {
   fixedClasses: {},
   // Default appearance
   classes: {
-    wrapper: 'absolute inset-0 overflow-hidden',
+    wrapper: 'absolute inset-0 z-30 overflow-hidden',
     overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-700/50 backdrop-blur-sm',
 
     innerLeft: 'fixed inset-y-0 left-0 pr-10 max-w-full flex',

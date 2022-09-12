@@ -9,7 +9,11 @@ Exports the national number, local number & country code for flexible & easier w
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<wrapper src="components/phone-input/demo" />
+<script setup>
+    import ExamplePhoneInput from './ExamplePhoneInput.vue';
+</script>
+
+<ExamplePhoneInput />
 
 !!!include(./src/parts/title-snippet.md)!!!
 

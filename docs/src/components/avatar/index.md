@@ -4,13 +4,13 @@ outline: deep
 
 # Avatar
 
-<script setup>
-    import ExampleAvatar from './ExampleAvatar.vue';
-</script>
-
 A Avatar component useful for User Profile Pictures, support uploading new pictures or display an existing one.
 
 !!!include(./src/parts/title-preview.md)!!!
+
+<script setup>
+    import ExampleAvatar from './ExampleAvatar.vue';
+</script>
 
 <ExampleAvatar />
 

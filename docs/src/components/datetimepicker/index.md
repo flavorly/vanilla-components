@@ -9,7 +9,11 @@ This component extends the default [VanillaInput](/components/input/index)
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<wrapper src="components/datetimepicker/demo" />
+<script setup>
+    import ExampleDatetimePicker from './ExampleDatetimePicker.vue';
+</script>
+
+<ExampleDatetimePicker />
 
 !!!include(./src/parts/title-snippet.md)!!!
 
