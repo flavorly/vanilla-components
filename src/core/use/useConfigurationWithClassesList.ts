@@ -27,6 +27,7 @@ export default function useConfigurationWithClassesList<ComponentOptions extends
 ): {
   configuration: ComponentOptions,
   attributes: Data,
+  variant: Ref | null
 } {
   const vm = getCurrentInstance()!;
 
@@ -58,5 +59,6 @@ export default function useConfigurationWithClassesList<ComponentOptions extends
   return {
     configuration: configuration as ComponentOptions,
     attributes,
+    variant,
   };
 }

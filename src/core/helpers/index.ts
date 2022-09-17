@@ -17,3 +17,6 @@ export { default as throttle } from './throttle';
 export { default as isTouchOnlyDevice } from './isTouchOnlyDevice';
 export { default as firstOf } from './firstOf';
 export { default as objectToArrayMap } from './objectToArrayMap';
+export { default as elementIsTargetOrTargetChild } from './elementIsTargetOrTargetChild';
+export { default as getFocusableElements } from './getFocusableElements';
+export { default as addToArray } from './addToArray';

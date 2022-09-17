@@ -14,27 +14,22 @@ const externals = [
 
 export default defineConfig(({ command, mode }) => {
   return {
-    ssr: {
-      optimizeDeps: {
-        disabled: 'build',
-        exclude: [ 'vue' ]
-      }
-    },
     plugins: [
-      vue(),
+      vue({isProduction: false}),
+      dts(),
       // Copy vue files so Webstorm can be happy.
-      copy({
-        targets: [
-          // Vue Components
-          { src: 'src/components/**/*.vue', dest: 'dist' },
-          // Vanilla Components Configuration
-          { src: 'src/components/**/Config.ts', dest: 'dist' },
-          // Vanilla Base Configuration
-          { src: 'src/core/config/*.ts', dest: 'dist' },
-        ],
-        hook: 'writeBundle',
-        flatten: false, // Keep directory structure
-      }),
+      // copy({
+      //   targets: [
+      //     // Vue Components
+      //     { src: 'src/components/**/*.vue', dest: 'dist' },
+      //     // Vanilla Components Configuration
+      //     { src: 'src/components/**/Config.ts', dest: 'dist' },
+      //     // Vanilla Base Configuration
+      //     { src: 'src/core/config/*.ts', dest: 'dist' },
+      //   ],
+      //   hook: 'writeBundle',
+      //   flatten: false, // Keep directory structure
+      // }),
     ],
     resolve:{
       alias: [
@@ -51,7 +46,6 @@ export default defineConfig(({ command, mode }) => {
         fileName: (format) => `index.${format}.js`
       },
       rollupOptions: {
-        inlineDynamicImports: true,
         external: externals,
         output: {
           globals: {

@@ -37,15 +37,12 @@
     "lib:publish": "yarn publish",
     "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
     "watch:docs": "yarn --cwd \"docs\" dev",
-    "analyze": "vite build --config analyze.config.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.0",
     "@popperjs/core": "^2.11.6",
-    "@variantjs/core": "^0.0.90",
-    "@variantjs/vue": "^0.0.22",
     "@vueuse/core": "^9.2.0",
     "axios": "^0.27.2",
     "flatpickr": "^4.6.9",
@@ -57,8 +54,6 @@
   "peerDependencies": {
     "@headlessui/vue": "^1.7.0",
     "@popperjs/core": "^2.11.6",
-    "@variantjs/core": "^0.0.87",
-    "@variantjs/vue": "^0.0.21",
     "vue": "^3.2.39"
   },
   "devDependencies": {

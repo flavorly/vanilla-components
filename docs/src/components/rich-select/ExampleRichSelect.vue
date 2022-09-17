@@ -4,9 +4,9 @@
     <VanillaRichSelect
       v-model="value"
       :options="options"
-      class="w-full inline-flex"
       :feedback="'Im useful helper out here, choose wisely'"
-      placeholder="Elon Musk"
+      placeholder="Please select an option"
+      :errors="'Your Seleection cannot be more than 10 stuff'"
     />
   </PreviewWrapper>
 </template>

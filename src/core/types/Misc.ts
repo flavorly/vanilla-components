@@ -19,6 +19,13 @@ type FetchedOptions = Promise<{ results: InputOptions; hasMorePages?: boolean; }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type PreFetchOptionsFn = (currentValue?: any) => Promise<InputOptions>;
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+type DebounceFn = (...args: any[]) => void;
+
+type DebouncedFn = {
+  cancel: () => void,
+} & DebounceFn;
+
 export {
   Measure,
   Data,
@@ -28,6 +35,8 @@ export {
   IconProp,
   FetchedOptions,
   PreFetchOptionsFn,
+  DebouncedFn,
+  DebounceFn,
 };
 
 

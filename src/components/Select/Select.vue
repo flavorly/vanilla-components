@@ -1,6 +1,6 @@
 <template>
-  <div class="vanilla-input">
-    <div :class="configuration.classesList.wrapper">
+  <div class="vanilla-simple-select">
+    <div :class="configuration.classesList?.wrapper">
       <select
         :id="name"
         ref="localRef"
@@ -9,10 +9,10 @@
         :autocomplete="autocomplete"
         v-bind="$attrs"
         :class="[
-          configuration.classesList.select,
-          configuration.multiple ? configuration.classesList.selectIfMultiple : '',
+          configuration.classesList?.select,
+          configuration.multiple ? configuration.classesList?.selectIfMultiple : '',
         ]"
-        :multiple="configuration.multiple"
+        :multiple="configuration?.multiple"
       >
         <VanillaSelectOption
           v-if="empty && showEmpty"

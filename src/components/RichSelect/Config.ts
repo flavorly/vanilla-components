@@ -4,7 +4,7 @@ import { mergeClasses } from '@/core';
 import { commonClasses } from '@/core/config/commonClasses';
 
 const defaultVariant = {
-    wrapper: 'relative',
+    wrapper: 'relative w-full',
 
     // TDropdown Component
     trigger: mergeClasses(

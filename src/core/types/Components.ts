@@ -52,6 +52,7 @@ type VanillaComponentConfiguration = {
   VanillaDatetimePicker?: VanillaDatetimePickerProps,
   VanillaDialog?: VanillaDialogProps,
   VanillaDropdown?: VanillaDropdownProps,
+  VanillaDropdownExtended?: VanillaDropdownProps,
 
   VanillaFormErrors?: VanillaFormErrorsProps,
   VanillaFormFeedback?: VanillaFormFeedbackProps,

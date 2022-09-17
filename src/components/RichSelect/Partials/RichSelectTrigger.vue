@@ -66,7 +66,7 @@
 
 <script lang="ts">
 import { ComputedRef, defineComponent, inject, Ref } from 'vue';
-import { NormalizedOption } from '@variantjs/core';
+import { NormalizedOption } from '@/core/types';
 import { VanillaRichSelectProps } from '@/components/RichSelect';
 import { useInjectsClassesList, useInjectsConfiguration } from '@/core';
 import RichSelectTriggerTags from './RichSelectTriggerTags.vue';
@@ -90,6 +90,8 @@ export default defineComponent({
         const shown = inject<ComputedRef<boolean>>('shown')!;
         const usesTags = inject<ComputedRef<boolean>>('usesTags')!;
         const classesList = useInjectsClassesList()!;
+
+        console.log('Trigger configuration', configuration, classesList.value);
 
         return {
             selectedOption,

@@ -7,17 +7,17 @@ import {
   watch,
 } from 'vue';
 
-export default function useMultipleVModel<P extends Data, K extends keyof P, C extends Data>(
+export default function useMultipleVModel<P extends Data, K extends keyof P, C extends boolean>(
   props: P,
   key: K,
-  configuration?: C,
+  multiple?: C,
 ): {
   localValue: Ref<P[K]>;
   clearValue: () => void
 } {
   const vm = getCurrentInstance();
 
-  const isMultiple = computed<boolean>((): boolean => (configuration === undefined ? false : configuration.multiple !== null && configuration.multiple !== undefined && configuration.multiple !== false));
+  const isMultiple = computed<boolean>((): boolean => (multiple === undefined ? false : multiple !== null && true && multiple !== false));
 
   const getDefaultValue = (): P[K] => {
     if (isMultiple.value) {

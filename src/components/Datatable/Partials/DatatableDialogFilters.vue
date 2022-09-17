@@ -107,7 +107,7 @@
 import { defineComponent, PropType, Ref, ref, watch } from 'vue';
 import VanillaDialog from '@/components/Dialog/Dialog.vue';
 import VanillaSelect from '@/components/Select/Select.vue';
-import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
+import VanillaRichSelect from '@/components/RichSelect/____RichSelect.vue';
 import VanillaCheckbox from '@/components/Checkbox/Checkbox.vue';
 import VanillaToggle from '@/components/Toggle/Toggle.vue';
 import VanillaInput from '@/components/Input/Input.vue';

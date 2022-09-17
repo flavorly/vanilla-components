@@ -14,4 +14,6 @@ export { default as useConfiguration } from './useConfiguration';
 export { default as useDefaultName } from './useDefaultName';
 export { default as useDynamicSlots } from './useDynamicSlots';
 export { default as useReplacePlaceholders } from './useReplacePlaceholders';
+export { default as useActivableOption } from './useActivableOption';
+export { default as useSelectableOption } from './useSelectableOption';
 export { useConfigurationParts, useAttributes, extractDefinedProps } from './useConfiguration';

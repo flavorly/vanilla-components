@@ -63,7 +63,7 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const configuration = inject<VanillaRichSelectProps>('configuration')!;
+        const configuration = inject<VanillaRichSelectProps>('configuration_vanilla')!;
         const shown = inject<Ref<boolean>>('shown');
         const fetchingMoreOptions = inject<Ref<boolean>>('fetchingMoreOptions')!;
         const dropdownBottomReachedHandler = inject<(() => void)>('dropdownBottomReachedHandler')!;

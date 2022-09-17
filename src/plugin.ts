@@ -1,6 +1,5 @@
 import { App } from 'vue';
 import { VanillaComponentConfiguration } from '@/core/types';
-import { variantJS } from '@variantjs/vue';
 import mergeConfiguration from './configuration';
 
 const plugin = {
@@ -9,8 +8,6 @@ const plugin = {
     app.config.globalProperties.$vanillaComponents = true;
     const mergedConfiguration = mergeConfiguration(configuration);
     app.provide('vanilla_configuration', mergedConfiguration);
-    // Also use VariantJS with their own configuration but merged with our defaults.
-    app.use(variantJS, mergedConfiguration);
   },
 };
 

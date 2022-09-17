@@ -26,3 +26,26 @@ export declare type VanillaDropdownProps = WithVariantPropsAndClassesList<{
   size?: string | undefined | 'default' | 'medium' | 'large' | 'extra-large' | 'super-large' | 'full-width',
   position?: string | undefined | 'center' | 'left' | 'right' | 'full-width',
 } & InputHTMLAttributes & Data, VanillaDropdownClassesValidKeys>;
+
+export type VanillaDropdownExtendedProps = WithVariantPropsAndClassesList<{
+  text?: string,
+  disabled?: boolean,
+
+  tagName?: string,
+  dropdownTagName?: string,
+  dropdownAttributes?: Data,
+
+  toggleOnFocus?: boolean,
+  toggleOnClick?: boolean,
+  toggleOnHover?: boolean,
+
+  show?: boolean,
+
+  hideOnLeaveTimeout?: number,
+
+  teleport?: boolean,
+  teleportTo?: string | HTMLElement,
+
+  placement?: Placement,
+  popperOptions?: Options,
+} & InputHTMLAttributes & Data, VanillaDropdownClassesValidKeys>;

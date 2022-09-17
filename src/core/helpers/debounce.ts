@@ -1,9 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-type DebounceFn = (...args: any[]) => void;
-
-export type DebouncedFn = {
-  cancel: () => void,
-} & DebounceFn;
+import { DebouncedFn, DebounceFn } from '@/core/types';
 
 const debounce = (func: (...args: any[]) => void, wait = 200): DebouncedFn => {
   let timeout: ReturnType<typeof setTimeout> | undefined;
