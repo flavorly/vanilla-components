@@ -1,3 +1,13 @@
+<script setup type="ts">
+import { VanillaDropdown, VanillaDropdownOption } from '@indigit/vanilla-components'
+import { defineComponent, ref } from 'vue'
+import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
+
+defineComponent({ name: 'ExampleDropdown' })
+
+const value = ref(true)
+</script>
+
 <template>
   <PreviewWrapper>
     <div class="h-[200px]">
@@ -9,7 +19,7 @@
         >
           <!-- Option -->
           <VanillaDropdownOption>
-            <DuplicateIcon class="w-5 h-5 mr-2" />
+            <DocumentDuplicateIcon class="w-5 h-5 mr-2" />
             <span>Copy Stuff</span>
           </VanillaDropdownOption>
           <!-- Option -->
@@ -26,14 +36,3 @@
     </div>
   </PreviewWrapper>
 </template>
-
-
-<script setup type="ts">
-import { VanillaDropdown, VanillaDropdownOption } from '@indigit/vanilla-components';
-import { ref, defineComponent } from 'vue';
-import { DuplicateIcon, CheckCircleIcon } from '@heroicons/vue/solid';
-
-defineComponent({ name: 'ExampleDropdown' });
-
-const value = ref(true);
-</script>

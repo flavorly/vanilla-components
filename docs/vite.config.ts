@@ -1,10 +1,28 @@
-import { defineConfig } from 'vite';
-import { whyframe } from '@whyframe/core';
-import { whyframeVue } from '@whyframe/vue';
+import { defineConfig } from 'vite'
 
 export default defineConfig({
   ssr: {
-    noExternal: [],
+    noExternal: [
+      '@heroicons/vue',
+    ],
+    optimizeDeps: {
+      exclude: ['@heroicons/vue'],
+    },
+  },
+  resolve: {
+    alias: [
+      {
+        find: '@indigit/vanilla-components',
+        replacement: '../src',
+      },
+    ],
+  },
+  optimizeDeps: {
+    exclude: [
+      '@indigit/vanilla-components',
+      '../src',
+    ],
+    force: true,
   },
   server: {
     host: true,
@@ -15,8 +33,5 @@ export default defineConfig({
   json: {
     stringify: true,
   },
-  plugins: [
-    whyframe({ defaultSrc: '/frames/default' }),
-    whyframeVue({ include: /\.(?:vue|md)$/ }),
-  ],
-});
+  plugins: [],
+})

@@ -1,37 +1,7 @@
-<template>
-  <PreviewWrapper>
-    <div>
-      <VanillaDatatable
-        :config="config"
-        :unique-name="'payments'"
-        :columns="columns"
-        :options="options"
-        :translations="translations"
-        :actions="actions"
-        :per-page-options="perPageItemsOptions"
-        :filters="filters"
-        :fetch-endpoint="'/datatables'"
-        :actions-endpoint="'/datatables'"
-        @fetchedSuccess="onFetched"
-        @fetchError="onFetched"
-        @openedSettings="onFetched"
-        @openedFilters="onFetched"
-      >
-        <template #rowId="{result, resultRaw}">
-          <span><u>{{ result }}</u></span>
-        </template>
-
-        <template #actionDeleteItems="{action}">
-          <TrashIcon class="h-4 w-4" /><span>{{ action.label }}</span>
-        </template>
-      </VanillaDatatable>
-    </div>
-  </PreviewWrapper>
-</template>
 <script type="ts">
-import { VanillaDatatable, VanillaDropdownOption } from '@indigit/vanilla-components';
-import { defineComponent } from 'vue';
-import { TrashIcon } from '@heroicons/vue/24/outline';
+import { VanillaDatatable, VanillaDropdownOption } from '@indigit/vanilla-components'
+import { defineComponent } from 'vue'
+import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
 
 export default defineComponent({
     name: 'ExampleDatatables',
@@ -43,8 +13,8 @@ export default defineComponent({
     setup(props) {
         const onFetched = () => {
             // Update our little demo height.
-            window.parent.postMessage('mounted', '*');
-        };
+            window.parent.postMessage('mounted', '*')
+        }
 
         // Options
         const options = {
@@ -55,7 +25,7 @@ export default defineComponent({
             showTotalItems: true,
             compact: false,
             striped: false,
-        };
+        }
 
         // Columns
         const columns = [
@@ -95,7 +65,7 @@ export default defineComponent({
                 defaultSortAs: undefined,
                 raw: false,
             },
-        ];
+        ]
 
         // Actions
         const actions = [
@@ -123,7 +93,7 @@ export default defineComponent({
                         },
                     },
                     callback: (action) => {
-                        console.log('Im being executed before on the action', action);
+                        console.log('Im being executed before on the action', action)
                     },
                 },
                 after: {
@@ -136,11 +106,11 @@ export default defineComponent({
                         stopWhenDataChanges: false,
                     },
                     callback: (action) => {
-                        console.log('Im being executed after');
+                        console.log('Im being executed after')
                     },
                 },
             },
-        ];
+        ]
 
         const filters = [
             {
@@ -174,7 +144,7 @@ export default defineComponent({
                     { value: 'Ethereum', text: 'Ethereum' },
                 ],
             },
-        ];
+        ]
 
         // Translations
         const translations = {
@@ -190,7 +160,6 @@ export default defineComponent({
             actionConfirmText: 'Are you sure you want to :name on the :itemsSelected item(s) selected? Please confirm',
             actionConfirmButton: 'Yes, I\'v Confirmed',
             actionCancelButton: 'Nah, Cancel',
-
 
             search: 'Search',
             searchPlaceholder: 'Search your latest Payments',
@@ -211,7 +180,7 @@ export default defineComponent({
             showingFrom: 'Showing :from to :to of :total results',
             nextPage: 'Next',
             previousPage: 'Previous',
-        };
+        }
 
         // Per Page Options
         const perPageItemsOptions = [
@@ -220,26 +189,26 @@ export default defineComponent({
             { value: 50, text: '50 Items per page' },
             { value: 100, text: '100 Items per page' },
             { value: 300, text: '300 Items per page' },
-        ];
+        ]
 
         const poolingOptions = {
             enable: false,
             interval: 5,
             during: 60,
             stopWhenDataChanges: true,
-        };
+        }
 
         const config = {
             name: 'ExampleDatatable',
             primaryKey: 'id',
-            columns: columns,
-            actions: actions,
-            filters: filters,
-            options: options,
-            translations: translations,
+            columns,
+            actions,
+            filters,
+            options,
+            translations,
             perPageOptions: perPageItemsOptions,
             pooling: poolingOptions,
-        };
+        }
 
         return {
             columns,
@@ -251,8 +220,38 @@ export default defineComponent({
             poolingOptions,
             config,
             onFetched,
-        };
-
+        }
     },
-});
+})
 </script>
+
+<template>
+  <PreviewWrapper>
+    <div>
+      <VanillaDatatable
+        :config="config"
+        unique-name="payments"
+        :columns="columns"
+        :options="options"
+        :translations="translations"
+        :actions="actions"
+        :per-page-options="perPageItemsOptions"
+        :filters="filters"
+        fetch-endpoint="/datatables"
+        actions-endpoint="/datatables"
+        @fetchedSuccess="onFetched"
+        @fetchError="onFetched"
+        @openedSettings="onFetched"
+        @openedFilters="onFetched"
+      >
+        <template #rowId="{ result, resultRaw }">
+          <span><u>{{ result }}</u></span>
+        </template>
+
+        <template #actionDeleteItems="{ action }">
+          <TrashIcon class="h-4 w-4" /><span>{{ action.label }}</span>
+        </template>
+      </VanillaDatatable>
+    </div>
+  </PreviewWrapper>
+</template>
