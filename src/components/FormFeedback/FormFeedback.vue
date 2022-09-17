@@ -1,21 +1,9 @@
-<template>
-  <div
-    v-if="text"
-    :class="configuration.class"
-    @click="clicked"
-  >
-    <span
-      v-if="safe"
-      v-html="text"
-    />
-    <span v-else>{{ text }}</span>
-  </div>
-</template>
-
 <script lang="ts">
-import { useBootVariant, useVariantProps, useConfiguration } from '@/core';
-import { defineComponent, PropType, ref } from 'vue';
-import { VanillaFormFeedbackProps, VanillaFormFeedbackConfig } from './index';
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import type { VanillaFormFeedbackProps } from './index'
+import { VanillaFormFeedbackConfig } from './index'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core'
 
 export default defineComponent({
     name: 'VanillaFormFeedback',
@@ -34,19 +22,33 @@ export default defineComponent({
     },
     emits: ['feedbackClick', 'click'],
     setup(props, { emit }) {
-        const { localVariant } = useBootVariant(props, '', ref(null));
-        const { configuration } = useConfiguration<VanillaFormFeedbackProps>(VanillaFormFeedbackConfig);
+        const { localVariant } = useBootVariant(props, '', ref(null))
+        const { configuration } = useConfiguration<VanillaFormFeedbackProps>(VanillaFormFeedbackConfig)
 
         const clicked = () => {
-            emit('feedbackClick', true);
-            emit('click', true);
-        };
+            emit('feedbackClick', true)
+            emit('click', true)
+        }
 
         return {
             localVariant,
             configuration,
             clicked,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <div
+    v-if="text"
+    :class="configuration.class"
+    @click="clicked"
+  >
+    <span
+      v-if="safe"
+      v-html="text"
+    />
+    <span v-else>{{ text }}</span>
+  </div>
+</template>

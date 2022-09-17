@@ -1,3 +1,51 @@
+<script lang="ts">
+import type { PropType } from 'vue'
+import { defineComponent } from 'vue'
+import { useInjectsClassesList } from '@/core'
+
+export default defineComponent({
+    name: 'VanillaCardFooter',
+    props: {
+        columns: {
+            type: [Number, String] as PropType<string | number>,
+            default: 1,
+            required: false,
+        },
+        type: {
+            type: String as PropType<string>,
+            default: 'simple',
+            required: false,
+            validator(value: string) {
+                // The value must match one of these strings
+                return ['simple', 'grid', 'split'].includes(value)
+            },
+        },
+        align: {
+            type: String,
+            default: 'right',
+            required: false,
+            validator(value: string) {
+                // The value must match one of these strings
+                return ['right', 'left', 'center', 'none'].includes(value)
+            },
+        },
+        border: {
+            type: [Boolean, String],
+            default: false,
+            required: false,
+        },
+    },
+    setup(props) {
+        const classesList = useInjectsClassesList()!
+
+        return {
+            classesList,
+            props,
+        }
+    },
+})
+</script>
+
 <template>
   <!-- Simple aligned left/right or just none -->
   <div
@@ -21,13 +69,13 @@
       columns === 2 ? classesList.footerWithTwoGrids : '',
       columns === 3 ? classesList.footerWithThreeGrids : '',
       border ? classesList.footerBorder : '',
-      classesList.footerWithGrid
+      classesList.footerWithGrid,
     ]"
   >
     <slot />
   </div>
 
-  <!--Gride'd card footer with section on left and right that on mobile will turn responsive -->
+  <!-- Gride'd card footer with section on left and right that on mobile will turn responsive -->
   <div
     v-else-if="type === 'split'"
     :class="[
@@ -44,49 +92,3 @@
     </div>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { useInjectsClassesList } from '@/core';
-
-export default defineComponent({
-    name: 'VanillaCardFooter',
-    props: {
-        columns: {
-            type: [Number, String] as PropType<string | number>,
-            default: 1,
-            required: false,
-        },
-        type: {
-            type: String as PropType<string>,
-            default: 'simple',
-            required: false,
-            validator(value: string) {
-                // The value must match one of these strings
-                return ['simple', 'grid', 'split'].includes(value);
-            },
-        },
-        align: {
-            type: String,
-            default: 'right',
-            required: false,
-            validator(value: string) {
-                // The value must match one of these strings
-                return ['right', 'left', 'center', 'none'].includes(value);
-            },
-        },
-        border: {
-            type: [Boolean, String],
-            default: false,
-            required: false,
-        },
-    },
-    setup(props) {
-        const classesList = useInjectsClassesList()!;
-
-        return {
-            classesList,
-            props,
-        };
-    },
-});
-</script>

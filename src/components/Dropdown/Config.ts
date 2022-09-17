@@ -1,13 +1,15 @@
-import { commonClasses } from '@/core/config/commonClasses';
-import { mergeClasses, popperOptions } from '@/core';
+import { commonClasses } from '@/core/config/commonClasses'
+import { mergeClasses, popperOptions } from '@/core'
 
 export const VanillaDropdownConfig = {
   fixedClasses: {},
+
   // Default appearance
   classes: {
     wrapper: 'relative',
     container: 'flex items-center content-center',
-    //container: 'inline-flex items-center content-center',
+
+    // container: 'inline-flex items-center content-center',
     chevronIcon: '-mr-1 ml-2 h-5 w-5',
     overlay: 'fixed top-0 right-0 left-0 bottom-0 z-[99] bg-black/50',
 
@@ -39,7 +41,7 @@ export const VanillaDropdownConfig = {
     menuItemsWrapper: '',
     menuItemsWrapperSpaced: 'space-y-1',
 
-    menuItem : 'group flex items-center w-full  text-sm leading-5 space-x-1 cursor-pointer',
+    menuItem: 'group flex items-center w-full  text-sm leading-5 space-x-1 cursor-pointer',
     menuItemHighlighted: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black z-10',
     menuItemNotHighlighted: 'text-gray-700 dark:text-white',
     menuItemSpacing: 'px-4 py-3',
@@ -54,12 +56,11 @@ export const VanillaDropdownConfig = {
     leaveFromClass: 'transform scale-100 opacity-100',
     leaveToClass: 'transform scale-95 opacity-0',
   },
-};
+}
 
-export const VanillaDropdownPopperDefaultOptions = popperOptions;
+export const VanillaDropdownPopperDefaultOptions = popperOptions
 
-export const VanillaDropdownClassesKeys = Object.keys(VanillaDropdownConfig.classes);
+export const VanillaDropdownClassesKeys = Object.keys(VanillaDropdownConfig.classes)
 
-export type VanillaDropdownClassesValidKeys = keyof typeof VanillaDropdownConfig.classes;
-
+export type VanillaDropdownClassesValidKeys = keyof typeof VanillaDropdownConfig.classes
 

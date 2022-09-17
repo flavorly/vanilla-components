@@ -1,5 +1,5 @@
-import mapValues from 'lodash/mapValues';
-import { mergeClasses } from '@/core';
+import mapValues from 'lodash/mapValues'
+import { mergeClasses } from '@/core'
 
 export const VanillaCheckboxConfig = {
   fixedClasses: {
@@ -15,15 +15,16 @@ export const VanillaCheckboxConfig = {
     groupCheckbox: 'flex items-center h-5',
     groupLabel: 'ml-3 text-sm leading-5',
   },
+
   // Default Input appearance
   classes: {
-    wrapper : '',
+    wrapper: '',
     wrapperLeft: '',
     wrapperCenter: '',
     wrapperRight: '',
 
     container: '',
-    checkbox:  mergeClasses(
+    checkbox: mergeClasses(
       'checked:bg-primary-600 checked:text-white',
       'dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600',
     ),
@@ -32,14 +33,15 @@ export const VanillaCheckboxConfig = {
     groupCheckbox: '',
     groupLabel: '',
   },
+
   // Variants
   variants: {
     // Used for Errors
     error: {
       classes: {
-        wrapper : '',
+        wrapper: '',
         container: '',
-        checkbox:  mergeClasses(
+        checkbox: mergeClasses(
           'text-red-600 border-red-300 placeholder-red-300 dark:bg-gray-900',
           'focus:ring-red-500',
           'checked:bg-red-600 checked:text-white',
@@ -52,7 +54,7 @@ export const VanillaCheckboxConfig = {
       },
     },
   },
-};
+}
 
 /**
  * Converts our own config into VariantJS config
@@ -66,13 +68,12 @@ export const VanillaCheckboxConfigToVariantJs = (configuration: any) => {
     variants: mapValues(configuration.variants, (value) => {
       return {
         classes: value.classes.checkbox,
-      };
+      }
     }),
-  };
-};
+  }
+}
 
-export const VanillaCheckboxClassesKeys = Object.keys(VanillaCheckboxConfig.classes);
+export const VanillaCheckboxClassesKeys = Object.keys(VanillaCheckboxConfig.classes)
 
-export type VanillaCheckboxClassesValidKeys = keyof typeof VanillaCheckboxConfig.classes;
-
+export type VanillaCheckboxClassesValidKeys = keyof typeof VanillaCheckboxConfig.classes
 

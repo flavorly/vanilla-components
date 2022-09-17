@@ -1,3 +1,65 @@
+<script lang="ts">
+import type { PropType } from 'vue'
+import { defineComponent, nextTick, ref } from 'vue'
+import { useInjectDatatableTranslations } from '../utils'
+import VanillaUFOIcon from '@/components/Icons/UFOIcon.vue'
+import VanillaRadarIcon from '@/components/Icons/RadarIcon.vue'
+import EmptyIcon from '@/components/Icons/Hero/Outline/FunnelIcon.vue'
+import VanillaButton from '@/components/Button/Button.vue'
+import { useInjectsClassesList } from '@/core'
+
+export default defineComponent({
+    name: 'VanillaDatatableEmptyState',
+    components: {
+        VanillaUFOIcon,
+        VanillaRadarIcon,
+        EmptyIcon,
+        VanillaButton,
+    },
+    props: {
+        hasFiltersOrSearch: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+        isFetching: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+    },
+    emits: [
+        'resetFilters',
+        'actionWithoutRecords',
+    ],
+    setup(props, { emit }) {
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+        const isLocallyLoading = ref(false)
+
+        const resetFilters = () => {
+            isLocallyLoading.value = true
+            emit('resetFilters')
+            nextTick(() => {
+                isLocallyLoading.value = false
+            })
+        }
+
+        const actionWithoutRecords = () => {
+            emit('actionWithoutRecords')
+        }
+
+        return {
+            translations,
+            classesList,
+            isLocallyLoading,
+            resetFilters,
+            actionWithoutRecords,
+        }
+    },
+})
+</script>
+
 <template>
   <!-- Table Empty / No results -->
   <div :class="[classesList.emptyStateContainer]">
@@ -74,65 +136,3 @@
     </slot>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, nextTick, PropType, ref } from 'vue';
-import VanillaUFOIcon from '@/components/Icons/UFOIcon.vue';
-import VanillaRadarIcon from '@/components/Icons/RadarIcon.vue';
-import EmptyIcon from '@/components/Icons/Hero/Outline/FunnelIcon.vue';
-import VanillaButton from '@/components/Button/Button.vue';
-import { useInjectDatatableTranslations } from '../utils';
-import { useInjectsClassesList } from '@/core';
-
-
-export default defineComponent({
-    name: 'VanillaDatatableEmptyState',
-    components: {
-        VanillaUFOIcon,
-        VanillaRadarIcon,
-        EmptyIcon,
-        VanillaButton,
-    },
-    props: {
-        hasFiltersOrSearch: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        isFetching: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-    },
-    emits: [
-        'resetFilters',
-        'actionWithoutRecords',
-    ],
-    setup(props, { emit }) {
-
-        // Provide Translations
-        const translations = useInjectDatatableTranslations()!;
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
-
-        const isLocallyLoading = ref(false);
-
-        const resetFilters = () => {
-            isLocallyLoading.value = true;
-            emit('resetFilters');
-            nextTick(() => {
-                isLocallyLoading.value = false;
-            });
-        };
-
-        const actionWithoutRecords = () => {
-            emit('actionWithoutRecords');
-        };
-
-        return {
-            translations,
-            classesList,
-            isLocallyLoading,
-            resetFilters,
-            actionWithoutRecords,
-        };
-    },
-});
-</script>

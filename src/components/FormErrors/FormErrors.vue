@@ -1,20 +1,9 @@
-<template>
-  <div
-    v-if="hasErrors"
-    :class="configuration.class"
-  >
-    <span
-      v-if="safe"
-      v-html="localErrors"
-    />
-    <span v-else>{{ localErrors }}</span>
-  </div>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useVariantProps, useConfiguration } from '@/core';
-import { VanillaFormErrorsProps, VanillaFormErrorsConfig } from './index';
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import type { VanillaFormErrorsProps } from './index'
+import { VanillaFormErrorsConfig } from './index'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core'
 
 export default defineComponent({
     name: 'VanillaFormErrors',
@@ -32,16 +21,29 @@ export default defineComponent({
             localErrors,
             localVariant,
             hasErrors,
-        } = useBootVariant(props, 'errors', ref(null));
+        } = useBootVariant(props, 'errors', ref(null))
 
-        const { configuration } = useConfiguration<VanillaFormErrorsProps>(VanillaFormErrorsConfig);
+        const { configuration } = useConfiguration<VanillaFormErrorsProps>(VanillaFormErrorsConfig)
 
         return {
             localErrors,
             localVariant,
             hasErrors,
             configuration,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <div
+    v-if="hasErrors"
+    :class="configuration.class"
+  >
+    <span
+      v-if="safe"
+      v-html="localErrors"
+    />
+    <span v-else>{{ localErrors }}</span>
+  </div>
+</template>

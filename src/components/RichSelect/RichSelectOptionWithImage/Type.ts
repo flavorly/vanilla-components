@@ -1,13 +1,13 @@
-import { Data, WithVariantPropsAndClassesList } from '@/core/types';
-import { InputHTMLAttributes } from 'vue';
+import type { InputHTMLAttributes } from 'vue'
 
-import { VanillaRichSelectOptionWithImageClassesValidKeys } from './Config';
+import type { VanillaRichSelectOptionWithImageClassesValidKeys } from './Config'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
 export declare type VanillaRichSelectOptionWithImageProps = WithVariantPropsAndClassesList<{
-  name?: string | undefined,
-  image?: string | undefined,
-  selected?: boolean,
-  description?: string | undefined,
-  hasErrors?: boolean,
+  name?: string | undefined
+  image?: string | undefined
+  selected?: boolean
+  description?: string | undefined
+  hasErrors?: boolean
   parentClasses?: string[] | string
-} & InputHTMLAttributes & Data, VanillaRichSelectOptionWithImageClassesValidKeys>;
+} & InputHTMLAttributes & Data, VanillaRichSelectOptionWithImageClassesValidKeys>

@@ -1,99 +1,101 @@
-import { isEqual, normalizedOptionIsDisabled } from '@/core/helpers';
-import { NormalizedOption } from '@/core/types';
-import { computed, ComputedRef, Ref, ref, watch } from 'vue';
+import type { ComputedRef, Ref } from 'vue'
+import { computed, ref, watch } from 'vue'
+import { isEqual, normalizedOptionIsDisabled } from '@/core/helpers'
+import type { NormalizedOption } from '@/core/types'
 
 export default function useActivableOption(
   options: ComputedRef<NormalizedOption[]>,
   localValue: Ref,
 ): {
-    activeOption: Ref<NormalizedOption | null>,
-    initActiveOption: () => void,
-    optionIsActive: (option: NormalizedOption) => boolean,
-    setActiveOption: (option: NormalizedOption) => void,
-    setNextOptionActive: () => void,
-    setPrevOptionActive: () => void,
+    activeOption: Ref<NormalizedOption | null>
+    initActiveOption: () => void
+    optionIsActive: (option: NormalizedOption) => boolean
+    setActiveOption: (option: NormalizedOption) => void
+    setNextOptionActive: () => void
+    setPrevOptionActive: () => void
   } {
   const getActiveOption = (): NormalizedOption | null => {
-    const selectedOption = options.value.find((option: NormalizedOption) => isEqual(option.value, localValue.value) && !normalizedOptionIsDisabled(option));
+    const selectedOption = options.value.find((option: NormalizedOption) => isEqual(option.value, localValue.value) && !normalizedOptionIsDisabled(option))
 
     if (selectedOption !== undefined) {
-      return selectedOption;
+      return selectedOption
     }
 
     if (options.value.length > 0) {
-      return options.value.find((option) => !normalizedOptionIsDisabled(option)) || null;
+      return options.value.find(option => !normalizedOptionIsDisabled(option)) || null
     }
 
-    return null;
-  };
+    return null
+  }
 
-  const activeOption = ref<NormalizedOption | null>(getActiveOption());
+  const activeOption = ref<NormalizedOption | null>(getActiveOption())
 
   const activeOptionIndex = computed((): number => {
     if (activeOption.value === null) {
-      return 0;
+      return 0
     }
 
-    const index = options.value.findIndex((option) => isEqual(option.value, (activeOption.value as NormalizedOption).value));
+    const index = options.value.findIndex(option => isEqual(option.value, (activeOption.value as NormalizedOption).value))
 
-    return index < 0 ? 0 : index;
-  });
+    return index < 0 ? 0 : index
+  })
 
-  const optionIsActive = (option: NormalizedOption): boolean => (activeOption.value === null ? false : isEqual(activeOption.value.value, option.value));
+  const optionIsActive = (option: NormalizedOption): boolean => (activeOption.value === null ? false : isEqual(activeOption.value.value, option.value))
 
   const setActiveOption = (option: NormalizedOption): void => {
-    activeOption.value = option;
-  };
+    activeOption.value = option
+  }
 
   const setNextOptionActive = (): void => {
-    let newActiveOption: NormalizedOption | undefined;
-    let nextIndex = activeOptionIndex.value + 1;
+    let newActiveOption: NormalizedOption | undefined
+    let nextIndex = activeOptionIndex.value + 1
 
     while (nextIndex < options.value.length && newActiveOption === undefined) {
-      const option = options.value[nextIndex];
-      const optionIsDisabled = normalizedOptionIsDisabled(option);
+      const option = options.value[nextIndex]
+      const optionIsDisabled = normalizedOptionIsDisabled(option)
       if (!optionIsDisabled) {
-        newActiveOption = option;
+        newActiveOption = option
       }
-      nextIndex += 1;
+      nextIndex += 1
     }
 
     if (newActiveOption) {
-      setActiveOption(newActiveOption);
+      setActiveOption(newActiveOption)
     }
-  };
+  }
 
   const setPrevOptionActive = (): void => {
-    let newActiveOption: NormalizedOption | undefined;
-    let nextIndex = activeOptionIndex.value - 1;
+    let newActiveOption: NormalizedOption | undefined
+    let nextIndex = activeOptionIndex.value - 1
 
     while (nextIndex >= 0 && newActiveOption === undefined) {
-      const option = options.value[nextIndex];
-      const optionIsDisabled = normalizedOptionIsDisabled(option);
+      const option = options.value[nextIndex]
+      const optionIsDisabled = normalizedOptionIsDisabled(option)
       if (!optionIsDisabled) {
-        newActiveOption = option;
+        newActiveOption = option
       }
-      nextIndex -= 1;
+      nextIndex -= 1
     }
 
     if (newActiveOption) {
-      setActiveOption(newActiveOption);
+      setActiveOption(newActiveOption)
     }
-  };
+  }
 
   const initActiveOption = (): void => {
-    activeOption.value = getActiveOption();
-  };
+    activeOption.value = getActiveOption()
+  }
 
   watch(options, (newOptions: NormalizedOption[], oldOptions: NormalizedOption[]) => {
-    const firstNewOption = newOptions.find((o) => !oldOptions.includes(o) && !normalizedOptionIsDisabled(o));
+    const firstNewOption = newOptions.find(o => !oldOptions.includes(o) && !normalizedOptionIsDisabled(o))
 
     if (firstNewOption) {
-      setActiveOption(firstNewOption);
-    } else {
-      initActiveOption();
+      setActiveOption(firstNewOption)
     }
-  });
+ else {
+      initActiveOption()
+    }
+  })
 
   return {
     activeOption,
@@ -102,5 +104,5 @@ export default function useActivableOption(
     setActiveOption,
     setNextOptionActive,
     setPrevOptionActive,
-  };
+  }
 }

@@ -1,3 +1,72 @@
+<script lang="ts">
+import type { PropType } from 'vue'
+import { defineComponent, provide, ref } from 'vue'
+import VanillaCardFooter from './CardFooter/CardFooter.vue'
+import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '@/core/use'
+import { hasSlot } from '@/core/helpers'
+import type { VanillaCardProps } from '@/components/Card'
+import { VanillaCardClassesKeys, VanillaCardConfig } from '@/components/Card'
+
+export default defineComponent({
+    name: 'VanillaCard',
+    components: {
+        VanillaCardFooter,
+    },
+    inheritAttrs: true,
+    props: {
+        ...useVariantProps<VanillaCardProps>(),
+        title: {
+            type: [String] as PropType<string>,
+            default: undefined,
+        },
+        subtitle: {
+            type: [String] as PropType<string>,
+            default: undefined,
+        },
+        as: {
+            type: [String] as PropType<string>,
+            default: 'div',
+        },
+        bodyDivided: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyDarker: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyWithPadding: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        bodyClasses: {
+            type: [String] as PropType<string>,
+            default: '',
+        },
+    },
+    setup(props) {
+        const { localVariant } = useBootVariant(props, 'errors', ref(null))
+
+        const { configuration } = useConfigurationWithClassesList<VanillaCardProps>(
+            VanillaCardConfig,
+            VanillaCardClassesKeys,
+            localVariant,
+        )
+
+        /**
+         * Provided data
+         */
+        provide('configuration_vanilla', configuration)
+
+        return {
+            configuration,
+            localVariant,
+            hasSlot,
+        }
+    },
+})
+</script>
+
 <template>
   <component
     :is="as"
@@ -7,12 +76,12 @@
     <div
       v-if="hasSlot($slots.title) || hasSlot($slots.subtitle) || hasSlot($slots.actions) || title !== undefined || subtitle !== undefined"
       :class="[
-        configuration.classesList.header
+        configuration.classesList.header,
       ]"
     >
       <div
         :class="[
-          configuration.classesList.headerInner
+          configuration.classesList.headerInner,
         ]"
       >
         <!--  Title and Subtitle -->
@@ -84,71 +153,4 @@
     <slot name="footerVanilla" />
   </component>
 </template>
-<script lang="ts">
-import { defineComponent, PropType, provide, ref } from 'vue';
-import { useBootVariant, useVariantProps, useConfigurationWithClassesList } from '@/core/use';
-import { hasSlot } from '@/core/helpers';
-import { VanillaCardProps, VanillaCardClassesKeys, VanillaCardConfig } from '@/components/Card';
-import VanillaCardFooter from './CardFooter/CardFooter.vue';
-
-export default defineComponent({
-    name: 'VanillaCard',
-    components: {
-        VanillaCardFooter,
-    },
-    inheritAttrs: true,
-    props: {
-        ...useVariantProps<VanillaCardProps>(),
-        title: {
-            type: [String] as PropType<string>,
-            default: undefined,
-        },
-        subtitle: {
-            type: [String] as PropType<string>,
-            default: undefined,
-        },
-        as: {
-            type: [String] as PropType<string>,
-            default: 'div',
-        },
-        bodyDivided: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyDarker: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyWithPadding: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyClasses: {
-            type: [String] as PropType<string>,
-            default: '',
-        },
-    },
-    setup(props) {
-
-        const { localVariant } = useBootVariant(props, 'errors', ref(null));
-
-        const { configuration } = useConfigurationWithClassesList<VanillaCardProps>(
-            VanillaCardConfig,
-            VanillaCardClassesKeys,
-            localVariant,
-        );
-
-        /**
-         * Provided data
-         */
-        provide('configuration_vanilla', configuration);
-
-        return {
-            configuration,
-            localVariant,
-            hasSlot,
-        };
-    },
-});
-</script>
 

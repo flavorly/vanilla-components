@@ -1,14 +1,13 @@
 const isTouchOnlyDevice = (w?: Window): boolean => {
   if (w === undefined) {
     if (window === undefined) {
-      return false;
+      return false
     }
 
-    // eslint-disable-next-line no-param-reassign
-    w = window;
+    w = window
   }
 
-  return !!(w.matchMedia && w.matchMedia('(any-hover: none)').matches);
-};
+  return !!(w.matchMedia && w.matchMedia('(any-hover: none)').matches)
+}
 
-export default isTouchOnlyDevice;
+export default isTouchOnlyDevice

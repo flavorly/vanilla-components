@@ -1,3 +1,32 @@
+<script lang="ts">
+import type { ComputedRef, Ref } from 'vue'
+import { computed, defineComponent, inject } from 'vue'
+import type { VanillaRichSelectProps } from '@/components/RichSelect'
+import { useInjectsClassesList, useInjectsConfiguration } from '@/core'
+
+export default defineComponent({
+    name: 'RichSelectState',
+    setup() {
+        const options = inject<ComputedRef<VanillaRichSelectProps>>('options')!
+        const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
+        const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!
+        const needsMoreCharsMessage = inject<ComputedRef<string>>('needsMoreCharsMessage')!
+        const configuration = useInjectsConfiguration<VanillaRichSelectProps>()
+        const noResults = computed<boolean>((): boolean => options.value.length === 0)
+        const classesList = useInjectsClassesList()!
+
+        return {
+            noResults,
+            configuration,
+            fetchingOptions,
+            needsMoreCharsToFetch,
+            needsMoreCharsMessage,
+            classesList,
+        }
+    },
+})
+</script>
+
 <template>
   <slot
     name="stateFeedback"
@@ -22,31 +51,3 @@
     />
   </slot>
 </template>
-
-<script lang="ts">
-import { computed, ComputedRef, defineComponent, inject, Ref } from 'vue';
-import { VanillaRichSelectProps } from '@/components/RichSelect';
-import { useInjectsClassesList, useInjectsConfiguration } from '@/core';
-
-export default defineComponent({
-    name: 'RichSelectState',
-    setup() {
-        const options = inject<ComputedRef<VanillaRichSelectProps>>('options')!;
-        const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!;
-        const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!;
-        const needsMoreCharsMessage = inject<ComputedRef<string>>('needsMoreCharsMessage')!;
-        const configuration = useInjectsConfiguration<VanillaRichSelectProps>();
-        const noResults = computed<boolean>((): boolean => options.value.length === 0);
-        const classesList = useInjectsClassesList()!;
-
-        return {
-            noResults,
-            configuration,
-            fetchingOptions,
-            needsMoreCharsToFetch,
-            needsMoreCharsMessage,
-            classesList,
-        };
-    },
-});
-</script>

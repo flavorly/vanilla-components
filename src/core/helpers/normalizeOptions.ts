@@ -1,13 +1,13 @@
-import {
-  InputOptions,
-  NormalizedOptions,
-  NormalizedOption,
+import type {
   InputOption,
-  InputOptionValue,
-  InputOptionText,
   InputOptionObject,
-} from '@/core/types';
-import { get } from '@/core/helpers';
+  InputOptionText,
+  InputOptionValue,
+  InputOptions,
+  NormalizedOption,
+  NormalizedOptions,
+} from '@/core/types'
+import { get } from '@/core/helpers'
 
 /**
  * Attempts to guess an option value
@@ -16,25 +16,25 @@ import { get } from '@/core/helpers';
  */
 const guessOptionValue = (option: InputOptionObject, valueAttribute?: string): InputOptionValue => {
   if (valueAttribute) {
-    const value = get(option, valueAttribute);
+    const value = get(option, valueAttribute)
 
     if (value === null) {
-      return null;
+      return null
     }
 
     if (typeof value === 'undefined') {
-      return undefined;
+      return undefined
     }
 
     if (typeof value === 'number' || typeof value === 'string') {
-      return value;
+      return value
     }
 
-    return String(value);
+    return String(value)
   }
 
-  return option.value;
-};
+  return option.value
+}
 
 /**
  * Attempts to guess an option text
@@ -43,21 +43,21 @@ const guessOptionValue = (option: InputOptionObject, valueAttribute?: string): I
  */
 const guessOptionText = (option: InputOptionObject, textAttribute?: string): InputOptionText => {
   if (textAttribute) {
-    const text = get(option, textAttribute);
+    const text = get(option, textAttribute)
 
     if (typeof text === 'undefined' || text === null) {
-      return '';
+      return ''
     }
 
     if (typeof text === 'number' || typeof text === 'string') {
-      return text;
+      return text
     }
 
-    return String(text);
+    return String(text)
   }
 
-  return option.text;
-};
+  return option.text
+}
 
 /**
  * Normalize a option for the select
@@ -75,26 +75,26 @@ const normalizeOption = (
       value: option,
       text: option,
       raw: option,
-    };
+    }
   }
 
   const normalizedOption: NormalizedOption = {
     value: guessOptionValue(option, valueAttribute),
     text: guessOptionText(option, textAttribute),
     raw: option,
-  };
+  }
 
   if (option.disabled) {
-    normalizedOption.disabled = true;
+    normalizedOption.disabled = true
   }
 
   if (option.children) {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    normalizedOption.children = normalizeOptions(option.children, textAttribute, valueAttribute);
+    normalizedOption.children = normalizeOptions(option.children, textAttribute, valueAttribute)
   }
 
-  return normalizedOption;
-};
+  return normalizedOption
+}
 
 /**
  * Normalize the options for the select
@@ -108,17 +108,17 @@ const normalizeOptions = (
   valueAttribute?: string,
 ): NormalizedOptions => {
   if (Array.isArray(options)) {
-    return options.map((option) => normalizeOption(option, textAttribute, valueAttribute));
+    return options.map(option => normalizeOption(option, textAttribute, valueAttribute))
   }
 
   if (typeof options === 'object') {
-    return Object.keys(options).map((optionKey) => ({
+    return Object.keys(options).map(optionKey => ({
       value: optionKey,
       text: options[optionKey],
-    }));
+    }))
   }
 
-  return [];
-};
+  return []
+}
 
-export default normalizeOptions;
+export default normalizeOptions

@@ -1,7 +1,7 @@
-import mapValues from 'lodash/mapValues';
-import { VanillaInputConfig } from '@/components/Input/Config';
+import mapValues from 'lodash/mapValues'
+import { VanillaInputConfig } from '@/components/Input/Config'
 
-export const VanillaDatetimePickerConfig = VanillaInputConfig;
+export const VanillaDatetimePickerConfig = VanillaInputConfig
 
 /**
  * Converts our own config into VariantJS config
@@ -15,13 +15,12 @@ export const VanillaDatetimePickerConfigToVariantJs = (configuration: any) => {
     variants: mapValues(configuration.variants, (value) => {
       return {
         classes: value.classes.input,
-      };
+      }
     }),
-  };
-};
+  }
+}
 
-export const VanillaDatetimePickerClassesKeys = Object.keys(VanillaDatetimePickerConfig.classes);
+export const VanillaDatetimePickerClassesKeys = Object.keys(VanillaDatetimePickerConfig.classes)
 
-export type VanillaDatetimePickerClassesValidKeys = keyof typeof VanillaDatetimePickerConfig.classes;
-
+export type VanillaDatetimePickerClassesValidKeys = keyof typeof VanillaDatetimePickerConfig.classes
 

@@ -1,3 +1,148 @@
+<script lang="ts">
+import type { PropType } from 'vue'
+import { defineComponent, provide } from 'vue'
+
+import {
+    DialogOverlay,
+    DialogTitle,
+    Dialog as HeadlessDialog,
+    TransitionChild,
+    TransitionRoot,
+} from '@headlessui/vue'
+import {
+    hasSlot,
+    useBootVariant,
+    useConfigurationWithClassesList,
+    useVModel,
+    useVariantProps,
+} from '@/core'
+
+import type { VanillaSlideoverProps } from '@/components/Slideover/index'
+import {
+    VanillaSlideoverClassesKeys,
+    VanillaSlideoverConfig,
+} from '@/components/Slideover/index'
+
+import XMarkIcon from '@/components/Icons/Hero/Outline/XMarkIcon.vue'
+
+export default defineComponent({
+    name: 'VanillaSlideover',
+    components: {
+        TransitionRoot,
+        TransitionChild,
+        HeadlessDialog,
+        DialogOverlay,
+        DialogTitle,
+        XMarkIcon,
+    },
+    inheritAttrs: true,
+    props: {
+        ...useVariantProps<VanillaSlideoverProps>(),
+        modelValue: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        title: {
+            type: [String] as PropType<string | undefined>,
+            default: undefined,
+        },
+        subtitle: {
+            type: [String] as PropType<string | undefined>,
+            default: undefined,
+        },
+        teleport: {
+            type: Boolean,
+            default: false,
+        },
+        teleportTo: {
+            type: [String, Object] as PropType<string | HTMLElement>,
+            default: 'body',
+        },
+        overlay: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+        closeable: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        closeableOnClickOutside: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        closeableOnPressEscape: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        paddingOnBody: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        paddingOnContainer: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        showHeader: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        as: {
+            type: [String] as PropType<string>,
+            default: 'div',
+        },
+        position: {
+            type: [String] as PropType<string>,
+            required: false,
+            default: 'right',
+            validator(position: string) {
+                return ['left', 'right'].includes(position)
+            },
+        },
+        size: {
+            type: [String] as PropType<string>,
+            required: false,
+            default: 'medium',
+            validator(align: string) {
+                return ['default', 'small', 'medium', 'large', 'full'].includes(align)
+            },
+        },
+    },
+    emits: [
+        'update:modelValue',
+    ],
+    setup(props) {
+        const localValue = useVModel(props, 'modelValue')
+        const { localVariant } = useBootVariant(props, 'errors', localValue)
+
+        const { configuration } = useConfigurationWithClassesList<VanillaSlideoverProps>(
+            VanillaSlideoverConfig,
+            VanillaSlideoverClassesKeys,
+            localVariant,
+        )
+
+        const close = () => localValue.value = false
+        const open = () => localValue.value = true
+        const closeOnClickOutside = () => props.closeableOnClickOutside && close()
+
+        /**
+         * Provided data
+         */
+        provide('configuration_vanilla', configuration)
+
+        return {
+            configuration,
+            localValue,
+            localVariant,
+            props,
+            close,
+            open,
+            hasSlot,
+            closeOnClickOutside,
+        }
+    },
+})
+</script>
+
 <template>
   <TransitionRoot
     appear
@@ -75,13 +220,13 @@
                     <div :class="configuration.classesList.titleContainer">
                       <slot
                         name="top"
-                        v-bind="{title, subtitle}"
+                        v-bind="{ title, subtitle }"
                       >
                         <div :class="configuration.classesList.titleInner">
                           <!-- Title -->
                           <slot
                             name="title"
-                            v-bind="{title}"
+                            v-bind="{ title }"
                           >
                             <DialogTitle
                               :class="configuration.classesList.titleText"
@@ -91,7 +236,7 @@
                           <!-- Subtitle -->
                           <slot
                             name="subtitle"
-                            v-bind="{subtitle}"
+                            v-bind="{ subtitle }"
                           >
                             <p
                               :class="configuration.classesList.subtitle"
@@ -107,7 +252,7 @@
                       >
                         <slot
                           name="closeIcon"
-                          v-bind="{closeable, close}"
+                          v-bind="{ closeable, close }"
                         >
                           <button
                             type="button"
@@ -130,7 +275,7 @@
                   :class="[
                     configuration.classesList.body,
                     paddingOnBody ? configuration.classesList.bodyWithPadding : '',
-                    title !== undefined ? configuration.classesList.bodyWithTitle : ''
+                    title !== undefined ? configuration.classesList.bodyWithTitle : '',
                   ]"
                 >
                   <slot />
@@ -143,148 +288,3 @@
     </HeadlessDialog>
   </TransitionRoot>
 </template>
-
-<script lang="ts">
-import { defineComponent, PropType, provide } from 'vue';
-
-import {
-    useBootVariant,
-    useVariantProps,
-    useConfigurationWithClassesList,
-    useVModel,
-    hasSlot,
-} from '@/core';
-
-import {
-    VanillaSlideoverProps,
-    VanillaSlideoverClassesKeys,
-    VanillaSlideoverConfig,
-} from '@/components/Slideover/index';
-
-import {
-    TransitionRoot,
-    TransitionChild,
-    Dialog as HeadlessDialog,
-    DialogOverlay,
-    DialogTitle,
-} from '@headlessui/vue';
-
-import XMarkIcon from '@/components/Icons/Hero/Outline/XMarkIcon.vue';
-
-export default defineComponent({
-    name: 'VanillaSlideover',
-    components: {
-        TransitionRoot,
-        TransitionChild,
-        HeadlessDialog,
-        DialogOverlay,
-        DialogTitle,
-        XMarkIcon,
-    },
-    inheritAttrs: true,
-    props: {
-        ...useVariantProps<VanillaSlideoverProps>(),
-        modelValue: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        title: {
-            type: [String] as PropType<string | undefined>,
-            default: undefined,
-        },
-        subtitle: {
-            type: [String] as PropType<string | undefined>,
-            default: undefined,
-        },
-        teleport: {
-            type: Boolean,
-            default: false,
-        },
-        teleportTo: {
-            type: [String, Object] as PropType<string | HTMLElement>,
-            default: 'body',
-        },
-        overlay: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        closeable: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        closeableOnClickOutside: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        closeableOnPressEscape: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        paddingOnBody: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        paddingOnContainer: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        showHeader: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        as: {
-            type: [String] as PropType<string>,
-            default: 'div',
-        },
-        position: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: 'right',
-            validator(position: string) {
-                return ['left', 'right'].includes(position);
-            },
-        },
-        size: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: 'medium',
-            validator(align: string) {
-                return ['default', 'small', 'medium', 'large', 'full'].includes(align);
-            },
-        },
-    },
-    emits: [
-        'update:modelValue',
-    ],
-    setup(props) {
-
-        const localValue = useVModel(props, 'modelValue');
-        const { localVariant } = useBootVariant(props, 'errors', localValue);
-
-        const { configuration } = useConfigurationWithClassesList<VanillaSlideoverProps>(
-            VanillaSlideoverConfig,
-            VanillaSlideoverClassesKeys,
-            localVariant,
-        );
-
-        const close = () => localValue.value = false;
-        const open = () => localValue.value = true;
-        const closeOnClickOutside = () => props.closeableOnClickOutside && close();
-
-        /**
-         * Provided data
-         */
-        provide('configuration_vanilla', configuration);
-
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            props,
-            close,
-            open,
-            hasSlot,
-        };
-    },
-});
-</script>

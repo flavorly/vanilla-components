@@ -1,4 +1,4 @@
-import { commonClasses } from '@/core';
+import { commonClasses } from '@/core'
 
 export const VanillaSelectCountryOptionConfig = {
   classes: {
@@ -6,7 +6,7 @@ export const VanillaSelectCountryOptionConfig = {
 
     labelAndImageWrapper: 'relative',
     labelAndImageContainer: 'flex items-center space-x-2 text-sm block',
-    labelAndImageContainerSelected : 'font-semibold',
+    labelAndImageContainerSelected: 'font-semibold',
     labelAndImageContainerRegular: 'font-normal',
 
     image: 'flex-shrink-0 w-6 h-6',
@@ -15,10 +15,9 @@ export const VanillaSelectCountryOptionConfig = {
     fallbackImage: 'flex-shrink-0 w-[24px] h-[16px] bg-gray-300 animate-pulse rounded-sm',
     icon: commonClasses.iconsSize,
   },
-};
+}
 
-export const VanillaSelectCountryOptionClassesKeys = Object.keys(VanillaSelectCountryOptionConfig.classes);
+export const VanillaSelectCountryOptionClassesKeys = Object.keys(VanillaSelectCountryOptionConfig.classes)
 
-export type VanillaSelectCountryOptionClassesValidKeys = keyof typeof VanillaSelectCountryOptionConfig.classes;
-
+export type VanillaSelectCountryOptionClassesValidKeys = keyof typeof VanillaSelectCountryOptionConfig.classes
 

@@ -1,8 +1,8 @@
-import { NormalizedOption, NormalizedOptions } from '@/core/types';
+import type { NormalizedOption, NormalizedOptions } from '@/core/types'
 
 const filterOptions = (options: NormalizedOptions, query: string): NormalizedOptions => {
   if (query === '') {
-    return options;
+    return options
   }
 
   return options
@@ -13,21 +13,21 @@ const filterOptions = (options: NormalizedOptions, query: string): NormalizedOpt
           ...{
             children: filterOptions(option.children, query),
           },
-        };
-        return newOption;
+        }
+        return newOption
       }
 
-      return option;
+      return option
     }).filter((option: NormalizedOption): boolean => {
       const foundText = String(option.text)
         .toUpperCase()
         .trim()
-        .includes(query.toUpperCase().trim());
+        .includes(query.toUpperCase().trim())
 
-      const hasChildren = option.children && option.children.length > 0;
+      const hasChildren = option.children && option.children.length > 0
 
-      return hasChildren || foundText;
-    });
-};
+      return hasChildren || foundText
+    })
+}
 
-export default filterOptions;
+export default filterOptions

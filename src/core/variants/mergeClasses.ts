@@ -1,14 +1,14 @@
-import {
+import type {
   CSSClass,
-  CSSClasses,
   CSSClassKeyValuePair,
-} from '@/core/types';
+  CSSClasses,
+} from '@/core/types'
 
 /**
  * Select the clases
  * @param classesObject
  */
-export const selectClasses = (classesObject: CSSClassKeyValuePair): CSSClasses => Object.keys(classesObject).filter((className: string) => !!classesObject[className]);
+export const selectClasses = (classesObject: CSSClassKeyValuePair): CSSClasses => Object.keys(classesObject).filter((className: string) => !!classesObject[className])
 
 /**
  * Merge the classes recursively
@@ -17,17 +17,17 @@ export const selectClasses = (classesObject: CSSClassKeyValuePair): CSSClasses =
 const mergeClasses = (...classes: CSSClasses): string => classes
   .map((className: CSSClass): string => {
     if (typeof className === 'string' || className === undefined) {
-      return className || '';
+      return className || ''
     }
 
     if (Array.isArray(className)) {
-      return mergeClasses(...className);
+      return mergeClasses(...className)
     }
 
-    return mergeClasses(...selectClasses(className));
+    return mergeClasses(...selectClasses(className))
   })
   .join(' ')
   .replace(/  +/g, ' ')
-  .trim();
+  .trim()
 
-export default mergeClasses;
+export default mergeClasses

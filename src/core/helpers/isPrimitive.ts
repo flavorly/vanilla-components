@@ -1,9 +1,9 @@
 const isPrimitive = (value: unknown): boolean => {
   if (value === null) {
-    return true;
+    return true
   }
 
-  return !['array', 'function', 'object'].includes(typeof value);
-};
+  return !['array', 'function', 'object'].includes(typeof value)
+}
 
-export default isPrimitive;
+export default isPrimitive

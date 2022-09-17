@@ -1,22 +1,21 @@
-import merge from 'lodash/merge';
-import assign from 'lodash/assign';
-import {
+import merge from 'lodash/merge'
+import assign from 'lodash/assign'
+import type {
   VanillaDatatableConfiguration,
   VanillaDatatableOptions,
+  VanillaDatatablePageOptions,
   VanillaDatatablePooling,
   VanillaDatatableTranslations,
-  VanillaDatatablePageOptions,
-} from '@/components/Datatable';
-import { Data } from '@/core/types';
+} from '@/components/Datatable'
+import type { Data } from '@/core/types'
 
 export default function useConfigurationBuilder<Props extends VanillaDatatableConfiguration | Data>(props: Props): VanillaDatatableConfiguration {
-
   const defaultPooling = {
     enable: false,
     interval: 5,
     during: 60,
     stopWhenDataChanges: true,
-  } as VanillaDatatablePooling;
+  } as VanillaDatatablePooling
 
   const defaultOptions = {
     selectable: true,
@@ -26,7 +25,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     striped: false,
     compact: true,
     refreshable: true,
-  } as VanillaDatatableOptions;
+  } as VanillaDatatableOptions
 
   const defaultTranslations = {
     title: 'Items',
@@ -79,7 +78,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     showingFrom: 'Showing :from to :to of :total results',
     nextPage: 'Next',
     previousPage: 'Previous',
-  } as VanillaDatatableTranslations;
+  } as VanillaDatatableTranslations
 
   const defaultPerPageOptions = [
       { value: 5, text: '5 Items per page' },
@@ -87,7 +86,7 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
       { value: 50, text: '50 Items per page' },
       { value: 100, text: '100 Items per page' },
       { value: 300, text: '300 Items per page' },
-  ] as VanillaDatatablePageOptions;
+  ] as VanillaDatatablePageOptions
 
   return {
     name: props?.uniqueName || props.config?.name,
@@ -131,6 +130,5 @@ export default function useConfigurationBuilder<Props extends VanillaDatatableCo
     onActionExecutedCallback: props?.onActionExecutedCallback || props.config?.onActionExecutedCallback || undefined,
     onExceptionCallback: props?.onExceptionCallback || props.config?.onExceptionCallback || undefined,
 
-  };
-
+  }
 }

@@ -1,7 +1,8 @@
-import { mergeClasses } from '@/core';
+import { mergeClasses } from '@/core'
 
 export const VanillaDialogConfig = {
   fixedClasses: {},
+
   // Default appearance
   classes: {
     wrapper: 'fixed inset-0 z-30 overflow-y-auto',
@@ -36,7 +37,8 @@ export const VanillaDialogConfig = {
     body: 'mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300',
     bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
     bodyDarker: 'bg-gray-50 dark:bg-gray-800',
-    //bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
+
+    // bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
     bodyWithPadding: 'px-4',
     bodyWithPaddingBottom: 'pb-4',
     bodyWithPaddingTop: 'pt-5',
@@ -64,11 +66,9 @@ export const VanillaDialogConfig = {
     dialogLeaveFrom: 'opacity-100 scale-100',
     dialogLeaveTo: 'opacity-0 scale-95',
   },
-};
+}
 
+export const VanillaDialogClassesKeys = Object.keys(VanillaDialogConfig.classes)
 
-export const VanillaDialogClassesKeys = Object.keys(VanillaDialogConfig.classes);
-
-export type VanillaDialogClassesValidKeys = keyof typeof VanillaDialogConfig.classes;
-
+export type VanillaDialogClassesValidKeys = keyof typeof VanillaDialogConfig.classes
 

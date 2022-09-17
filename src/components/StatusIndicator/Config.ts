@@ -1,4 +1,3 @@
-
 export const VanillaStatusIndicatorConfig = {
   fixedClasses: {
     wrapper: 'relative',
@@ -41,10 +40,9 @@ export const VanillaStatusIndicatorConfig = {
         },
       },
   },
-};
+}
 
-export const VanillaStatusIndicatorClassesKeys = Object.keys(VanillaStatusIndicatorConfig.classes);
+export const VanillaStatusIndicatorClassesKeys = Object.keys(VanillaStatusIndicatorConfig.classes)
 
-export type VanillaStatusIndicatorClassesValidKeys = keyof typeof VanillaStatusIndicatorConfig.classes;
-
+export type VanillaStatusIndicatorClassesValidKeys = keyof typeof VanillaStatusIndicatorConfig.classes
 

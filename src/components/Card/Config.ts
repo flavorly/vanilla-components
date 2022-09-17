@@ -36,7 +36,7 @@ const defaultCard = {
   emptyStateContainer: 'flex items-center justify-center text-center px-6 py-8 rounded-lg',
   emptyState: 'text-sm w-full',
   emptyIcon: 'text-gray-200 dark:text-gray-600',
-};
+}
 
 export const VanillaCardConfig = {
   fixedClasses: {
@@ -52,10 +52,9 @@ export const VanillaCardConfig = {
       },
     },
   },
-};
+}
 
-export const VanillaCardClassesKeys = Object.keys(VanillaCardConfig.classes);
+export const VanillaCardClassesKeys = Object.keys(VanillaCardConfig.classes)
 
-export type VanillaCardClassesValidKeys = keyof typeof VanillaCardConfig.classes;
-
+export type VanillaCardClassesValidKeys = keyof typeof VanillaCardConfig.classes
 

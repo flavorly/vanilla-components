@@ -1,2 +1,2 @@
-export * from './Config';
-export * from './Type';
+export * from './Config'
+export * from './Type'

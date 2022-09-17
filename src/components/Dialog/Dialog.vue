@@ -1,146 +1,28 @@
-<template>
-  <TransitionRoot
-    appear
-    :show="localValue"
-    as="template"
-  >
-    <HeadlessDialog
-      :as="as"
-      :open="localValue"
-      :initial-focus="null"
-      @close="close"
-    >
-      <div :class="configuration.classesList.wrapper">
-        <div :class="configuration.classesList.inner">
-          <TransitionChild
-            as="template"
-            :enter="configuration.classesList.overlayEnter"
-            :enter-from="configuration.classesList.overlayEnterFrom"
-            :enter-to="configuration.classesList.overlayEnterTo"
-            :leave="configuration.classesList.overlayLeave"
-            :leave-from="configuration.classesList.overlayLeaveFrom"
-            :leave-to="configuration.classesList.overlayLeaveTo"
-          >
-            <DialogOverlay :class="configuration.classesList.overlay" />
-          </TransitionChild>
-
-          <span
-            :class="configuration.classesList.closeButton"
-            aria-hidden="true"
-          >
-            &#8203;
-          </span>
-
-          <TransitionChild
-            as="template"
-            :enter="configuration.classesList.dialogEnter"
-            :enter-from="configuration.classesList.dialogEnterFrom"
-            :enter-to="configuration.classesList.dialogEnterTo"
-            :leave="configuration.classesList.dialogLeave"
-            :leave-from="configuration.classesList.dialogLeaveFrom"
-            :leave-to="configuration.classesList.dialogLeaveTo"
-          >
-            <div
-              :class="[
-                configuration.classesList.modal,
-                paddingOnModal ? configuration.classesList.modalWithPadding : '',
-                size === 'default' ? configuration.classesList.sizeDefault : '',
-                size === 'small' ? configuration.classesList.sizeSmall : '',
-                size === 'medium' ? configuration.classesList.sizeMedium : '',
-                size === 'large' ? configuration.classesList.sizeLarge : '',
-                size === 'full' ? configuration.classesList.sizeFull : '',
-              ]"
-            >
-              <!-- Trap the focus here, some weird bug with headlessui -->
-              <div
-                style="width: 0; height: 0; visibility: hidden"
-                tabindex="99"
-              />
-
-              <!-- Header -->
-              <DialogTitle
-                v-if="hasSlot($slots.header) || title !== undefined"
-                as="div"
-                :class="[
-                  configuration.classesList.title,
-                  divided ? configuration.classesList.titleDivided : ''
-                ]"
-              >
-                <slot
-                  :close="close"
-                  name="header"
-                >
-                  <h3
-                    :class="configuration.classesList.titleText"
-                    v-html="title"
-                  />
-                </slot>
-              </DialogTitle>
-
-              <!-- Body -->
-              <DialogDescription
-                as="div"
-                :class="[
-                  bodyDivided ? configuration.classesList.bodyDivided : '',
-                  bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
-                  bodyWithPadding && (!hasSlot($slots.header) || title === undefined ) ? configuration.classesList.bodyWithPaddingTop : '',
-                  bodyWithPadding && !hasSlot($slots.footer) ? configuration.classesList.bodyWithPaddingBottom : '',
-                  bodyDarker ? configuration.classesList.bodyDarker : '',
-                  bodyClasses,
-                ]"
-              >
-                <slot
-                  v-bind="{
-                    close,
-                    classes: configuration.classesList.body
-                  }"
-                />
-              </DialogDescription>
-
-              <!-- Footer -->
-              <VanillaDialogFooter
-                v-if="hasSlot($slots.footer)"
-                ref="footer"
-                :divided="divided"
-              >
-                <slot
-                  :close="close"
-                  name="footer"
-                />
-              </VanillaDialogFooter>
-            </div>
-          </TransitionChild>
-        </div>
-      </div>
-    </HeadlessDialog>
-  </TransitionRoot>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType, provide } from 'vue';
+import type { PropType } from 'vue'
+import { defineComponent, provide } from 'vue'
 import {
+    DialogDescription,
+    DialogOverlay,
+    DialogTitle,
+    Dialog as HeadlessDialog,
+    TransitionChild, TransitionRoot,
+} from '@headlessui/vue'
+import {
+    hasSlot,
     useBootVariant,
-    useVariantProps,
     useConfigurationWithClassesList,
     useVModel,
-    hasSlot,
-} from '@/core';
+    useVariantProps,
+} from '@/core'
 
+import type { VanillaDialogProps } from '@/components/Dialog/index'
 import {
-    VanillaDialogProps,
     VanillaDialogClassesKeys,
     VanillaDialogConfig,
-} from '@/components/Dialog/index';
+} from '@/components/Dialog/index'
 
-import {
-    TransitionRoot,
-    TransitionChild,
-    Dialog as HeadlessDialog,
-    DialogOverlay,
-    DialogTitle, DialogDescription,
-} from '@headlessui/vue';
-
-import VanillaDialogFooter from '@/components/Dialog/DialogFooter/DialogFooter.vue';
+import VanillaDialogFooter from '@/components/Dialog/DialogFooter/DialogFooter.vue'
 
 export default defineComponent({
     name: 'VanillaDialog',
@@ -221,7 +103,7 @@ export default defineComponent({
             required: false,
             default: 'default',
             validator(align: string) {
-                return ['default', 'small', 'medium', 'large', 'full'].includes(align);
+                return ['default', 'small', 'medium', 'large', 'full'].includes(align)
             },
         },
     },
@@ -231,40 +113,38 @@ export default defineComponent({
         'open',
     ],
     setup(props, { emit }) {
-
-        const localValue = useVModel(props, 'modelValue');
-        const { localVariant } = useBootVariant(props, 'errors', localValue);
+        const localValue = useVModel(props, 'modelValue')
+        const { localVariant } = useBootVariant(props, 'errors', localValue)
 
         const { configuration } = useConfigurationWithClassesList<VanillaDialogProps>(
             VanillaDialogConfig,
             VanillaDialogClassesKeys,
             localVariant,
-        );
+        )
 
         const close = () => {
-
             if (!props.closeable) {
-                localValue.value = true;
-                return;
+                localValue.value = true
+                return
             }
 
             if (!props.closeableOnClickOutside) {
-                localValue.value = true;
-                return;
+                localValue.value = true
+                return
             }
-            localValue.value = false;
-            emit('close');
-        };
+            localValue.value = false
+            emit('close')
+        }
 
         const open = () => {
-            localValue.value = true;
-            emit('open');
-        };
+            localValue.value = true
+            emit('open')
+        }
 
         /**
          * Provided data
          */
-        provide('configuration_vanilla', configuration);
+        provide('configuration_vanilla', configuration)
 
         return {
             configuration,
@@ -274,7 +154,125 @@ export default defineComponent({
             close,
             open,
             hasSlot,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <TransitionRoot
+    appear
+    :show="localValue"
+    as="template"
+  >
+    <HeadlessDialog
+      :as="as"
+      :open="localValue"
+      :initial-focus="null"
+      @close="close"
+    >
+      <div :class="configuration.classesList.wrapper">
+        <div :class="configuration.classesList.inner">
+          <TransitionChild
+            as="template"
+            :enter="configuration.classesList.overlayEnter"
+            :enter-from="configuration.classesList.overlayEnterFrom"
+            :enter-to="configuration.classesList.overlayEnterTo"
+            :leave="configuration.classesList.overlayLeave"
+            :leave-from="configuration.classesList.overlayLeaveFrom"
+            :leave-to="configuration.classesList.overlayLeaveTo"
+          >
+            <DialogOverlay :class="configuration.classesList.overlay" />
+          </TransitionChild>
+
+          <span
+            :class="configuration.classesList.closeButton"
+            aria-hidden="true"
+          >
+            &#8203;
+          </span>
+
+          <TransitionChild
+            as="template"
+            :enter="configuration.classesList.dialogEnter"
+            :enter-from="configuration.classesList.dialogEnterFrom"
+            :enter-to="configuration.classesList.dialogEnterTo"
+            :leave="configuration.classesList.dialogLeave"
+            :leave-from="configuration.classesList.dialogLeaveFrom"
+            :leave-to="configuration.classesList.dialogLeaveTo"
+          >
+            <div
+              :class="[
+                configuration.classesList.modal,
+                paddingOnModal ? configuration.classesList.modalWithPadding : '',
+                size === 'default' ? configuration.classesList.sizeDefault : '',
+                size === 'small' ? configuration.classesList.sizeSmall : '',
+                size === 'medium' ? configuration.classesList.sizeMedium : '',
+                size === 'large' ? configuration.classesList.sizeLarge : '',
+                size === 'full' ? configuration.classesList.sizeFull : '',
+              ]"
+            >
+              <!-- Trap the focus here, some weird bug with headlessui -->
+              <div
+                style="width: 0; height: 0; visibility: hidden"
+                tabindex="99"
+              />
+
+              <!-- Header -->
+              <DialogTitle
+                v-if="hasSlot($slots.header) || title !== undefined"
+                as="div"
+                :class="[
+                  configuration.classesList.title,
+                  divided ? configuration.classesList.titleDivided : '',
+                ]"
+              >
+                <slot
+                  :close="close"
+                  name="header"
+                >
+                  <h3
+                    :class="configuration.classesList.titleText"
+                    v-html="title"
+                  />
+                </slot>
+              </DialogTitle>
+
+              <!-- Body -->
+              <DialogDescription
+                as="div"
+                :class="[
+                  bodyDivided ? configuration.classesList.bodyDivided : '',
+                  bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
+                  bodyWithPadding && (!hasSlot($slots.header) || title === undefined) ? configuration.classesList.bodyWithPaddingTop : '',
+                  bodyWithPadding && !hasSlot($slots.footer) ? configuration.classesList.bodyWithPaddingBottom : '',
+                  bodyDarker ? configuration.classesList.bodyDarker : '',
+                  bodyClasses,
+                ]"
+              >
+                <slot
+                  v-bind="{
+                    close,
+                    classes: configuration.classesList.body,
+                  }"
+                />
+              </DialogDescription>
+
+              <!-- Footer -->
+              <VanillaDialogFooter
+                v-if="hasSlot($slots.footer)"
+                ref="footer"
+                :divided="divided"
+              >
+                <slot
+                  :close="close"
+                  name="footer"
+                />
+              </VanillaDialogFooter>
+            </div>
+          </TransitionChild>
+        </div>
+      </div>
+    </HeadlessDialog>
+  </TransitionRoot>
+</template>

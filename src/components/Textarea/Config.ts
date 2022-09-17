@@ -1,7 +1,7 @@
-import mapValues from 'lodash/mapValues';
-import { VanillaInputConfig } from '@/components/Input/Config';
+import mapValues from 'lodash/mapValues'
+import { VanillaInputConfig } from '@/components/Input/Config'
 
-export const VanillaTextareaConfig = VanillaInputConfig;
+export const VanillaTextareaConfig = VanillaInputConfig
 
 /**
  * Converts our own config into VariantJS config
@@ -15,13 +15,12 @@ export const VanillaTextareaConfigToVariantJs = (configuration: any) => {
     variants: mapValues(configuration.variants, (value) => {
       return {
         classes: value.classes.input,
-      };
+      }
     }),
-  };
-};
+  }
+}
 
-export const VanillaTextareaClassesKeys = Object.keys(VanillaTextareaConfig.classes);
+export const VanillaTextareaClassesKeys = Object.keys(VanillaTextareaConfig.classes)
 
-export type VanillaTextareaClassesValidKeys = keyof typeof VanillaTextareaConfig.classes;
-
+export type VanillaTextareaClassesValidKeys = keyof typeof VanillaTextareaConfig.classes
 

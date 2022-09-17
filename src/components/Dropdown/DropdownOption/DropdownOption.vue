@@ -1,32 +1,8 @@
-<template>
-  <MenuItem
-    v-slot="{ active }"
-    :as="as"
-    :disabled="disabled"
-  >
-    <div
-      :class="[
-        classesList.menuItem,
-        withDefaultPadding ? classesList.menuItemSpacing : '',
-        active ? classesList.menuItemHighlighted : classesList.menuItemNotHighlighted
-      ]"
-    >
-      <slot
-        v-bind="{
-          active,
-          classes: classesList.menuItemSpacing
-        }"
-      >
-        <span v-text="text" />
-      </slot>
-    </div>
-  </MenuItem>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { useInjectsClassesList } from '@/core';
-import { MenuItem } from '@headlessui/vue';
+import type { PropType } from 'vue'
+import { defineComponent } from 'vue'
+import { MenuItem } from '@headlessui/vue'
+import { useInjectsClassesList } from '@/core'
 
 export default defineComponent({
     name: 'VanillaDropdownOption',
@@ -56,11 +32,36 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const classesList = useInjectsClassesList()!;
+        const classesList = useInjectsClassesList()!
 
         return {
             classesList,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <MenuItem
+    v-slot="{ active }"
+    :as="as"
+    :disabled="disabled"
+  >
+    <div
+      :class="[
+        classesList.menuItem,
+        withDefaultPadding ? classesList.menuItemSpacing : '',
+        active ? classesList.menuItemHighlighted : classesList.menuItemNotHighlighted,
+      ]"
+    >
+      <slot
+        v-bind="{
+          active,
+          classes: classesList.menuItemSpacing,
+        }"
+      >
+        <span v-text="text" />
+      </slot>
+    </div>
+  </MenuItem>
+</template>

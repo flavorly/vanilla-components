@@ -1,45 +1,12 @@
-<template>
-  <div
-    :class="[
-      parentClasses,
-      configuration.classesList.wrapper,
-      disabled ? configuration.classesList.disabled : ''
-    ]"
-  >
-    <div :class="[configuration.classesList.labelAndImageWrapper]">
-      <div
-        :class="[
-          selected ? configuration.classesList.labelAndImageContainerSelected : '',
-          !selected ? configuration.classesList.labelAndImageContainerRegular : '',
-          configuration.classesList.labelAndImageContainer,
-        ]"
-      >
-        <div
-          :class="[
-            configuration.classesList.image
-          ]"
-          :style="{
-            backgroundImage: `url(${image})`
-          }"
-        />
-        <span
-          :class="[
-            configuration.classesList.label
-          ]"
-          v-html="name"
-        />
-      </div>
-    </div>
-  </div>
-</template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useConfigurationWithClassesList } from '@/core';
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { useBootVariant, useConfigurationWithClassesList } from '@/core'
+import type { VanillaRichSelectTagWithImageProps } from '@/components/RichSelect/RichSelectTagWithImage'
 import {
     VanillaRichSelectTagWithImageClassesKeys,
     VanillaRichSelectTagWithImageConfig,
-    VanillaRichSelectTagWithImageProps,
-} from '@/components/RichSelect/RichSelectTagWithImage';
+} from '@/components/RichSelect/RichSelectTagWithImage'
 
 export default defineComponent({
     name: 'VanillaRichSelectTagWithImage',
@@ -74,22 +41,56 @@ export default defineComponent({
         },
     },
     setup(props) {
-
         const {
             localVariant,
-        } = useBootVariant(props, 'errors', ref(null));
+        } = useBootVariant(props, 'errors', ref(null))
 
         const { configuration } = useConfigurationWithClassesList<VanillaRichSelectTagWithImageProps>(
             VanillaRichSelectTagWithImageConfig,
             VanillaRichSelectTagWithImageClassesKeys,
             localVariant,
-        );
+        )
 
         return {
             props,
             configuration,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <div
+    :class="[
+      parentClasses,
+      configuration.classesList.wrapper,
+      disabled ? configuration.classesList.disabled : '',
+    ]"
+  >
+    <div :class="[configuration.classesList.labelAndImageWrapper]">
+      <div
+        :class="[
+          selected ? configuration.classesList.labelAndImageContainerSelected : '',
+          !selected ? configuration.classesList.labelAndImageContainerRegular : '',
+          configuration.classesList.labelAndImageContainer,
+        ]"
+      >
+        <div
+          :class="[
+            configuration.classesList.image,
+          ]"
+          :style="{
+            backgroundImage: `url(${image})`,
+          }"
+        />
+        <span
+          :class="[
+            configuration.classesList.label,
+          ]"
+          v-html="name"
+        />
+      </div>
+    </div>
+  </div>
+</template>
 

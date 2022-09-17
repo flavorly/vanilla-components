@@ -1,22 +1,10 @@
-<template>
-  <component
-    :is="as"
-    :class="configuration.classesList.wrapper"
-  >
-    <div
-      v-for="(current, index) in count"
-      :key="uniqueId(current+'_'+index)"
-      :class="configuration.classesList.class"
-      v-bind="$attrs"
-    />
-  </component>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useVariantProps, useConfigurationWithClassesList } from '@/core';
-import { VanillaSkeletonBarProps, VanillaSkeletonBarConfig, VanillaSkeletonBarClassesKeys } from './index';
-import uniqueId from 'lodash/uniqueId';
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import uniqueId from 'lodash/uniqueId'
+import type { VanillaSkeletonBarProps } from './index'
+import { VanillaSkeletonBarClassesKeys, VanillaSkeletonBarConfig } from './index'
+import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '@/core'
 
 export default defineComponent({
     name: 'VanillaSkeletonBar',
@@ -36,19 +24,33 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const { localVariant } = useBootVariant(props, 'errors', ref(null));
+        const { localVariant } = useBootVariant(props, 'errors', ref(null))
 
         const { configuration } = useConfigurationWithClassesList<VanillaSkeletonBarProps>(
             VanillaSkeletonBarConfig,
             VanillaSkeletonBarClassesKeys,
             localVariant,
-        );
+        )
 
         return {
             localVariant,
             configuration,
             uniqueId,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <component
+    :is="as"
+    :class="configuration.classesList.wrapper"
+  >
+    <div
+      v-for="(current, index) in count"
+      :key="uniqueId(`${current}_${index}`)"
+      :class="configuration.classesList.class"
+      v-bind="$attrs"
+    />
+  </component>
+</template>

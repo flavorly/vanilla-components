@@ -1,6 +1,6 @@
-
 export const VanillaSlideoverConfig = {
   fixedClasses: {},
+
   // Default appearance
   classes: {
     wrapper: 'absolute inset-0 z-30 overflow-hidden',
@@ -63,11 +63,9 @@ export const VanillaSlideoverConfig = {
     dialogRightLeaveFrom: 'translate-x-0',
     dialogRightLeaveTo: 'translate-x-full',
   },
-};
+}
 
+export const VanillaSlideoverClassesKeys = Object.keys(VanillaSlideoverConfig.classes)
 
-export const VanillaSlideoverClassesKeys = Object.keys(VanillaSlideoverConfig.classes);
-
-export type VanillaSlideoverClassesValidKeys = keyof typeof VanillaSlideoverConfig.classes;
-
+export type VanillaSlideoverClassesValidKeys = keyof typeof VanillaSlideoverConfig.classes
 

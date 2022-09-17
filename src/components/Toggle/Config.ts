@@ -1,4 +1,4 @@
-import { commonClasses, mergeClasses } from '@/core';
+import { commonClasses, mergeClasses } from '@/core'
 
 export const VanillaToggleConfig = {
   fixedClasses: {
@@ -21,10 +21,11 @@ export const VanillaToggleConfig = {
     iconChecked: 'h-3 w-3',
     iconUnchecked: 'h-3 w-3',
   },
+
   // Default Input appearance
   classes: {
 
-    wrapper : '',
+    wrapper: '',
     wrapperLeft: '',
     wrapperCenter: '',
     wrapperRight: '',
@@ -35,12 +36,13 @@ export const VanillaToggleConfig = {
     iconChecked: 'text-primary-600',
     iconUnchecked: 'text-gray-400 dark:text-gray-900',
   },
+
   // Variants
   variants: {
     // Used for Errors
     error: {
       classes: {
-        wrapper : '',
+        wrapper: '',
         toggle: 'focus:ring-offset-2 focus:ring-red-600',
         checked: 'bg-red-600',
         unchecked: 'bg-red-600/50 dark:bg-red-500/70',
@@ -49,10 +51,9 @@ export const VanillaToggleConfig = {
       },
     },
   },
-};
+}
 
-export const VanillaToggleClassesKeys = Object.keys(VanillaToggleConfig.classes);
+export const VanillaToggleClassesKeys = Object.keys(VanillaToggleConfig.classes)
 
-export type VanillaToggleClassesValidKeys = keyof typeof VanillaToggleConfig.classes;
-
+export type VanillaToggleClassesValidKeys = keyof typeof VanillaToggleConfig.classes
 

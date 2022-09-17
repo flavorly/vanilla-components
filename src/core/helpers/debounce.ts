@@ -1,28 +1,28 @@
-import { DebouncedFn, DebounceFn } from '@/core/types';
+import type { DebounceFn, DebouncedFn } from '@/core/types'
 
 const debounce = (func: (...args: any[]) => void, wait = 200): DebouncedFn => {
-  let timeout: ReturnType<typeof setTimeout> | undefined;
+  let timeout: ReturnType<typeof setTimeout> | undefined
 
   const cancel: () => void = () => {
     if (timeout) {
-      clearTimeout(timeout);
+      clearTimeout(timeout)
     }
-  };
+  }
 
   const debounceFn: DebounceFn = (...args: any[]) => {
-    cancel();
+    cancel()
 
     timeout = setTimeout(() => {
-      timeout = undefined;
-      func(args);
-    }, wait);
+      timeout = undefined
+      func(args)
+    }, wait)
 
     if (!wait) {
-      func(args);
+      func(args)
     }
-  };
+  }
 
-  return Object.assign(debounceFn, { cancel });
-};
+  return Object.assign(debounceFn, { cancel })
+}
 
-export default debounce;
+export default debounce

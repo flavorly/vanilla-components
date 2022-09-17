@@ -1,6 +1,281 @@
+<script lang="ts">
+import type { PropType } from 'vue'
+import {
+    computed,
+    defineComponent,
+    onBeforeUnmount,
+    onMounted,
+    provide,
+    ref, watch,
+} from 'vue'
+
+import type { Options, Placement } from '@popperjs/core'
+import { createPopper } from '@popperjs/core'
+import type { Instance as PopperInstance } from '@popperjs/core/lib/types'
+import { Menu as HeadlessMenu, MenuButton, MenuItems } from '@headlessui/vue'
+import {
+    throttle,
+    useBootVariant,
+    useConfigurationWithClassesList,
+    useVModel,
+    useVariantProps,
+    validPlacements,
+} from '@/core'
+
+import type { VanillaDropdownProps } from '@/components/Dropdown/index'
+import {
+    VanillaDropdownClassesKeys,
+    VanillaDropdownConfig,
+    VanillaDropdownPopperDefaultOptions,
+} from '@/components/Dropdown/index'
+
+import VanillaButton from '@/components/Button/Button.vue'
+import VanillaTransitionable from '@/components/Transitions/Transitionable.vue'
+import ChevronDownIcon from '@/components/Icons/Hero/Solid/ChevronDownIcon.vue'
+
+export default defineComponent({
+    name: 'VanillaDropdown',
+    components: {
+        VanillaTransitionable,
+        HeadlessMenu,
+        MenuButton,
+        MenuItems,
+        ChevronDownIcon,
+        VanillaButton,
+    },
+    inheritAttrs: true,
+    props: {
+        ...useVariantProps<VanillaDropdownProps>(),
+        modelValue: {
+            type: [Boolean] as PropType<boolean>,
+            default: false,
+        },
+        text: {
+            type: String,
+            default: undefined,
+        },
+        buttonVariant: {
+            type: String,
+            default: undefined,
+        },
+        teleport: {
+            type: Boolean,
+            default: true,
+        },
+        teleportTo: {
+            type: [String, Object] as PropType<string | HTMLElement>,
+            default: 'body',
+        },
+        tagName: {
+            type: String,
+            default: 'div',
+        },
+        dropdownTagName: {
+            type: String,
+            default: 'div',
+        },
+        disabled: {
+            type: Boolean,
+            default: undefined,
+        },
+        toggleOnFocus: {
+            type: Boolean,
+            default: true,
+        },
+        toggleOnClick: {
+            type: Boolean,
+            default: true,
+        },
+        toggleOnHover: {
+            type: Boolean,
+            default: false,
+        },
+        placement: {
+            type: String as PropType<Placement>,
+            default: undefined,
+            validator: (value: Placement | string): boolean => validPlacements.includes(value),
+        },
+        popperOptions: {
+            type: Object as PropType<Options>,
+            default: (): Options => VanillaDropdownPopperDefaultOptions as Options,
+        },
+        usePopper: {
+            type: Boolean,
+            default: true,
+        },
+        overlay: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+        spacedItems: {
+            type: Boolean as PropType<boolean>,
+            default: true,
+        },
+        showArrow: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+        size: {
+            type: [String] as PropType<string>,
+            default: 'default',
+            validator(value: string) {
+                return ['default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value)
+            },
+        },
+        position: {
+            type: [String] as PropType<string>,
+            default: 'center',
+            validator(value: string) {
+                return ['center', 'left', 'right', 'full-width'].includes(value)
+            },
+        },
+    },
+    emits: [
+        'update:modelValue',
+    ],
+    setup(props) {
+        const localValue = useVModel(props, 'modelValue')
+        const { localVariant } = useBootVariant(props, 'errors', localValue)
+
+        const { configuration } = useConfigurationWithClassesList<VanillaDropdownProps>(
+            VanillaDropdownConfig,
+            VanillaDropdownClassesKeys,
+            localVariant,
+        )
+
+        const button = ref(undefined)
+        const menu = ref(undefined)
+        const menuItems = ref(undefined)
+        const popperInstance = ref<PopperInstance | null>(null)
+
+        const popperComputedOptions = computed((): Options => {
+            const popperOptions = configuration.popperOptions as Options
+
+            if (configuration.placement !== undefined) {
+                popperOptions.placement = configuration.placement as Placement
+            }
+
+            return popperOptions
+        })
+
+        const toggleDropdown = () => {
+            button.value.$el.click()
+        }
+
+        const hideDropdown = () => {
+            if (localValue.value === false) {
+                return
+            }
+            toggleDropdown()
+        }
+
+        const showDropdown = () => {
+            if (localValue.value === true) {
+                return
+            }
+            toggleDropdown()
+        }
+
+        const toggleOnHoverHandler = throttle(() => {
+            if (!props.toggleOnHover) {
+                return
+            }
+            toggleDropdown()
+        }, 1000)
+
+        const toggleOnFocusHandler = () => {
+            if (!props.toggleOnFocus) {
+                return
+            }
+            toggleDropdown()
+        }
+
+        const closeOnClickOverlay = () => {
+            if (!props.overlay) {
+                return
+            }
+            hideDropdown()
+        }
+
+        const createPopperInstance = () => {
+            if (!props.usePopper || !menu.value || !button.value?.$el) {
+                return
+            }
+
+            if (popperInstance.value !== null) {
+                return
+            }
+
+            popperInstance.value = createPopper(button.value?.$el, menu?.value, popperComputedOptions.value)
+        }
+
+        const destroyPopperInstance = () => {
+            setTimeout(() => popperInstance.value?.destroy(), 1000)
+        }
+
+        const refreshPopperInstance = () => {
+            const headlessUIState = menu.value != undefined
+            if (headlessUIState) {
+                createPopperInstance()
+            }
+ else {
+                destroyPopperInstance()
+            }
+        }
+
+        onMounted(() => {
+            if (localValue.value) {
+                createPopperInstance()
+                toggleDropdown()
+            }
+        })
+
+        onBeforeUnmount(() => {
+            destroyPopperInstance()
+        })
+
+        // Watch if the menu element is shown or hidden
+        watch(menuItems, (newValue) => {
+            localValue.value = newValue != undefined
+            createPopperInstance()
+        })
+
+        // Whenever the model value or local value changes
+        // we will trigger a click to let HeadlessUi do its job
+        // @see https://github.com/tailwindlabs/headlessui/issues/427#issuecomment-827403170
+        watch(localValue, () => {
+            createPopperInstance()
+        }, { immediate: false })
+
+        /**
+         * Provided data
+         */
+        provide('configuration_vanilla', configuration)
+
+        return {
+            configuration,
+            localValue,
+            localVariant,
+            props,
+            toggleDropdown,
+            hideDropdown,
+            showDropdown,
+            createPopperInstance,
+            destroyPopperInstance,
+            toggleOnHoverHandler,
+            toggleOnFocusHandler,
+            closeOnClickOverlay,
+            button,
+            menu,
+            menuItems,
+        }
+    },
+})
+</script>
+
 <template>
   <HeadlessMenu
-    v-slot="{open}"
+    v-slot="{ open }"
     as="div"
     :class="[
       teleport ? configuration.classesList.wrapper : '',
@@ -17,7 +292,7 @@
         v-bind="{
           buttonVariant,
           text,
-          iconClasses: configuration.classesList.chevronIcon
+          iconClasses: configuration.classesList.chevronIcon,
         }"
       >
         <VanillaButton
@@ -85,277 +360,3 @@
     </teleport>
   </HeadlessMenu>
 </template>
-
-<script lang="ts">
-import {
-    defineComponent,
-    PropType,
-    ref,
-    watch,
-    onMounted,
-    onBeforeUnmount,
-    computed, provide,
-} from 'vue';
-
-import {
-    useBootVariant,
-    useVariantProps,
-    useConfigurationWithClassesList,
-    useVModel,
-    validPlacements,
-    throttle,
-} from '@/core';
-
-import {
-    VanillaDropdownProps,
-    VanillaDropdownClassesKeys,
-    VanillaDropdownConfig,
-    VanillaDropdownPopperDefaultOptions,
-} from '@/components/Dropdown/index';
-
-import VanillaButton from '@/components/Button/Button.vue';
-import VanillaTransitionable from '@/components/Transitions/Transitionable.vue';
-import { createPopper, Options, Placement } from '@popperjs/core';
-import { Instance as PopperInstance } from '@popperjs/core/lib/types';
-import { Menu as HeadlessMenu, MenuButton, MenuItems } from '@headlessui/vue';
-import ChevronDownIcon from '@/components/Icons/Hero/Solid/ChevronDownIcon.vue';
-
-export default defineComponent({
-    name: 'VanillaDropdown',
-    components: {
-        VanillaTransitionable,
-        HeadlessMenu,
-        MenuButton,
-        MenuItems,
-        ChevronDownIcon,
-        VanillaButton,
-    },
-    inheritAttrs: true,
-    props: {
-        ...useVariantProps<VanillaDropdownProps>(),
-        modelValue: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        text: {
-            type: String,
-            default: undefined,
-        },
-        buttonVariant: {
-            type: String,
-            default: undefined,
-        },
-        teleport: {
-            type: Boolean,
-            default: true,
-        },
-        teleportTo: {
-            type: [String, Object] as PropType<string | HTMLElement>,
-            default: 'body',
-        },
-        tagName: {
-            type: String,
-            default: 'div',
-        },
-        dropdownTagName: {
-            type: String,
-            default: 'div',
-        },
-        disabled: {
-            type: Boolean,
-            default: undefined,
-        },
-        toggleOnFocus: {
-            type: Boolean,
-            default: true,
-        },
-        toggleOnClick: {
-            type: Boolean,
-            default: true,
-        },
-        toggleOnHover: {
-            type: Boolean,
-            default: false,
-        },
-        placement: {
-            type: String as PropType<Placement>,
-            default: undefined,
-            validator: (value: Placement | string):boolean => validPlacements.includes(value),
-        },
-        popperOptions: {
-            type: Object as PropType<Options>,
-            default: (): Options => VanillaDropdownPopperDefaultOptions as Options,
-        },
-        usePopper: {
-            type: Boolean,
-            default: true,
-        },
-        overlay: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        spacedItems: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        showArrow: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        size: {
-            type: [String] as PropType<string>,
-            default: 'default',
-            validator(value: string) {
-                return ['default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value);
-            },
-        },
-        position: {
-            type: [String] as PropType<string>,
-            default: 'center',
-            validator(value: string) {
-                return ['center', 'left', 'right', 'full-width'].includes(value);
-            },
-        },
-    },
-    emits: [
-        'update:modelValue',
-    ],
-    setup(props) {
-
-        const localValue = useVModel(props, 'modelValue');
-        const { localVariant } = useBootVariant(props, 'errors', localValue);
-
-        const { configuration } = useConfigurationWithClassesList<VanillaDropdownProps>(
-            VanillaDropdownConfig,
-            VanillaDropdownClassesKeys,
-            localVariant,
-        );
-
-        const button = ref(undefined);
-        const menu = ref(undefined);
-        const menuItems = ref(undefined);
-        const popperInstance = ref<PopperInstance | null>(null);
-
-        const popperComputedOptions = computed((): Options => {
-            const popperOptions = configuration.popperOptions as Options;
-
-            if (configuration.placement !== undefined) {
-                popperOptions.placement = configuration.placement as Placement;
-            }
-
-            return popperOptions;
-        });
-
-        const toggleDropdown = () => {
-            button.value.$el.click();
-        };
-
-        const hideDropdown = () => {
-            if (localValue.value === false) {
-                return;
-            }
-            toggleDropdown();
-        };
-
-        const showDropdown = () => {
-            if (localValue.value === true) {
-                return;
-            }
-            toggleDropdown();
-        };
-
-        const toggleOnHoverHandler = throttle(() => {
-            if (!props.toggleOnHover) {
-                return;
-            }
-            toggleDropdown();
-        }, 1000);
-
-        const toggleOnFocusHandler = () => {
-            if (!props.toggleOnFocus) {
-                return;
-            }
-            toggleDropdown();
-        };
-
-        const closeOnClickOverlay = () => {
-            if (!props.overlay) {
-                return;
-            }
-            hideDropdown();
-        };
-
-        const createPopperInstance = () => {
-            if (!props.usePopper || !menu.value || !button.value?.$el) {
-                return;
-            }
-
-            if (popperInstance.value !== null) {
-                return;
-            }
-
-            popperInstance.value = createPopper(button.value?.$el, menu?.value, popperComputedOptions.value);
-        };
-
-        const destroyPopperInstance = () => {
-            setTimeout(() => popperInstance.value?.destroy(), 1000);
-        };
-
-        const refreshPopperInstance = () => {
-            const headlessUIState = menu.value != undefined;
-            if (headlessUIState) {
-                createPopperInstance();
-            } else {
-                destroyPopperInstance();
-            }
-        };
-
-        onMounted(() => {
-            if (localValue.value) {
-                createPopperInstance();
-                toggleDropdown();
-            }
-        });
-
-        onBeforeUnmount(() => {
-            destroyPopperInstance();
-        });
-
-        // Watch if the menu element is shown or hidden
-        watch(menuItems, (newValue) => {
-            localValue.value = newValue != undefined;
-            createPopperInstance();
-        });
-
-        // Whenever the model value or local value changes
-        // we will trigger a click to let HeadlessUi do its job
-        // @see https://github.com/tailwindlabs/headlessui/issues/427#issuecomment-827403170
-        watch(localValue,  () => {
-            createPopperInstance();
-        }, { immediate: false });
-
-        /**
-         * Provided data
-         */
-        provide('configuration_vanilla', configuration);
-
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            props,
-            toggleDropdown,
-            hideDropdown,
-            showDropdown,
-            createPopperInstance,
-            destroyPopperInstance,
-            toggleOnHoverHandler,
-            toggleOnFocusHandler,
-            closeOnClickOverlay,
-            button,
-            menu,
-            menuItems,
-        };
-    },
-});
-</script>

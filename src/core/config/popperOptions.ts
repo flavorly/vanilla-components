@@ -1,5 +1,5 @@
-import { Modifier, ModifierArguments } from '@popperjs/core';
-import { Data } from '@/core/types';
+import type { Modifier, ModifierArguments } from '@popperjs/core'
+import type { Data } from '@/core/types'
 
 export const popperOptions = {
   placement: 'bottom-end',
@@ -13,7 +13,7 @@ export const popperOptions = {
   ],
   strategy: 'absolute',
   onFirstUpdate: undefined,
-};
+}
 
 export const validPlacements = [
   'auto',
@@ -31,7 +31,7 @@ export const validPlacements = [
   'left',
   'left-start',
   'left-end',
-];
+]
 
 export const sameWidthModifier: Modifier<'sameWidth', Data> = {
   name: 'sameWidth',
@@ -39,12 +39,12 @@ export const sameWidthModifier: Modifier<'sameWidth', Data> = {
   phase: 'beforeWrite',
   requires: ['computeStyles'],
   fn: (options: ModifierArguments<Data>): void => {
-    const { state } = options;
-    state.styles.popper.width = `${state.rects.reference.width}px`;
+    const { state } = options
+    state.styles.popper.width = `${state.rects.reference.width}px`
   },
   effect: (options: ModifierArguments<Data>): void => {
-    const { state } = options;
-    const reference = state.elements.reference as HTMLElement;
-    state.elements.popper.style.width = `${reference.offsetWidth}px`;
+    const { state } = options
+    const reference = state.elements.reference as HTMLElement
+    state.elements.popper.style.width = `${reference.offsetWidth}px`
   },
-};
+}

@@ -1,25 +1,9 @@
-<template>
-  <label
-    :for="for"
-    :class="configuration.class"
-  >
-    <slot>
-      <span
-        v-if="safe"
-        v-html="label"
-      />
-      <span
-        v-else
-        v-text="label"
-      />
-    </slot>
-  </label>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useVariantProps, useConfiguration } from '@/core';
-import { VanillaFormLabelProps, VanillaFormLabelConfig } from './index';
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import type { VanillaFormLabelProps } from './index'
+import { VanillaFormLabelConfig } from './index'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core'
 
 export default defineComponent({
     name: 'VanillaFormLabel',
@@ -46,16 +30,34 @@ export default defineComponent({
             localErrors,
             localVariant,
             hasErrors,
-        } = useBootVariant(props, 'errors', ref(null));
+        } = useBootVariant(props, 'errors', ref(null))
 
-        const { configuration } = useConfiguration<VanillaFormLabelProps>(VanillaFormLabelConfig);
+        const { configuration } = useConfiguration<VanillaFormLabelProps>(VanillaFormLabelConfig)
 
         return {
             localErrors,
             localVariant,
             hasErrors,
             configuration,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <label
+    :for="for"
+    :class="configuration.class"
+  >
+    <slot>
+      <span
+        v-if="safe"
+        v-html="label"
+      />
+      <span
+        v-else
+        v-text="label"
+      />
+    </slot>
+  </label>
+</template>

@@ -1,12 +1,12 @@
-import { Data, WithVariantProps } from '@/core/types';
-import { InputHTMLAttributes } from 'vue';
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, WithVariantProps } from '@/core/types'
 
 export declare type VanillaSelectCountryOptionProps = WithVariantProps<{
-  country?: object,
-  selected?: boolean,
-  description?: string | undefined,
-  hasErrors?: boolean,
+  country?: object
+  selected?: boolean
+  description?: string | undefined
+  hasErrors?: boolean
   parentClasses?: string[] | string
-  labelWithDialCode?: boolean,
+  labelWithDialCode?: boolean
   labelWithCountryCode?: boolean
-} & InputHTMLAttributes & Data>;
+} & InputHTMLAttributes & Data>

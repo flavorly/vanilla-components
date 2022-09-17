@@ -1,6 +1,4 @@
-import merge from 'lodash/merge';
-import { VanillaComponentConfiguration } from '@/core/types';
-
+import merge from 'lodash/merge'
 import {
   VanillaAvatarConfig,
   VanillaButtonConfig,
@@ -44,10 +42,10 @@ import {
   VanillaTextareaConfig,
   VanillaToggleConfig,
 
-} from './configs';
+} from './configs'
+import type { VanillaComponentConfiguration } from '@/core/types'
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
-
     // Merge Vanilla Components Configuration with the user configuration
     const VanillaComponentsDefaults = merge(
       {
@@ -90,7 +88,7 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         VanillaToggle: VanillaToggleConfig,
       },
       userConfiguration,
-    );
+    )
 
     // Mapping the Variant JS Configuration with the Vanilla Components Configuration & User Provider Configuration
     const VariantJSMapping = {
@@ -98,13 +96,13 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
         TRichSelect: VanillaRichSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaRichSelect ?? {}),
         TCheckbox: VanillaCheckboxConfigToVariantJs(VanillaComponentsDefaults?.VanillaCheckbox ?? {}),
         TSelect: VanillaSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaSelect ?? {}),
-    };
+    }
 
     // Return Both Merged Configuration
     return merge(
       VanillaComponentsDefaults,
       VariantJSMapping,
-  );
-};
+  )
+}
 
-export default mergeConfiguration;
+export default mergeConfiguration

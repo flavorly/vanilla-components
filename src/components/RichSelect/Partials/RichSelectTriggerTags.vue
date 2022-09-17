@@ -1,8 +1,31 @@
+<script lang="ts">
+import type { ComputedRef } from 'vue'
+import { defineComponent, inject } from 'vue'
+import RichSelectTriggerTagsTag from './RichSelectTriggerTagsTag.vue'
+import type { NormalizedOption } from '@/core/types'
+import { useInjectsClassesListClass } from '@/core'
+
+export default defineComponent({
+    name: 'RichSelectTriggerTags',
+    components: {
+        RichSelectTriggerTagsTag,
+    },
+    setup() {
+        const selectedOptions = inject<ComputedRef<NormalizedOption[]>>('selectedOption')!
+        const className = useInjectsClassesListClass('tagsWrapper')!
+        return {
+            selectedOptions,
+            className,
+        }
+    },
+})
+</script>
+
 <template>
   <div
     :class="className"
   >
-    <rich-select-trigger-tags-tag
+    <RichSelectTriggerTagsTag
       v-for="(option, index) in selectedOptions"
       :key="`${option.value}-${index}`"
       :option="option"
@@ -19,28 +42,6 @@
           v-bind="props"
         />
       </template>
-    </rich-select-trigger-tags-tag>
+    </RichSelectTriggerTagsTag>
   </div>
 </template>
-
-<script lang="ts">
-import { ComputedRef, defineComponent, inject } from 'vue';
-import { NormalizedOption } from '@/core/types';
-import { useInjectsClassesListClass } from '@/core';
-import RichSelectTriggerTagsTag from './RichSelectTriggerTagsTag.vue';
-
-export default defineComponent({
-    name: 'RichSelectTriggerTags',
-    components: {
-        RichSelectTriggerTagsTag,
-    },
-    setup() {
-        const selectedOptions = inject<ComputedRef<NormalizedOption[]>>('selectedOption')!;
-        const className = useInjectsClassesListClass('tagsWrapper')!;
-        return {
-            selectedOptions,
-            className,
-        };
-    },
-});
-</script>

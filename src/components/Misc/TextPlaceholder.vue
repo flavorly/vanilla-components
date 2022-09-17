@@ -1,15 +1,6 @@
-<template>
-  <span :class="className">
-    <slot>
-      <template v-if="placeholder !== undefined">{{ placeholder }}</template>
-      <template v-else>&nbsp;</template>
-    </slot>
-  </span>
-</template>
-
 <script lang="ts">
-import { defineComponent } from 'vue';
-import { useInjectsClassesListClass } from '@/core';
+import { defineComponent } from 'vue'
+import { useInjectsClassesListClass } from '@/core'
 export default defineComponent({
     name: 'TextPlaceholder',
     props: {
@@ -23,8 +14,17 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const className = useInjectsClassesListClass(props.classProperty);
-        return { className };
+        const className = useInjectsClassesListClass(props.classProperty)
+        return { className }
     },
-});
+})
 </script>
+
+<template>
+  <span :class="className">
+    <slot>
+      <template v-if="placeholder !== undefined">{{ placeholder }}</template>
+      <template v-else>&nbsp;</template>
+    </slot>
+  </span>
+</template>

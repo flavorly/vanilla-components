@@ -1,56 +1,56 @@
-import { Data } from '@/core/types';
+import type { Ref } from 'vue'
 import {
   computed,
-  ref,
   getCurrentInstance,
-  Ref,
+  ref,
   watch,
-} from 'vue';
+} from 'vue'
+import type { Data } from '@/core/types'
 
 export default function useMultipleVModel<P extends Data, K extends keyof P, C extends boolean>(
   props: P,
   key: K,
   multiple?: C,
 ): {
-  localValue: Ref<P[K]>;
+  localValue: Ref<P[K]>
   clearValue: () => void
 } {
-  const vm = getCurrentInstance();
+  const vm = getCurrentInstance()
 
-  const isMultiple = computed<boolean>((): boolean => (multiple === undefined ? false : multiple !== null && true && multiple !== false));
+  const isMultiple = computed<boolean>((): boolean => (multiple === undefined ? false : multiple !== null && true && multiple !== false))
 
   const getDefaultValue = (): P[K] => {
     if (isMultiple.value) {
-      return [] as P[K];
+      return [] as P[K]
     }
 
-    return undefined as P[K];
-  };
+    return undefined as P[K]
+  }
 
-  const initialValue = props[key];
+  const initialValue = props[key]
 
-  const localValue = ref(initialValue === undefined ? getDefaultValue() : initialValue) as Ref<P[K]>;
+  const localValue = ref(initialValue === undefined ? getDefaultValue() : initialValue) as Ref<P[K]>
 
   watch(localValue, (value) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    vm?.emit(`update:${key}`, value);
-  });
+    // @ts-expect-error
+    vm?.emit(`update:${key}`, value)
+  })
 
   watch(() => props[key], (value) => {
-    localValue.value = value;
-  });
+    localValue.value = value
+  })
 
-  const clearValue = () : void => {
-    localValue.value = getDefaultValue();
-  };
+  const clearValue = (): void => {
+    localValue.value = getDefaultValue()
+  }
 
   watch(isMultiple, () => {
-    clearValue();
-  });
+    clearValue()
+  })
 
   return {
     localValue,
     clearValue,
-  };
+  }
 }

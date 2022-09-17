@@ -5,6 +5,7 @@ export const VanillaRichRadioConfig = {
     optionContainerSeparated: 'space-y-2',
     optionContainerNonSeparated: '-space-y-px',
   },
+
   // Default Input appearance
   classes: {
     wrapper: '',
@@ -13,6 +14,7 @@ export const VanillaRichRadioConfig = {
     optionContainerSeparated: '',
     optionContainerNonSeparated: '',
   },
+
   // Variants
   variants: {
     // Used for Errors
@@ -26,11 +28,9 @@ export const VanillaRichRadioConfig = {
       },
     },
   },
-};
+}
 
+export const VanillaRichRadioClassesKeys = Object.keys(VanillaRichRadioConfig.classes)
 
-export const VanillaRichRadioClassesKeys = Object.keys(VanillaRichRadioConfig.classes);
-
-export type VanillaRichRadioClassesValidKeys = keyof typeof VanillaRichRadioConfig.classes;
-
+export type VanillaRichRadioClassesValidKeys = keyof typeof VanillaRichRadioConfig.classes
 

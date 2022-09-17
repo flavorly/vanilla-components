@@ -43,4 +43,4 @@ export const commonClasses = {
   // Options
   optionOrItemDisabled: 'opacity-50 cursor-not-allowed',
 
-};
+}

@@ -1,101 +1,12 @@
-<template>
-  <div :class="[classesList.paginationContainer]">
-    <div :class="[classesList.paginationShortContainer]">
-      <VanillaButton
-        variant="paginationButton"
-        :class="[
-          isFetching || previousPage === null ? classesList.genericForbidden : classesList.genericPointer,
-        ]"
-        aria-label="Previous"
-        @click.prevent="goToPage(previousPage)"
-      >
-        <ChevronLeftIcon :class="[classesList.paginationShortIcon]" />
-        <span
-          :class="classesList.paginationShortLeft"
-          v-html="translations.previousPage"
-        />
-      </VanillaButton>
-      <VanillaButton
-        variant="paginationButton"
-        :class="[
-          isFetching || nextPage === null ? classesList.genericForbidden : classesList.genericPointer,
-        ]"
-        aria-label="Next"
-        @click.prevent="goToPage(nextPage)"
-      >
-        <span
-          :class="classesList.paginationShortRight"
-          v-html="translations.nextPage"
-        />
-        <ChevronRightIcon :class="[classesList.paginationShortIcon]" />
-      </VanillaButton>
-    </div>
-
-    <div :class="[classesList.paginationFullContainer]">
-      <div>
-        <p
-          v-if="showNumberOfItems"
-          :class="[classesList.paginationFullNumberOfRecords]"
-        >
-          <span
-            v-html="useReplacePlaceholders(translations.showingFrom,{
-              from: showingFrom,
-              to: showingTo,
-              total: total
-            })"
-          />
-        </p>
-      </div>
-      <div>
-        <nav :class="[classesList.paginationFullButtonsContainer]">
-          <VanillaButton
-            variant="paginationButton"
-            :class="[
-              classesList.paginationFullLeft,
-              isFetching || previousPage === null ? classesList.genericForbidden : classesList.genericPointer,
-            ]"
-            aria-label="Previous"
-            @click.prevent="goToPage(previousPage)"
-          >
-            <ChevronLeftIcon :class="[classesList.paginationFullIcon]" />
-          </VanillaButton>
-          <template v-if="showPages && pages.length > 0">
-            <VanillaButton
-              v-for="(page, key) in pagesLimited"
-              :key="key"
-              variant="paginationButtonPage"
-              :class="[
-                page.active ? classesList.paginationFullPageActive : classesList.paginationFullPage,
-              ]"
-              @click.prevent="goToPage(page.url)"
-            >
-              {{ page.label }}
-            </VanillaButton>
-          </template>
-          <VanillaButton
-            variant="paginationButton"
-            :class="[
-              classesList.paginationFullRight,
-              isFetching || nextPage === null ? classesList.genericForbidden : classesList.genericPointer,
-            ]"
-            aria-label="Previous"
-            @click.prevent="goToPage(nextPage)"
-          >
-            <ChevronRightIcon :class="[classesList.paginationFullIcon]" />
-          </VanillaButton>
-        </nav>
-      </div>
-    </div>
-  </div>
-</template>
 <script lang="ts">
-import { defineComponent, PropType, computed } from 'vue';
-import VanillaButton from '@/components/Button/Button.vue';
-import { VanillaDatatableResponsePage } from '../index';
-import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
-import { useInjectDatatableTranslations } from '../utils';
-import ChevronLeftIcon from '@/components/Icons/Hero/Solid/ChevronLeftIcon.vue';
-import ChevronRightIcon from '@/components/Icons/Hero/Solid/ChevronRightIcon.vue';
+import type { PropType } from 'vue'
+import { computed, defineComponent } from 'vue'
+import type { VanillaDatatableResponsePage } from '../index'
+import { useInjectDatatableTranslations } from '../utils'
+import VanillaButton from '@/components/Button/Button.vue'
+import { useInjectsClassesList, useReplacePlaceholders } from '@/core'
+import ChevronLeftIcon from '@/components/Icons/Hero/Solid/ChevronLeftIcon.vue'
+import ChevronRightIcon from '@/components/Icons/Hero/Solid/ChevronRightIcon.vue'
 
 export default defineComponent({
     name: 'VanillaDatatablePagination',
@@ -113,7 +24,7 @@ export default defineComponent({
             type: [Array] as PropType<VanillaDatatableResponsePage[]>,
             required: false,
             default() {
-                return [];
+                return []
             },
         },
         nextPage: {
@@ -165,34 +76,33 @@ export default defineComponent({
     },
     emits: ['navigate'],
     setup(props, { emit }) {
-
         const goToPage = (page: string | number) => {
-            emit('navigate', page);
-        };
+            emit('navigate', page)
+        }
 
         // Provide Translations
-        const translations = useInjectDatatableTranslations()!;
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
+        const translations = useInjectDatatableTranslations()!
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
         const pagesLimited = computed(() => {
             if (prop.limitPages === false) {
-                return prop.pages;
+                return prop.pages
             }
-            const pages = props.pages;
-            const currentPage = Number(props.currentPage) - 1;
-            const showPagesMaximum = Number(props.showPagesMaximum);
-            const pagesLength = pages.length;
-            const pagesSliced = pages.slice(currentPage, currentPage + showPagesMaximum);
+            const pages = props.pages
+            const currentPage = Number(props.currentPage) - 1
+            const showPagesMaximum = Number(props.showPagesMaximum)
+            const pagesLength = pages.length
+            const pagesSliced = pages.slice(currentPage, currentPage + showPagesMaximum)
             if (pagesSliced.length < showPagesMaximum) {
-                const pagesToAdd = showPagesMaximum - pagesSliced.length;
-                const pagesToAddStart = pagesSliced.length;
-                const pagesToAddEnd = pagesSliced.length + pagesToAdd;
-                const pagesToAddStartLimited = pages.slice(0, pagesToAddStart);
-                const pagesToAddEndLimited = pages.slice(pagesLength - pagesToAddEnd, pagesLength);
-                return [...pagesToAddStartLimited, ...pagesSliced, ...pagesToAddEndLimited];
+                const pagesToAdd = showPagesMaximum - pagesSliced.length
+                const pagesToAddStart = pagesSliced.length
+                const pagesToAddEnd = pagesSliced.length + pagesToAdd
+                const pagesToAddStartLimited = pages.slice(0, pagesToAddStart)
+                const pagesToAddEndLimited = pages.slice(pagesLength - pagesToAddEnd, pagesLength)
+                return [...pagesToAddStartLimited, ...pagesSliced, ...pagesToAddEndLimited]
             }
-            return pagesSliced;
-        });
+            return pagesSliced
+        })
 
         return {
             goToPage,
@@ -200,7 +110,98 @@ export default defineComponent({
             pagesLimited,
             translations,
             classesList,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <div :class="[classesList.paginationContainer]">
+    <div :class="[classesList.paginationShortContainer]">
+      <VanillaButton
+        variant="paginationButton"
+        :class="[
+          isFetching || previousPage === null ? classesList.genericForbidden : classesList.genericPointer,
+        ]"
+        aria-label="Previous"
+        @click.prevent="goToPage(previousPage)"
+      >
+        <ChevronLeftIcon :class="[classesList.paginationShortIcon]" />
+        <span
+          :class="classesList.paginationShortLeft"
+          v-html="translations.previousPage"
+        />
+      </VanillaButton>
+      <VanillaButton
+        variant="paginationButton"
+        :class="[
+          isFetching || nextPage === null ? classesList.genericForbidden : classesList.genericPointer,
+        ]"
+        aria-label="Next"
+        @click.prevent="goToPage(nextPage)"
+      >
+        <span
+          :class="classesList.paginationShortRight"
+          v-html="translations.nextPage"
+        />
+        <ChevronRightIcon :class="[classesList.paginationShortIcon]" />
+      </VanillaButton>
+    </div>
+
+    <div :class="[classesList.paginationFullContainer]">
+      <div>
+        <p
+          v-if="showNumberOfItems"
+          :class="[classesList.paginationFullNumberOfRecords]"
+        >
+          <span
+            v-html="useReplacePlaceholders(translations.showingFrom, {
+              from: showingFrom,
+              to: showingTo,
+              total,
+            })"
+          />
+        </p>
+      </div>
+      <div>
+        <nav :class="[classesList.paginationFullButtonsContainer]">
+          <VanillaButton
+            variant="paginationButton"
+            :class="[
+              classesList.paginationFullLeft,
+              isFetching || previousPage === null ? classesList.genericForbidden : classesList.genericPointer,
+            ]"
+            aria-label="Previous"
+            @click.prevent="goToPage(previousPage)"
+          >
+            <ChevronLeftIcon :class="[classesList.paginationFullIcon]" />
+          </VanillaButton>
+          <template v-if="showPages && pages.length > 0">
+            <VanillaButton
+              v-for="(page, key) in pagesLimited"
+              :key="key"
+              variant="paginationButtonPage"
+              :class="[
+                page.active ? classesList.paginationFullPageActive : classesList.paginationFullPage,
+              ]"
+              @click.prevent="goToPage(page.url)"
+            >
+              {{ page.label }}
+            </VanillaButton>
+          </template>
+          <VanillaButton
+            variant="paginationButton"
+            :class="[
+              classesList.paginationFullRight,
+              isFetching || nextPage === null ? classesList.genericForbidden : classesList.genericPointer,
+            ]"
+            aria-label="Previous"
+            @click.prevent="goToPage(nextPage)"
+          >
+            <ChevronRightIcon :class="[classesList.paginationFullIcon]" />
+          </VanillaButton>
+        </nav>
+      </div>
+    </div>
+  </div>
+</template>

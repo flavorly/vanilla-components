@@ -4,6 +4,7 @@ export const VanillaSkeletonBarConfig = {
     wrapper: 'animate-pulse space-y-1',
     class: 'h-5 rounded w-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700',
   },
+
   // Variants
   variants: {
     error: {
@@ -13,10 +14,9 @@ export const VanillaSkeletonBarConfig = {
       },
     },
   },
-};
+}
 
-export const VanillaSkeletonBarClassesKeys = Object.keys(VanillaSkeletonBarConfig.classes);
+export const VanillaSkeletonBarClassesKeys = Object.keys(VanillaSkeletonBarConfig.classes)
 
-export type VanillaSkeletonBarClassesValidKeys = keyof typeof VanillaSkeletonBarConfig.classes;
-
+export type VanillaSkeletonBarClassesValidKeys = keyof typeof VanillaSkeletonBarConfig.classes
 

@@ -1,4 +1,4 @@
-import { commonClasses } from '@/core';
+import { commonClasses } from '@/core'
 
 export const VanillaRichRadioOptionConfig = {
   fixedClasses: {
@@ -85,6 +85,7 @@ export const VanillaRichRadioOptionConfig = {
     descriptionChecked: 'text-primary-700 dark:text-gray-200',
     descriptionUnchecked: 'text-gray-500 dark:text-gray-400',
   },
+
   // Variants
   variants: {
     // Used for Errors
@@ -133,10 +134,9 @@ export const VanillaRichRadioOptionConfig = {
       },
     },
   },
-};
+}
 
-export const VanillaRichRadioOptionClassesKeys = Object.keys(VanillaRichRadioOptionConfig.classes);
+export const VanillaRichRadioOptionClassesKeys = Object.keys(VanillaRichRadioOptionConfig.classes)
 
-export type VanillaRichRadioOptionClassesValidKeys = keyof typeof VanillaRichRadioOptionConfig.classes;
-
+export type VanillaRichRadioOptionClassesValidKeys = keyof typeof VanillaRichRadioOptionConfig.classes
 

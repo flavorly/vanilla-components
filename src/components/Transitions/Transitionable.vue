@@ -1,3 +1,20 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+    name: 'VanillaTransitionable',
+    props: {
+        classesList: {
+            type: Object,
+            default: () => ({}),
+        },
+        enabled: {
+            type: Boolean,
+            default: true,
+        },
+    },
+})
+</script>
+
 <template>
   <transition
     :enter-active-class="classesList?.enterActiveClass"
@@ -11,20 +28,3 @@
     <slot />
   </transition>
 </template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-    name: 'VanillaTransitionable',
-    props: {
-        classesList: {
-            type: Object,
-            default: () => ({}),
-        },
-        enabled: {
-            type: Boolean,
-            default: true,
-        },
-    },
-});
-</script>

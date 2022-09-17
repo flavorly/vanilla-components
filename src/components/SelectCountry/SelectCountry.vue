@@ -1,56 +1,14 @@
-<template>
-  <vanilla-rich-select
-    v-model="localValue"
-    v-bind="bindAttributes"
-    :options="preFetchOptions"
-    :fetch-options="fetchCountries"
-    :minimum-input-length="2"
-    :value-attribute="'value'"
-    :text-attribute="'label'"
-    :clear-search-on-close="true"
-    :variant="localVariant"
-    :show-errors="showErrors"
-    :search-box-placeholder="searchBoxPlaceholder"
-    :no-results-text="noResultsText"
-    :searching-text="searchingText"
-    :loading-closed-placeholder="loadingClosedPlaceholder"
-    :loading-more-results-text="loadingMoreResultsText"
-    :minimum-input-length-text="minimumInputLengthText"
-    :clearable="false"
-    :select-on-close="false"
-  >
-    <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
-      <VanillaSelectCountryOption
-        :country="selectedCountry"
-        :selected="isSelected"
-        :parent-classes="className"
-        :has-errors="hasErrors"
-        :label-with-dial-code="props.labelWithDialCode"
-        :label-with-country-code="props.labelWithCountryCode"
-      />
-    </template>
-    <template #option="{ option: { raw: country }, className, isSelected, hasErrors}">
-      <VanillaSelectCountryOption
-        :country="country"
-        :selected="isSelected"
-        :parent-classes="className"
-        :has-errors="hasErrors"
-        :label-with-dial-code="props.labelWithDialCode"
-        :label-with-country-code="props.labelWithCountryCode"
-      />
-    </template>
-  </vanilla-rich-select>
-</template>
 <script lang="ts">
-import { computed, defineComponent, PropType, watch } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, hasSlot, useAttributesAndProps } from '@/core';
-import { filterCountriesByName, countries } from '@/utils/CountryCodes';
-import { VanillaSelectCountryProps, VanillaFavoriteCountriesValue, VanillaSelectCountryValue } from './index';
-import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
-import VanillaSelectCountryOption from '@/components/SelectCountry/SelectCountryOption/SelectCountryOption.vue';
-import find from 'lodash/find';
-import first from 'lodash/first';
-import { MinimumInputLengthTextProp } from '@/components/RichSelect';
+import type { PropType } from 'vue'
+import { computed, defineComponent, watch } from 'vue'
+import find from 'lodash/find'
+import first from 'lodash/first'
+import type { VanillaFavoriteCountriesValue, VanillaSelectCountryProps, VanillaSelectCountryValue } from './index'
+import { hasSlot, useAttributesAndProps, useBootVariant, useVModel, useVariantProps } from '@/core'
+import { countries, filterCountriesByName } from '@/utils/CountryCodes'
+import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue'
+import VanillaSelectCountryOption from '@/components/SelectCountry/SelectCountryOption/SelectCountryOption.vue'
+import type { MinimumInputLengthTextProp } from '@/components/RichSelect'
 
 export default defineComponent({
     name: 'VanillaSelectCountry',
@@ -112,9 +70,8 @@ export default defineComponent({
         'update:modelValue',
     ],
     setup(props, { emit }) {
-
-        const localValue = useVModel(props, 'modelValue');
-        const { hasErrors, localErrors, localVariant } = useBootVariant(props, 'errors', localValue);
+        const localValue = useVModel(props, 'modelValue')
+        const { hasErrors, localErrors, localVariant } = useBootVariant(props, 'errors', localValue)
 
         // Pre-fetch the following Options
         const preFetchOptions = filterCountriesByName(
@@ -123,7 +80,7 @@ export default defineComponent({
             countries,
             2,
             props.favoriteCountries,
-        );
+        )
 
         // Function to fetch Countries from local object
         const fetchCountries = (query?: string) =>
@@ -134,29 +91,29 @@ export default defineComponent({
                     countries,
                     2,
                     props.favoriteCountries,
-                ));
-            }).then((response) => ({
+                ))
+            }).then(response => ({
                 results: response as Record<string, never>[],
                 hasMorePages: false,
-            }));
+            }))
 
         // Actual Country Selected ( Whole object )
         const selectedCountry = computed(() => {
             return find(
                 countries,
                 country => country.value === localValue.value,
-            ) || first(preFetchOptions);
-        });
+            ) || first(preFetchOptions)
+        })
 
         // Watch & Emit additional data
         watch(localValue, () => {
-            emit('update:countryDialCode', selectedCountry.value.dialCode);
-            emit('update:countryCode', selectedCountry.value.value);
-            emit('update:countryName', selectedCountry.value.name_raw);
-        }, { immediate: true });
+            emit('update:countryDialCode', selectedCountry.value.dialCode)
+            emit('update:countryCode', selectedCountry.value.value)
+            emit('update:countryName', selectedCountry.value.name_raw)
+        }, { immediate: true })
 
         // Rebind Attributes
-        const bindAttributes = useAttributesAndProps();
+        const bindAttributes = useAttributesAndProps()
 
         return {
             localValue,
@@ -169,8 +126,52 @@ export default defineComponent({
             props,
             bindAttributes,
             selectedCountry,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <VanillaRichSelect
+    v-model="localValue"
+    v-bind="bindAttributes"
+    :options="preFetchOptions"
+    :fetch-options="fetchCountries"
+    :minimum-input-length="2"
+    value-attribute="value"
+    text-attribute="label"
+    :clear-search-on-close="true"
+    :variant="localVariant"
+    :show-errors="showErrors"
+    :search-box-placeholder="searchBoxPlaceholder"
+    :no-results-text="noResultsText"
+    :searching-text="searchingText"
+    :loading-closed-placeholder="loadingClosedPlaceholder"
+    :loading-more-results-text="loadingMoreResultsText"
+    :minimum-input-length-text="minimumInputLengthText"
+    :clearable="false"
+    :select-on-close="false"
+  >
+    <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
+      <VanillaSelectCountryOption
+        :country="selectedCountry"
+        :selected="isSelected"
+        :parent-classes="className"
+        :has-errors="hasErrors"
+        :label-with-dial-code="props.labelWithDialCode"
+        :label-with-country-code="props.labelWithCountryCode"
+      />
+    </template>
+    <template #option="{ option: { raw: country }, className, isSelected, hasErrors }">
+      <VanillaSelectCountryOption
+        :country="country"
+        :selected="isSelected"
+        :parent-classes="className"
+        :has-errors="hasErrors"
+        :label-with-dial-code="props.labelWithDialCode"
+        :label-with-country-code="props.labelWithCountryCode"
+      />
+    </template>
+  </VanillaRichSelect>
+</template>
 

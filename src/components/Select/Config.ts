@@ -1,6 +1,6 @@
-import mapValues from 'lodash/mapValues';
-import { commonClasses } from '@/core/config/commonClasses';
-import { mergeClasses } from '@/core';
+import mapValues from 'lodash/mapValues'
+import { commonClasses } from '@/core/config/commonClasses'
+import { mergeClasses } from '@/core'
 
 export const VanillaSelectConfig = {
   fixedClasses: {
@@ -13,9 +13,10 @@ export const VanillaSelectConfig = {
     ),
     selectIfMultiple: 'space-y-2',
   },
+
   // Default Input appearance
   classes: {
-    wrapper : '',
+    wrapper: '',
 
     select: mergeClasses(
       '',
@@ -43,12 +44,13 @@ export const VanillaSelectConfig = {
       'px-3 py-2',
     ),
   },
+
   // Variants
   variants: {
     // Used for Errors
     error: {
       classes: {
-        wrapper : '',
+        wrapper: '',
         select: mergeClasses(
           commonClasses.inputsErrorText,
           commonClasses.inputsErrorsBackground,
@@ -73,7 +75,7 @@ export const VanillaSelectConfig = {
       },
     },
   },
-};
+}
 
 /**
  * Converts our own config into VariantJS config
@@ -88,13 +90,12 @@ export const VanillaSelectConfigToVariantJs = (configuration: any) => {
     variants: mapValues(configuration.variants, (value) => {
       return {
         classes: value.classes.select,
-      };
+      }
     }),
-  };
-};
+  }
+}
 
-export const VanillaSelectClassesKeys = Object.keys(VanillaSelectConfig.classes);
+export const VanillaSelectClassesKeys = Object.keys(VanillaSelectConfig.classes)
 
-export type VanillaSelectClassesValidKeys = keyof typeof VanillaSelectConfig.classes;
-
+export type VanillaSelectClassesValidKeys = keyof typeof VanillaSelectConfig.classes
 

@@ -1,10 +1,10 @@
-import { Data, WithVariantPropsAndClassesList } from '@/core/types';
-import { InputHTMLAttributes } from 'vue';
-import { VanillaTextareaClassesValidKeys } from './Config';
+import type { InputHTMLAttributes } from 'vue'
+import type { VanillaTextareaClassesValidKeys } from './Config'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export declare type VanillaTextareaValue = string | number | string[] | undefined;
+export declare type VanillaTextareaValue = string | number | string[] | undefined
 
 export declare type VanillaTextareaProps = WithVariantPropsAndClassesList<{
-  modelValue?: VanillaTextareaValue,
-  rows?: string | number,
-} & InputHTMLAttributes & Data, VanillaTextareaClassesValidKeys>;
+  modelValue?: VanillaTextareaValue
+  rows?: string | number
+} & InputHTMLAttributes & Data, VanillaTextareaClassesValidKeys>

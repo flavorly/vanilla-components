@@ -1,13 +1,13 @@
-import { Data, WithVariantPropsAndClassesList } from '@/core/types';
-import { InputHTMLAttributes } from 'vue';
+import type { InputHTMLAttributes } from 'vue'
 
-import { VanillaRichRadioOptionClassesValidKeys } from './Config';
+import type { VanillaRichRadioOptionClassesValidKeys } from './Config'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
 export declare type VanillaRichRadioOptionProps = WithVariantPropsAndClassesList<{
-  name?: string | undefined,
-  image?: string | undefined,
-  selected?: boolean,
-  description?: string | undefined,
-  hasErrors?: boolean,
+  name?: string | undefined
+  image?: string | undefined
+  selected?: boolean
+  description?: string | undefined
+  hasErrors?: boolean
   parentClasses?: string[] | string
-} & InputHTMLAttributes & Data, VanillaRichRadioOptionClassesValidKeys>;
+} & InputHTMLAttributes & Data, VanillaRichRadioOptionClassesValidKeys>

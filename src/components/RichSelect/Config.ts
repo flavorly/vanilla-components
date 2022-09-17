@@ -1,10 +1,10 @@
-import { enterAndLeave } from '@/core/config/transitions';
-import merge from 'lodash/merge';
-import { mergeClasses } from '@/core';
-import { commonClasses } from '@/core/config/commonClasses';
+import merge from 'lodash/merge'
+import { enterAndLeave } from '@/core/config/transitions'
+import { mergeClasses } from '@/core'
+import { commonClasses } from '@/core/config/commonClasses'
 
 const defaultVariant = {
-    wrapper: 'relative w-full',
+    wrapper: 'block w-full',
 
     // TDropdown Component
     trigger: mergeClasses(
@@ -29,6 +29,7 @@ const defaultVariant = {
       commonClasses.dropdownsRadius,
       commonClasses.dropdownsShadows,
     ),
+
     // Dropdown content
     dropdownContent: 'pt-1 space-y-2',
 
@@ -132,7 +133,7 @@ const defaultVariant = {
 
     // Transitions
     ...enterAndLeave,
-};
+}
 
 export const VanillaRichSelectConfig = {
   // Until the little bits are merged or variantjs fixes this issue or provider a clear way to override the trigger
@@ -150,11 +151,12 @@ export const VanillaRichSelectConfig = {
   classes: {
     ...defaultVariant,
   },
+
   // Variants
   variants: {
     // Errors
     error: {
-      classes : {
+      classes: {
           ...merge(defaultVariant, {
               // Trigger
               trigger: mergeClasses(
@@ -187,14 +189,14 @@ export const VanillaRichSelectConfig = {
                 'bg-red-100 dark:bg-red-500/20',
                 'm-0.5 h-8 max-w-full',
                 'text-red-900 dark:text-red-300 white-space-no text-sm white-space-no',
-                commonClasses.buttonErrorsRing + ' focus:ring-opacity-50',
+                `${commonClasses.buttonErrorsRing} focus:ring-opacity-50`,
                 commonClasses.inputsTransition,
                 commonClasses.inputsDisabled,
               ),
 
               tagDeleteButton: mergeClasses(
                 commonClasses.inputsTransition,
-                commonClasses.buttonErrorsRing + ' focus:ring-opacity-50',
+                `${commonClasses.buttonErrorsRing} focus:ring-opacity-50`,
                 '-ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r',
                 'text-red-900 dark:text-red-300 focus:text-white hover:text-red-800 dark:hover:text-red-200',
                 'hover:bg-red-200 focus:bg-red-500 dark:hover:bg-red-400/20 dark:focus:bg-red-500/20',
@@ -203,7 +205,7 @@ export const VanillaRichSelectConfig = {
       },
     },
   },
-};
+}
 
 /**
  * Converts our own config into VariantJS config
@@ -211,12 +213,10 @@ export const VanillaRichSelectConfig = {
  * @constructor
  */
 export const VanillaRichSelectConfigToVariantJs = (configuration: any) => {
-  return configuration;
-};
+  return configuration
+}
 
+export const VanillaRichSelectClassesKeys = Object.keys(VanillaRichSelectConfig.classes)
 
-export const VanillaRichSelectClassesKeys = Object.keys(VanillaRichSelectConfig.classes);
-
-export type  VanillaRichSelectClassesValidKeys = keyof typeof VanillaRichSelectConfig.classes;
-
+export type VanillaRichSelectClassesValidKeys = keyof typeof VanillaRichSelectConfig.classes
 

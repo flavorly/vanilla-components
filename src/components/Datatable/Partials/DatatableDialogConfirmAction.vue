@@ -1,3 +1,98 @@
+<script lang="ts">
+import type { PropType } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
+import type { VanillaDatatableAction } from '../index'
+import { useInjectDatatableTranslations } from '../utils'
+import VanillaDialog from '@/components/Dialog/Dialog.vue'
+import VanillaButton from '@/components/Button/Button.vue'
+import { useInjectsClassesList, useReplacePlaceholders } from '@/core'
+import ExclamationTriangleIcon from '@/components/Icons/Hero/Outline/ExclamationTriangleIcon.vue'
+import CheckIcon from '@/components/Icons/Hero/Outline/CheckIcon.vue'
+import SignalIcon from '@/components/Icons/Hero/Outline/SignalIcon.vue'
+import InformationCircleIcon from '@/components/Icons/Hero/Outline/InformationCircleIcon.vue'
+
+export default defineComponent({
+    name: 'VanillaDatatableDialogConfirmAction',
+    components: {
+        VanillaDialog,
+        VanillaButton,
+        ExclamationTriangleIcon,
+        CheckIcon,
+        SignalIcon,
+        InformationCircleIcon,
+    },
+    props: {
+        action: {
+            type: [Object, undefined] as PropType<VanillaDatatableAction | undefined>,
+            required: false,
+            default: undefined,
+        },
+        countSelected: {
+            type: [Number, String] as PropType<number | string>,
+            required: true,
+        },
+    },
+    emits: [
+        'update:modelValue',
+        'actionCanceled',
+        'actionConfirmed',
+    ],
+    setup(props, { emit }) {
+        const isOpen = ref(false)
+
+        const cancelAction = () => {
+            isOpen.value = false
+            emit('actionCanceled', props.action)
+        }
+
+        const confirmAction = () => {
+            isOpen.value = false
+            emit('actionConfirmed', props.action)
+        }
+
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+        const title = computed(() => {
+            const value = props.action?.before?.confirm?.title || translations.value.actionConfirmTitle
+            return useReplacePlaceholders(value, { name: props.action?.label })
+        })
+
+        const text = computed(() => {
+            const value = props.action?.before?.confirm?.text || translations.value.actionConfirmText
+            return useReplacePlaceholders(value, { name: `<b>${props.action?.label}</b>`, itemsSelected: `<b>${props.countSelected}</b>` })
+        })
+
+        const confirmText = computed(() => {
+            const value = props.action?.before?.confirm?.confirmButton || translations.value.actionConfirmButton
+            return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected })
+        })
+
+        const cancelText = computed(() => {
+            const value = props.action?.before?.confirm?.cancelButton || translations.value.actionCancelButton
+            return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected })
+        })
+
+        watch(isOpen, (val: boolean) => {
+            emit('update:modelValue', val)
+        })
+
+        return {
+            title,
+            text,
+            confirmText,
+            cancelText,
+            isOpen,
+            cancelAction,
+            confirmAction,
+            translations,
+            classesList,
+        }
+    },
+})
+</script>
+
 <template>
   <VanillaDialog v-model="isOpen">
     <slot
@@ -7,7 +102,7 @@
         title,
         text,
         confirmText,
-        cancelText
+        cancelText,
       }"
     >
       <div
@@ -57,16 +152,16 @@
         title,
         text,
         confirmText,
-        cancelText
+        cancelText,
       }"
     >
       <div :class="classesList.actionsContentContainer">
-        <!-- Title-->
+        <!-- Title -->
         <h3
           v-if="title !== null && title !== ''"
           :class="[
             classesList.actionsTitle,
-            action?.before?.confirm?.classes?.title
+            action?.before?.confirm?.classes?.title,
           ]"
         >
           <span
@@ -79,7 +174,7 @@
         <div
           :class="[
             classesList.actionsText,
-            action?.before?.confirm?.classes?.text
+            action?.before?.confirm?.classes?.text,
           ]"
         >
           <p
@@ -110,97 +205,3 @@
     </template>
   </VanillaDialog>
 </template>
-<script lang="ts">
-import { defineComponent, PropType, computed, ref, watch } from 'vue';
-import VanillaDialog from '@/components/Dialog/Dialog.vue';
-import VanillaButton from '@/components/Button/Button.vue';
-import { VanillaDatatableAction } from '../index';
-import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
-import { useInjectDatatableTranslations } from '../utils';
-import ExclamationTriangleIcon from '@/components/Icons/Hero/Outline/ExclamationTriangleIcon.vue';
-import CheckIcon from '@/components/Icons/Hero/Outline/CheckIcon.vue';
-import SignalIcon from '@/components/Icons/Hero/Outline/SignalIcon.vue';
-import InformationCircleIcon from '@/components/Icons/Hero/Outline/InformationCircleIcon.vue';
-
-export default defineComponent({
-    name: 'VanillaDatatableDialogConfirmAction',
-    components: {
-        VanillaDialog,
-        VanillaButton,
-        ExclamationTriangleIcon,
-        CheckIcon,
-        SignalIcon,
-        InformationCircleIcon,
-    },
-    props: {
-        action: {
-            type: [Object, undefined] as PropType<VanillaDatatableAction | undefined>,
-            required: false,
-            default: undefined,
-        },
-        countSelected: {
-            type: [Number, String] as PropType<number | string>,
-            required: true,
-        },
-    },
-    emits: [
-        'update:modelValue',
-        'actionCanceled',
-        'actionConfirmed',
-    ],
-    setup(props, { emit }) {
-
-        const isOpen = ref(false);
-
-        const cancelAction = () => {
-            isOpen.value = false;
-            emit('actionCanceled', props.action);
-        };
-
-        const confirmAction = () => {
-            isOpen.value = false;
-            emit('actionConfirmed', props.action);
-        };
-
-        // Provide Translations
-        const translations = useInjectDatatableTranslations()!;
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
-
-        const title = computed(() => {
-            const value =  props.action?.before?.confirm?.title || translations.value.actionConfirmTitle;
-            return useReplacePlaceholders(value, { name: props.action?.label });
-        });
-
-        const text = computed(() => {
-            const value =  props.action?.before?.confirm?.text || translations.value.actionConfirmText;
-            return useReplacePlaceholders(value, { name: '<b>' + props.action?.label + '</b>', itemsSelected: '<b>' + props.countSelected + '</b>' });
-        });
-
-        const confirmText = computed(() => {
-            const value =  props.action?.before?.confirm?.confirmButton || translations.value.actionConfirmButton;
-            return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected });
-        });
-
-        const cancelText = computed(() => {
-            const value =  props.action?.before?.confirm?.cancelButton || translations.value.actionCancelButton;
-            return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected });
-        });
-
-        watch(isOpen, (val: boolean) => {
-            emit('update:modelValue', val);
-        });
-
-        return {
-            title,
-            text,
-            confirmText,
-            cancelText,
-            isOpen,
-            cancelAction,
-            confirmAction,
-            translations,
-            classesList,
-        };
-    },
-});
-</script>

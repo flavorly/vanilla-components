@@ -1,7 +1,7 @@
 export const VanillaAvatarConfig = {
   fixedClasses: {
     wrapper: '',
-    wrapperImageAndButtons : '',
+    wrapperImageAndButtons: '',
     imageAndPreviewContainer: 'flex items-center justify-center cursor-pointer',
     imagePreviewContainer: 'mt-2',
     currentImage: 'rounded-full h-20 w-20 object-cover',
@@ -10,10 +10,11 @@ export const VanillaAvatarConfig = {
     buttonsContainer: 'flex items-center justify-center mt-2',
     preview: 'block w-20 h-20 border border-gray-100 dark:border-gray-500 shadow-sm rounded-full',
   },
+
   // Default Input appearance
   classes: {
     wrapper: 'relative',
-    wrapperImageAndButtons : '',
+    wrapperImageAndButtons: '',
     imageAndPreviewContainer: '',
     imagePreviewContainer: '',
     currentImage: '',
@@ -22,13 +23,14 @@ export const VanillaAvatarConfig = {
     buttonsContainer: '',
     preview: '',
   },
+
   // Variants
   variants: {
     // Used for Errors
     error: {
       classes: {
         wrapper: 'relative',
-        wrapperImageAndButtons : '',
+        wrapperImageAndButtons: '',
         imageAndPreviewContainer: '',
         imagePreviewContainer: '',
         currentImage: '',
@@ -39,10 +41,9 @@ export const VanillaAvatarConfig = {
       },
     },
   },
-};
+}
 
-export const VanillaAvatarClassesKeys = Object.keys(VanillaAvatarConfig.classes);
+export const VanillaAvatarClassesKeys = Object.keys(VanillaAvatarConfig.classes)
 
-export type VanillaAvatarClassesValidKeys = keyof typeof VanillaAvatarConfig.classes;
-
+export type VanillaAvatarClassesValidKeys = keyof typeof VanillaAvatarConfig.classes
 

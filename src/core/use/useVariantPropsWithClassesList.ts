@@ -1,13 +1,13 @@
-import { PropType } from 'vue';
-import {
+import type { PropType } from 'vue'
+import type {
   CSSRawClassesList,
   Data,
   Errors,
-  VariantsWithClassesList,
   VanillaComponentWithClassesListProps,
-} from '@/core/types';
+  VariantsWithClassesList,
+} from '@/core/types'
 
-const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKeys extends string>() : VanillaComponentWithClassesListProps<ClassesKeys> => ({
+const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKeys extends string>(): VanillaComponentWithClassesListProps<ClassesKeys> => ({
   classes: {
     type: [String, Array, Object] as PropType<CSSRawClassesList<ClassesKeys>>,
     default: undefined,
@@ -62,6 +62,6 @@ const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKe
     default: false,
     required: false,
   },
-});
+})
 
-export default useVariantPropsWithClassesList;
+export default useVariantPropsWithClassesList

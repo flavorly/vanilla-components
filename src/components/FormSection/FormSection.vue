@@ -1,13 +1,9 @@
-<template>
-  <form :class="configuration.class">
-    <slot />
-  </form>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useVariantProps, useConfiguration } from '@/core';
-import { VanillaFormSectionProps, VanillaFormSectionConfig } from './index';
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import type { VanillaFormSectionProps } from './index'
+import { VanillaFormSectionConfig } from './index'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core'
 
 export default defineComponent({
     name: 'VanillaFormSection',
@@ -21,13 +17,19 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const { localVariant } = useBootVariant(props, 'errors', ref(null));
-        const { configuration } = useConfiguration<VanillaFormSectionProps>(VanillaFormSectionConfig);
+        const { localVariant } = useBootVariant(props, 'errors', ref(null))
+        const { configuration } = useConfiguration<VanillaFormSectionProps>(VanillaFormSectionConfig)
 
         return {
             localVariant,
             configuration,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <form :class="configuration.class">
+    <slot />
+  </form>
+</template>

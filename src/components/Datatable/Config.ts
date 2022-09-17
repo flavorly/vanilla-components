@@ -1,6 +1,6 @@
-
 export const VanillaDatatableConfig = {
   fixedClasses: {},
+
   // Default appearance
   classes: {
 
@@ -107,14 +107,10 @@ export const VanillaDatatableConfig = {
     skeletonTableBody: 'bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700',
     skeletonTableColumn: 'px-2 py-3 whitespace-nowrap leading-5',
 
-
   },
-};
+}
 
-export const VanillaDatatableClassesKeys = Object.keys(VanillaDatatableConfig.classes);
+export const VanillaDatatableClassesKeys = Object.keys(VanillaDatatableConfig.classes)
 
-export type VanillaDatatableClassesValidKeys = keyof typeof VanillaDatatableConfig.classes;
-
-
-
+export type VanillaDatatableClassesValidKeys = keyof typeof VanillaDatatableConfig.classes
 

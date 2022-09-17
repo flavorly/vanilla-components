@@ -1,1 +1,1 @@
-export type Errors = string | object | string[] | undefined | null;
+export type Errors = string | object | string[] | undefined | null

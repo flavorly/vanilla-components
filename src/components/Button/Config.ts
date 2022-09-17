@@ -1,10 +1,11 @@
-import mapValues from 'lodash/mapValues';
-import { commonClasses, mergeClasses } from '@/core';
+import mapValues from 'lodash/mapValues'
+import { commonClasses, mergeClasses } from '@/core'
 
 export const VanillaButtonConfig = {
   fixedClasses: {
     button: mergeClasses(
-      //commonClasses.buttonTransition,
+
+      // commonClasses.buttonTransition,
       commonClasses.buttonPosition,
       commonClasses.buttonShadow,
       commonClasses.buttonSpacing,
@@ -18,6 +19,7 @@ export const VanillaButtonConfig = {
     enableOpacity: 'opacity-100',
     busyOrInvalidState: 'cursor-not-allowed',
   },
+
   // Default Input appearance
   classes: {
     button: mergeClasses(
@@ -35,6 +37,7 @@ export const VanillaButtonConfig = {
     enableOpacity: '',
     busyOrInvalidState: '',
   },
+
   // Variants
   variants: {
     // Used for Errors
@@ -55,6 +58,7 @@ export const VanillaButtonConfig = {
         busyOrInvalidState: '',
       },
     },
+
     // Soft Variant for errors
     errorSoft: {
       classes: {
@@ -74,6 +78,7 @@ export const VanillaButtonConfig = {
         busyOrInvalidState: '',
       },
     },
+
     // Primary
     primary: {
       classes: {
@@ -92,6 +97,7 @@ export const VanillaButtonConfig = {
         busyOrInvalidState: '',
       },
     },
+
     // Success
     success: {
       classes: {
@@ -110,6 +116,7 @@ export const VanillaButtonConfig = {
         busyOrInvalidState: '',
       },
     },
+
     // Transparent
     transparent: {
       classes: {
@@ -160,7 +167,7 @@ export const VanillaButtonConfig = {
       },
     },
   },
-};
+}
 
 /**
  * Converts our own config into VariantJS config
@@ -175,13 +182,12 @@ export const VanillaButtonConfigToVariantJs = (configuration: any) => {
     variants: mapValues(configuration.variants, (value) => {
       return {
         classes: value.classes.button,
-      };
+      }
     }),
-  };
-};
+  }
+}
 
-export const VanillaButtonClassesKeys = Object.keys(VanillaButtonConfig.classes);
+export const VanillaButtonClassesKeys = Object.keys(VanillaButtonConfig.classes)
 
-export type VanillaButtonClassesValidKeys = keyof typeof VanillaButtonConfig.classes;
-
+export type VanillaButtonClassesValidKeys = keyof typeof VanillaButtonConfig.classes
 

@@ -1,17 +1,18 @@
+import type { Ref } from 'vue'
 import {
   computed,
   getCurrentInstance,
-  reactive, Ref,
+  reactive,
   watch,
-} from 'vue';
+} from 'vue'
 
 import {
   parseVariantWithClassesList,
   useAttributes,
   useConfigurationParts,
-} from '@/core';
+} from '@/core'
 
-import { Data } from '@/core/types';
+import type { Data } from '@/core/types'
 
 /**
  * Same as configuration but with classes list.
@@ -25,13 +26,13 @@ export default function useConfigurationWithClassesList<ComponentOptions extends
   classesListKeys: string[],
   variant: Ref,
 ): {
-  configuration: ComponentOptions,
-  attributes: Data,
+  configuration: ComponentOptions
+  attributes: Data
   variant: Ref | null
 } {
-  const vm = getCurrentInstance()!;
+  const vm = getCurrentInstance()!
 
-  const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>();
+  const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>()
 
   const computedConfiguration = computed(() => ({
     ...vm?.props || {},
@@ -42,23 +43,23 @@ export default function useConfigurationWithClassesList<ComponentOptions extends
       defaultConfiguration,
       variant.value,
     ),
-  }));
+  }))
 
-  const configuration = reactive(computedConfiguration.value);
+  const configuration = reactive(computedConfiguration.value)
 
   // Watches all the component props and also the variant clases list
   // If any changes, it will be updated with the new keys
   watch(computedConfiguration, (newValue) => {
     Object.keys(newValue).forEach((key) => {
-      configuration[key] = newValue[key];
-    });
-  });
+      configuration[key] = newValue[key]
+    })
+  })
 
-  const attributes = useAttributes(configuration);
+  const attributes = useAttributes(configuration)
 
   return {
     configuration: configuration as ComponentOptions,
     attributes,
     variant,
-  };
+  }
 }

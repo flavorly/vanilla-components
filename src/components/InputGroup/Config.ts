@@ -12,14 +12,13 @@ export const VanillaInputGroupConfig = {
     rowInput: '',
     rowWithPadding: 'px-6 py-3.5 mt-0',
 
-
     contentContainer: 'sm:grid',
     contentLabel: '',
     contentInput: '',
     contentWithPadding: 'px-6 py-3 mt-0',
   },
-};
+}
 
-export const VanillaInputGroupClassesKeys = Object.keys(VanillaInputGroupConfig.classes);
+export const VanillaInputGroupClassesKeys = Object.keys(VanillaInputGroupConfig.classes)
 
-export type VanillaInputGroupClassesValidKeys = keyof typeof VanillaInputGroupConfig.classes;
+export type VanillaInputGroupClassesValidKeys = keyof typeof VanillaInputGroupConfig.classes

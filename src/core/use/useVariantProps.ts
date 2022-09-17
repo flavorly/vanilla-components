@@ -1,16 +1,16 @@
-import { PropType } from 'vue';
+import type { PropType } from 'vue'
 
-import {
+import type {
   CSSClass,
   Data,
   Errors,
-  Variants,
   VanillaComponentProps,
-} from '@/core/types';
+  Variants,
+} from '@/core/types'
 
-import { useDefaultName } from '@/core';
+import { useDefaultName } from '@/core'
 
-const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProps => ({
+const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps => ({
   classes: {
     type: [String, Array, Object] as PropType<CSSClass>,
     default: undefined,
@@ -35,18 +35,18 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
     type: [String] as PropType<string>,
     required: false,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error
     default(props): string | unknown {
-      return useDefaultName(props);
+      return useDefaultName(props)
     },
   },
   autocomplete: {
     type: [String, Boolean] as PropType<string | boolean>,
     required: false,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
+    // @ts-expect-error
     default(props): string {
-      return props.name || false;
+      return props.name || false
     },
   },
   variant: {
@@ -74,6 +74,6 @@ const useVariantProps = <ComponentOptions extends Data>() : VanillaComponentProp
     required: false,
   },
 
-});
+})
 
-export default useVariantProps;
+export default useVariantProps

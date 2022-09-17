@@ -1,4 +1,4 @@
-import { commonClasses } from '@/core';
+import { commonClasses } from '@/core'
 
 export const VanillaRichSelectOptionWithIndicatorsConfig = {
   classes: {
@@ -7,7 +7,7 @@ export const VanillaRichSelectOptionWithIndicatorsConfig = {
 
     labelAndImageWrapper: 'relative',
     labelAndImageContainer: 'flex items-center space-x-2 text-sm block',
-    labelAndImageContainerSelected : 'font-semibold',
+    labelAndImageContainerSelected: 'font-semibold',
     labelAndImageContainerRegular: 'font-normal',
 
     indicator: 'flex-shrink-0 inline-block h-2 w-2 rounded-full',
@@ -26,10 +26,9 @@ export const VanillaRichSelectOptionWithIndicatorsConfig = {
     indicatorYellow: 'bg-yellow-400',
     indicatorBlue: 'bg-blue-400',
   },
-};
+}
 
-export const VanillaRichSelectOptionWithIndicatorsClassesKeys = Object.keys(VanillaRichSelectOptionWithIndicatorsConfig.classes);
+export const VanillaRichSelectOptionWithIndicatorsClassesKeys = Object.keys(VanillaRichSelectOptionWithIndicatorsConfig.classes)
 
-export type VanillaRichSelectOptionWithIndicatorsClassesValidKeys = keyof typeof VanillaRichSelectOptionWithIndicatorsConfig.classes;
-
+export type VanillaRichSelectOptionWithIndicatorsClassesValidKeys = keyof typeof VanillaRichSelectOptionWithIndicatorsConfig.classes
 

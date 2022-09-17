@@ -1,3 +1,129 @@
+<script lang="ts">
+import type { PropType, Ref } from 'vue'
+import { defineComponent, ref, watch } from 'vue'
+import find from 'lodash/find'
+import type {
+    VanillaDatatableFilters,
+    VanillaDatatableSavedFilter,
+    VanillaDatatableUserSettings,
+} from '../index'
+import { useInjectDatatableTranslations } from '../utils'
+import VanillaDialog from '@/components/Dialog/Dialog.vue'
+import VanillaSelect from '@/components/Select/Select.vue'
+import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue'
+import VanillaCheckbox from '@/components/Checkbox/Checkbox.vue'
+import VanillaToggle from '@/components/Toggle/Toggle.vue'
+import VanillaInput from '@/components/Input/Input.vue'
+import VanillaTextarea from '@/components/Textarea/Textarea.vue'
+import VanillaDatetimePicker from '@/components/DatetimePicker/DatetimePicker.vue'
+import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue'
+import VanillaButton from '@/components/Button/Button.vue'
+import { isEqual, useInjectsClassesList } from '@/core'
+import TrashIcon from '@/components/Icons/Hero/Outline/TrashIcon.vue'
+
+export default defineComponent({
+    name: 'VanillaDatatableDialogFilters',
+    components: {
+        VanillaDialog,
+        VanillaSelect,
+        VanillaRichSelect,
+        VanillaCheckbox,
+        VanillaToggle,
+        VanillaInput,
+        VanillaTextarea,
+        VanillaInputGroup,
+        VanillaDatetimePicker,
+        VanillaButton,
+        TrashIcon,
+    },
+    props: {
+        filters: {
+            type: [Array] as PropType<VanillaDatatableFilters>,
+            required: true,
+        },
+        userSettings: {
+            type: [Object] as PropType<VanillaDatatableUserSettings>,
+            required: true,
+        },
+    },
+    emits: [
+        'update:modelValue',
+        'filtersSaved',
+        'filtersReset',
+    ],
+    setup(props, { emit }) {
+        const isOpen = ref(false) as Ref<boolean>
+        const localFilters = ref({}) as Ref<VanillaDatatableSavedFilter>
+
+        // Once props changes, destruct the local filters value
+        watch(
+            () => props.userSettings.filters,
+            (newValue) => {
+                localFilters.value = { ...newValue }
+            },
+            { deep: true },
+        )
+
+        // Resolve the value for the filter
+        const getFilterDefaultValue = (name: string): unknown => {
+            return find(props.filters, { name })?.defaultValue || ''
+        }
+
+        // Resolve the value for the filter
+        const getFilterProvidedValue = (name: string): unknown => {
+            return find(props.filters, { name })?.value || ''
+        }
+
+        // Resolve the value for the filter
+        const getFilterValue = (name: string): unknown => {
+            return props.userSettings.filters[name] || getFilterProvidedValue(name) || getFilterDefaultValue(name)
+        }
+
+        // Cleanup empty filters on save
+        const cleanupEmptyFilters = (filters: object) => {
+            return Object.fromEntries(Object.entries(filters).filter(([key, v]) => {
+                return v != null && v !== '' && v != getFilterDefaultValue(key)
+            }))
+        }
+
+        // Save the settings & Emit when necessary
+        const saveSettings = () => {
+            isOpen.value = false
+            if (Object.keys(localFilters).length > 0 && !isEqual(localFilters.value, props.userSettings.filters)) {
+                localFilters.value = cleanupEmptyFilters(localFilters.value)
+                emit('filtersSaved', { ...localFilters.value })
+            }
+        }
+
+        // Reset Filters
+        const resetSettings = () => {
+            isOpen.value = false
+            localFilters.value = {}
+            emit('filtersReset', true)
+        }
+
+        // Open / Close Modal
+        watch(isOpen, (val: boolean) => {
+            emit('update:modelValue', val)
+        })
+
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+        return {
+            isOpen,
+            localFilters,
+            getFilterValue,
+            saveSettings,
+            resetSettings,
+            translations,
+            classesList,
+        }
+    },
+})
+</script>
+
 <template>
   <VanillaDialog
     v-model="isOpen"
@@ -75,7 +201,6 @@
       </VanillaInputGroup>
     </template>
 
-
     <VanillaInputGroup layout="content">
       <div :class="[classesList.genericFormsContentContainer]">
         <span
@@ -103,128 +228,3 @@
     </template>
   </VanillaDialog>
 </template>
-<script lang="ts">
-import { defineComponent, PropType, Ref, ref, watch } from 'vue';
-import VanillaDialog from '@/components/Dialog/Dialog.vue';
-import VanillaSelect from '@/components/Select/Select.vue';
-import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
-import VanillaCheckbox from '@/components/Checkbox/Checkbox.vue';
-import VanillaToggle from '@/components/Toggle/Toggle.vue';
-import VanillaInput from '@/components/Input/Input.vue';
-import VanillaTextarea from '@/components/Textarea/Textarea.vue';
-import VanillaDatetimePicker from '@/components/DatetimePicker/DatetimePicker.vue';
-import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue';
-import VanillaButton from '@/components/Button/Button.vue';
-import {
-    VanillaDatatableFilters,
-    VanillaDatatableSavedFilter,
-    VanillaDatatableUserSettings,
-} from '../index';
-import find from 'lodash/find';
-import { isEqual, useInjectsClassesList } from '@/core';
-import { useInjectDatatableTranslations } from '../utils';
-import TrashIcon from '@/components/Icons/Hero/Outline/TrashIcon.vue';
-
-export default defineComponent({
-    name: 'VanillaDatatableDialogFilters',
-    components: {
-        VanillaDialog,
-        VanillaSelect,
-        VanillaRichSelect,
-        VanillaCheckbox,
-        VanillaToggle,
-        VanillaInput,
-        VanillaTextarea,
-        VanillaInputGroup,
-        VanillaDatetimePicker,
-        VanillaButton,
-        TrashIcon,
-    },
-    props: {
-        filters: {
-            type: [Array] as PropType<VanillaDatatableFilters>,
-            required: true,
-        },
-        userSettings: {
-            type: [Object] as PropType<VanillaDatatableUserSettings>,
-            required: true,
-        },
-    },
-    emits: [
-        'update:modelValue',
-        'filtersSaved',
-        'filtersReset',
-    ],
-    setup(props, { emit }) {
-
-        const isOpen = ref(false) as Ref<boolean>;
-        const localFilters = ref({}) as Ref<VanillaDatatableSavedFilter>;
-
-        // Once props changes, destruct the local filters value
-        watch(
-            () => props.userSettings.filters,
-            (newValue) => {
-                localFilters.value = { ...newValue };
-            },
-            { deep: true },
-        );
-
-        // Resolve the value for the filter
-        const getFilterDefaultValue = (name: string): unknown => {
-            return find(props.filters, { name: name })?.defaultValue || '';
-        };
-
-        // Resolve the value for the filter
-        const getFilterProvidedValue = (name: string): unknown => {
-            return find(props.filters, { name: name })?.value || '';
-        };
-
-        // Resolve the value for the filter
-        const getFilterValue = (name: string): unknown => {
-            return props.userSettings.filters[name] || getFilterProvidedValue(name) || getFilterDefaultValue(name);
-        };
-
-        // Cleanup empty filters on save
-        const cleanupEmptyFilters = (filters: object) => {
-            return Object.fromEntries(Object.entries(filters).filter(([key, v]) => {
-                return v != null && v !== '' && v != getFilterDefaultValue(key);
-            }));
-        };
-
-        // Save the settings & Emit when necessary
-        const saveSettings = () => {
-            isOpen.value = false;
-            if (Object.keys(localFilters).length > 0 && !isEqual(localFilters.value, props.userSettings.filters)) {
-                localFilters.value = cleanupEmptyFilters(localFilters.value);
-                emit('filtersSaved',  { ...localFilters.value });
-            }
-        };
-
-        // Reset Filters
-        const resetSettings = () => {
-            isOpen.value = false;
-            localFilters.value = {};
-            emit('filtersReset', true);
-        };
-
-        // Open / Close Modal
-        watch(isOpen, (val: boolean) => {
-            emit('update:modelValue', val);
-        });
-
-        // Provide Translations
-        const translations = useInjectDatatableTranslations()!;
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
-
-        return {
-            isOpen,
-            localFilters,
-            getFilterValue,
-            saveSettings,
-            resetSettings,
-            translations,
-            classesList,
-        };
-    },
-});
-</script>

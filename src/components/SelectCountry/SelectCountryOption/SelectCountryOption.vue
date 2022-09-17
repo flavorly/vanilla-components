@@ -1,60 +1,11 @@
-<template>
-  <div :class="[parentClasses, configuration.classesList.wrapper]">
-    <div :class="[configuration.classesList.labelAndImageWrapper]">
-      <div
-        :class="[
-          selected ? configuration.classesList.labelAndImageContainerSelected : '',
-          !selected ? configuration.classesList.labelAndImageContainerRegular : '',
-          configuration.classesList.labelAndImageContainer,
-        ]"
-      >
-        <suspense>
-          <VanillaFlag
-            :class="[
-              configuration.classesList.image
-            ]"
-            :country="country?.iso2"
-          />
-          <template #fallback>
-            <div :class="configuration.classesList.fallbackImage" />
-          </template>
-        </suspense>
-        <span
-          :class="[
-            configuration.classesList.label
-          ]"
-          v-html="nameLabel"
-        />
-      </div>
-    </div>
-    <div
-      v-if="description"
-      :class="[
-        configuration.classesList.description,
-        selected ? configuration.classesList.descriptionSelected : '',
-        !selected ? configuration.classesList.descriptionRegular : '',
-      ]"
-      v-html="description"
-    />
-    <span
-      v-if="selected"
-      :class="[configuration.classesList.selectedIconContainer]"
-    >
-      <slot name="selectedIcon">
-        <CheckIcon
-          aria-hidden="true"
-          :class="[configuration.classesList.icon]"
-        />
-      </slot>
-    </span>
-  </div>
-</template>
 <script lang="ts">
-import { computed, defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useConfigurationWithClassesList } from '@/core';
-import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaSelectCountryOptionProps } from './index';
-import VanillaFlag from '@/components/Icons/Flag.vue';
-import CheckIcon from '@/components/Icons/Hero/Solid/CheckIcon.vue';
+import type { PropType } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
+import type { VanillaSelectCountryOptionProps } from './index'
+import { VanillaSelectCountryOptionClassesKeys, VanillaSelectCountryOptionConfig } from './index'
+import { useBootVariant, useConfigurationWithClassesList } from '@/core'
+import VanillaFlag from '@/components/Icons/Flag.vue'
+import CheckIcon from '@/components/Icons/Hero/Solid/CheckIcon.vue'
 
 export default defineComponent({
     name: 'VanillaSelectCountryOption',
@@ -66,12 +17,12 @@ export default defineComponent({
         country: {
             // TODO : move this to a exported type
             type: [Object, Array] as PropType<{
-                value: string,
-                label: string,
-                name: string,
-                name_raw: string,
-                dialCode: string,
-                iso2: string,
+                value: string
+                label: string
+                name: string
+                name_raw: string
+                dialCode: string
+                iso2: string
             }>,
             required: true,
         },
@@ -103,39 +54,90 @@ export default defineComponent({
         },
     },
     setup(props) {
-
         const {
             localVariant,
-        } = useBootVariant(props, 'errors', ref(null));
+        } = useBootVariant(props, 'errors', ref(null))
 
         const { configuration } = useConfigurationWithClassesList<VanillaSelectCountryOptionProps>(
             VanillaSelectCountryOptionConfig,
             VanillaSelectCountryOptionClassesKeys,
             localVariant,
-        );
+        )
 
         const nameLabel = computed(() => {
             if (props.labelWithDialCode) {
-                return props.country.label + ' +' + props.country.dialCode;
+                return `${props.country.label} +${props.country.dialCode}`
             }
 
             if (props.labelWithCountryCode) {
-                return props.country.label + ' (' + props.country.dialCode + ')';
+                return `${props.country.label} (${props.country.dialCode})`
             }
 
             if (props.labelWithDialCode && props.labelWithCountryCode) {
-                return props.country.label + ' +' + props.country.dialCode + ' (' + props.country.dialCode + ')';
+                return `${props.country.label} +${props.country.dialCode} (${props.country.dialCode})`
             }
 
-            return props.country.label;
-        });
+            return props.country.label
+        })
 
         return {
             props,
             configuration,
             nameLabel,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <div :class="[parentClasses, configuration.classesList.wrapper]">
+    <div :class="[configuration.classesList.labelAndImageWrapper]">
+      <div
+        :class="[
+          selected ? configuration.classesList.labelAndImageContainerSelected : '',
+          !selected ? configuration.classesList.labelAndImageContainerRegular : '',
+          configuration.classesList.labelAndImageContainer,
+        ]"
+      >
+        <suspense>
+          <VanillaFlag
+            :class="[
+              configuration.classesList.image,
+            ]"
+            :country="country?.iso2"
+          />
+          <template #fallback>
+            <div :class="configuration.classesList.fallbackImage" />
+          </template>
+        </suspense>
+        <span
+          :class="[
+            configuration.classesList.label,
+          ]"
+          v-html="nameLabel"
+        />
+      </div>
+    </div>
+    <div
+      v-if="description"
+      :class="[
+        configuration.classesList.description,
+        selected ? configuration.classesList.descriptionSelected : '',
+        !selected ? configuration.classesList.descriptionRegular : '',
+      ]"
+      v-html="description"
+    />
+    <span
+      v-if="selected"
+      :class="[configuration.classesList.selectedIconContainer]"
+    >
+      <slot name="selectedIcon">
+        <CheckIcon
+          aria-hidden="true"
+          :class="[configuration.classesList.icon]"
+        />
+      </slot>
+    </span>
+  </div>
+</template>
 

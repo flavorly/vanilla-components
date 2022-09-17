@@ -1,31 +1,9 @@
-<template>
-  <div :class="[classesList.searchContainer]">
-    <VanillaInput
-      ref="search"
-      v-model="localValue"
-      name="search"
-      :class="[
-        classesList.searchInputClasses,
-        !searchable ? classesList.genericForbidden : ''
-      ]"
-      :disabled="!searchable"
-      :placeholder="placeholder"
-      :variant="classesList.searchInputVariant"
-      type="search"
-    >
-      <template #before>
-        <MagnifyingGlassIcon
-          :class="[classesList.searchIcon]"
-        />
-      </template>
-    </VanillaInput>
-  </div>
-</template>
 <script lang="ts">
-import { defineComponent, PropType } from 'vue';
-import { useInjectsClassesList, useVModel } from '@/core';
-import VanillaInput from '@/components/Input/Input.vue';
-import MagnifyingGlassIcon from '@/components/Icons/Hero/Solid/MagnifyingGlassIcon.vue';
+import type { PropType } from 'vue'
+import { defineComponent } from 'vue'
+import { useInjectsClassesList, useVModel } from '@/core'
+import VanillaInput from '@/components/Input/Input.vue'
+import MagnifyingGlassIcon from '@/components/Icons/Hero/Solid/MagnifyingGlassIcon.vue'
 
 export default defineComponent({
     name: 'VanillaDatatableSearch',
@@ -51,12 +29,36 @@ export default defineComponent({
         'update:modelValue',
     ],
     setup(props) {
-        const localValue = useVModel(props, 'modelValue');
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
+        const localValue = useVModel(props, 'modelValue')
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
         return {
             localValue,
             classesList,
-        };
+        }
     },
-});
+})
 </script>
+
+<template>
+  <div :class="[classesList.searchContainer]">
+    <VanillaInput
+      ref="search"
+      v-model="localValue"
+      name="search"
+      :class="[
+        classesList.searchInputClasses,
+        !searchable ? classesList.genericForbidden : '',
+      ]"
+      :disabled="!searchable"
+      :placeholder="placeholder"
+      :variant="classesList.searchInputVariant"
+      type="search"
+    >
+      <template #before>
+        <MagnifyingGlassIcon
+          :class="[classesList.searchIcon]"
+        />
+      </template>
+    </VanillaInput>
+  </div>
+</template>

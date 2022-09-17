@@ -1,9 +1,9 @@
-import mapValues from 'lodash/mapValues';
-import { commonClasses } from '@/core/config/commonClasses';
-import { mergeClasses } from '@/core';
+import mapValues from 'lodash/mapValues'
+import { commonClasses } from '@/core/config/commonClasses'
+import { mergeClasses } from '@/core'
 
 const defaultInput = {
-  input:  mergeClasses(
+  input: mergeClasses(
     '',
     commonClasses.inputsText,
     commonClasses.inputsTextColor,
@@ -13,13 +13,13 @@ const defaultInput = {
     commonClasses.inputsRadius,
     commonClasses.inputsSpacing,
   ),
-  wrapper : '',
+  wrapper: '',
   addonBefore: '',
   addonAfter: '',
   addonBeforeInputClasses: '',
   addonAfterInputClasses: '',
   addonClasses: 'text-gray-300 dark:text-gray-600',
-};
+}
 
 export const VanillaInputConfig = {
   fixedClasses: {
@@ -35,16 +35,18 @@ export const VanillaInputConfig = {
     addonAfterInputClasses: 'pr-10',
     addonClasses: commonClasses.iconsSize,
   },
+
   // Default Input appearance
   classes: {
     ...defaultInput,
   },
+
   // Variants
   variants: {
     compact: {
       classes: {
         ...defaultInput,
-        input:  mergeClasses(
+        input: mergeClasses(
           '',
           commonClasses.inputsText,
           commonClasses.inputsTextColor,
@@ -56,6 +58,7 @@ export const VanillaInputConfig = {
         ),
       },
     },
+
     // Used for Errors
     error: {
       classes: {
@@ -65,7 +68,7 @@ export const VanillaInputConfig = {
           commonClasses.inputsErrorsBorder,
           commonClasses.inputsErrorsRing,
         ),
-        wrapper : '',
+        wrapper: '',
         addonBefore: '',
         addonAfter: '',
         addonBeforeInputClasses: '',
@@ -74,7 +77,7 @@ export const VanillaInputConfig = {
       },
     },
   },
-};
+}
 
 /**
  * Converts our own config into VariantJS config
@@ -89,13 +92,12 @@ export const VanillaInputConfigToVariantJs = (configuration: any) => {
     variants: mapValues(configuration.variants, (value) => {
       return {
         classes: value.classes.input,
-      };
+      }
     }),
-  };
-};
+  }
+}
 
-export const VanillaInputClassesKeys = Object.keys(VanillaInputConfig.classes);
+export const VanillaInputClassesKeys = Object.keys(VanillaInputConfig.classes)
 
-export type VanillaInputClassesValidKeys = keyof typeof VanillaInputConfig.classes;
-
+export type VanillaInputClassesValidKeys = keyof typeof VanillaInputConfig.classes
 

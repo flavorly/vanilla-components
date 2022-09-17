@@ -1,202 +1,46 @@
-<template>
-  <div
-    :class="configuration.classesList?.wrapper"
-    v-bind="attributes"
-  >
-    <div class="relative">
-      <VanillaSelect
-        v-model="localValue"
-        :name="configuration.name"
-        :fixed-classes="undefined"
-        :classes="undefined"
-        :multiple="configuration.multiple"
-        :options="flattenedOptions"
-        style="display:none"
-      />
-
-      <VanillaDropdownExtended
-        ref="dropdownComponent"
-        :disabled="configuration.disabled"
-        :classes="dropdownClasses"
-        :fixed-classes="undefined"
-        :toggle-on-focus="false"
-        :toggle-on-click="false"
-        :toggle-on-hover="false"
-        :popper-options="configuration.dropdownPopperOptions"
-        :placement="configuration.dropdownPlacement"
-        :tag-name="usesTags ? 'div' : 'button'"
-        :tabindex="usesTags && !hasSelectedOption ? 0 : undefined"
-        :teleport="configuration.teleport"
-        :teleport-to="configuration.teleportTo"
-        data-rich-select-focusable
-        @mouseover="$emit('mouseover', $event)"
-        @mouseleave="$emit('mouseleave', $event)"
-        @touchstart="$emit('touchstart', $event)"
-        @shown="shownHandler"
-        @hidden="hiddenHandler"
-        @before-show="beforeShowHandler"
-        @before-hide="beforeHideHandler"
-        @blur="blurHandler"
-        @focus="focusHandler"
-        @keydown.enter="keydownEnterHandler"
-        @keydown.space="keydownSpaceHandler"
-        @keydown.down="keydownDownHandler"
-        @keydown.up="keydownUpHandler"
-        @keydown.esc="keydownEscHandler"
-        @mousedown="mousedownHandler"
-        @blur-on-child="blurOnChildHandler"
-      >
-        <template #trigger>
-          <rich-select-trigger ref="trigger">
-            <template #selectorIcon="props">
-              <slot
-                name="selectorIcon"
-                v-bind="props"
-              />
-            </template>
-            <template #placeholder="props">
-              <slot
-                name="placeholder"
-                v-bind="props"
-              />
-            </template>
-            <template #label="props">
-              <slot
-                name="label"
-                v-bind="props"
-              />
-            </template>
-            <template #tagCloseIcon="props">
-              <slot
-                name="tagCloseIcon"
-                v-bind="props"
-              />
-            </template>
-            <template #tagLabel="props">
-              <slot
-                name="tagLabel"
-                v-bind="props"
-              />
-            </template>
-          </rich-select-trigger>
-        </template>
-
-        <rich-select-dropdown ref="dropdown">
-          <template #option="props">
-            <slot
-              name="option"
-              v-bind="props"
-            />
-          </template>
-          <template #optionLabel="props">
-            <slot
-              name="optionLabel"
-              v-bind="props"
-            />
-          </template>
-          <template #optionIcon="props">
-            <slot
-              name="optionIcon"
-              v-bind="props"
-            />
-          </template>
-          <template #dropdownTop="props">
-            <slot
-              name="dropdownTop"
-              v-bind="props"
-            />
-          </template>
-          <template #dropdownButton="props">
-            <slot
-              name="dropdownButton"
-              v-bind="props"
-            />
-          </template>
-          <template #stateFeedback="props">
-            <slot
-              name="stateFeedback"
-              v-bind="props"
-            />
-          </template>
-        </rich-select-dropdown>
-      </VanillaDropdownExtended>
-
-      <rich-select-clear-button
-        v-if="showClearButton"
-        ref="clearButton"
-        @click="clearValue"
-      >
-        <template #clearButton="props">
-          <slot
-            name="clearButton"
-            v-bind="props"
-            :classes-list="configuration.classesList"
-          />
-        </template>
-      </rich-select-clear-button>
-    </div>
-    <slot
-      name="errors"
-      v-bind="{hasErrors, localErrors}"
-    >
-      <VanillaFormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
-      />
-    </slot>
-    <!-- Feedback -->
-    <slot
-      name="feedback"
-      v-bind="{hasErrors, feedback}"
-    >
-      <VanillaFormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
-      />
-    </slot>
-  </div>
-</template>
-
 <script lang="ts">
-import { defineComponent, PropType, provide, ref, computed } from 'vue';
+import type { PropType } from 'vue'
+import { computed, defineComponent, provide, ref } from 'vue'
+import type { Options, Placement } from '@popperjs/core'
+import RichSelectTrigger from './Partials/RichSelectTrigger.vue'
+import RichSelectDropdown from './Partials//RichSelectDropdown.vue'
+import RichSelectClearButton from './Partials/RichSelectClearButton.vue'
 import {
+    useActivableOption,
     useBootVariant,
-    useMultipleVModel,
-    useVariantPropsWithClassesList,
     useConfigurationWithClassesList,
     useFetchsOptions,
-    useActivableOption,
+    useMultipleVModel,
     useSelectableOption,
-} from '@/core';
+    useVariantPropsWithClassesList,
+} from '@/core'
 
-import { isEqual, throttle } from '@/core/helpers';
-import { Options, Placement } from '@popperjs/core';
-import { sameWidthModifier, popperOptions } from '@/core/config/popperOptions';
-import {
+import { isEqual, throttle } from '@/core/helpers'
+import { popperOptions, sameWidthModifier } from '@/core/config/popperOptions'
+import type {
+    CSSRawClassesList,
+    Data,
     FetchOptionsFn,
-    PreFetchOptionsFn,
     InputOptions,
     Measure,
-    Data,
     NormalizedOption,
-    CSSRawClassesList,
-} from '@/core/types';
+    PreFetchOptionsFn,
+} from '@/core/types'
 
-import {
-    VanillaRichSelectValue,
-    VanillaRichSelectProps,
+import type {
     MinimumInputLengthTextProp,
+    VanillaRichSelectClassesValidKeys,
+    VanillaRichSelectProps,
+    VanillaRichSelectValue,
+} from '@/components/RichSelect/index'
+import {
     VanillaRichSelectClassesKeys,
     VanillaRichSelectConfig,
-    VanillaRichSelectClassesValidKeys,
-} from '@/components/RichSelect/index';
-import VanillaSelect from '@/components/Select/Select.vue';
-import VanillaDropdownExtended, { validDropdownPlacements } from '@/components/Dropdown/DropdownExtended.vue';
-import RichSelectTrigger from './Partials/RichSelectTrigger.vue';
-import RichSelectDropdown from './Partials//RichSelectDropdown.vue';
-import RichSelectClearButton from './Partials/RichSelectClearButton.vue';
-import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
-import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
+} from '@/components/RichSelect/index'
+import VanillaSelect from '@/components/Select/Select.vue'
+import VanillaDropdownExtended, { validDropdownPlacements } from '@/components/Dropdown/DropdownExtended.vue'
+import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue'
+import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue'
 
 export default defineComponent({
     name: 'VanillaRichSelect',
@@ -368,17 +212,17 @@ export default defineComponent({
         },
     },
     emits: {
-        change: (e: CustomEvent) => e instanceof CustomEvent,
-        input: (e: CustomEvent) => e instanceof CustomEvent,
-        keydown: (e: KeyboardEvent) => e instanceof KeyboardEvent,
-        focus: (e: FocusEvent) => e instanceof FocusEvent,
-        blur: (e: FocusEvent) => e instanceof FocusEvent,
-        mousedown: (e: MouseEvent) => e instanceof MouseEvent,
-        mouseover: (e: MouseEvent) => e instanceof MouseEvent,
-        mouseleave: (e: MouseEvent) => e instanceof MouseEvent,
-        touchstart: (e: TouchEvent) => e instanceof TouchEvent,
-        shown: () => true,
-        hidden: () => true,
+        'change': (e: CustomEvent) => e instanceof CustomEvent,
+        'input': (e: CustomEvent) => e instanceof CustomEvent,
+        'keydown': (e: KeyboardEvent) => e instanceof KeyboardEvent,
+        'focus': (e: FocusEvent) => e instanceof FocusEvent,
+        'blur': (e: FocusEvent) => e instanceof FocusEvent,
+        'mousedown': (e: MouseEvent) => e instanceof MouseEvent,
+        'mouseover': (e: MouseEvent) => e instanceof MouseEvent,
+        'mouseleave': (e: MouseEvent) => e instanceof MouseEvent,
+        'touchstart': (e: TouchEvent) => e instanceof TouchEvent,
+        'shown': () => true,
+        'hidden': () => true,
         'before-show': () => true,
         'before-hide': () => true,
         'fetch-options-success': () => true,
@@ -386,26 +230,25 @@ export default defineComponent({
         'update:modelValue': () => true,
     },
     setup(props, { emit }) {
-
         const { localValue, clearValue } = useMultipleVModel(
             props,
             'modelValue',
             props.multiple,
-        );
+        )
 
         const {
             localErrors,
             localVariant,
             hasErrors,
-        } = useBootVariant(props, 'errors', localValue);
+        } = useBootVariant(props, 'errors', localValue)
 
         const { configuration, attributes } = useConfigurationWithClassesList<VanillaRichSelectProps>(
             VanillaRichSelectConfig,
             VanillaRichSelectClassesKeys,
             localVariant,
-        );
+        )
 
-        const searchQuery = ref<string | undefined>(undefined);
+        const searchQuery = ref<string | undefined>(undefined)
 
         const {
             normalizedOptions,
@@ -433,7 +276,7 @@ export default defineComponent({
             computed(() => configuration.delay),
             computed(() => configuration.minimumInputLength),
             computed(() => configuration.minimumInputLengthText!),
-        );
+        )
 
         const {
             selectedOption,
@@ -445,7 +288,7 @@ export default defineComponent({
             flattenedOptions,
             localValue,
             computed(() => configuration.multiple!),
-        );
+        )
 
         const {
             activeOption,
@@ -454,207 +297,211 @@ export default defineComponent({
             initActiveOption,
             setNextOptionActive,
             setPrevOptionActive,
-        } = useActivableOption(flattenedOptions, localValue);
+        } = useActivableOption(flattenedOptions, localValue)
 
-        const shown = ref<boolean>(false);
+        const shown = ref<boolean>(false)
 
         const showSearchInput = computed<boolean>(() => {
             if (configuration.hideSearchBox) {
-                return false;
+                return false
             }
 
             if (configuration.minimumResultsForSearch !== undefined) {
                 return (
                     normalizedOptions.value.length
                     >= configuration.minimumResultsForSearch
-                );
+                )
             }
 
-            return true;
-        });
+            return true
+        })
 
         /**
          * Dropdown component reference
          */
         const dropdownComponent = ref<{
-            focus:() => void;
-            doShow: () => void;
-            doHide: () => void;
-            adjustPopper: () => Promise<void>;
-        }>();
+            focus: () => void
+            doShow: () => void
+            doHide: () => void
+            adjustPopper: () => Promise<void>
+        }>()
 
         const focusDropdownTrigger = (): void => {
-            dropdownComponent.value!.focus();
-        };
+            dropdownComponent.value!.focus()
+        }
 
         const usesTags = computed<boolean>(
             () => configuration.tags === true && configuration.multiple === true,
-        );
+        )
 
         /**
          * Manage dropdown related methods
          */
         const hideDropdown = (): void => {
-            dropdownComponent.value!.doHide();
-        };
+            dropdownComponent.value!.doHide()
+        }
 
         const showDropdown = (): void => {
-            dropdownComponent.value!.doShow();
-        };
+            dropdownComponent.value!.doShow()
+        }
 
         const adjustDropdown = async (): Promise<void> => {
-            await dropdownComponent.value!.adjustPopper();
-        };
+            await dropdownComponent.value!.adjustPopper()
+        }
 
-        const throttledShowDropdown = throttle(showDropdown, 200);
+        const throttledShowDropdown = throttle(showDropdown, 200)
 
         const toggleDropdown = (): void => {
             if (shown.value) {
-                hideDropdown();
-            } else {
-                throttledShowDropdown();
+                hideDropdown()
             }
-        };
+            else {
+                throttledShowDropdown()
+            }
+        }
 
         /**
          * Active option handling
          */
         const toggleOptionFromActiveOption = (): void => {
             if (activeOption.value === null) {
-                return;
+                return
             }
 
-            toggleOption(activeOption.value as NormalizedOption);
-        };
+            toggleOption(activeOption.value as NormalizedOption)
+        }
 
         // Select the current active option
         const selectOptionFromActiveOption = (): void => {
             if (activeOption.value === null) {
-                return;
+                return
             }
 
-            selectOption(activeOption.value as NormalizedOption);
-        };
+            selectOption(activeOption.value as NormalizedOption)
+        }
 
         /**
          * Event handlers
          */
         const keydownDownHandler = (e: KeyboardEvent): void => {
-            emit('keydown', e);
+            emit('keydown', e)
 
-            e.preventDefault();
+            e.preventDefault()
 
             if (shown.value === false) {
-                throttledShowDropdown();
-            } else {
-                setNextOptionActive();
+                throttledShowDropdown()
+            }
+            else {
+                setNextOptionActive()
 
-                const lastOption: NormalizedOption = normalizedOptions.value[normalizedOptions.value.length - 1];
+                const lastOption: NormalizedOption = normalizedOptions.value[normalizedOptions.value.length - 1]
 
                 if (
                     optionIsActive(lastOption)
                     && fetchedOptionsHaveMorePages.value
                     && !fetchingMoreOptions.value
                 ) {
-                    fetchMoreOptions();
+                    fetchMoreOptions()
                 }
             }
-        };
+        }
 
         const keydownUpHandler = (e: KeyboardEvent): void => {
-            emit('keydown', e);
+            emit('keydown', e)
 
-            e.preventDefault();
+            e.preventDefault()
 
             if (shown.value === false) {
-                throttledShowDropdown();
-            } else {
-                setPrevOptionActive();
+                throttledShowDropdown()
             }
-        };
+            else {
+                setPrevOptionActive()
+            }
+        }
 
         const keydownEnterHandler = (e: KeyboardEvent): void => {
-            emit('keydown', e);
+            emit('keydown', e)
 
             if (shown.value === true) {
-                toggleOptionFromActiveOption();
+                toggleOptionFromActiveOption()
             }
-        };
+        }
 
         const keydownSpaceHandler = (e: KeyboardEvent): void => {
-            emit('keydown', e);
+            emit('keydown', e)
 
-            e.preventDefault();
+            e.preventDefault()
 
             if (configuration.toggleOnClick && shown.value === false) {
-                throttledShowDropdown();
-            } else if (shown.value === true) {
-                toggleOptionFromActiveOption();
+                throttledShowDropdown()
             }
-        };
+            else if (shown.value === true) {
+                toggleOptionFromActiveOption()
+            }
+        }
 
         const keydownEscHandler = (e: KeyboardEvent): void => {
-            emit('keydown', e);
+            emit('keydown', e)
 
             if (shown.value === false) {
-                return;
+                return
             }
 
-            hideDropdown();
+            hideDropdown()
 
-            focusDropdownTrigger();
-        };
+            focusDropdownTrigger()
+        }
 
         const dropdownBottomReachedHandler = (): void => {
             if (fetchedOptionsHaveMorePages.value && !fetchingMoreOptions.value) {
-                fetchMoreOptions();
+                fetchMoreOptions()
             }
-        };
+        }
 
         /**
          * Provided data
          */
-        provide('configuration_vanilla', configuration);
+        provide('configuration_vanilla', configuration)
 
-        provide('options', normalizedOptions);
+        provide('options', normalizedOptions)
 
-        provide('selectedOption', selectedOption);
+        provide('selectedOption', selectedOption)
 
-        provide('hasSelectedOption', hasSelectedOption);
+        provide('hasSelectedOption', hasSelectedOption)
 
-        provide('toggleOption', toggleOption);
+        provide('toggleOption', toggleOption)
 
-        provide('setActiveOption', setActiveOption);
+        provide('setActiveOption', setActiveOption)
 
-        provide('optionIsSelected', optionIsSelected);
+        provide('optionIsSelected', optionIsSelected)
 
-        provide('optionIsActive', optionIsActive);
+        provide('optionIsActive', optionIsActive)
 
-        provide('keydownDownHandler', keydownDownHandler);
+        provide('keydownDownHandler', keydownDownHandler)
 
-        provide('keydownUpHandler', keydownUpHandler);
+        provide('keydownUpHandler', keydownUpHandler)
 
-        provide('keydownEscHandler', keydownEscHandler);
+        provide('keydownEscHandler', keydownEscHandler)
 
-        provide('keydownEnterHandler', keydownEnterHandler);
+        provide('keydownEnterHandler', keydownEnterHandler)
 
-        provide('shown', shown);
+        provide('shown', shown)
 
-        provide('showSearchInput', showSearchInput);
+        provide('showSearchInput', showSearchInput)
 
-        provide('searchQuery', searchQuery);
+        provide('searchQuery', searchQuery)
 
-        provide('needsMoreCharsToFetch', needsMoreCharsToFetch);
+        provide('needsMoreCharsToFetch', needsMoreCharsToFetch)
 
-        provide('needsMoreCharsMessage', needsMoreCharsMessage);
+        provide('needsMoreCharsMessage', needsMoreCharsMessage)
 
-        provide('fetchingOptions', fetchingOptions);
+        provide('fetchingOptions', fetchingOptions)
 
-        provide('fetchingMoreOptions', fetchingMoreOptions);
+        provide('fetchingMoreOptions', fetchingMoreOptions)
 
-        provide('dropdownBottomReachedHandler', dropdownBottomReachedHandler);
+        provide('dropdownBottomReachedHandler', dropdownBottomReachedHandler)
 
-        provide('usesTags', usesTags);
+        provide('usesTags', usesTags)
 
         return {
             configuration,
@@ -692,7 +539,7 @@ export default defineComponent({
             localErrors,
             hasErrors,
             localVariant,
-        };
+        }
     },
     computed: {
         canFetchOptions(): boolean {
@@ -700,14 +547,14 @@ export default defineComponent({
                 this.fetchsOptions
                 && !this.optionsWereFetched
                 && !this.needsMoreCharsToFetch
-            );
+            )
         },
         canPreFetchOptions(): boolean {
             if (typeof this.configuration.prefetchOptions === 'function') {
-                return !this.optionsWereFetched;
+                return !this.optionsWereFetched
             }
 
-            return this.canFetchOptions;
+            return this.canFetchOptions
         },
         dropdownClasses(): CSSRawClassesList {
             const {
@@ -719,7 +566,7 @@ export default defineComponent({
                 leaveToClass,
                 trigger,
                 dropdown,
-            } = this.configuration.classesList!;
+            } = this.configuration.classesList!
 
             return {
                 trigger,
@@ -730,130 +577,294 @@ export default defineComponent({
                 leaveActiveClass,
                 leaveFromClass,
                 leaveToClass,
-            };
+            }
         },
         showClearButton(): boolean {
             return (
                 this.hasSelectedOption
                 && this.configuration.clearable === true
                 && this.configuration.disabled !== true
-            );
+            )
         },
     },
     watch: {
         localValue(): void {
-            this.onOptionSelected();
+            this.onOptionSelected()
         },
     },
     created() {
         if (this.configuration.prefetchOptions && this.canPreFetchOptions) {
-            this.doPrefetchOptions();
+            this.doPrefetchOptions()
         }
     },
     beforeUnmount() {
-        this.fetchOptionsCancel();
+        this.fetchOptionsCancel()
     },
     methods: {
         onOptionSelected(): void {
             this.$emit('input', new CustomEvent('input', {
                 detail: this.localValue,
-            }));
+            }))
 
             this.$emit('change', new CustomEvent('change', {
                 detail: this.localValue,
-            }));
+            }))
 
             if (this.shown === false) {
-                return;
+                return
             }
 
-            this.adjustDropdown();
+            this.adjustDropdown()
 
             if (
                 this.configuration.closeOnSelect === true
+
                 // If `closeOnSelect`  is not set hide the dropdown only when is not
                 // multiple
                 || (this.configuration.closeOnSelect === undefined
                     && !this.configuration.multiple)
             ) {
-                this.hideDropdown();
+                this.hideDropdown()
 
-                this.focusDropdownTrigger();
+                this.focusDropdownTrigger()
             }
         },
         beforeHideHandler(): void {
-            this.$emit('before-hide');
+            this.$emit('before-hide')
 
             if (
                 this.configuration.selectOnClose
                 && !isEqual(this.localValue, this.activeOption?.value)
             ) {
-                this.selectOptionFromActiveOption();
+                this.selectOptionFromActiveOption()
             }
         },
         shownHandler(): void {
-            this.$emit('shown');
+            this.$emit('shown')
 
-            this.shown = true;
+            this.shown = true
         },
         hiddenHandler(): void {
-            this.$emit('hidden');
+            this.$emit('hidden')
 
-            this.shown = false;
+            this.shown = false
 
             if (this.clearSearchOnClose) {
-                this.searchQuery = undefined;
+                this.searchQuery = undefined
             }
         },
         beforeShowHandler(): void {
-            this.$emit('before-show');
+            this.$emit('before-show')
 
-            this.initActiveOption();
+            this.initActiveOption()
 
             if (this.canFetchOptions) {
-                this.doFetchOptions();
+                this.doFetchOptions()
             }
         },
         mousedownHandler(e: MouseEvent): void {
-            this.$emit('mousedown', e);
+            this.$emit('mousedown', e)
 
             if (this.configuration.toggleOnClick) {
                 // If it has as search box I need to prevent default to ensure the search
                 // box keep focused
                 if (this.showSearchInput && this.shown === false) {
-                    e.preventDefault();
+                    e.preventDefault()
                 }
 
-                this.toggleDropdown();
+                this.toggleDropdown()
             }
         },
         focusHandler(e: FocusEvent): void {
-            this.$emit('focus', e);
+            this.$emit('focus', e)
 
             if (this.configuration.toggleOnFocus) {
-                this.throttledShowDropdown();
+                this.throttledShowDropdown()
             }
         },
         blurOnChildHandler(e: FocusEvent): void {
-            const target = e.target as HTMLButtonElement | HTMLInputElement;
-            const relatedTarget = e.relatedTarget as HTMLElement | EventTarget;
+            const target = e.target as HTMLButtonElement | HTMLInputElement
+            const relatedTarget = e.relatedTarget as HTMLElement | EventTarget
             const relatedTargetDataset: Data | undefined = relatedTarget instanceof HTMLElement
                 ? relatedTarget.dataset
-                : undefined;
+                : undefined
 
             if (
                 target.dataset.richSelectFocusable !== undefined
                 && relatedTargetDataset
                 && relatedTargetDataset.richSelectFocusable === undefined
             ) {
-                target.focus();
+                target.focus()
             }
         },
         blurHandler(e: FocusEvent): void {
-            this.$emit('blur', e);
+            this.$emit('blur', e)
 
-            this.hideDropdown();
+            this.hideDropdown()
         },
     },
-});
+})
 </script>
+
+<template>
+  <div
+    class="vanilla-rich-select"
+    v-bind="attributes"
+  >
+    <div
+      :class="configuration.classesList?.wrapper"
+    >
+      <div class="relative">
+        <VanillaSelect
+          v-model="localValue"
+          :name="configuration.name"
+          :fixed-classes="undefined"
+          :classes="undefined"
+          :multiple="configuration.multiple"
+          :options="flattenedOptions"
+          style="display:none"
+        />
+
+        <VanillaDropdownExtended
+          ref="dropdownComponent"
+          :disabled="configuration.disabled"
+          :classes="dropdownClasses"
+          :fixed-classes="undefined"
+          :toggle-on-focus="false"
+          :toggle-on-click="false"
+          :toggle-on-hover="false"
+          :popper-options="configuration.dropdownPopperOptions"
+          :placement="configuration.dropdownPlacement"
+          :tag-name="usesTags ? 'div' : 'button'"
+          :tabindex="usesTags && !hasSelectedOption ? 0 : undefined"
+          :teleport="configuration.teleport"
+          :teleport-to="configuration.teleportTo"
+          data-rich-select-focusable
+          @mouseover="$emit('mouseover', $event)"
+          @mouseleave="$emit('mouseleave', $event)"
+          @touchstart="$emit('touchstart', $event)"
+          @shown="shownHandler"
+          @hidden="hiddenHandler"
+          @before-show="beforeShowHandler"
+          @before-hide="beforeHideHandler"
+          @blur="blurHandler"
+          @focus="focusHandler"
+          @keydown.enter="keydownEnterHandler"
+          @keydown.space="keydownSpaceHandler"
+          @keydown.down="keydownDownHandler"
+          @keydown.up="keydownUpHandler"
+          @keydown.esc="keydownEscHandler"
+          @mousedown="mousedownHandler"
+          @blur-on-child="blurOnChildHandler"
+        >
+          <template #trigger>
+            <RichSelectTrigger ref="trigger">
+              <template #selectorIcon="props">
+                <slot
+                  name="selectorIcon"
+                  v-bind="props"
+                />
+              </template>
+              <template #placeholder="props">
+                <slot
+                  name="placeholder"
+                  v-bind="props"
+                />
+              </template>
+              <template #label="props">
+                <slot
+                  name="label"
+                  v-bind="props"
+                />
+              </template>
+              <template #tagCloseIcon="props">
+                <slot
+                  name="tagCloseIcon"
+                  v-bind="props"
+                />
+              </template>
+              <template #tagLabel="props">
+                <slot
+                  name="tagLabel"
+                  v-bind="props"
+                />
+              </template>
+            </RichSelectTrigger>
+          </template>
+
+          <RichSelectDropdown ref="dropdown">
+            <template #option="props">
+              <slot
+                name="option"
+                v-bind="props"
+              />
+            </template>
+            <template #optionLabel="props">
+              <slot
+                name="optionLabel"
+                v-bind="props"
+              />
+            </template>
+            <template #optionIcon="props">
+              <slot
+                name="optionIcon"
+                v-bind="props"
+              />
+            </template>
+            <template #dropdownTop="props">
+              <slot
+                name="dropdownTop"
+                v-bind="props"
+              />
+            </template>
+            <template #dropdownButton="props">
+              <slot
+                name="dropdownButton"
+                v-bind="props"
+              />
+            </template>
+            <template #stateFeedback="props">
+              <slot
+                name="stateFeedback"
+                v-bind="props"
+              />
+            </template>
+          </RichSelectDropdown>
+        </VanillaDropdownExtended>
+
+        <RichSelectClearButton
+          v-if="showClearButton"
+          ref="clearButton"
+          @click="clearValue"
+        >
+          <template #clearButton="props">
+            <slot
+              name="clearButton"
+              v-bind="props"
+              :classes-list="configuration.classesList"
+            />
+          </template>
+        </RichSelectClearButton>
+      </div>
+      <slot
+        name="errors"
+        v-bind="{ hasErrors, localErrors }"
+      >
+        <VanillaFormErrors
+          v-if="hasErrors && showErrors"
+          :errors="localErrors"
+        />
+      </slot>
+      <!-- Feedback -->
+      <slot
+        name="feedback"
+        v-bind="{ hasErrors, feedback }"
+      >
+        <VanillaFormFeedback
+          v-if="!hasErrors && feedback !== undefined && showFeedback"
+          :text="feedback"
+        />
+      </slot>
+    </div>
+  </div>
+</template>

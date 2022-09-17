@@ -1,3 +1,10 @@
+<script lang="ts">
+import { defineComponent } from 'vue'
+export default defineComponent({
+    name: 'VanillaUncheckedIcon',
+})
+</script>
+
 <template>
   <svg
     fill="none"
@@ -12,9 +19,3 @@
     />
   </svg>
 </template>
-<script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-    name: 'VanillaUncheckedIcon',
-});
-</script>

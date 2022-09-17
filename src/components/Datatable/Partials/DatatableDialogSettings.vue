@@ -1,3 +1,106 @@
+<script lang="ts">
+import type { PropType, Ref } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
+import type {
+    VanillaDatatableColumnComputed,
+    VanillaDatatableColumnsComputed,
+    VanillaDatatablePageOptions,
+    VanillaDatatableUserSettings,
+} from '../index'
+import { useInjectDatatableTranslations } from '../utils'
+import VanillaDialog from '@/components/Dialog/Dialog.vue'
+import VanillaSelect from '@/components/Select/Select.vue'
+import VanillaCheckboxGroup from '@/components/Checkbox/CheckboxGroup.vue'
+import VanillaToggle from '@/components/Toggle/Toggle.vue'
+import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue'
+import VanillaButton from '@/components/Button/Button.vue'
+import { useInjectsClassesList } from '@/core'
+import TrashIcon from '@/components/Icons/Hero/Outline/TrashIcon.vue'
+
+export default defineComponent({
+    name: 'VanillaDatatableDialogSettings',
+    components: {
+        VanillaDialog,
+        VanillaSelect,
+        VanillaCheckboxGroup,
+        VanillaToggle,
+        VanillaInputGroup,
+        VanillaButton,
+        TrashIcon,
+    },
+    props: {
+        userSettings: {
+            type: [Object] as PropType<VanillaDatatableUserSettings>,
+            required: true,
+        },
+        defaultSettings: {
+            type: [Object] as PropType<VanillaDatatableUserSettings>,
+            required: true,
+        },
+        perPageOptions: {
+            type: [Object] as PropType<VanillaDatatablePageOptions>,
+            required: true,
+        },
+        columns: {
+            type: [Array] as PropType<VanillaDatatableColumnsComputed>,
+            required: true,
+        },
+    },
+    emits: [
+        'update:modelValue',
+        'update:settings',
+        'settingsReset',
+    ],
+    setup(props, { emit }) {
+        const isOpen = ref(false)
+        const localSettings = ref(props.userSettings) as Ref<VanillaDatatableUserSettings>
+
+        // Normalize the columns with Label & Text
+        const columnsNormalized = computed(() => {
+            const columns = [] as { text: string; value: string }[]
+            props.columns.forEach((column: VanillaDatatableColumnComputed) => {
+                columns.push({
+                    text: column.label,
+                    value: column.name,
+                })
+            })
+            return columns
+        })
+
+        // Save Settings
+        const saveSettings = () => {
+            isOpen.value = false
+            emit('update:settings', localSettings.value)
+        }
+
+        // Reset Settings
+        const resetSettings = () => {
+            isOpen.value = false
+            emit('settingsReset', true)
+        }
+
+        // Open / Close Modal
+        watch(isOpen, (val: boolean) => {
+            emit('update:modelValue', val)
+        })
+
+        // Provide Translations
+        const translations = useInjectDatatableTranslations()!
+        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+        return {
+            isOpen,
+            localSettings,
+            columnsNormalized,
+            saveSettings,
+            resetSettings,
+            translations,
+            classesList,
+        }
+    },
+})
+</script>
+
 <template>
   <VanillaDialog
     v-model="isOpen"
@@ -68,105 +171,3 @@
     </template>
   </VanillaDialog>
 </template>
-<script lang="ts">
-import { computed, defineComponent, PropType, Ref, ref, watch } from 'vue';
-import VanillaDialog from '@/components/Dialog/Dialog.vue';
-import VanillaSelect from '@/components/Select/Select.vue';
-import VanillaCheckboxGroup from '@/components/Checkbox/CheckboxGroup.vue';
-import VanillaToggle from '@/components/Toggle/Toggle.vue';
-import VanillaInputGroup from '@/components/InputGroup/InputGroup.vue';
-import VanillaButton from '@/components/Button/Button.vue';
-import {
-    VanillaDatatableColumnComputed,
-    VanillaDatatableColumnsComputed,
-    VanillaDatatablePageOptions,
-    VanillaDatatableUserSettings,
-} from '../index';
-import { useInjectDatatableTranslations } from '../utils';
-import { useInjectsClassesList } from '@/core';
-import TrashIcon from '@/components/Icons/Hero/Outline/TrashIcon.vue';
-
-export default defineComponent({
-    name: 'VanillaDatatableDialogSettings',
-    components: {
-        VanillaDialog,
-        VanillaSelect,
-        VanillaCheckboxGroup,
-        VanillaToggle,
-        VanillaInputGroup,
-        VanillaButton,
-        TrashIcon,
-    },
-    props: {
-        userSettings: {
-            type: [Object] as PropType<VanillaDatatableUserSettings>,
-            required: true,
-        },
-        defaultSettings: {
-            type: [Object] as PropType<VanillaDatatableUserSettings>,
-            required: true,
-        },
-        perPageOptions: {
-            type: [Object] as PropType<VanillaDatatablePageOptions>,
-            required: true,
-        },
-        columns: {
-            type: [Array] as PropType<VanillaDatatableColumnsComputed>,
-            required: true,
-        },
-    },
-    emits: [
-        'update:modelValue',
-        'update:settings',
-        'settingsReset',
-    ],
-    setup(props, { emit }) {
-
-        const isOpen = ref(false);
-        const localSettings = ref(props.userSettings) as Ref<VanillaDatatableUserSettings>;
-
-        // Normalize the columns with Label & Text
-        const columnsNormalized = computed(() => {
-            let columns = [] as { text: string, value: string }[];
-            props.columns.forEach((column: VanillaDatatableColumnComputed) => {
-                columns.push({
-                    text: column.label,
-                    value: column.name,
-                });
-            });
-            return columns;
-        });
-
-        // Save Settings
-        const saveSettings = () => {
-            isOpen.value = false;
-            emit('update:settings', localSettings.value);
-        };
-
-        // Reset Settings
-        const resetSettings = () => {
-            isOpen.value = false;
-            emit('settingsReset', true);
-        };
-
-        // Open / Close Modal
-        watch(isOpen, (val: boolean) => {
-            emit('update:modelValue', val);
-        });
-
-        // Provide Translations
-        const translations = useInjectDatatableTranslations()!;
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!;
-
-        return {
-            isOpen,
-            localSettings,
-            columnsNormalized,
-            saveSettings,
-            resetSettings,
-            translations,
-            classesList,
-        };
-    },
-});
-</script>
