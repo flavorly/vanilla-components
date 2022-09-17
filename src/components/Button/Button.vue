@@ -46,9 +46,6 @@ export default defineComponent({
         VanillaLoadingSpinner,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaButtonProps>(),
         as: {

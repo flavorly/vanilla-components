@@ -12,9 +12,6 @@ import { VanillaFormSectionProps, VanillaFormSectionConfig } from './index';
 export default defineComponent({
     name: 'VanillaFormSection',
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaFormSectionProps>(),
         safe: {

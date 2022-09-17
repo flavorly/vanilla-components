@@ -25,9 +25,6 @@ import { VanillaStatusIndicatorClassesKeys, VanillaStatusIndicatorConfig } from 
 export default defineComponent({
     name: 'VanillaStatusIndicator',
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaStatusIndicatorProps>(),
         pulse: {

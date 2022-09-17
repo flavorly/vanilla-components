@@ -4,7 +4,7 @@
     :show="localValue"
     as="template"
   >
-    <Dialog
+    <HeadlessDialog
       :as="as"
       :open="localValue"
       :initial-focus="null"
@@ -112,13 +112,12 @@
           </TransitionChild>
         </div>
       </div>
-    </Dialog>
+    </HeadlessDialog>
   </TransitionRoot>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType, provide } from 'vue';
-
 import {
     useBootVariant,
     useVariantProps,
@@ -136,7 +135,7 @@ import {
 import {
     TransitionRoot,
     TransitionChild,
-    Dialog,
+    Dialog as HeadlessDialog,
     DialogOverlay,
     DialogTitle, DialogDescription,
 } from '@headlessui/vue';
@@ -150,14 +149,11 @@ export default defineComponent({
         DialogDescription,
         TransitionRoot,
         TransitionChild,
-        Dialog,
+        HeadlessDialog,
         DialogOverlay,
         DialogTitle,
     },
     inheritAttrs: true,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaDialogProps>(),
         modelValue: {

@@ -14,16 +14,14 @@
 
 <script lang="ts">
 import { defineComponent, PropType, ref } from 'vue';
-import { useBootVariant, useVariantProps, useConfiguration, useConfigurationWithClassesList } from '@/core';
+import { useBootVariant, useVariantProps, useConfigurationWithClassesList } from '@/core';
 import { VanillaSkeletonBarProps, VanillaSkeletonBarConfig, VanillaSkeletonBarClassesKeys } from './index';
 import uniqueId from 'lodash/uniqueId';
 
 export default defineComponent({
     name: 'VanillaSkeletonBar',
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
+
     props: {
         ...useVariantProps<VanillaSkeletonBarProps>(),
         count: {

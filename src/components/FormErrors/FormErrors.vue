@@ -19,9 +19,6 @@ import { VanillaFormErrorsProps, VanillaFormErrorsConfig } from './index';
 export default defineComponent({
     name: 'VanillaFormErrors',
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaFormErrorsProps>(),
         safe: {

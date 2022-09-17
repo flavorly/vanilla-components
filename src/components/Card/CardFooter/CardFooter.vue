@@ -50,9 +50,6 @@ import { useInjectsClassesList } from '@/core';
 
 export default defineComponent({
     name: 'VanillaCardFooter',
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         columns: {
             type: [Number, String] as PropType<string | number>,
@@ -83,7 +80,7 @@ export default defineComponent({
             required: false,
         },
     },
-    setup(props){
+    setup(props) {
         const classesList = useInjectsClassesList()!;
 
         return {

@@ -73,9 +73,6 @@ export default defineComponent({
         VanillaCheckbox,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaCheckboxProps>(),
         modelValue: {

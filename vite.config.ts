@@ -15,21 +15,30 @@ const externals = [
 export default defineConfig(({ command, mode }) => {
   return {
     plugins: [
-      vue({isProduction: false}),
-      dts(),
+      vue(),
+      dts({
+        cleanVueFileName: false,
+        staticImport: true,
+        beforeWriteFile(filePath, content){
+          return {
+            filePath: filePath.replace(`src`, ``),
+            content,
+          };
+        }
+      }),
       // Copy vue files so Webstorm can be happy.
-      // copy({
-      //   targets: [
-      //     // Vue Components
-      //     { src: 'src/components/**/*.vue', dest: 'dist' },
-      //     // Vanilla Components Configuration
-      //     { src: 'src/components/**/Config.ts', dest: 'dist' },
-      //     // Vanilla Base Configuration
-      //     { src: 'src/core/config/*.ts', dest: 'dist' },
-      //   ],
-      //   hook: 'writeBundle',
-      //   flatten: false, // Keep directory structure
-      // }),
+      copy({
+        targets: [
+          // Vue Components
+          { src: 'src/components/**/*.vue', dest: 'dist' },
+          // Vanilla Components Configuration
+          { src: 'src/components/**/Config.ts', dest: 'dist' },
+          // Vanilla Base Configuration
+          { src: 'src/core/config/*.ts', dest: 'dist' },
+        ],
+        hook: 'writeBundle',
+        flatten: false, // Keep directory structure
+      }),
     ],
     resolve:{
       alias: [

@@ -30,9 +30,6 @@ import { MenuItem } from '@headlessui/vue';
 
 export default defineComponent({
     name: 'VanillaDropdownOption',
-    compatConfig: {
-        MODE: 3,
-    },
     components: {
         MenuItem,
     },

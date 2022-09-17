@@ -88,9 +88,6 @@ export default defineComponent({
         VanillaFormErrors,
         VanillaFormFeedback,
     },
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaPhoneNumberProps>(),
         modelValue: {

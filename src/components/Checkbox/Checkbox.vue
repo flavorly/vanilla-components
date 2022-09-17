@@ -57,9 +57,6 @@ export default defineComponent({
         VanillaFormFeedback,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     model: {
         prop: 'checked',
         event: 'change',
@@ -90,7 +87,7 @@ export default defineComponent({
             type: [String] as PropType<string>,
             required: false,
             default: 'left',
-            validator(align: string){
+            validator(align: string) {
                 return ['left', 'right', 'center'].includes(align);
             },
         },
@@ -121,10 +118,10 @@ export default defineComponent({
             }
 
             // It's an object
-            if (typeof localValue.value === 'object' && localValue.value !== null){
+            if (typeof localValue.value === 'object' && localValue.value !== null) {
                 let temporaryValue = props.value;
                 let temporaryObject = localValue.value;
-                if (isChecked){
+                if (isChecked) {
                     // @ts-expect-error: We assume its a string or will throw an error
                     temporaryObject[temporaryValue] = true;
                 } else {

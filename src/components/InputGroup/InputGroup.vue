@@ -98,9 +98,6 @@ export default defineComponent({
         VanillaFormLabel,
     },
     inheritAttrs: true,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaInputGroupProps>(),
         type: {

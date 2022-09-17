@@ -46,7 +46,7 @@ import { computed, defineComponent, PropType, watch } from 'vue';
 import { useBootVariant, useVModel, useVariantProps, hasSlot, useAttributesAndProps } from '@/core';
 import { filterCountriesByName, countries } from '@/utils/CountryCodes';
 import { VanillaSelectCountryProps, VanillaFavoriteCountriesValue, VanillaSelectCountryValue } from './index';
-import VanillaRichSelect from '@/components/RichSelect/____RichSelect.vue';
+import VanillaRichSelect from '@/components/RichSelect/RichSelect.vue';
 import VanillaSelectCountryOption from '@/components/SelectCountry/SelectCountryOption/SelectCountryOption.vue';
 import find from 'lodash/find';
 import first from 'lodash/first';
@@ -59,9 +59,6 @@ export default defineComponent({
         VanillaRichSelect,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaSelectCountryProps>(),
         modelValue: {

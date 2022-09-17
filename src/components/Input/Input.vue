@@ -93,9 +93,6 @@ export default defineComponent({
         EyeSlashIcon,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaInputProps>(),
         modelValue: {

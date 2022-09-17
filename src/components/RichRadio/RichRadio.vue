@@ -120,9 +120,6 @@ export default defineComponent({
         RadioGroupOption,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaRichRadioProps>(),
         modelValue: {

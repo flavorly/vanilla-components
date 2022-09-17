@@ -24,9 +24,6 @@ import { VanillaFormLabelProps, VanillaFormLabelConfig } from './index';
 export default defineComponent({
     name: 'VanillaFormLabel',
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaFormLabelProps>(),
         label: {

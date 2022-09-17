@@ -17,16 +17,13 @@ import { useInjectsClassesList } from '@/core';
 
 export default defineComponent({
     name: 'VanillaDialogFooter',
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         divided: {
             type: Boolean as PropType<boolean>,
             default: true,
         },
     },
-    setup(props){
+    setup(props) {
 
         const classesList = useInjectsClassesList()!;
         const footer = ref(null);
@@ -36,15 +33,15 @@ export default defineComponent({
         onMounted(() => {
             children.value = footer.value?.children.length;
 
-            if (children.value === 1){
+            if (children.value === 1) {
                 footerClasses.value = classesList.value.footerWithOneButton;
             }
 
-            if (children.value === 2){
+            if (children.value === 2) {
                 footerClasses.value = classesList.value.footerWithTwoButtons;
             }
 
-            if (children.value === 3){
+            if (children.value === 3) {
                 footerClasses.value = classesList.value.footerWithThreeButtons;
             }
         });

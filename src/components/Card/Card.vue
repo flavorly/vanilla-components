@@ -97,9 +97,6 @@ export default defineComponent({
         VanillaCardFooter,
     },
     inheritAttrs: true,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaCardProps>(),
         title: {

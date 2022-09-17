@@ -140,9 +140,6 @@ export default defineComponent({
         VanillaButton,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaAvatarProps>(),
         modelValue: {

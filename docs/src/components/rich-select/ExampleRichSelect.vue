@@ -8,6 +8,7 @@
       placeholder="Please select an option"
       :errors="'Your Seleection cannot be more than 10 stuff'"
     />
+    {{ value }}
   </PreviewWrapper>
 </template>
 

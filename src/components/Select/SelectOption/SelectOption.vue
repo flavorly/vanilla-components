@@ -29,9 +29,6 @@ import { useInjectsClassesList } from '@/core';
 
 export default defineComponent({
     name: 'VanillaSelectOption',
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         option: {
             type: [Object] as PropType<NormalizedOption>,
@@ -42,7 +39,7 @@ export default defineComponent({
             default: false,
         },
     },
-    setup(props){
+    setup(props) {
         const classesList = useInjectsClassesList()!;
         const hasChildren = computed(() => props.option.children !== undefined && props.option.children.length > 0);
 

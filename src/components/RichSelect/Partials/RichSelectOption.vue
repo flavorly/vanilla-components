@@ -84,9 +84,6 @@ import CheckmarkIcon from '@/components/icons/CheckmarkIcon.vue';
 
 export default defineComponent({
     name: 'RichSelectOption',
-    compatConfig: {
-        MODE: 3,
-    },
     components: {
         CheckmarkIcon,
     },

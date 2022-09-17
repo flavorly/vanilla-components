@@ -13,11 +13,7 @@ import { useInjectsClassesList } from '@/core';
 
 export default defineComponent({
     name: 'VanillaCardEmpty',
-    compatConfig: {
-        MODE: 3,
-    },
-    setup(props){
-
+    setup(props) {
         const classesList = useInjectsClassesList()!;
 
         return {

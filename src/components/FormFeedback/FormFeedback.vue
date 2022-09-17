@@ -20,9 +20,6 @@ import { VanillaFormFeedbackProps, VanillaFormFeedbackConfig } from './index';
 export default defineComponent({
     name: 'VanillaFormFeedback',
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaFormFeedbackProps>(),
         text: {

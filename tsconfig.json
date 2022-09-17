@@ -19,12 +19,12 @@
   },
   "include": [
     "src/**/*.ts",
-    "src/**/*.d.ts",
+    //"src/**/*.d.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
     "src/**/*.js",
-    "docs/**/*.ts",
-    "docs/**/*.vue",
+    //"docs/**/*.ts",
+    //"docs/**/*.vue",
   ],
   "exclude": [
     "node_modules"

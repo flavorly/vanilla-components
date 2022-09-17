@@ -68,9 +68,6 @@ export default defineComponent({
 
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaSelectProps>(),
         modelValue: {

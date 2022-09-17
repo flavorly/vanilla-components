@@ -182,9 +182,6 @@ export default defineComponent({
         XMarkIcon,
     },
     inheritAttrs: true,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaSlideoverProps>(),
         modelValue: {

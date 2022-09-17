@@ -612,9 +612,6 @@ export default defineComponent({
         CogIcon,
     },
     inheritAttrs: true,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaDatatableProps>(),
         config: {

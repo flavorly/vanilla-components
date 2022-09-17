@@ -70,9 +70,6 @@ export default defineComponent({
         VanillaCheckedIcon,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     model: {
         prop: 'checked',
         event: 'change',

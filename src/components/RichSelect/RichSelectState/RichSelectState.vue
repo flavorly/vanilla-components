@@ -66,9 +66,6 @@ import {
 
 export default defineComponent({
     name: 'VanillaRichSelectState',
-    compatConfig: {
-        MODE: 3,
-    },
     setup(props) {
         const options = inject<ComputedRef<VanillaRichSelectProps>>('options')!;
         const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!;

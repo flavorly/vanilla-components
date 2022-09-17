@@ -72,9 +72,6 @@ export default defineComponent({
         ExclamationCircleIcon,
     },
     inheritAttrs: false,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaTextareaProps>(),
         modelValue: {
