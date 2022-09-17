@@ -1,5 +1,5 @@
 <template>
-  <Menu
+  <HeadlessMenu
     v-slot="{open}"
     as="div"
     :class="[
@@ -83,7 +83,7 @@
         </VanillaTransitionable>
       </div>
     </teleport>
-  </Menu>
+  </HeadlessMenu>
 </template>
 
 <script lang="ts">
@@ -117,24 +117,20 @@ import VanillaButton from '@/components/Button/Button.vue';
 import VanillaTransitionable from '@/components/Transitions/Transitionable.vue';
 import { createPopper, Options, Placement } from '@popperjs/core';
 import { Instance as PopperInstance } from '@popperjs/core/lib/types';
-
-import { Menu, MenuButton, MenuItems } from '@headlessui/vue';
-import { ChevronDownIcon } from '@heroicons/vue/24/solid';
+import { Menu as HeadlessMenu, MenuButton, MenuItems } from '@headlessui/vue';
+import ChevronDownIcon from '@/components/Icons/Hero/Solid/ChevronDownIcon.vue';
 
 export default defineComponent({
     name: 'VanillaDropdown',
     components: {
         VanillaTransitionable,
-        Menu,
+        HeadlessMenu,
         MenuButton,
         MenuItems,
         ChevronDownIcon,
         VanillaButton,
     },
     inheritAttrs: true,
-    compatConfig: {
-        MODE: 3,
-    },
     props: {
         ...useVariantProps<VanillaDropdownProps>(),
         modelValue: {

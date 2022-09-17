@@ -573,8 +573,10 @@ import VanillaDatatableFilterBadge from './Partials/DatatableFilterBadge.vue';
 import VanillaDatatableEmptyState from './Partials/DatatableEmptyState.vue';
 
 // Icons
-import { EllipsisVerticalIcon, CogIcon } from '@heroicons/vue/24/solid';
-import { FunnelIcon, ArrowPathIcon } from '@heroicons/vue/24/outline';
+import EllipsisVerticalIcon from '@/components/Icons/Hero/Solid/EllipsisVerticalIcon.vue';
+import CogIcon from '@/components/Icons/Hero/Solid/CogIcon.vue';
+import FunnelIcon from '@/components/Icons/Hero/Outline/FunnelIcon.vue';
+import ArrowPathIcon from '@/components/Icons/Hero/Outline/ArrowPathIcon.vue';
 
 // Other 3rd Party Packages
 import { useSessionStorage } from '@vueuse/core';

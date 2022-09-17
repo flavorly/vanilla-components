@@ -52,7 +52,6 @@
   </div>
 </template>
 <script lang="ts">
-import { CheckIcon } from '@heroicons/vue/24/solid';
 import { defineComponent, PropType, ref, computed } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList } from '@/core';
 import {
@@ -60,6 +59,8 @@ import {
     VanillaRichSelectOptionWithIndicatorsConfig,
     VanillaRichSelectOptionWithIndicatorsProps,
 } from '@/components/RichSelect/RichSelectOptionWithIndicators';
+
+import CheckIcon from '@/components/Icons/Hero/Solid/CheckIcon.vue';
 
 export default defineComponent({
     name: 'VanillaRichSelectOptionWithIndicators',

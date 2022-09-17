@@ -120,10 +120,10 @@ import {
     VanillaDatatableSavedFilter,
     VanillaDatatableUserSettings,
 } from '../index';
-import { TrashIcon } from '@heroicons/vue/24/outline';
 import find from 'lodash/find';
 import { isEqual, useInjectsClassesList } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
+import TrashIcon from '@/components/Icons/Hero/Outline/TrashIcon.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogFilters',

@@ -4,9 +4,7 @@ import { whyframeVue } from '@whyframe/vue';
 
 export default defineConfig({
   ssr: {
-    noExternal: [
-      '@heroicons/vue'
-    ]
+    noExternal: [],
   },
   server: {
     host: true,
@@ -18,7 +16,7 @@ export default defineConfig({
     stringify: true,
   },
   plugins: [
-    whyframe({defaultSrc: '/frames/default'}),
-    whyframeVue({include: /\.(?:vue|md)$/})
-  ]
-})
+    whyframe({ defaultSrc: '/frames/default' }),
+    whyframeVue({ include: /\.(?:vue|md)$/ }),
+  ],
+});

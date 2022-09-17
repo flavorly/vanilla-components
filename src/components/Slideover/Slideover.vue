@@ -4,7 +4,7 @@
     :show="localValue"
     as="template"
   >
-    <Dialog
+    <HeadlessDialog
       :as="as"
       :open="localValue"
       :initial-focus="null"
@@ -140,7 +140,7 @@
           </TransitionChild>
         </div>
       </div>
-    </Dialog>
+    </HeadlessDialog>
   </TransitionRoot>
 </template>
 
@@ -164,19 +164,19 @@ import {
 import {
     TransitionRoot,
     TransitionChild,
-    Dialog,
+    Dialog as HeadlessDialog,
     DialogOverlay,
     DialogTitle,
 } from '@headlessui/vue';
 
-import { XMarkIcon } from '@heroicons/vue/24/outline';
+import XMarkIcon from '@/components/Icons/Hero/Outline/XMarkIcon.vue';
 
 export default defineComponent({
     name: 'VanillaSlideover',
     components: {
         TransitionRoot,
         TransitionChild,
-        Dialog,
+        HeadlessDialog,
         DialogOverlay,
         DialogTitle,
         XMarkIcon,

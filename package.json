@@ -43,7 +43,6 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.0",
-    "@heroicons/vue": "^2.0.10",
     "@popperjs/core": "^2.11.6",
     "@variantjs/core": "^0.0.90",
     "@variantjs/vue": "^0.0.22",
@@ -57,7 +56,6 @@
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.7.0",
-    "@heroicons/vue": "^2.0.10",
     "@popperjs/core": "^2.11.6",
     "@variantjs/core": "^0.0.87",
     "@variantjs/vue": "^0.0.21",

@@ -39,9 +39,10 @@ import { useDynamicSlots, useInjectsClassesList } from '@/core';
 import VanillaDropdown from '@/components/Dropdown/Dropdown.vue';
 import VanillaDropdownOption from '@/components/Dropdown/DropdownOption/DropdownOption.vue';
 import VanillaButton from '@/components/Button/Button.vue';
+import ChevronDownIcon from '@/components/Icons/Hero/Solid/ChevronDownIcon.vue';
 import { VanillaDatatableActions } from '../index';
 import { useInjectDatatableTranslations } from '../utils';
-import { ChevronDownIcon } from '@heroicons/vue/24/solid';
+
 
 export default defineComponent({
     name: 'VanillaDatatableActions',

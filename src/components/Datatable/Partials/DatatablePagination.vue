@@ -90,11 +90,12 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, computed } from 'vue';
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/24/solid';
 import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableResponsePage } from '../index';
 import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
+import ChevronLeftIcon from '@/components/Icons/Hero/Solid/ChevronLeftIcon.vue';
+import ChevronRightIcon from '@/components/Icons/Hero/Solid/ChevronRightIcon.vue';
 
 export default defineComponent({
     name: 'VanillaDatatablePagination',

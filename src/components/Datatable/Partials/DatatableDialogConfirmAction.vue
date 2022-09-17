@@ -117,7 +117,10 @@ import VanillaButton from '@/components/Button/Button.vue';
 import { VanillaDatatableAction } from '../index';
 import { useInjectsClassesList, useReplacePlaceholders } from '@/core';
 import { useInjectDatatableTranslations } from '../utils';
-import { ExclamationTriangleIcon, CheckIcon, SignalIcon, InformationCircleIcon } from '@heroicons/vue/24/outline';
+import ExclamationTriangleIcon from '@/components/Icons/Hero/Outline/ExclamationTriangleIcon.vue';
+import CheckIcon from '@/components/Icons/Hero/Outline/CheckIcon.vue';
+import SignalIcon from '@/components/Icons/Hero/Outline/SignalIcon.vue';
+import InformationCircleIcon from '@/components/Icons/Hero/Outline/InformationCircleIcon.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogConfirmAction',

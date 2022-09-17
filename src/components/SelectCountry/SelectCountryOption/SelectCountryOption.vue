@@ -54,7 +54,7 @@ import { computed, defineComponent, PropType, ref } from 'vue';
 import { useBootVariant, useConfigurationWithClassesList } from '@/core';
 import { VanillaSelectCountryOptionConfig, VanillaSelectCountryOptionClassesKeys, VanillaSelectCountryOptionProps } from './index';
 import VanillaFlag from '@/components/Icons/Flag.vue';
-import { CheckIcon } from '@heroicons/vue/24/solid';
+import CheckIcon from '@/components/Icons/Hero/Solid/CheckIcon.vue';
 
 export default defineComponent({
     name: 'VanillaSelectCountryOption',

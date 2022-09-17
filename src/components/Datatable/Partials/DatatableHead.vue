@@ -67,7 +67,6 @@
 </template>
 <script lang="ts">
 import { ref, defineComponent, PropType, watch } from 'vue';
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/vue/24/solid';
 import {
     VanillaDatatableColumnsComputed,
     VanillaDatatableColumnComputed,
@@ -76,6 +75,9 @@ import {
 import find from 'lodash/find';
 import findIndex from 'lodash/findIndex';
 import { useInjectsClassesList } from '@/core';
+
+import ChevronDownIcon from '@/components/Icons/Hero/Solid/ChevronDownIcon.vue';
+import ChevronUpIcon from '@/components/Icons/Hero/Solid/ChevronUpIcon.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableHead',

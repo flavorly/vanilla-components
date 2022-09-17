@@ -82,9 +82,9 @@ import {
     VanillaDatatablePageOptions,
     VanillaDatatableUserSettings,
 } from '../index';
-import { TrashIcon } from '@heroicons/vue/24/outline';
 import { useInjectDatatableTranslations } from '../utils';
 import { useInjectsClassesList } from '@/core';
+import TrashIcon from '@/components/Icons/Hero/Outline/TrashIcon.vue';
 
 export default defineComponent({
     name: 'VanillaDatatableDialogSettings',

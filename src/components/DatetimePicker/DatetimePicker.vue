@@ -75,10 +75,11 @@ import {
     VanillaDatetimePickerConfig,
 } from './index';
 
-import { ExclamationCircleIcon } from '@heroicons/vue/24/solid';
+import Flatpickr from 'flatpickr';
+
 import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
 import VanillaFormFeedback from '@/components/FormFeedback/FormFeedback.vue';
-import Flatpickr from 'flatpickr';
+import ExclamationCircleIcon from '@/components/Icons/Hero/Solid/ExclamationCircleIcon.vue';
 
 export default defineComponent({
     name: 'VanillaDatetimePicker',
