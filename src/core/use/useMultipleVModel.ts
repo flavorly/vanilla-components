@@ -32,6 +32,8 @@ export default function useMultipleVModel<P extends Data, K extends keyof P, C e
   const localValue = ref(initialValue === undefined ? getDefaultValue() : initialValue) as Ref<P[K]>;
 
   watch(localValue, (value) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     vm?.emit(`update:${key}`, value);
   });
 

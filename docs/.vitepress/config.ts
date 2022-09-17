@@ -153,6 +153,7 @@ export default defineConfig({
             { text: 'Datatables', link: '/components/datatables/index' },
             { text: 'Dropdown', link: '/components/dropdown/index' },
             { text: 'Slideover', link: '/components/slideover/index' },
+            { text: 'Rich Select', link: '/components/rich-select/index' },
           ],
         },
         {

@@ -7,6 +7,8 @@ export { default as hasSlot } from './hasSlot';
 export { default as isEqual } from './isEqual';
 export { default as isPrimitive } from './isPrimitive';
 export { default as normalizeOptions } from './normalizeOptions';
+export { default as normalizedOptionIsDisabled } from './normalizedOptionIsDisabled';
+export { default as normalizeMeasure } from './normalizeMeasure';
 export { default as pick } from './pick';
 export { default as promisify } from './promisify';
 export { default as promisifyFunctionResult } from './promisifyFunctionResult';
@@ -15,5 +17,3 @@ export { default as throttle } from './throttle';
 export { default as isTouchOnlyDevice } from './isTouchOnlyDevice';
 export { default as firstOf } from './firstOf';
 export { default as objectToArrayMap } from './objectToArrayMap';
-
-

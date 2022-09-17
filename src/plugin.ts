@@ -3,7 +3,6 @@ import { VanillaComponentConfiguration } from '@/core/types';
 import { variantJS } from '@variantjs/vue';
 import mergeConfiguration from './configuration';
 
-
 const plugin = {
   install: (app: App<Element>, configuration: VanillaComponentConfiguration = {}): void => {
     // eslint-disable-next-line no-param-reassign
