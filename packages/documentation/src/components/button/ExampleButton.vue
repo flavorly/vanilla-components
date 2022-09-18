@@ -1,8 +1,5 @@
 <script setup type="ts">
 import { VanillaButton } from '@indigit/vanilla-components'
-import { defineComponent, onMounted } from 'vue'
-
-defineComponent({ name: 'ExampleButton' })
 </script>
 
 <template>

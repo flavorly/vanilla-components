@@ -1,3 +1,120 @@
+<script lang="ts">
+import { defineComponent, PropType, Ref, ref, watch } from 'vue';
+import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '../../core';
+import {
+  VanillaAvatarValue,
+  VanillaAvatarProps,
+  VanillaAvatarClassesKeys,
+  VanillaAvatarConfig,
+  VanillaAvatarPreview,
+} from './index';
+import VanillaFormErrors from '../FormErrors/FormErrors.vue';
+import VanillaFormFeedback from '../FormFeedback/FormFeedback.vue';
+import VanillaButton from '../Button/Button.vue';
+
+export default defineComponent({
+  name: 'VanillaAvatar',
+  components: {
+    VanillaFormErrors,
+    VanillaFormFeedback,
+    VanillaButton,
+  },
+  inheritAttrs: false,
+  props: {
+    ...useVariantProps<VanillaAvatarProps>(),
+    modelValue: {
+      //type: [String, undefined] as PropType<VanillaAvatarValue>,
+      default: undefined,
+    },
+    currentPhotoUrl: {
+      type: [String, undefined] as PropType<string | undefined>,
+      default: undefined,
+    },
+    currentPhotoAltTag: {
+      type: [String, undefined] as PropType<string | undefined>,
+      default: 'avatar',
+    },
+    avatarInitials: {
+      type: [String, undefined] as PropType<string | undefined>,
+      default: 'Avatar',
+    },
+    uploadButtonLabel: {
+      type: [String, undefined] as PropType<string | undefined>,
+      default: 'Change Profile Photo',
+    },
+    resetButtonLabel: {
+      type: [String, undefined] as PropType<string | undefined>,
+      default: 'Clear Photo',
+    },
+    uploadButtonVariant: {
+      type: [String, undefined] as PropType<string | undefined>,
+      default: undefined,
+    },
+    resetButtonVariant: {
+      type: [String, undefined] as PropType<string | undefined>,
+      default: undefined,
+    },
+  },
+  setup: function (props) {
+    const localValue: Ref<VanillaAvatarValue> = useVModel(props, 'modelValue');
+    const {
+      localErrors,
+      localVariant,
+      hasErrors,
+    } = useBootVariant(props, 'errors', localValue);
+
+    const {configuration} = useConfigurationWithClassesList<VanillaAvatarProps>(
+      VanillaAvatarConfig,
+      VanillaAvatarClassesKeys,
+      localVariant,
+    );
+
+    const photoPreview: Ref<VanillaAvatarPreview> = ref(null);
+    const photoInput: any = ref(null);
+
+    const updateAvatarPreview = () => {
+      const reader = new FileReader();
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        photoPreview.value = event?.target?.result;
+      };
+
+      localValue.value = photoInput?.value?.files[0];
+      if (localValue.value) {
+        reader.readAsDataURL(<Blob><unknown>localValue.value);
+      }
+    };
+
+    const triggerFileUploadAction = () => {
+      photoInput.value.click();
+    };
+
+    const resetPhoto = () => {
+      localValue.value = undefined;
+      photoPreview.value = null;
+      photoInput.value.value = null;
+    };
+
+    watch(() => props.currentPhotoUrl, (newValue: string | undefined) => {
+      if (newValue) {
+        photoPreview.value = null;
+      }
+    });
+
+    return {
+      configuration,
+      localValue,
+      localVariant,
+      localErrors,
+      hasErrors,
+      photoPreview,
+      photoInput,
+      updateAvatarPreview,
+      triggerFileUploadAction,
+      resetPhoto,
+    };
+  },
+});
+</script>
 <template>
   <div
     class="vanilla-input"
@@ -118,121 +235,4 @@
     </slot>
   </div>
 </template>
-<script lang="ts">
-import { defineComponent, PropType, Ref, ref, watch } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '../../core';
-import {
-    VanillaAvatarValue,
-    VanillaAvatarProps,
-    VanillaAvatarClassesKeys,
-    VanillaAvatarConfig,
-    VanillaAvatarPreview,
-} from './index';
-import VanillaFormErrors from '../FormErrors/FormErrors.vue';
-import VanillaFormFeedback from '../FormFeedback/FormFeedback.vue';
-import VanillaButton from '../Button/Button.vue';
-
-export default defineComponent({
-    name: 'VanillaAvatar',
-    components: {
-        VanillaFormErrors,
-        VanillaFormFeedback,
-        VanillaButton,
-    },
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaAvatarProps>(),
-        modelValue: {
-            //type: [String, undefined] as PropType<VanillaAvatarValue>,
-            default: undefined,
-        },
-        currentPhotoUrl: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: undefined,
-        },
-        currentPhotoAltTag: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: 'avatar',
-        },
-        avatarInitials: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: 'Avatar',
-        },
-        uploadButtonLabel: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: 'Change Profile Photo',
-        },
-        resetButtonLabel: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: 'Clear Photo',
-        },
-        uploadButtonVariant: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: undefined,
-        },
-        resetButtonVariant: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: undefined,
-        },
-    },
-    setup(props) {
-        const localValue: Ref<VanillaAvatarValue> = useVModel(props, 'modelValue');
-        const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', localValue);
-
-        const { configuration } = useConfigurationWithClassesList<VanillaAvatarProps>(
-            VanillaAvatarConfig,
-            VanillaAvatarClassesKeys,
-            localVariant,
-        );
-
-        const photoPreview: Ref<VanillaAvatarPreview> = ref(null);
-        const photoInput: any = ref(null);
-
-        const updateAvatarPreview = () => {
-            const reader = new FileReader();
-            reader.onload = (event: ProgressEvent<FileReader>) => {
-                photoPreview.value = event?.target?.result;
-            };
-
-            localValue.value = photoInput?.value?.files[0];
-            if (localValue.value) {
-                reader.readAsDataURL(<Blob><unknown>localValue.value);
-            }
-        };
-
-        const triggerFileUploadAction = () => {
-            photoInput.value.click();
-        };
-
-        const resetPhoto = () => {
-            localValue.value = undefined;
-            photoPreview.value = null;
-            photoInput.value.value = null;
-        };
-
-        watch(() => props.currentPhotoUrl, (newValue: string | undefined) => {
-            if (newValue) {
-                photoPreview.value = null;
-            }
-        });
-
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            localErrors,
-            hasErrors,
-            photoPreview,
-            photoInput,
-            updateAvatarPreview,
-            triggerFileUploadAction,
-            resetPhoto,
-        };
-    },
-});
-</script>
 

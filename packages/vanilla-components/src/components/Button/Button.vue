@@ -1,94 +1,132 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType, Ref } from 'vue'
 import { defineComponent, onMounted, ref } from 'vue'
+import VanillaLoadingSpinner from '../Icons/LoadingSpinner.vue'
 import { hasSlot, useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core'
 import type { VanillaButtonProps } from './index'
 import { VanillaButtonClassesKeys, VanillaButtonConfig } from './index'
-import VanillaLoadingSpinner from '../Icons/LoadingSpinner.vue'
 
-export default defineComponent({
-    name: 'VanillaButton',
-    components: {
-        VanillaLoadingSpinner,
+const props = defineProps({
+    ...useVariantProps<VanillaButtonProps>(),
+    as: {
+        type: [String] as PropType<string>,
+        default: 'button',
     },
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaButtonProps>(),
-        as: {
-            type: [String] as PropType<string>,
-            default: 'button',
-        },
-        asDeep: {
-            type: [String] as PropType<string>,
-            default: 'button',
-        },
-        label: {
-            type: [String] as PropType<string>,
-            default: 'Button',
-        },
-        loading: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        disabled: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        type: {
-            type: [String] as PropType<string>,
-            default: 'button',
-        },
-        focusOnMount: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
+    asDeep: {
+        type: [String] as PropType<string>,
+        default: 'button',
     },
-    emits: [
-        'click',
-    ],
-    setup(props, { emit }) {
-        const localRef = ref(null) as Ref<HTMLElement | null>
-        const localValue = ref(props.variant)
-        const { localVariant } = useBootVariant(props, 'errors', localValue)
-
-        const { configuration } = useConfigurationWithClassesList<VanillaButtonProps>(
-            VanillaButtonConfig,
-            VanillaButtonClassesKeys,
-            localVariant,
-        )
-
-        // If its disable, just ignore it
-        const handleClickEvent = (event: MouseEvent) => {
-            if (props.disabled || props.loading) {
-                event.preventDefault()
-                event.stopPropagation()
-            }
-            emit('click', event)
-        }
-
-        // Focus on mount, (useful for modals )
-        onMounted(() => {
-            if (props.focusOnMount) {
-                try {
-                    localRef?.value?.focus()
-                }
- catch (e) {
-                    localRef?.value?.$el?.focus()
-                }
-            }
-        })
-
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            props,
-            hasSlot,
-            localRef,
-            handleClickEvent,
-        }
+    label: {
+        type: [String] as PropType<string>,
+        default: 'Button',
+    },
+    loading: {
+        type: [Boolean] as PropType<boolean>,
+        default: false,
+    },
+    disabled: {
+        type: [Boolean] as PropType<boolean>,
+        default: false,
+    },
+    type: {
+        type: [String] as PropType<string>,
+        default: 'button',
+    },
+    focusOnMount: {
+        type: [Boolean] as PropType<boolean>,
+        default: false,
     },
 })
+
+defineComponent({
+  inheritAttrs: false,
+})
+
+const localRef = ref(null) as Ref<HTMLElement | null>
+const localValue = ref(props.variant)
+const { localVariant } = useBootVariant(props, 'errors', localValue)
+
+const { configuration } = useConfigurationWithClassesList<VanillaButtonProps>(
+  VanillaButtonConfig,
+  VanillaButtonClassesKeys,
+  localVariant,
+)
+
+// If its disable, just ignore it
+const handleClickEvent = (event: MouseEvent) => {
+  if (props.disabled || props.loading) {
+    event.preventDefault()
+    event.stopPropagation()
+  }
+
+  // emit('click', event)
+}
+
+// Focus on mount, (useful for modals )
+onMounted(() => {
+  if (props.focusOnMount) {
+    try {
+      localRef?.value?.focus()
+    }
+    catch (e) {
+      localRef?.value?.$el?.focus()
+    }
+  }
+})
+
+//
+// export default defineComponent({
+//     name: 'VanillaButton',
+//     components: {
+//         VanillaLoadingSpinner,
+//     },
+//     inheritAttrs: false,
+//     props: {
+//         ...useVariantProps<VanillaButtonProps>(),
+//         as: {
+//             type: [String] as PropType<string>,
+//             default: 'button',
+//         },
+//         asDeep: {
+//             type: [String] as PropType<string>,
+//             default: 'button',
+//         },
+//         label: {
+//             type: [String] as PropType<string>,
+//             default: 'Button',
+//         },
+//         loading: {
+//             type: [Boolean] as PropType<boolean>,
+//             default: false,
+//         },
+//         disabled: {
+//             type: [Boolean] as PropType<boolean>,
+//             default: false,
+//         },
+//         type: {
+//             type: [String] as PropType<string>,
+//             default: 'button',
+//         },
+//         focusOnMount: {
+//             type: [Boolean] as PropType<boolean>,
+//             default: false,
+//         },
+//     },
+//     emits: [
+//         'click',
+//     ],
+//     setup(props, { emit }) {
+//         return {
+//             configuration,
+//             localValue,
+//             localVariant,
+//             props,
+//             hasSlot,
+//             localRef,
+//             handleClickEvent,
+//         }
+//     },
+// })
 </script>
 
 <template>
