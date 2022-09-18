@@ -1,63 +1,85 @@
-<script setup lang="ts">
+<script lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, onUpdated, ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { hasSlot, useBootVariant, useConfigurationWithClassesList, useVModel, useVariantProps } from '../../core'
+import type { VanillaInputProps, VanillaInputValue } from './index'
+import { VanillaInputClassesKeys, VanillaInputConfig } from './index'
+import VanillaFormErrors from '../FormErrors/FormErrors.vue'
+import VanillaFormFeedback from '../FormFeedback/FormFeedback.vue'
+
 import ExclamationCircleIcon from '../Icons/Hero/Solid/ExclamationCircleIcon.vue'
 import EyeIcon from '../Icons/Hero/Solid/EyeIcon.vue'
 import EyeSlashIcon from '../Icons/Hero/Solid/EyeSlashIcon.vue'
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/FormFeedback.vue'
-import type { VanillaInputProps, VanillaInputValue } from './index'
-import { VanillaInputClassesKeys, VanillaInputConfig } from './index'
 
-const props = defineProps({
-  ...useVariantProps(),
-  modelValue: {
-    type: [String, Number] as PropType<VanillaInputValue>,
-    default: undefined,
-  },
-  type: {
-    type: [String] as PropType<string>,
-    default: 'text',
-  },
-  placeholder: {
-    type: [String] as PropType<string>,
-    default: 'text',
-  },
+export default defineComponent({
+    name: 'VanillaInput',
+    components: {
+        VanillaFormErrors,
+        VanillaFormFeedback,
+        ExclamationCircleIcon,
+        EyeIcon,
+        EyeSlashIcon,
+    },
+    inheritAttrs: false,
+    props: {
+        ...useVariantProps<VanillaInputProps>(),
+        modelValue: {
+            type: [String, Number] as PropType<VanillaInputValue>,
+            default: undefined,
+        },
+        type: {
+            type: [String] as PropType<string>,
+            default: 'text',
+        },
+        placeholder: {
+            type: [String] as PropType<string>,
+            default: 'text',
+        },
+    },
+    setup(props) {
+        const localRef = ref(null)
+        const localValue = useVModel(props, 'modelValue')
+        const localType = ref(props.type)
+        const {
+            localErrors,
+            localVariant,
+            hasErrors,
+        } = useBootVariant(props, 'errors', localValue)
+
+        const { configuration } = useConfigurationWithClassesList<VanillaInputProps>(
+            VanillaInputConfig,
+            VanillaInputClassesKeys,
+            localVariant,
+        )
+
+        // When type is password
+        const showingPassword = ref(false)
+        const togglePassword = () => {
+            showingPassword.value = !showingPassword.value
+            localType.value = showingPassword.value ? 'text' : 'password'
+        }
+
+        return {
+            configuration,
+            localValue,
+            localVariant,
+            localType,
+            localErrors,
+            localRef,
+            hasErrors,
+            hasSlot,
+            showingPassword,
+            togglePassword,
+        }
+    },
 })
-
-defineComponent({
-  name: 'VanillaInput',
-  inheritAttrs: false,
-})
-
-const localRef = ref(null)
-const localValue = useVModel(props, 'modelValue')
-const localType = ref(props.type)
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfigurationWithClassesList<VanillaInputProps>(
-  VanillaInputConfig,
-  VanillaInputClassesKeys,
-  localVariant,
-)
-
-// When type is password
-const showingPassword = ref(false)
-const togglePassword = () => {
-  showingPassword.value = !showingPassword.value
-  localType.value = showingPassword.value ? 'text' : 'password'
-}
 </script>
 
 <template>
-  <div class="vc-input">
+  <div
+    class="vanilla-input"
+  >
     <div :class="configuration.classesList.wrapper">
-      <!-- Before Input -->
       <div
         v-if="hasSlot($slots.before)"
         :class="configuration.classesList.addonBefore"
@@ -67,7 +89,6 @@ const togglePassword = () => {
           v-bind="{ className: configuration.classesList.addonClasses }"
         />
       </div>
-      <!-- Input -->
       <input
         :id="name"
         ref="localRef"
@@ -83,14 +104,13 @@ const togglePassword = () => {
         :type="localType"
         v-bind="$attrs"
       >
-      <!-- After Input -->
       <div
         v-if="hasSlot($slots.after) || hasErrors || type === 'password'"
         :class="configuration.classesList.addonAfter"
       >
         <slot
           name="after"
-          v-bind="{ hasErrors, type, showingPassword, className: configuration.classesList.addonClasses }"
+          v-bind="{ hasErrors, type, showingPassword }"
         >
           <ExclamationCircleIcon
             v-if="hasErrors && type !== 'password'"

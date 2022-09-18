@@ -1,159 +1,133 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
 import { defineComponent, ref } from 'vue'
 import { hasSlot, useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core'
+import VanillaFormLabel from '../FormLabel/FormLabel.vue'
+import VanillaFormErrors from '../FormErrors/FormErrors.vue'
+import VanillaFormFeedback from '../FormFeedback/FormFeedback.vue'
 import type { VanillaInputGroupProps } from './index'
 import { VanillaInputGroupClassesKeys, VanillaInputGroupConfig } from './index'
-import VanillaFormLabel from '../FormLabel/FormLabel.vue'
+import type { Errors } from '@/core/types'
 
-export default defineComponent({
-    name: 'VanillaInputGroup',
-    components: {
-        VanillaFormLabel,
-    },
-    inheritAttrs: true,
-    props: {
-        ...useVariantProps<VanillaInputGroupProps>(),
-        type: {
-            type: [String] as PropType<string>,
-            default: 'text',
-        },
-        label: {
-            type: [String] as PropType<string>,
-            default: undefined,
-            required: false,
-        },
-        name: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: undefined,
-            required: false,
-        },
-        layout: {
-            type: [String, undefined] as PropType<'row' | 'inline' | 'content' | string | undefined>,
-            default: 'row',
-            required: false,
-            validator: (layout: string) => {
-                return ['row', 'inline', 'content'].includes(layout)
-            },
-        },
-        withPadding: {
-            type: [Boolean] as PropType<boolean>,
-            default: true,
-            required: false,
-        },
-    },
-    setup(props) {
-        const localType = ref(props.type)
-        const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration } = useConfigurationWithClassesList<VanillaInputGroupProps>(
-            VanillaInputGroupConfig,
-            VanillaInputGroupClassesKeys,
-            localVariant,
-        )
-
-        return {
-            configuration,
-            localVariant,
-            localType,
-            localErrors,
-            hasErrors,
-            hasSlot,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<VanillaInputGroupProps>(),
+  errors: {
+    type: [String, Array, Object] as PropType<Errors>,
+    default: undefined,
+  },
+  feedback: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
+  label: {
+    type: [String] as PropType<string>,
+    default: undefined,
+    required: false,
+  },
+  name: {
+    type: [String, undefined] as PropType<string | undefined>,
+    default: undefined,
+    required: false,
+  },
+  showErrors: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+    required: false,
+  },
+  showFeedback: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+    required: false,
+  },
+  withPadding: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+    required: false,
+  },
 })
+
+defineComponent({ inheritAttrs: true })
+
+const {
+  localErrors,
+  localVariant,
+  hasErrors,
+} = useBootVariant(props, 'errors', ref(null))
+
+const { configuration } = useConfigurationWithClassesList<VanillaInputGroupProps>(
+  VanillaInputGroupConfig,
+  VanillaInputGroupClassesKeys,
+  localVariant,
+)
 </script>
 
 <template>
-  <!-- Inline - Label -> Input -->
   <div
-    v-if="layout === 'inline'"
-    :class="[
-      configuration.classesList.inlineContainer,
-      withPadding ? configuration.classesList.inlineWithPadding : '',
-    ]"
+    class="vc-group"
+    :class="[withPadding ? configuration.classesList.containerPadded : '']"
   >
-    <div
-      v-if="hasSlot($slots.label) || label !== undefined"
-      :class="[
-        configuration.classesList.inlineLabel,
-      ]"
-    >
+    <!-- Label And Input -->
+    <div class="vc-inputs-group">
       <slot name="label">
         <VanillaFormLabel
+          v-if="label !== undefined"
           :label="label"
           :for="name"
         />
       </slot>
+      <div
+        class="vc-inputs-container"
+        :class="[
+          configuration.classesList.wrapper,
+        ]"
+      >
+        <div
+          v-if="hasSlot($slots.before)"
+          :class="configuration.classesList.addonBefore"
+        >
+          <!-- Before Input -->
+          <slot
+            name="before"
+            v-bind="{ className: configuration.classesList.addonClasses }"
+          />
+        </div>
+        <!-- Input -->
+        <slot
+          v-bind="{ label, name, layout }"
+        />
+        <!-- After Input -->
+        <div
+          v-if="hasSlot($slots.after)"
+          :class="configuration.classesList.addonAfter"
+        >
+          <slot
+            name="after"
+            v-bind="{ hasErrors, type }"
+          />
+        </div>
+      </div>
     </div>
-    <div
-      :class="[
-        configuration.classesList.inlineInput,
-      ]"
-    >
+    <!-- Errors & Feedback -->
+    <div class="vc-errors-and-feedback">
       <slot
-        v-bind="{ label, name, layout }"
-      />
+        name="errors"
+        v-bind="{ hasErrors, localErrors }"
+      >
+        <VanillaFormErrors
+          v-if="hasErrors && showErrors"
+          :errors="localErrors"
+        />
+      </slot>
+      <slot
+        name="feedback"
+        v-bind="{ hasErrors, feedback }"
+      >
+        <VanillaFormFeedback
+          v-if="!hasErrors && feedback !== undefined && showFeedback"
+          :text="feedback"
+        />
+      </slot>
     </div>
-  </div>
-
-  <!-- Standard Label in a line, Input in a new line -->
-  <div
-    v-if="layout === 'row'"
-    :class="[
-      configuration.classesList.rowContainer,
-      withPadding ? configuration.classesList.rowWithPadding : '',
-    ]"
-  >
-    <slot name="label">
-      <VanillaFormLabel
-        v-if="label !== undefined"
-        :label="label"
-        :for="name"
-      />
-    </slot>
-    <slot
-      v-bind="{ label, name, layout }"
-    />
-  </div>
-
-  <!-- Content Line centered -->
-  <div
-    v-if="layout === 'content'"
-    :class="[
-      configuration.classesList.contentContainer,
-      withPadding ? configuration.classesList.contentWithPadding : '',
-    ]"
-  >
-    <slot name="label">
-      <VanillaFormLabel
-        v-if=" label !== undefined"
-        :label="label"
-        :for="name"
-      />
-    </slot>
-    <slot
-      v-bind="{ label, name, layout }"
-    />
-  </div>
-  <!-- No Styles Applied -->
-  <div
-    v-if="layout === undefined"
-  >
-    <slot name="label">
-      <VanillaFormLabel
-        v-if="label !== undefined"
-        :label="label"
-        :for="name"
-      />
-    </slot>
-    <slot
-      v-bind="{ label, name, layout }"
-    />
   </div>
 </template>
 

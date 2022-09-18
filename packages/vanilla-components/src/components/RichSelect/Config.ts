@@ -207,15 +207,6 @@ export const VanillaRichSelectConfig = {
   },
 }
 
-/**
- * Converts our own config into VariantJS config
- * @param configuration
- * @constructor
- */
-export const VanillaRichSelectConfigToVariantJs = (configuration: any) => {
-  return configuration
-}
-
 export const VanillaRichSelectClassesKeys = Object.keys(VanillaRichSelectConfig.classes)
 
 export type VanillaRichSelectClassesValidKeys = keyof typeof VanillaRichSelectConfig.classes

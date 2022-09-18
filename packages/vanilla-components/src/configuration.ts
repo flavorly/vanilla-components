@@ -4,50 +4,39 @@ import {
   VanillaButtonConfig,
   VanillaCardConfig,
   VanillaCheckboxConfig,
-  VanillaCheckboxConfigToVariantJs,
   VanillaDatatableConfig,
   VanillaDatetimePickerConfig,
   VanillaDialogConfig,
   VanillaDropdownConfig,
-
   VanillaFormErrorsConfig,
   VanillaFormFeedbackConfig,
   VanillaFormLabelConfig,
   VanillaFormSectionConfig,
-
   VanillaInputConfig,
-  VanillaInputConfigToVariantJs,
   VanillaInputGroupConfig,
-
   VanillaPhoneNumberConfig,
   VanillaRichRadioConfig,
   VanillaRichRadioOptionConfig,
-
   VanillaRichSelectConfig,
-  VanillaRichSelectConfigToVariantJs,
   VanillaRichSelectOptionWithImageConfig,
   VanillaRichSelectOptionWithIndicatorsConfig,
   VanillaRichSelectStateConfig,
   VanillaRichSelectTagWithImageConfig,
-
   VanillaSelectConfig,
-  VanillaSelectConfigToVariantJs,
   VanillaSelectCountryConfig,
   VanillaSelectCountryOptionConfig,
-
   VanillaSkeletonBarConfig,
   VanillaSlideoverConfig,
   VanillaStatusIndicatorConfig,
-
   VanillaTextareaConfig,
   VanillaToggleConfig,
-
 } from './configs'
 import type { VanillaComponentConfiguration } from './core/types'
 
 const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {}) => {
     // Merge Vanilla Components Configuration with the user configuration
-    const VanillaComponentsDefaults = merge(
+  // Return Both Merged Configuration
+    return merge(
       {
         VanillaAvatar: VanillaAvatarConfig,
         VanillaButton: VanillaButtonConfig,
@@ -89,20 +78,6 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
       },
       userConfiguration,
     )
-
-    // Mapping the Variant JS Configuration with the Vanilla Components Configuration & User Provider Configuration
-    const VariantJSMapping = {
-        TInput: VanillaInputConfigToVariantJs(VanillaComponentsDefaults?.VanillaInput ?? {}),
-        TRichSelect: VanillaRichSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaRichSelect ?? {}),
-        TCheckbox: VanillaCheckboxConfigToVariantJs(VanillaComponentsDefaults?.VanillaCheckbox ?? {}),
-        TSelect: VanillaSelectConfigToVariantJs(VanillaComponentsDefaults?.VanillaSelect ?? {}),
-    }
-
-    // Return Both Merged Configuration
-    return merge(
-      VanillaComponentsDefaults,
-      VariantJSMapping,
-  )
 }
 
 export default mergeConfiguration

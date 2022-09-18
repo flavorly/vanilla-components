@@ -73,7 +73,6 @@ const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps
     default: true,
     required: false,
   },
-
 })
 
 export default useVariantProps

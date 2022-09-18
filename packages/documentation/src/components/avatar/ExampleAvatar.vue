@@ -1,9 +1,6 @@
 <script setup type="ts">
 import { VanillaAvatar } from '@indigit/vanilla-components'
-import { defineComponent, ref } from 'vue'
-
-defineComponent({ name: 'ExampleAvatar' })
-
+import { ref } from 'vue'
 const value = ref(null)
 const value2 = ref(null)
 </script>

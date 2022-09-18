@@ -77,24 +77,6 @@ export const VanillaSelectConfig = {
   },
 }
 
-/**
- * Converts our own config into VariantJS config
- * TODO : need to finish the typings
- * @param configuration
- * @constructor
- */
-export const VanillaSelectConfigToVariantJs = (configuration: any) => {
-  return {
-    fixedClasses: configuration.fixedClasses.select,
-    classes: VanillaSelectConfig.classes.select,
-    variants: mapValues(configuration.variants, (value) => {
-      return {
-        classes: value.classes.select,
-      }
-    }),
-  }
-}
-
 export const VanillaSelectClassesKeys = Object.keys(VanillaSelectConfig.classes)
 
 export type VanillaSelectClassesValidKeys = keyof typeof VanillaSelectConfig.classes

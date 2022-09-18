@@ -2,11 +2,14 @@ import type {
   ComputedRef,
   Ref,
 } from 'vue'
+
 import {
   computed,
+  getCurrentInstance,
   ref,
   watch,
 } from 'vue'
+
 import type {
   Data,
   Errors,
@@ -17,8 +20,20 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
   errorsKey: ErrorsKey,
   modelValue: ModelValueKey,
 ) {
+  const vm = getCurrentInstance()!
+
   // Own component errors as a new reactive ref.
   const componentErrors = ref(props[errorsKey]) as Ref<Errors>
+
+  // Parent Flash
+  // console.log(vm.parent.type.__name)
+  if (vm?.parent?.type?.__name === 'InputGroup'
+    && vm?.type.__name !== 'InputGroup'
+    && vm?.type.__name !== 'FormLabel'
+    && vm?.parent?.props?.errors !== undefined
+  ) {
+    componentErrors.value = vm?.parent.props.errors
+  }
 
   // Local Errors starting as undefined
   const localErrors = ref(undefined) as Ref<Errors>
@@ -56,7 +71,7 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
     if (hasErrors.value) {
       localVariant.value = 'error'
     }
- else {
+    else {
       localVariant.value = props.variant
     }
   })

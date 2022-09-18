@@ -56,23 +56,6 @@ export const VanillaCheckboxConfig = {
   },
 }
 
-/**
- * Converts our own config into VariantJS config
- * @param configuration
- * @constructor
- */
-export const VanillaCheckboxConfigToVariantJs = (configuration: any) => {
-  return {
-    fixedClasses: configuration.fixedClasses.checkbox,
-    classes: VanillaCheckboxConfig.classes.checkbox,
-    variants: mapValues(configuration.variants, (value) => {
-      return {
-        classes: value.classes.checkbox,
-      }
-    }),
-  }
-}
-
 export const VanillaCheckboxClassesKeys = Object.keys(VanillaCheckboxConfig.classes)
 
 export type VanillaCheckboxClassesValidKeys = keyof typeof VanillaCheckboxConfig.classes

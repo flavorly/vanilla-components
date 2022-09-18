@@ -169,24 +169,6 @@ export const VanillaButtonConfig = {
   },
 }
 
-/**
- * Converts our own config into VariantJS config
- * TODO : need to finish the typings
- * @param configuration
- * @constructor
- */
-export const VanillaButtonConfigToVariantJs = (configuration: any) => {
-  return {
-    fixedClasses: configuration.fixedClasses.button,
-    classes: VanillaButtonConfig.classes.button,
-    variants: mapValues(configuration.variants, (value) => {
-      return {
-        classes: value.classes.button,
-      }
-    }),
-  }
-}
-
 export const VanillaButtonClassesKeys = Object.keys(VanillaButtonConfig.classes)
 
 export type VanillaButtonClassesValidKeys = keyof typeof VanillaButtonConfig.classes

@@ -43,21 +43,6 @@ export const VanillaInputConfig = {
 
   // Variants
   variants: {
-    compact: {
-      classes: {
-        ...defaultInput,
-        input: mergeClasses(
-          '',
-          commonClasses.inputsText,
-          commonClasses.inputsTextColor,
-          commonClasses.inputsBackground,
-          commonClasses.inputsBorder,
-          commonClasses.inputsRing,
-          commonClasses.inputsRadius,
-          'px-4 py-2',
-        ),
-      },
-    },
 
     // Used for Errors
     error: {
@@ -76,25 +61,22 @@ export const VanillaInputConfig = {
         addonClasses: 'text-red-300 dark:text-red-300/70',
       },
     },
+    compact: {
+      classes: {
+        ...defaultInput,
+        input: mergeClasses(
+          '',
+          commonClasses.inputsText,
+          commonClasses.inputsTextColor,
+          commonClasses.inputsBackground,
+          commonClasses.inputsBorder,
+          commonClasses.inputsRing,
+          commonClasses.inputsRadius,
+          'px-4 py-2',
+        ),
+      },
+    },
   },
-}
-
-/**
- * Converts our own config into VariantJS config
- * TODO : need to finish the typings
- * @param configuration
- * @constructor
- */
-export const VanillaInputConfigToVariantJs = (configuration: any) => {
-  return {
-    fixedClasses: configuration.fixedClasses.input,
-    classes: VanillaInputConfig.classes.input,
-    variants: mapValues(configuration.variants, (value) => {
-      return {
-        classes: value.classes.input,
-      }
-    }),
-  }
 }
 
 export const VanillaInputClassesKeys = Object.keys(VanillaInputConfig.classes)
