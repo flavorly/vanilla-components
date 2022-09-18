@@ -1,86 +1,34 @@
 {
-  "name": "@indigit/vanilla-components",
+  "name": "vanilla-components",
   "version": "0.6.25",
-  "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/igerslike/vanilla-components"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
-  "author": "Jon <support@indigit.pt>",
-  "license": "ISC",
-  "engines": {
-    "node": ">=10"
-  },
-  "type": "module",
-  "sideEffects": false,
-  "private": false,
-  "files": [
-    "dist/**/*"
-  ],
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
-  },
+  "description": "",
+  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "vite build",
-    "build:watch": "vite build --watch",
-    "build:watch-mon": "nodemon --exec 'yarn lib:build'",
-    "lib:publish": "yarn publish",
-    "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
-    "watch:docs": "yarn --cwd \"docs\" dev",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "format": "prettier .  --write"
+    "dev": "nr --filter @indigit/vanilla-components dev",
+    "build": "nr --filter @indigit/vanilla-components build",
+    "docs:dev": "nr --filter @indigit/vanilla-components-documentation dev",
+    "docs:build": "nr --filter @indigit/vanilla-components build && nr --filter @indigit/vanilla-components-documentation build",
+    "clean": "rimraf node_modules packages/vanilla-components/node_modules packages/vanilla-components/dist packages/documentation/node_modules",
+    "release": "bumpp package.json packages/vanilla-components/package.json --execute 'nr --filter @indigit/vanilla-components build' && na --filter @indigit/vanilla-components publish --no-git-checks"
   },
-  "dependencies": {
-    "@headlessui/vue": "^1.7.0",
-    "@popperjs/core": "^2.11.6",
-    "@vueuse/core": "^9.2.0",
-    "axios": "^0.27.2",
-    "flatpickr": "^4.6.9",
-    "fuse.js": "^6.4.6",
-    "libphonenumber-js": "^1.9.49",
-    "vue": "^3.2.39"
-  },
-  "peerDependencies": {
-    "@headlessui/vue": "^1.7.0",
-    "@popperjs/core": "^2.11.6",
-    "vue": "^3.2.39",
-    "axios": "^0.27.2"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@antfu/eslint-config": "^0.26.3",
+    "@antfu/eslint-config-vue": "^0.25.1",
     "@antfu/ni": "^0.16.3",
-    "@rollup/plugin-typescript": "^8.5.0",
-    "@types/lodash": "^4.14.178",
-    "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "@typescript-eslint/parser": "^5.8.0",
-    "@vitejs/plugin-vue": "^3.1.0",
-    "@vue/compiler-sfc": "^3.2.39",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
     "bumpp": "^8.2.1",
-    "eslint": "^8.23.1",
+    "eslint": "^8.19.0",
     "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-typescript": "^3.2.5",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-tree-shaking": "^1.9.2",
+    "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-unicorn": "^43.0.1",
-    "eslint-plugin-vue": "^9.4.0",
+    "eslint-plugin-vue": "^9.2.0",
     "pnpm": "^7.5.0",
-    "prettier": "^2.7.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-visualizer": "^5.8.1",
-    "typescript": "^4.8.3",
-    "vite": "^3.1.0-beta.2",
-    "vite-plugin-dts": "^1.5.0"
-  }
+    "rimraf": "^3.0.2"
+  },
+  "packageManager": "pnpm@7.1.7"
 }
