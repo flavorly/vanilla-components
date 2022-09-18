@@ -26,8 +26,10 @@
   "engines": {
     "node": ">=10"
   },
-  "files": ["dist"],
-  "types": "dist",
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/index.d.ts",
   "main": "./dist/vanilla-components.umd.js",
   "module": "./dist/vanilla-components.es.js",
   "exports": {
@@ -88,7 +90,7 @@
     "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-visualizer": "^5.8.1",
     "typescript": "^4.8.3",
-    "vite": "^3.1.0-beta.2",
+    "vite": "^3.1.2",
     "vite-plugin-dts": "^1.5.0"
   }
 }

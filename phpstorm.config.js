@@ -1,6 +1,5 @@
 System.config({
-  "paths": {
-    "@/*": "./src/*",
-    "@vanilla-components/*": "./src/*",
-  }
-});
+  paths: {
+    '@/*': './packages/vanilla-components/src/*',
+  },
+})

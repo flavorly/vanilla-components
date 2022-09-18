@@ -17,7 +17,6 @@
         :class="configuration.classesList.imageAndPreviewContainer"
         v-bind="$attrs"
       >
-        <p>fooooo</p>
         <!-- Current Profile Photo -->
         <slot
           name="photo"

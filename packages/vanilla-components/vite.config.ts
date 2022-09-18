@@ -5,6 +5,7 @@ import dts from 'vite-plugin-dts'
 import copy from 'rollup-plugin-copy'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
+import typescript from '@rollup/plugin-typescript'
 import * as pkg from './package.json'
 
 const externals = [
@@ -16,28 +17,35 @@ export default defineConfig(() => {
   return {
     plugins: [
       vue(),
+
+      // typescript({ tsconfig: './tsconfig.json' }),
+      // dts(),
+
       dts({
         cleanVueFileName: false,
-        staticImport: true,
+        staticImport: false,
+        skipDiagnostics: true,
+        outputDir: 'dist',
         beforeWriteFile(filePath, content) {
           return {
-            filePath: filePath.replace('src', ''),
+            filePath: filePath.replace('packages/vanilla-components/src', ''),
             content,
           }
         },
       }),
 
       // Copy vue files so Webstorm can be happy.
+
       copy({
         targets: [
           // Vue Components
           { src: 'src/components/**/*.vue', dest: 'dist' },
 
           // Vanilla Components Configuration
-          { src: 'src/components/**/Config.ts', dest: 'dist' },
+          // { src: 'src/components/**/Config.ts', dest: 'dist' },
 
           // Vanilla Base Configuration
-          { src: 'src/core/config/*.ts', dest: 'dist' },
+          // { src: 'src/core/config/*.ts', dest: 'dist' },
         ],
         hook: 'writeBundle',
         flatten: false, // Keep directory structure
@@ -51,7 +59,7 @@ export default defineConfig(() => {
     },
     build: {
       minify: false,
-      sourcemap: true,
+      sourcemap: false,
       lib: {
         entry: resolve(__dirname, 'src/index.ts'),
         name: 'vanilla-components',
