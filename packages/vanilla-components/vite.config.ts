@@ -5,7 +5,6 @@ import dts from 'vite-plugin-dts'
 import copy from 'rollup-plugin-copy'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import typescript from '@rollup/plugin-typescript'
 import * as pkg from './package.json'
 
 const externals = [
@@ -17,10 +16,6 @@ export default defineConfig(() => {
   return {
     plugins: [
       vue(),
-
-      // typescript({ tsconfig: './tsconfig.json' }),
-      // dts(),
-
       dts({
         cleanVueFileName: false,
         staticImport: false,
@@ -69,7 +64,14 @@ export default defineConfig(() => {
         external: externals,
         output: {
           globals: {
-            vue: 'Vue',
+            'vue': 'Vue',
+            '@vueuse/core': 'vue-use',
+            '@popperjs/core': 'popperjs',
+            '@headlessui/vue': 'headlessui-vue',
+            'axios': 'axios',
+            'flatpickr': 'flatpickr',
+            'libphonenumber-js': 'libphonenumber-js',
+            'fuse.js': 'fusejs',
           },
         },
       },

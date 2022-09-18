@@ -1,7 +1,10 @@
+import { resolve } from 'path'
 import { defineConfig } from 'vitepress'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import MarkitDownInclude from 'markdown-it-include'
+import Inspect from 'vite-plugin-inspect'
+import ReplacePackagePlugin from '../plugins/local-link'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanillacomponents.dev' : 'http://localhost:3000'
@@ -9,10 +12,46 @@ const image = `${site}/banner.png`
 const title = 'Vanilla Components'
 const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
 
+const plugins = !production
+  ? [
+    ReplacePackagePlugin(),
+    Inspect({
+      build: false,
+      outputDir: '.vite-inspect',
+    }),
+  ]
+  : []
+
 export default defineConfig({
   // Vue Config
   vue: {
     reactivityTransform: false,
+  },
+
+  // Vite config
+  vite: {
+    optimizeDeps: {
+      exclude: [],
+      include: [
+        '@indigit/vanilla-components',
+      ],
+      force: true,
+    },
+    server: {
+      host: true,
+      fs: {
+        allow: ['../..'],
+      },
+    },
+    resolve: {
+      alias: [
+        { find: '@vanilla', replacement: resolve(__dirname, '../../vanilla-components') },
+      ],
+    },
+    json: {
+      stringify: true,
+    },
+    plugins,
   },
 
   // Vitepress Config

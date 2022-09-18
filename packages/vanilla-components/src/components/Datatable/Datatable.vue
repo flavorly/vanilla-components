@@ -1427,10 +1427,10 @@ export default defineComponent({
                     }"
                   >
                     <div
-                      v-if="column.raw && !column.component"
+                      v-if="column?.raw && !column.component"
                       v-html="result[column.name]"
                     />
-                    <div v-else-if="!column.raw">
+                    <div v-else-if="!column?.raw">
                       {{ result[column.name] }}
                     </div>
                     <div v-else-if="column.component && column.component !== ''">

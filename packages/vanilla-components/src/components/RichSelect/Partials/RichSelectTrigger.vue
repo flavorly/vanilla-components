@@ -1,13 +1,13 @@
 <script lang="ts">
 import type { ComputedRef, Ref } from 'vue'
 import { defineComponent, inject } from 'vue'
-import RichSelectTriggerTags from './RichSelectTriggerTags.vue'
-import type { NormalizedOption } from '../../../core/types'
 import type { VanillaRichSelectProps } from '../index'
 import { useInjectsClassesList, useInjectsConfiguration } from '../../../core'
 import TextPlaceholder from '../../Misc/TextPlaceholder.vue'
 import SelectorIcon from '../../Icons/SelectorIcon.vue'
 import LoadingIcon from '../../Icons/LoadingIcon.vue'
+import RichSelectTriggerTags from './RichSelectTriggerTags.vue'
+import type { NormalizedOption } from '@/core/types'
 
 export default defineComponent({
     name: 'RichSelectTrigger',
@@ -25,8 +25,6 @@ export default defineComponent({
         const shown = inject<ComputedRef<boolean>>('shown')!
         const usesTags = inject<ComputedRef<boolean>>('usesTags')!
         const classesList = useInjectsClassesList()!
-
-        console.log('Trigger configuration', configuration, classesList.value)
 
         return {
             selectedOption,
