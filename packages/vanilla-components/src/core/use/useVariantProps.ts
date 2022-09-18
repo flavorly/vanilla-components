@@ -1,7 +1,7 @@
 import type { PropType } from 'vue'
 
 import type {
-  CSSClass,
+  CssClass,
   Data,
   Errors,
   VanillaComponentProps,
@@ -12,11 +12,11 @@ import { useDefaultName } from '../index'
 
 const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps => ({
   classes: {
-    type: [String, Array, Object] as PropType<CSSClass>,
+    type: [String, Array, Object] as PropType<CssClass>,
     default: undefined,
   },
   fixedClasses: {
-    type: [String, Array, Object] as PropType<CSSClass>,
+    type: [String, Array, Object] as PropType<CssClass>,
     default: undefined,
   },
   variants: {

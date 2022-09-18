@@ -46,6 +46,7 @@ export default defineConfig({
     resolve: {
       alias: [
         { find: '@vanilla', replacement: resolve(__dirname, '../../vanilla-components') },
+        { find: '@', replacement: resolve(__dirname, '../../vanilla-components/src') },
       ],
     },
     json: {

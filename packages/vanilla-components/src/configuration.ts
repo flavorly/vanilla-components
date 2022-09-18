@@ -38,9 +38,9 @@ const mergeConfiguration = (userConfiguration: VanillaComponentConfiguration = {
   // Return Both Merged Configuration
     return merge(
       {
-        VanillaAvatar: VanillaAvatarConfig,
-        VanillaButton: VanillaButtonConfig,
-        VanillaCard: VanillaCardConfig,
+        Avatar: VanillaAvatarConfig,
+        Button: VanillaButtonConfig,
+        Card: VanillaCardConfig,
         VanillaCheckbox: VanillaCheckboxConfig,
         VanillaDatatable: VanillaDatatableConfig,
         VanillaDatetimePicker: VanillaDatetimePickerConfig,

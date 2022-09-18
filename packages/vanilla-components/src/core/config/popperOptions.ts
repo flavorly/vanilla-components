@@ -1,7 +1,7 @@
 import type { Modifier, ModifierArguments } from '@popperjs/core'
 import type { Data } from '../types'
 
-export const popperOptions = {
+const popperOptions = {
   placement: 'bottom-end',
   modifiers: [
     {
@@ -15,7 +15,7 @@ export const popperOptions = {
   onFirstUpdate: undefined,
 }
 
-export const validPlacements = [
+const validPlacements = [
   'auto',
   'auto-start',
   'auto-end',
@@ -33,7 +33,7 @@ export const validPlacements = [
   'left-end',
 ]
 
-export const sameWidthModifier: Modifier<'sameWidth', Data> = {
+const sameWidthModifier: Modifier<'sameWidth', Data> = {
   name: 'sameWidth',
   enabled: true,
   phase: 'beforeWrite',
@@ -47,4 +47,10 @@ export const sameWidthModifier: Modifier<'sameWidth', Data> = {
     const reference = state.elements.reference as HTMLElement
     state.elements.popper.style.width = `${reference.offsetWidth}px`
   },
+}
+
+export {
+  sameWidthModifier,
+  validPlacements,
+  popperOptions,
 }
