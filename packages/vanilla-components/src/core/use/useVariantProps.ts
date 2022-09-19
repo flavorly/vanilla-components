@@ -3,7 +3,6 @@ import type { PropType } from 'vue'
 import type {
   CssClass,
   Data,
-  Errors,
   VanillaComponentProps,
   Variants,
 } from '../types'
@@ -21,6 +20,10 @@ const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps
   },
   variants: {
     type: Object as PropType<Variants<ComponentOptions>>,
+    default: undefined,
+  },
+  variant: {
+    type: String as PropType<string | undefined>,
     default: undefined,
   },
   errors: {
@@ -48,10 +51,6 @@ const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps
     default(props): string {
       return props.name || false
     },
-  },
-  variant: {
-    type: String as PropType<string | undefined>,
-    default: undefined,
   },
   hasItemBellow: {
     type: Boolean as PropType<boolean>,

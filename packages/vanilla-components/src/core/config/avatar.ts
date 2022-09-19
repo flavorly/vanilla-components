@@ -1,4 +1,7 @@
-export const VanillaAvatarConfig = {
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+
+export const AvatarConfig = {
   fixedClasses: {
     wrapper: '',
     wrapperImageAndButtons: '',
@@ -43,7 +46,20 @@ export const VanillaAvatarConfig = {
   },
 }
 
-export const VanillaAvatarClassesKeys = Object.keys(VanillaAvatarConfig.classes)
+export const AvatarClassesKeys = Object.keys(AvatarConfig.classes)
 
-export type VanillaAvatarClassesValidKeys = keyof typeof VanillaAvatarConfig.classes
+export type AvatarClassesValidKeys = keyof typeof AvatarConfig.classes
+
+export declare type AvatarValue = never | undefined
+
+export declare type AvatarPreview = string | ArrayBuffer | null | undefined
+
+export declare type AvatarProps = WithVariantPropsAndClassesList<{
+  modelValue?: AvatarValue
+  currentPhotoUrl?: string | undefined
+  currentPhotoAltTag?: string | undefined
+  avatarInitials?: string | undefined
+  uploadButtonLabel?: string | undefined
+  resetButtonLabel?: string | undefined
+} & InputHTMLAttributes & Data, AvatarClassesValidKeys>
 

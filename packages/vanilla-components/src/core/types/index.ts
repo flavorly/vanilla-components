@@ -1,8 +1,7 @@
 export * from './css-class'
 export * from './variants'
 export * from './input-options'
-export * from './Modify'
 export * from './misc'
-export * from './components'
-export * from './Errors'
-export * from './Helpers'
+
+// export * from './components'
+export * from './components/index'

@@ -1,26 +1,15 @@
-<script lang="ts">
-import { defineComponent, PropType, Ref, ref, watch } from 'vue';
-import { useBootVariant, useVModel, useVariantProps, useConfigurationWithClassesList } from '@/core';
-import {
-  VanillaAvatarValue,
-  VanillaAvatarProps,
-  VanillaAvatarClassesKeys,
-  VanillaAvatarConfig,
-  VanillaAvatarPreview,
-} from './avatar';
-import VanillaFormErrors from '@/components/FormErrors/FormErrors.vue';
-import VanillaFormFeedback from '@/components/FormFeedback/form-feedback.vue';
-import VanillaButton from './button.vue';
+<script setup lang="ts">
+  import type { PropType, Ref } from 'vue'
+  import { defineComponent, ref, watch } from 'vue'
+  import type { AvatarPreview, AvatarProps, AvatarValue } from '@/core/config'
+  import { AvatarClassesKeys, AvatarConfig } from '@/core/config'
+  import { useBootVariant, useConfigurationWithClassesList, useVModel, useVariantProps } from '@/core/use'
+  import FormErrors from '@/components/form-errors.vue'
+  import FormFeedback from '@/components/form-feedback.vue'
+  import Button from '@/components/button.vue'
 
-export default defineComponent({
-  components: {
-    VanillaFormErrors,
-    VanillaFormFeedback,
-    VanillaButton,
-  },
-  inheritAttrs: false,
-  props: {
-    ...useVariantProps<VanillaAvatarProps>(),
+  const props = defineProps({
+    ...useVariantProps<AvatarProps>(),
     modelValue: {
       default: undefined,
     },
@@ -52,67 +41,51 @@ export default defineComponent({
       type: [String, undefined] as PropType<string | undefined>,
       default: undefined,
     },
-  },
-  setup: function (props) {
-    const localValue: Ref<VanillaAvatarValue> = useVModel(props, 'modelValue');
-    const {
-      localErrors,
-      localVariant,
-      hasErrors,
-    } = useBootVariant(props, 'errors', localValue);
+  })
 
-    const {configuration} = useConfigurationWithClassesList<VanillaAvatarProps>(
-      VanillaAvatarConfig,
-      VanillaAvatarClassesKeys,
-      localVariant,
-    );
+  defineComponent({ inheritAttrs: false })
 
-    const photoPreview: Ref<VanillaAvatarPreview> = ref(null);
-    const photoInput: any = ref(null);
+  const localValue: Ref<AvatarValue> = useVModel(props, 'modelValue')
+  const {
+    localErrors,
+    localVariant,
+    hasErrors,
+  } = useBootVariant(props, 'errors', localValue)
 
-    const updateAvatarPreview = () => {
-      const reader = new FileReader();
-      reader.onload = (event: ProgressEvent<FileReader>) => {
-        photoPreview.value = event?.target?.result;
-      };
+  const { configuration } = useConfigurationWithClassesList<AvatarProps>(AvatarConfig, AvatarClassesKeys, localVariant)
 
-      localValue.value = photoInput?.value?.files[0];
-      if (localValue.value) {
-        reader.readAsDataURL(<Blob><unknown>localValue.value);
-      }
-    };
+  const photoPreview: Ref<AvatarPreview> = ref(null)
+  const photoInput: any = ref(null)
 
-    const triggerFileUploadAction = () => {
-      photoInput.value.click();
-    };
+  const updateAvatarPreview = () => {
+    const reader = new FileReader()
+    reader.onload = (event: ProgressEvent<FileReader>) => {
+      photoPreview.value = event?.target?.result
+    }
 
-    const resetPhoto = () => {
-      localValue.value = undefined;
-      photoPreview.value = null;
-      photoInput.value.value = null;
-    };
+    localValue.value = photoInput?.value?.files[0]
+    if (localValue.value) {
+      reader.readAsDataURL(localValue.value)
+    }
+  }
 
-    watch(() => props.currentPhotoUrl, (newValue: string | undefined) => {
-      if (newValue) {
-        photoPreview.value = null;
-      }
-    });
+  const triggerFileUploadAction = () => {
+    photoInput.value.click()
+  }
 
-    return {
-      configuration,
-      localValue,
-      localVariant,
-      localErrors,
-      hasErrors,
-      photoPreview,
-      photoInput,
-      updateAvatarPreview,
-      triggerFileUploadAction,
-      resetPhoto,
-    };
-  },
-});
+  const resetPhoto = () => {
+    localValue.value = undefined
+    photoPreview.value = null
+    photoInput.value.value = null
+  }
+
+  watch(() => props.currentPhotoUrl, (newValue: string | undefined) => {
+    if (newValue) {
+      photoPreview.value = null
+    }
+  })
 </script>
+
 <template>
   <div
     class="vanilla-input"
@@ -140,7 +113,7 @@ export default defineComponent({
             currentPhotoAltTag,
             avatarInitials,
             hasErrors,
-            triggerFileUploadAction
+            triggerFileUploadAction,
           }"
         >
           <div
@@ -166,14 +139,14 @@ export default defineComponent({
         <!-- New Profile Photo Preview -->
         <slot
           name="preview"
-          v-bind="{photoPreview}"
+          v-bind="{ photoPreview }"
         >
           <div
             v-if="photoPreview"
             class="mt-2"
           >
             <span
-              :style="'background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url(\'' + photoPreview + '\');'"
+              :style="`background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('${photoPreview}');`"
               :class="configuration.classesList.preview"
             />
           </div>
@@ -183,50 +156,50 @@ export default defineComponent({
       <div :class="configuration.classesList.buttonsContainer">
         <slot
           name="uploadButton"
-          v-bind="{triggerFileUploadAction, hasErrors, photoPreview}"
+          v-bind="{ triggerFileUploadAction, hasErrors, photoPreview }"
         >
-          <VanillaButton
+          <Button
             v-if="!photoPreview"
             type="button"
             :variant="uploadButtonVariant"
             @click="triggerFileUploadAction"
           >
             {{ uploadButtonLabel }}
-          </VanillaButton>
+          </Button>
         </slot>
         <slot
           name="resetButton"
-          v-bind="{resetPhoto, hasErrors, photoPreview}"
+          v-bind="{ resetPhoto, hasErrors, photoPreview }"
         >
-          <VanillaButton
+          <Button
             v-if="photoPreview"
             type="button"
             :variant="resetButtonVariant"
             @click="resetPhoto"
           >
             {{ resetButtonLabel }}
-          </VanillaButton>
+          </Button>
         </slot>
         <slot
           name="otherButtons"
-          v-bind="{resetPhoto,triggerFileUploadAction}"
+          v-bind="{ resetPhoto, triggerFileUploadAction }"
         />
       </div>
     </div>
     <slot
       name="errors"
-      v-bind="{hasErrors, localErrors}"
+      v-bind="{ hasErrors, localErrors }"
     >
-      <VanillaFormErrors
+      <FormErrors
         v-if="hasErrors && showErrors"
         :errors="localErrors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{hasErrors, feedback}"
+      v-bind="{ hasErrors, feedback }"
     >
-      <VanillaFormFeedback
+      <FormFeedback
         v-if="!hasErrors && feedback !== undefined && showFeedback"
         :text="feedback"
       />

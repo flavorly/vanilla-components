@@ -1,4 +1,4 @@
-const _base = {
+const _theme_base = {
 
   // Icons and Misc
   iconsSize: 'w-5 h-5',
@@ -44,4 +44,4 @@ const _base = {
   optionOrItemDisabled: 'opacity-50 cursor-not-allowed',
 }
 
-export default _base
+export default _theme_base

@@ -100,7 +100,6 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   errors?: Errors
   feedback?: string
   name?: string
-  autocomplete?: string | boolean
   hasItemBellow?: boolean
   hasItemAbove?: boolean
   showErrors?: boolean

@@ -37,6 +37,15 @@ const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKe
     required: false,
     default: Date.now().toString(36) + Math.random().toString(36).substr(2),
   },
+  autocomplete: {
+    type: [String, Boolean] as PropType<string | boolean>,
+    required: false,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    default(props): string {
+      return props.name || false
+    },
+  },
   hasItemBellow: {
     type: Boolean as PropType<boolean>,
     default: false,
@@ -55,11 +64,6 @@ const useVariantPropsWithClassesList = <ComponentOptions extends Data, ClassesKe
   showFeedback: {
     type: Boolean as PropType<boolean>,
     default: true,
-    required: false,
-  },
-  autocomplete: {
-    type: Boolean as PropType<string | boolean>,
-    default: false,
     required: false,
   },
 })

@@ -37,7 +37,7 @@ export default defineConfig(() => {
           { src: 'src/components/**/*.vue', dest: 'dist' },
 
           // Vanilla Components Configuration
-          { src: 'src/components/**/Config.ts', dest: 'dist' },
+          { src: 'src/components/**/config.ts', dest: 'dist' },
 
           // Vanilla Base Configuration
           { src: 'src/core/config/*.ts', dest: 'dist' },
