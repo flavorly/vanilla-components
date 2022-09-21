@@ -4,7 +4,7 @@ import { defineComponent, nextTick, ref } from 'vue'
 import VanillaUFOIcon from '../icons/ufo.vue'
 import VanillaRadarIcon from '../icons/RadarIcon.vue'
 import EmptyIcon from '../icons/hero/outline/FunnelIcon.vue'
-import VanillaButton from '../button.vue'
+import VanillaButton from '../button/button.vue'
 import { useInjectsClassesList } from '../../core'
 import { useInjectDatatableTranslations } from './utils'
 

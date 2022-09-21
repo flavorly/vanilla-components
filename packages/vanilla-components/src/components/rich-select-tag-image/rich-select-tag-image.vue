@@ -1,0 +1,95 @@
+<script lang="ts">
+import type { PropType } from 'vue'
+import { defineComponent, ref } from 'vue'
+import { useBootVariant, useConfigurationWithClassesList } from '../../core'
+import type { VanillaRichSelectTagWithImageProps } from './rich-select-tag-image.vue'
+import {
+    VanillaRichSelectTagWithImageClassesKeys,
+    VanillaRichSelectTagWithImageConfig,
+} from './rich-select-tag-image.vue'
+
+export default defineComponent({
+    props: {
+        name: {
+            type: String,
+            default: undefined,
+        },
+        image: {
+            type: String,
+            required: true,
+        },
+        selected: {
+            type: Boolean,
+            default: false,
+        },
+        description: {
+            type: [String] as PropType<string | undefined>,
+            default: undefined,
+        },
+        hasErrors: {
+            type: Boolean,
+            default: false,
+        },
+        disabled: {
+            type: Boolean as PropType<boolean>,
+            default: false,
+        },
+        parentClasses: {
+            type: [String, Array] as PropType<string | string[]>,
+            default: '',
+        },
+    },
+    setup(props) {
+        const {
+            localVariant,
+        } = useBootVariant(props, 'errors', ref(null))
+
+        const { configuration } = useConfigurationWithClassesList<VanillaRichSelectTagWithImageProps>(
+            VanillaRichSelectTagWithImageConfig,
+            VanillaRichSelectTagWithImageClassesKeys,
+            localVariant,
+        )
+
+        return {
+            props,
+            configuration,
+        }
+    },
+})
+</script>
+
+<template>
+  <div
+    :class="[
+      parentClasses,
+      configuration.classesList.wrapper,
+      disabled ? configuration.classesList.disabled : '',
+    ]"
+  >
+    <div :class="[configuration.classesList.labelAndImageWrapper]">
+      <div
+        :class="[
+          selected ? configuration.classesList.labelAndImageContainerSelected : '',
+          !selected ? configuration.classesList.labelAndImageContainerRegular : '',
+          configuration.classesList.labelAndImageContainer,
+        ]"
+      >
+        <div
+          :class="[
+            configuration.classesList.image,
+          ]"
+          :style="{
+            backgroundImage: `url(${image})`,
+          }"
+        />
+        <span
+          :class="[
+            configuration.classesList.label,
+          ]"
+          v-html="name"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+

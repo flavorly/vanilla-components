@@ -1,17 +1,17 @@
 // ------------------------------- //
 // Vanilla Components
 // ------------------------------- //
-export { default as VanillaAvatar } from './components/avatar.vue'
-export { default as VanillaButton } from './components/button.vue'
+export { default as VanillaAvatar } from './components/avatar/avatar.vue'
+export { default as VanillaButton } from './components/button/button.vue'
 
-export { default as VanillaCard } from './components/card.vue'
+export { default as VanillaCard } from './components/card/card.vue'
 export { default as VanillaCardFooter } from './components/card/card-footer.vue'
 export { default as VanillaCardEmpty } from './components/card/card-empty.vue'
 
-export { default as VanillaCheckbox } from './components/checkbox.vue'
-export { default as VanillaCheckboxGroup } from './components/checkbox-group.vue'
+export { default as VanillaCheckbox } from './components/checkbox/checkbox.vue'
+export { default as VanillaCheckboxGroup } from './components/checkbox/checkbox-group.vue'
 
-export { default as VanillaDatatable } from './components/datatable.vue'
+export { default as VanillaDatatable } from './components/datatable/datatable.vue'
 export { default as VanillaDatatableActions } from './components/datatable/actions.vue'
 export { default as VanillaDatatableDialogConfirmAction } from './components/datatable/dialog-confirm-action.vue'
 export { default as VanillaDatatableDialogSettings } from './components/datatable/dialog-settings.vue'
@@ -22,10 +22,10 @@ export { default as VanillaDatatableSearch } from './components/datatable/search
 export { default as VanillaDatatableSelectionBar } from './components/datatable/selection-bar.vue'
 
 export { default as VanillaDatetimePicker } from './components/DatetimePicker/DatetimePicker.vue'
-export { default as VanillaDialog } from './components/dialog.vue'
+export { default as VanillaDialog } from './components/dialog/dialog.vue'
 export { default as VanillaDialogFooter } from './components/dialog/dialog-footer.vue'
 
-export { default as VanillaDropdown } from './components/dropdown.vue'
+export { default as VanillaDropdown } from './components/dropdown/dropdown.vue'
 export { default as VanillaDropdownOption } from './components/dropdown/dropdown-option.vue'
 
 export { default as VanillaFormErrors } from './components/FormErrors/FormErrors.vue'
@@ -41,7 +41,7 @@ export { default as VanillaRadarIcon } from './components/Icons/RadarIcon.vue'
 export { default as VanillaCheckedIcon } from './components/icons/checked.vue'
 export { default as VanillaUncheckedIcon } from './components/icons/unchecked.vue'
 
-export { default as VanillaInput } from './components/input.vue'
+export { default as VanillaInput } from './components/input/input.vue'
 export { default as VanillaInputGroup } from './components/InputGroup/InputGroup.vue'
 
 export { default as VanillaPhoneNumber } from './components/PhoneNumber/PhoneNumber.vue'
@@ -55,17 +55,17 @@ export { default as VanillaRichSelectOptionWithIndicators } from './components/R
 export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState/RichSelectState.vue'
 export { default as VanillaRichSelectTagWithImage } from './components/RichSelect/RichSelectTagWithImage/RichSelectTagWithImage.vue'
 
-export { default as VanillaSelect } from './components/select.vue'
+export { default as VanillaSelect } from './components/select/select.vue'
 export { default as VanillaSelectOption } from './components/select/option.vue'
 export { default as VanillaSelectCountry } from './components/SelectCountry/SelectCountry.vue'
 
 export { default as VanillaSkeletonBar } from './components/Skeletons/SkeletonBar/SkeletonBar.vue'
 
-export { default as VanillaSlideover } from './components/slideover.vue'
+export { default as VanillaSlideover } from './components/slideober/slideover.vue'
 export { default as VanillaStatusIndicator } from './components/StatusIndicator/StatusIndicator.vue'
 
-export { default as VanillaTextarea } from './components/textarea.vue'
-export { default as VanillaToggle } from './components/toggle.vue'
+export { default as VanillaTextarea } from './components/textarea/textarea.vue'
+export { default as VanillaToggle } from './components/toggle/toggle.vue'
 export { default as VanillaTransition } from './components/misc/transitionable.vue'
 
 // ----------------- //

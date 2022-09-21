@@ -2,7 +2,7 @@
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
 import type { VanillaDatatableResponsePage } from '../index'
-import VanillaButton from '../button.vue'
+import VanillaButton from '../button/button.vue'
 import { useInjectsClassesList, useReplacePlaceholders } from '../../core'
 import ChevronLeftIcon from '../icons/hero/solid/ChevronLeftIcon.vue'
 import ChevronRightIcon from '../icons/hero/solid/ChevronRightIcon.vue'

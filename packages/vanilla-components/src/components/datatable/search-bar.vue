@@ -2,7 +2,7 @@
 import type { PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { useInjectsClassesList, useVModel } from '../../core'
-import VanillaInput from '../input.vue'
+import VanillaInput from '../input/input.vue'
 import MagnifyingGlassIcon from '../icons/hero/solid/MagnifyingGlassIcon.vue'
 
 export default defineComponent({

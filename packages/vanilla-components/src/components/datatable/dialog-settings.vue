@@ -7,12 +7,12 @@ import type {
     VanillaDatatablePageOptions,
     VanillaDatatableUserSettings,
 } from '../index'
-import VanillaDialog from '../dialog.vue'
-import VanillaSelect from '../select.vue'
-import VanillaCheckboxGroup from '../checkbox-group.vue'
-import VanillaToggle from '../toggle.vue'
+import VanillaDialog from '../dialog/dialog.vue'
+import VanillaSelect from '../select/select.vue'
+import VanillaCheckboxGroup from '../checkbox/checkbox-group.vue'
+import VanillaToggle from '../toggle/toggle.vue'
 import VanillaInputGroup from '../../InputGroup/InputGroup.vue'
-import VanillaButton from '../button.vue'
+import VanillaButton from '../button/button.vue'
 import { useInjectsClassesList } from '../../core'
 import TrashIcon from '../icons/hero/outline/TrashIcon.vue'
 import { useInjectDatatableTranslations } from './utils'
