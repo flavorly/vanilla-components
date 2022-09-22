@@ -1,89 +1,88 @@
 import type { ComponentPropsOptions, PropType } from 'vue'
 
-import type { VanillaAvatarProps } from '../../components/avatar/types'
-import type { VanillaButtonProps } from '../../components/button/types'
-import type { VanillaCardProps } from '../../components/card/types'
-import type { VanillaCheckboxProps } from '../../components/checkbox/types'
-import type { VanillaDatatableProps } from '../../components/datatable/types'
-import type { VanillaDatetimePickerProps } from '../../components/datetime-input/types'
-import type { VanillaDialogProps } from '../../components/dialog/types'
-import type { VanillaDropdownProps } from '../../components/Dropdown/types'
-import type { VanillaFormErrorsProps } from '../../components/FormErrors/Type'
-import type { VanillaFormFeedbackProps } from '../../components/FormFeedback/types'
-import type { VanillaFormLabelProps } from '../../components/FormLabel/Type'
-import type { VanillaFormSectionProps } from '../../components/FormSection/Type'
-import type { VanillaInputProps } from '../../components/input/types'
-import type { VanillaInputGroupProps } from '../../components/InputGroup/Type'
-import type { VanillaPhoneNumberProps } from '../../components/PhoneNumber/Type'
-import type { VanillaRichRadioProps } from '../../components/RichRadio/Type'
-import type { VanillaRichRadioOptionProps } from '../../components/RichRadio/RichRadioOption/Type'
-import type { VanillaRichSelectProps } from '../../components/RichSelect/Type'
-import type { VanillaRichSelectOptionWithImageProps } from '../../components/RichSelect/RichSelectOptionWithImage/Type'
-import type { VanillaRichSelectOptionWithIndicatorsProps } from '../../components/RichSelect/RichSelectOptionWithIndicators/Type'
-import type { VanillaRichSelectStateProps } from '../../components/RichSelect/RichSelectState/Type'
-import type { VanillaRichSelectTagWithImageProps } from '../../components/RichSelect/RichSelectTagWithImage/Type'
-import type { VanillaSelectProps } from '../../components/select/types'
-import type { VanillaSelectCountryProps } from '../../components/SelectCountry/Type'
-import type { VanillaSelectCountryOptionProps } from '../../components/SelectCountry/SelectCountryOption/Type'
-import type { VanillaSkeletonBarProps } from '../../components/Skeletons/SkeletonBar/Type'
-import type { VanillaSlideoverProps } from '../../components/slideover/types'
-import type { VanillaStatusIndicatorProps } from '../../components/StatusIndicator/Type'
-import type { VanillaTextareaProps } from '../../components/textarea/type'
-import type { VanillaToggleProps } from '../../components/toggle/types'
 import type {
   CSSRawClassesList,
   CssClass,
   Data,
-  Errors,
   Variants,
   VariantsWithClassesList,
   WithVariantProps,
   WithVariantPropsAndClassesList,
  } from './index'
+import type { AvatarProps } from '@/components/avatar/config'
+import type { ButtonProps } from '@/components/components/button/config'
+import type { CardProps } from '@/components/components/card/config'
+import type { CheckboxProps } from '@/components/components/checkbox/config'
+import type { DatatableProps } from '@/components/components/datatable/config'
+import type { DatetimePickerProps } from '@/components/components/datetime-input/config'
+import type { DialogProps } from '@/components/components/dialog/config'
+import type { DropdownProps } from '@/components/components/Dropdown/config'
+import type { FormErrorsProps } from '@/components/components/FormErrors/Type'
+import type { FormFeedbackProps } from '@/components/components/FormFeedback/config'
+import type { FormLabelProps } from '@/components/components/FormLabel/Type'
+import type { FormSectionProps } from '@/components/components/FormSection/Type'
+import type { InputProps } from '@/components/components/input/config'
+import type { InputGroupProps } from '@/components/components/InputGroup/Type'
+import type { PhoneNumberProps } from '@/components/components/PhoneNumber/Type'
+import type { RichRadioProps } from '@/components/components/RichRadio/Type'
+import type { RichRadioOptionProps } from '@/components/components/RichRadio/RichRadioOption/Type'
+import type { RichSelectProps } from '@/components/components/RichSelect/Type'
+import type { RichSelectOptionWithImageProps } from '@/components/components/RichSelect/RichSelectOptionWithImage/Type'
+import type { RichSelectOptionWithIndicatorsProps } from '@/components/components/RichSelect/RichSelectOptionWithIndicators/Type'
+import type { RichSelectStateProps } from '@/components/components/RichSelect/RichSelectState/Type'
+import type { RichSelectTagWithImageProps } from '@/components/components/RichSelect/RichSelectTagWithImage/Type'
+import type { SelectProps } from '@/components/components/select/config'
+import type { SelectCountryProps } from '@/components/components/SelectCountry/Type'
+import type { SelectCountryOptionProps } from '@/components/components/SelectCountry/SelectCountryOption/Type'
+import type { SkeletonBarProps } from '@/components/components/Skeletons/SkeletonBar/Type'
+import type { SlideoverProps } from '@/components/components/slideover/config'
+import type { StatusIndicatorProps } from '@/components/components/StatusIndicator/Type'
+import type { TextareaProps } from '@/components/components/textarea/type'
+import type { ToggleProps } from '@/components/components/toggle/config'
 
 /**
  * Stores the Type for all components available in project
  */
 interface VanillaComponentConfiguration {
-  VanillaAvatar?: VanillaAvatarProps
-  VanillaButton?: VanillaButtonProps
-  VanillaCard?: VanillaCardProps
-  VanillaCheckbox?: VanillaCheckboxProps
-  VanillaDatatable?: VanillaDatatableProps
-  VanillaDatetimePicker?: VanillaDatetimePickerProps
-  VanillaDialog?: VanillaDialogProps
-  VanillaDropdown?: VanillaDropdownProps
-  VanillaDropdownExtended?: VanillaDropdownProps
+  Avatar?: AvatarProps
+  Button?: ButtonProps
+  Card?: CardProps
+  Checkbox?: CheckboxProps
+  Datatable?: DatatableProps
+  DatetimePicker?: DatetimePickerProps
+  Dialog?: DialogProps
+  Dropdown?: DropdownProps
+  DropdownExtended?: DropdownProps
 
-  VanillaFormErrors?: VanillaFormErrorsProps
-  VanillaFormFeedback?: VanillaFormFeedbackProps
-  VanillaFormLabel?: VanillaFormLabelProps
-  VanillaFormSection?: VanillaFormSectionProps
+  FormErrors?: FormErrorsProps
+  FormFeedback?: FormFeedbackProps
+  FormLabel?: FormLabelProps
+  FormSection?: FormSectionProps
 
-  VanillaInput?: VanillaInputProps
-  VanillaInputGroup?: VanillaInputGroupProps
+  Input?: InputProps
+  InputGroup?: InputGroupProps
 
-  VanillaPhoneNumber?: VanillaPhoneNumberProps
+  PhoneNumber?: PhoneNumberProps
 
-  VanillaRichRadio?: VanillaRichRadioProps
-  VanillaRichRadioOption?: VanillaRichRadioOptionProps
+  RichRadio?: RichRadioProps
+  RichRadioOption?: RichRadioOptionProps
 
-  VanillaRichSelect?: VanillaRichSelectProps
-  VanillaRichSelectOptionWithImage?: VanillaRichSelectOptionWithImageProps
-  VanillaRichSelectOptionWithIndicators?: VanillaRichSelectOptionWithIndicatorsProps
-  VanillaRichSelectState?: VanillaRichSelectStateProps
-  VanillaRichSelectTagWithImage?: VanillaRichSelectTagWithImageProps
+  RichSelect?: RichSelectProps
+  RichSelectOptionWithImage?: RichSelectOptionWithImageProps
+  RichSelectOptionWithIndicators?: RichSelectOptionWithIndicatorsProps
+  RichSelectState?: RichSelectStateProps
+  RichSelectTagWithImage?: RichSelectTagWithImageProps
 
-  VanillaSelect?: VanillaSelectProps
-  VanillaSelectCountry?: VanillaSelectCountryProps
-  VanillaSelectCountryOption?: VanillaSelectCountryOptionProps
+  Select?: SelectProps
+  SelectCountry?: SelectCountryProps
+  SelectCountryOption?: SelectCountryOptionProps
 
-  VanillaSkeletonBar?: VanillaSkeletonBarProps
-  VanillaSlideover?: VanillaSlideoverProps
-  VanillaStatusIndicator?: VanillaStatusIndicatorProps
+  SkeletonBar?: SkeletonBarProps
+  Slideover?: SlideoverProps
+  StatusIndicator?: StatusIndicatorProps
 
-  VanillaTextarea?: VanillaTextareaProps
-  VanillaToggle?: VanillaToggleProps
+  Textarea?: TextareaProps
+  Toggle?: ToggleProps
 
   [key: string]: any
 }
@@ -97,7 +96,7 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
   variants?: Variants<Data>
   variant?: string
   class?: string
-  errors?: Errors
+  errors?: string
   feedback?: string
   name?: string
   hasItemBellow?: boolean
@@ -122,7 +121,7 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
     default: undefined | string | never
   }
   errors: {
-    type: PropType<Errors>
+    type: PropType<string | undefined>
     default: undefined
   }
   feedback: {
@@ -177,7 +176,7 @@ type VanillaComponentProps<ComponentOptions extends WithVariantProps<Data> = {
     default: undefined
   }
   errors: {
-    type: PropType<Errors>
+    type: PropType<string | undefined>
     default: undefined
   }
   feedback: {
@@ -240,7 +239,7 @@ type VanillaComponentWithClassesListProps<
       default: undefined
     }
     errors: {
-      type: PropType<Errors>
+      type: PropType<string | undefined>
       default: undefined
     }
     feedback: {
@@ -295,7 +294,7 @@ type VanillaComponentWithClassesListProps<
       default: undefined
     }
     errors: {
-      type: PropType<Errors>
+      type: PropType<string | undefined>
       default: undefined
     }
     feedback: {

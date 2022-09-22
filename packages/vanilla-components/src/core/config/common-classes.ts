@@ -1,4 +1,4 @@
-const _theme_base = {
+const commonClasses = {
 
   // Icons and Misc
   iconsSize: 'w-5 h-5',
@@ -44,4 +44,6 @@ const _theme_base = {
   optionOrItemDisabled: 'opacity-50 cursor-not-allowed',
 }
 
-export default _theme_base
+export {
+  commonClasses,
+}

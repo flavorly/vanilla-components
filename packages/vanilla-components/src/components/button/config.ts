@@ -1,6 +1,9 @@
-import { commonClasses, mergeClasses } from '../../core'
+import type { InputHTMLAttributes } from 'vue'
+import { mergeClasses } from '@/core/helpers'
+import { commonClasses } from '@/core/config'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaButtonConfig = {
+export const buttonConfig = {
   fixedClasses: {
     button: mergeClasses(
 
@@ -168,7 +171,17 @@ export const VanillaButtonConfig = {
   },
 }
 
-export const VanillaButtonClassesKeys = Object.keys(VanillaButtonConfig.classes)
+export const buttonClassesKeys = Object.keys(buttonConfig.classes)
 
-export type VanillaButtonClassesValidKeys = keyof typeof VanillaButtonConfig.classes
+export type buttonClassesValidKeys = keyof typeof buttonConfig.classes
+
+export declare type buttonProps = WithVariantPropsAndClassesList<{
+  as?: string
+  asDeep?: string
+  label?: string
+  loading?: boolean
+  disabled?: boolean | string
+  focusOnMount?: boolean
+  type?: string
+} & InputHTMLAttributes & Data, buttonClassesValidKeys>
 

@@ -28,6 +28,8 @@ type DebouncedFn = {
   cancel: () => void
 } & DebounceFn
 
+type MinimumInputLengthTextProp = ((minimumInputLength: number, query?: string) => string) | string
+
 export {
   Measure,
   Data,
@@ -42,5 +44,6 @@ export {
   ObjectWithProperties,
   KeysOfType,
   Modify,
+  MinimumInputLengthTextProp,
 }
 

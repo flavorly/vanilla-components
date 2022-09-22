@@ -15,14 +15,15 @@ import {
   get,
   isEqual,
   isPrimitive,
-  parseVariant,
   pick,
-} from '../index'
+} from '@/core/helpers'
+
+import { useParseVariant } from '@/core/use'
 
 import type {
   Data,
   VanillaComponentConfiguration,
-} from '../types'
+} from '@/core/types'
 
 /**
  * Extract the defined props from the component
@@ -107,8 +108,12 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
  * Returns the configuration for the component & the Attributes
  *
  * @param defaultConfiguration
+ * @param classesListKeys
  */
-export default function useConfiguration<ComponentOptions extends Data>(defaultConfiguration: ComponentOptions): {
+export function useConfiguration<ComponentOptions extends Data>(
+  defaultConfiguration: ComponentOptions,
+  classesListKeys: string[],
+): {
   configuration: ComponentOptions
   attributes: Data
 } {
@@ -116,21 +121,20 @@ export default function useConfiguration<ComponentOptions extends Data>(defaultC
 
   const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>()
 
-  const computedConfiguration = computed(() => {
-    const props = { ...vm.props }
-    delete props.modelValue
-    return {
-      ...props,
-      ...parseVariant(
-        propsValues.value,
-        componentGlobalConfiguration,
-        defaultConfiguration,
-      ),
-    }
-  })
+  const computedConfiguration = computed(() => ({
+    ...vm?.props || {},
+    ...useParseVariant(
+      propsValues.value,
+      classesListKeys,
+      componentGlobalConfiguration,
+      defaultConfiguration,
+    ),
+  }))
 
   const configuration = reactive(computedConfiguration.value)
 
+  // Watches all the component props and also the variant clases list
+  // If any changes, it will be updated with the new keys
   watch(computedConfiguration, (newValue) => {
     Object.keys(newValue).forEach((key) => {
       configuration[key] = newValue[key]

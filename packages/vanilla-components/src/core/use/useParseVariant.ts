@@ -6,13 +6,13 @@ import type {
   VariantsWithClassesList,
   WithVariantProps,
   WithVariantPropsAndClassesList,
-} from '../types'
+} from '@/core/types'
 
 import {
   hasProperty,
   mergeClasses,
   pick,
-} from '../index'
+} from '@/core/helpers'
 
 const getCustomPropsFromVariant = <
   P extends ObjectWithClassesList,
@@ -31,7 +31,11 @@ const getCustomPropsFromVariant = <
 const getShouldClearClasses = <
   P extends ObjectWithClassesList,
   ClassesKeys extends string,
->(props: WithVariantPropsAndClassesList<P, ClassesKeys>, key: string, variant: string | undefined): boolean => {
+>(
+  props: WithVariantPropsAndClassesList<P, ClassesKeys>,
+  key: string,
+  variant: string | undefined,
+): boolean => {
   if (variant === undefined) {
     return hasProperty(props, key) && (props[key] === undefined || props[key] === null)
   }
@@ -45,7 +49,7 @@ const getShouldClearClasses = <
   return false
 }
 
-const parseVariantWithClassesList = <
+const useParseVariant = <
   P extends ObjectWithClassesList,
   ClassesKeys extends string,
 >(
@@ -64,7 +68,7 @@ const parseVariantWithClassesList = <
   // TODO : Check how can we forward the variant
   // We should store here the variant as a "localVariant" to forward it and be able to maninpulate it
   // const localVariant = ref(givenVariant ?? variant);
-  const localVariant = ref(givenVariant)
+  const localVariant = ref(givenVariant ?? variant)
 
   const classes: Partial<CSSRawClassesList<ClassesKeys>> = {}
   const fixedClasses: Partial<CSSRawClassesList<ClassesKeys>> = {}
@@ -119,15 +123,15 @@ const parseVariantWithClassesList = <
       fixedClasses[classItemKey] = undefined
     })
   }
- else {
+  else {
     classesListKeys.forEach((classItemKey) => {
       if (props.fixedClasses !== undefined && hasProperty(props.fixedClasses, classItemKey)) {
         fixedClasses[classItemKey] = props.fixedClasses[classItemKey]
       }
- else if (globalConfiguration !== undefined && globalConfiguration.fixedClasses !== undefined && hasProperty(globalConfiguration.fixedClasses, classItemKey)) {
+      else if (globalConfiguration !== undefined && globalConfiguration.fixedClasses !== undefined && hasProperty(globalConfiguration.fixedClasses, classItemKey)) {
         fixedClasses[classItemKey] = globalConfiguration.fixedClasses[classItemKey]
       }
- else if (defaultConfiguration !== undefined && defaultConfiguration.fixedClasses !== undefined && hasProperty(defaultConfiguration.fixedClasses, classItemKey)) {
+      else if (defaultConfiguration !== undefined && defaultConfiguration.fixedClasses !== undefined && hasProperty(defaultConfiguration.fixedClasses, classItemKey)) {
         fixedClasses[classItemKey] = defaultConfiguration.fixedClasses[classItemKey]
       }
 
@@ -139,14 +143,14 @@ const parseVariantWithClassesList = <
             fixedClasses[classItemKey] = propsVariant.fixedClasses[classItemKey]
           }
         }
- else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[localVariant.value] !== undefined) {
+        else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[localVariant.value] !== undefined) {
           const globalConfigurationVariant = globalConfiguration.variants[localVariant.value] as WithVariantProps<P>
 
           if (globalConfigurationVariant.fixedClasses && hasProperty(globalConfigurationVariant.fixedClasses, classItemKey)) {
             fixedClasses[classItemKey] = globalConfigurationVariant.fixedClasses[classItemKey]
           }
         }
- else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[localVariant.value] !== undefined) {
+        else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[localVariant.value] !== undefined) {
           const defaultConfigurationVariant = defaultConfiguration.variants[localVariant.value] as WithVariantProps<P>
 
           if (defaultConfigurationVariant.fixedClasses && hasProperty(defaultConfigurationVariant.fixedClasses, classItemKey)) {
@@ -189,4 +193,4 @@ const parseVariantWithClassesList = <
   return mergedProps as P
 }
 
-export default parseVariantWithClassesList
+export default useParseVariant

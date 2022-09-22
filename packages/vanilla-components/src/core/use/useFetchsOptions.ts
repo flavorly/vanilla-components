@@ -1,7 +1,4 @@
-import type {
-  ComputedRef,
-  Ref,
-} from 'vue'
+import type { ComputedRef, Ref } from 'vue'
 import {
   computed,
   getCurrentInstance,
@@ -9,23 +6,22 @@ import {
   watch,
 } from 'vue'
 
+import type {
+  FetchOptionsFn,
+  FetchedOptions,
+  InputOptions,
+  MinimumInputLengthTextProp,
+  NormalizedOption,
+  NormalizedOptions,
+  PreFetchOptionsFn,
+} from '@/core/types'
+
 import {
   debounce,
   filterOptions,
   flattenOptions,
   normalizeOptions,
-} from '../index'
-
-import type {
-  FetchOptionsFn,
-  FetchedOptions,
-  InputOptions,
-  NormalizedOption,
-  NormalizedOptions,
-  PreFetchOptionsFn,
-} from '../types'
-
-import type { MinimumInputLengthTextProp } from '../../components/RichSelect/Type'
+} from '@/core/helpers'
 
 export default function useFetchsOptions(
 

@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { defineComponent, onMounted, ref } from 'vue'
-import { hasSlot, useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core'
+import { defineComponent, defineEmits, onMounted, ref } from 'vue'
 import VanillaLoadingSpinner from '../icons/spinner.vue'
-import type { VanillaButtonProps } from './button.vue'
-import { VanillaButtonClassesKeys, VanillaButtonConfig } from './button.vue'
+import type { buttonClassesValidKeys, buttonProps } from './config'
+import { buttonClassesKeys, buttonConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { hasSlot } from '@/core/helpers'
 
 const props = defineProps({
-    ...useVariantProps<VanillaButtonProps>(),
+    ...useVariantProps<buttonProps, buttonClassesValidKeys>(),
     as: {
         type: [String] as PropType<string>,
         default: 'button',
@@ -38,6 +39,8 @@ const props = defineProps({
     },
 })
 
+const emit = defineEmits(['click'])
+
 defineComponent({
   inheritAttrs: false,
 })
@@ -45,12 +48,7 @@ defineComponent({
 const localRef = ref(null) as Ref<HTMLElement | null>
 const localValue = ref(props.variant)
 const { localVariant } = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfigurationWithClassesList<VanillaButtonProps>(
-  VanillaButtonConfig,
-  VanillaButtonClassesKeys,
-  localVariant,
-)
+const { configuration } = useConfiguration<buttonProps>(buttonConfig, buttonClassesKeys)
 
 // If its disable, just ignore it
 const handleClickEvent = (event: MouseEvent) => {
@@ -59,7 +57,7 @@ const handleClickEvent = (event: MouseEvent) => {
     event.stopPropagation()
   }
 
-  // emit('click', event)
+  emit('click', event)
 }
 
 // Focus on mount, (useful for modals )
@@ -73,60 +71,6 @@ onMounted(() => {
     }
   }
 })
-
-//
-// export default defineComponent({
-//     name: 'VanillaButton',
-//     components: {
-//         VanillaLoadingSpinner,
-//     },
-//     inheritAttrs: false,
-//     props: {
-//         ...useVariantProps<VanillaButtonProps>(),
-//         as: {
-//             type: [String] as PropType<string>,
-//             default: 'button',
-//         },
-//         asDeep: {
-//             type: [String] as PropType<string>,
-//             default: 'button',
-//         },
-//         label: {
-//             type: [String] as PropType<string>,
-//             default: 'Button',
-//         },
-//         loading: {
-//             type: [Boolean] as PropType<boolean>,
-//             default: false,
-//         },
-//         disabled: {
-//             type: [Boolean] as PropType<boolean>,
-//             default: false,
-//         },
-//         type: {
-//             type: [String] as PropType<string>,
-//             default: 'button',
-//         },
-//         focusOnMount: {
-//             type: [Boolean] as PropType<boolean>,
-//             default: false,
-//         },
-//     },
-//     emits: [
-//         'click',
-//     ],
-//     setup(props, { emit }) {
-//         return {
-//             configuration,
-//             localValue,
-//             localVariant,
-//             props,
-//             hasSlot,
-//             localRef,
-//             handleClickEvent,
-//         }
-//     },
-// })
 </script>
 
 <template>

@@ -21,17 +21,17 @@ export { default as VanillaDatatableRowSkeleton } from './components/datatable/r
 export { default as VanillaDatatableSearch } from './components/datatable/search-bar.vue'
 export { default as VanillaDatatableSelectionBar } from './components/datatable/selection-bar.vue'
 
-export { default as VanillaDatetimePicker } from './components/DatetimePicker/DatetimePicker.vue'
+export { default as VanillaDatetimePicker } from './components/datime-input/datetime-input.vue'
 export { default as VanillaDialog } from './components/dialog/dialog.vue'
 export { default as VanillaDialogFooter } from './components/dialog/dialog-footer.vue'
 
 export { default as VanillaDropdown } from './components/dropdown/dropdown.vue'
 export { default as VanillaDropdownOption } from './components/dropdown/dropdown-option.vue'
 
-export { default as VanillaFormErrors } from './components/FormErrors/FormErrors.vue'
-export { default as VanillaFormFeedback } from './components/FormFeedback/form-feedback.vue'
-export { default as VanillaFormLabel } from './components/FormLabel/FormLabel.vue'
-export { default as VanillaFormSection } from './components/FormSection/FormSection.vue'
+export { default as VanillaFormErrors } from './components/forms/form-errors.vue'
+export { default as VanillaFormFeedback } from './components/forms/form-feedback.vue'
+export { default as VanillaFormLabel } from './components/forms/form-label.vue'
+export { default as VanillaFormSection } from './components/forms/form-section.vue'
 
 export { default as VanillaFlag } from './components/icons/flag.vue'
 export { default as VanillaFlagAsync } from './components/icons/flag-async.vue'
@@ -42,14 +42,14 @@ export { default as VanillaCheckedIcon } from './components/icons/checked.vue'
 export { default as VanillaUncheckedIcon } from './components/icons/unchecked.vue'
 
 export { default as VanillaInput } from './components/input/input.vue'
-export { default as VanillaInputGroup } from './components/InputGroup/InputGroup.vue'
+export { default as VanillaInputGroup } from './components/input-group/input-group.vue'
 
-export { default as VanillaPhoneNumber } from './components/PhoneNumber/PhoneNumber.vue'
+export { default as VanillaPhoneNumber } from './components/phone-input/phone-input.vue'
 
-export { default as VanillaRichRadio } from './components/RichRadio/RichRadio.vue'
-export { default as VanillaRichRadioOption } from './components/RichRadio/RichRadioOption/RichRadioOption.vue'
+export { default as VanillaRichRadio } from './components/rich-radio/rich-radio.vue'
+export { default as VanillaRichRadioOption } from './components/rich-radio-option/rich-radio-option.vue'
 
-export { default as VanillaRichSelect } from './components/RichSelect/RichSelect.vue'
+export { default as VanillaRichSelect } from './components/rich-select/rich-select.vue'
 export { default as VanillaRichSelectOptionWithImage } from './components/RichSelect/RichSelectOptionWithImage/RichSelectOptionWithImage.vue'
 export { default as VanillaRichSelectOptionWithIndicators } from './components/RichSelect/RichSelectOptionWithIndicators/RichSelectOptionWithIndicators.vue'
 export { default as VanillaRichSelectState } from './components/RichSelect/RichSelectState/RichSelectState.vue'

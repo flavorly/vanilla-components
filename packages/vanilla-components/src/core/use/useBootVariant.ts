@@ -1,19 +1,6 @@
-import type {
-  ComputedRef,
-  Ref,
-} from 'vue'
-
-import {
-  computed,
-  getCurrentInstance,
-  ref,
-  watch,
-} from 'vue'
-
-import type {
-  Data,
-  Errors,
-} from '../types'
+import type { ComputedRef, Ref } from 'vue'
+import { computed, getCurrentInstance, ref, watch } from 'vue'
+import type { Data } from '@/core/types'
 
 export default function useBootVariant<Props extends Data, ErrorsKey extends string, ModelValueKey extends Ref>(
   props: Props,
@@ -23,7 +10,7 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
   const vm = getCurrentInstance()!
 
   // Own component errors as a new reactive ref.
-  const componentErrors = ref(props[errorsKey]) as Ref<Errors>
+  const componentErrors = ref(props[errorsKey]) as Ref<string | undefined>
 
   // Parent Flash
   // console.log(vm.parent.type.__name)
@@ -32,11 +19,11 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
     && vm?.type.__name !== 'FormLabel'
     && vm?.parent?.props?.errors !== undefined
   ) {
-    componentErrors.value = vm?.parent.props.errors
+    componentErrors.value = vm?.parent.props.errors as string | undefined
   }
 
   // Local Errors starting as undefined
-  const localErrors = ref(undefined) as Ref<Errors>
+  const localErrors = ref(undefined) as Ref<string | undefined>
   const localVariant = ref(props.variant)
 
   // If component itself has errors, then use them
@@ -66,7 +53,7 @@ export default function useBootVariant<Props extends Data, ErrorsKey extends str
 
   // If prop of the component changes, we will update the localErrors as well with that value
   // We must also reset the variant here
-  watch(() => props[errorsKey], (newErrors: Errors) => {
+  watch(() => props[errorsKey], (newErrors: any) => {
     localErrors.value = newErrors
     if (hasErrors.value) {
       localVariant.value = 'error'

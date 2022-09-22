@@ -1,25 +1,22 @@
 import type { PropType } from 'vue'
-
 import type {
-  CssClass,
+  CSSRawClassesList,
   Data,
-  VanillaComponentProps,
-  Variants,
-} from '../types'
+  VanillaComponentWithClassesListProps,
+  VariantsWithClassesList,
+} from '@/core/types'
 
-import { useDefaultName } from '../index'
-
-const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps => ({
+const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends string>(): VanillaComponentWithClassesListProps<ClassesKeys> => ({
   classes: {
-    type: [String, Array, Object] as PropType<CssClass>,
+    type: [String, Array, Object] as PropType<CSSRawClassesList<ClassesKeys>>,
     default: undefined,
   },
   fixedClasses: {
-    type: [String, Array, Object] as PropType<CssClass>,
+    type: [String, Array, Object] as PropType<CSSRawClassesList<ClassesKeys>>,
     default: undefined,
   },
   variants: {
-    type: Object as PropType<Variants<ComponentOptions>>,
+    type: Object as PropType<VariantsWithClassesList<ComponentOptions, ClassesKeys>>,
     default: undefined,
   },
   variant: {
@@ -27,7 +24,7 @@ const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps
     default: undefined,
   },
   errors: {
-    type: [String, Array, Object] as PropType<Errors>,
+    type: [String, undefined] as PropType<string | undefined>,
     default: undefined,
   },
   feedback: {
@@ -37,11 +34,7 @@ const useVariantProps = <ComponentOptions extends Data>(): VanillaComponentProps
   name: {
     type: [String] as PropType<string>,
     required: false,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    default(props): string | unknown {
-      return useDefaultName(props)
-    },
+    default: Date.now().toString(36) + Math.random().toString(36).substr(2),
   },
   autocomplete: {
     type: [String, Boolean] as PropType<string | boolean>,
