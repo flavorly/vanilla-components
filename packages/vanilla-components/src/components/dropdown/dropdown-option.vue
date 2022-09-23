@@ -2,7 +2,7 @@
 import type { PropType } from 'vue'
 import { defineComponent } from 'vue'
 import { MenuItem } from '@headlessui/vue'
-import { useInjectsClassesList } from '../../core'
+import { useInjectsClassesList } from '@/core/use'
 
 export default defineComponent({
     components: {

@@ -173,9 +173,9 @@ export const buttonConfig = {
 
 export const buttonClassesKeys = Object.keys(buttonConfig.classes)
 
-export type buttonClassesValidKeys = keyof typeof buttonConfig.classes
+export declare type ButtonClassesValidKeys = keyof typeof buttonConfig.classes
 
-export declare type buttonProps = WithVariantPropsAndClassesList<{
+export declare type ButtonProps = WithVariantPropsAndClassesList<{
   as?: string
   asDeep?: string
   label?: string
@@ -183,5 +183,5 @@ export declare type buttonProps = WithVariantPropsAndClassesList<{
   disabled?: boolean | string
   focusOnMount?: boolean
   type?: string
-} & InputHTMLAttributes & Data, buttonClassesValidKeys>
+} & InputHTMLAttributes & Data, ButtonClassesValidKeys>
 

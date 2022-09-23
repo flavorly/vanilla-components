@@ -1,130 +1,99 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList, useVModel, useVariantProps } from '../../core'
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/form-feedback.vue'
-import type { VanillaCheckboxProps, VanillaCheckboxValue } from './checkbox.vue'
-import { VanillaCheckboxClassesKeys, VanillaCheckboxConfig } from './checkbox.vue'
+import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
+import { checkboxClassesKeys, checkboxConfig } from './config'
+import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import FormErrors from '@/components/forms/form-errors.vue'
+import FormFeedback from '@/components/forms/form-feedback.vue'
 
-export default defineComponent({
-    components: {
-        VanillaFormErrors,
-        VanillaFormFeedback,
+const props = defineProps({
+  ...useVariantProps<CheckboxProps, CheckboxClassesValidKeys>(),
+  modelValue: {
+    type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<CheckboxValue>,
+    default: undefined,
+  },
+  checked: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  value: {
+    type: [String, Number, Boolean, Array, Object, Date, Function, Symbol, undefined] as PropType<CheckboxValue>,
+    default: false,
+  },
+  checkedValue: {
+    type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<CheckboxValue>,
+    default: true,
+  },
+  uncheckedValue: {
+    type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<CheckboxValue>,
+    default: false,
+  },
+  align: {
+    type: [String] as PropType<string>,
+    required: false,
+    default: 'left',
+    validator(align: string) {
+      return ['left', 'right', 'center'].includes(align)
     },
-    inheritAttrs: false,
-    model: {
-        prop: 'checked',
-        event: 'change',
-    },
-    props: {
-        ...useVariantProps<VanillaCheckboxProps>(),
-        modelValue: {
-            type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<VanillaCheckboxValue>,
-            default: undefined,
-        },
-        checked: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        value: {
-            type: [String, Number, Boolean, Array, Object, Date, Function, Symbol, undefined] as PropType<VanillaCheckboxValue>,
-            default: false,
-        },
-        checkedValue: {
-            type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<VanillaCheckboxValue>,
-            default: true,
-        },
-        uncheckedValue: {
-            type: [String, Number, Boolean, Array, Object, Date, Function, Symbol] as PropType<VanillaCheckboxValue>,
-            default: false,
-        },
-        align: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: 'left',
-            validator(align: string) {
-                return ['left', 'right', 'center'].includes(align)
-            },
-        },
-    },
-    emits: [
-        'update:modelValue',
-    ],
-    setup(props) {
-        const localValue = useVModel(props, 'modelValue')
+  },
+})
 
-        // When toggle changes, emit the update in a different way.
-        const emitUpdate = (event: Event | any) => {
-            const isChecked = event.target?.checked
+defineComponent({ inheritAttrs: false })
 
-            // It's an array
-            if (Array.isArray(localValue.value)) {
-                const newValue = [...localValue.value]
+const localValue = useVModel(props, 'modelValue')
+const {
+  localErrors,
+  localVariant,
+  hasErrors,
+} = useBootVariant(props, 'errors', localValue)
 
-                if (isChecked) {
-                    newValue.push(props.value)
-                }
- else {
-                    newValue.splice(newValue.indexOf(props.value), 1)
-                }
+const { configuration } = useConfiguration<CheckboxProps>(checkboxConfig, checkboxClassesKeys)
 
-                localValue.value = newValue
-                return
-            }
+// When toggle changes, emit the update in a different way.
+const emitUpdate = (event: Event | any) => {
+  const isChecked = event.target?.checked
 
-            // It's an object
-            if (typeof localValue.value === 'object' && localValue.value !== null) {
-                const temporaryValue = props.value
-                const temporaryObject = localValue.value
-                if (isChecked) {
-                    // @ts-expect-error: We assume its a string or will throw an error
-                    temporaryObject[temporaryValue] = true
-                }
- else {
-                    // @ts-expect-error: We assume its a string or will throw an error
-                    delete temporaryObject[temporaryValue]
-                }
-                localValue.value = temporaryObject
-                return
-            }
+  // It's an array
+  if (Array.isArray(localValue.value)) {
+    const newValue = [...localValue.value]
 
-            // It's a boolean
-            const toggleValue = isChecked ? props.checkedValue : props.uncheckedValue
-            localValue.value = toggleValue
-        }
+    if (isChecked) {
+      newValue.push(props.value)
+    }
+    else {
+      newValue.splice(newValue.indexOf(props.value), 1)
+    }
 
-        // Check if the value is checked
-        const isChecked = computed(() => {
-            if (Array.isArray(localValue.value) && typeof props.value === 'string') {
-                return localValue.value.includes(props.value)
-            }
-            return localValue.value === props.checkedValue
-        })
+    localValue.value = newValue
+    return
+  }
 
-        const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', localValue)
+  // It's an object
+  if (typeof localValue.value === 'object' && localValue.value !== null) {
+    const temporaryValue = props.value as string
+    const temporaryObject = localValue.value as object
+    if (isChecked) {
+      temporaryObject[temporaryValue] = true
+    }
+    else {
+      delete temporaryObject[temporaryValue]
+    }
+    localValue.value = temporaryObject
+    return
+  }
 
-        const { configuration } = useConfigurationWithClassesList<VanillaCheckboxProps>(
-            VanillaCheckboxConfig,
-            VanillaCheckboxClassesKeys,
-            localVariant,
-        )
+  // It's a boolean
+  const toggleValue = isChecked ? props.checkedValue : props.uncheckedValue
+  localValue.value = toggleValue
+}
 
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            localErrors,
-            hasErrors,
-            props,
-            emitUpdate,
-            isChecked,
-        }
-    },
+// Check if the value is checked
+const isChecked = computed(() => {
+  if (Array.isArray(localValue.value) && typeof props.value === 'string') {
+    return localValue.value.includes(props.value)
+  }
+  return localValue.value === props.checkedValue
 })
 </script>
 
@@ -157,7 +126,7 @@ export default defineComponent({
       name="errors"
       v-bind="{ hasErrors, localErrors }"
     >
-      <VanillaFormErrors
+      <FormErrors
         v-if="hasErrors && showErrors"
         :errors="localErrors"
       />
@@ -166,7 +135,7 @@ export default defineComponent({
       name="feedback"
       v-bind="{ hasErrors, feedback }"
     >
-      <VanillaFormFeedback
+      <FormFeedback
         v-if="!hasErrors && feedback !== undefined && showFeedback"
         :text="feedback"
       />

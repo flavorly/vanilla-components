@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
 import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const AvatarConfig = {
+export const avatarConfig = {
   fixedClasses: {
     wrapper: '',
     wrapperImageAndButtons: '',
@@ -46,9 +46,9 @@ export const AvatarConfig = {
   },
 }
 
-export const AvatarClassesKeys = Object.keys(AvatarConfig.classes)
+export const avatarClassesKeys = Object.keys(avatarConfig.classes)
 
-export type AvatarClassesValidKeys = keyof typeof AvatarConfig.classes
+export declare type AvatarClassesValidKeys = keyof typeof avatarConfig.classes
 
 export declare type AvatarValue = never | undefined
 

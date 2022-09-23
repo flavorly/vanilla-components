@@ -1,17 +1,6 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useInjectsClassesList } from '../../core'
-
-export default defineComponent({
-    setup(props) {
-        const classesList = useInjectsClassesList()!
-
-        return {
-            classesList,
-            props,
-        }
-    },
-})
+<script setup lang="ts">
+import { useInjectsClassesList } from '@/core/use'
+const classesList = useInjectsClassesList()!
 </script>
 
 <template>

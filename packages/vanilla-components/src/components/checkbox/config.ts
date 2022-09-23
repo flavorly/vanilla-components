@@ -1,7 +1,8 @@
-import mapValues from 'lodash/mapValues'
-import { mergeClasses } from '../../core'
+import type { InputHTMLAttributes } from 'vue'
+import { mergeClasses } from '@/core/helpers'
+import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaCheckboxConfig = {
+export const checkboxConfig = {
   fixedClasses: {
     wrapper: '',
     wrapperLeft: 'flex items-center justify-start',
@@ -56,7 +57,20 @@ export const VanillaCheckboxConfig = {
   },
 }
 
-export const VanillaCheckboxClassesKeys = Object.keys(VanillaCheckboxConfig.classes)
+export const checkboxClassesKeys = Object.keys(checkboxConfig.classes)
 
-export type VanillaCheckboxClassesValidKeys = keyof typeof VanillaCheckboxConfig.classes
+export declare type CheckboxClassesValidKeys = keyof typeof checkboxConfig.classes
+
+export declare type CheckboxSimpleValue = string | number | boolean | undefined | null | Date | Function | symbol | object | string[]
+
+export declare type CheckboxValue = CheckboxSimpleValue | CheckboxSimpleValue[] | ObjectWithProperties<CheckboxSimpleValue>
+
+export declare type CheckboxProps = WithVariantPropsAndClassesList<{
+    modelValue?: CheckboxValue
+    value?: CheckboxValue
+    checkedValue?: CheckboxValue
+    uncheckedValue?: CheckboxValue
+    type?: 'checkbox'
+    checked?: boolean
+} & InputHTMLAttributes & Data, CheckboxClassesValidKeys>
 

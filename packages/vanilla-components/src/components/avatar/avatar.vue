@@ -2,7 +2,7 @@
   import type { PropType, Ref } from 'vue'
   import { defineComponent, ref, watch } from 'vue'
   import type { AvatarClassesValidKeys, AvatarPreview, AvatarProps, AvatarValue } from './config'
-  import { AvatarClassesKeys, AvatarConfig } from './config'
+  import { avatarClassesKeys, avatarConfig } from './config'
   import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
   import FormErrors from '@/components/forms/form-errors.vue'
   import FormFeedback from '@/components/forms/form-feedback.vue'
@@ -52,7 +52,7 @@
     hasErrors,
   } = useBootVariant(props, 'errors', localValue)
 
-  const { configuration } = useConfiguration<AvatarProps>(AvatarConfig, AvatarClassesKeys)
+  const { configuration } = useConfiguration<AvatarProps>(avatarConfig, avatarClassesKeys)
 
   const photoPreview: Ref<AvatarPreview> = ref(null)
   const photoInput: any = ref(null)

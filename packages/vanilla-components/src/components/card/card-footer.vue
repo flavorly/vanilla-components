@@ -1,48 +1,39 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import { useInjectsClassesList } from '../../core'
+import { useInjectsClassesList } from '@/core/use'
 
-export default defineComponent({
-    props: {
-        columns: {
-            type: [Number, String] as PropType<string | number>,
-            default: 1,
-            required: false,
-        },
-        type: {
-            type: String as PropType<string>,
-            default: 'simple',
-            required: false,
-            validator(value: string) {
-                // The value must match one of these strings
-                return ['simple', 'grid', 'split'].includes(value)
-            },
-        },
-        align: {
-            type: String,
-            default: 'right',
-            required: false,
-            validator(value: string) {
-                // The value must match one of these strings
-                return ['right', 'left', 'center', 'none'].includes(value)
-            },
-        },
-        border: {
-            type: [Boolean, String],
-            default: false,
-            required: false,
-        },
+const props = defineProps({
+  columns: {
+    type: [Number, String] as PropType<string | number>,
+    default: 1,
+    required: false,
+  },
+  type: {
+    type: String as PropType<string>,
+    default: 'simple',
+    required: false,
+    validator(value: string) {
+      // The value must match one of these strings
+      return ['simple', 'grid', 'split'].includes(value)
     },
-    setup(props) {
-        const classesList = useInjectsClassesList()!
-
-        return {
-            classesList,
-            props,
-        }
+  },
+  align: {
+    type: String,
+    default: 'right',
+    required: false,
+    validator(value: string) {
+      // The value must match one of these strings
+      return ['right', 'left', 'center', 'none'].includes(value)
     },
+  },
+  border: {
+    type: [Boolean, String],
+    default: false,
+    required: false,
+  },
 })
+
+const classesList = useInjectsClassesList()!
 </script>
 
 <template>

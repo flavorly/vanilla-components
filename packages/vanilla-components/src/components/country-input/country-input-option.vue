@@ -1,90 +1,70 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, defineComponent, ref } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList } from '../../core'
-import VanillaFlag from '../icons/flag.vue'
-import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
-import { VanillaSelectCountryOptionClassesKeys, VanillaSelectCountryOptionConfig } from './country-input-option.vue'
-import type { VanillaSelectCountryOptionProps } from './country-input-option.vue'
+import { computed, ref } from 'vue'
+import { countryInputOptionClassesKeys, countryInputOptionConfig } from './config'
+import type { CountryInputOptionProps } from './config'
+import Flag from '@/components/icons/flag.vue'
+import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
+import { useBootVariant, useConfiguration } from '@/core/use'
 
-export default defineComponent({
-    components: {
-        VanillaFlag,
-        CheckIcon,
-    },
-    props: {
-        country: {
-            // TODO : move this to a exported type
-            type: [Object, Array] as PropType<{
-                value: string
-                label: string
-                name: string
-                name_raw: string
-                dialCode: string
-                iso2: string
-            }>,
-            required: true,
-        },
-        selected: {
-            type: Boolean,
-            default: false,
-        },
-        description: {
-            type: [String] as PropType<string | undefined>,
-            default: undefined,
-        },
-        hasErrors: {
-            type: Boolean,
-            default: false,
-        },
-        parentClasses: {
-            type: [String, Array] as PropType<string | string[]>,
-            default: '',
-        },
-        labelWithDialCode: {
-            type: Boolean as PropType<boolean>,
-            required: false,
-            default: false,
-        },
-        labelWithCountryCode: {
-            type: Boolean as PropType<boolean>,
-            required: false,
-            default: false,
-        },
-    },
-    setup(props) {
-        const {
-            localVariant,
-        } = useBootVariant(props, 'errors', ref(null))
+const props = defineProps({
+  country: {
+    // TODO : move this to a exported type
+    type: [Object, Array] as PropType<{
+      value: string
+      label: string
+      name: string
+      name_raw: string
+      dialCode: string
+      iso2: string
+    }>,
+    required: true,
+  },
+  selected: {
+    type: Boolean,
+    default: false,
+  },
+  description: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
+  hasErrors: {
+    type: Boolean,
+    default: false,
+  },
+  parentClasses: {
+    type: [String, Array] as PropType<string | string[]>,
+    default: '',
+  },
+  labelWithDialCode: {
+    type: Boolean as PropType<boolean>,
+    required: false,
+    default: false,
+  },
+  labelWithCountryCode: {
+    type: Boolean as PropType<boolean>,
+    required: false,
+    default: false,
+  },
+})
 
-        const { configuration } = useConfigurationWithClassesList<VanillaSelectCountryOptionProps>(
-            VanillaSelectCountryOptionConfig,
-            VanillaSelectCountryOptionClassesKeys,
-            localVariant,
-        )
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<CountryInputOptionProps>(countryInputOptionConfig, countryInputOptionClassesKeys)
 
-        const nameLabel = computed(() => {
-            if (props.labelWithDialCode) {
-                return `${props.country.label} +${props.country.dialCode}`
-            }
+const nameLabel = computed(() => {
+  if (props.labelWithDialCode) {
+    return `${props.country.label} +${props.country.dialCode}`
+  }
 
-            if (props.labelWithCountryCode) {
-                return `${props.country.label} (${props.country.dialCode})`
-            }
+  if (props.labelWithCountryCode) {
+    return `${props.country.label} (${props.country.dialCode})`
+  }
 
-            if (props.labelWithDialCode && props.labelWithCountryCode) {
-                return `${props.country.label} +${props.country.dialCode} (${props.country.dialCode})`
-            }
+  if (props.labelWithDialCode && props.labelWithCountryCode) {
+    return `${props.country.label} +${props.country.dialCode} (${props.country.dialCode})`
+  }
 
-            return props.country.label
-        })
-
-        return {
-            props,
-            configuration,
-            nameLabel,
-        }
-    },
+  return props.country.label
 })
 </script>
 
@@ -99,7 +79,7 @@ export default defineComponent({
         ]"
       >
         <suspense>
-          <VanillaFlag
+          <Flag
             :class="[
               configuration.classesList.image,
             ]"

@@ -1,97 +1,69 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
-import {
-    useBootVariant,
-    useConfigurationWithClassesList,
-    useMultipleOptions,
-    useMultipleVModel,
-    useVariantProps,
-} from '../../core'
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/form-feedback.vue'
-import VanillaFormLabel from '../FormLabel/FormLabel.vue'
-import type { InputOptions } from '../../core/types'
-import type { VanillaSelectValue } from '../select/select.vue'
-import VanillaCheckbox, { VanillaCheckboxClassesKeys, VanillaCheckboxConfig } from './checkbox.vue'
-import type { VanillaCheckboxProps } from './checkbox.vue'
+import { checkboxClassesKeys, checkboxConfig } from './config'
+import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
+import type { InputOptions } from '@/core/types'
+import { useBootVariant, useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '@/core/use'
+import FormErrors from '@/components/forms/form-errors.vue'
+import FormFeedback from '@/components/forms/form-feedback.vue'
+import FormLabel from '@/components/forms/form-label.vue.vue'
+import Checkbox from '@/components/checkbox/checkbox.vue'
 
-export default defineComponent({
-    components: {
-        VanillaFormErrors,
-        VanillaFormFeedback,
-        VanillaFormLabel,
-        VanillaCheckbox,
-    },
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaCheckboxProps>(),
-        modelValue: {
-            type: [
-                String,
-                Number,
-                Boolean,
-                Array,
-                Object,
-                Date,
-                Function,
-                Symbol,
-            ] as PropType<VanillaSelectValue>,
-            default: undefined,
-        },
-        options: {
-            type: [Array, Object] as PropType<InputOptions>,
-            default: undefined,
-        },
-        normalizeOptions: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        valueAttribute: {
-            type: String as PropType<string | undefined>,
-            default: 'value',
-        },
-        textAttribute: {
-            type: String as PropType<string | undefined>,
-            default: 'text',
-        },
-    },
-    emits: [
-        'update:modelValue',
-    ],
-    setup(props) {
-        const { localValue } = useMultipleVModel(props, 'modelValue', props)
-
-        const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', localValue)
-
-        const { configuration } = useConfigurationWithClassesList<VanillaCheckboxProps>(
-            VanillaCheckboxConfig,
-            VanillaCheckboxClassesKeys,
-            localVariant,
-        )
-
-        const { normalizedOptions } = useMultipleOptions(
-            computed(() => props.options as InputOptions | undefined),
-            computed(() => props.textAttribute),
-            computed(() => props.valueAttribute),
-            computed(() => props.normalizeOptions!),
-        )
-
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            localErrors,
-            hasErrors,
-            props,
-            normalizedOptions,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<CheckboxProps, CheckboxClassesValidKeys>(),
+  modelValue: {
+    type: [
+      String,
+      Number,
+      Boolean,
+      Array,
+      Object,
+      Date,
+      Function,
+      Symbol,
+    ] as PropType<CheckboxValue>,
+    default: undefined,
+  },
+  options: {
+    type: [Array, Object] as PropType<InputOptions>,
+    default: undefined,
+  },
+  normalizeOptions: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  valueAttribute: {
+    type: String as PropType<string | undefined>,
+    default: 'value',
+  },
+  textAttribute: {
+    type: String as PropType<string | undefined>,
+    default: 'text',
+  },
 })
+
+defineComponent({ inheritAttrs: false })
+
+const { localValue } = useMultipleVModel(props, 'modelValue', true)
+
+const {
+  localErrors,
+  localVariant,
+  hasErrors,
+} = useBootVariant(props, 'errors', localValue)
+
+const { configuration } = useConfiguration<CheckboxProps>(
+  checkboxConfig,
+  checkboxClassesKeys,
+)
+
+const { normalizedOptions } = useMultipleOptions(
+  computed(() => props.options as InputOptions | undefined),
+  computed(() => props.textAttribute),
+  computed(() => props.valueAttribute),
+  computed(() => props.normalizeOptions!),
+)
 </script>
 
 <template>
@@ -108,7 +80,7 @@ export default defineComponent({
     >
       <div :class="configuration.classesList.groupCheckboxWrapper">
         <div :class="configuration.classesList.groupCheckbox">
-          <VanillaCheckbox
+          <Checkbox
             v-model="localValue"
             :name="option.value"
             :value="option.value"
@@ -116,7 +88,7 @@ export default defineComponent({
           />
         </div>
         <div :class="configuration.classesList.groupLabel">
-          <VanillaFormLabel
+          <FormLabel
             :for="option.value.toString()"
             :label="option.text.toString()"
           />
@@ -127,7 +99,7 @@ export default defineComponent({
       name="errors"
       v-bind="{ hasErrors, localErrors }"
     >
-      <VanillaFormErrors
+      <FormErrors
         v-if="hasErrors && showErrors"
         :errors="localErrors"
       />
@@ -136,7 +108,7 @@ export default defineComponent({
       name="feedback"
       v-bind="{ hasErrors, feedback }"
     >
-      <VanillaFormFeedback
+      <FormFeedback
         v-if="!hasErrors && feedback !== undefined && showFeedback"
         :text="feedback"
       />

@@ -1,4 +1,7 @@
-export const VanillaDatatableConfig = {
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, InputOptions, NormalizedOption, NormalizedOptions, WithVariantPropsAndClassesList } from '@/core/types'
+
+export const datatableConfig = {
   fixedClasses: {},
 
   // Default appearance
@@ -106,11 +109,282 @@ export const VanillaDatatableConfig = {
 
     skeletonTableBody: 'bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700',
     skeletonTableColumn: 'px-2 py-3 whitespace-nowrap leading-5',
-
   },
 }
 
-export const VanillaDatatableClassesKeys = Object.keys(VanillaDatatableConfig.classes)
+export const datatableClassesKeys = Object.keys(datatableConfig.classes)
 
-export type VanillaDatatableClassesValidKeys = keyof typeof VanillaDatatableConfig.classes
+export declare type DatatableClassesValidKeys = keyof typeof datatableConfig.classes
+
+export declare interface DatatableUserSettings {
+  visibleColumns: string[]
+  perPage: number
+  useStorage: boolean
+  saveSelection: boolean
+  selectedIds: string[]
+  filters: DatatableSavedFilter
+}
+
+export declare interface DatatableOptions {
+  selectable?: boolean
+  searchable?: boolean
+  refreshable?: boolean
+  manageSettings?: boolean
+  showTotalItems?: boolean
+  compact?: boolean
+  striped?: boolean
+}
+
+export declare interface DatatablePooling {
+  enable?: boolean
+  interval?: number
+  during?: number
+  stopWhenDataChanges?: boolean
+}
+
+export declare interface DatatableFilter {
+  name: string
+  label: string
+  layout?: string
+  component: string
+  placeholder?: string
+  value?: string | undefined | null | number
+  defaultValue?: string | undefined | null | number
+  options?: undefined | InputOptions | NormalizedOption[] | NormalizedOptions
+  rules?: undefined | string[]
+  props?: DatatableFilterProp[]
+}
+
+export declare interface DatatableFilterProp {
+  key: string
+  value: unknown
+}
+
+export declare interface DatatableSavedFilter {
+  [key: string]: unknown
+}
+
+export declare type DatatablePageOption = {
+  value: string | number | undefined | null | object | boolean
+  text: string | number | undefined
+} & NormalizedOption
+
+export declare interface DatatableTranslations {
+  title?: string
+  subtitle?: string
+  resource?: string
+  resources?: string
+
+  actionsButton?: string
+  actionsSelectedRows?: string
+
+  actionConfirmTitle?: string
+  actionConfirmText?: string
+  actionConfirmButton?: string
+  actionCancelButton?: string
+
+  search?: string
+  searchPlaceholder?: string
+
+  selectRows?: string
+  selectedUndo?: string
+  selectAllOr?: string
+  selectAllMatching?: string
+  selectAllMatchingUndo?: string
+
+  filters?: string
+  filtersBarLabel?: string
+  filtersWithEmptyData?: string
+  filtersReset?: string
+  filtersResetOr?: string
+  filtersCopy?: string
+  filtersSaveAndClose?: string
+  filtersRemove?: string
+
+  settings?: string
+  settingsItemsPerPage?: string
+  settingsVisibility?: string
+  settingsPersist?: string
+  settingsPersistSelection?: string
+  settingsReset?: string
+  settingsSaveAndClose?: string
+
+  refresh?: string
+
+  recordsEmpty?: string
+  recordsEmptyWithFiltersOrSearch?: string
+  recordsEmptyWithFiltersOrSearchAction?: string
+
+  settingsPerPage?: string
+
+  showingFrom?: string
+  nextPage?: string
+  previousPage?: string
+}
+
+export declare interface DatatableColumn {
+  name: string
+  label: string
+  sortable: boolean
+  native?: boolean
+  hidden?: boolean
+  defaultSortAs?: 'asc' | 'desc' | undefined | string
+  raw?: boolean
+  component?: string
+}
+
+export declare type DatatableColumnComputed = {
+  visible: boolean
+  isSorted: boolean
+  isSortedAsc: boolean
+  isSortedDesc: boolean
+  slotName: string
+} & DatatableColumn
+
+export declare type VanillaActionCallback = (action: DatatableAction) => void
+
+export declare interface DatatableAction {
+  name: string
+  label?: string
+  icon?: string | 'danger' | 'success' | 'warning' | 'info' | undefined
+  permissions?: {
+    view?: boolean
+    execute?: boolean
+  }
+  before?: {
+    confirm?: {
+      enable: boolean
+      title?: string
+      subtitle?: string | undefined
+      text?: string
+      icon?: string | undefined
+      confirmButton?: string
+      cancelButton?: string
+      safe?: boolean
+      classes?: {
+        title?: string
+        text?: string
+        icon?: string
+      }
+    }
+    callback?: VanillaActionCallback
+  }
+  after?: {
+    clearSelected?: boolean
+    resetFilters?: boolean
+    pooling?: DatatablePooling
+    callback?: VanillaActionCallback
+  }
+
+  [key: string]: any
+}
+
+export declare interface DatatableSortedColumn {
+  column: string
+  direction: 'asc' | 'desc' | null
+  sortedTimes?: number
+}
+
+export declare type DatatableSortedColumns = DatatableSortedColumn[]
+
+export declare interface DatatableQueryData {
+  search: null | undefined | string
+  perPage: number | string | keyof DatatablePageOption
+  selected: (string)[]
+  selectedAll: boolean
+  filters: DatatableSavedFilter
+  sorting: DatatableSortedColumn[]
+  action?: null | undefined | string
+}
+
+export declare interface DatatableResultData {
+  id: string | number
+  created_at?: string
+  updated_at?: string
+
+  [key: string]: any
+}
+
+export declare interface DatatableResponsePage {
+  url: string
+  label: string | number
+  active: boolean
+}
+
+export declare interface DatatableLinks {
+  next: string | null
+  previous: string | null
+  pages?: DatatableResponsePage[] | null
+}
+
+export declare interface DatatableMeta {
+  current_page: number
+  from: number
+  to: number
+  total: number
+}
+
+export declare interface DatatableResponse {
+  data: DatatableResultData[]
+  links: DatatableLinks | undefined
+  meta: DatatableMeta | undefined
+
+  [key: string]: any
+}
+
+export declare type DatatableActions = DatatableAction[]
+
+export declare type DatatableColumns = DatatableColumn[]
+
+export declare type DatatableColumnsComputed = DatatableColumnComputed[]
+
+export declare type DatatableFilters = DatatableFilter[]
+
+export declare type DatatableSavedFilters = DatatableSavedFilter[]
+
+export declare type DatatablePageOptions = DatatablePageOption[] & NormalizedOptions & InputOptions
+
+export declare interface DatatableConfiguration {
+  name: string | number
+  primaryKey: string | number
+  columns: DatatableColumns
+  actions: DatatableActions
+
+  filters: DatatableFilters
+  filtersKey?: string | number
+  filtersBaseUrl?: string | undefined
+
+  options: DatatableOptions
+  translations: DatatableTranslations
+  perPageOptions: DatatablePageOptions
+  pooling: DatatablePooling
+
+  fetchData?: DatatableFetchDataFunction
+  fetchEndpoint?: string
+  fetchMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
+
+  actionsEndpoint?: string
+  actionsMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
+
+  onActionExecutedCallback?: DatatableActionExecutedFunction
+  onExceptionCallback?: DatatableExceptionFunction
+
+  [key: string]: any
+}
+
+export declare type DatatableFetchDataFunction = (configuration: DatatableConfiguration, data: DatatableQueryData) => DatatableFetchDataPromise
+export declare type DatatableActionExecutedFunction = (action: DatatableAction) => Promise<never>
+export declare type DatatableExceptionFunction = (error: object) => Promise<never>
+
+export declare type DatatableFetchDataPromise = Promise<{
+  data: DatatableResultData[]
+  links?: DatatableLinks | undefined
+  meta?: DatatableMeta
+
+  [key: string]: any
+}>
+
+export declare type DatatableProps = WithVariantPropsAndClassesList<{
+  config?: DatatableConfiguration
+} & InputHTMLAttributes & Data, DatatableClassesValidKeys>
 

@@ -1,69 +1,50 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
 import { defineComponent, provide, ref } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core/use'
-import { hasSlot } from '../../core/helpers'
 import VanillaCardFooter from './card-footer.vue'
-import type { VanillaCardProps } from './card.vue'
-import { VanillaCardClassesKeys, VanillaCardConfig } from './card.vue'
+import type { CardClassesValidKeys, CardProps } from './config'
+import { cardClassesKeys, cardConfig } from './config'
+import { hasSlot } from '@/core/helpers'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 
-export default defineComponent({
-    components: {
-        VanillaCardFooter,
-    },
-    inheritAttrs: true,
-    props: {
-        ...useVariantProps<VanillaCardProps>(),
-        title: {
-            type: [String] as PropType<string>,
-            default: undefined,
-        },
-        subtitle: {
-            type: [String] as PropType<string>,
-            default: undefined,
-        },
-        as: {
-            type: [String] as PropType<string>,
-            default: 'div',
-        },
-        bodyDivided: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyDarker: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyWithPadding: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyClasses: {
-            type: [String] as PropType<string>,
-            default: '',
-        },
-    },
-    setup(props) {
-        const { localVariant } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration } = useConfigurationWithClassesList<VanillaCardProps>(
-            VanillaCardConfig,
-            VanillaCardClassesKeys,
-            localVariant,
-        )
-
-        /**
-         * Provided data
-         */
-        provide('configuration_vanilla', configuration)
-
-        return {
-            configuration,
-            localVariant,
-            hasSlot,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<CardProps, CardClassesValidKeys>(),
+  title: {
+    type: [String] as PropType<string>,
+    default: undefined,
+  },
+  subtitle: {
+    type: [String] as PropType<string>,
+    default: undefined,
+  },
+  as: {
+    type: [String] as PropType<string>,
+    default: 'div',
+  },
+  bodyDivided: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  bodyDarker: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  bodyWithPadding: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  bodyClasses: {
+    type: [String] as PropType<string>,
+    default: '',
+  },
 })
+
+defineComponent({ inheritAttrs: true })
+
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<CardProps>(cardConfig, cardClassesKeys)
+
+provide('configuration_vanilla', configuration)
 </script>
 
 <template>

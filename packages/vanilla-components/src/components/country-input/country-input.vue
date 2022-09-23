@@ -1,137 +1,119 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed, defineComponent, watch } from 'vue'
 import find from 'lodash/find'
 import first from 'lodash/first'
-import { hasSlot, useAttributesAndProps, useBootVariant, useVModel, useVariantProps } from '../../core'
-import { countries, filterCountriesByName } from '../../utils/CountryCodes'
-import VanillaRichSelect from '../RichSelect/RichSelect.vue'
-import type { MinimumInputLengthTextProp } from '../RichSelect'
-import VanillaSelectCountryOption from '../SelectCountryOption/SelectCountryOption.vue'
-import type { VanillaFavoriteCountriesValue, VanillaSelectCountryProps, VanillaSelectCountryValue } from './country-input.vue'
+import type { CountryInputClassesValidKeys, CountryInputProps, CountryValue, FavoriteCountriesValue } from './config'
+import CountryOption from '@/components/country-input/country-input-option.vue'
+import RichSelect from '@/components/rich-select/rich-select.vue'
+import { countries, filterCountriesByName } from '@/core/utils'
+import type { MinimumInputLengthTextProp } from '@/core/types'
+import { useAttributesAndProps, useBootVariant, useVModel, useVariantProps } from '@/core/use'
 
-export default defineComponent({
-    components: {
-        VanillaSelectCountryOption,
-        VanillaRichSelect,
-    },
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaSelectCountryProps>(),
-        modelValue: {
-            type: [String, Number] as PropType<VanillaSelectCountryValue>,
-            default: undefined,
-        },
-        favoriteCountries: {
-            type: [Array, Object, undefined] as PropType<VanillaFavoriteCountriesValue>,
-            required: false,
-            default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
-        },
-        labelWithDialCode: {
-            type: Boolean as PropType<boolean>,
-            required: false,
-            default: false,
-        },
-        labelWithCountryCode: {
-            type: Boolean as PropType<boolean>,
-            required: false,
-            default: false,
-        },
-        searchBoxPlaceholder: {
-            type: String,
-            default: 'Search for your country here...',
-        },
-        noResultsText: {
-            type: String,
-            default: '😟 Sorry but we did not find any countries to your query. Try another one query?',
-        },
-        searchingText: {
-            type: String,
-            default: 'Please wait, searching for countries...',
-        },
-        loadingClosedPlaceholder: {
-            type: String,
-            default: 'Loading, please wait ...',
-        },
-        loadingMoreResultsText: {
-            type: String,
-            default: 'Loading more options...',
-        },
-        minimumInputLengthText: {
-            type: [Function, String] as PropType<MinimumInputLengthTextProp>,
-            default: () => (minimumInputLength: number): string => `Search more countries by entering ${minimumInputLength} or more characters`,
-        },
-    },
-    emits: [
-        'update:countryDialCode',
-        'update:countryCode',
-        'update:countryName',
-        'update:modelValue',
-    ],
-    setup(props, { emit }) {
-        const localValue = useVModel(props, 'modelValue')
-        const { hasErrors, localErrors, localVariant } = useBootVariant(props, 'errors', localValue)
-
-        // Pre-fetch the following Options
-        const preFetchOptions = filterCountriesByName(
-            '',
-            localValue.value?.toString(),
-            countries,
-            2,
-            props.favoriteCountries,
-        )
-
-        // Function to fetch Countries from local object
-        const fetchCountries = (query?: string) =>
-            new Promise((resolve) => {
-                resolve(filterCountriesByName(
-                    query,
-                    localValue.value?.toString(),
-                    countries,
-                    2,
-                    props.favoriteCountries,
-                ))
-            }).then(response => ({
-                results: response as Record<string, never>[],
-                hasMorePages: false,
-            }))
-
-        // Actual Country Selected ( Whole object )
-        const selectedCountry = computed(() => {
-            return find(
-                countries,
-                country => country.value === localValue.value,
-            ) || first(preFetchOptions)
-        })
-
-        // Watch & Emit additional data
-        watch(localValue, () => {
-            emit('update:countryDialCode', selectedCountry.value.dialCode)
-            emit('update:countryCode', selectedCountry.value.value)
-            emit('update:countryName', selectedCountry.value.name_raw)
-        }, { immediate: true })
-
-        // Rebind Attributes
-        const bindAttributes = useAttributesAndProps()
-
-        return {
-            localValue,
-            localErrors,
-            localVariant,
-            hasErrors,
-            hasSlot,
-            fetchCountries,
-            preFetchOptions,
-            props,
-            bindAttributes,
-            selectedCountry,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<CountryInputProps, CountryInputClassesValidKeys>(),
+  modelValue: {
+    type: [String, Number] as PropType<CountryValue>,
+    default: undefined,
+  },
+  favoriteCountries: {
+    type: [Array, Object, undefined] as PropType<FavoriteCountriesValue>,
+    required: false,
+    default: () => ['US', 'GB', 'PT', 'FR', 'DE'],
+  },
+  labelWithDialCode: {
+    type: Boolean as PropType<boolean>,
+    required: false,
+    default: false,
+  },
+  labelWithCountryCode: {
+    type: Boolean as PropType<boolean>,
+    required: false,
+    default: false,
+  },
+  searchBoxPlaceholder: {
+    type: String,
+    default: 'Search for your country here...',
+  },
+  noResultsText: {
+    type: String,
+    default: '😟 Sorry but we did not find any countries to your query. Try another one query?',
+  },
+  searchingText: {
+    type: String,
+    default: 'Please wait, searching for countries...',
+  },
+  loadingClosedPlaceholder: {
+    type: String,
+    default: 'Loading, please wait ...',
+  },
+  loadingMoreResultsText: {
+    type: String,
+    default: 'Loading more options...',
+  },
+  minimumInputLengthText: {
+    type: [Function, String] as PropType<MinimumInputLengthTextProp>,
+    default: () => (minimumInputLength: number): string => `Search more countries by entering ${minimumInputLength} or more characters`,
+  },
 })
+
+const emit = defineEmits([
+  'update:countryDialCode',
+  'update:countryCode',
+  'update:countryName',
+  'update:modelValue',
+])
+
+defineComponent({ inheritAttrs: false })
+
+const localValue = useVModel(props, 'modelValue')
+const { hasErrors, localErrors, localVariant } = useBootVariant(props, 'errors', localValue)
+
+// Pre-fetch the following Options
+const preFetchOptions = filterCountriesByName(
+  '',
+  localValue.value?.toString(),
+  countries,
+  2,
+  props.favoriteCountries,
+)
+
+// Function to fetch Countries from local object
+const fetchCountries = (query?: string) =>
+  new Promise((resolve) => {
+    resolve(filterCountriesByName(
+      query,
+      localValue.value?.toString(),
+      countries,
+      2,
+      props.favoriteCountries,
+    ))
+  }).then(response => ({
+    results: response as Record<string, never>[],
+    hasMorePages: false,
+  }))
+
+// Actual Country Selected ( Whole object )
+const selectedCountry = computed(() => {
+  return find(
+    countries,
+    country => country.value === localValue.value,
+  ) || first(preFetchOptions)
+})
+
+// Watch & Emit additional data
+watch(localValue, () => {
+  emit('update:countryDialCode', selectedCountry.value.dialCode)
+  emit('update:countryCode', selectedCountry.value.value)
+  emit('update:countryName', selectedCountry.value.name_raw)
+}, { immediate: true })
+
+// Rebind Attributes
+const bindAttributes = useAttributesAndProps()
 </script>
 
 <template>
-  <VanillaRichSelect
+  <RichSelect
     v-model="localValue"
     v-bind="bindAttributes"
     :options="preFetchOptions"
@@ -152,7 +134,7 @@ export default defineComponent({
     :select-on-close="false"
   >
     <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
-      <VanillaSelectCountryOption
+      <CountryOption
         :country="selectedCountry"
         :selected="isSelected"
         :parent-classes="className"
@@ -162,7 +144,7 @@ export default defineComponent({
       />
     </template>
     <template #option="{ option: { raw: country }, className, isSelected, hasErrors }">
-      <VanillaSelectCountryOption
+      <CountryOption
         :country="country"
         :selected="isSelected"
         :parent-classes="className"
@@ -171,6 +153,6 @@ export default defineComponent({
         :label-with-country-code="props.labelWithCountryCode"
       />
     </template>
-  </VanillaRichSelect>
+  </RichSelect>
 </template>
 

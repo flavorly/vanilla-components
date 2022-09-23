@@ -1,3 +1,6 @@
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+
 const defaultCard = {
   card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-800/70 dark:text-white dark:shadow-dark-xl dark:border dark:border-white/10',
 
@@ -38,7 +41,7 @@ const defaultCard = {
   emptyIcon: 'text-gray-200 dark:text-gray-600',
 }
 
-export const VanillaCardConfig = {
+export const cardConfig = {
   fixedClasses: {
     bodyDivided: '',
   },
@@ -54,7 +57,17 @@ export const VanillaCardConfig = {
   },
 }
 
-export const VanillaCardClassesKeys = Object.keys(VanillaCardConfig.classes)
+export const cardClassesKeys = Object.keys(cardConfig.classes)
 
-export type VanillaCardClassesValidKeys = keyof typeof VanillaCardConfig.classes
+export declare type CardClassesValidKeys = keyof typeof cardConfig.classes
+
+export declare type CardProps = WithVariantPropsAndClassesList<{
+  title?: string
+  subtitle?: string
+  as?: string
+  bodyDivided?: boolean
+  bodyDarker?: boolean
+  bodyWithPadding?: boolean
+  bodyClasses?: string | undefined
+} & InputHTMLAttributes & Data, CardClassesValidKeys>
 

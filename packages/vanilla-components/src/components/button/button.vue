@@ -2,13 +2,13 @@
 import type { PropType, Ref } from 'vue'
 import { defineComponent, defineEmits, onMounted, ref } from 'vue'
 import VanillaLoadingSpinner from '../icons/spinner.vue'
-import type { buttonClassesValidKeys, buttonProps } from './config'
+import type { ButtonClassesValidKeys, ButtonProps } from './config'
 import { buttonClassesKeys, buttonConfig } from './config'
 import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 
 const props = defineProps({
-    ...useVariantProps<buttonProps, buttonClassesValidKeys>(),
+    ...useVariantProps<ButtonProps, ButtonClassesValidKeys>(),
     as: {
         type: [String] as PropType<string>,
         default: 'button',
@@ -48,15 +48,14 @@ defineComponent({
 const localRef = ref(null) as Ref<HTMLElement | null>
 const localValue = ref(props.variant)
 const { localVariant } = useBootVariant(props, 'errors', localValue)
-const { configuration } = useConfiguration<buttonProps>(buttonConfig, buttonClassesKeys)
+const { configuration } = useConfiguration<ButtonProps>(buttonConfig, buttonClassesKeys)
 
-// If its disable, just ignore it
+// If it's disable, just ignore it
 const handleClickEvent = (event: MouseEvent) => {
   if (props.disabled || props.loading) {
     event.preventDefault()
     event.stopPropagation()
   }
-
   emit('click', event)
 }
 
