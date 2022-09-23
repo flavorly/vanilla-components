@@ -1,58 +1,43 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import { useInjectsClassesList, useReplacePlaceholders } from '../../core'
-import { useInjectDatatableTranslations } from './utils'
+import { useInjectDatatableTranslations } from '../utils'
+import { useInjectsClassesList, useReplacePlaceholders } from '@/core/use'
 
-export default defineComponent({
-    components: {
-    },
-    props: {
-        isAllSelected: {
-            type: Boolean as PropType<boolean>,
-            required: true,
-        },
-        countSelected: {
-            type: [String, Number] as PropType<string | number>,
-            required: true,
-        },
-        countTotal: {
-            type: [String, Number] as PropType<string | number>,
-            required: true,
-        },
-    },
-    emits: [
-        'deselectAll',
-        'selectMatching',
-        'deselectMatching',
-    ],
-    setup(props, { emit }) {
-        const deselectAll = () => {
-            emit('deselectAll', true)
-        }
-
-        const selectMatching = () => {
-            emit('selectMatching', true)
-        }
-
-        const deselectMatching = () => {
-            emit('deselectMatching', true)
-        }
-
-        // Provide Translations & Config
-        const translations = useInjectDatatableTranslations()!
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
-
-        return {
-            deselectAll,
-            selectMatching,
-            deselectMatching,
-            useReplacePlaceholders,
-            translations,
-            classesList,
-        }
-    },
+const props = defineProps({
+  isAllSelected: {
+    type: Boolean as PropType<boolean>,
+    required: true,
+  },
+  countSelected: {
+    type: [String, Number] as PropType<string | number>,
+    required: true,
+  },
+  countTotal: {
+    type: [String, Number] as PropType<string | number>,
+    required: true,
+  },
 })
+
+const emit = defineEmits([
+  'deselectAll',
+  'selectMatching',
+  'deselectMatching',
+])
+
+const deselectAll = () => {
+  emit('deselectAll', true)
+}
+
+const selectMatching = () => {
+  emit('selectMatching', true)
+}
+
+const deselectMatching = () => {
+  emit('deselectMatching', true)
+}
+
+const translations = useInjectDatatableTranslations()!
+const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 </script>
 
 <template>

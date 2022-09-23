@@ -20,7 +20,7 @@ const defaultInput = {
   addonClasses: 'text-gray-300 dark:text-gray-600',
 }
 
-export const VanillaInputConfig = {
+export const inputConfig = {
   fixedClasses: {
     input: mergeClasses(
       'appearance-none block w-full',
@@ -78,7 +78,7 @@ export const VanillaInputConfig = {
   },
 }
 
-export const VanillaInputClassesKeys = Object.keys(VanillaInputConfig.classes)
+export const inputClassesKeys = Object.keys(inputConfig.classes)
 
-export type VanillaInputClassesValidKeys = keyof typeof VanillaInputConfig.classes
+export declare type VanillaInputClassesValidKeys = keyof typeof inputConfig.classes
 

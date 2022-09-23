@@ -1,46 +1,33 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import { useInjectsClassesList, useVModel } from '../../core'
-import VanillaInput from '../input/input.vue'
-import MagnifyingGlassIcon from '../icons/hero/solid/MagnifyingGlassIcon.vue'
+import Input from '@/components/input/input.vue'
+import MagnifyingGlassIcon from '@/components/icons/hero/solid/MagnifyingGlassIcon.vue'
+import { useInjectsClassesList, useVModel } from '@/core/use'
 
-export default defineComponent({
-    components: {
-        VanillaInput,
-        MagnifyingGlassIcon,
-    },
-    props: {
-        modelValue: {
-            type: [String, null, undefined] as PropType<string | null | undefined>,
-            required: true,
-        },
-        placeholder: {
-            type: [String] as PropType<string>,
-            required: true,
-        },
-        searchable: {
-            type: Boolean as PropType<boolean>,
-            required: true,
-        },
-    },
-    emits: [
-        'update:modelValue',
-    ],
-    setup(props) {
-        const localValue = useVModel(props, 'modelValue')
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
-        return {
-            localValue,
-            classesList,
-        }
-    },
+const props = defineProps({
+  modelValue: {
+    type: [String, null, undefined] as PropType<string | null | undefined>,
+    required: true,
+  },
+  placeholder: {
+    type: [String] as PropType<string>,
+    required: true,
+  },
+  searchable: {
+    type: Boolean as PropType<boolean>,
+    required: true,
+  },
 })
+
+const emit = defineEmits(['update:modelValue'])
+
+const localValue = useVModel(props, 'modelValue')
+const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 </script>
 
 <template>
   <div :class="[classesList.searchContainer]">
-    <VanillaInput
+    <Input
       ref="search"
       v-model="localValue"
       name="search"
@@ -58,6 +45,6 @@ export default defineComponent({
           :class="[classesList.searchIcon]"
         />
       </template>
-    </VanillaInput>
+    </Input>
   </div>
 </template>

@@ -1,43 +1,32 @@
-<script lang="ts">
-import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import { MenuItem } from '@headlessui/vue'
-import { useInjectsClassesList } from '@/core/use'
+<script setup lang="ts">
+  import type { PropType } from 'vue'
+  import { MenuItem } from '@headlessui/vue'
+  import { useInjectsClassesList } from '@/core/use'
 
-export default defineComponent({
-    components: {
-        MenuItem,
+  const props = defineProps({
+    text: {
+      type: [String] as PropType<string>,
+      required: false,
+      default: undefined,
     },
-    props: {
-        text: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: undefined,
-        },
-        disabled: {
-            type: [Boolean] as PropType<boolean>,
-            required: false,
-            default: false,
-        },
-        as: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: 'template',
-        },
-        withDefaultPadding: {
-            type: [Boolean] as PropType<boolean>,
-            required: false,
-            default: false,
-        },
+    disabled: {
+      type: [Boolean] as PropType<boolean>,
+      required: false,
+      default: false,
     },
-    setup(props) {
-        const classesList = useInjectsClassesList()!
+    as: {
+      type: [String] as PropType<string>,
+      required: false,
+      default: 'template',
+    },
+    withDefaultPadding: {
+      type: [Boolean] as PropType<boolean>,
+      required: false,
+      default: false,
+    },
+  })
 
-        return {
-            classesList,
-        }
-    },
-})
+  const classesList = useInjectsClassesList()!
 </script>
 
 <template>

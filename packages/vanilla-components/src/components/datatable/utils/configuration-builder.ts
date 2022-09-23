@@ -1,21 +1,17 @@
 import merge from 'lodash/merge'
 import assign from 'lodash/assign'
-import type {
-  VanillaDatatableConfiguration,
-  VanillaDatatableOptions,
-  VanillaDatatablePageOptions,
-  VanillaDatatablePooling,
-  VanillaDatatableTranslations,
-} from '../index'
+import type * as Types from '../config'
 import type { Data } from '@/core/types'
 
-export default function configurationBuilder<Props extends VanillaDatatableConfiguration | Data>(props: Props): VanillaDatatableConfiguration {
+export default function configurationBuilder<
+  Props extends Types.DatatableConfiguration | Data,
+>(props: Props): Types.DatatableConfiguration {
   const defaultPooling = {
     enable: false,
     interval: 5,
     during: 60,
     stopWhenDataChanges: true,
-  } as VanillaDatatablePooling
+  } as Types.DatatablePooling
 
   const defaultOptions = {
     selectable: true,
@@ -25,7 +21,7 @@ export default function configurationBuilder<Props extends VanillaDatatableConfi
     striped: false,
     compact: true,
     refreshable: true,
-  } as VanillaDatatableOptions
+  } as Types.DatatableOptions
 
   const defaultTranslations = {
     title: 'Items',
@@ -78,7 +74,7 @@ export default function configurationBuilder<Props extends VanillaDatatableConfi
     showingFrom: 'Showing :from to :to of :total results',
     nextPage: 'Next',
     previousPage: 'Previous',
-  } as VanillaDatatableTranslations
+  } as Types.DatatableTranslations
 
   const defaultPerPageOptions = [
       { value: 5, text: '5 Items per page' },
@@ -86,7 +82,7 @@ export default function configurationBuilder<Props extends VanillaDatatableConfi
       { value: 50, text: '50 Items per page' },
       { value: 100, text: '100 Items per page' },
       { value: 300, text: '300 Items per page' },
-  ] as VanillaDatatablePageOptions
+  ] as Types.DatatablePageOptions
 
   return {
     name: props?.uniqueName || props.config?.name,
@@ -129,6 +125,5 @@ export default function configurationBuilder<Props extends VanillaDatatableConfi
 
     onActionExecutedCallback: props?.onActionExecutedCallback || props.config?.onActionExecutedCallback || undefined,
     onExceptionCallback: props?.onExceptionCallback || props.config?.onExceptionCallback || undefined,
-
   }
 }

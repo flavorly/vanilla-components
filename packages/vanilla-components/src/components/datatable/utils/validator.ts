@@ -1,6 +1,6 @@
-import type { VanillaDatatableColumn, VanillaDatatableConfiguration } from '../index'
+import type * as Types from '../config'
 
-const validator = (config: VanillaDatatableConfiguration) => {
+const validator = (config: Types.DatatableConfiguration) => {
     // console.log('Validating Configuration', config);
 
     // Validate if columns exists
@@ -9,7 +9,7 @@ const validator = (config: VanillaDatatableConfiguration) => {
     }
 
     // Ensure all columns have a name
-    config?.columns.forEach((column: VanillaDatatableColumn) => {
+    config?.columns.forEach((column: Types.DatatableColumn) => {
         if (!column.name) {
           throw new Error(`You must define a name for this column ${column.name}`)
         }

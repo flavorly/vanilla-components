@@ -1,8 +1,8 @@
 import type { ComputedRef } from 'vue'
 import { computed, inject } from 'vue'
-import type { VanillaDatatableTranslations } from '../index'
+import type * as Types from '../config'
 
-export default function injectTranslations(): ComputedRef<VanillaDatatableTranslations> {
+export default function injectTranslations(): ComputedRef<Types.DatatableTranslations> {
     const translations = inject('datatable_translations', {})
-    return computed<VanillaDatatableTranslations>((): VanillaDatatableTranslations => translations || {})
+    return computed<Types.DatatableTranslations>((): Types.DatatableTranslations => translations || {})
 }

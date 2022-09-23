@@ -1,16 +1,11 @@
 import type { AxiosRequestConfig } from 'axios'
 import axios from 'axios'
+import type * as Types from '../config'
 
-import type {
-  VanillaDatatableConfiguration,
-  VanillaDatatableFetchDataPromise,
-  VanillaDatatableQueryData,
-} from '../index'
-
-const fetchData = <T extends VanillaDatatableConfiguration, Data extends VanillaDatatableQueryData>(
+const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.DatatableQueryData>(
   config: T,
   data: Data,
-): VanillaDatatableFetchDataPromise => {
+): Types.DatatableFetchDataPromise => {
   const isAction = data.action !== null
   const method = isAction ? config?.actionsMethod : config?.fetchMethod
   const url = isAction ? config?.actionsEndpoint : config?.fetchEndpoint
@@ -25,13 +20,13 @@ const fetchData = <T extends VanillaDatatableConfiguration, Data extends Vanilla
   } as AxiosRequestConfig
 
   return axios(axiosConfig)
-  .then(response => ({
-    data: response.data?.data,
-    links: response.data?.links,
-    meta: response.data?.meta,
-    responses: response.data?.responses,
-    resolved: true,
-  }))
+    .then(response => ({
+      data: response.data?.data,
+      links: response.data?.links,
+      meta: response.data?.meta,
+      responses: response.data?.responses,
+      resolved: true,
+    }))
 }
 
 export default fetchData

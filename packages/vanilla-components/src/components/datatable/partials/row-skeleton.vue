@@ -1,30 +1,20 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import VanillaSkeletonBar from '../../Skeletons/SkeletonBar/SkeletonBar.vue'
-import { useInjectsClassesList } from '../../core'
+import { useInjectsClassesList } from '@/core/use'
+import VanillaSkeletonBar from '@/components/skeleton-bar/skeleton-bar.vue'
 
-export default defineComponent({
-    components: {
-        VanillaSkeletonBar,
-    },
-    props: {
-        numberOfColumns: {
-            type: [Number] as PropType<number>,
-            required: true,
-        },
-        numberOfRows: {
-            type: [Number] as PropType<number>,
-            required: true,
-        },
-    },
-    setup() {
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
-        return {
-            classesList,
-        }
-    },
+const props = defineProps({
+  numberOfColumns: {
+    type: [Number] as PropType<number>,
+    required: true,
+  },
+  numberOfRows: {
+    type: [Number] as PropType<number>,
+    required: true,
+  },
 })
+
+const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 </script>
 
 <template>

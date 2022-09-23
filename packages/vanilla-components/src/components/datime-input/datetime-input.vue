@@ -1,92 +1,49 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import {
-    defineComponent,
-    onMounted,
-    ref,
-} from 'vue'
-
+import { onMounted, ref } from 'vue'
 import Flatpickr from 'flatpickr'
-import {
-    hasSlot,
-    useBootVariant,
-    useConfigurationWithClassesList,
-    useVModel,
-    useVariantProps,
-} from '../../core'
+import { dateTimeInputClassesKeys, dateTimeInputConfig } from './config'
+import type { DateTimeInputClassesValidKeys, DateTimeInputProps, DateTimeInputValue } from './config'
+import FormErrors from '@/components/forms/form-errors.vue'
+import FormFeedback from '@/components/forms/form-feedback.vue'
+import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
+import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { hasSlot } from '@/core/helpers'
 
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/form-feedback.vue'
-import ExclamationCircleIcon from '../icons/hero/solid/ExclamationCircleIcon.vue'
-import {
-    VanillaDatetimePickerClassesKeys,
-    VanillaDatetimePickerConfig,
-} from './datetime-input.vue'
-import type {
-    VanillaDatetimePickerProps,
-    VanillaDatetimePickerValue,
-} from './datetime-input.vue'
-
-export default defineComponent({
-    components: {
-        VanillaFormErrors,
-        VanillaFormFeedback,
-        ExclamationCircleIcon,
+const props = defineProps({
+  ...useVariantProps<DateTimeInputProps, DateTimeInputClassesValidKeys>(),
+  modelValue: {
+    type: [String, undefined] as PropType<DateTimeInputValue>,
+    default: undefined,
+  },
+  options: {
+    type: [Object] as PropType<object>,
+    default: () => {
+      return {
+        enableTime: true,
+        time_24hr: true,
+      }
     },
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaDatetimePickerProps>(),
-        modelValue: {
-            type: [String, undefined] as PropType<VanillaDatetimePickerValue>,
-            default: undefined,
-        },
-        options: {
-            type: [Object] as PropType<object>,
-            default: () => {
-                return {
-                    enableTime: true,
-                    time_24hr: true,
-                }
-            },
-        },
-        type: {
-            type: [String] as PropType<string>,
-            default: 'text',
-        },
-    },
-    setup(props) {
-        const localValue = useVModel(props, 'modelValue')
-        const flatpickrInput = ref(null)
-        const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', localValue)
-
-        const { configuration } = useConfigurationWithClassesList<VanillaDatetimePickerProps>(
-            VanillaDatetimePickerConfig,
-            VanillaDatetimePickerClassesKeys,
-            localVariant,
-        )
-
-        // On mounted start flatpickr
-        onMounted(() => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            Flatpickr(flatpickrInput.value, props.options)
-        })
-
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            localErrors,
-            hasErrors,
-            hasSlot,
-            flatpickrInput,
-        }
-    },
+  },
+  type: {
+    type: [String] as PropType<string>,
+    default: 'text',
+  },
 })
+
+const localValue = useVModel(props, 'modelValue')
+const flatpickrInput = ref(null)
+const {
+  localErrors,
+  localVariant,
+  hasErrors,
+} = useBootVariant(props, 'errors', localValue)
+
+const { configuration } = useConfiguration<DateTimeInputProps>(
+  dateTimeInputConfig,
+  dateTimeInputClassesKeys,
+)
+onMounted(() => Flatpickr(flatpickrInput.value, props.options))
 </script>
 
 <template>
@@ -127,7 +84,7 @@ export default defineComponent({
       name="errors"
       v-bind="{ hasErrors, localErrors }"
     >
-      <VanillaFormErrors
+      <FormErrors
         v-if="hasErrors && showErrors"
         :errors="localErrors"
       />
@@ -136,7 +93,7 @@ export default defineComponent({
       name="feedback"
       v-bind="{ hasErrors, feedback }"
     >
-      <VanillaFormFeedback
+      <FormFeedback
         v-if="!hasErrors && feedback !== undefined && showFeedback"
         :text="feedback"
       />

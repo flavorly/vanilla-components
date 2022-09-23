@@ -3,29 +3,12 @@ import type { PropType } from 'vue'
 import { defineComponent, onMounted, ref } from 'vue'
 import type { Options, Placement, Instance as PopperInstance } from '@popperjs/core'
 import { createPopper } from '@popperjs/core'
-
-import {
-    debounce,
-    elementIsTargetOrTargetChild,
-    getFocusableElements,
-    isTouchOnlyDevice as getIsTouch,
-    throttle,
-} from '../../core/helpers'
-
-import type { DebouncedFn } from '../../core/types'
-
-import { useBootVariant, useConfigurationWithClassesList, useVModel, useVariantPropsWithClassesList } from '../../core'
-
-import Transitionable from '../misc/transitionable.vue'
-import {
-    VanillaDropdownClassesKeys,
-    VanillaDropdownConfig,
-    VanillaDropdownPopperDefaultOptions as defaultPopperOptions,
-} from './dropdown.vue'
-import type {
-    VanillaDropdownClassesValidKeys,
-    VanillaDropdownExtendedProps,
-} from './dropdown.vue'
+import { dropdownClassesKeys, dropdownConfig, dropdownPopperDefaultOptions } from './config'
+import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
+import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import Transitionable from '@/components/misc/transitionable.vue'
+import type { DebouncedFn } from '@/core/types'
+import { debounce, elementIsTargetOrTargetChild, getFocusableElements, isTouchOnlyDevice as getIsTouch, throttle } from '@/core/helpers'
 
 export const validDropdownPlacements = [
     'auto',
@@ -51,7 +34,7 @@ export default defineComponent({
     },
     inheritAttrs: false,
     props: {
-        ...useVariantPropsWithClassesList<VanillaDropdownExtendedProps, VanillaDropdownClassesValidKeys>(),
+        ...useVariantProps<DropdownExtendedProps, DropdownClassesValidKeys>(),
         text: {
             type: String,
             default: undefined,
@@ -107,7 +90,7 @@ export default defineComponent({
         },
         popperOptions: {
             type: Object as PropType<Options>,
-            default: (): Options => defaultPopperOptions as Options,
+            default: (): Options => dropdownPopperDefaultOptions as Options,
         },
     },
     emits: {
@@ -128,11 +111,7 @@ export default defineComponent({
         const localValue = useVModel(props, 'modelValue')
         const { localVariant } = useBootVariant(props, 'errors', localValue)
 
-        const { configuration, attributes } = useConfigurationWithClassesList<VanillaDropdownExtendedProps>(
-            VanillaDropdownConfig,
-            VanillaDropdownClassesKeys,
-            localVariant,
-        )
+        const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dropdownConfig, dropdownClassesKeys)
 
         const isTouchOnlyDevice = ref<boolean>(false)
 
@@ -148,10 +127,10 @@ export default defineComponent({
     },
     data({ configuration }) {
         return {
-            shown: (configuration as unknown as VanillaDropdownExtendedProps).show,
+            shown: (configuration as unknown as DropdownExtendedProps).show,
 
             // Disables the animation while the dropdown is being shown
-            initAsShow: (configuration as unknown as VanillaDropdownExtendedProps).show,
+            initAsShow: (configuration as unknown as DropdownExtendedProps).show,
             hideTimeout: null as ReturnType<typeof setTimeout> | null,
             focusableElements: [] as Array<HTMLElement>,
             throttledToggle: null as null | (() => void),
@@ -181,7 +160,7 @@ export default defineComponent({
             if (popperIsAdjusted) {
                 this.enablePopperNeedsAdjustmentListener()
             }
- else {
+            else {
                 this.disablePopperNeedsAdjustmentListener()
             }
         },
@@ -189,7 +168,7 @@ export default defineComponent({
             if (show) {
                 this.doShow()
             }
- else {
+            else {
                 this.doHide()
             }
         },
@@ -235,7 +214,7 @@ export default defineComponent({
             if (this.isTouchOnlyDevice) {
                 window.addEventListener('touchstart', this.touchstartHandler)
             }
- else {
+           else {
                 this.addBlurListenersToChildElements()
             }
         },
@@ -247,7 +226,7 @@ export default defineComponent({
             if (this.isTouchOnlyDevice) {
                 window.removeEventListener('touchstart', this.touchstartHandler)
             }
- else {
+            else {
                 this.removeBlurListenersFromChildElements()
             }
         },
@@ -279,7 +258,7 @@ export default defineComponent({
         async adjustPopper(): Promise<void> {
             // eslint-disable-next-line no-async-promise-executor
             return new Promise(async (resolve) => {
-                if (this.shown === false && this.adjustingPopper === false) {
+                if (this.shown === false && !this.adjustingPopper) {
                     this.popperIsAdjusted = false
                     resolve()
                     return
@@ -366,7 +345,7 @@ export default defineComponent({
             if (!this.shown) {
                 this.doShow()
             }
- else {
+            else {
                 this.doHide()
             }
         },
@@ -400,7 +379,7 @@ export default defineComponent({
             if (this.configuration.toggleOnClick) {
                 this.throttledToggle!()
             }
- else if (this.shouldShowWhenClicked) {
+            else if (this.shouldShowWhenClicked) {
                 this.doShow()
             }
         },
@@ -421,7 +400,7 @@ export default defineComponent({
             if (!isChild) {
                 this.$emit('blur', e)
             }
- else {
+            else {
                 this.$emit('blur-on-child', e)
             }
 
@@ -474,7 +453,7 @@ export default defineComponent({
             if (!this.configuration.hideOnLeaveTimeout) {
                 this.doHide()
             }
- else {
+            else {
                 this.hideTimeout = setTimeout(() => {
                     this.doHide()
                     this.hideTimeout = null

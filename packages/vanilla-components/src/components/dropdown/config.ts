@@ -1,7 +1,10 @@
-import { commonClasses } from '../../core/config/commonClasses'
-import { mergeClasses, popperOptions } from '../../core'
+import type { Options, Placement } from '@popperjs/core'
+import type { InputHTMLAttributes } from 'vue'
+import { commonClasses, popperOptions } from '@/core/config'
+import { mergeClasses } from '@/core/helpers'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaDropdownConfig = {
+export const dropdownConfig = {
   fixedClasses: {},
 
   // Default appearance
@@ -58,9 +61,54 @@ export const VanillaDropdownConfig = {
   },
 }
 
-export const VanillaDropdownPopperDefaultOptions = popperOptions
+export const dropdownPopperDefaultOptions = popperOptions
+export const dropdownClassesKeys = Object.keys(dropdownConfig.classes)
 
-export const VanillaDropdownClassesKeys = Object.keys(VanillaDropdownConfig.classes)
+export declare type DropdownClassesValidKeys = keyof typeof dropdownConfig.classes
+export declare type DropdownValue = boolean
 
-export type VanillaDropdownClassesValidKeys = keyof typeof VanillaDropdownConfig.classes
+export declare type DropdownProps = WithVariantPropsAndClassesList<{
+  modelValue?: DropdownValue
+  text?: string
+  buttonVariant?: string
+  teleport?: boolean
+  teleportTo?: string | HTMLElement
+  tagName?: string
+  dropdownTagName?: string
+  disabled?: boolean
+  toggleOnFocus?: boolean
+  toggleOnClick?: boolean
+  toggleOnHover?: boolean
+  placement?: Placement | string
+  popperOptions?: Options
+  usePopper?: boolean
+  overlay?: boolean
+  spacedItems?: boolean
+  showArrow?: boolean
+  size?: string | undefined | 'default' | 'medium' | 'large' | 'extra-large' | 'super-large' | 'full-width'
+  position?: string | undefined | 'center' | 'left' | 'right' | 'full-width'
+} & InputHTMLAttributes & Data, DropdownClassesValidKeys>
+
+export declare type DropdownExtendedProps = WithVariantPropsAndClassesList<{
+  text?: string
+  disabled?: boolean
+
+  tagName?: string
+  dropdownTagName?: string
+  dropdownAttributes?: Data
+
+  toggleOnFocus?: boolean
+  toggleOnClick?: boolean
+  toggleOnHover?: boolean
+
+  show?: boolean
+
+  hideOnLeaveTimeout?: number
+
+  teleport?: boolean
+  teleportTo?: string | HTMLElement
+
+  placement?: Placement
+  popperOptions?: Options
+} & InputHTMLAttributes & Data, DropdownClassesValidKeys>
 
