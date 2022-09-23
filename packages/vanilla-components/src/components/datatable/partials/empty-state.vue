@@ -1,62 +1,43 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, nextTick, ref } from 'vue'
-import VanillaUFOIcon from '../icons/ufo.vue'
-import VanillaRadarIcon from '../icons/RadarIcon.vue'
-import EmptyIcon from '../icons/hero/outline/FunnelIcon.vue'
-import VanillaButton from '../button/button.vue'
-import { useInjectsClassesList } from '../../core'
-import { useInjectDatatableTranslations } from './utils'
+import { nextTick, ref } from 'vue'
+import { useInjectDatatableTranslations } from '../utils'
+import UFOIcon from '@/components/icons/ufo.vue'
+import RadarIcon from '@/components/icons/RadarIcon.vue'
+import EmptyIcon from '@/components/icons/hero/outline/FunnelIcon.vue'
+import Button from '@/components/button/button.vue'
+import { useInjectsClassesList } from '@/core/use'
 
-export default defineComponent({
-    components: {
-        VanillaUFOIcon,
-        VanillaRadarIcon,
-        EmptyIcon,
-        VanillaButton,
-    },
-    props: {
-        hasFiltersOrSearch: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        isFetching: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-    },
-    emits: [
-        'resetFilters',
-        'actionWithoutRecords',
-    ],
-    setup(props, { emit }) {
-        // Provide Translations
-        const translations = useInjectDatatableTranslations()!
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
-
-        const isLocallyLoading = ref(false)
-
-        const resetFilters = () => {
-            isLocallyLoading.value = true
-            emit('resetFilters')
-            nextTick(() => {
-                isLocallyLoading.value = false
-            })
-        }
-
-        const actionWithoutRecords = () => {
-            emit('actionWithoutRecords')
-        }
-
-        return {
-            translations,
-            classesList,
-            isLocallyLoading,
-            resetFilters,
-            actionWithoutRecords,
-        }
-    },
+const props = defineProps({
+  hasFiltersOrSearch: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  isFetching: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
 })
+
+const emit = defineEmits([
+  'resetFilters',
+  'actionWithoutRecords',
+])
+
+// Provide Translations
+const translations = useInjectDatatableTranslations()!
+const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+const isLocallyLoading = ref(false)
+
+const resetFilters = () => {
+  isLocallyLoading.value = true
+  emit('resetFilters')
+  nextTick(() => {
+    isLocallyLoading.value = false
+  })
+}
+
+const actionWithoutRecords = () => emit('actionWithoutRecords')
 </script>
 
 <template>
@@ -70,7 +51,7 @@ export default defineComponent({
       <div :class="[classesList.emptyStateInner]">
         <div :class="[classesList.emptyStateRow]">
           <slot name="emptyWithFiltersIcon">
-            <VanillaUFOIcon :class="[classesList.emptyStateIcon]" />
+            <UFOIcon :class="[classesList.emptyStateIcon]" />
           </slot>
         </div>
 
@@ -88,7 +69,7 @@ export default defineComponent({
           @click="resetFilters"
         >
           <slot name="emptyWithFiltersButton">
-            <VanillaButton
+            <Button
               :variant="classesList.emptyStateResetFiltersButtonVariant"
               :loading="isFetching || isLocallyLoading"
             >
@@ -98,7 +79,7 @@ export default defineComponent({
               <template #label>
                 <span v-text="translations.recordsEmptyWithFiltersOrSearchAction" />
               </template>
-            </VanillaButton>
+            </Button>
           </slot>
         </div>
       </div>
@@ -112,7 +93,7 @@ export default defineComponent({
       <div :class="[classesList.emptyStateInner]">
         <div :class="[classesList.emptyStateRow]">
           <slot name="emptyWithoutRecordsIcon">
-            <VanillaRadarIcon :class="[classesList.emptyStateIcon]" />
+            <RadarIcon :class="[classesList.emptyStateIcon]" />
           </slot>
         </div>
 

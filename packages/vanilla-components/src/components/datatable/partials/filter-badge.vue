@@ -1,41 +1,29 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
-import type { VanillaDatatableFilter } from '../index'
-import { useInjectsClassesList } from '../../core'
-import { useInjectDatatableTranslations } from './utils'
+import type * as Types from '../config'
+import { useInjectDatatableTranslations } from '../utils'
+import { useInjectsClassesList } from '@/core/use'
 
-export default defineComponent({
-    props: {
-        filter: {
-            type: [Object, Array] as PropType<VanillaDatatableFilter>,
-            required: true,
-        },
-        value: {
-            type: [Number, String] as PropType<number | string>,
-            required: true,
-        },
-        withLabel: {
-            type: [Boolean],
-            default: true,
-            required: false,
-        },
-    },
-    emits: [
-        'filterRemove',
-    ],
-    setup() {
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
-
-        // Provide Translations
-        const translations = useInjectDatatableTranslations()!
-
-        return {
-            classesList,
-            translations,
-        }
-    },
+const props = defineProps({
+  filter: {
+    type: [Object, Array] as PropType<Types.DatatableFilter>,
+    required: true,
+  },
+  value: {
+    type: [Number, String] as PropType<number | string>,
+    required: true,
+  },
+  withLabel: {
+    type: [Boolean],
+    default: true,
+    required: false,
+  },
 })
+
+const emit = defineEmits(['filterRemove'])
+
+const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+const translations = useInjectDatatableTranslations()!
 </script>
 
 <template>

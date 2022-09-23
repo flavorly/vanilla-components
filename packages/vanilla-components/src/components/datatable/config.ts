@@ -239,6 +239,7 @@ export declare type DatatableColumnComputed = {
   isSortedAsc: boolean
   isSortedDesc: boolean
   slotName: string
+  sortedTimes?: number
 } & DatatableColumn
 
 export declare type VanillaActionCallback = (action: DatatableAction) => void

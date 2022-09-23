@@ -1,99 +1,77 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, defineComponent, ref, watch } from 'vue'
-import type { VanillaDatatableAction } from '../index'
-import VanillaDialog from '../dialog/dialog.vue'
-import VanillaButton from '../button/button.vue'
-import { useInjectsClassesList, useReplacePlaceholders } from '../../core'
-import ExclamationTriangleIcon from '../icons/hero/outline/ExclamationTriangleIcon.vue'
-import CheckIcon from '../icons/hero/outline/CheckIcon.vue'
-import SignalIcon from '../icons/hero/outline/SignalIcon.vue'
-import InformationCircleIcon from '../icons/hero/outline/InformationCircleIcon.vue'
-import { useInjectDatatableTranslations } from './utils'
+import { computed, ref, watch } from 'vue'
+import type * as Types from '../config'
+import { useInjectDatatableTranslations } from '../utils'
+import Dialog from '@/components/dialog/dialog.vue'
+import Button from '@/components/button/button.vue'
+import ExclamationTriangleIcon from '@/components/icons/hero/outline/ExclamationTriangleIcon.vue'
+import CheckIcon from '@/components/icons/hero/outline/CheckIcon.vue'
+import SignalIcon from '@/components/icons/hero/outline/SignalIcon.vue'
+import InformationCircleIcon from '@/components/icons/hero/outline/InformationCircleIcon.vue'
+import { useInjectsClassesList, useReplacePlaceholders } from '@/core/use'
 
-export default defineComponent({
-    components: {
-        VanillaDialog,
-        VanillaButton,
-        ExclamationTriangleIcon,
-        CheckIcon,
-        SignalIcon,
-        InformationCircleIcon,
-    },
-    props: {
-        action: {
-            type: [Object, undefined] as PropType<VanillaDatatableAction | undefined>,
-            required: false,
-            default: undefined,
-        },
-        countSelected: {
-            type: [Number, String] as PropType<number | string>,
-            required: true,
-        },
-    },
-    emits: [
-        'update:modelValue',
-        'actionCanceled',
-        'actionConfirmed',
-    ],
-    setup(props, { emit }) {
-        const isOpen = ref(false)
+const props = defineProps({
+  action: {
+    type: [Object, undefined] as PropType<Types.DatatableAction | undefined>,
+    required: false,
+    default: undefined,
+  },
+  countSelected: {
+    type: [Number, String] as PropType<number | string>,
+    required: true,
+  },
+})
 
-        const cancelAction = () => {
-            isOpen.value = false
-            emit('actionCanceled', props.action)
-        }
+const emit = defineEmits([
+  'update:modelValue',
+  'actionCanceled',
+  'actionConfirmed',
+])
 
-        const confirmAction = () => {
-            isOpen.value = false
-            emit('actionConfirmed', props.action)
-        }
+const isOpen = ref(false)
 
-        // Provide Translations
-        const translations = useInjectDatatableTranslations()!
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+const cancelAction = () => {
+  isOpen.value = false
+  emit('actionCanceled', props.action)
+}
 
-        const title = computed(() => {
-            const value = props.action?.before?.confirm?.title || translations.value.actionConfirmTitle
-            return useReplacePlaceholders(value, { name: props.action?.label })
-        })
+const confirmAction = () => {
+  isOpen.value = false
+  emit('actionConfirmed', props.action)
+}
 
-        const text = computed(() => {
-            const value = props.action?.before?.confirm?.text || translations.value.actionConfirmText
-            return useReplacePlaceholders(value, { name: `<b>${props.action?.label}</b>`, itemsSelected: `<b>${props.countSelected}</b>` })
-        })
+// Provide Translations
+const translations = useInjectDatatableTranslations()!
+const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
-        const confirmText = computed(() => {
-            const value = props.action?.before?.confirm?.confirmButton || translations.value.actionConfirmButton
-            return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected })
-        })
+const title = computed(() => {
+  const value = props.action?.before?.confirm?.title || translations.value.actionConfirmTitle
+  return useReplacePlaceholders(value, { name: props.action?.label })
+})
 
-        const cancelText = computed(() => {
-            const value = props.action?.before?.confirm?.cancelButton || translations.value.actionCancelButton
-            return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected })
-        })
+const text = computed(() => {
+  const value = props.action?.before?.confirm?.text || translations.value.actionConfirmText
+  return useReplacePlaceholders(value, { name: `<b>${props.action?.label}</b>`, itemsSelected: `<b>${props.countSelected}</b>` })
+})
 
-        watch(isOpen, (val: boolean) => {
-            emit('update:modelValue', val)
-        })
+const confirmText = computed(() => {
+  const value = props.action?.before?.confirm?.confirmButton || translations.value.actionConfirmButton
+  return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected })
+})
 
-        return {
-            title,
-            text,
-            confirmText,
-            cancelText,
-            isOpen,
-            cancelAction,
-            confirmAction,
-            translations,
-            classesList,
-        }
-    },
+const cancelText = computed(() => {
+  const value = props.action?.before?.confirm?.cancelButton || translations.value.actionCancelButton
+  return useReplacePlaceholders(value, { name: props.action?.label, itemsSelected: props.countSelected })
+})
+
+watch(isOpen, (val: boolean) => {
+  emit('update:modelValue', val)
 })
 </script>
 
 <template>
-  <VanillaDialog v-model="isOpen">
+  <Dialog v-model="isOpen">
     <slot
       name="icon"
       v-bind="{
@@ -189,18 +167,18 @@ export default defineComponent({
 
     <!-- Footer -->
     <template #footer>
-      <VanillaButton
+      <Button
         :label="cancelText"
         tabindex="1"
         focus-on-mount
         @click="cancelAction"
       />
-      <VanillaButton
+      <Button
         tabindex="2"
         variant="primary"
         :label="confirmText"
         @click="confirmAction"
       />
     </template>
-  </VanillaDialog>
+  </Dialog>
 </template>

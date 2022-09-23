@@ -1,143 +1,121 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref, watch } from 'vue'
+import { ref, watch } from 'vue'
 import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
-import type {
-    VanillaDatatableColumnComputed,
-    VanillaDatatableColumnsComputed,
-    VanillaDatatableSortedColumns,
-} from '../index'
-import { useInjectsClassesList } from '../../core'
+import type * as Types from '../config'
+import { useInjectsClassesList } from '@/core/use'
+import ChevronDownIcon from '@/components/icons/hero/solid/ChevronDownIcon.vue'
+import ChevronUpIcon from '@/components/icons/hero/solid/ChevronUpIcon.vue'
 
-import ChevronDownIcon from '../icons/hero/solid/ChevronDownIcon.vue'
-import ChevronUpIcon from '../icons/hero/solid/ChevronUpIcon.vue'
-
-export default defineComponent({
-    components: {
-        ChevronDownIcon,
-        ChevronUpIcon,
+const props = defineProps({
+  columns: {
+    type: [Array] as PropType<Types.DatatableColumnsComputed>,
+    required: true,
+  },
+  columnsWithHiddenState: {
+    type: [Array] as PropType<Types.DatatableColumnsComputed>,
+    required: false,
+    default() {
+      return []
     },
-    props: {
-        columns: {
-            type: [Array] as PropType<VanillaDatatableColumnsComputed>,
-            required: true,
-        },
-        columnsWithHiddenState: {
-            type: [Array] as PropType<VanillaDatatableColumnsComputed>,
-            required: false,
-            default() {
-                return []
-            },
-        },
-        columnsWithSorting: {
-            type: [Array] as PropType<VanillaDatatableSortedColumns>,
-            required: false,
-            default() {
-                return []
-            },
-        },
-        isFetching: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        selectable: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        allItemsChecked: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        someItemsChecked: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
+  },
+  columnsWithSorting: {
+    type: [Array] as PropType<Types.DatatableSortedColumns>,
+    required: false,
+    default() {
+      return []
     },
-    emits: [
-        'checked',
-        'sorted',
-    ],
-    setup(props, { emit }) {
-        const onCheckAllToggled = (event: Event) => {
-            emit('checked', event.target?.checked)
-        }
-
-        /** Default Sorting direction */
-        const defaultSorting = 'desc'
-
-        /**
-         * Map the user initial columns with our own internal representation
-         * All columns start with a sorting times set to 1
-         **/
-        const localSorting = ref(props.columnsWithSorting.map((column: VanillaDatatableColumnComputed) => {
-            return {
-                ...column,
-                sortedTimes: 1,
-            }
-        }))
-
-        // Once props changes, destruct the local filters value
-        watch(
-            () => props.columnsWithSorting,
-            (newValue) => {
-                localSorting.value = [...newValue]
-            },
-        )
-
-        /**
-         * Sorting Column by name
-         * - If the column you want to toggle does not exists in the sorting array, then push it
-         * - If the column was sorted more or two times, remove it from the sorting array
-         * - Otherwise, we will replace the index with the new sorting object updated.
-         **/
-        const toggleSorting = (columnToSort: string) => {
-            const finalSorting = localSorting.value
-            const index = findIndex(localSorting.value, { column: columnToSort })
-
-            // Means it did not find the sorting register, so push it.
-            if (index === -1) {
-                finalSorting.push({
-                    column: columnToSort,
-                    direction: defaultSorting,
-                    sortedTimes: 1,
-                })
-            }
- else {
-                // Find the current configuration for the current sorting
-                const columnSort = find(localSorting.value, { column: columnToSort })
-                const timesSorted = columnSort.sortedTimes
-
-                // Tapped 2 times, remove it from the array
-                if (timesSorted >= 2) {
-                    finalSorting.splice(index, 1)
-                }
- else {
-                    // Tapped 1 time, toggle the direction
-                    finalSorting.splice(index, 1, {
-                        column: columnToSort,
-                        direction: columnSort.direction === 'asc' ? 'desc' : 'asc',
-                        sortedTimes: timesSorted + 1,
-                    })
-                }
-            }
-
-            // Update the original object & Emit
-            localSorting.value = finalSorting
-
-            emit('sorted', [...localSorting.value])
-        }
-
-        const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
-
-        return {
-            classesList,
-            onCheckAllToggled,
-            toggleSorting,
-            localSorting,
-        }
-    },
+  },
+  isFetching: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  selectable: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  allItemsChecked: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  someItemsChecked: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
 })
+
+const emit = defineEmits(['checked', 'sorted'])
+
+const onCheckAllToggled = (event: Event) => {
+  emit('checked', event.target?.checked)
+}
+
+const defaultSorting = 'desc'
+
+/**
+ * Map the user initial columns with our own internal representation
+ * All columns start with a sorting times set to 1
+ **/
+const localSorting = ref(props.columnsWithSorting.map((column: Types.DatatableSortedColumn) => {
+  return {
+    ...column,
+    sortedTimes: 1,
+  }
+}))
+
+// Once props changes, destruct the local filters value
+watch(
+  () => props.columnsWithSorting,
+  (newValue) => {
+    localSorting.value = [...newValue]
+  },
+)
+
+/**
+ * Sorting Column by name
+ * - If the column you want to toggle does not exists in the sorting array, then push it
+ * - If the column was sorted more or two times, remove it from the sorting array
+ * - Otherwise, we will replace the index with the new sorting object updated.
+ **/
+const toggleSorting = (columnToSort: string) => {
+  const finalSorting = localSorting.value
+  const index = findIndex(localSorting.value, { column: columnToSort })
+
+  // Means it did not find the sorting register, so push it.
+  if (index === -1) {
+    finalSorting.push({
+      column: columnToSort,
+      direction: defaultSorting,
+      sortedTimes: 1,
+    })
+  }
+  else {
+    // Find the current configuration for the current sorting
+    const columnSort = find(localSorting.value, { column: columnToSort })
+    const timesSorted = columnSort?.sortedTimes ?? 0
+
+    // Tapped 2 times, remove it from the array
+    if (timesSorted >= 2) {
+      finalSorting.splice(index, 1)
+    }
+    else {
+      // Tapped 1 time, toggle the direction
+      finalSorting.splice(index, 1, {
+        column: columnToSort,
+        direction: columnSort?.direction === 'asc' ? 'desc' : 'asc',
+        sortedTimes: timesSorted + 1,
+      })
+    }
+  }
+
+  // Update the original object & Emit
+  localSorting.value = finalSorting
+
+  emit('sorted', [...localSorting.value])
+}
+
+const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 </script>
 
 <template>
