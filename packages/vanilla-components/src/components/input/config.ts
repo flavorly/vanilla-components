@@ -1,5 +1,7 @@
-import { commonClasses } from '@/core/config/commonClasses'
-import { mergeClasses } from '@/core'
+import type { InputHTMLAttributes } from 'vue'
+import { commonClasses } from '@/core/config'
+import { mergeClasses } from '@/core/helpers'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
 const defaultInput = {
   input: mergeClasses(
@@ -80,5 +82,13 @@ export const inputConfig = {
 
 export const inputClassesKeys = Object.keys(inputConfig.classes)
 
-export declare type VanillaInputClassesValidKeys = keyof typeof inputConfig.classes
+export declare type InputClassesValidKeys = keyof typeof inputConfig.classes
+
+export declare type InputValue = string | number | undefined
+
+export declare type InputProps = WithVariantPropsAndClassesList<{
+  modelValue?: InputValue
+  type?: string
+  placeholder?: string
+} & InputHTMLAttributes & Data, InputClassesValidKeys>
 

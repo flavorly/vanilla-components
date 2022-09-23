@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, onUpdated, ref } from 'vue'
-import { hasSlot, useBootVariant, useConfigurationWithClassesList, useVModel, useVariantProps } from '../../core'
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/form-feedback.vue'
-import ExclamationCircleIcon from '../icons/hero/solid/ExclamationCircleIcon.vue'
-import EyeIcon from '../icons/hero/solid/EyeIcon.vue'
-import EyeSlashIcon from '../icons/hero/solid/EyeSlashIcon.vue'
-import type { VanillaInputProps, VanillaInputValue } from './input.vue'
-import { VanillaInputClassesKeys, VanillaInputConfig } from './input.vue'
+import { defineComponent, ref } from 'vue'
+import type { InputClassesValidKeys, InputProps, InputValue } from './config'
+import { inputClassesKeys, inputConfig } from './config'
+import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { hasSlot } from '@/core/helpers'
+import FormErrors from '@/components/forms/form-errors.vue'
+import FormFeedback from '@/components/forms/form-feedback.vue'
+import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
+import EyeIcon from '@/components/icons/hero/solid/EyeIcon.vue'
+import EyeSlashIcon from '@/components/icons/hero/solid/EyeSlashIcon.vue'
 
 const props = defineProps({
-  ...useVariantProps(),
+  ...useVariantProps<InputProps, InputClassesValidKeys>(),
   modelValue: {
-    type: [String, Number] as PropType<VanillaInputValue>,
+    type: [String, Number] as PropType<InputValue>,
     default: undefined,
   },
   type: {
@@ -33,19 +34,9 @@ defineComponent({
 const localRef = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const localType = ref(props.type)
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', localValue)
+const { localErrors, localVariant, hasErrors } = useBootVariant(props, 'errors', localValue)
+const { configuration } = useConfiguration<InputProps>(inputConfig, inputClassesKeys)
 
-const { configuration } = useConfigurationWithClassesList<VanillaInputProps>(
-  VanillaInputConfig,
-  VanillaInputClassesKeys,
-  localVariant,
-)
-
-// When type is password
 const showingPassword = ref(false)
 const togglePassword = () => {
   showingPassword.value = !showingPassword.value
@@ -72,7 +63,7 @@ const togglePassword = () => {
         ref="localRef"
         v-model="localValue"
         :name="name"
-        :autocomplete="autocomplete"
+        :autocomplete="props.autocomplete"
         :placeholder="placeholder"
         :class="[
           hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
@@ -112,7 +103,7 @@ const togglePassword = () => {
       name="errors"
       v-bind="{ hasErrors, localErrors }"
     >
-      <VanillaFormErrors
+      <FormErrors
         v-if="hasErrors && showErrors"
         :errors="localErrors"
       />
@@ -121,7 +112,7 @@ const togglePassword = () => {
       name="feedback"
       v-bind="{ hasErrors, feedback }"
     >
-      <VanillaFormFeedback
+      <FormFeedback
         v-if="!hasErrors && feedback !== undefined && showFeedback"
         :text="feedback"
       />
