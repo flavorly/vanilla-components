@@ -1,6 +1,6 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, provide } from 'vue'
+import { provide } from 'vue'
 import {
     DialogDescription,
     DialogOverlay,
@@ -8,153 +8,114 @@ import {
     Dialog as HeadlessDialog,
     TransitionChild, TransitionRoot,
 } from '@headlessui/vue'
-import {
-    hasSlot,
-    useBootVariant,
-    useConfigurationWithClassesList,
-    useVModel,
-    useVariantProps,
-} from '../../core'
+import DialogFooter from './partials/footer.vue'
+import type { DialogClassesValidKeys, DialogProps } from './config'
+import { dialogClassesKeys, dialogConfig } from './config'
+import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { hasSlot } from '@/core/helpers'
 
-import VanillaDialogFooter from './dialog-footer.vue'
-import type { VanillaDialogProps } from './dialog.vue'
-import {
-    VanillaDialogClassesKeys,
-    VanillaDialogConfig,
-} from './dialog.vue'
-
-export default defineComponent({
-    components: {
-        VanillaDialogFooter,
-        DialogDescription,
-        TransitionRoot,
-        TransitionChild,
-        HeadlessDialog,
-        DialogOverlay,
-        DialogTitle,
+const props = defineProps({
+  ...useVariantProps<DialogProps, DialogClassesValidKeys>(),
+  modelValue: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  title: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
+  teleport: {
+    type: Boolean,
+    default: false,
+  },
+  teleportTo: {
+    type: [String, Object] as PropType<string | HTMLElement>,
+    default: 'body',
+  },
+  overlay: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  closeable: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  closeableOnClickOutside: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  closeableOnPressEscape: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  paddingOnModal: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  bodyDivided: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  bodyDarker: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  bodyWithPadding: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  bodyClasses: {
+    type: [String] as PropType<string>,
+    default: '',
+  },
+  divided: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
+  as: {
+    type: [String] as PropType<string>,
+    default: 'div',
+  },
+  size: {
+    type: [String] as PropType<string>,
+    required: false,
+    default: 'default',
+    validator(align: string) {
+      return ['default', 'small', 'medium', 'large', 'full'].includes(align)
     },
-    inheritAttrs: true,
-    props: {
-        ...useVariantProps<VanillaDialogProps>(),
-        modelValue: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        title: {
-            type: [String] as PropType<string | undefined>,
-            default: undefined,
-        },
-        teleport: {
-            type: Boolean,
-            default: false,
-        },
-        teleportTo: {
-            type: [String, Object] as PropType<string | HTMLElement>,
-            default: 'body',
-        },
-        overlay: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        closeable: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        closeableOnClickOutside: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        closeableOnPressEscape: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        paddingOnModal: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        bodyDivided: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyDarker: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyWithPadding: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
-        bodyClasses: {
-            type: [String] as PropType<string>,
-            default: '',
-        },
-        divided: {
-            type: Boolean as PropType<boolean>,
-            default: true,
-        },
-        as: {
-            type: [String] as PropType<string>,
-            default: 'div',
-        },
-        size: {
-            type: [String] as PropType<string>,
-            required: false,
-            default: 'default',
-            validator(align: string) {
-                return ['default', 'small', 'medium', 'large', 'full'].includes(align)
-            },
-        },
-    },
-    emits: [
-        'update:modelValue',
-        'close',
-        'open',
-    ],
-    setup(props, { emit }) {
-        const localValue = useVModel(props, 'modelValue')
-        const { localVariant } = useBootVariant(props, 'errors', localValue)
-
-        const { configuration } = useConfigurationWithClassesList<VanillaDialogProps>(
-            VanillaDialogConfig,
-            VanillaDialogClassesKeys,
-            localVariant,
-        )
-
-        const close = () => {
-            if (!props.closeable) {
-                localValue.value = true
-                return
-            }
-
-            if (!props.closeableOnClickOutside) {
-                localValue.value = true
-                return
-            }
-            localValue.value = false
-            emit('close')
-        }
-
-        const open = () => {
-            localValue.value = true
-            emit('open')
-        }
-
-        /**
-         * Provided data
-         */
-        provide('configuration_vanilla', configuration)
-
-        return {
-            configuration,
-            localValue,
-            localVariant,
-            props,
-            close,
-            open,
-            hasSlot,
-        }
-    },
+  },
 })
+
+const emit = defineEmits([
+  'update:modelValue',
+  'close',
+  'open',
+])
+
+const localValue = useVModel(props, 'modelValue')
+const { localVariant } = useBootVariant(props, 'errors', localValue)
+const { configuration } = useConfiguration<DialogProps>(dialogConfig, dialogClassesKeys)
+
+const close = () => {
+  if (!props.closeable) {
+    localValue.value = true
+    return
+  }
+
+  if (!props.closeableOnClickOutside) {
+    localValue.value = true
+    return
+  }
+  localValue.value = false
+  emit('close')
+}
+
+const open = () => {
+  localValue.value = true
+  emit('open')
+}
+
+provide('configuration_vanilla', configuration)
 </script>
 
 <template>
@@ -257,7 +218,7 @@ export default defineComponent({
               </DialogDescription>
 
               <!-- Footer -->
-              <VanillaDialogFooter
+              <DialogFooter
                 v-if="hasSlot($slots.footer)"
                 ref="footer"
                 :divided="divided"
@@ -266,7 +227,7 @@ export default defineComponent({
                   :close="close"
                   name="footer"
                 />
-              </VanillaDialogFooter>
+              </DialogFooter>
             </div>
           </TransitionChild>
         </div>

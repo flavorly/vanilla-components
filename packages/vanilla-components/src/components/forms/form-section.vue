@@ -1,30 +1,21 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
-import { useBootVariant, useConfiguration, useVariantProps } from '../../core'
-import type { VanillaFormSectionProps } from './form-section.vue'
-import { VanillaFormSectionConfig } from './form-section.vue'
+import { ref } from 'vue'
+import type { FormClassesValidKeys, FormSectionProps } from './config'
+import { formClassesKeys, formsConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 
-export default defineComponent({
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaFormSectionProps>(),
-        safe: {
-            type: [Boolean] as PropType<boolean>,
-            default: true,
-            required: false,
-        },
-    },
-    setup(props) {
-        const { localVariant } = useBootVariant(props, 'errors', ref(null))
-        const { configuration } = useConfiguration<VanillaFormSectionProps>(VanillaFormSectionConfig)
-
-        return {
-            localVariant,
-            configuration,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<FormSectionProps, FormClassesValidKeys>(),
+  safe: {
+    type: [Boolean] as PropType<boolean>,
+    default: true,
+    required: false,
+  },
 })
+
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<FormSectionProps>(formsConfig, formClassesKeys)
 </script>
 
 <template>

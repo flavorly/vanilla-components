@@ -1,6 +1,8 @@
-import { mergeClasses } from '../../core'
+import type { InputHTMLAttributes } from 'vue'
+import { mergeClasses } from '@/core/helpers'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaDialogConfig = {
+export const dialogConfig = {
   fixedClasses: {},
 
   // Default appearance
@@ -68,7 +70,26 @@ export const VanillaDialogConfig = {
   },
 }
 
-export const VanillaDialogClassesKeys = Object.keys(VanillaDialogConfig.classes)
+export const dialogClassesKeys = Object.keys(dialogConfig.classes)
 
-export type VanillaDialogClassesValidKeys = keyof typeof VanillaDialogConfig.classes
+export declare type DialogClassesValidKeys = keyof typeof dialogConfig.classes
+export declare type DialogValue = boolean
 
+export declare type DialogProps = WithVariantPropsAndClassesList<{
+  modelValue?: DialogValue
+  title?: string
+  teleport?: boolean
+  teleportTo?: string | HTMLElement
+  overlay?: boolean
+  closeable?: boolean
+  closeableOnClickOutside?: boolean
+  closeableOnPressEscape?: boolean
+  paddingOnModal?: boolean
+  bodyDivided?: boolean
+  bodyDarker?: boolean
+  bodyWithPadding?: boolean
+  bodyClasses?: boolean
+  divided?: boolean
+  as?: string
+  size?: 'default' | 'small' | 'medium' | 'large' | 'full'
+} & InputHTMLAttributes & Data, DialogClassesValidKeys>

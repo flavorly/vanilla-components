@@ -1,51 +1,40 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
-import { useBootVariant, useConfiguration, useVariantProps } from '../../core'
-import type { VanillaFormLabelProps } from './form-label.vue'
-import { VanillaFormLabelConfig } from './form-label.vue'
+import { ref } from 'vue'
+import type { FormClassesValidKeys, FormLabelProps } from './config'
+import { formClassesKeys, formsConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 
-export default defineComponent({
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaFormLabelProps>(),
-        label: {
-            type: [String] as PropType<string>,
-            required: true,
-        },
-        for: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: undefined,
-            required: false,
-        },
-        safe: {
-            type: [Boolean] as PropType<boolean>,
-            default: true,
-            required: false,
-        },
-    },
-    setup(props) {
-        const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration } = useConfiguration<VanillaFormLabelProps>(VanillaFormLabelConfig)
-
-        return {
-            localErrors,
-            localVariant,
-            hasErrors,
-            configuration,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<FormLabelProps, FormClassesValidKeys>(),
+  label: {
+    type: [String] as PropType<string>,
+    required: true,
+  },
+  for: {
+    type: [String, undefined] as PropType<string | undefined>,
+    default: undefined,
+    required: false,
+  },
+  safe: {
+    type: [Boolean] as PropType<boolean>,
+    default: true,
+    required: false,
+  },
 })
+
+const {
+  localErrors,
+  localVariant,
+  hasErrors,
+} = useBootVariant(props, 'errors', ref(null))
+
+const { configuration } = useConfiguration<FormLabelProps>(formsConfig, formClassesKeys)
 </script>
 
 <template>
   <label
-    :for="for"
+    :for="props.for"
     :class="configuration.class"
   >
     <slot>

@@ -1,18 +1,19 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { defineComponent, ref } from 'vue'
-import { useBootVariant, useConfiguration, useVariantProps } from '../../core'
-import type { VanillaFormErrorsProps } from './form-errors.vue'
-import { VanillaFormErrorsConfig } from './form-errors.vue'
+import type { FormClassesValidKeys, FormErrorsProps } from './config'
+import { formClassesKeys, formsConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
-  ...useVariantProps<VanillaFormErrorsProps>(),
+  ...useVariantProps<FormErrorsProps, FormClassesValidKeys>(),
   safe: {
     type: [Boolean] as PropType<boolean>,
     default: true,
     required: false,
   },
 })
+
 defineComponent({ inheritAttrs: false })
 
 const {
@@ -20,8 +21,7 @@ const {
   localVariant,
   hasErrors,
 } = useBootVariant(props, 'errors', ref(null))
-
-const { configuration } = useConfiguration<VanillaFormErrorsProps>(VanillaFormErrorsConfig)
+const { configuration } = useConfiguration<FormErrorsProps>(formsConfig, formClassesKeys)
 </script>
 
 <template>
