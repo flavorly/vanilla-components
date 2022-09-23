@@ -1,23 +1,18 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useInjectsClassesListClass } from '../../core'
-export default defineComponent({
-    name: 'TextPlaceholder',
-    props: {
-        classProperty: {
-            type: String,
-            default: 'placeholder',
-        },
-        placeholder: {
-            type: String,
-            default: undefined,
-        },
-    },
-    setup(props) {
-        const className = useInjectsClassesListClass(props.classProperty)
-        return { className }
-    },
+<script setup lang="ts">
+import { useInjectsClassesListClass } from '@/core/use'
+
+const props = defineProps({
+  classProperty: {
+    type: String,
+    default: 'placeholder',
+  },
+  placeholder: {
+    type: String,
+    default: undefined,
+  },
 })
+
+const className = useInjectsClassesListClass(props.classProperty)
 </script>
 
 <template>

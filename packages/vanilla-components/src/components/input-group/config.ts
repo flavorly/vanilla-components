@@ -1,4 +1,7 @@
-export const VanillaInputGroupConfig = {
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+
+export const inputGroupConfig = {
   fixedClasses: {},
   classes: {
     wrapper: 'grid space-y-2',
@@ -23,6 +26,9 @@ export const VanillaInputGroupConfig = {
   },
 }
 
-export const VanillaInputGroupClassesKeys = Object.keys(VanillaInputGroupConfig.classes)
+export const inputGroupClassesKeys = Object.keys(inputGroupConfig.classes)
 
-export type VanillaInputGroupClassesValidKeys = keyof typeof VanillaInputGroupConfig.classes
+export declare type InputGroupClassesValidKeys = keyof typeof inputGroupConfig.classes
+export declare type InputGroupValue = string | number | undefined
+export declare type InputGroupProps = WithVariantPropsAndClassesList<{
+} & InputHTMLAttributes & Data, InputGroupClassesValidKeys>

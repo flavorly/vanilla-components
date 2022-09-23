@@ -1,18 +1,18 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { defineComponent, ref } from 'vue'
-import { hasSlot, useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core'
-import VanillaFormLabel from '../FormLabel/FormLabel.vue'
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/form-feedback.vue'
-import type { VanillaInputGroupProps } from './input-group.vue'
-import { VanillaInputGroupClassesKeys, VanillaInputGroupConfig } from './input-group.vue'
-import type { Errors } from '@/core/types'
+import type { InputGroupClassesValidKeys, InputGroupProps } from './config'
+import { inputGroupClassesKeys, inputGroupConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { hasSlot } from '@/core/helpers'
+import FormErrors from '@/components/forms/form-errors.vue'
+import FormFeedback from '@/components/forms/form-feedback.vue'
+import FormLabel from '@/components/forms/form-label.vue'
 
 const props = defineProps({
-  ...useVariantProps<VanillaInputGroupProps>(),
+  ...useVariantProps<InputGroupProps, InputGroupClassesValidKeys>(),
   errors: {
-    type: [String, Array, Object] as PropType<Errors>,
+    type: [String, Array, Object] as PropType<string | undefined>,
     default: undefined,
   },
   feedback: {
@@ -48,17 +48,9 @@ const props = defineProps({
 
 defineComponent({ inheritAttrs: true })
 
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', ref(null))
-
-const { configuration } = useConfigurationWithClassesList<VanillaInputGroupProps>(
-  VanillaInputGroupConfig,
-  VanillaInputGroupClassesKeys,
-  localVariant,
-)
+// TODO: Fix Classes
+const { localErrors, localVariant, hasErrors } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<InputGroupProps>(inputGroupConfig, inputGroupClassesKeys)
 </script>
 
 <template>
@@ -69,7 +61,7 @@ const { configuration } = useConfigurationWithClassesList<VanillaInputGroupProps
     <!-- Label And Input -->
     <div class="vc-inputs-group">
       <slot name="label">
-        <VanillaFormLabel
+        <FormLabel
           v-if="label !== undefined"
           :label="label"
           :for="name"
@@ -93,7 +85,7 @@ const { configuration } = useConfigurationWithClassesList<VanillaInputGroupProps
         </div>
         <!-- Input -->
         <slot
-          v-bind="{ label, name, layout }"
+          v-bind="{ label, name }"
         />
         <!-- After Input -->
         <div
@@ -113,7 +105,7 @@ const { configuration } = useConfigurationWithClassesList<VanillaInputGroupProps
         name="errors"
         v-bind="{ hasErrors, localErrors }"
       >
-        <VanillaFormErrors
+        <FormErrors
           v-if="hasErrors && showErrors"
           :errors="localErrors"
         />
@@ -122,7 +114,7 @@ const { configuration } = useConfigurationWithClassesList<VanillaInputGroupProps
         name="feedback"
         v-bind="{ hasErrors, feedback }"
       >
-        <VanillaFormFeedback
+        <FormFeedback
           v-if="!hasErrors && feedback !== undefined && showFeedback"
           :text="feedback"
         />

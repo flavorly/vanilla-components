@@ -1,16 +1,13 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-export default defineComponent({
-    props: {
-        classesList: {
-            type: Object,
-            default: () => ({}),
-        },
-        enabled: {
-            type: Boolean,
-            default: true,
-        },
-    },
+<script setup lang="ts">
+const props = defineProps({
+  classesList: {
+    type: Object,
+    default: () => ({}),
+  },
+  enabled: {
+    type: Boolean,
+    default: true,
+  },
 })
 </script>
 
