@@ -1,8 +1,17 @@
-import { VanillaInputConfig } from '../input/config'
+import type { InputHTMLAttributes } from 'vue'
+import { inputConfig } from '../input/config'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaTextareaConfig = VanillaInputConfig
+export const textareaConfig = inputConfig
 
-export const VanillaTextareaClassesKeys = Object.keys(VanillaTextareaConfig.classes)
+export const textareaClassesKeys = Object.keys(textareaConfig.classes)
 
-export type VanillaTextareaClassesValidKeys = keyof typeof VanillaTextareaConfig.classes
+export declare type TextareaClassesValidKeys = keyof typeof textareaConfig.classes
+
+export declare type TextareaValue = string | number | string[] | undefined
+
+export declare type TextareaProps = WithVariantPropsAndClassesList<{
+  modelValue?: TextareaValue
+  rows?: string | number
+} & InputHTMLAttributes & Data, TextareaClassesValidKeys>
 

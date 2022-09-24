@@ -2,519 +2,519 @@
 import { defineComponent } from 'vue'
 
 // Components
-import VanillaFlagAC from './Flags/FlagAC.vue'
-import VanillaFlagAD from './Flags/FlagAD.vue'
-import VanillaFlagAE from './Flags/FlagAE.vue'
-import VanillaFlagAF from './Flags/FlagAF.vue'
-import VanillaFlagAG from './Flags/FlagAG.vue'
-import VanillaFlagAI from './Flags/FlagAI.vue'
-import VanillaFlagAL from './Flags/FlagAL.vue'
-import VanillaFlagAM from './Flags/FlagAM.vue'
-import VanillaFlagAO from './Flags/FlagAO.vue'
-import VanillaFlagAQ from './Flags/FlagAQ.vue'
-import VanillaFlagAR from './Flags/FlagAR.vue'
-import VanillaFlagAS from './Flags/FlagAS.vue'
-import VanillaFlagAT from './Flags/FlagAT.vue'
-import VanillaFlagAU from './Flags/FlagAU.vue'
-import VanillaFlagAW from './Flags/FlagAW.vue'
-import VanillaFlagAX from './Flags/FlagAX.vue'
-import VanillaFlagAZ from './Flags/FlagAZ.vue'
-import VanillaFlagBA from './Flags/FlagBA.vue'
-import VanillaFlagBB from './Flags/FlagBB.vue'
-import VanillaFlagBD from './Flags/FlagBD.vue'
-import VanillaFlagBE from './Flags/FlagBE.vue'
-import VanillaFlagBF from './Flags/FlagBF.vue'
-import VanillaFlagBG from './Flags/FlagBG.vue'
-import VanillaFlagBH from './Flags/FlagBH.vue'
-import VanillaFlagBI from './Flags/FlagBI.vue'
-import VanillaFlagBJ from './Flags/FlagBJ.vue'
-import VanillaFlagBL from './Flags/FlagBL.vue'
-import VanillaFlagBM from './Flags/FlagBM.vue'
-import VanillaFlagBN from './Flags/FlagBN.vue'
-import VanillaFlagBO from './Flags/FlagBO.vue'
-import VanillaFlagBQ from './Flags/FlagBQ.vue'
-import VanillaFlagBR from './Flags/FlagBR.vue'
-import VanillaFlagBS from './Flags/FlagBS.vue'
-import VanillaFlagBT from './Flags/FlagBT.vue'
-import VanillaFlagBV from './Flags/FlagBV.vue'
-import VanillaFlagBW from './Flags/FlagBW.vue'
-import VanillaFlagBY from './Flags/FlagBY.vue'
-import VanillaFlagBZ from './Flags/FlagBZ.vue'
-import VanillaFlagCA from './Flags/FlagCA.vue'
-import VanillaFlagCC from './Flags/FlagCC.vue'
-import VanillaFlagCD from './Flags/FlagCD.vue'
-import VanillaFlagCF from './Flags/FlagCF.vue'
-import VanillaFlagCG from './Flags/FlagCG.vue'
-import VanillaFlagCH from './Flags/FlagCH.vue'
-import VanillaFlagCI from './Flags/FlagCI.vue'
-import VanillaFlagCK from './Flags/FlagCK.vue'
-import VanillaFlagCL from './Flags/FlagCL.vue'
-import VanillaFlagCM from './Flags/FlagCM.vue'
-import VanillaFlagCN from './Flags/FlagCN.vue'
-import VanillaFlagCO from './Flags/FlagCO.vue'
-import VanillaFlagCR from './Flags/FlagCR.vue'
-import VanillaFlagCU from './Flags/FlagCU.vue'
-import VanillaFlagCV from './Flags/FlagCV.vue'
-import VanillaFlagCW from './Flags/FlagCW.vue'
-import VanillaFlagCX from './Flags/FlagCX.vue'
-import VanillaFlagCY from './Flags/FlagCY.vue'
-import VanillaFlagCZ from './Flags/FlagCZ.vue'
-import VanillaFlagDE from './Flags/FlagDE.vue'
-import VanillaFlagDJ from './Flags/FlagDJ.vue'
-import VanillaFlagDK from './Flags/FlagDK.vue'
-import VanillaFlagDM from './Flags/FlagDM.vue'
-import VanillaFlagDO from './Flags/FlagDO.vue'
-import VanillaFlagDZ from './Flags/FlagDZ.vue'
-import VanillaFlagEC from './Flags/FlagEC.vue'
-import VanillaFlagEE from './Flags/FlagEE.vue'
-import VanillaFlagEG from './Flags/FlagEG.vue'
-import VanillaFlagEH from './Flags/FlagEH.vue'
-import VanillaFlagER from './Flags/FlagER.vue'
-import VanillaFlagES from './Flags/FlagES.vue'
-import VanillaFlagET from './Flags/FlagET.vue'
-import VanillaFlagEU from './Flags/FlagEU.vue'
-import VanillaFlagFI from './Flags/FlagFI.vue'
-import VanillaFlagFJ from './Flags/FlagFJ.vue'
-import VanillaFlagFK from './Flags/FlagFK.vue'
-import VanillaFlagFM from './Flags/FlagFM.vue'
-import VanillaFlagFO from './Flags/FlagFO.vue'
-import VanillaFlagFR from './Flags/FlagFR.vue'
-import VanillaFlagGA from './Flags/FlagGA.vue'
-import VanillaFlagGB from './Flags/FlagGB.vue'
-import VanillaFlagGD from './Flags/FlagGD.vue'
-import VanillaFlagGEAB from './Flags/FlagGEAB.vue'
-import VanillaFlagGEOS from './Flags/FlagGEOS.vue'
-import VanillaFlagGE from './Flags/FlagGE.vue'
-import VanillaFlagGF from './Flags/FlagGF.vue'
-import VanillaFlagGG from './Flags/FlagGG.vue'
-import VanillaFlagGH from './Flags/FlagGH.vue'
-import VanillaFlagGI from './Flags/FlagGI.vue'
-import VanillaFlagGL from './Flags/FlagGL.vue'
-import VanillaFlagGM from './Flags/FlagGM.vue'
-import VanillaFlagGN from './Flags/FlagGN.vue'
-import VanillaFlagGP from './Flags/FlagGP.vue'
-import VanillaFlagGQ from './Flags/FlagGQ.vue'
-import VanillaFlagGR from './Flags/FlagGR.vue'
-import VanillaFlagGS from './Flags/FlagGS.vue'
-import VanillaFlagGT from './Flags/FlagGT.vue'
-import VanillaFlagGU from './Flags/FlagGU.vue'
-import VanillaFlagGW from './Flags/FlagGW.vue'
-import VanillaFlagGY from './Flags/FlagGY.vue'
-import VanillaFlagHK from './Flags/FlagHK.vue'
-import VanillaFlagHM from './Flags/FlagHM.vue'
-import VanillaFlagHN from './Flags/FlagHN.vue'
-import VanillaFlagHR from './Flags/FlagHR.vue'
-import VanillaFlagHT from './Flags/FlagHT.vue'
-import VanillaFlagHU from './Flags/FlagHU.vue'
-import VanillaFlagID from './Flags/FlagID.vue'
-import VanillaFlagIE from './Flags/FlagIE.vue'
-import VanillaFlagIL from './Flags/FlagIL.vue'
-import VanillaFlagIM from './Flags/FlagIM.vue'
-import VanillaFlagIN from './Flags/FlagIN.vue'
-import VanillaFlagIO from './Flags/FlagIO.vue'
-import VanillaFlagIQ from './Flags/FlagIQ.vue'
-import VanillaFlagIR from './Flags/FlagIR.vue'
-import VanillaFlagIS from './Flags/FlagIS.vue'
-import VanillaFlagIT from './Flags/FlagIT.vue'
-import VanillaFlagJE from './Flags/FlagJE.vue'
-import VanillaFlagJM from './Flags/FlagJM.vue'
-import VanillaFlagJO from './Flags/FlagJO.vue'
-import VanillaFlagJP from './Flags/FlagJP.vue'
-import VanillaFlagKE from './Flags/FlagKE.vue'
-import VanillaFlagKG from './Flags/FlagKG.vue'
-import VanillaFlagKH from './Flags/FlagKH.vue'
-import VanillaFlagKI from './Flags/FlagKI.vue'
-import VanillaFlagKM from './Flags/FlagKM.vue'
-import VanillaFlagKN from './Flags/FlagKN.vue'
-import VanillaFlagKP from './Flags/FlagKP.vue'
-import VanillaFlagKR from './Flags/FlagKR.vue'
-import VanillaFlagKW from './Flags/FlagKW.vue'
-import VanillaFlagKY from './Flags/FlagKY.vue'
-import VanillaFlagKZ from './Flags/FlagKZ.vue'
-import VanillaFlagLA from './Flags/FlagLA.vue'
-import VanillaFlagLB from './Flags/FlagLB.vue'
-import VanillaFlagLC from './Flags/FlagLC.vue'
-import VanillaFlagLI from './Flags/FlagLI.vue'
-import VanillaFlagLK from './Flags/FlagLK.vue'
-import VanillaFlagLR from './Flags/FlagLR.vue'
-import VanillaFlagLS from './Flags/FlagLS.vue'
-import VanillaFlagLT from './Flags/FlagLT.vue'
-import VanillaFlagLU from './Flags/FlagLU.vue'
-import VanillaFlagLV from './Flags/FlagLV.vue'
-import VanillaFlagLY from './Flags/FlagLY.vue'
-import VanillaFlagMA from './Flags/FlagMA.vue'
-import VanillaFlagMC from './Flags/FlagMC.vue'
-import VanillaFlagMD from './Flags/FlagMD.vue'
-import VanillaFlagME from './Flags/FlagME.vue'
-import VanillaFlagMF from './Flags/FlagMF.vue'
-import VanillaFlagMG from './Flags/FlagMG.vue'
-import VanillaFlagMH from './Flags/FlagMH.vue'
-import VanillaFlagMK from './Flags/FlagMK.vue'
-import VanillaFlagML from './Flags/FlagML.vue'
-import VanillaFlagMM from './Flags/FlagMM.vue'
-import VanillaFlagMN from './Flags/FlagMN.vue'
-import VanillaFlagMO from './Flags/FlagMO.vue'
-import VanillaFlagMP from './Flags/FlagMP.vue'
-import VanillaFlagMQ from './Flags/FlagMQ.vue'
-import VanillaFlagMR from './Flags/FlagMR.vue'
-import VanillaFlagMS from './Flags/FlagMS.vue'
-import VanillaFlagMT from './Flags/FlagMT.vue'
-import VanillaFlagMU from './Flags/FlagMU.vue'
-import VanillaFlagMV from './Flags/FlagMV.vue'
-import VanillaFlagMW from './Flags/FlagMW.vue'
-import VanillaFlagMX from './Flags/FlagMX.vue'
-import VanillaFlagMY from './Flags/FlagMY.vue'
-import VanillaFlagMZ from './Flags/FlagMZ.vue'
-import VanillaFlagNA from './Flags/FlagNA.vue'
-import VanillaFlagNC from './Flags/FlagNC.vue'
-import VanillaFlagNE from './Flags/FlagNE.vue'
-import VanillaFlagNF from './Flags/FlagNF.vue'
-import VanillaFlagNG from './Flags/FlagNG.vue'
-import VanillaFlagNI from './Flags/FlagNI.vue'
-import VanillaFlagNL from './Flags/FlagNL.vue'
-import VanillaFlagNO from './Flags/FlagNO.vue'
-import VanillaFlagNP from './Flags/FlagNP.vue'
-import VanillaFlagNR from './Flags/FlagNR.vue'
-import VanillaFlagNU from './Flags/FlagNU.vue'
-import VanillaFlagNZ from './Flags/FlagNZ.vue'
-import VanillaFlagOM from './Flags/FlagOM.vue'
-import VanillaFlagPA from './Flags/FlagPA.vue'
-import VanillaFlagPE from './Flags/FlagPE.vue'
-import VanillaFlagPF from './Flags/FlagPF.vue'
-import VanillaFlagPG from './Flags/FlagPG.vue'
-import VanillaFlagPH from './Flags/FlagPH.vue'
-import VanillaFlagPK from './Flags/FlagPK.vue'
-import VanillaFlagPL from './Flags/FlagPL.vue'
-import VanillaFlagPM from './Flags/FlagPM.vue'
-import VanillaFlagPN from './Flags/FlagPN.vue'
-import VanillaFlagPR from './Flags/FlagPR.vue'
-import VanillaFlagPS from './Flags/FlagPS.vue'
-import VanillaFlagPT from './Flags/FlagPT.vue'
-import VanillaFlagPW from './Flags/FlagPW.vue'
-import VanillaFlagPY from './Flags/FlagPY.vue'
-import VanillaFlagQA from './Flags/FlagQA.vue'
-import VanillaFlagRE from './Flags/FlagRE.vue'
-import VanillaFlagRO from './Flags/FlagRO.vue'
-import VanillaFlagRS from './Flags/FlagRS.vue'
-import VanillaFlagRU from './Flags/FlagRU.vue'
-import VanillaFlagRW from './Flags/FlagRW.vue'
-import VanillaFlagSA from './Flags/FlagSA.vue'
-import VanillaFlagSB from './Flags/FlagSB.vue'
-import VanillaFlagSC from './Flags/FlagSC.vue'
-import VanillaFlagSD from './Flags/FlagSD.vue'
-import VanillaFlagSE from './Flags/FlagSE.vue'
-import VanillaFlagSG from './Flags/FlagSG.vue'
-import VanillaFlagSH from './Flags/FlagSH.vue'
-import VanillaFlagSI from './Flags/FlagSI.vue'
-import VanillaFlagSJ from './Flags/FlagSJ.vue'
-import VanillaFlagSK from './Flags/FlagSK.vue'
-import VanillaFlagSL from './Flags/FlagSL.vue'
-import VanillaFlagSM from './Flags/FlagSM.vue'
-import VanillaFlagSN from './Flags/FlagSN.vue'
-import VanillaFlagSO from './Flags/FlagSO.vue'
-import VanillaFlagSR from './Flags/FlagSR.vue'
-import VanillaFlagSS from './Flags/FlagSS.vue'
-import VanillaFlagST from './Flags/FlagST.vue'
-import VanillaFlagSV from './Flags/FlagSV.vue'
-import VanillaFlagSX from './Flags/FlagSX.vue'
-import VanillaFlagSY from './Flags/FlagSY.vue'
-import VanillaFlagSZ from './Flags/FlagSZ.vue'
-import VanillaFlagTA from './Flags/FlagTA.vue'
-import VanillaFlagTC from './Flags/FlagTC.vue'
-import VanillaFlagTD from './Flags/FlagTD.vue'
-import VanillaFlagTF from './Flags/FlagTF.vue'
-import VanillaFlagTG from './Flags/FlagTG.vue'
-import VanillaFlagTH from './Flags/FlagTH.vue'
-import VanillaFlagTJ from './Flags/FlagTJ.vue'
-import VanillaFlagTK from './Flags/FlagTK.vue'
-import VanillaFlagTL from './Flags/FlagTL.vue'
-import VanillaFlagTM from './Flags/FlagTM.vue'
-import VanillaFlagTN from './Flags/FlagTN.vue'
-import VanillaFlagTO from './Flags/FlagTO.vue'
-import VanillaFlagTR from './Flags/FlagTR.vue'
-import VanillaFlagTT from './Flags/FlagTT.vue'
-import VanillaFlagTV from './Flags/FlagTV.vue'
-import VanillaFlagTW from './Flags/FlagTW.vue'
-import VanillaFlagTZ from './Flags/FlagTZ.vue'
-import VanillaFlagUA from './Flags/FlagUA.vue'
-import VanillaFlagUG from './Flags/FlagUG.vue'
-import VanillaFlagUM from './Flags/FlagUM.vue'
-import VanillaFlagUS from './Flags/FlagUS.vue'
-import VanillaFlagUY from './Flags/FlagUY.vue'
-import VanillaFlagUZ from './Flags/FlagUZ.vue'
-import VanillaFlagVA from './Flags/FlagVA.vue'
-import VanillaFlagVC from './Flags/FlagVC.vue'
-import VanillaFlagVE from './Flags/FlagVE.vue'
-import VanillaFlagVG from './Flags/FlagVG.vue'
-import VanillaFlagVI from './Flags/FlagVI.vue'
-import VanillaFlagVN from './Flags/FlagVN.vue'
-import VanillaFlagVU from './Flags/FlagVU.vue'
-import VanillaFlagWF from './Flags/FlagWF.vue'
-import VanillaFlagWS from './Flags/FlagWS.vue'
-import VanillaFlagXK from './Flags/FlagXK.vue'
-import VanillaFlagYE from './Flags/FlagYE.vue'
-import VanillaFlagYT from './Flags/FlagYT.vue'
-import VanillaFlagZA from './Flags/FlagZA.vue'
-import VanillaFlagZM from './Flags/FlagZM.vue'
-import VanillaFlagZW from './Flags/FlagZW.vue'
+import FlagAC from './Flags/FlagAC.vue'
+import FlagAD from './Flags/FlagAD.vue'
+import FlagAE from './Flags/FlagAE.vue'
+import FlagAF from './Flags/FlagAF.vue'
+import FlagAG from './Flags/FlagAG.vue'
+import FlagAI from './Flags/FlagAI.vue'
+import FlagAL from './Flags/FlagAL.vue'
+import FlagAM from './Flags/FlagAM.vue'
+import FlagAO from './Flags/FlagAO.vue'
+import FlagAQ from './Flags/FlagAQ.vue'
+import FlagAR from './Flags/FlagAR.vue'
+import FlagAS from './Flags/FlagAS.vue'
+import FlagAT from './Flags/FlagAT.vue'
+import FlagAU from './Flags/FlagAU.vue'
+import FlagAW from './Flags/FlagAW.vue'
+import FlagAX from './Flags/FlagAX.vue'
+import FlagAZ from './Flags/FlagAZ.vue'
+import FlagBA from './Flags/FlagBA.vue'
+import FlagBB from './Flags/FlagBB.vue'
+import FlagBD from './Flags/FlagBD.vue'
+import FlagBE from './Flags/FlagBE.vue'
+import FlagBF from './Flags/FlagBF.vue'
+import FlagBG from './Flags/FlagBG.vue'
+import FlagBH from './Flags/FlagBH.vue'
+import FlagBI from './Flags/FlagBI.vue'
+import FlagBJ from './Flags/FlagBJ.vue'
+import FlagBL from './Flags/FlagBL.vue'
+import FlagBM from './Flags/FlagBM.vue'
+import FlagBN from './Flags/FlagBN.vue'
+import FlagBO from './Flags/FlagBO.vue'
+import FlagBQ from './Flags/FlagBQ.vue'
+import FlagBR from './Flags/FlagBR.vue'
+import FlagBS from './Flags/FlagBS.vue'
+import FlagBT from './Flags/FlagBT.vue'
+import FlagBV from './Flags/FlagBV.vue'
+import FlagBW from './Flags/FlagBW.vue'
+import FlagBY from './Flags/FlagBY.vue'
+import FlagBZ from './Flags/FlagBZ.vue'
+import FlagCA from './Flags/FlagCA.vue'
+import FlagCC from './Flags/FlagCC.vue'
+import FlagCD from './Flags/FlagCD.vue'
+import FlagCF from './Flags/FlagCF.vue'
+import FlagCG from './Flags/FlagCG.vue'
+import FlagCH from './Flags/FlagCH.vue'
+import FlagCI from './Flags/FlagCI.vue'
+import FlagCK from './Flags/FlagCK.vue'
+import FlagCL from './Flags/FlagCL.vue'
+import FlagCM from './Flags/FlagCM.vue'
+import FlagCN from './Flags/FlagCN.vue'
+import FlagCO from './Flags/FlagCO.vue'
+import FlagCR from './Flags/FlagCR.vue'
+import FlagCU from './Flags/FlagCU.vue'
+import FlagCV from './Flags/FlagCV.vue'
+import FlagCW from './Flags/FlagCW.vue'
+import FlagCX from './Flags/FlagCX.vue'
+import FlagCY from './Flags/FlagCY.vue'
+import FlagCZ from './Flags/FlagCZ.vue'
+import FlagDE from './Flags/FlagDE.vue'
+import FlagDJ from './Flags/FlagDJ.vue'
+import FlagDK from './Flags/FlagDK.vue'
+import FlagDM from './Flags/FlagDM.vue'
+import FlagDO from './Flags/FlagDO.vue'
+import FlagDZ from './Flags/FlagDZ.vue'
+import FlagEC from './Flags/FlagEC.vue'
+import FlagEE from './Flags/FlagEE.vue'
+import FlagEG from './Flags/FlagEG.vue'
+import FlagEH from './Flags/FlagEH.vue'
+import FlagER from './Flags/FlagER.vue'
+import FlagES from './Flags/FlagES.vue'
+import FlagET from './Flags/FlagET.vue'
+import FlagEU from './Flags/FlagEU.vue'
+import FlagFI from './Flags/FlagFI.vue'
+import FlagFJ from './Flags/FlagFJ.vue'
+import FlagFK from './Flags/FlagFK.vue'
+import FlagFM from './Flags/FlagFM.vue'
+import FlagFO from './Flags/FlagFO.vue'
+import FlagFR from './Flags/FlagFR.vue'
+import FlagGA from './Flags/FlagGA.vue'
+import FlagGB from './Flags/FlagGB.vue'
+import FlagGD from './Flags/FlagGD.vue'
+import FlagGEAB from './Flags/FlagGEAB.vue'
+import FlagGEOS from './Flags/FlagGEOS.vue'
+import FlagGE from './Flags/FlagGE.vue'
+import FlagGF from './Flags/FlagGF.vue'
+import FlagGG from './Flags/FlagGG.vue'
+import FlagGH from './Flags/FlagGH.vue'
+import FlagGI from './Flags/FlagGI.vue'
+import FlagGL from './Flags/FlagGL.vue'
+import FlagGM from './Flags/FlagGM.vue'
+import FlagGN from './Flags/FlagGN.vue'
+import FlagGP from './Flags/FlagGP.vue'
+import FlagGQ from './Flags/FlagGQ.vue'
+import FlagGR from './Flags/FlagGR.vue'
+import FlagGS from './Flags/FlagGS.vue'
+import FlagGT from './Flags/FlagGT.vue'
+import FlagGU from './Flags/FlagGU.vue'
+import FlagGW from './Flags/FlagGW.vue'
+import FlagGY from './Flags/FlagGY.vue'
+import FlagHK from './Flags/FlagHK.vue'
+import FlagHM from './Flags/FlagHM.vue'
+import FlagHN from './Flags/FlagHN.vue'
+import FlagHR from './Flags/FlagHR.vue'
+import FlagHT from './Flags/FlagHT.vue'
+import FlagHU from './Flags/FlagHU.vue'
+import FlagID from './Flags/FlagID.vue'
+import FlagIE from './Flags/FlagIE.vue'
+import FlagIL from './Flags/FlagIL.vue'
+import FlagIM from './Flags/FlagIM.vue'
+import FlagIN from './Flags/FlagIN.vue'
+import FlagIO from './Flags/FlagIO.vue'
+import FlagIQ from './Flags/FlagIQ.vue'
+import FlagIR from './Flags/FlagIR.vue'
+import FlagIS from './Flags/FlagIS.vue'
+import FlagIT from './Flags/FlagIT.vue'
+import FlagJE from './Flags/FlagJE.vue'
+import FlagJM from './Flags/FlagJM.vue'
+import FlagJO from './Flags/FlagJO.vue'
+import FlagJP from './Flags/FlagJP.vue'
+import FlagKE from './Flags/FlagKE.vue'
+import FlagKG from './Flags/FlagKG.vue'
+import FlagKH from './Flags/FlagKH.vue'
+import FlagKI from './Flags/FlagKI.vue'
+import FlagKM from './Flags/FlagKM.vue'
+import FlagKN from './Flags/FlagKN.vue'
+import FlagKP from './Flags/FlagKP.vue'
+import FlagKR from './Flags/FlagKR.vue'
+import FlagKW from './Flags/FlagKW.vue'
+import FlagKY from './Flags/FlagKY.vue'
+import FlagKZ from './Flags/FlagKZ.vue'
+import FlagLA from './Flags/FlagLA.vue'
+import FlagLB from './Flags/FlagLB.vue'
+import FlagLC from './Flags/FlagLC.vue'
+import FlagLI from './Flags/FlagLI.vue'
+import FlagLK from './Flags/FlagLK.vue'
+import FlagLR from './Flags/FlagLR.vue'
+import FlagLS from './Flags/FlagLS.vue'
+import FlagLT from './Flags/FlagLT.vue'
+import FlagLU from './Flags/FlagLU.vue'
+import FlagLV from './Flags/FlagLV.vue'
+import FlagLY from './Flags/FlagLY.vue'
+import FlagMA from './Flags/FlagMA.vue'
+import FlagMC from './Flags/FlagMC.vue'
+import FlagMD from './Flags/FlagMD.vue'
+import FlagME from './Flags/FlagME.vue'
+import FlagMF from './Flags/FlagMF.vue'
+import FlagMG from './Flags/FlagMG.vue'
+import FlagMH from './Flags/FlagMH.vue'
+import FlagMK from './Flags/FlagMK.vue'
+import FlagML from './Flags/FlagML.vue'
+import FlagMM from './Flags/FlagMM.vue'
+import FlagMN from './Flags/FlagMN.vue'
+import FlagMO from './Flags/FlagMO.vue'
+import FlagMP from './Flags/FlagMP.vue'
+import FlagMQ from './Flags/FlagMQ.vue'
+import FlagMR from './Flags/FlagMR.vue'
+import FlagMS from './Flags/FlagMS.vue'
+import FlagMT from './Flags/FlagMT.vue'
+import FlagMU from './Flags/FlagMU.vue'
+import FlagMV from './Flags/FlagMV.vue'
+import FlagMW from './Flags/FlagMW.vue'
+import FlagMX from './Flags/FlagMX.vue'
+import FlagMY from './Flags/FlagMY.vue'
+import FlagMZ from './Flags/FlagMZ.vue'
+import FlagNA from './Flags/FlagNA.vue'
+import FlagNC from './Flags/FlagNC.vue'
+import FlagNE from './Flags/FlagNE.vue'
+import FlagNF from './Flags/FlagNF.vue'
+import FlagNG from './Flags/FlagNG.vue'
+import FlagNI from './Flags/FlagNI.vue'
+import FlagNL from './Flags/FlagNL.vue'
+import FlagNO from './Flags/FlagNO.vue'
+import FlagNP from './Flags/FlagNP.vue'
+import FlagNR from './Flags/FlagNR.vue'
+import FlagNU from './Flags/FlagNU.vue'
+import FlagNZ from './Flags/FlagNZ.vue'
+import FlagOM from './Flags/FlagOM.vue'
+import FlagPA from './Flags/FlagPA.vue'
+import FlagPE from './Flags/FlagPE.vue'
+import FlagPF from './Flags/FlagPF.vue'
+import FlagPG from './Flags/FlagPG.vue'
+import FlagPH from './Flags/FlagPH.vue'
+import FlagPK from './Flags/FlagPK.vue'
+import FlagPL from './Flags/FlagPL.vue'
+import FlagPM from './Flags/FlagPM.vue'
+import FlagPN from './Flags/FlagPN.vue'
+import FlagPR from './Flags/FlagPR.vue'
+import FlagPS from './Flags/FlagPS.vue'
+import FlagPT from './Flags/FlagPT.vue'
+import FlagPW from './Flags/FlagPW.vue'
+import FlagPY from './Flags/FlagPY.vue'
+import FlagQA from './Flags/FlagQA.vue'
+import FlagRE from './Flags/FlagRE.vue'
+import FlagRO from './Flags/FlagRO.vue'
+import FlagRS from './Flags/FlagRS.vue'
+import FlagRU from './Flags/FlagRU.vue'
+import FlagRW from './Flags/FlagRW.vue'
+import FlagSA from './Flags/FlagSA.vue'
+import FlagSB from './Flags/FlagSB.vue'
+import FlagSC from './Flags/FlagSC.vue'
+import FlagSD from './Flags/FlagSD.vue'
+import FlagSE from './Flags/FlagSE.vue'
+import FlagSG from './Flags/FlagSG.vue'
+import FlagSH from './Flags/FlagSH.vue'
+import FlagSI from './Flags/FlagSI.vue'
+import FlagSJ from './Flags/FlagSJ.vue'
+import FlagSK from './Flags/FlagSK.vue'
+import FlagSL from './Flags/FlagSL.vue'
+import FlagSM from './Flags/FlagSM.vue'
+import FlagSN from './Flags/FlagSN.vue'
+import FlagSO from './Flags/FlagSO.vue'
+import FlagSR from './Flags/FlagSR.vue'
+import FlagSS from './Flags/FlagSS.vue'
+import FlagST from './Flags/FlagST.vue'
+import FlagSV from './Flags/FlagSV.vue'
+import FlagSX from './Flags/FlagSX.vue'
+import FlagSY from './Flags/FlagSY.vue'
+import FlagSZ from './Flags/FlagSZ.vue'
+import FlagTA from './Flags/FlagTA.vue'
+import FlagTC from './Flags/FlagTC.vue'
+import FlagTD from './Flags/FlagTD.vue'
+import FlagTF from './Flags/FlagTF.vue'
+import FlagTG from './Flags/FlagTG.vue'
+import FlagTH from './Flags/FlagTH.vue'
+import FlagTJ from './Flags/FlagTJ.vue'
+import FlagTK from './Flags/FlagTK.vue'
+import FlagTL from './Flags/FlagTL.vue'
+import FlagTM from './Flags/FlagTM.vue'
+import FlagTN from './Flags/FlagTN.vue'
+import FlagTO from './Flags/FlagTO.vue'
+import FlagTR from './Flags/FlagTR.vue'
+import FlagTT from './Flags/FlagTT.vue'
+import FlagTV from './Flags/FlagTV.vue'
+import FlagTW from './Flags/FlagTW.vue'
+import FlagTZ from './Flags/FlagTZ.vue'
+import FlagUA from './Flags/FlagUA.vue'
+import FlagUG from './Flags/FlagUG.vue'
+import FlagUM from './Flags/FlagUM.vue'
+import FlagUS from './Flags/FlagUS.vue'
+import FlagUY from './Flags/FlagUY.vue'
+import FlagUZ from './Flags/FlagUZ.vue'
+import FlagVA from './Flags/FlagVA.vue'
+import FlagVC from './Flags/FlagVC.vue'
+import FlagVE from './Flags/FlagVE.vue'
+import FlagVG from './Flags/FlagVG.vue'
+import FlagVI from './Flags/FlagVI.vue'
+import FlagVN from './Flags/FlagVN.vue'
+import FlagVU from './Flags/FlagVU.vue'
+import FlagWF from './Flags/FlagWF.vue'
+import FlagWS from './Flags/FlagWS.vue'
+import FlagXK from './Flags/FlagXK.vue'
+import FlagYE from './Flags/FlagYE.vue'
+import FlagYT from './Flags/FlagYT.vue'
+import FlagZA from './Flags/FlagZA.vue'
+import FlagZM from './Flags/FlagZM.vue'
+import FlagZW from './Flags/FlagZW.vue'
 
 export default defineComponent({
     components: {
-        VanillaFlagAC,
-        VanillaFlagAD,
-        VanillaFlagAE,
-        VanillaFlagAF,
-        VanillaFlagAG,
-        VanillaFlagAI,
-        VanillaFlagAL,
-        VanillaFlagAM,
-        VanillaFlagAO,
-        VanillaFlagAQ,
-        VanillaFlagAR,
-        VanillaFlagAS,
-        VanillaFlagAT,
-        VanillaFlagAU,
-        VanillaFlagAW,
-        VanillaFlagAX,
-        VanillaFlagAZ,
-        VanillaFlagBA,
-        VanillaFlagBB,
-        VanillaFlagBD,
-        VanillaFlagBE,
-        VanillaFlagBF,
-        VanillaFlagBG,
-        VanillaFlagBH,
-        VanillaFlagBI,
-        VanillaFlagBJ,
-        VanillaFlagBL,
-        VanillaFlagBM,
-        VanillaFlagBN,
-        VanillaFlagBO,
-        VanillaFlagBQ,
-        VanillaFlagBR,
-        VanillaFlagBS,
-        VanillaFlagBT,
-        VanillaFlagBV,
-        VanillaFlagBW,
-        VanillaFlagBY,
-        VanillaFlagBZ,
-        VanillaFlagCA,
-        VanillaFlagCC,
-        VanillaFlagCD,
-        VanillaFlagCF,
-        VanillaFlagCG,
-        VanillaFlagCH,
-        VanillaFlagCI,
-        VanillaFlagCK,
-        VanillaFlagCL,
-        VanillaFlagCM,
-        VanillaFlagCN,
-        VanillaFlagCO,
-        VanillaFlagCR,
-        VanillaFlagCU,
-        VanillaFlagCV,
-        VanillaFlagCW,
-        VanillaFlagCX,
-        VanillaFlagCY,
-        VanillaFlagCZ,
-        VanillaFlagDE,
-        VanillaFlagDJ,
-        VanillaFlagDK,
-        VanillaFlagDM,
-        VanillaFlagDO,
-        VanillaFlagDZ,
-        VanillaFlagEC,
-        VanillaFlagEE,
-        VanillaFlagEG,
-        VanillaFlagEH,
-        VanillaFlagER,
-        VanillaFlagES,
-        VanillaFlagET,
-        VanillaFlagEU,
-        VanillaFlagFI,
-        VanillaFlagFJ,
-        VanillaFlagFK,
-        VanillaFlagFM,
-        VanillaFlagFO,
-        VanillaFlagFR,
-        VanillaFlagGA,
-        VanillaFlagGB,
-        VanillaFlagGD,
-        VanillaFlagGEAB,
-        VanillaFlagGEOS,
-        VanillaFlagGE,
-        VanillaFlagGF,
-        VanillaFlagGG,
-        VanillaFlagGH,
-        VanillaFlagGI,
-        VanillaFlagGL,
-        VanillaFlagGM,
-        VanillaFlagGN,
-        VanillaFlagGP,
-        VanillaFlagGQ,
-        VanillaFlagGR,
-        VanillaFlagGS,
-        VanillaFlagGT,
-        VanillaFlagGU,
-        VanillaFlagGW,
-        VanillaFlagGY,
-        VanillaFlagHK,
-        VanillaFlagHM,
-        VanillaFlagHN,
-        VanillaFlagHR,
-        VanillaFlagHT,
-        VanillaFlagHU,
-        VanillaFlagID,
-        VanillaFlagIE,
-        VanillaFlagIL,
-        VanillaFlagIM,
-        VanillaFlagIN,
-        VanillaFlagIO,
-        VanillaFlagIQ,
-        VanillaFlagIR,
-        VanillaFlagIS,
-        VanillaFlagIT,
-        VanillaFlagJE,
-        VanillaFlagJM,
-        VanillaFlagJO,
-        VanillaFlagJP,
-        VanillaFlagKE,
-        VanillaFlagKG,
-        VanillaFlagKH,
-        VanillaFlagKI,
-        VanillaFlagKM,
-        VanillaFlagKN,
-        VanillaFlagKP,
-        VanillaFlagKR,
-        VanillaFlagKW,
-        VanillaFlagKY,
-        VanillaFlagKZ,
-        VanillaFlagLA,
-        VanillaFlagLB,
-        VanillaFlagLC,
-        VanillaFlagLI,
-        VanillaFlagLK,
-        VanillaFlagLR,
-        VanillaFlagLS,
-        VanillaFlagLT,
-        VanillaFlagLU,
-        VanillaFlagLV,
-        VanillaFlagLY,
-        VanillaFlagMA,
-        VanillaFlagMC,
-        VanillaFlagMD,
-        VanillaFlagME,
-        VanillaFlagMF,
-        VanillaFlagMG,
-        VanillaFlagMH,
-        VanillaFlagMK,
-        VanillaFlagML,
-        VanillaFlagMM,
-        VanillaFlagMN,
-        VanillaFlagMO,
-        VanillaFlagMP,
-        VanillaFlagMQ,
-        VanillaFlagMR,
-        VanillaFlagMS,
-        VanillaFlagMT,
-        VanillaFlagMU,
-        VanillaFlagMV,
-        VanillaFlagMW,
-        VanillaFlagMX,
-        VanillaFlagMY,
-        VanillaFlagMZ,
-        VanillaFlagNA,
-        VanillaFlagNC,
-        VanillaFlagNE,
-        VanillaFlagNF,
-        VanillaFlagNG,
-        VanillaFlagNI,
-        VanillaFlagNL,
-        VanillaFlagNO,
-        VanillaFlagNP,
-        VanillaFlagNR,
-        VanillaFlagNU,
-        VanillaFlagNZ,
-        VanillaFlagOM,
-        VanillaFlagPA,
-        VanillaFlagPE,
-        VanillaFlagPF,
-        VanillaFlagPG,
-        VanillaFlagPH,
-        VanillaFlagPK,
-        VanillaFlagPL,
-        VanillaFlagPM,
-        VanillaFlagPN,
-        VanillaFlagPR,
-        VanillaFlagPS,
-        VanillaFlagPT,
-        VanillaFlagPW,
-        VanillaFlagPY,
-        VanillaFlagQA,
-        VanillaFlagRE,
-        VanillaFlagRO,
-        VanillaFlagRS,
-        VanillaFlagRU,
-        VanillaFlagRW,
-        VanillaFlagSA,
-        VanillaFlagSB,
-        VanillaFlagSC,
-        VanillaFlagSD,
-        VanillaFlagSE,
-        VanillaFlagSG,
-        VanillaFlagSH,
-        VanillaFlagSI,
-        VanillaFlagSJ,
-        VanillaFlagSK,
-        VanillaFlagSL,
-        VanillaFlagSM,
-        VanillaFlagSN,
-        VanillaFlagSO,
-        VanillaFlagSR,
-        VanillaFlagSS,
-        VanillaFlagST,
-        VanillaFlagSV,
-        VanillaFlagSX,
-        VanillaFlagSY,
-        VanillaFlagSZ,
-        VanillaFlagTA,
-        VanillaFlagTC,
-        VanillaFlagTD,
-        VanillaFlagTF,
-        VanillaFlagTG,
-        VanillaFlagTH,
-        VanillaFlagTJ,
-        VanillaFlagTK,
-        VanillaFlagTL,
-        VanillaFlagTM,
-        VanillaFlagTN,
-        VanillaFlagTO,
-        VanillaFlagTR,
-        VanillaFlagTT,
-        VanillaFlagTV,
-        VanillaFlagTW,
-        VanillaFlagTZ,
-        VanillaFlagUA,
-        VanillaFlagUG,
-        VanillaFlagUM,
-        VanillaFlagUS,
-        VanillaFlagUY,
-        VanillaFlagUZ,
-        VanillaFlagVA,
-        VanillaFlagVC,
-        VanillaFlagVE,
-        VanillaFlagVG,
-        VanillaFlagVI,
-        VanillaFlagVN,
-        VanillaFlagVU,
-        VanillaFlagWF,
-        VanillaFlagWS,
-        VanillaFlagXK,
-        VanillaFlagYE,
-        VanillaFlagYT,
-        VanillaFlagZA,
-        VanillaFlagZM,
-        VanillaFlagZW,
+        FlagAC,
+        FlagAD,
+        FlagAE,
+        FlagAF,
+        FlagAG,
+        FlagAI,
+        FlagAL,
+        FlagAM,
+        FlagAO,
+        FlagAQ,
+        FlagAR,
+        FlagAS,
+        FlagAT,
+        FlagAU,
+        FlagAW,
+        FlagAX,
+        FlagAZ,
+        FlagBA,
+        FlagBB,
+        FlagBD,
+        FlagBE,
+        FlagBF,
+        FlagBG,
+        FlagBH,
+        FlagBI,
+        FlagBJ,
+        FlagBL,
+        FlagBM,
+        FlagBN,
+        FlagBO,
+        FlagBQ,
+        FlagBR,
+        FlagBS,
+        FlagBT,
+        FlagBV,
+        FlagBW,
+        FlagBY,
+        FlagBZ,
+        FlagCA,
+        FlagCC,
+        FlagCD,
+        FlagCF,
+        FlagCG,
+        FlagCH,
+        FlagCI,
+        FlagCK,
+        FlagCL,
+        FlagCM,
+        FlagCN,
+        FlagCO,
+        FlagCR,
+        FlagCU,
+        FlagCV,
+        FlagCW,
+        FlagCX,
+        FlagCY,
+        FlagCZ,
+        FlagDE,
+        FlagDJ,
+        FlagDK,
+        FlagDM,
+        FlagDO,
+        FlagDZ,
+        FlagEC,
+        FlagEE,
+        FlagEG,
+        FlagEH,
+        FlagER,
+        FlagES,
+        FlagET,
+        FlagEU,
+        FlagFI,
+        FlagFJ,
+        FlagFK,
+        FlagFM,
+        FlagFO,
+        FlagFR,
+        FlagGA,
+        FlagGB,
+        FlagGD,
+        FlagGEAB,
+        FlagGEOS,
+        FlagGE,
+        FlagGF,
+        FlagGG,
+        FlagGH,
+        FlagGI,
+        FlagGL,
+        FlagGM,
+        FlagGN,
+        FlagGP,
+        FlagGQ,
+        FlagGR,
+        FlagGS,
+        FlagGT,
+        FlagGU,
+        FlagGW,
+        FlagGY,
+        FlagHK,
+        FlagHM,
+        FlagHN,
+        FlagHR,
+        FlagHT,
+        FlagHU,
+        FlagID,
+        FlagIE,
+        FlagIL,
+        FlagIM,
+        FlagIN,
+        FlagIO,
+        FlagIQ,
+        FlagIR,
+        FlagIS,
+        FlagIT,
+        FlagJE,
+        FlagJM,
+        FlagJO,
+        FlagJP,
+        FlagKE,
+        FlagKG,
+        FlagKH,
+        FlagKI,
+        FlagKM,
+        FlagKN,
+        FlagKP,
+        FlagKR,
+        FlagKW,
+        FlagKY,
+        FlagKZ,
+        FlagLA,
+        FlagLB,
+        FlagLC,
+        FlagLI,
+        FlagLK,
+        FlagLR,
+        FlagLS,
+        FlagLT,
+        FlagLU,
+        FlagLV,
+        FlagLY,
+        FlagMA,
+        FlagMC,
+        FlagMD,
+        FlagME,
+        FlagMF,
+        FlagMG,
+        FlagMH,
+        FlagMK,
+        FlagML,
+        FlagMM,
+        FlagMN,
+        FlagMO,
+        FlagMP,
+        FlagMQ,
+        FlagMR,
+        FlagMS,
+        FlagMT,
+        FlagMU,
+        FlagMV,
+        FlagMW,
+        FlagMX,
+        FlagMY,
+        FlagMZ,
+        FlagNA,
+        FlagNC,
+        FlagNE,
+        FlagNF,
+        FlagNG,
+        FlagNI,
+        FlagNL,
+        FlagNO,
+        FlagNP,
+        FlagNR,
+        FlagNU,
+        FlagNZ,
+        FlagOM,
+        FlagPA,
+        FlagPE,
+        FlagPF,
+        FlagPG,
+        FlagPH,
+        FlagPK,
+        FlagPL,
+        FlagPM,
+        FlagPN,
+        FlagPR,
+        FlagPS,
+        FlagPT,
+        FlagPW,
+        FlagPY,
+        FlagQA,
+        FlagRE,
+        FlagRO,
+        FlagRS,
+        FlagRU,
+        FlagRW,
+        FlagSA,
+        FlagSB,
+        FlagSC,
+        FlagSD,
+        FlagSE,
+        FlagSG,
+        FlagSH,
+        FlagSI,
+        FlagSJ,
+        FlagSK,
+        FlagSL,
+        FlagSM,
+        FlagSN,
+        FlagSO,
+        FlagSR,
+        FlagSS,
+        FlagST,
+        FlagSV,
+        FlagSX,
+        FlagSY,
+        FlagSZ,
+        FlagTA,
+        FlagTC,
+        FlagTD,
+        FlagTF,
+        FlagTG,
+        FlagTH,
+        FlagTJ,
+        FlagTK,
+        FlagTL,
+        FlagTM,
+        FlagTN,
+        FlagTO,
+        FlagTR,
+        FlagTT,
+        FlagTV,
+        FlagTW,
+        FlagTZ,
+        FlagUA,
+        FlagUG,
+        FlagUM,
+        FlagUS,
+        FlagUY,
+        FlagUZ,
+        FlagVA,
+        FlagVC,
+        FlagVE,
+        FlagVG,
+        FlagVI,
+        FlagVN,
+        FlagVU,
+        FlagWF,
+        FlagWS,
+        FlagXK,
+        FlagYE,
+        FlagYT,
+        FlagZA,
+        FlagZM,
+        FlagZW,
     },
     props: {
         country: {
@@ -524,7 +524,7 @@ export default defineComponent({
     },
     computed: {
         componentName() {
-            return `VanillaFlag${this.country}`
+            return `Flag${this.country}`
         },
     },
 })

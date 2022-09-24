@@ -1,58 +1,35 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList, useVModel, useVariantProps } from '../../core/use'
-import { hasSlot } from '../../core/helpers'
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/form-feedback.vue'
-import ExclamationCircleIcon from '../icons/hero/solid/ExclamationCircleIcon.vue'
-import { VanillaTextareaClassesKeys, VanillaTextareaConfig } from './textarea/config'
-import type { VanillaTextareaProps, VanillaTextareaValue } from './textarea/type'
+import { ref } from 'vue'
+import { textareaClassesKeys, textareaConfig } from './config'
+import type { TextareaClassesValidKeys, TextareaProps, TextareaValue } from './config'
+import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { hasSlot } from '@/core/helpers'
+import FormErrors from '@/components/forms/form-errors.vue'
+import FormFeedback from '@/components/forms/form-feedback.vue'
+import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
 
-export default defineComponent({
-    components: {
-        VanillaFormErrors,
-        VanillaFormFeedback,
-        ExclamationCircleIcon,
-    },
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaTextareaProps>(),
-        modelValue: {
-            type: [String, Number] as PropType<VanillaTextareaValue>,
-            default: undefined,
-        },
-        rows: {
-            type: [String, Number] as PropType<string | number>,
-            default: 4,
-        },
-    },
-    setup(props) {
-        const localRef = ref(null)
-        const localValue = useVModel(props, 'modelValue')
-        const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', localValue)
-
-        const { configuration } = useConfigurationWithClassesList<VanillaTextareaProps>(
-            VanillaTextareaConfig,
-            VanillaTextareaClassesKeys,
-            localVariant,
-        )
-
-        return {
-            configuration,
-            localRef,
-            localValue,
-            localVariant,
-            localErrors,
-            hasErrors,
-            hasSlot,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<TextareaProps, TextareaClassesValidKeys>(),
+  modelValue: {
+    type: [String, Number] as PropType<TextareaValue>,
+    default: undefined,
+  },
+  rows: {
+    type: [String, Number] as PropType<string | number>,
+    default: 4,
+  },
 })
+
+const localRef = ref(null)
+const localValue = useVModel(props, 'modelValue')
+const {
+  localErrors,
+  localVariant,
+  hasErrors,
+} = useBootVariant(props, 'errors', localValue)
+
+const { configuration } = useConfiguration<TextareaProps>(textareaConfig, textareaClassesKeys)
 </script>
 
 <template>
@@ -93,7 +70,7 @@ export default defineComponent({
       name="errors"
       v-bind="{ hasErrors, localErrors }"
     >
-      <VanillaFormErrors
+      <FormErrors
         v-if="hasErrors && showErrors"
         :errors="localErrors"
       />
@@ -102,7 +79,7 @@ export default defineComponent({
       name="feedback"
       v-bind="{ hasErrors, feedback }"
     >
-      <VanillaFormFeedback
+      <FormFeedback
         v-if="!hasErrors && feedback !== undefined && showFeedback"
         :text="feedback"
       />

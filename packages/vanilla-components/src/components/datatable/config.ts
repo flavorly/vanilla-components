@@ -242,7 +242,7 @@ export declare type DatatableColumnComputed = {
   sortedTimes?: number
 } & DatatableColumn
 
-export declare type VanillaActionCallback = (action: DatatableAction) => void
+export declare type ActionCallback = (action: DatatableAction) => void
 
 export declare interface DatatableAction {
   name: string
@@ -268,13 +268,13 @@ export declare interface DatatableAction {
         icon?: string
       }
     }
-    callback?: VanillaActionCallback
+    callback?: ActionCallback
   }
   after?: {
     clearSelected?: boolean
     resetFilters?: boolean
     pooling?: DatatablePooling
-    callback?: VanillaActionCallback
+    callback?: ActionCallback
   }
 
   [key: string]: any

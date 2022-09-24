@@ -1,6 +1,9 @@
-import { commonClasses, mergeClasses } from '../../core'
+import type { InputHTMLAttributes } from 'vue'
+import { commonClasses } from '@/core/config'
+import { mergeClasses } from '@/core/helpers'
+import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaToggleConfig = {
+export const toggleConfig = {
   fixedClasses: {
 
     wrapper: '',
@@ -53,7 +56,20 @@ export const VanillaToggleConfig = {
   },
 }
 
-export const VanillaToggleClassesKeys = Object.keys(VanillaToggleConfig.classes)
+export const toggleClassesKeys = Object.keys(toggleConfig.classes)
 
-export type VanillaToggleClassesValidKeys = keyof typeof VanillaToggleConfig.classes
+export declare type ToggleClassesValidKeys = keyof typeof toggleConfig.classes
+
+export declare type ToggleSimpleValue = string | number | boolean | undefined | null | Date | Function | symbol | object | string[]
+
+export declare type ToggleValue = ToggleSimpleValue | ToggleSimpleValue[] | ObjectWithProperties<ToggleSimpleValue>
+
+export declare type ToggleProps = WithVariantPropsAndClassesList<{
+    modelValue?: ToggleValue
+    value?: ToggleValue
+    checkedValue?: ToggleValue
+    uncheckedValue?: ToggleValue
+    type?: 'checkbox'
+    checked?: boolean
+} & InputHTMLAttributes & Data, ToggleClassesValidKeys>
 

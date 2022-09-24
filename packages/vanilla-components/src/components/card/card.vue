@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { defineComponent, provide, ref } from 'vue'
-import VanillaCardFooter from './card-footer.vue'
+import Footer from './card-footer.vue'
 import type { CardClassesValidKeys, CardProps } from './config'
 import { cardClassesKeys, cardConfig } from './config'
 import { hasSlot } from '@/core/helpers'
@@ -125,9 +125,9 @@ provide('configuration_vanilla', configuration)
       v-if="hasSlot($slots.footerActions)"
       :class="configuration.classesList.footer"
     >
-      <VanillaCardFooter>
+      <Footer>
         <slot name="footerActions" />
-      </VanillaCardFooter>
+      </Footer>
     </div>
 
     <slot name="footerVanilla" />

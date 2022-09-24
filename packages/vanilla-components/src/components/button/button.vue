@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
 import { defineComponent, defineEmits, onMounted, ref } from 'vue'
-import VanillaLoadingSpinner from '../icons/spinner.vue'
 import type { ButtonClassesValidKeys, ButtonProps } from './config'
 import { buttonClassesKeys, buttonConfig } from './config'
+import LoadingSpinnerIcon from '@/components/icons/spinner.vue'
 import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 
@@ -92,7 +92,7 @@ onMounted(() => {
       <slot name="default">
         <!-- Loading Icon -->
         <span v-if="loading">
-          <VanillaLoadingSpinner :class="configuration.classesList.spinner" />
+          <LoadingSpinnerIcon :class="configuration.classesList.spinner" />
         </span>
         <!-- If not loading, show the user provided icon -->
         <span v-if="!loading && hasSlot($slots.icon)">
