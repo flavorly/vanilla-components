@@ -1,4 +1,7 @@
-export const VanillaRichRadioConfig = {
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from '@/core/types'
+
+export const richRadioConfig = {
   fixedClasses: {
     container: 'relative flex-1',
     optionContainer: 'rounded-lg',
@@ -30,7 +33,22 @@ export const VanillaRichRadioConfig = {
   },
 }
 
-export const VanillaRichRadioClassesKeys = Object.keys(VanillaRichRadioConfig.classes)
+export const richRadioClassesKeys = Object.keys(richRadioConfig.classes)
 
-export type VanillaRichRadioClassesValidKeys = keyof typeof VanillaRichRadioConfig.classes
+export declare type RichRadioClassesValidKeys = keyof typeof richRadioConfig.classes
+
+export declare type RichRadioSimpleValue = string | number | boolean | undefined | null | Date | Function | symbol | object | string[]
+
+export declare type RichRadioValue = RichRadioSimpleValue | RichRadioSimpleValue[] | ObjectWithProperties<RichRadioSimpleValue>
+
+export declare type RichRadioProps = WithVariantPropsAndClassesList<{
+    modelValue?: RichRadioValue
+    value?: RichRadioValue
+    checkedValue?: RichRadioValue
+    uncheckedValue?: RichRadioValue
+  }
+  & InputHTMLAttributes & Data & {
+  type?: 'checkbox'
+  checked?: boolean
+}, RichRadioClassesValidKeys>
 

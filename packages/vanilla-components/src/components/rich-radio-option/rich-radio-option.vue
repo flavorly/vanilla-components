@@ -1,70 +1,58 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 import { RadioGroupDescription, RadioGroupLabel } from '@headlessui/vue'
-import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core'
-import type { NormalizedOption } from '../../core/types'
-import type { VanillaRichRadioOptionProps } from './rich-radio-option.vue'
-import { VanillaRichRadioOptionClassesKeys, VanillaRichRadioOptionConfig } from './rich-radio-option.vue'
+import type { RichRadioOptionClassesValidKeys, RichRadioOptionProps } from './config'
+import { richRadioOptionClassesKeys, richRadioOptionConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import type { NormalizedOption } from '@/core/types'
 
-export default defineComponent({
-    components: {
-        RadioGroupLabel,
-        RadioGroupDescription,
-    },
-    props: {
-        ...useVariantProps<VanillaRichRadioOptionProps>(),
-        radio: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        checked: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        active: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        option: {
-            type: [Array, Object, undefined] as PropType<NormalizedOption>,
-            required: true,
-        },
-        compact: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        separated: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        optionIndex: {
-            type: [Number, undefined] as PropType<number | undefined>,
-            default: undefined,
-        },
-        totalOptions: {
-            type: [Number] as PropType<number | undefined>,
-            default: undefined,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-    },
-    setup(props) {
-        const { localVariant } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration } = useConfigurationWithClassesList<VanillaRichRadioOptionProps>(
-            VanillaRichRadioOptionConfig,
-            VanillaRichRadioOptionClassesKeys,
-            localVariant,
-        )
-
-        return {
-            configuration,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<RichRadioOptionProps, RichRadioOptionClassesValidKeys>(),
+  radio: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  checked: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  active: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  option: {
+    type: [Array, Object, undefined] as PropType<NormalizedOption>,
+    required: true,
+  },
+  compact: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  separated: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  optionIndex: {
+    type: [Number, undefined] as PropType<number | undefined>,
+    default: undefined,
+  },
+  totalOptions: {
+    type: [Number] as PropType<number | undefined>,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
 })
+
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+
+const { configuration } = useConfiguration<RichRadioOptionProps>(
+  richRadioOptionConfig,
+  richRadioOptionClassesKeys,
+)
 </script>
 
 <template>

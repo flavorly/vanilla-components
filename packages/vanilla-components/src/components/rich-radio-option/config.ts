@@ -1,6 +1,8 @@
-import { commonClasses } from '../../core'
+import type { InputHTMLAttributes } from 'vue'
+import { commonClasses } from '@/core/config'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaRichRadioOptionConfig = {
+export const richRadioOptionConfig = {
   fixedClasses: {
     disabled: commonClasses.optionOrItemDisabled,
 
@@ -136,7 +138,15 @@ export const VanillaRichRadioOptionConfig = {
   },
 }
 
-export const VanillaRichRadioOptionClassesKeys = Object.keys(VanillaRichRadioOptionConfig.classes)
+export const richRadioOptionClassesKeys = Object.keys(richRadioOptionConfig.classes)
 
-export type VanillaRichRadioOptionClassesValidKeys = keyof typeof VanillaRichRadioOptionConfig.classes
+export declare type RichRadioOptionClassesValidKeys = keyof typeof richRadioOptionConfig.classes
 
+export declare type RichRadioOptionProps = WithVariantPropsAndClassesList<{
+  name?: string | undefined
+  image?: string | undefined
+  selected?: boolean
+  description?: string | undefined
+  hasErrors?: boolean
+  parentClasses?: string[] | string
+} & InputHTMLAttributes & Data, RichRadioOptionClassesValidKeys>
