@@ -1,29 +1,8 @@
-import type {
-  ComponentInternalInstance,
-  ComputedRef,
-} from 'vue'
-import {
-  camelize,
-  computed,
-  getCurrentInstance,
-  inject,
-  reactive,
-  watch,
-} from 'vue'
-
-import {
-  get,
-  isEqual,
-  isPrimitive,
-  pick,
-} from '@/core/helpers'
-
+import type { ComponentInternalInstance, ComputedRef } from 'vue'
+import { camelize, computed, getCurrentInstance, inject, reactive, watch } from 'vue'
+import { get, isEqual, isPrimitive, pick } from '@/core/helpers'
 import { useParseVariant } from '@/core/use'
-
-import type {
-  Data,
-  VanillaComponentConfiguration,
-} from '@/core/types'
+import type { ComponentsConfiguration, Data } from '@/core/types'
 
 /**
  * Extract the defined props from the component
@@ -75,13 +54,13 @@ export function useConfigurationParts<ComponentOptions extends Data>(): {
   const vm = getCurrentInstance()!
 
   // Inject the Default Configuration
-  const variantGlobalConfiguration = inject<VanillaComponentConfiguration>('vanilla_configuration', {})
+  const variantGlobalConfiguration = inject<ComponentsConfiguration>('vanilla_configuration', {})
 
   // This ensures the configuration can only be loaded for this component name
   // TODO: check this, we can probably add other ways to pick the configuration key file.
-  const componentGlobalConfiguration = get<VanillaComponentConfiguration, ComponentOptions>(
+  const componentGlobalConfiguration = get<ComponentsConfiguration, ComponentOptions>(
     variantGlobalConfiguration,
-    vm?.type.name as keyof VanillaComponentConfiguration,
+    vm?.type.name as keyof ComponentsConfiguration,
     {},
   )
 

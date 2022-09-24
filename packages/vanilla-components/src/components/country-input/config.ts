@@ -1,6 +1,12 @@
 import type { InputHTMLAttributes } from 'vue'
 import { commonClasses } from '@/core/config'
-import type { Data, MinimumInputLengthTextProp, WithVariantProps, WithVariantPropsAndClassesList } from '@/core/types'
+import type {
+  Data,
+  FavoriteCountriesValue,
+  MinimumInputLengthTextProp,
+  WithVariantProps,
+  WithVariantPropsAndClassesList,
+} from '@/core/types'
 
 export const countryInputConfig = {
   classes: {},
@@ -30,7 +36,6 @@ export declare type CountryInputClassesValidKeys = keyof typeof countryInputConf
 export declare type CountryInputOptionClassesValidKeys = keyof typeof countryInputOptionConfig.classes
 
 export declare type CountryValue = string | undefined | null
-export declare type FavoriteCountriesValue = undefined | string | string[] | Array<string>
 
 export declare type CountryInputProps = WithVariantPropsAndClassesList<{
   modelValue?: CountryValue

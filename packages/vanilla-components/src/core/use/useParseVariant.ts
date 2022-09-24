@@ -8,11 +8,7 @@ import type {
   WithVariantPropsAndClassesList,
 } from '@/core/types'
 
-import {
-  hasProperty,
-  mergeClasses,
-  pick,
-} from '@/core/helpers'
+import { hasProperty, mergeClasses, pick } from '@/core/helpers'
 
 const getCustomPropsFromVariant = <
   P extends ObjectWithClassesList,

@@ -1,4 +1,4 @@
-import type { Measure } from '../types'
+import type { Measure } from '@/core/types'
 
 const normalizeMeasure = (measure?: Measure | null | undefined): string | undefined => {
   if (measure === null || measure === undefined) {

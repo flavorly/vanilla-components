@@ -1,3 +1,4 @@
+import { get } from './index'
 import type {
   InputOption,
   InputOptionObject,
@@ -6,8 +7,7 @@ import type {
   InputOptions,
   NormalizedOption,
   NormalizedOptions,
-} from '../types'
-import { get } from './index'
+} from '@/core/types'
 
 /**
  * Attempts to guess an option value

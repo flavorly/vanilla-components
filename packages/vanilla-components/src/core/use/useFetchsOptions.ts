@@ -1,11 +1,6 @@
 import type { ComputedRef, Ref } from 'vue'
-import {
-  computed,
-  getCurrentInstance,
-  ref,
-  watch,
-} from 'vue'
-
+import { computed, getCurrentInstance, ref, watch } from 'vue'
+import { debounce, filterOptions, flattenOptions, normalizeOptions } from '@/core/helpers'
 import type {
   FetchOptionsFn,
   FetchedOptions,
@@ -16,15 +11,7 @@ import type {
   PreFetchOptionsFn,
 } from '@/core/types'
 
-import {
-  debounce,
-  filterOptions,
-  flattenOptions,
-  normalizeOptions,
-} from '@/core/helpers'
-
 export default function useFetchsOptions(
-
   localValue: Ref<any>,
   options: Ref<InputOptions | undefined>,
   textAttribute: Ref<string | undefined>,

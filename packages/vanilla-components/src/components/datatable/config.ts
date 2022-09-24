@@ -333,7 +333,7 @@ export declare interface DatatableResponse {
   [key: string]: any
 }
 
-export declare type DatatableActions = DatatableAction[]
+export declare type DatatableActionsType = DatatableAction[]
 
 export declare type DatatableColumns = DatatableColumn[]
 
@@ -349,7 +349,7 @@ export declare interface DatatableConfiguration {
   name: string | number
   primaryKey: string | number
   columns: DatatableColumns
-  actions: DatatableActions
+  actions: DatatableActionsType
 
   filters: DatatableFilters
   filtersKey?: string | number

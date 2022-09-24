@@ -1,11 +1,6 @@
 import type { Ref } from 'vue'
-import {
-  getCurrentInstance,
-  ref,
-  watch,
-} from 'vue'
-
-import type { Data } from '../types'
+import { getCurrentInstance, ref, watch } from 'vue'
+import type { Data } from '@/core/types'
 
 export default function useVModel<P extends Data, K extends keyof P>(
   props: P,
@@ -15,6 +10,8 @@ export default function useVModel<P extends Data, K extends keyof P>(
   const localValue = ref(props[key]) as Ref<P[K]>
 
   watch(localValue, (value) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     vm?.emit(`update:${key}`, value)
   })
 

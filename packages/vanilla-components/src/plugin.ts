@@ -1,10 +1,10 @@
 import type { App } from 'vue'
 import mergeConfiguration from './configuration'
-import type { VanillaComponentConfiguration } from './core/types'
+import type { ComponentsConfiguration } from './core/types'
 import { FragmentPlugin } from './plugins/Fragment'
 
 const plugin = {
-  install: (app: App<Element>, configuration: VanillaComponentConfiguration = {}): void => {
+  install: (app: App<Element>, configuration: ComponentsConfiguration = {}): void => {
     app.config.globalProperties.$vanillaComponents = true
     const mergedConfiguration = mergeConfiguration(configuration)
     app.provide('vanilla_configuration', mergedConfiguration)

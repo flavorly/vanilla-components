@@ -11,7 +11,7 @@ import ChevronDownIcon from '@/components/icons/hero/solid/ChevronDownIcon.vue'
 
 const props = defineProps({
   actions: {
-    type: [Array, Object] as PropType<Types.DatatableActions>,
+    type: [Array, Object] as PropType<Types.DatatableActionsType>,
     required: true,
   },
   countSelected: {

@@ -1,4 +1,4 @@
-import type { NormalizedOption } from '../types'
+import type { NormalizedOption } from '@/core/types'
 
 const normalizedOptionIsDisabled = (option: NormalizedOption): boolean => option.disabled === true || option.disabled === 'disabled'
 

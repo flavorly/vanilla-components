@@ -30,6 +30,8 @@ type DebouncedFn = {
 
 type MinimumInputLengthTextProp = ((minimumInputLength: number, query?: string) => string) | string
 
+type FavoriteCountriesValue = undefined | string | string[] | Array<string>
+
 export {
   Measure,
   Data,
@@ -45,5 +47,6 @@ export {
   KeysOfType,
   Modify,
   MinimumInputLengthTextProp,
+  FavoriteCountriesValue,
 }
 

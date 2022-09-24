@@ -1,15 +1,7 @@
 import type { ComputedRef, Ref } from 'vue'
 import { computed } from 'vue'
-import {
-  flattenOptions,
-  normalizeOptions,
-} from '../index'
-
-import type {
-  InputOptions,
-  NormalizedOption,
-  NormalizedOptions,
-} from '../types'
+import type { InputOptions, NormalizedOption, NormalizedOptions } from '@/core/types'
+import { flattenOptions, normalizeOptions } from '@/core/helpers'
 
 export default function useMultipleOptions(
   options: Ref<InputOptions | undefined>,

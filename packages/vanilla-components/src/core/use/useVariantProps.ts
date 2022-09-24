@@ -1,12 +1,7 @@
 import type { PropType } from 'vue'
-import type {
-  CSSRawClassesList,
-  Data,
-  VanillaComponentWithClassesListProps,
-  VariantsWithClassesList,
-} from '@/core/types'
+import type { CSSRawClassesList, ComponentProps, Data, VariantsWithClassesList } from '@/core/types'
 
-const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends string>(): VanillaComponentWithClassesListProps<ClassesKeys> => ({
+const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends string>(): ComponentProps<ClassesKeys> => ({
   classes: {
     type: [String, Array, Object] as PropType<CSSRawClassesList<ClassesKeys>>,
     default: undefined,

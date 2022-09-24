@@ -92,7 +92,7 @@ export default function useActivableOption(
     if (firstNewOption) {
       setActiveOption(firstNewOption)
     }
- else {
+    else {
       initActiveOption()
     }
   })

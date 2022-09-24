@@ -1,12 +1,5 @@
-import type {
-  App,
-  ComponentPublicInstance,
-  VNode,
-} from 'vue'
-import {
-  Fragment as RawFragment,
-  createVNode,
-} from 'vue'
+import type { App, ComponentPublicInstance, VNode } from 'vue'
+import { Fragment as RawFragment, createVNode } from 'vue'
 
 const name = 'Fragment'
 

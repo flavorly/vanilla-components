@@ -1,8 +1,4 @@
-import {
-  getCurrentInstance,
-  unref,
-} from 'vue'
-
+import { getCurrentInstance, unref } from 'vue'
 import pick from 'lodash/pick'
 import omit from 'lodash/omit'
 
