@@ -34,7 +34,7 @@ import { Button } from '@indigit/vanilla-components'
 
       <!-- With Indicator -->
       <span class="relative inline-flex">
-        <VanillaButton
+        <Button
           label="New Orders"
           class="focus:ring-0 focus:ring-offset-0 focus:border-primary-600"
         />
@@ -45,33 +45,33 @@ import { Button } from '@indigit/vanilla-components'
       </span>
 
       <!-- Primary & Loading -->
-      <VanillaButton
+      <Button
         label="Processing"
         variant="primary"
         :loading="true"
       />
 
       <!-- Primary & Loading -->
-      <VanillaButton
+      <Button
         label="Processing"
         :loading="true"
       />
 
       <!-- Loading & Disabled -->
-      <VanillaButton
+      <Button
         label="Processing & Disabled"
         :loading="true"
         :disabled="true"
       />
 
       <!-- Loading & Disabled -->
-      <VanillaButton
+      <Button
         label="Disabled"
         :disabled="true"
       />
 
       <!-- Transparent -->
-      <VanillaButton
+      <Button
         label="Transparent"
         variant="transparent"
       />

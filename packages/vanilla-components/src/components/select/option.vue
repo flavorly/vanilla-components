@@ -1,30 +1,23 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
 import type { NormalizedOption } from '@/core/types'
 import { useInjectsClassesList } from '@/core/use'
+import SelectOption from '@/components/select/option.vue'
 
-export default defineComponent({
-    props: {
-        option: {
-            type: [Object] as PropType<NormalizedOption>,
-            required: true,
-        },
-        safe: {
-            type: [Boolean] as PropType<boolean>,
-            default: false,
-        },
+const props = defineProps({
+    option: {
+      type: [Object] as PropType<NormalizedOption>,
+      required: true,
     },
-    setup(props) {
-        const classesList = useInjectsClassesList()!
-        const hasChildren = computed(() => props.option.children !== undefined && props.option.children.length > 0)
-
-        return {
-            classesList,
-            hasChildren,
-        }
+    safe: {
+      type: [Boolean] as PropType<boolean>,
+      default: false,
     },
 })
+
+const classesList = useInjectsClassesList()!
+const hasChildren = computed(() => props.option.children !== undefined && props.option.children.length > 0)
 </script>
 
 <template>
@@ -35,7 +28,7 @@ export default defineComponent({
     :disabled="!!option.disabled"
     :class="classesList.optgroupLabel"
   >
-    <VanillaSelectOption
+    <SelectOption
       v-for="(childrenOption, index) in option.children"
       :key="`${childrenOption.value}-${childrenOption.text}-${index}`"
       :option="childrenOption"

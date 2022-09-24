@@ -1,5 +1,6 @@
 import type { PropType } from 'vue'
 import type { CSSRawClassesList, ComponentProps, Data, VariantsWithClassesList } from '@/core/types'
+import { useDefaultName } from '@/core/use/index'
 
 const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends string>(): ComponentProps<ClassesKeys> => ({
   classes: {
@@ -29,7 +30,11 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
   name: {
     type: [String] as PropType<string>,
     required: false,
-    default: Date.now().toString(36) + Math.random().toString(36).substr(2),
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
+    default(props) {
+      return useDefaultName(props)
+    },
   },
   autocomplete: {
     type: [String, Boolean] as PropType<string | boolean>,

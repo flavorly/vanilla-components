@@ -15,7 +15,7 @@ import Checkbox from '@/components/checkbox/checkbox.vue'
 import Toggle from '@/components/toggle/toggle.vue'
 import Input from '@/components/input/input.vue'
 import Textarea from '@/components/textarea/textarea.vue'
-import DateTimeInput from '@/components/datime-input/datetime-input.vue'
+import DateTimeInput from '@/components/datetime-input/datetime-input.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
 
 const props = defineProps({

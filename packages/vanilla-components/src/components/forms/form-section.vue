@@ -19,7 +19,7 @@ const { configuration } = useConfiguration<FormSectionProps>(formsConfig, formCl
 </script>
 
 <template>
-  <form :class="configuration.class">
+  <form :class="configuration.classesList.section">
     <slot />
   </form>
 </template>

@@ -35,7 +35,7 @@ const { configuration } = useConfiguration<FormLabelProps>(formsConfig, formClas
 <template>
   <label
     :for="props.for"
-    :class="configuration.class"
+    :class="configuration.classesList.label"
   >
     <slot>
       <span

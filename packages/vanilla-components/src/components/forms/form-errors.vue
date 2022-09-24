@@ -27,7 +27,7 @@ const { configuration } = useConfiguration<FormErrorsProps>(formsConfig, formCla
 <template>
   <div
     v-if="hasErrors"
-    :class="configuration.class"
+    :class="configuration.classesList.errors"
   >
     <span
       v-if="safe"

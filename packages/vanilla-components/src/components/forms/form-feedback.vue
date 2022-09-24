@@ -32,7 +32,7 @@ const clicked = () => {
 <template>
   <div
     v-if="text"
-    :class="configuration.class"
+    :class="configuration.classesList.feedback"
     @click="clicked"
   >
     <span

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { defineComponent, defineEmits, onMounted, ref } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import type { ButtonClassesValidKeys, ButtonProps } from './config'
 import { buttonClassesKeys, buttonConfig } from './config'
 import LoadingSpinnerIcon from '@/components/icons/spinner.vue'

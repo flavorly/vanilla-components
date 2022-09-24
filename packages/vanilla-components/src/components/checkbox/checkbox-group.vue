@@ -7,7 +7,7 @@ import type { InputOptions } from '@/core/types'
 import { useBootVariant, useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '@/core/use'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
-import FormLabel from '@/components/forms/form-label.vue.vue'
+import FormLabel from '@/components/forms/form-label.vue'
 import Checkbox from '@/components/checkbox/checkbox.vue'
 
 const props = defineProps({
