@@ -1,42 +1,21 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { ComputedRef, Ref } from 'vue'
-import { computed, defineComponent, inject, ref } from 'vue'
-import type { VanillaRichSelectProps } from '../rich-select/types'
-import { useBootVariant, useConfigurationWithClassesList, useInjectsClassesList, useInjectsConfiguration } from '../../core/use'
-import type { VanillaRichSelectStateProps } from './rich-select-state/types'
-import { VanillaRichSelectStateClassesKeys, VanillaRichSelectStateConfig } from './rich-select-state.vue'
+import { computed, inject, ref } from 'vue'
+import type { RichSelectProps } from '../config'
+import { richSelectClassesKeys, richSelectConfig } from '../config'
+import { useBootVariant, useConfiguration, useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
 
-export default defineComponent({
-    setup(props) {
-        const options = inject<ComputedRef<VanillaRichSelectProps>>('options')!
-        const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
-        const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!
-        const needsMoreCharsMessage = inject<ComputedRef<string>>('needsMoreCharsMessage')!
-        const configuration = useInjectsConfiguration<VanillaRichSelectProps>()
-        const noResults = computed<boolean>((): boolean => options.value.length === 0)
-        const classesList = useInjectsClassesList()!
+const props = defineProps({})
+const options = inject<ComputedRef<RichSelectProps>>('options')!
+const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
+const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!
+const needsMoreCharsMessage = inject<ComputedRef<string>>('needsMoreCharsMessage')!
+const configuration = useInjectsConfiguration<RichSelectProps>()
+const noResults = computed<boolean>((): boolean => options.value.length === 0)
+const classesList = useInjectsClassesList()!
 
-        const {
-            localVariant,
-        } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration: ownConfiguration } = useConfigurationWithClassesList<VanillaRichSelectStateProps>(
-            VanillaRichSelectStateConfig,
-            VanillaRichSelectStateClassesKeys,
-            localVariant,
-        )
-
-        return {
-            noResults,
-            configuration,
-            fetchingOptions,
-            needsMoreCharsToFetch,
-            needsMoreCharsMessage,
-            classesList,
-            ownConfiguration,
-        }
-    },
-})
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration: ownConfiguration } = useConfiguration<RichSelectProps>(richSelectConfig, richSelectClassesKeys)
 </script>
 
 <template>
@@ -48,10 +27,10 @@ export default defineComponent({
   >
     <div
       v-if="fetchingOptions"
-      :class="ownConfiguration.classesList.wrapper"
+      :class="ownConfiguration.classesList.stateWrapper"
     >
       <svg
-        :class="ownConfiguration.classesList.loadingIcon"
+        :class="ownConfiguration.classesList.stateLoadingIcon"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

@@ -1,126 +1,96 @@
-<script lang="ts">
-import type { PropType, Ref } from 'vue'
-import { defineAsyncComponent, defineComponent, inject } from 'vue'
-import type { CssClass, NormalizedOption } from '../../core/types'
-import { normalizedOptionIsDisabled } from '../../core/helpers'
-import { useInjectsClassesList } from '../../core'
-import CheckmarkIcon from '../icons/checkmark.vue'
+<script setup lang="ts">
+import type { ComponentPublicInstance, PropType, Ref } from 'vue'
+import { computed, inject, nextTick, ref, watch } from 'vue'
+import SelectOptionsList from './option-list.vue'
+import type { CssClass, NormalizedOption } from '@/core/types'
+import { normalizedOptionIsDisabled } from '@/core/helpers'
+import { useInjectsClassesList } from '@/core/use'
+import CheckmarkIcon from '@/components/icons/checkmark.vue'
 
-export default defineComponent({
-    name: 'RichSelectOption',
-    components: {
-        CheckmarkIcon,
-    },
-    props: {
-        option: {
-            type: [Object] as PropType<NormalizedOption>,
-            required: true,
-        },
-        deep: {
-            type: Number,
-            default: 0,
-        },
-    },
-    setup() {
-        const toggleOption = inject<(option: NormalizedOption) => void>('toggleOption')!
-        const setActiveOption = inject<(option: NormalizedOption) => void>('setActiveOption')!
-        const optionIsSelected = inject<(option: NormalizedOption) => boolean>('optionIsSelected')!
-        const optionIsActive = inject<(option: NormalizedOption) => boolean>('optionIsActive')!
-        const shown = inject<Ref<boolean>>('shown')
-        const classesList = useInjectsClassesList()!
+const props = defineProps({
+  option: {
+    type: [Object] as PropType<NormalizedOption>,
+    required: true,
+  },
+  deep: {
+    type: Number,
+    default: 0,
+  },
+})
 
-        return {
-            setActiveOption,
-            toggleOption,
-            optionIsSelected,
-            optionIsActive,
-            shown,
-            classesList,
-        }
-    },
-    computed: {
-        optionClasses(): CssClass[] {
-            const classes: CssClass[] = [this.classesList!.option]
+const elementList = ref(null) as Ref<ComponentPublicInstance<HTMLInputElement> | null>
 
-            // Selected
-            if (this.isSelected) {
-                if (this.isActive) {
-                    classes.push(this.classesList!.selectedHighlightedOption)
-                }
- else {
-                    classes.push(this.classesList!.selectedOption)
-                }
+const toggleOption = inject<(option: NormalizedOption) => void>('toggleOption')!
+const setActiveOption = inject<(option: NormalizedOption) => void>('setActiveOption')!
+const optionIsSelected = inject<(option: NormalizedOption) => boolean>('optionIsSelected')!
+const optionIsActive = inject<(option: NormalizedOption) => boolean>('optionIsActive')!
+const shown = inject<Ref<boolean>>('shown')
+const classesList = useInjectsClassesList()!
 
-                // Not selected
-            }
- else if (this.isActive) {
-                classes.push(this.classesList!.highlightedOption)
-            }
+// Computed stuff
+const isActive = computed(() => optionIsActive(props.option)) as Ref<boolean>
+const isSelected = computed(() => optionIsSelected(props.option)) as Ref<boolean>
+const isDisabled = computed(() => normalizedOptionIsDisabled(props.option)) as Ref<boolean>
+const hasChildren = computed(() => props.option.children !== undefined && props.option.children.length > 0) as Ref<boolean>
+const valueAttribute = computed(() => typeof props.option.value === 'object' ? JSON.stringify(props.option.value) : String(props.option.value))
+const optionClasses = computed(() => {
+  const classes: CssClass[] = [classesList.value!.option]
 
-            return classes
-        },
-        valueAttribute(): string {
-            if (typeof this.option.value === 'object') {
-                return JSON.stringify(this.option.value)
-            }
+  // Selected
+  if (isSelected.value) {
+    if (isActive.value) {
+      classes.push(classesList.value!.selectedHighlightedOption)
+    }
+    else {
+      classes.push(classesList.value!.selectedOption)
+    }
 
-            return String(this.option.value)
-        },
-        hasChildren(): boolean {
-            return this.option.children !== undefined && this.option.children.length > 0
-        },
-        isSelected(): boolean {
-            return this.optionIsSelected(this.option)
-        },
-        isActive(): boolean {
-            return this.optionIsActive(this.option)
-        },
-        isDisabled(): boolean {
-            return normalizedOptionIsDisabled(this.option)
-        },
-    },
-    watch: {
-        shown: {
-            async handler(): Promise<void> {
-                await this.$nextTick()
-                this.scrollIntoViewIfNeccesary()
-            },
-            immediate: true,
-        },
-        isActive(): void {
-            this.scrollIntoViewIfNeccesary()
-        },
-    },
-    beforeCreate() {
-        /* istanbul ignore next */
-        this.$options.components!.RichSelectOptionsList = defineAsyncComponent(() => import('./option-list.vue'))
-    },
-    methods: {
-        scrollIntoViewIfNeccesary(): void {
-            if (this.shown && this.isActive) {
-                const li = this.$el as HTMLLIElement
-                li.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
-            }
-        },
-        mousemoveHandler(): void {
-            if (this.isDisabled) {
-                return
-            }
-            this.setActiveOption(this.option)
-        },
-        mousewheelHandler(): void {
-            if (this.isDisabled) {
-                return
-            }
-            this.setActiveOption(this.option)
-        },
-        clickHandler(): void {
-            if (this.isDisabled) {
-                return
-            }
-            this.toggleOption(this.option)
-        },
-    },
+    // Not selected
+  }
+  else if (isActive.value) {
+    classes.push(classesList.value!.highlightedOption)
+  }
+  return classes
+}) as Ref<CssClass[]>
+
+// Methods
+
+const scrollIntoViewIfNecessary = () => {
+  if (shown?.value && isActive.value) {
+    const li = elementList.value?.$el as HTMLLIElement
+    li.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+  }
+}
+
+const mouseMoveHandler = () => {
+  if (isDisabled.value) {
+    return
+  }
+  setActiveOption(props.option)
+}
+
+const mouseWheelHandler = () => {
+  if (isDisabled.value) {
+    return
+  }
+  setActiveOption(props.option)
+}
+
+const clickHandler = () => {
+  if (isDisabled.value) {
+    return
+  }
+  toggleOption(props.option)
+}
+
+// Watchers
+watch(() => shown, async (value): Promise<void> => {
+  await nextTick()
+  scrollIntoViewIfNecessary()
+}, { immediate: true })
+
+watch(() => isActive, (value): void => {
+  scrollIntoViewIfNecessary()
 })
 </script>
 
@@ -133,7 +103,7 @@ export default defineComponent({
     <div :class="classesList.optgroupContent">
       <span :class="classesList.optgroupLabel">{{ option.text }}</span>
 
-      <rich-select-options-list
+      <SelectOptionsList
         ref="childrenOptions"
         :class="classesList.optgroupOptionsList"
         :options="option.children"
@@ -144,8 +114,8 @@ export default defineComponent({
   <li
     v-else
     :class="classesList.optionWrapper"
-    @mousemove="mousemoveHandler"
-    @mousewheel="mousewheelHandler"
+    @mousemove="mouseMoveHandler"
+    @mousewheel="mouseWheelHandler"
     @click="clickHandler"
   >
     <slot
@@ -166,7 +136,7 @@ export default defineComponent({
         :disabled="isDisabled"
         :value="valueAttribute"
       >
-        <div :class="classesList.optionContent">
+        <span :class="classesList.optionContent">
           <slot
             name="optionLabel"
             :option="option"
@@ -195,7 +165,7 @@ export default defineComponent({
               :class="classesList.optionSelectedIcon"
             />
           </slot>
-        </div>
+        </span>
       </button>
     </slot>
   </li>

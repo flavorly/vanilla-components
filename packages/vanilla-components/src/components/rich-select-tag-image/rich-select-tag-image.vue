@@ -1,61 +1,43 @@
 <script lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList } from '../../core'
-import type { VanillaRichSelectTagWithImageProps } from './rich-select-tag-image.vue'
-import {
-    VanillaRichSelectTagWithImageClassesKeys,
-    VanillaRichSelectTagWithImageConfig,
-} from './rich-select-tag-image.vue'
+import { ref } from 'vue'
+import type { RichSelectTagWithImageProps } from './config'
+import { richSelectTagWithImageClassesKeys, richSelectTagWithImageConfig } from './config'
+import { useBootVariant, useConfiguration } from '@/core/use'
 
-export default defineComponent({
-    props: {
-        name: {
-            type: String,
-            default: undefined,
-        },
-        image: {
-            type: String,
-            required: true,
-        },
-        selected: {
-            type: Boolean,
-            default: false,
-        },
-        description: {
-            type: [String] as PropType<string | undefined>,
-            default: undefined,
-        },
-        hasErrors: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        parentClasses: {
-            type: [String, Array] as PropType<string | string[]>,
-            default: '',
-        },
-    },
-    setup(props) {
-        const {
-            localVariant,
-        } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration } = useConfigurationWithClassesList<VanillaRichSelectTagWithImageProps>(
-            VanillaRichSelectTagWithImageConfig,
-            VanillaRichSelectTagWithImageClassesKeys,
-            localVariant,
-        )
-
-        return {
-            props,
-            configuration,
-        }
-    },
+const props = defineProps({
+  name: {
+    type: String,
+    default: undefined,
+  },
+  image: {
+    type: String,
+    required: true,
+  },
+  selected: {
+    type: Boolean,
+    default: false,
+  },
+  description: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
+  hasErrors: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  parentClasses: {
+    type: [String, Array] as PropType<string | string[]>,
+    default: '',
+  },
 })
+
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<RichSelectTagWithImageProps>(richSelectTagWithImageConfig, richSelectTagWithImageClassesKeys)
 </script>
 
 <template>

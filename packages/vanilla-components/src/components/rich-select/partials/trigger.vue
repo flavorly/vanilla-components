@@ -1,72 +1,49 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { ComputedRef, Ref } from 'vue'
-import { defineComponent, inject } from 'vue'
-import type { VanillaRichSelectProps } from '../index'
-import { useInjectsClassesList, useInjectsConfiguration } from '../../core'
-import TextPlaceholder from '../misc/text-placeholder.vue'
-import SelectorIcon from '../icons/selector.vue'
-import LoadingIcon from '../icons/loading.vue'
-import RichSelectTriggerTags from './trigger-tags.vue'
+import { computed, inject } from 'vue'
+import type { RichSelectProps } from '../config'
+import SelectTriggerTags from './trigger-tags.vue'
+import { useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
+import TextPlaceholder from '@/components/misc/text-placeholder.vue'
+import SelectorIcon from '@/components/icons/selector.vue'
+import LoadingIcon from '@/components/icons/loading.vue'
 import type { NormalizedOption } from '@/core/types'
 
-export default defineComponent({
-    name: 'RichSelectTrigger',
-    components: {
-        RichSelectTriggerTags,
-        TextPlaceholder,
-        SelectorIcon,
-        LoadingIcon,
-    },
-    setup() {
-        const configuration = useInjectsConfiguration<VanillaRichSelectProps>()
-        const selectedOption = inject<ComputedRef<NormalizedOption | undefined | NormalizedOption[]>>('selectedOption')!
-        const hasSelectedOption = inject<ComputedRef<boolean>>('hasSelectedOption')!
-        const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
-        const shown = inject<ComputedRef<boolean>>('shown')!
-        const usesTags = inject<ComputedRef<boolean>>('usesTags')!
-        const classesList = useInjectsClassesList()!
+const configuration = useInjectsConfiguration<RichSelectProps>()
+const selectedOption = inject<ComputedRef<NormalizedOption | undefined | NormalizedOption[]>>('selectedOption')!
+const hasSelectedOption = inject<ComputedRef<boolean>>('hasSelectedOption')!
+const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
+const shown = inject<ComputedRef<boolean>>('shown')!
+const usesTags = inject<ComputedRef<boolean>>('usesTags')!
+const classesList = useInjectsClassesList()!
 
-        return {
-            selectedOption,
-            hasSelectedOption,
-            configuration,
-            fetchingOptions,
-            shown,
-            usesTags,
-            classesList,
-        }
-    },
-    computed: {
-        label(): string | undefined {
-            if (!this.hasSelectedOption) {
-                return undefined
-            }
+// Computed
+const multiple = computed(() => Array.isArray(selectedOption.value))
 
-            if (this.multiple) {
-                return (this.selectedOption as NormalizedOption[])
-                    .map(o => o.text).join(', ')
-            }
+const label = computed((): string | undefined => {
+  if (!hasSelectedOption.value) {
+    return undefined
+  }
 
-            return String((this.selectedOption as NormalizedOption).text)
-        },
-        isFetchingOptionsWhileClosed(): boolean {
-            return this.fetchingOptions && !this.shown
-        },
-        multiple(): boolean {
-            return Array.isArray(this.selectedOption)
-        },
-        showSelectorIcon(): boolean {
-            if (this.isFetchingOptionsWhileClosed) {
-                return false
-            }
+  if (multiple.value) {
+    return (selectedOption.value as NormalizedOption[]).map(o => o.text).join(', ')
+  }
 
-            if (!this.configuration.clearable) {
-                return true
-            }
+  return String((selectedOption.value as NormalizedOption).text)
+})
 
-            return !this.hasSelectedOption || this.configuration.disabled === true
-        },
-    },
+const isFetchingOptionsWhileClosed = computed(() => fetchingOptions.value && !shown.value)
+
+const showSelectorIcon = computed((): boolean => {
+  if (isFetchingOptionsWhileClosed.value) {
+    return false
+  }
+
+  if (!configuration.clearable) {
+    return true
+  }
+
+  return !hasSelectedOption || configuration.disabled === true
 })
 </script>
 
@@ -96,7 +73,7 @@ export default defineComponent({
     />
   </slot>
 
-  <RichSelectTriggerTags v-else-if="usesTags">
+  <SelectTriggerTags v-else-if="usesTags">
     <template #tagCloseIcon="props">
       <slot
         name="tagCloseIcon"
@@ -109,7 +86,7 @@ export default defineComponent({
         v-bind="props"
       />
     </template>
-  </RichSelectTriggerTags>
+  </SelectTriggerTags>
 
   <span
     v-else

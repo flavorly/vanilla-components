@@ -1,18 +1,7 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-import { useInjectsClassesListClass } from '../../core'
-import CloseIcon from '../icons/close.vue'
-
-export default defineComponent({
-    name: 'RichSelectClearButton',
-    components: {
-        CloseIcon,
-    },
-    setup() {
-        const className = useInjectsClassesListClass('clearButton')
-        return { className }
-    },
-})
+<script setup lang="ts">
+import { useInjectsClassesListClass } from '@/core/use'
+import CloseIcon from '@/components/icons/close.vue'
+const className = useInjectsClassesListClass('clearButton')
 </script>
 
 <template>

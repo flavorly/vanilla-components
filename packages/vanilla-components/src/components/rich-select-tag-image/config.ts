@@ -1,6 +1,8 @@
-import { commonClasses } from '../../core'
+import type { InputHTMLAttributes } from 'vue'
+import { commonClasses } from '@/core/config'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaRichSelectTagWithImageConfig = {
+export const richSelectTagWithImageConfig = {
   classes: {
     wrapper: 'relative group',
     disabled: commonClasses.optionOrItemDisabled,
@@ -15,7 +17,16 @@ export const VanillaRichSelectTagWithImageConfig = {
   },
 }
 
-export const VanillaRichSelectTagWithImageClassesKeys = Object.keys(VanillaRichSelectTagWithImageConfig.classes)
+export const richSelectTagWithImageClassesKeys = Object.keys(richSelectTagWithImageConfig.classes)
 
-export type VanillaRichSelectTagWithImageClassesValidKeys = keyof typeof VanillaRichSelectTagWithImageConfig.classes
+export declare type RichSelectTagWithImageClassesValidKeys = keyof typeof richSelectTagWithImageConfig.classes
+
+export declare type RichSelectTagWithImageProps = WithVariantPropsAndClassesList<{
+  name?: string | undefined
+  image?: string | undefined
+  selected?: boolean
+  description?: string | undefined
+  hasErrors?: boolean
+  parentClasses?: string[] | string
+} & InputHTMLAttributes & Data, RichSelectTagWithImageClassesValidKeys>
 

@@ -1,52 +1,36 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { ComputedRef } from 'vue'
-import { defineComponent, inject } from 'vue'
-import type { NormalizedOptions } from '../../core/types'
-import { useInjectsClassesListClass } from '../../core'
-import RichSelectOptionsList from './option-list.vue'
-import RichSelectSearchInput from './search.vue'
-import RichSelectState from './state.vue'
+import { inject } from 'vue'
+import OptionsList from './option-list.vue'
+import SearchInput from './search.vue'
+import SelectState from './state.vue'
+import { useInjectsClassesListClass } from '@/core/use'
+import type { NormalizedOptions } from '@/core/types'
 
-export default defineComponent({
-    name: 'RichSelectDropdown',
-    components: {
-        RichSelectOptionsList,
-        RichSelectSearchInput,
-        RichSelectState,
-    },
-    setup() {
-        const options = inject<ComputedRef<NormalizedOptions>>('options')!
-        const showSearchInput = inject<ComputedRef<boolean>>('showSearchInput')!
-        const className = useInjectsClassesListClass('dropdownContent')
-
-        return {
-            options,
-            showSearchInput,
-            className,
-        }
-    },
-})
+const options = inject<ComputedRef<NormalizedOptions>>('options')!
+const showSearchInput = inject<ComputedRef<boolean>>('showSearchInput')!
+const className = useInjectsClassesListClass('dropdownContent')
 </script>
 
 <template>
   <div :class="className">
-    <RichSelectSearchInput
+    <SearchInput
       v-if="showSearchInput"
       ref="searchInput"
     />
 
     <slot name="dropdownTop" />
 
-    <RichSelectState ref="state">
+    <SelectState ref="state">
       <template #stateFeedback="props">
         <slot
           name="stateFeedback"
           v-bind="props"
         />
       </template>
-    </RichSelectState>
+    </SelectState>
 
-    <RichSelectOptionsList
+    <OptionsList
       ref="optionsList"
       :options="options"
     >
@@ -68,7 +52,7 @@ export default defineComponent({
           v-bind="props"
         />
       </template>
-    </RichSelectOptionsList>
+    </OptionsList>
 
     <slot name="dropdownButton" />
   </div>

@@ -1,30 +1,16 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { ComputedRef, Ref } from 'vue'
-import { computed, defineComponent, inject } from 'vue'
-import type { VanillaRichSelectProps } from '../index'
-import { useInjectsClassesList, useInjectsConfiguration } from '../../core'
+import { computed, inject } from 'vue'
+import type { RichSelectProps } from '../config'
+import { useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
 
-export default defineComponent({
-    name: 'RichSelectState',
-    setup() {
-        const options = inject<ComputedRef<VanillaRichSelectProps>>('options')!
-        const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
-        const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!
-        const needsMoreCharsMessage = inject<ComputedRef<string>>('needsMoreCharsMessage')!
-        const configuration = useInjectsConfiguration<VanillaRichSelectProps>()
-        const noResults = computed<boolean>((): boolean => options.value.length === 0)
-        const classesList = useInjectsClassesList()!
-
-        return {
-            noResults,
-            configuration,
-            fetchingOptions,
-            needsMoreCharsToFetch,
-            needsMoreCharsMessage,
-            classesList,
-        }
-    },
-})
+const options = inject<ComputedRef<RichSelectProps>>('options')!
+const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
+const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!
+const needsMoreCharsMessage = inject<ComputedRef<string>>('needsMoreCharsMessage')!
+const configuration = useInjectsConfiguration<RichSelectProps>()
+const noResults = computed<boolean>((): boolean => options.value.length === 0)
+const classesList = useInjectsClassesList()!
 </script>
 
 <template>

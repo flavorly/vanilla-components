@@ -1,75 +1,53 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, defineComponent, ref } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList } from '../../core'
-import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
-import type { VanillaRichSelectOptionWithIndicatorsProps } from './rich-select-option-indicator.vue'
-import {
-    VanillaRichSelectOptionWithIndicatorsClassesKeys,
-    VanillaRichSelectOptionWithIndicatorsConfig,
-} from './rich-select-option-indicator.vue'
+import { computed, ref } from 'vue'
+import type { RichSelectOptionWithIndicatorsProps } from './config'
+import { richSelectOptionWithIndicatorsClassesKeys, richSelectOptionWithIndicatorsConfig } from './config'
+import { useBootVariant, useConfiguration } from '@/core/use'
+import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
 
-export default defineComponent({
-    components: {
-        CheckIcon,
-    },
-    props: {
-        name: {
-            type: String,
-            default: undefined,
-        },
-        status: {
-            type: String,
-            required: true,
-        },
-        selected: {
-            type: Boolean,
-            default: false,
-        },
-        description: {
-            type: [String] as PropType<string | undefined>,
-            default: undefined,
-        },
-        hasErrors: {
-            type: Boolean,
-            default: false,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        parentClasses: {
-            type: [String, Array] as PropType<string | string[]>,
-            default: '',
-        },
-    },
-    setup(props) {
-        const {
-            localVariant,
-        } = useBootVariant(props, 'errors', ref(null))
+const props = defineProps({
+  name: {
+    type: String,
+    default: undefined,
+  },
+  status: {
+    type: String,
+    required: true,
+  },
+  selected: {
+    type: Boolean,
+    default: false,
+  },
+  description: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
+  hasErrors: {
+    type: Boolean,
+    default: false,
+  },
+  disabled: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  parentClasses: {
+    type: [String, Array] as PropType<string | string[]>,
+    default: '',
+  },
+})
 
-        const { configuration } = useConfigurationWithClassesList<VanillaRichSelectOptionWithIndicatorsProps>(
-            VanillaRichSelectOptionWithIndicatorsConfig,
-            VanillaRichSelectOptionWithIndicatorsClassesKeys,
-            localVariant,
-        )
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<RichSelectOptionWithIndicatorsProps>(richSelectOptionWithIndicatorsConfig, richSelectOptionWithIndicatorsClassesKeys)
 
-        const indicatorClass = computed(() => {
-            return {
-                green: configuration.classesList?.indicatorGreen,
-                gray: configuration.classesList?.indicatorGray,
-                red: configuration.classesList?.indicatorRed,
-                yellow: configuration.classesList?.indicatorYellow,
-                blue: configuration.classesList?.indicatorBlue,
-            }[props.status]
-        })
-
-        return {
-            props,
-            indicatorClass,
-            configuration,
-        }
-    },
+const indicatorClass = computed(() => {
+  return {
+    green: configuration.classesList?.indicatorGreen,
+    gray: configuration.classesList?.indicatorGray,
+    red: configuration.classesList?.indicatorRed,
+    yellow: configuration.classesList?.indicatorYellow,
+    blue: configuration.classesList?.indicatorBlue,
+  }[props.status]
 })
 </script>
 

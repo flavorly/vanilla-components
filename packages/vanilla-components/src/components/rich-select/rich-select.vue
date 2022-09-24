@@ -2,18 +2,15 @@
 import type { PropType } from 'vue'
 import { computed, defineComponent, provide, ref } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
-import {
-    useActivableOption,
-    useBootVariant,
-    useConfigurationWithClassesList,
-    useFetchsOptions,
-    useMultipleVModel,
-    useSelectableOption,
-    useVariantPropsWithClassesList,
-} from '../../core'
-
-import { isEqual, throttle } from '../../core/helpers'
-import { popperOptions, sameWidthModifier } from '../core/config/popperOptions'
+import Dropdown from './partials/dropdown.vue'
+import Trigger from './partials/trigger.vue'
+import ClearButton from './partials/clear-button.vue'
+import { richSelectClassesKeys, richSelectConfig } from './config'
+import type { MinimumInputLengthTextProp, RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
+import DropdownSimple, { validDropdownPlacements } from '@/components/dropdown/dropdown-simple.vue'
+import SimpleSelect from '@/components/select/select.vue'
+import FormFeedback from '@/components/forms/form-feedback.vue'
+import FormErrors from '@/components/forms/form-errors.vue'
 import type {
     CSSRawClassesList,
     Data,
@@ -22,39 +19,31 @@ import type {
     Measure,
     NormalizedOption,
     PreFetchOptionsFn,
-} from '../../core/types'
-
-import VanillaFormErrors from '../FormErrors/FormErrors.vue'
-import VanillaFormFeedback from '../FormFeedback/form-feedback.vue'
-import VanillaSelect from '../select/select.vue'
-import VanillaDropdownExtended, { validDropdownPlacements } from '../dropdown/dropdown-simple.vue'
-import RichSelectClearButton from './clear-button.vue'
-import RichSelectDropdown from './Partials//RichSelectDropdown.vue'
-import RichSelectTrigger from './trigger.vue'
+} from '@/core/types'
+import { popperOptions, sameWidthModifier } from '@/core/config'
+import { isEqual, throttle } from '@/core/helpers'
 import {
-    VanillaRichSelectClassesKeys,
-    VanillaRichSelectConfig,
-} from './rich-select.vue'
-import type {
-    MinimumInputLengthTextProp,
-    VanillaRichSelectClassesValidKeys,
-    VanillaRichSelectProps,
-    VanillaRichSelectValue,
-} from './rich-select.vue'
+    useActivableOption,
+    useBootVariant,
+    useConfiguration,
+    useFetchsOptions,
+    useMultipleVModel,
+    useSelectableOption,
+    useVariantProps,
+} from '@/core/use'
 
 export default defineComponent({
-
     components: {
-        RichSelectTrigger,
-        RichSelectDropdown,
-        RichSelectClearButton,
-        VanillaDropdownExtended,
-        VanillaSelect,
-        VanillaFormErrors,
-        VanillaFormFeedback,
+        Trigger,
+        Dropdown,
+        DropdownSimple,
+        SimpleSelect,
+        ClearButton,
+        FormErrors,
+        FormFeedback,
     },
     props: {
-        ...useVariantPropsWithClassesList<VanillaRichSelectProps, VanillaRichSelectClassesValidKeys>(),
+        ...useVariantProps<RichSelectProps, RichSelectClassesValidKeys>(),
         modelValue: {
             type: [
                 String,
@@ -65,7 +54,7 @@ export default defineComponent({
                 Date,
                 Function,
                 Symbol,
-            ] as PropType<VanillaRichSelectValue>,
+            ] as PropType<RichSelectValue>,
             default: undefined,
         },
         name: {
@@ -242,11 +231,7 @@ export default defineComponent({
             hasErrors,
         } = useBootVariant(props, 'errors', localValue)
 
-        const { configuration, attributes } = useConfigurationWithClassesList<VanillaRichSelectProps>(
-            VanillaRichSelectConfig,
-            VanillaRichSelectClassesKeys,
-            localVariant,
-        )
+        const { configuration, attributes } = useConfiguration<RichSelectProps>(richSelectConfig, richSelectClassesKeys)
 
         const searchQuery = ref<string | undefined>(undefined)
 
@@ -715,7 +700,7 @@ export default defineComponent({
       :class="configuration.classesList?.wrapper"
     >
       <div class="relative">
-        <VanillaSelect
+        <SimpleSelect
           v-model="localValue"
           :name="configuration.name"
           :fixed-classes="undefined"
@@ -725,7 +710,7 @@ export default defineComponent({
           style="display:none"
         />
 
-        <VanillaDropdownExtended
+        <DropdownSimple
           ref="dropdownComponent"
           :disabled="configuration.disabled"
           :classes="dropdownClasses"
@@ -758,7 +743,7 @@ export default defineComponent({
           @blur-on-child="blurOnChildHandler"
         >
           <template #trigger>
-            <RichSelectTrigger ref="trigger">
+            <Trigger ref="trigger">
               <template #selectorIcon="props">
                 <slot
                   name="selectorIcon"
@@ -789,10 +774,10 @@ export default defineComponent({
                   v-bind="props"
                 />
               </template>
-            </RichSelectTrigger>
+            </Trigger>
           </template>
 
-          <RichSelectDropdown ref="dropdown">
+          <Dropdown ref="dropdown">
             <template #option="props">
               <slot
                 name="option"
@@ -829,10 +814,10 @@ export default defineComponent({
                 v-bind="props"
               />
             </template>
-          </RichSelectDropdown>
-        </VanillaDropdownExtended>
+          </Dropdown>
+        </DropdownSimple>
 
-        <RichSelectClearButton
+        <ClearButton
           v-if="showClearButton"
           ref="clearButton"
           @click="clearValue"
@@ -844,13 +829,13 @@ export default defineComponent({
               :classes-list="configuration.classesList"
             />
           </template>
-        </RichSelectClearButton>
+        </ClearButton>
       </div>
       <slot
         name="errors"
         v-bind="{ hasErrors, localErrors }"
       >
-        <VanillaFormErrors
+        <FormErrors
           v-if="hasErrors && showErrors"
           :errors="localErrors"
         />
@@ -860,7 +845,7 @@ export default defineComponent({
         name="feedback"
         v-bind="{ hasErrors, feedback }"
       >
-        <VanillaFormFeedback
+        <FormFeedback
           v-if="!hasErrors && feedback !== undefined && showFeedback"
           :text="feedback"
         />

@@ -1,9 +1,10 @@
 <script lang="ts">
 import type { PropType } from 'vue'
 import { defineComponent, inject } from 'vue'
-import { normalizedOptionIsDisabled, useInjectsClassesList } from '../../core'
-import type { NormalizedOption } from '../../core/types'
-import CloseIcon from '../icons/close.vue'
+import { useInjectsClassesList } from '@/core/use'
+import { normalizedOptionIsDisabled } from '@/core/helpers'
+import type { NormalizedOption } from '@/core/types'
+import CloseIcon from '@/components/icons/close.vue'
 
 export default defineComponent({
     name: 'RichSelectTriggerTagsTag',
@@ -78,7 +79,7 @@ export default defineComponent({
             if (nextElement) {
                 nextElement.focus()
             }
- else if (elementIndex > 0) {
+            else if (elementIndex > 0) {
                 parentElement.children[elementIndex - 1].focus()
             }
         },

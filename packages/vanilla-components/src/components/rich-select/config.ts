@@ -1,7 +1,17 @@
 import merge from 'lodash/merge'
-import { enterAndLeave } from '../../core/config/transitions'
-import { mergeClasses } from '../../core'
-import { commonClasses } from '../../core/config/commonClasses'
+import type { Options, Placement } from '@popperjs/core'
+import type { HTMLAttributes } from 'vue'
+import { mergeClasses } from '@/core/helpers'
+import { commonClasses, enterAndLeave } from '@/core/config'
+import type {
+  Data,
+  FetchOptionsFn,
+  InputOptions, Measure,
+  NormalizedOption,
+  NormalizedOptions,
+  PreFetchOptionsFn,
+  WithVariantPropsAndClassesList,
+} from '@/core/types'
 
 const defaultVariant = {
     wrapper: 'block w-full',
@@ -131,11 +141,15 @@ const defaultVariant = {
     groupedBellow: 'rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10',
     groupedAbove: 'rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10',
 
+    // State
+    stateWrapper: 'flex items-center justify-center space-x-1',
+    stateLoadingIcon: 'animate-spin w-3.5 h-3.5 -mr-2',
+
     // Transitions
     ...enterAndLeave,
 }
 
-export const VanillaRichSelectConfig = {
+export const richSelectConfig = {
   // Until the little bits are merged or variantjs fixes this issue or provider a clear way to override the trigger
   // fixedClasses: {
   //   trigger: mergeClasses(
@@ -207,7 +221,46 @@ export const VanillaRichSelectConfig = {
   },
 }
 
-export const VanillaRichSelectClassesKeys = Object.keys(VanillaRichSelectConfig.classes)
+export const richSelectClassesKeys = Object.keys(richSelectConfig.classes)
 
-export type VanillaRichSelectClassesValidKeys = keyof typeof VanillaRichSelectConfig.classes
+export declare type RichSelectClassesValidKeys = keyof typeof richSelectConfig.classes
+
+export declare type MinimumInputLengthTextProp = ((minimumInputLength: number, query?: string) => string) | string
+
+export declare type RichSelectValue = string | number | boolean | undefined | null | Date | Function | symbol | RichSelectValue[]
+
+export declare type RichSelectProps = WithVariantPropsAndClassesList<{
+  modelValue?: RichSelectValue
+  options?: InputOptions | NormalizedOption[] | NormalizedOptions
+  multiple?: boolean
+  name?: string
+  tags?: boolean
+  normalizeOptions?: boolean
+  valueAttribute?: string
+  textAttribute?: string
+  delay?: number
+  fetchOptions?: FetchOptionsFn
+  prefetchOptions?: boolean | PreFetchOptionsFn
+  minimumInputLength?: number
+  minimumInputLengthText?: MinimumInputLengthTextProp
+  minimumResultsForSearch?: number
+  hideSearchBox?: boolean
+  toggleOnFocus?: boolean
+  toggleOnClick?: boolean
+  closeOnSelect?: boolean
+  selectOnClose?: boolean
+  clearable?: boolean
+  disabled?: boolean
+  placeholder?: string
+  searchBoxPlaceholder?: string
+  noResultsText?: string
+  searchingText?: string
+  loadingClosedPlaceholder?: string
+  loadingMoreResultsText?: string
+  maxHeight?: Measure | null
+  dropdownPlacement?: Placement
+  dropdownPopperOptions?: Options
+  teleport?: boolean
+  teleportTo?: string | HTMLElement
+} & HTMLAttributes & Data, RichSelectClassesValidKeys>
 

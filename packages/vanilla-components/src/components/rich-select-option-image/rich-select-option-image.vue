@@ -1,62 +1,45 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core'
-import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
-import type { VanillaRichSelectOptionWithImageProps } from './rich-select-option-image.vue'
-import { VanillaRichSelectOptionWithImageClassesKeys, VanillaRichSelectOptionWithImageConfig } from './rich-select-option-image.vue'
+import { ref } from 'vue'
+import type { RichSelectOptionWithImageClassesValidKeys, RichSelectOptionWithImageProps } from './config'
+import { richSelectOptionWithImageClassesKeys, richSelectOptionWithImageConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
 
-export default defineComponent({
-    components: {
-        CheckIcon,
-    },
-    props: {
-        ...useVariantProps<VanillaRichSelectOptionWithImageProps>(),
-        name: {
-            type: String as PropType<string | undefined>,
-            default: undefined,
-        },
-        image: {
-            type: String as PropType<string | undefined>,
-            default: undefined,
-        },
-        selected: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        description: {
-            type: [String] as PropType<string | undefined>,
-            default: undefined,
-        },
-        hasErrors: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        disabled: {
-            type: Boolean as PropType<boolean>,
-            default: false,
-        },
-        parentClasses: {
-            type: [String, Array] as PropType<string | string[]>,
-            default: '',
-        },
-    },
-    setup(props) {
-        const {
-            localVariant,
-        } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration } = useConfigurationWithClassesList<VanillaRichSelectOptionWithImageProps>(
-            VanillaRichSelectOptionWithImageConfig,
-            VanillaRichSelectOptionWithImageClassesKeys,
-            localVariant,
-        )
-
-        return {
-            configuration,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<RichSelectOptionWithImageProps, RichSelectOptionWithImageClassesValidKeys>(),
+  name: {
+    type: String as PropType<string | undefined>,
+    default: undefined,
+  },
+  image: {
+    type: String as PropType<string | undefined>,
+    default: undefined,
+  },
+  selected: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  description: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
+  hasErrors: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  disabled: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
+  parentClasses: {
+    type: [String, Array] as PropType<string | string[]>,
+    default: '',
+  },
 })
+
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<RichSelectOptionWithImageProps>(richSelectOptionWithImageConfig, richSelectOptionWithImageClassesKeys)
 </script>
 
 <template>

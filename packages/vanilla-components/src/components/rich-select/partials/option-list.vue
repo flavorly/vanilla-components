@@ -1,15 +1,17 @@
 <script lang="ts">
 import type { PropType, Ref } from 'vue'
 import { computed, defineComponent, inject } from 'vue'
-import { debounce, normalizeMeasure, useInjectsClassesList } from '../../core'
-import type { NormalizedOptions } from '../../core/types'
-import type { VanillaRichSelectProps } from '../index'
-import RichSelectOption from './option.vue'
+import type { RichSelectProps } from '../config'
+import SelectOption from './option.vue'
+import { useInjectsClassesList } from '@/core/use'
+import { debounce, normalizeMeasure } from '@/core/helpers'
+import type { NormalizedOptions } from '@/core/types'
+
+// TODO: Refactor to script setup
 
 export default defineComponent({
-    name: 'RichSelectOptionsList',
     components: {
-        RichSelectOption,
+      SelectOption,
     },
     props: {
         options: {
@@ -22,7 +24,7 @@ export default defineComponent({
         },
     },
     setup(props) {
-        const configuration = inject<VanillaRichSelectProps>('configuration_vanilla')!
+        const configuration = inject<RichSelectProps>('configuration_vanilla')!
         const shown = inject<Ref<boolean>>('shown')
         const fetchingMoreOptions = inject<Ref<boolean>>('fetchingMoreOptions')!
         const dropdownBottomReachedHandler = inject<(() => void)>('dropdownBottomReachedHandler')!
@@ -61,7 +63,7 @@ export default defineComponent({
                 await this.$nextTick()
                 this.$el.addEventListener('scroll', this.bottomReachedObserver)
             }
- else {
+            else {
                 this.$el.removeEventListener('scroll', this.bottomReachedObserver)
             }
         },
@@ -92,7 +94,7 @@ export default defineComponent({
     :class="classesList.optionsList"
     :style="usesMaxHeight ? `max-height: ${maxHeight}; overflow-x: auto;` : undefined"
   >
-    <RichSelectOption
+    <SelectOption
       v-for="(option, index) in options"
       :key="`${deep > 0 ? `${deep}-` : ''}${JSON.stringify(option.value)}-${index}`"
       :option="option"
@@ -116,7 +118,7 @@ export default defineComponent({
           v-bind="props"
         />
       </template>
-    </RichSelectOption>
+    </SelectOption>
 
     <li
       v-if="fetchingMoreOptions"
