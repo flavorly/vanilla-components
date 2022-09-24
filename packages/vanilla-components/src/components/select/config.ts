@@ -1,8 +1,9 @@
-import mapValues from 'lodash/mapValues'
-import { commonClasses } from '../../core/config/commonClasses'
-import { mergeClasses } from '../../core'
+import type { InputHTMLAttributes } from 'vue'
+import { commonClasses } from '@/core/config'
+import { mergeClasses } from '@/core/helpers'
+import type { Data, InputOptions, NormalizedOption, NormalizedOptions, WithVariantPropsAndClassesList } from '@/core/types'
 
-export const VanillaSelectConfig = {
+export const selectConfig = {
   fixedClasses: {
     wrapper: 'relative',
     select: mergeClasses(
@@ -77,7 +78,18 @@ export const VanillaSelectConfig = {
   },
 }
 
-export const VanillaSelectClassesKeys = Object.keys(VanillaSelectConfig.classes)
+export const selectClassesKeys = Object.keys(selectConfig.classes)
 
-export type VanillaSelectClassesValidKeys = keyof typeof VanillaSelectConfig.classes
+export declare type SelectClassesValidKeys = keyof typeof selectConfig.classes
 
+export declare type SelectValue = string | number | boolean | undefined | null | Date | Function | symbol | SelectValue[]
+
+export declare type SelectProps = WithVariantPropsAndClassesList<{
+  modelValue?: SelectValue
+  options?: InputOptions | NormalizedOption[] | NormalizedOptions
+  multiple?: boolean
+  normalizeOptions?: boolean
+  valueAttribute?: string
+  textAttribute?: string
+  disabled?: boolean
+} & InputHTMLAttributes & Data, SelectClassesValidKeys>
