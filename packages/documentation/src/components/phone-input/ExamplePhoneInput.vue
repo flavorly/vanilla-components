@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { VanillaPhoneNumber } from '@indigit/vanilla-components'
+import { PhoneInput } from '@indigit/vanilla-components'
 import { defineComponent, onMounted, ref } from 'vue'
 
 defineComponent({ name: 'ExamplePhoneNumber' })
@@ -15,7 +15,7 @@ const value2Country = 'PT'
 <template>
   <PreviewWrapper>
     <div class="h-[500px]">
-      <VanillaPhoneNumber
+      <PhoneInput
         v-model="value"
         :country-code="valueCountry"
         feedback="Im useful helper out here, choose wisely"
@@ -31,7 +31,7 @@ const value2Country = 'PT'
       <div class="h-1 my-5" />
 
       <!-- Regular -->
-      <VanillaPhoneNumber
+      <PhoneInput
         v-model="value2"
         :country-code="value2Country"
         feedback="Im useful helper out here, choose wisely"

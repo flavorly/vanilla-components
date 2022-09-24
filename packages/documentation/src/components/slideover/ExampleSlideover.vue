@@ -1,8 +1,5 @@
 <script setup type="ts">
-import {
-    VanillaButton,
-    VanillaSlideover,
-} from '@indigit/vanilla-components'
+import { Button, Slideover } from '@indigit/vanilla-components'
 import { defineComponent, ref } from 'vue'
 
 defineComponent({ name: 'ExampleSlideover' })
@@ -12,12 +9,12 @@ const open = ref(false)
 
 <template>
   <PreviewWrapper>
-    <VanillaButton
+    <Button
       label="Open Slideover"
       @click="open = !open"
     />
     <div class="h-[320px]">
-      <VanillaSlideover
+      <Slideover
         v-model="open"
         title="Payments"
         subtitle="Want to create new payments? Worry not, this a demo payment slideover"
@@ -28,7 +25,7 @@ const open = ref(false)
             aria-hidden="true"
           />
         </div>
-      </VanillaSlideover>
+      </Slideover>
     </div>
   </PreviewWrapper>
 </template>

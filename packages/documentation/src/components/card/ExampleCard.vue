@@ -1,9 +1,9 @@
 <script setup type="ts">
 import {
-    VanillaButton,
-    VanillaCard,
-    VanillaDropdown,
-    VanillaDropdownOption,
+    Button,
+    Card,
+    Dropdown,
+    DropdownOption,
 } from '@indigit/vanilla-components'
 import { defineComponent } from 'vue'
 
@@ -14,19 +14,19 @@ defineComponent({ name: 'ExampleCard' })
   <PreviewWrapper>
     <!-- Regular -->
     <div class="h-[220px]">
-      <VanillaCard
+      <Card
         title="Payment Methods"
         subtitle="Here you can have your favorite payments methods"
       >
         <template #actions>
-          <VanillaDropdown text="Options">
-            <VanillaDropdownOption>
+          <Dropdown text="Options">
+            <DropdownOption>
               <span>Copy Stuff</span>
-            </VanillaDropdownOption>
-            <VanillaDropdownOption>
+            </DropdownOption>
+            <DropdownOption>
               <span>Mark as Done</span>
-            </VanillaDropdownOption>
-          </VanillaDropdown>
+            </DropdownOption>
+          </Dropdown>
         </template>
 
         <div class="p-5 text-sm">
@@ -34,13 +34,13 @@ defineComponent({ name: 'ExampleCard' })
         </div>
 
         <template #footerActions>
-          <VanillaButton label="Resets" />
-          <VanillaButton
+          <Button label="Resets" />
+          <Button
             label="Submit"
             variant="primary"
           />
         </template>
-      </VanillaCard>
+      </Card>
     </div>
   </PreviewWrapper>
 </template>

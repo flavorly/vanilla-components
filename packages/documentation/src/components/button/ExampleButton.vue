@@ -1,33 +1,33 @@
 <script setup type="ts">
-import { VanillaButton } from '@indigit/vanilla-components'
+import { Button } from '@indigit/vanilla-components'
 </script>
 
 <template>
   <PreviewWrapper>
     <div class="flex flex-col items-center justify-center mx-auto space-y-3 ">
       <!-- Regular -->
-      <VanillaButton label="Complete Order" />
+      <Button label="Complete Order" />
 
       <!-- Primary -->
-      <VanillaButton
+      <Button
         label="All Good!"
         variant="primary"
       />
 
       <!-- Errors -->
-      <VanillaButton
+      <Button
         variant="error"
         label="Cancel Order"
       />
 
       <!-- Errors Soft -->
-      <VanillaButton
+      <Button
         variant="errorSoft"
         label="Are you sure?"
       />
 
       <!-- Success -->
-      <VanillaButton
+      <Button
         variant="success"
         label="Confirmed"
       />

@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { VanillaCheckbox } from '@indigit/vanilla-components'
+import { Checkbox } from '@indigit/vanilla-components'
 import { defineComponent, ref } from 'vue'
 
 defineComponent({ name: 'ExampleCheckbox' })
@@ -13,7 +13,7 @@ const valueMultiple = ref([])
   <PreviewWrapper>
     <div class="flex items-center justify-center mx-auto text-center mt-2">
       <!-- Regular -->
-      <VanillaCheckbox
+      <Checkbox
         v-model="value"
         value="accepted"
         checked-value="accepted"
@@ -31,7 +31,7 @@ const valueMultiple = ref([])
 
     <div class="flex items-center justify-center space-x-2">
       <!-- Multiple -->
-      <VanillaCheckbox
+      <Checkbox
         v-model="valueMultiple"
         value="accepted"
         checked-value="accepted"
@@ -39,7 +39,7 @@ const valueMultiple = ref([])
         class="inline-flex"
       />
 
-      <VanillaCheckbox
+      <Checkbox
         v-model="valueMultiple"
         value="accepted2"
         checked-value="accepted2"
@@ -56,7 +56,7 @@ const valueMultiple = ref([])
 
     <!-- Errors -->
     <div class="flex items-center justify-center mx-auto text-center mt-2">
-      <VanillaCheckbox
+      <Checkbox
         v-model="value2"
         errors="Sorry for this name is already taken"
         feedback="I only show when i dont have errors"

@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { VanillaRichSelect } from '@indigit/vanilla-components'
+import { RichSelect } from '@indigit/vanilla-components'
 import { defineComponent, ref } from 'vue'
 
 defineComponent({ name: 'ExampleRichSelect' })
@@ -24,7 +24,7 @@ const options = [
   <PreviewWrapper>
     <!-- Regular -->
     <div class="w-full">
-      <VanillaRichSelect
+      <RichSelect
         v-model="value"
         :options="options"
         feedback="Im useful helper out here, choose wisely"

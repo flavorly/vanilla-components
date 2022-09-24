@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { VanillaInput } from '@indigit/vanilla-components'
+import { Input } from '@indigit/vanilla-components'
 import { defineComponent, ref } from 'vue'
 
 defineComponent({ name: 'ExampleInput' })
@@ -13,7 +13,7 @@ const valuePassword = ref(null)
   <PreviewWrapper>
     <div class="grid space-y-2">
       <!-- Regular -->
-      <VanillaInput
+      <Input
         v-model="value"
         placeholder="Simple with icon"
         feedback="You can add SVGs as addons before & After"
@@ -35,16 +35,16 @@ const valuePassword = ref(null)
             />
           </svg>
         </template>
-      </VanillaInput>
+      </Input>
       <!-- Errors -->
-      <VanillaInput
+      <Input
         v-model="valueErrors"
         placeholder="Elon Musk"
         feedback="Im showing only because you cleared errors"
         errors="We have a problem Musk, Abort! Write to clear"
       />
       <!-- Password -->
-      <VanillaInput
+      <Input
         v-model="valuePassword"
         type="password"
         placeholder="A secure password"

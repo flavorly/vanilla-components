@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { VanillaAvatar } from '@indigit/vanilla-components'
+import { Avatar } from '@indigit/vanilla-components'
 import { ref } from 'vue'
 const value = ref(null)
 const value2 = ref(null)
@@ -9,7 +9,7 @@ const value2 = ref(null)
   <PreviewWrapper>
     <!-- Regular -->
     <div class="text-center">
-      <VanillaAvatar
+      <Avatar
         v-model="value"
         class="inline-flex"
         feedback="Im useful helper out here, choose wisely"
@@ -18,7 +18,7 @@ const value2 = ref(null)
     </div>
 
     <div class="text-center">
-      <VanillaAvatar
+      <Avatar
         v-model="value2"
         placeholder="Type to clear errors"
         errors="Sorry for this name is already taken"

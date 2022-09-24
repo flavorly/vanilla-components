@@ -1,13 +1,13 @@
 <script type="ts">
-import { VanillaDatatable, VanillaDropdownOption } from '@indigit/vanilla-components'
+import { Datatable, DropdownOption } from '@indigit/vanilla-components'
 import { defineComponent } from 'vue'
 import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
 
 export default defineComponent({
     name: 'ExampleDatatables',
     components: {
-        VanillaDatatable,
-        VanillaDropdownOption,
+        Datatable,
+        DropdownOption,
         TrashIcon,
     },
     setup(props) {
@@ -228,7 +228,7 @@ export default defineComponent({
 <template>
   <PreviewWrapper>
     <div>
-      <VanillaDatatable
+      <Datatable
         :config="config"
         unique-name="payments"
         :columns="columns"
@@ -251,7 +251,7 @@ export default defineComponent({
         <template #actionDeleteItems="{ action }">
           <TrashIcon class="h-4 w-4" /><span>{{ action.label }}</span>
         </template>
-      </VanillaDatatable>
+      </Datatable>
     </div>
   </PreviewWrapper>
 </template>

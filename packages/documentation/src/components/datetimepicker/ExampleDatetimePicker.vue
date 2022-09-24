@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { VanillaDatetimePicker } from '@indigit/vanilla-components'
+import { DateTimeInput } from '@indigit/vanilla-components'
 import { defineComponent, ref } from 'vue'
 
 defineComponent({ name: 'ExampleDatetimePicker' })
@@ -12,7 +12,7 @@ const value2 = ref('2022-01-01 0:00:01')
   <PreviewWrapper>
     <div class="h-[400px]">
       <!-- Regular -->
-      <VanillaDatetimePicker
+      <DateTimeInput
         v-model="value"
       />
 
@@ -21,7 +21,7 @@ const value2 = ref('2022-01-01 0:00:01')
       </div>
 
       <!-- Regular -->
-      <VanillaDatetimePicker
+      <DateTimeInput
         v-model="value2"
         errors="Sorry for this name is already taken"
       />
