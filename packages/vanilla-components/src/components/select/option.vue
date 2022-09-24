@@ -1,8 +1,8 @@
 <script lang="ts">
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
-import type { NormalizedOption } from '../../core/types'
-import { useInjectsClassesList } from '../../core'
+import type { NormalizedOption } from '@/core/types'
+import { useInjectsClassesList } from '@/core/use'
 
 export default defineComponent({
     props: {

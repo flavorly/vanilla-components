@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'vue'
-import { inputConfig } from '../input/config'
+import { inputConfig } from '@/components/input/config'
 import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
 export const textareaConfig = inputConfig

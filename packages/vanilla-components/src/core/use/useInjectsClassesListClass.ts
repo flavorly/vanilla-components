@@ -1,6 +1,6 @@
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
-import type { CssClass } from '../types'
+import type { CssClass } from '@/core/types'
 import { useInjectsConfiguration } from '@/core/use'
 import { get } from '@/core/helpers'
 

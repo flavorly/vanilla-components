@@ -1,6 +1,6 @@
 import { getCurrentInstance } from 'vue'
 import uniqueId from 'lodash/uniqueId'
-import type { Data } from '../types'
+import type { Data } from '@/core/types'
 
 /**
  * Attempts to set the child name default based on parent label / name

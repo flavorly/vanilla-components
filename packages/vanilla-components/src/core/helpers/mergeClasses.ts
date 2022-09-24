@@ -1,8 +1,4 @@
-import type {
-  CSSClassKeyValuePair,
-  CSSClasses,
-  CssClass,
-} from '../types'
+import type { CSSClassKeyValuePair, CSSClasses, CssClass } from '@/core/types'
 
 /**
  * Select the clases

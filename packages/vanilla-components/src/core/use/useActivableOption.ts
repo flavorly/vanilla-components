@@ -1,7 +1,7 @@
 import type { ComputedRef, Ref } from 'vue'
 import { computed, ref, watch } from 'vue'
-import { isEqual, normalizedOptionIsDisabled } from '../helpers'
-import type { NormalizedOption } from '../types'
+import { isEqual, normalizedOptionIsDisabled } from '@/core/helpers'
+import type { NormalizedOption } from '@/core/types'
 
 export default function useActivableOption(
   options: ComputedRef<NormalizedOption[]>,
