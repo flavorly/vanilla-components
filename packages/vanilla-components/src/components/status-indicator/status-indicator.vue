@@ -1,36 +1,21 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
-import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core/use'
-import type { VanillaStatusIndicatorProps } from './status-indicator/types'
-import { VanillaStatusIndicatorClassesKeys, VanillaStatusIndicatorConfig } from './status-indicator/config'
-export default defineComponent({
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaStatusIndicatorProps>(),
-        pulse: {
-            type: [Boolean] as PropType<boolean>,
-            default: true,
-        },
-    },
-    setup(props) {
-        const localRef = ref(null)
-        const value = ref(null)
-        const { localVariant } = useBootVariant(props, 'errors', value)
+import { ref } from 'vue'
+import type { StatusIndicatorClassesValidKeys, StatusIndicatorProps } from './config'
+import { statusIndicatorClassesKeys, statusIndicatorConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 
-        const { configuration } = useConfigurationWithClassesList<VanillaStatusIndicatorProps>(
-            VanillaStatusIndicatorConfig,
-            VanillaStatusIndicatorClassesKeys,
-            localVariant,
-        )
-
-        return {
-            configuration,
-            localRef,
-            localVariant,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<StatusIndicatorProps, StatusIndicatorClassesValidKeys>(),
+  pulse: {
+    type: [Boolean] as PropType<boolean>,
+    default: true,
+  },
 })
+
+const value = ref(null)
+const { localVariant } = useBootVariant(props, 'errors', value)
+const { configuration } = useConfiguration<StatusIndicatorProps>(statusIndicatorConfig, statusIndicatorClassesKeys)
 </script>
 
 <template>

@@ -1,4 +1,7 @@
-export const VanillaSkeletonBarConfig = {
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, WithVariantProps } from '@/core/types'
+
+export const skeletonBarConfig = {
   fixedClasses: '',
   classes: {
     wrapper: 'animate-pulse space-y-1',
@@ -16,7 +19,12 @@ export const VanillaSkeletonBarConfig = {
   },
 }
 
-export const VanillaSkeletonBarClassesKeys = Object.keys(VanillaSkeletonBarConfig.classes)
+export const skeletonBarClassesKeys = Object.keys(skeletonBarConfig.classes)
 
-export type VanillaSkeletonBarClassesValidKeys = keyof typeof VanillaSkeletonBarConfig.classes
+export declare type SkeletonBarClassesValidKeys = keyof typeof skeletonBarConfig.classes
+
+export declare type SkeletonBarProps = WithVariantProps<{
+  count?: number
+  as?: string
+} & InputHTMLAttributes & Data>
 

@@ -1,42 +1,26 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 import uniqueId from 'lodash/uniqueId'
-import { useBootVariant, useConfigurationWithClassesList, useVariantProps } from '../../core'
-import type { VanillaSkeletonBarProps } from './skeleton-bar.vue'
-import { VanillaSkeletonBarClassesKeys, VanillaSkeletonBarConfig } from './skeleton-bar.vue'
+import type { SkeletonBarClassesValidKeys, SkeletonBarProps } from './config'
+import { skeletonBarClassesKeys, skeletonBarConfig } from './config'
+import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
 
-export default defineComponent({
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<VanillaSkeletonBarProps>(),
-        count: {
-            type: [Number] as PropType<number>,
-            required: false,
-            default: 1,
-        },
-        as: {
-            type: [String, undefined] as PropType<string | undefined>,
-            default: 'div',
-            required: false,
-        },
-    },
-    setup(props) {
-        const { localVariant } = useBootVariant(props, 'errors', ref(null))
-
-        const { configuration } = useConfigurationWithClassesList<VanillaSkeletonBarProps>(
-            VanillaSkeletonBarConfig,
-            VanillaSkeletonBarClassesKeys,
-            localVariant,
-        )
-
-        return {
-            localVariant,
-            configuration,
-            uniqueId,
-        }
-    },
+const props = defineProps({
+  ...useVariantProps<SkeletonBarProps, SkeletonBarClassesValidKeys>(),
+  count: {
+    type: [Number] as PropType<number>,
+    required: false,
+    default: 1,
+  },
+  as: {
+    type: [String, undefined] as PropType<string | undefined>,
+    default: 'div',
+    required: false,
+  },
 })
+const { localVariant } = useBootVariant(props, 'errors', ref(null))
+const { configuration } = useConfiguration<SkeletonBarProps>(skeletonBarConfig, skeletonBarClassesKeys)
 </script>
 
 <template>

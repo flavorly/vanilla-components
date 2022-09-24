@@ -1,4 +1,7 @@
-export const VanillaStatusIndicatorConfig = {
+import type { InputHTMLAttributes } from 'vue'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+
+export const statusIndicatorConfig = {
   fixedClasses: {
     wrapper: 'relative',
     container: 'flex h-3 w-3 flex-shrink-0',
@@ -42,7 +45,11 @@ export const VanillaStatusIndicatorConfig = {
   },
 }
 
-export const VanillaStatusIndicatorClassesKeys = Object.keys(VanillaStatusIndicatorConfig.classes)
+export const statusIndicatorClassesKeys = Object.keys(statusIndicatorConfig.classes)
 
-export type VanillaStatusIndicatorClassesValidKeys = keyof typeof VanillaStatusIndicatorConfig.classes
+export declare type StatusIndicatorClassesValidKeys = keyof typeof statusIndicatorConfig.classes
+
+export declare type StatusIndicatorProps = WithVariantPropsAndClassesList<{
+  pulse?: boolean
+} & InputHTMLAttributes & Data, StatusIndicatorClassesValidKeys>
 
