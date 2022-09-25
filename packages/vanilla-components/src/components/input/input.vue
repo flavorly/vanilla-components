@@ -32,11 +32,7 @@ defineComponent({ inheritAttrs: false })
 const localRef = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const localType = ref(props.type)
-const { configuration, errors, hasErrors } = useConfiguration<InputProps>(
-  inputConfig,
-  'Input',
-  localValue,
-)
+const { configuration, errors, hasErrors } = useConfiguration<InputProps>(inputConfig, 'Input', localValue)
 
 const showingPassword = ref(false)
 const togglePassword = () => {

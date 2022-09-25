@@ -219,19 +219,13 @@ export default defineComponent({
         'update:modelValue': () => true,
     },
     setup(props, { emit }) {
-        const { localValue, clearValue } = useMultipleVModel(
-            props,
-            'modelValue',
-            props.multiple,
-        )
-
+        const { localValue, clearValue } = useMultipleVModel(props, 'modelValue', props.multiple)
         const {
-            localErrors,
-            localVariant,
-            hasErrors,
-        } = useBootVariant(props, 'errors', localValue)
-
-        const { configuration, attributes } = useConfiguration<RichSelectProps>(richSelectConfig, richSelectClassesKeys)
+          configuration,
+          attributes,
+          hasErrors,
+          errors,
+        } = useConfiguration<RichSelectProps>(richSelectConfig, 'RichSelect', localValue)
 
         const searchQuery = ref<string | undefined>(undefined)
 
@@ -521,9 +515,8 @@ export default defineComponent({
             flattenedOptions,
             usesTags,
             searchQuery,
-            localErrors,
+            errors,
             hasErrors,
-            localVariant,
         }
     },
     computed: {
@@ -833,11 +826,11 @@ export default defineComponent({
       </div>
       <slot
         name="errors"
-        v-bind="{ hasErrors, localErrors }"
+        v-bind="{ hasErrors, errors }"
       >
         <FormErrors
           v-if="hasErrors && showErrors"
-          :errors="localErrors"
+          :errors="errors"
         />
       </slot>
       <!-- Feedback -->

@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
-import { checkboxClassesKeys, checkboxConfig } from './config'
+import { checkboxConfig } from './config'
 import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
 import type { InputOptions } from '@/core/types'
-import { useBootVariant, useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '@/core/use'
+import { useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '@/core/use'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormLabel from '@/components/forms/form-label.vue'
@@ -46,17 +46,7 @@ const props = defineProps({
 defineComponent({ inheritAttrs: false })
 
 const { localValue } = useMultipleVModel(props, 'modelValue', true)
-
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfiguration<CheckboxProps>(
-  checkboxConfig,
-  checkboxClassesKeys,
-)
+const { configuration, errors, hasErrors } = useConfiguration<CheckboxProps>(checkboxConfig, 'CheckboxGroup', localValue)
 
 const { normalizedOptions } = useMultipleOptions(
   computed(() => props.options as InputOptions | undefined),

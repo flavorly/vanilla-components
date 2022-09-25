@@ -2,8 +2,8 @@
 import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
 import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
-import { checkboxClassesKeys, checkboxConfig } from './config'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { checkboxConfig } from './config'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 
@@ -42,13 +42,7 @@ const props = defineProps({
 defineComponent({ inheritAttrs: false })
 
 const localValue = useVModel(props, 'modelValue')
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfiguration<CheckboxProps>(checkboxConfig, checkboxClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<CheckboxProps>(checkboxConfig, 'Checkbox', localValue)
 
 // When toggle changes, emit the update in a different way.
 const emitUpdate = (event: Event | any) => {
@@ -124,20 +118,20 @@ const isChecked = computed(() => {
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && props.showErrors"
+        :errors="errors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

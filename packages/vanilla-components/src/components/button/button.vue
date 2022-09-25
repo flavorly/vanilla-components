@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, PropType, Ref } from 'vue'
 import { defineComponent, onMounted, ref } from 'vue'
 import type { ButtonClassesValidKeys, ButtonProps } from './config'
-import { buttonClassesKeys, buttonConfig } from './config'
+import { buttonConfig } from './config'
 import LoadingSpinnerIcon from '@/components/icons/spinner.vue'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { useConfiguration, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 
 const props = defineProps({
@@ -45,10 +45,9 @@ defineComponent({
   inheritAttrs: false,
 })
 
-const localRef = ref(null) as Ref<HTMLElement | null>
-const localValue = ref(props.variant)
-const { localVariant } = useBootVariant(props, 'errors', localValue)
-const { configuration } = useConfiguration<ButtonProps>(buttonConfig, buttonClassesKeys)
+const localRef = ref(null) as Ref<ComponentPublicInstance<HTMLInputElement> | null>
+const localValue = ref(props.label)
+const { configuration } = useConfiguration<ButtonProps>(buttonConfig, 'Button', localValue)
 
 // If it's disable, just ignore it
 const handleClickEvent = (event: MouseEvent) => {

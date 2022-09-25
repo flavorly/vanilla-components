@@ -10,6 +10,7 @@ interface ComponentsConfiguration {
   Button?: Components.ButtonProps
   Card?: Components.CardProps
   Checkbox?: Components.CheckboxProps
+  CheckboxGroup?: Components.CheckboxProps
   CountryInput?: Components.CountryInputProps
   Datatable?: Components.DatatableProps
   DateTimeInput?: Components.DateTimeInputProps

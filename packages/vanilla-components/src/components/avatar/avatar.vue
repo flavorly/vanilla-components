@@ -2,8 +2,8 @@
   import type { PropType, Ref } from 'vue'
   import { defineComponent, ref, watch } from 'vue'
   import type { AvatarClassesValidKeys, AvatarPreview, AvatarProps, AvatarValue } from './config'
-  import { avatarClassesKeys, avatarConfig } from './config'
-  import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+  import { avatarConfig } from './config'
+  import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
   import FormErrors from '@/components/forms/form-errors.vue'
   import FormFeedback from '@/components/forms/form-feedback.vue'
   import Button from '@/components/button/button.vue'
@@ -46,13 +46,7 @@
   defineComponent({ inheritAttrs: false })
 
   const localValue: Ref<AvatarValue> = useVModel(props, 'modelValue')
-  const {
-    localErrors,
-    localVariant,
-    hasErrors,
-  } = useBootVariant(props, 'errors', localValue)
-
-  const { configuration } = useConfiguration<AvatarProps>(avatarConfig, avatarClassesKeys)
+  const { configuration, errors, hasErrors } = useConfiguration<AvatarProps>(avatarConfig, 'Avatar', localValue)
 
   const photoPreview: Ref<AvatarPreview> = ref(null)
   const photoInput: any = ref(null)
@@ -188,20 +182,20 @@
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && props.showErrors"
+        :errors="errors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

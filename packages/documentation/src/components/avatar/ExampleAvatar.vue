@@ -11,7 +11,6 @@ const value2 = ref(null)
     <div class="text-center">
       <Avatar
         v-model="value"
-        class="inline-flex"
         feedback="Im useful helper out here, choose wisely"
         placeholder="Elon Musk"
       />
