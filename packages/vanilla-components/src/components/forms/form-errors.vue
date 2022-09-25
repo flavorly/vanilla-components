@@ -2,8 +2,8 @@
 import type { PropType } from 'vue'
 import { defineComponent, ref } from 'vue'
 import type { FormClassesValidKeys, FormErrorsProps } from './config'
-import { formClassesKeys, formsConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { formsConfig } from './config'
+import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<FormErrorsProps, FormClassesValidKeys>(),
@@ -15,13 +15,7 @@ const props = defineProps({
 })
 
 defineComponent({ inheritAttrs: false })
-
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<FormErrorsProps>(formsConfig, formClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<FormErrorsProps>(formsConfig, 'FormErrors')
 </script>
 
 <template>
@@ -31,8 +25,8 @@ const { configuration } = useConfiguration<FormErrorsProps>(formsConfig, formCla
   >
     <span
       v-if="safe"
-      v-html="localErrors"
+      v-html="errors"
     />
-    <span v-else>{{ localErrors }}</span>
+    <span v-else>{{ errors }}</span>
   </div>
 </template>

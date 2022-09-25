@@ -97,9 +97,9 @@ export function useConfigurationParts<ComponentOptions extends Data>(
  */
 export function useConfiguration<ComponentOptions extends Data>(
   defaultConfiguration: ComponentOptions,
-  classesListKeys: string[],
   componentName: keyof ComponentsConfiguration,
   modelValue: Ref | undefined = undefined,
+  classesListKeys: string[] | undefined = undefined,
 ): {
   configuration: ComponentOptions
   attributes: Data
@@ -147,11 +147,13 @@ export function useConfiguration<ComponentOptions extends Data>(
   // Finally here extract everything on a single computed configuration
   const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>(componentName)
 
+  const finalClassesListKeys = classesListKeys ?? Object.keys(defaultConfiguration.classes ?? {})
+
   const computedConfiguration = computed(() => ({
     ...props || {},
     ...useParseVariant(
       propsValues.value,
-      classesListKeys,
+      finalClassesListKeys,
       componentGlobalConfiguration,
       defaultConfiguration,
       variant.value,

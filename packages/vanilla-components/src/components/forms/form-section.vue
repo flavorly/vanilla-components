@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref } from 'vue'
 import type { FormClassesValidKeys, FormSectionProps } from './config'
-import { formClassesKeys, formsConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { formsConfig } from './config'
+import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<FormSectionProps, FormClassesValidKeys>(),
@@ -14,8 +13,7 @@ const props = defineProps({
   },
 })
 
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<FormSectionProps>(formsConfig, formClassesKeys)
+const { configuration } = useConfiguration<FormSectionProps>(formsConfig, 'FormLabel')
 </script>
 
 <template>

@@ -2,7 +2,7 @@
 import type { PropType } from 'vue'
 import { defineComponent, ref } from 'vue'
 import type { InputClassesValidKeys, InputProps, InputValue } from './config'
-import { inputClassesKeys, inputConfig } from './config'
+import { inputConfig } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 import FormErrors from '@/components/forms/form-errors.vue'
@@ -10,6 +10,7 @@ import FormFeedback from '@/components/forms/form-feedback.vue'
 import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
 import EyeIcon from '@/components/icons/hero/solid/EyeIcon.vue'
 import EyeSlashIcon from '@/components/icons/hero/solid/EyeSlashIcon.vue'
+
 const props = defineProps({
   ...useVariantProps<InputProps, InputClassesValidKeys>(),
   modelValue: {
@@ -33,7 +34,6 @@ const localValue = useVModel(props, 'modelValue')
 const localType = ref(props.type)
 const { configuration, errors, hasErrors } = useConfiguration<InputProps>(
   inputConfig,
-  inputClassesKeys,
   'Input',
   localValue,
 )
@@ -105,17 +105,17 @@ const togglePassword = () => {
       v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
+        v-if="hasErrors && props.showErrors"
         :errors="errors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>
