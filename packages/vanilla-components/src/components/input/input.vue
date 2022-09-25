@@ -3,14 +3,13 @@ import type { PropType } from 'vue'
 import { defineComponent, ref } from 'vue'
 import type { InputClassesValidKeys, InputProps, InputValue } from './config'
 import { inputClassesKeys, inputConfig } from './config'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
 import EyeIcon from '@/components/icons/hero/solid/EyeIcon.vue'
 import EyeSlashIcon from '@/components/icons/hero/solid/EyeSlashIcon.vue'
-
 const props = defineProps({
   ...useVariantProps<InputProps, InputClassesValidKeys>(),
   modelValue: {
@@ -27,15 +26,17 @@ const props = defineProps({
   },
 })
 
-defineComponent({
-  inheritAttrs: false,
-})
+defineComponent({ inheritAttrs: false })
 
 const localRef = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const localType = ref(props.type)
-const { localErrors, localVariant, hasErrors } = useBootVariant(props, 'errors', localValue)
-const { configuration } = useConfiguration<InputProps>(inputConfig, inputClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<InputProps>(
+  inputConfig,
+  inputClassesKeys,
+  'Input',
+  localValue,
+)
 
 const showingPassword = ref(false)
 const togglePassword = () => {
@@ -101,11 +102,11 @@ const togglePassword = () => {
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
         v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        :errors="errors"
       />
     </slot>
     <slot

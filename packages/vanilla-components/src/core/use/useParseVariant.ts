@@ -76,15 +76,15 @@ const useParseVariant = <
       classes[classItemKey] = undefined
     })
   }
- else {
+  else {
     classesListKeys.forEach((classItemKey) => {
       if (props.classes !== undefined && hasProperty(props.classes, classItemKey)) {
         classes[classItemKey] = props.classes[classItemKey]
       }
- else if (globalConfiguration !== undefined && globalConfiguration.classes !== undefined && hasProperty(globalConfiguration.classes, classItemKey)) {
+      else if (globalConfiguration !== undefined && globalConfiguration.classes !== undefined && hasProperty(globalConfiguration.classes, classItemKey)) {
         classes[classItemKey] = globalConfiguration.classes[classItemKey]
       }
- else if (defaultConfiguration !== undefined && defaultConfiguration.classes !== undefined && hasProperty(defaultConfiguration.classes, classItemKey)) {
+      else if (defaultConfiguration !== undefined && defaultConfiguration.classes !== undefined && hasProperty(defaultConfiguration.classes, classItemKey)) {
         classes[classItemKey] = defaultConfiguration.classes[classItemKey]
       }
 
@@ -96,14 +96,14 @@ const useParseVariant = <
             classes[classItemKey] = propsVariant.classes[classItemKey]
           }
         }
- else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[localVariant.value] !== undefined) {
+        else if (globalConfiguration !== undefined && globalConfiguration.variants !== undefined && globalConfiguration.variants[localVariant.value] !== undefined) {
           const globalConfigurationVariant = globalConfiguration.variants[localVariant.value] as WithVariantProps<P>
 
           if (globalConfigurationVariant.classes && hasProperty(globalConfigurationVariant.classes, classItemKey)) {
             classes[classItemKey] = globalConfigurationVariant.classes[classItemKey]
           }
         }
- else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[localVariant.value] !== undefined) {
+        else if (defaultConfiguration !== undefined && defaultConfiguration.variants !== undefined && defaultConfiguration.variants[localVariant.value] !== undefined) {
           const defaultConfigurationVariant = defaultConfiguration.variants[localVariant.value] as WithVariantProps<P>
 
           if (defaultConfigurationVariant.classes && hasProperty(defaultConfigurationVariant.classes, classItemKey)) {

@@ -1,5 +1,5 @@
-import type { ComponentInternalInstance, ComputedRef, Ref } from 'vue'
-import { camelize, computed, getCurrentInstance, inject, reactive, ref, watch } from 'vue'
+import type { ComponentInternalInstance, ComputedRef } from 'vue'
+import { camelize, computed, getCurrentInstance, inject, reactive, watch } from 'vue'
 import { get, isEqual, isPrimitive, pick } from '@/core/helpers'
 import { useParseVariant } from '@/core/use'
 import type { ComponentsConfiguration, Data } from '@/core/types'
@@ -46,9 +46,7 @@ export function useAttributes<ComponentOptions extends Data>(configuration: Comp
  * Extracts the configuration parts for the component such as
  * classes list & options / classes for the component
  */
-export function useConfigurationParts<ComponentOptions extends Data>(
-  componentName: string | keyof ComponentsConfiguration,
-): {
+export function useConfigurationParts<ComponentOptions extends Data>(): {
   componentGlobalConfiguration?: ComponentOptions
   propsValues: ComputedRef<Data>
 } {
@@ -58,13 +56,11 @@ export function useConfigurationParts<ComponentOptions extends Data>(
   // Inject the Default Configuration
   const variantGlobalConfiguration = inject<ComponentsConfiguration>('vanilla_configuration', {})
 
-  console.log('Global Configuration for', componentName)
-
   // This ensures the configuration can only be loaded for this component name
   // TODO: check this, we can probably add other ways to pick the configuration key file.
   const componentGlobalConfiguration = get<ComponentsConfiguration, ComponentOptions>(
     variantGlobalConfiguration,
-    componentName as keyof ComponentsConfiguration,
+    vm?.type.name as keyof ComponentsConfiguration,
     {},
   )
 
@@ -92,69 +88,29 @@ export function useConfigurationParts<ComponentOptions extends Data>(
  *
  * @param defaultConfiguration
  * @param classesListKeys
- * @param modelValue
- * @param componentName
  */
 export function useConfiguration<ComponentOptions extends Data>(
   defaultConfiguration: ComponentOptions,
   classesListKeys: string[],
-  componentName: keyof ComponentsConfiguration,
-  modelValue: Ref | undefined = undefined,
 ): {
   configuration: ComponentOptions
   attributes: Data
-  errors: Ref<string | undefined>
-  variant: Ref<string | undefined>
-  hasErrors: Ref<boolean>
 } {
   const vm = getCurrentInstance()!
-  const props = vm?.props
 
-  // Local Errors starting as undefined
-  const errors = ref<string | undefined>(props?.errors as string | undefined)
-  const variant = ref<string | undefined>(props?.variant as string | undefined)
-  const hasErrors = computed(() => errors?.value !== undefined && errors?.value !== null && errors?.value !== '') as ComputedRef<boolean>
+  // console.log(inject('vanilla_configuration'))
 
-  // If there is any error, we will just set the variant to the error one
-  if (errors.value !== undefined && errors.value !== '') {
-      variant.value = 'error'
-  }
-
-  // If there is a model value, we will watch it and reset the errors
-  if (modelValue !== undefined) {
-    watch(() => modelValue?.value, () => {
-      errors.value = undefined
-      variant.value = props.variant as string | undefined
-    })
-  }
-
-  // Watch the variant change and re-pass it
-  watch(() => props.variant, (newVariant) => {
-    variant.value = newVariant as string | undefined
-  })
-
-  // If the actual errors changes, we will also update it
-  watch(() => props.errors, (newErrors: any) => {
-    errors.value = newErrors
-    if (hasErrors.value) {
-      variant.value = 'error'
-    }
-    else {
-      variant.value = props.variant as string | undefined
-    }
-  })
-
-  // Finally here extract everything on a single computed configuration
-  const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>(componentName)
+  const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>()
 
   const computedConfiguration = computed(() => ({
-    ...props || {},
+    ...vm?.props || {},
     ...useParseVariant(
       propsValues.value,
       classesListKeys,
       componentGlobalConfiguration,
       defaultConfiguration,
-      variant.value,
+
+      // vm?.props?.errors ? 'error' : undefined,
     ),
   }))
 
@@ -173,8 +129,7 @@ export function useConfiguration<ComponentOptions extends Data>(
   return {
     configuration: configuration as ComponentOptions,
     attributes,
-    errors,
-    variant,
-    hasErrors,
   }
 }
+
+
