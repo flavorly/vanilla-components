@@ -41,7 +41,7 @@ export declare type CountryInputProps = WithVariantPropsAndClassesList<{
   modelValue?: CountryValue
   favoriteCountries?: FavoriteCountriesValue
   labelWithDialCode?: boolean
-  labelWithCountryCode: boolean
+  labelWithCountryCode?: boolean
   placeholder?: string
   searchBoxPlaceholder?: string
   noResultsText?: string
@@ -51,7 +51,7 @@ export declare type CountryInputProps = WithVariantPropsAndClassesList<{
   minimumInputLengthText?: MinimumInputLengthTextProp
 } & InputHTMLAttributes & Data, CountryInputOptionClassesValidKeys>
 
-export declare type CountryInputOptionProps = WithVariantProps<{
+export declare type CountryInputOptionProps = WithVariantPropsAndClassesList<{
   country?: object
   selected?: boolean
   description?: string | undefined
@@ -59,5 +59,5 @@ export declare type CountryInputOptionProps = WithVariantProps<{
   parentClasses?: string[] | string
   labelWithDialCode?: boolean
   labelWithCountryCode?: boolean
-} & InputHTMLAttributes & Data>
+} & InputHTMLAttributes & Data, CountryInputOptionClassesValidKeys>
 

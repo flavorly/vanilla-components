@@ -3,12 +3,13 @@ import type { PropType } from 'vue'
 import { computed, defineComponent, watch } from 'vue'
 import find from 'lodash/find'
 import first from 'lodash/first'
-import type { CountryInputClassesValidKeys, CountryInputProps, CountryValue, FavoriteCountriesValue } from './config'
+import type { CountryInputClassesValidKeys, CountryInputProps, CountryValue } from './config'
+import { countryInputConfig } from './config'
 import CountryOption from '@/components/country-input/country-input-option.vue'
 import RichSelect from '@/components/rich-select/rich-select.vue'
 import { countries, filterCountriesByName } from '@/core/utils'
-import type { MinimumInputLengthTextProp } from '@/core/types'
-import { useAttributesAndProps, useBootVariant, useVModel, useVariantProps } from '@/core/use'
+import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '@/core/types'
+import { useAttributesAndProps, useConfiguration, useVModel, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<CountryInputProps, CountryInputClassesValidKeys>(),
@@ -67,7 +68,7 @@ const emit = defineEmits([
 defineComponent({ inheritAttrs: false })
 
 const localValue = useVModel(props, 'modelValue')
-const { hasErrors, localErrors, localVariant } = useBootVariant(props, 'errors', localValue)
+const { configuration, errors, hasErrors } = useConfiguration<CountryInputProps>(countryInputConfig, 'CountryInput', localValue)
 
 // Pre-fetch the following Options
 const preFetchOptions = filterCountriesByName(
