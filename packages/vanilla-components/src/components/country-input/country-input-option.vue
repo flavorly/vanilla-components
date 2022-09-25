@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, ref } from 'vue'
-import { countryInputOptionClassesKeys, countryInputOptionConfig } from './config'
+import { computed } from 'vue'
+import { countryInputOptionConfig } from './config'
 import type { CountryInputOptionProps } from './config'
 import Flag from '@/components/icons/flag.vue'
 import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
-import { useBootVariant, useConfiguration } from '@/core/use'
+import { useConfiguration } from '@/core/use'
 
 const props = defineProps({
   country: {
@@ -48,8 +48,7 @@ const props = defineProps({
   },
 })
 
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<CountryInputOptionProps>(countryInputOptionConfig, countryInputOptionClassesKeys)
+const { configuration } = useConfiguration<CountryInputOptionProps>(countryInputOptionConfig, 'CountryInputOption')
 
 const nameLabel = computed(() => {
   if (props.labelWithDialCode) {

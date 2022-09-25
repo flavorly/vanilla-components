@@ -10,8 +10,8 @@ import {
 } from '@headlessui/vue'
 import DialogFooter from './partials/footer.vue'
 import type { DialogClassesValidKeys, DialogProps } from './config'
-import { dialogClassesKeys, dialogConfig } from './config'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { dialogConfig } from './config'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 
 const props = defineProps({
@@ -93,8 +93,7 @@ const emit = defineEmits([
 ])
 
 const localValue = useVModel(props, 'modelValue')
-const { localVariant } = useBootVariant(props, 'errors', localValue)
-const { configuration } = useConfiguration<DialogProps>(dialogConfig, dialogClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<DialogProps>(dialogConfig, 'Dialog', localValue)
 
 const close = () => {
   if (!props.closeable) {

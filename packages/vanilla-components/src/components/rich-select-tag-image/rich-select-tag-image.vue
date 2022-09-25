@@ -4,6 +4,10 @@ import { ref } from 'vue'
 import type { RichSelectTagWithImageProps } from './config'
 import { richSelectTagWithImageClassesKeys, richSelectTagWithImageConfig } from './config'
 import { useBootVariant, useConfiguration } from '@/core/use'
+import {
+  RichSelectOptionWithIndicatorsProps,
+  richSelectOptionWithIndicatorsConfig,
+} from '@/components/rich-select-option-indicator/config'
 
 const props = defineProps({
   name: {
@@ -36,8 +40,7 @@ const props = defineProps({
   },
 })
 
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<RichSelectTagWithImageProps>(richSelectTagWithImageConfig, richSelectTagWithImageClassesKeys)
+const { configuration } = useConfiguration<RichSelectTagWithImageProps>(richSelectTagWithImageConfig, 'RichSelectTagWithImage')
 </script>
 
 <template>

@@ -3,8 +3,8 @@ import type { PropType } from 'vue'
 import { computed, provide, ref } from 'vue'
 import type { SelectClassesValidKeys, SelectProps, SelectValue } from './config'
 import SelectOption from './option.vue'
-import { selectClassesKeys, selectConfig } from './config'
-import { useBootVariant, useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '@/core/use'
+import { selectConfig } from './config'
+import { useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '@/core/use'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import type { InputOptions, NormalizedOption } from '@/core/types'
@@ -69,8 +69,7 @@ const props = defineProps({
 
 const localRef = ref(null)
 const { localValue } = useMultipleVModel(props, 'modelValue', props.multiple)
-const { localErrors, localVariant, hasErrors } = useBootVariant(props, 'errors', localValue)
-const { configuration } = useConfiguration<SelectProps>(selectConfig, selectClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<SelectProps>(selectConfig, 'Select', localValue)
 
 const { normalizedOptions } = useMultipleOptions(
   computed(() => props.options as InputOptions | undefined),
@@ -89,7 +88,7 @@ provide('configuration_vanilla', configuration)
         ref="localRef"
         v-model="localValue"
         :name="name"
-        :autocomplete="autocomplete"
+        :autocomplete="props.autocomplete"
         v-bind="$attrs"
         :class="[
           configuration.classesList?.select,
@@ -115,20 +114,20 @@ provide('configuration_vanilla', configuration)
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && props.showErrors"
+        :errors="errors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

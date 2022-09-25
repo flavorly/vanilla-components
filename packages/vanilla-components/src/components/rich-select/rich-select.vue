@@ -5,7 +5,7 @@ import type { Options, Placement } from '@popperjs/core'
 import Dropdown from './partials/dropdown.vue'
 import Trigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
-import { richSelectClassesKeys, richSelectConfig } from './config'
+import { richSelectConfig } from './config'
 import type { MinimumInputLengthTextProp, RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
 import DropdownSimple, { validDropdownPlacements } from '@/components/dropdown/dropdown-simple.vue'
 import SimpleSelect from '@/components/select/select.vue'
@@ -24,7 +24,6 @@ import { popperOptions, sameWidthModifier } from '@/core/config'
 import { isEqual, throttle } from '@/core/helpers'
 import {
     useActivableOption,
-    useBootVariant,
     useConfiguration,
     useFetchsOptions,
     useMultipleVModel,

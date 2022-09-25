@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
+import { defineComponent } from 'vue'
 import type { InputGroupClassesValidKeys, InputGroupProps } from './config'
-import { inputGroupClassesKeys, inputGroupConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { inputGroupConfig } from './config'
+import { useConfiguration, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
@@ -48,15 +48,13 @@ const props = defineProps({
 
 defineComponent({ inheritAttrs: true })
 
-// TODO: Fix Classes
-const { localErrors, localVariant, hasErrors } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<InputGroupProps>(inputGroupConfig, inputGroupClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<InputGroupProps>(inputGroupConfig, 'InputGroup')
 </script>
 
 <template>
   <div
     class="vc-group"
-    :class="[withPadding ? configuration.classesList.containerPadded : '']"
+    :class="[withPadding ? configuration.classesList.wrapperWithPadding : '']"
   >
     <!-- Label And Input -->
     <div class="vc-inputs-group">
@@ -94,7 +92,7 @@ const { configuration } = useConfiguration<InputGroupProps>(inputGroupConfig, in
         >
           <slot
             name="after"
-            v-bind="{ hasErrors, type }"
+            v-bind="{ hasErrors }"
           />
         </div>
       </div>
@@ -103,11 +101,11 @@ const { configuration } = useConfiguration<InputGroupProps>(inputGroupConfig, in
     <div class="vc-errors-and-feedback">
       <slot
         name="errors"
-        v-bind="{ hasErrors, localErrors }"
+        v-bind="{ hasErrors, errors }"
       >
         <FormErrors
           v-if="hasErrors && showErrors"
-          :errors="localErrors"
+          :errors="errors"
         />
       </slot>
       <slot

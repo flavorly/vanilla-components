@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref } from 'vue'
 import type { RichSelectOptionWithImageClassesValidKeys, RichSelectOptionWithImageProps } from './config'
-import { richSelectOptionWithImageClassesKeys, richSelectOptionWithImageConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { richSelectOptionWithImageConfig } from './config'
+import { useConfiguration, useVariantProps } from '@/core/use'
 import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
 
 const props = defineProps({
@@ -38,8 +37,7 @@ const props = defineProps({
   },
 })
 
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<RichSelectOptionWithImageProps>(richSelectOptionWithImageConfig, richSelectOptionWithImageClassesKeys)
+const { configuration } = useConfiguration<RichSelectOptionWithImageProps>(richSelectOptionWithImageConfig, 'RichSelectOptionWithImage')
 </script>
 
 <template>

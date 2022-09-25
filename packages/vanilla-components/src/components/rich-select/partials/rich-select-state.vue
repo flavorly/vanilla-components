@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { ComputedRef, Ref } from 'vue'
-import { computed, inject, ref } from 'vue'
+import { computed, inject } from 'vue'
 import type { RichSelectProps } from '../config'
-import { richSelectClassesKeys, richSelectConfig } from '../config'
-import { useBootVariant, useConfiguration, useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
+import { richSelectConfig } from '../config'
+import { useConfiguration, useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
 
 const props = defineProps({})
 const options = inject<ComputedRef<RichSelectProps>>('options')!
@@ -14,8 +14,7 @@ const configuration = useInjectsConfiguration<RichSelectProps>()
 const noResults = computed<boolean>((): boolean => options.value.length === 0)
 const classesList = useInjectsClassesList()!
 
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration: ownConfiguration } = useConfiguration<RichSelectProps>(richSelectConfig, richSelectClassesKeys)
+const { configuration: ownConfiguration, errors, hasErrors, variant } = useConfiguration<RichSelectProps>(richSelectConfig, 'RichSelect')
 </script>
 
 <template>

@@ -6,6 +6,7 @@ import { normalizedOptionIsDisabled } from '@/core/helpers'
 import type { NormalizedOption } from '@/core/types'
 import CloseIcon from '@/components/icons/close.vue'
 
+// TODO: Refactor this to script Setup
 export default defineComponent({
     name: 'RichSelectTriggerTagsTag',
     components: {

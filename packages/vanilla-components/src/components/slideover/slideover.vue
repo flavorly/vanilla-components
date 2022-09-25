@@ -9,15 +9,10 @@ import {
     TransitionRoot,
 } from '@headlessui/vue'
 import type { SlideoverClassesValidKeys, SlideoverProps } from './config'
-import { slideoverClassesKeys, slideoverConfig } from './config'
+import { slideoverConfig } from './config'
 import XMarkIcon from '@/components/icons/hero/outline/XMarkIcon.vue'
 import { hasSlot } from '@/core/helpers'
-import {
-    useBootVariant,
-    useConfiguration,
-    useVModel,
-    useVariantProps,
-} from '@/core/use'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<SlideoverProps, SlideoverClassesValidKeys>(),
@@ -94,16 +89,12 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
 const localValue = useVModel(props, 'modelValue')
-const { localVariant } = useBootVariant(props, 'errors', localValue)
-const { configuration } = useConfiguration<SlideoverProps>(slideoverConfig, slideoverClassesKeys)
+const { configuration } = useConfiguration<SlideoverProps>(slideoverConfig, 'SkeletonBar', localValue)
 
 const close = () => localValue.value = false
 const open = () => localValue.value = true
 const closeOnClickOutside = () => props.closeableOnClickOutside && close()
 
-/**
- * Provided data
- */
 provide('configuration_vanilla', configuration)
 </script>
 

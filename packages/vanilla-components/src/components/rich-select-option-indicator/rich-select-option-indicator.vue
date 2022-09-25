@@ -2,8 +2,8 @@
 import type { PropType } from 'vue'
 import { computed, ref } from 'vue'
 import type { RichSelectOptionWithIndicatorsProps } from './config'
-import { richSelectOptionWithIndicatorsClassesKeys, richSelectOptionWithIndicatorsConfig } from './config'
-import { useBootVariant, useConfiguration } from '@/core/use'
+import { richSelectOptionWithIndicatorsConfig } from './config'
+import { useConfiguration } from '@/core/use'
 import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
 
 const props = defineProps({
@@ -37,8 +37,7 @@ const props = defineProps({
   },
 })
 
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<RichSelectOptionWithIndicatorsProps>(richSelectOptionWithIndicatorsConfig, richSelectOptionWithIndicatorsClassesKeys)
+const { configuration } = useConfiguration<RichSelectOptionWithIndicatorsProps>(richSelectOptionWithIndicatorsConfig, 'RichSelectOptionWithIndicators')
 
 const indicatorClass = computed(() => {
   return {

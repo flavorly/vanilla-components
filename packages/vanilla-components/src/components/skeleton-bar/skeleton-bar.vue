@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref } from 'vue'
 import uniqueId from 'lodash/uniqueId'
 import type { SkeletonBarClassesValidKeys, SkeletonBarProps } from './config'
-import { skeletonBarClassesKeys, skeletonBarConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { skeletonBarConfig } from './config'
+import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<SkeletonBarProps, SkeletonBarClassesValidKeys>(),
@@ -19,8 +18,7 @@ const props = defineProps({
     required: false,
   },
 })
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<SkeletonBarProps>(skeletonBarConfig, skeletonBarClassesKeys)
+const { configuration } = useConfiguration<SkeletonBarProps>(skeletonBarConfig, 'SkeletonBar')
 </script>
 
 <template>

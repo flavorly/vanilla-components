@@ -3,15 +3,14 @@ import type { PropType, Ref } from 'vue'
 import type { CountryCallingCode, CountryCode, PhoneNumber } from 'libphonenumber-js/types'
 import { ref, watch } from 'vue'
 import { getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js'
-import { phoneInputClassesKeys, phoneInputConfig } from './config'
+import { phoneInputConfig } from './config'
 import type { PhoneInputClassesValidKeys, PhoneInputProps } from './config'
 import CountryInput from '@/components/country-input/country-input.vue'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
-import type { MinimumInputLengthTextProp } from '@/core/types'
+import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '@/core/types'
 import Input from '@/components/input/input.vue'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import type { FavoriteCountriesValue } from '@/components/country-input/config'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<PhoneInputProps, PhoneInputClassesValidKeys>(),
@@ -104,14 +103,7 @@ const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountry
 
 attemptToParseNumber(phoneNumber.value, phoneCountryCode.value)
 
-// Only boot here, first we must prepare the values before start to watch.
-const {
-  hasErrors,
-  localErrors,
-  localVariant,
-} = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfiguration<PhoneInputProps>(phoneInputConfig, phoneInputClassesKeys)
+const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInputProps>(phoneInputConfig, 'InputGroup', localValue)
 
 // Watch Country Code and Phone number together
 // When one changes we will trigger the model value & emit back
@@ -136,7 +128,7 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
         ref="localRefCountry"
         v-model="phoneCountryCode"
         :favorite-countries="favoriteCountries"
-        :variant="localVariant"
+        :variant="variant"
         :show-errors="false"
         :has-item-bellow="true"
         :label-with-dial-code="true"
@@ -154,10 +146,10 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
       <Input
         ref="localRefPhone"
         v-model="phoneNumber"
-        :variant="localVariant"
+        :variant="variant"
         :show-errors="false"
         :placeholder="phonePlaceholder"
-        :autocomplete="autocomplete"
+        :autocomplete="props.autocomplete"
         :class="[
           configuration.classesList.input,
         ]"
@@ -177,11 +169,11 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && props.showErrors"
+        :errors="errors"
       />
     </slot>
     <slot
@@ -189,8 +181,8 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
       v-bind="{ hasErrors, feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

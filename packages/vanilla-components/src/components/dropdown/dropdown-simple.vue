@@ -3,9 +3,9 @@ import type { PropType } from 'vue'
 import { defineComponent, onMounted, ref } from 'vue'
 import type { Options, Placement, Instance as PopperInstance } from '@popperjs/core'
 import { createPopper } from '@popperjs/core'
-import { dropdownClassesKeys, dropdownConfig, dropdownPopperDefaultOptions } from './config'
+import { dropdownConfig, dropdownPopperDefaultOptions } from './config'
 import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import Transitionable from '@/components/misc/transitionable.vue'
 import type { DebouncedFn } from '@/core/types'
 import { debounce, elementIsTargetOrTargetChild, getFocusableElements, isTouchOnlyDevice as getIsTouch, throttle } from '@/core/helpers'
@@ -109,9 +109,7 @@ export default defineComponent({
     },
     setup(props) {
         const localValue = useVModel(props, 'modelValue')
-        const { localVariant } = useBootVariant(props, 'errors', localValue)
-
-        const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dropdownConfig, dropdownClassesKeys)
+        const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dropdownConfig, 'Dropdown', localValue)
 
         const isTouchOnlyDevice = ref<boolean>(false)
 

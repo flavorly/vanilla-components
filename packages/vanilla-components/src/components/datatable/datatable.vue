@@ -25,7 +25,7 @@ import FilterBadge from './partials/filter-badge.vue'
 import EmptyState from './partials/empty-state.vue'
 
 import { useConfigurationBuilder, useFetchData, useValidator } from './utils'
-import { datatableClassesKeys, datatableConfig } from './config'
+import { datatableConfig } from './config'
 import type * as Types from './config'
 
 // Other Components
@@ -39,7 +39,7 @@ import Dropdown from '@/components/dropdown/dropdown.vue'
 import Card from '@/components/card/card.vue'
 
 import type { CSSClassesList, NormalizedOption } from '@/core/types'
-import { useBootVariant, useConfiguration, useDynamicSlots, useVariantProps } from '@/core/use'
+import { useConfiguration, useDynamicSlots, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<Types.DatatableProps, Types.DatatableClassesValidKeys>(),
@@ -74,7 +74,7 @@ const props = defineProps({
     },
   },
   actions: {
-    type: [Array] as PropType<Types.DatatableActions>,
+    type: [Array] as PropType<Types.DatatableActionsType>,
     default() {
       return []
     },
@@ -172,8 +172,7 @@ const emit = defineEmits([
 defineComponent({ inheritAttrs: true })
 
 // ----- Start the Variant -----  //
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-const { configuration } = useConfiguration<Types.DatatableProps>(datatableConfig, datatableClassesKeys)
+const { configuration } = useConfiguration<Types.DatatableProps>(datatableConfig, 'Datatable')
 
 // ---------------------------- //
 // ----- Boot Config & Validate -----  //

@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref } from 'vue'
 import type { StatusIndicatorClassesValidKeys, StatusIndicatorProps } from './config'
-import { statusIndicatorClassesKeys, statusIndicatorConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { statusIndicatorConfig } from './config'
+import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<StatusIndicatorProps, StatusIndicatorClassesValidKeys>(),
@@ -12,10 +11,7 @@ const props = defineProps({
     default: true,
   },
 })
-
-const value = ref(null)
-const { localVariant } = useBootVariant(props, 'errors', value)
-const { configuration } = useConfiguration<StatusIndicatorProps>(statusIndicatorConfig, statusIndicatorClassesKeys)
+const { configuration } = useConfiguration<StatusIndicatorProps>(statusIndicatorConfig, 'StatusIndicator')
 </script>
 
 <template>

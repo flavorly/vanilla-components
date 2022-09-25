@@ -12,6 +12,7 @@ interface ComponentsConfiguration {
   Checkbox?: Components.CheckboxProps
   CheckboxGroup?: Components.CheckboxProps
   CountryInput?: Components.CountryInputProps
+  CountryInputOption?: Components.CountryInputOptionProps
   Datatable?: Components.DatatableProps
   DateTimeInput?: Components.DateTimeInputProps
   Dialog?: Components.DialogProps

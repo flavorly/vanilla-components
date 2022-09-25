@@ -1,10 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref } from 'vue'
 import { RadioGroupDescription, RadioGroupLabel } from '@headlessui/vue'
 import type { RichRadioOptionClassesValidKeys, RichRadioOptionProps } from './config'
-import { richRadioOptionClassesKeys, richRadioOptionConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { richRadioOptionConfig } from './config'
+import { useConfiguration, useVariantProps } from '@/core/use'
 import type { NormalizedOption } from '@/core/types'
 
 const props = defineProps({
@@ -46,13 +45,7 @@ const props = defineProps({
     default: false,
   },
 })
-
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
-
-const { configuration } = useConfiguration<RichRadioOptionProps>(
-  richRadioOptionConfig,
-  richRadioOptionClassesKeys,
-)
+const { configuration } = useConfiguration<RichRadioOptionProps>(richRadioOptionConfig, 'RichRadioOption')
 </script>
 
 <template>

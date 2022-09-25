@@ -2,12 +2,12 @@
 import type { PropType } from 'vue'
 import { RadioGroup, RadioGroupOption } from '@headlessui/vue'
 import RichRadioOption from '../rich-radio-option/rich-radio-option.vue'
-import { richRadioClassesKeys, richRadioConfig } from './config'
+import { richRadioConfig } from './config'
 import type { RichRadioClassesValidKeys, RichRadioProps, RichRadioValue } from './config'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import type { InputOptions } from '@/core/types'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import { normalizeOptions } from '@/core/helpers'
 
 const props = defineProps({
@@ -53,14 +53,7 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue'])
 
 const localValue = useVModel(props, 'modelValue')
-
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfiguration<RichRadioProps>(richRadioConfig, richRadioClassesKeys)
+const { configuration, errors, hasErrors, variant } = useConfiguration<RichRadioProps>(richRadioConfig, 'RichRadio', localValue)
 
 const normalizedOptions = normalizeOptions(
   props.options,
@@ -103,7 +96,7 @@ const normalizedOptions = normalizeOptions(
               :separated="separated"
               :compact="compact"
               :radio="radio"
-              :variant="localVariant"
+              :variant="variant"
               :disabled="option.disabled || false"
             >
               <template #radioIcon>
@@ -140,11 +133,11 @@ const normalizedOptions = normalizeOptions(
     </RadioGroup>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && props.showErrors"
+        :errors="errors"
       />
     </slot>
     <slot
@@ -152,8 +145,8 @@ const normalizedOptions = normalizeOptions(
       v-bind="{ hasErrors, feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

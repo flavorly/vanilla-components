@@ -2,8 +2,8 @@
 import type { PropType } from 'vue'
 import { computed, ref } from 'vue'
 import type { ToggleClassesValidKeys, ToggleProps, ToggleValue } from './config'
-import { toggleClassesKeys, toggleConfig } from './config'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { toggleConfig } from './config'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import VanillaCheckedIcon from '@/components/icons/checked.vue'
 import VanillaUncheckedIcon from '@/components/icons/unchecked.vue'
 
@@ -91,10 +91,7 @@ const isChecked = computed(() => {
   }
   return localValue.value === props.checkedValue
 })
-
-const { localErrors, localVariant, hasErrors } = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfiguration<ToggleProps>(toggleConfig, toggleClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<ToggleProps>(toggleConfig, 'Toggle', localValue)
 </script>
 
 <template>

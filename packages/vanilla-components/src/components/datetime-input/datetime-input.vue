@@ -2,12 +2,12 @@
 import type { PropType } from 'vue'
 import { onMounted, ref } from 'vue'
 import Flatpickr from 'flatpickr'
-import { dateTimeInputClassesKeys, dateTimeInputConfig } from './config'
+import { dateTimeInputConfig } from './config'
 import type { DateTimeInputClassesValidKeys, DateTimeInputProps, DateTimeInputValue } from './config'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 
 const props = defineProps({
@@ -33,16 +33,7 @@ const props = defineProps({
 
 const localValue = useVModel(props, 'modelValue')
 const flatpickrInput = ref(null)
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfiguration<DateTimeInputProps>(
-  dateTimeInputConfig,
-  dateTimeInputClassesKeys,
-)
+const { configuration, errors, hasErrors } = useConfiguration<DateTimeInputProps>(dateTimeInputConfig, 'DateTimeInput', localValue)
 onMounted(() => Flatpickr(flatpickrInput.value, props.options))
 </script>
 
@@ -82,20 +73,20 @@ onMounted(() => Flatpickr(flatpickrInput.value, props.options))
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && props.showErrors"
+        :errors="errors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

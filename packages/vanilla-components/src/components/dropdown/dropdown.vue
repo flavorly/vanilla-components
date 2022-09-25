@@ -5,9 +5,9 @@
   import { createPopper } from '@popperjs/core'
   import type { Instance as PopperInstance } from '@popperjs/core/lib/types'
   import { Menu as HeadlessMenu, MenuButton, MenuItems } from '@headlessui/vue'
-  import { dropdownClassesKeys, dropdownConfig, dropdownPopperDefaultOptions } from './config'
+  import { dropdownConfig, dropdownPopperDefaultOptions } from './config'
   import type { DropdownClassesValidKeys, DropdownProps } from './config'
-  import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+  import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
   import { throttle } from '@/core/helpers'
   import { validPlacements } from '@/core/config'
 
@@ -105,12 +105,7 @@
   const emit = defineEmits(['update:modelValue'])
 
   const localValue = useVModel(props, 'modelValue')
-  const { localVariant } = useBootVariant(props, 'errors', localValue)
-
-  const { configuration } = useConfiguration<DropdownProps>(
-    dropdownConfig,
-    dropdownClassesKeys,
-  )
+  const { configuration } = useConfiguration<DropdownProps>(dropdownConfig, 'Dropdown', localValue)
 
   const button = ref<ComponentPublicInstance<HTMLInputElement> | undefined>(undefined)
   const menu = ref(undefined)

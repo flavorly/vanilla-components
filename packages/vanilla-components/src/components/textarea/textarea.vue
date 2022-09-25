@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { ref } from 'vue'
-import { textareaClassesKeys, textareaConfig } from './config'
+import { textareaConfig } from './config'
 import type { TextareaClassesValidKeys, TextareaProps, TextareaValue } from './config'
-import { useBootVariant, useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import { hasSlot } from '@/core/helpers'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
@@ -23,13 +23,7 @@ const props = defineProps({
 
 const localRef = ref(null)
 const localValue = useVModel(props, 'modelValue')
-const {
-  localErrors,
-  localVariant,
-  hasErrors,
-} = useBootVariant(props, 'errors', localValue)
-
-const { configuration } = useConfiguration<TextareaProps>(textareaConfig, textareaClassesKeys)
+const { configuration, errors, hasErrors } = useConfiguration<TextareaProps>(textareaConfig, 'Textarea', localValue)
 </script>
 
 <template>
@@ -46,7 +40,7 @@ const { configuration } = useConfiguration<TextareaProps>(textareaConfig, textar
         ref="localRef"
         v-model="localValue"
         :name="name"
-        :autocomplete="autocomplete"
+        :autocomplete="props.autocomplete"
         :class="[
           hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
           hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
@@ -68,20 +62,20 @@ const { configuration } = useConfiguration<TextareaProps>(textareaConfig, textar
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && props.showErrors"
+        :errors="errors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && pros.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

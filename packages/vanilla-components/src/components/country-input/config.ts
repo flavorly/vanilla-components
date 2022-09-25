@@ -4,7 +4,6 @@ import type {
   Data,
   FavoriteCountriesValue,
   MinimumInputLengthTextProp,
-  WithVariantProps,
   WithVariantPropsAndClassesList,
 } from '@/core/types'
 
