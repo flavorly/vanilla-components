@@ -58,7 +58,11 @@ const optionClasses = computed(() => {
 const scrollIntoViewIfNecessary = () => {
   if (shown?.value && isActive.value) {
     const li = elementList.value?.$el as HTMLLIElement
-    li.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+
+    // TODO: check this
+    if (li) {
+      li.scrollIntoView({ block: 'nearest', behavior: 'smooth' })
+    }
   }
 }
 

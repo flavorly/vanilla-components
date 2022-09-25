@@ -188,6 +188,7 @@ export default defineConfig({
             { text: 'Avatar', link: '/components/avatar/index' },
             { text: 'Button', link: '/components/button/index' },
             { text: 'Input', link: '/components/input/index' },
+            { text: 'Country Input', link: '/components/country-input/index' },
             { text: 'Phone Input', link: '/components/phone-input/index' },
             { text: 'Checkbox', link: '/components/checkbox/index' },
             { text: 'Date Time Picker', link: '/components/datetimepicker/index' },

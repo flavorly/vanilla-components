@@ -68,7 +68,6 @@ const emit = defineEmits([
 defineComponent({ inheritAttrs: false })
 
 const localValue = useVModel(props, 'modelValue')
-const { configuration, errors, hasErrors } = useConfiguration<CountryInputProps>(countryInputConfig, 'CountryInput', localValue)
 
 // Pre-fetch the following Options
 const preFetchOptions = filterCountriesByName(
@@ -109,6 +108,10 @@ watch(localValue, () => {
   emit('update:countryName', selectedCountry.value.name_raw)
 }, { immediate: true })
 
+const { configuration, errors, hasErrors, variant } = useConfiguration<CountryInputProps>(countryInputConfig, 'CountryInput', localValue)
+
+console.log(localValue.value, variant)
+
 // Rebind Attributes
 const bindAttributes = useAttributesAndProps()
 </script>
@@ -123,8 +126,8 @@ const bindAttributes = useAttributesAndProps()
     value-attribute="value"
     text-attribute="label"
     :clear-search-on-close="true"
-    :variant="localVariant"
-    :show-errors="showErrors"
+    :variant="variant"
+    :show-errors="props.showErrors"
     :search-box-placeholder="searchBoxPlaceholder"
     :no-results-text="noResultsText"
     :searching-text="searchingText"
@@ -134,7 +137,7 @@ const bindAttributes = useAttributesAndProps()
     :clearable="false"
     :select-on-close="false"
   >
-    <template #label="{ option: { raw: country }, className, isSelected, hasErrors }">
+    <template #label="{ option, className, isSelected, hasErrors }">
       <CountryOption
         :country="selectedCountry"
         :selected="isSelected"

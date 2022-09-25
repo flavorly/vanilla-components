@@ -2,9 +2,6 @@
 import { PhoneInput } from '@indigit/vanilla-components'
 import { defineComponent, onMounted, ref } from 'vue'
 
-defineComponent({ name: 'ExamplePhoneNumber' })
-onMounted(() => window.parent.postMessage('mounted', '*'))
-
 const value = ref('+35191523813')
 const valueCountry = 'PT'
 

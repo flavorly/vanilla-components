@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { countryInputOptionConfig } from './config'
 import type { CountryInputOptionProps } from './config'
 import Flag from '@/components/icons/flag.vue'

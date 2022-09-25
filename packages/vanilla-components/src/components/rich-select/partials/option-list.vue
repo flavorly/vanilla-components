@@ -71,7 +71,11 @@ export default defineComponent({
             if (fetchingMoreOptions) {
                 await this.$nextTick()
                 const el = this.$refs.fetchingMoreOptionsText as HTMLLIElement
-                el.scrollIntoView({ block: 'end', behavior: 'smooth' })
+
+                // TODO: check this
+                if (el) {
+                  el.scrollIntoView({ block: 'end', behavior: 'smooth' })
+                }
             }
         },
     },

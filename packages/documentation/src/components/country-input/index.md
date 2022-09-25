@@ -2,10 +2,9 @@
 outline: deep
 ---
 
-# Phone Input
+# Country Input
 
-A Native Input dedicated to Mobile & Local Phone numbers, includes a beautiful country picker and a native input.
-Exports the national number, local number & country code for flexible & easier way to validate on the backend.
+A `<RichSelect />` made only to pick a list of countries with beautiful flags for each country. Add your favorite countries & search for other countries. 
 
 !!!include(./src/parts/title-preview.md)!!!
 
@@ -17,7 +16,7 @@ import Demo from './demo.vue';
 
 !!!include(./src/parts/title-snippet.md)!!!
 
-<<< @/components/phone-input/demo.vue
+<<< @/components/country-input/demo.vue
 
 !!!include(./src/parts/title-props.md)!!!
 
