@@ -20,5 +20,5 @@ export { default as throttle } from './throttle'
 export { default as isTouchOnlyDevice } from './isTouchOnlyDevice'
 export { default as objectToArrayMap } from './objectToArrayMap'
 export { default as getFocusableElements } from './getFocusableElements'
-export { default as mergeClasses } from './mergeClasses'
+export { mergeClasses, mergeClassesFromObject } from './mergeClasses'
 

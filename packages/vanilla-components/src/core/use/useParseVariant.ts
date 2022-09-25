@@ -1,4 +1,5 @@
 import { ref } from 'vue'
+import { isObject } from '@vueuse/core'
 import type {
   CSSClassesList,
   CSSRawClassesList,
@@ -8,7 +9,7 @@ import type {
   WithVariantPropsAndClassesList,
 } from '@/core/types'
 
-import { hasProperty, mergeClasses, pick } from '@/core/helpers'
+import { hasProperty, mergeClasses, mergeClassesFromObject, pick } from '@/core/helpers'
 
 const getCustomPropsFromVariant = <
   P extends ObjectWithClassesList,
@@ -174,10 +175,18 @@ const useParseVariant = <
     const classesForTheCurrentKey = classes[classItemKey]
     const fixedClassesForTheCurrentKey = fixedClasses[classItemKey]
 
-    mergedClasses[classItemKey as string] = mergeClasses(
-      classesForTheCurrentKey,
-      fixedClassesForTheCurrentKey,
-    )
+    if (isObject(classesForTheCurrentKey)) {
+      mergedClasses[classItemKey as string] = mergeClassesFromObject(
+        classesForTheCurrentKey,
+        fixedClassesForTheCurrentKey,
+      )
+    }
+    else {
+      mergedClasses[classItemKey as string] = mergeClasses(
+        classesForTheCurrentKey,
+        fixedClassesForTheCurrentKey,
+      )
+    }
   })
 
   const result = pick(mergedClasses)

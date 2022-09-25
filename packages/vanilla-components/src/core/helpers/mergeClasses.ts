@@ -1,4 +1,6 @@
+import { isObject } from '@vueuse/core'
 import type { CSSClassKeyValuePair, CSSClasses, CssClass } from '@/core/types'
+import { get } from '@/core/helpers'
 
 /**
  * Select the clases
@@ -10,7 +12,7 @@ export const selectClasses = (classesObject: CSSClassKeyValuePair): CSSClasses =
  * Merge the classes recursively
  * @param classes
  */
-const mergeClasses = (...classes: CSSClasses): string => classes
+export const mergeClasses = (...classes: CSSClasses): string => classes
   .map((className: CssClass): string => {
     if (typeof className === 'string' || className === undefined) {
       return className || ''
@@ -26,4 +28,29 @@ const mergeClasses = (...classes: CSSClasses): string => classes
   .replace(/  +/g, ' ')
   .trim()
 
-export default mergeClasses
+/**
+ * Merge the classes recursively from a nested object
+ * @param objectOne
+ * @param objectTwo
+ */
+
+export const mergeClassesFromObject = (objectOne: object | CssClass, objectTwo: object | CssClass) => {
+  const temporary = {}
+  for (const [key, value] of Object.entries(objectOne as object)) {
+    if (isObject(value)) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      temporary[key] = mergeClassesFromObject(value, get(objectTwo, key, {}))
+    }
+    else {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      temporary[key] = mergeClasses(
+        value,
+        get(objectTwo, key, undefined),
+      )
+    }
+  }
+  return temporary
+}
+
