@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'vue'
 import { commonClasses } from '@/core/config'
+import { richSelectConfig } from '@/components/rich-select/config'
 import type {
   Data,
   FavoriteCountriesValue,
@@ -7,9 +8,7 @@ import type {
   WithVariantPropsAndClassesList,
 } from '@/core/types'
 
-export const countryInputConfig = {
-  classes: {},
-}
+export const countryInputConfig = richSelectConfig
 
 export const countryInputOptionConfig = {
   classes: {

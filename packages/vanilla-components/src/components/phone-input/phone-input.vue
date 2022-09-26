@@ -125,7 +125,7 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
     class="vanilla-input-phone-number"
     :class="configuration.classesList.wrapper"
   >
-    <div class="-space-y-px">
+    <div class="">
       <CountryInput
         ref="localRefCountry"
         v-model="phoneCountryCode"
@@ -135,6 +135,7 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
         :label-with-dial-code="true"
         :placeholder="countryPlaceholder"
         :clearable="false"
+        :classes="configuration.classesList.richSelect"
         :search-box-placeholder="searchBoxPlaceholder"
         :no-results-text="noResultsText"
         :searching-text="searchingText"
@@ -147,6 +148,7 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
         v-model="phoneNumber"
         :variant="variant"
         :show-errors="false"
+        :classes="configuration.classesList.input"
         :placeholder="phonePlaceholder"
         :autocomplete="props.autocomplete"
         rounded="bottom"

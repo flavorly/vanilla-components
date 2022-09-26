@@ -125,6 +125,7 @@ const bindAttributes = useAttributesAndProps()
     text-attribute="label"
     :clear-search-on-close="true"
     :variant="variant"
+    :classes="configuration.classesList"
     :show-errors="props.showErrors"
     :search-box-placeholder="searchBoxPlaceholder"
     :no-results-text="noResultsText"
