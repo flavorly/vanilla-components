@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { CSSRawClassesList, ComponentProps, Data, VariantsWithClassesList } from '@/core/types'
+import type { CSSRawClassesList, ComponentProps, Data, ElementPosition, VariantsWithClassesList } from '@/core/types'
 import { useDefaultName } from '@/core/use/index'
 
 const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends string>(): ComponentProps<ClassesKeys> => ({
@@ -53,6 +53,11 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
   hasItemAbove: {
     type: Boolean as PropType<boolean>,
     default: false,
+    required: false,
+  },
+  rounded: {
+    type: String as PropType<ElementPosition>,
+    default: 'full',
     required: false,
   },
   showErrors: {

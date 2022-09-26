@@ -13,7 +13,17 @@ const commonClasses = {
   inputsShadows: 'shadow',
   inputsRing: 'focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600',
   inputsDisabled: 'disabled:opacity-50 disabled:cursor-not-allowed',
+
   inputsRadius: 'rounded-lg',
+  inputsRadiusTop: 'rounded-none rounded-t-lg',
+  inputsRadiusBottom: 'rounded-none rounded-b-lg',
+  inputsRadiusLeft: 'rounded-none rounded-l-lg',
+  inputsRadiusRight: 'rounded-none rounded-r-lg',
+  inputsRadiusTopRight: 'rounded-none rounded-tr-lg',
+  inputsRadiusTopLeft: 'rounded-none rounded-tl-lg',
+  inputsRadiusBottomLeft: 'rounded-none rounded-bl-lg',
+  inputsRadiusBottomRight: 'rounded-none rounded-br-lg',
+
   inputsTransition: 'transition duration-100 ease-in-out',
 
   // Inputs with Errors

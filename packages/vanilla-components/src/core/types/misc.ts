@@ -32,6 +32,8 @@ type MinimumInputLengthTextProp = ((minimumInputLength: number, query?: string) 
 
 type FavoriteCountriesValue = undefined | string | string[] | Array<string>
 
+type ElementPosition = string | 'full' | 'bottom' | 'top' | 'left' | 'right' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
+
 export {
   Measure,
   Data,
@@ -48,5 +50,6 @@ export {
   Modify,
   MinimumInputLengthTextProp,
   FavoriteCountriesValue,
+  ElementPosition,
 }
 

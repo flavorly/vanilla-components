@@ -5,10 +5,21 @@ import { mergeClasses } from '@/core/helpers'
 import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
 export const dropdownConfig = {
-  fixedClasses: {},
+  fixedClasses: {
+    // roundedFull: commonClasses.inputsRadius,
+    // roundedTop: commonClasses.inputsRadiusTop,
+    // roundedBottom: commonClasses.inputsRadiusBottom,
+    // roundedLeft: commonClasses.inputsRadiusLeft,
+    // roundedRight: commonClasses.inputsRadiusRight,
+    // roundedBottomLeft: commonClasses.inputsRadiusBottomLeft,
+    // roundedBottomRight: commonClasses.inputsRadiusBottomRight,
+    // roundedTopLeft: commonClasses.inputsRadiusTopLeft,
+    // roundedTopRight: commonClasses.inputsRadiusTopRight,
+  },
 
   // Default appearance
   classes: {
+    trigger: '',
     wrapper: 'relative',
     container: 'flex items-center content-center',
 
@@ -27,12 +38,23 @@ export const dropdownConfig = {
     dropdown: mergeClasses(
       commonClasses.dropdownsBackground,
       commonClasses.dropdownsBorder,
-      commonClasses.dropdownsRadius,
+
+      // commonClasses.dropdownsRadius,
       commonClasses.dropdownsShadows,
       'top-5',
       'focus:ring-0 focus:outline-none',
       'overflow-hidden',
     ),
+
+    roundedFull: commonClasses.inputsRadius,
+    roundedTop: commonClasses.inputsRadiusTop,
+    roundedBottom: commonClasses.inputsRadiusBottom,
+    roundedLeft: commonClasses.inputsRadiusLeft,
+    roundedRight: commonClasses.inputsRadiusRight,
+    roundedBottomLeft: commonClasses.inputsRadiusBottomLeft,
+    roundedBottomRight: commonClasses.inputsRadiusBottomRight,
+    roundedTopLeft: commonClasses.inputsRadiusTopLeft,
+    roundedTopRight: commonClasses.inputsRadiusTopRight,
 
     sizeDefault: 'w-56',
     sizeMedium: 'w-64',

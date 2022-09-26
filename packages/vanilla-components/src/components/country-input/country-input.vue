@@ -110,8 +110,6 @@ watch(localValue, () => {
 
 const { configuration, errors, hasErrors, variant } = useConfiguration<CountryInputProps>(countryInputConfig, 'CountryInput', localValue)
 
-console.log(localValue.value, variant)
-
 // Rebind Attributes
 const bindAttributes = useAttributesAndProps()
 </script>
@@ -134,6 +132,7 @@ const bindAttributes = useAttributesAndProps()
     :loading-closed-placeholder="loadingClosedPlaceholder"
     :loading-more-results-text="loadingMoreResultsText"
     :minimum-input-length-text="minimumInputLengthText"
+    :rounded="props.rounded"
     :clearable="false"
     :select-on-close="false"
   >

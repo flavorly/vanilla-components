@@ -103,7 +103,9 @@ const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountry
 
 attemptToParseNumber(phoneNumber.value, phoneCountryCode.value)
 
-const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInputProps>(phoneInputConfig, 'InputGroup', localValue)
+const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInputProps>(phoneInputConfig, 'PhoneInput', localValue)
+
+console.log('configuration', configuration)
 
 // Watch Country Code and Phone number together
 // When one changes we will trigger the model value & emit back
@@ -123,25 +125,22 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
     class="vanilla-input-phone-number"
     :class="configuration.classesList.wrapper"
   >
-    <div>
+    <div class="-space-y-px">
       <CountryInput
         ref="localRefCountry"
         v-model="phoneCountryCode"
         :favorite-countries="favoriteCountries"
         :variant="variant"
         :show-errors="false"
-        :has-item-bellow="true"
         :label-with-dial-code="true"
         :placeholder="countryPlaceholder"
         :clearable="false"
-        :class="[
-          configuration.classesList.select,
-        ]"
         :search-box-placeholder="searchBoxPlaceholder"
         :no-results-text="noResultsText"
         :searching-text="searchingText"
         :loading-closed-placeholder="loadingClosedPlaceholder"
         :loading-more-results-text="loadingMoreResultsText"
+        rounded="top"
       />
       <Input
         ref="localRefPhone"
@@ -150,9 +149,7 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
         :show-errors="false"
         :placeholder="phonePlaceholder"
         :autocomplete="props.autocomplete"
-        :class="[
-          configuration.classesList.input,
-        ]"
+        rounded="bottom"
       >
         <template #before="{ className }">
           <slot

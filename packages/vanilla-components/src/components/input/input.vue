@@ -66,6 +66,16 @@ const togglePassword = () => {
           hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
           hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
           configuration.classesList.input,
+          configuration.classesList.inputBorder,
+          props.rounded === 'full' ? configuration.classesList.roundedFull : '',
+          props.rounded === 'top' ? configuration.classesList.roundedTop : '',
+          props.rounded === 'bottom' ? configuration.classesList.roundedBottom : '',
+          props.rounded === 'left' ? configuration.classesList.roundedLeft : '',
+          props.rounded === 'right' ? configuration.classesList.roundedRight : '',
+          props.rounded === 'top-left' ? configuration.classesList.roundedTopLeft : '',
+          props.rounded === 'top-right' ? configuration.classesList.roundedTopRight : '',
+          props.rounded === 'bottom-left' ? configuration.classesList.roundedBottomLeft : '',
+          props.rounded === 'bottom-right' ? configuration.classesList.roundedBottomRight : '',
         ]"
         :type="localType"
         v-bind="$attrs"

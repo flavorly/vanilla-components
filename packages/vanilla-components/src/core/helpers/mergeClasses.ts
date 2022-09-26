@@ -32,9 +32,10 @@ export const mergeClasses = (...classes: CSSClasses): string => classes
  * Merge the classes recursively from a nested object
  * @param objectOne
  * @param objectTwo
+ * @param mergeDeep
  */
 
-export const mergeClassesFromObject = (objectOne: object | CssClass, objectTwo: object | CssClass) => {
+export const mergeClassesFromObject = (objectOne: object | CssClass, objectTwo: object | CssClass, mergeDeep = false) => {
   const temporary = {}
   for (const [key, value] of Object.entries(objectOne as object)) {
     if (isObject(value)) {
@@ -43,12 +44,19 @@ export const mergeClassesFromObject = (objectOne: object | CssClass, objectTwo: 
       temporary[key] = mergeClassesFromObject(value, get(objectTwo, key, {}))
     }
     else {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      temporary[key] = mergeClasses(
-        value,
-        get(objectTwo, key, undefined),
-      )
+      if (mergeDeep) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        temporary[key] = mergeClasses(
+          value,
+          get(objectTwo, key, undefined),
+        )
+      }
+      else {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        temporary[key] = value
+      }
     }
   }
   return temporary

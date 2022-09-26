@@ -1,5 +1,11 @@
 import type { ComponentPropsOptions, PropType } from 'vue'
-import type { CSSRawClassesList, Data, VariantsWithClassesList, WithVariantPropsAndClassesList } from './index'
+import type {
+  CSSRawClassesList,
+  Data,
+  ElementPosition,
+  VariantsWithClassesList,
+  WithVariantPropsAndClassesList,
+} from './index'
 import type * as Components from '@/components'
 
 /**
@@ -90,6 +96,11 @@ type ComponentProps<
       default: boolean
       required: boolean
     }
+    rounded: {
+      type: PropType<ElementPosition>
+      default: 'full'
+      required: boolean
+    }
     showErrors: {
       type: PropType<boolean>
       default: boolean
@@ -143,6 +154,11 @@ type ComponentProps<
     hasItemAbove: {
       type: PropType<boolean>
       default: boolean
+      required: boolean
+    }
+    rounded: {
+      type: PropType<ElementPosition>
+      default: 'full'
       required: boolean
     }
     showErrors: {

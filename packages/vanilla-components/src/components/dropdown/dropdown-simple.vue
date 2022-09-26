@@ -121,6 +121,7 @@ export default defineComponent({
             configuration,
             attributes,
             isTouchOnlyDevice,
+            rounded: props.rounded,
         }
     },
     data({ configuration }) {
@@ -468,7 +469,19 @@ export default defineComponent({
     ref="trigger"
     :type="tagName === 'button' ? 'button' : undefined"
     :aria-expanded="shown"
-    :class="configuration.classes?.trigger"
+    class="focus:z-10"
+    :class="[
+      configuration.classes?.trigger,
+      rounded === 'full' ? configuration.classesList.roundedFull : '',
+      rounded === 'top' ? configuration.classesList.roundedTop : '',
+      rounded === 'bottom' ? configuration.classesList.roundedBottom : '',
+      rounded === 'left' ? configuration.classesList.roundedLeft : '',
+      rounded === 'right' ? configuration.classesList.roundedRight : '',
+      rounded === 'top-left' ? configuration.classesList.roundedTopLeft : '',
+      rounded === 'top-right' ? configuration.classesList.roundedTopRight : '',
+      rounded === 'bottom-left' ? configuration.classesList.roundedBottomLeft : '',
+      rounded === 'bottom-right' ? configuration.classesList.roundedBottomRight : '',
+    ]"
     :disabled="configuration.disabled"
     v-bind="{ ...attributes, ...$attrs }"
     @click="clickHandler"
@@ -501,7 +514,9 @@ export default defineComponent({
         v-show="shown || adjustingPopper || initAsShow"
         ref="dropdown"
         :style="adjustingPopper ? 'opacity:0' : undefined"
-        :class="configuration.classes?.dropdown"
+        :class="[
+          configuration.classesList?.dropdown,
+        ]"
         :aria-hidden="!shown"
         tabindex="-1"
         v-bind="dropdownAttributes"

@@ -706,6 +706,7 @@ export default defineComponent({
           ref="dropdownComponent"
           :disabled="configuration.disabled"
           :classes="dropdownClasses"
+          :rounded="configuration.rounded"
           :fixed-classes="undefined"
           :toggle-on-focus="false"
           :toggle-on-click="false"

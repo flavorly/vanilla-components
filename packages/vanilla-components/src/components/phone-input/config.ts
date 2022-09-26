@@ -5,7 +5,16 @@ import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 export const phoneInputConfig = {
   classes: {
     wrapper: 'relative',
-    input: 'rounded-t-none focus:z-20 pl-14',
+
+    // // input: 'rounded-t-none focus:z-20 pl-14',
+    // input: {
+    //   ...merge(inputConfig.classes, {
+    //     inputRadius: 'rounded-t-none',
+    //   }),
+    // },
+    // countryInput: {
+    //   ...richSelectConfig.classes,
+    // },
   },
 }
 

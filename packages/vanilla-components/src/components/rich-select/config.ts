@@ -21,7 +21,8 @@ const defaultVariant = {
       commonClasses.inputsBackground,
       commonClasses.inputsBorder,
       commonClasses.inputsRing,
-      commonClasses.inputsRadius,
+
+      // commonClasses.inputsRadius,
 
       // Only way to get border-b-none and etc working :(
       'flex items-center justify-between w-full',
