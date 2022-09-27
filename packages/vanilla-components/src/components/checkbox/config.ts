@@ -9,7 +9,7 @@ export const checkboxConfig = {
     wrapperCenter: 'flex items-center justify-center',
     wrapperRight: 'flex items-center justify-end',
     container: '',
-    checkbox: 'h-5 w-5 transition duration-150 ease-in-out block',
+    checkbox: 'h-5 w-5 transition duration-150 ease-in-out relative',
 
     groupContainer: 'space-y-3',
     groupCheckboxWrapper: 'relative flex items-start',

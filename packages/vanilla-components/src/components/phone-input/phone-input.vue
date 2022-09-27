@@ -105,8 +105,6 @@ attemptToParseNumber(phoneNumber.value, phoneCountryCode.value)
 
 const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInputProps>(phoneInputConfig, 'PhoneInput', localValue)
 
-console.log('configuration', configuration)
-
 // Watch Country Code and Phone number together
 // When one changes we will trigger the model value & emit back
 watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) => {
@@ -125,7 +123,7 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
     class="vanilla-input-phone-number"
     :class="configuration.classesList.wrapper"
   >
-    <div class="">
+    <div class="rounded-lg -space-y-px">
       <CountryInput
         ref="localRefCountry"
         v-model="phoneCountryCode"
@@ -135,7 +133,6 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
         :label-with-dial-code="true"
         :placeholder="countryPlaceholder"
         :clearable="false"
-        :classes="configuration.classesList.richSelect"
         :search-box-placeholder="searchBoxPlaceholder"
         :no-results-text="noResultsText"
         :searching-text="searchingText"
@@ -148,7 +145,6 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
         v-model="phoneNumber"
         :variant="variant"
         :show-errors="false"
-        :classes="configuration.classesList.input"
         :placeholder="phonePlaceholder"
         :autocomplete="props.autocomplete"
         rounded="bottom"

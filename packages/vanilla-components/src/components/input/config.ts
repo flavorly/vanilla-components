@@ -35,7 +35,7 @@ const defaultInput = {
 export const inputConfig = {
   fixedClasses: {
     input: mergeClasses(
-      'appearance-none block w-full',
+      'appearance-none w-full',
       commonClasses.inputsShadows,
       commonClasses.inputsDisabled,
     ),

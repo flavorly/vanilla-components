@@ -11,8 +11,14 @@ export const phoneInputConfig = {
     input: {
         inputBorder: 'pl-14 focus:z-20',
     },
-
     richSelect: {
+    },
+  },
+  variants: {
+    error: {
+      input: {
+        inputBorder: 'pl-14 focus:z-20',
+      },
     },
   },
 }

@@ -469,7 +469,6 @@ export default defineComponent({
     ref="trigger"
     :type="tagName === 'button' ? 'button' : undefined"
     :aria-expanded="shown"
-    class="focus:z-10"
     :class="[
       configuration.classes?.trigger,
       rounded === 'full' ? configuration.classesList.roundedFull : '',

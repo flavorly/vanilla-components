@@ -25,7 +25,7 @@ const defaultVariant = {
       // commonClasses.inputsRadius,
 
       // Only way to get border-b-none and etc working :(
-      'flex items-center justify-between w-full',
+      'relative flex items-center justify-between w-full focus:z-10',
       commonClasses.inputsText,
       commonClasses.inputsTransition,
       commonClasses.inputsShadows,
@@ -152,16 +152,10 @@ const defaultVariant = {
 
 export const richSelectConfig = {
   // Until the little bits are merged or variantjs fixes this issue or provider a clear way to override the trigger
-  // fixedClasses: {
-  //   trigger: mergeClasses(
-  //     'flex items-center justify-between w-full',
-  //     commonClasses.inputsText,
-  //     commonClasses.inputsTransition,
-  //     commonClasses.inputsShadows,
-  //     commonClasses.inputsDisabled,
-  //     commonClasses.inputsSpacing,
-  //   ),
-  // },
+  fixedClasses: {
+    trigger: 'relative',
+  },
+
   // Default Input appearance
   classes: {
     ...defaultVariant,

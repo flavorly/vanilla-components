@@ -11,7 +11,7 @@ export const avatarConfig = {
     avatarPlaceholder: 'inline-flex items-center justify-center rounded-full h-20 w-20 rounded-full p-5 border border-gray-100 dark:border-gray-500 shadow-sm',
     avatarPlaceholderText: 'text-sm font-light leading-none',
     buttonsContainer: 'flex items-center justify-center mt-2',
-    preview: 'block w-20 h-20 border border-gray-100 dark:border-gray-500 shadow-sm rounded-full',
+    preview: 'relative w-20 h-20 border border-gray-100 dark:border-gray-500 shadow-sm rounded-full',
   },
 
   // Default Input appearance
