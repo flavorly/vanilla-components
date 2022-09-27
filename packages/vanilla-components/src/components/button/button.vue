@@ -54,6 +54,7 @@ const handleClickEvent = (event: MouseEvent) => {
   if (props.disabled || props.loading) {
     event.preventDefault()
     event.stopPropagation()
+    return
   }
   emit('click', event)
 }

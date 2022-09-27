@@ -1,5 +1,4 @@
 export { default as useAttributesAndProps } from './useAttributesAndProps'
-export { default as useBootVariant } from './useBootVariant'
 export { default as useFetchsOptions } from './useFetchsOptions'
 export { default as useInjectsClassesList } from './useInjectsClassesList'
 export { default as useInjectsClassesListClass } from './useInjectsClassesListClass'

@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref } from 'vue'
 import type { FormClassesValidKeys, FormFeedbackProps } from './config'
 import { formsConfig } from './config'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<FormFeedbackProps, FormClassesValidKeys>(),
@@ -19,8 +18,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['feedbackClick', 'click'])
-
-const { localVariant } = useBootVariant(props, '', ref(null))
 const { configuration } = useConfiguration<FormFeedbackProps>(formsConfig, 'FormFeedback')
 
 const clicked = () => {

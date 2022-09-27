@@ -1,23 +1,27 @@
 import type { CountryCode } from 'libphonenumber-js/types'
 import type { InputHTMLAttributes } from 'vue'
 import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
-import { richSelectConfig } from '@/components/rich-select/config'
 
 export const phoneInputConfig = {
-  classes: {
+  fixedClasses: {
     wrapper: 'relative',
-
-    // // input: 'rounded-t-none focus:z-20 pl-14',
+    inputsContainer: 'rounded-lg -space-y-px',
+  },
+  classes: {
+    wrapper: '',
+    inputsContainer: '',
     input: {
-        inputBorder: 'pl-14 focus:z-20',
-    },
-    richSelect: {
+        fixedClasses: {
+          addonBeforeInputClasses: 'pl-12',
+        },
     },
   },
   variants: {
     error: {
       input: {
-        inputBorder: 'pl-14 focus:z-20',
+        fixedClasses: {
+          addonBeforeInputClasses: 'pl-12',
+        },
       },
     },
   },

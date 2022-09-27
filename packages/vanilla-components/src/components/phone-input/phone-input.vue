@@ -2,7 +2,8 @@
 import type { PropType, Ref } from 'vue'
 import type { CountryCallingCode, CountryCode, PhoneNumber } from 'libphonenumber-js/types'
 import { ref, watch } from 'vue'
-import { getCountryCallingCode, parsePhoneNumber } from 'libphonenumber-js'
+import { getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js'
+import examples from 'libphonenumber-js/mobile/examples'
 import { phoneInputConfig } from './config'
 import type { PhoneInputClassesValidKeys, PhoneInputProps } from './config'
 import CountryInput from '@/components/country-input/country-input.vue'
@@ -11,6 +12,7 @@ import FormFeedback from '@/components/forms/form-feedback.vue'
 import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '@/core/types'
 import Input from '@/components/input/input.vue'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
+import { countryCodes } from '@/core/utils'
 
 const props = defineProps({
   ...useVariantProps<PhoneInputProps, PhoneInputClassesValidKeys>(),
@@ -77,9 +79,14 @@ const phoneCountryCode: CountryCode | Ref = ref(props.countryCode)
 const phoneDialCode: CountryCallingCode | Ref = ref(null)
 const phoneNumber: Ref<string | undefined> = ref(localValue.value)
 const isValidPhoneNumber: Ref<boolean> = ref(false)
+const placeholder = ref<string | number | undefined>(props.phonePlaceholder)
 const parsedPhoneNumber: Ref<PhoneNumber> | Ref = ref(null)
 
 const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountryCodeValue: CountryCode) => {
+  if (!phoneNumberValue || !phoneCountryCodeValue) {
+    return
+  }
+
   try {
     // Always resolve the country code to dial code
     phoneDialCode.value = getCountryCallingCode(phoneCountryCodeValue)
@@ -97,6 +104,10 @@ const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountry
     }
   }
   catch (e) {
+    const countryCallingCode = countryCodes.find(country => country.iso2 === phoneCountryCodeValue?.toLowerCase())?.dialCode
+    if (countryCallingCode) {
+      phoneDialCode.value = countryCallingCode
+    }
     localValue.value = `+${phoneDialCode.value}${phoneNumber.value}`
   }
 }
@@ -109,6 +120,11 @@ const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInpu
 // When one changes we will trigger the model value & emit back
 watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) => {
   attemptToParseNumber(newPhoneNumber, newPhoneCountryCode)
+
+  const examplePlaceHolder = getExampleNumber(newPhoneCountryCode, examples)?.nationalNumber as string | undefined
+  if (examplePlaceHolder) {
+    placeholder.value = examplePlaceHolder
+  }
 
   // Watch & Emit additional data
   emit('update:countryDialCode', phoneDialCode.value)
@@ -123,10 +139,10 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
     class="vanilla-input-phone-number"
     :class="configuration.classesList.wrapper"
   >
-    <div class="rounded-lg -space-y-px">
+    <div :class="[configuration.classesList.inputsContainer]">
       <CountryInput
         ref="localRefCountry"
-        v-model="phoneCountryCode"
+        v-model.lazy="phoneCountryCode"
         :favorite-countries="favoriteCountries"
         :variant="variant"
         :show-errors="false"
@@ -142,11 +158,12 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
       />
       <Input
         ref="localRefPhone"
-        v-model="phoneNumber"
+        v-model.lazy="phoneNumber"
         :variant="variant"
         :show-errors="false"
-        :placeholder="phonePlaceholder"
+        :placeholder="placeholder"
         :autocomplete="props.autocomplete"
+        :fixed-classes="configuration.classesList.input.fixedClasses"
         rounded="bottom"
       >
         <template #before="{ className }">
@@ -173,7 +190,7 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
         v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"

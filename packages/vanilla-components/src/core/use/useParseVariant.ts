@@ -72,6 +72,9 @@ const useParseVariant = <
   const clearClasses = getShouldClearClasses(props, 'classes', localVariant.value)
   const clearFixedClasses = getShouldClearClasses(props, 'fixedClasses', localVariant.value)
 
+  // console.log('Clear Classes', clearClasses)
+  // console.log('Fixed Classes', clearFixedClasses)
+
   if (clearClasses) {
     classesListKeys.forEach((classItemKey) => {
       classes[classItemKey] = undefined

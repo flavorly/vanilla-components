@@ -5,7 +5,7 @@ import Footer from './card-footer.vue'
 import type { CardClassesValidKeys, CardProps } from './config'
 import { cardConfig } from './config'
 import { hasSlot } from '@/core/helpers'
-import { useBootVariant, useConfiguration, useVariantProps } from '@/core/use'
+import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<CardProps, CardClassesValidKeys>(),
@@ -41,7 +41,6 @@ const props = defineProps({
 
 defineComponent({ inheritAttrs: true })
 
-const { localVariant } = useBootVariant(props, 'errors', ref(null))
 const { configuration } = useConfiguration<CardProps>(cardConfig, 'Card')
 provide('configuration_vanilla', configuration)
 </script>
