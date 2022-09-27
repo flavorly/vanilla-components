@@ -10,7 +10,8 @@
     "docs:dev": "nr --filter @indigit/vanilla-components-documentation dev",
     "docs:build": "nr --filter @indigit/vanilla-components build && nr --filter @indigit/vanilla-components-documentation build",
     "clean": "rimraf node_modules packages/vanilla-components/node_modules packages/vanilla-components/dist packages/documentation/node_modules",
-    "release": "bumpp package.json packages/vanilla-components/package.json --execute 'nr --filter @indigit/vanilla-components build' && na --filter @indigit/vanilla-components publish --no-git-checks"
+    "release": "bumpp package.json packages/vanilla-components/package.json --execute 'nr --filter @indigit/vanilla-components build' && na --filter @indigit/vanilla-components publish --no-git-checks",
+    "docs:index:build" : "nr --filter @indigit/vanilla-components-documentation index:build"
   },
   "keywords": [],
   "author": "",

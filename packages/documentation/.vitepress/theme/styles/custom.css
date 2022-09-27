@@ -114,3 +114,10 @@ pre {
     width:20px;
     height:20px;
 }
+
+.DocSearch-Input:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none !important;
+}

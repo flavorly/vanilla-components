@@ -1,5 +1,6 @@
 node_modules
 .vitepress/dist
+.vitepress/index
 src/.vite-inspect
 yarn.lock
 pnpm.lock.yaml

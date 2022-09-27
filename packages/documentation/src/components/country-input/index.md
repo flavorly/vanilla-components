@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Country Input
+# Country
 
 A `<RichSelect />` made only to pick a list of countries with beautiful flags for each country. Add your favorite countries & search for other countries. 
 

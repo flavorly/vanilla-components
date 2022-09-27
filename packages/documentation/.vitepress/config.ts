@@ -47,6 +47,7 @@ export default defineConfig({
       alias: [
         { find: '@vanilla', replacement: resolve(__dirname, '../../vanilla-components') },
         { find: '@', replacement: resolve(__dirname, '../../vanilla-components/src') },
+        { find: './VPNavBarSearch.vue', replacement: resolve(__dirname, './theme/AlgoliaLunr/VPNavBarSearch.vue') },
       ],
     },
     json: {
@@ -93,24 +94,25 @@ export default defineConfig({
     logo: '/symbol-gradient.svg',
 
     editLink: {
-      pattern: 'https://github.com/vitejs/vite/edit/main/docs/:path',
+      pattern: 'https://github.com/igerslike/vanilla-components/tree/master/packages/documentation/:path',
       text: 'Suggest changes to this page',
     },
 
     socialLinks: [
-      { icon: 'twitter', link: 'https://twitter.com/vite_js' },
-      { icon: 'discord', link: 'https://chat.vitejs.dev' },
-      { icon: 'github', link: 'https://github.com/vitejs/vite' },
+      { icon: 'twitter', link: 'https://twitter.com/nikuscs' },
+
+      // { icon: 'discord', link: 'https://chat.vitejs.dev' },
+      { icon: 'github', link: 'https://github.com/igerslike' },
     ],
 
-    algolia: {
-      appId: '',
-      apiKey: 'b573aa848fd57fb47d693b531297403c',
-      indexName: 'vitejs',
-      searchParameters: {
-        facetFilters: ['tags:en'],
-      },
-    },
+    // algolia: {
+    //   appId: '',
+    //   apiKey: 'b573aa848fd57fb47d693b531297403c',
+    //   indexName: 'vitejs',
+    //   searchParameters: {
+    //     facetFilters: ['tags:en'],
+    //   },
+    // },
 
     footer: {
       message: 'Released under the MIT License.',
