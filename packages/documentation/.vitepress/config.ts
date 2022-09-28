@@ -4,6 +4,8 @@ import { defineConfig } from 'vitepress'
 // @ts-expect-error
 import MarkitDownInclude from 'markdown-it-include'
 import Inspect from 'vite-plugin-inspect'
+import { whyframe } from '@whyframe/core'
+import { whyframeVue } from '@whyframe/vue'
 import ReplacePackagePlugin from '../plugins/local-link'
 
 const production = process.env.NODE_ENV === 'production'
@@ -12,6 +14,17 @@ const image = `${site}/banner.png`
 const title = 'Vanilla Components'
 const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
 
+const pluginsActive = [
+  whyframe({
+    defaultSrc: '/frames/default',
+  }),
+
+  // Initialize Vue integration plugin
+  whyframeVue({
+    include: /\.(?:vue|md)$/, // also scan in markdown files
+  }),
+]
+
 const plugins = !production
   ? [
     ReplacePackagePlugin(),
@@ -19,8 +32,11 @@ const plugins = !production
       build: false,
       outputDir: '.vite-inspect',
     }),
+    ...pluginsActive,
   ]
-  : []
+  : [
+    ...pluginsActive,
+  ]
 
 export default defineConfig({
   // Vue Config

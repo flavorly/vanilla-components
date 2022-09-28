@@ -45,6 +45,8 @@ importers:
       '@tailwindcss/forms': ^0.5.3
       '@tailwindcss/typography': ^0.5.0
       '@vueuse/core': ^9.2.0
+      '@whyframe/core': ^0.1.4
+      '@whyframe/vue': ^0.1.1
       autoprefixer: ^10.3.7
       body-scroll-lock: ^4.0.0-beta.0
       cheerio: ^1.0.0-rc.12
@@ -93,6 +95,8 @@ importers:
       vitepress: 1.0.0-alpha.15_tbpndr44ulefs3hehwpi2mkf2y
       vue: 3.2.39
     devDependencies:
+      '@whyframe/core': 0.1.4_vite@3.1.2
+      '@whyframe/vue': 0.1.1_4bp3of7cvvyjc74pootkxzlzje
       autoprefixer: 10.4.11_postcss@8.4.16
       cheerio: 1.0.0-rc.12
       patch-package: 6.4.7
@@ -1103,6 +1107,26 @@ packages:
       - '@vue/composition-api'
       - vue
     dev: false
+
+  /@whyframe/core/0.1.4_vite@3.1.2:
+    resolution: {integrity: sha512-7bjlBgqGUzg0rUj0PBkLCfrMF8CVxOopL+oSCisVNf7gKtU8WDk9D9ByQYKi02AN2JOWBf5n1+CneGObGwMp4w==}
+    peerDependencies:
+      vite: ^3.0.0
+    dependencies:
+      vite: 3.1.2
+    dev: true
+
+  /@whyframe/vue/0.1.1_4bp3of7cvvyjc74pootkxzlzje:
+    resolution: {integrity: sha512-aep7Z4OyKDLfGQvMRWQMTDfgSyJhFIIjYPWsMZ4jZ49TZg2Nh7RzE5AGImzW1iZHcfF9GB8sR+LG9PASB7wOSQ==}
+    peerDependencies:
+      '@whyframe/core': ^0.1.3
+      vite: ^3.0.0
+    dependencies:
+      '@vue/compiler-dom': 3.2.39
+      '@whyframe/core': 0.1.4_vite@3.1.2
+      magic-string: 0.26.4
+      vite: 3.1.2
+    dev: true
 
   /@yarnpkg/lockfile/1.1.0:
     resolution: {integrity: sha512-GpSwvyXOcOOlV70vbnzjj4fW5xW/FdUF6nQEt1ENy7m4ZCczi1+/buVUPAqmGfqznsORNFzUMjctTIp8a9tuCQ==}
@@ -3303,6 +3327,13 @@ packages:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
     dependencies:
       sourcemap-codec: 1.4.8
+
+  /magic-string/0.26.4:
+    resolution: {integrity: sha512-e5uXtVJ22aEpK9u1+eQf0fSxHeqwyV19K+uGnlROCxUhzwRip9tBsaMViK/0vC3viyPd5Gtucp3UmEp/Q2cPTQ==}
+    engines: {node: '>=12'}
+    dependencies:
+      sourcemap-codec: 1.4.8
+    dev: true
 
   /markdown-it-include/2.0.0_markdown-it@13.0.1:
     resolution: {integrity: sha512-wfgIX92ZEYahYWiCk6Jx36XmHvAimeHN420csOWgfyZjpf171Y0xREqZWcm/Rwjzyd0RLYryY+cbNmrkYW2MDw==}

@@ -11,6 +11,7 @@ import './styles/custom.css'
 import { VanillaComponents } from '@indigit/vanilla-components'
 import { makeServer } from '../../mocks/server'
 import Layout from './Layout.vue'
+import DynamicLayout from './why-frame/DynamicLayout.vue'
 import NotFound from './NotFound.vue'
 import PreviewWrapper from './components/PreviewWrapper.vue'
 export { default as VPHomeHero } from './components/VPHomeHero.vue'
@@ -35,7 +36,7 @@ const demoConfiguration = {
 }
 
 const theme = {
-    Layout,
+    Layout: DynamicLayout,
     NotFound,
     enhanceApp({ app }) {
       app.use(VanillaComponents)
