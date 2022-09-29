@@ -1,465 +1,445 @@
-<script lang="ts">
-import type { PropType } from 'vue'
-import { defineComponent, onMounted, ref } from 'vue'
+<script setup lang="ts">
+import type { PropType, Ref } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { Options, Placement, Instance as PopperInstance } from '@popperjs/core'
-import { createPopper } from '@popperjs/core'
-import { dropdownConfig, dropdownPopperDefaultOptions } from './config'
+import { createPopper as createPopperBase } from '@popperjs/core'
+import { dropdownConfig, dropdownPopperDefaultOptions, validDropdownPlacements } from './config'
 import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import Transitionable from '@/components/misc/transitionable.vue'
 import type { DebouncedFn } from '@/core/types'
 import { debounce, elementIsTargetOrTargetChild, getFocusableElements, isTouchOnlyDevice as getIsTouch, throttle } from '@/core/helpers'
+import { NormalizedOption } from '@/core/types'
 
-export const validDropdownPlacements = [
-    'auto',
-    'auto-start',
-    'auto-end',
-    'top',
-    'top-start',
-    'top-end',
-    'bottom',
-    'bottom-start',
-    'bottom-end',
-    'right',
-    'right-start',
-    'right-end',
-    'left',
-    'left-start',
-    'left-end',
-]
+const props = defineProps({
+  ...useVariantProps<DropdownExtendedProps, DropdownClassesValidKeys>(),
+  modelValue: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
+  text: {
+    type: String,
+    default: undefined,
+  },
+  teleport: {
+    type: Boolean,
+    default: false,
+  },
+  teleportTo: {
+    type: [String, Object] as PropType<string | HTMLElement>,
+    default: 'body',
+  },
+  tagName: {
+    type: String,
+    default: 'button',
+  },
+  dropdownTagName: {
+    type: String,
+    default: 'div',
+  },
+  dropdownAttributes: {
+    type: Object,
+    default: undefined,
+  },
+  disabled: {
+    type: Boolean,
+    default: undefined,
+  },
+  toggleOnFocus: {
+    type: Boolean,
+    default: true,
+  },
+  toggleOnClick: {
+    type: Boolean,
+    default: true,
+  },
+  toggleOnHover: {
+    type: Boolean,
+    default: false,
+  },
+  hideOnLeaveTimeout: {
+    type: Number,
+    default: 250,
+  },
+  show: {
+    type: Boolean,
+    default: false,
+  },
+  placement: {
+    type: String as PropType<Placement>,
+    default: undefined,
+    validator: (value: Placement | string): boolean => validDropdownPlacements.includes(value),
+  },
+  popperOptions: {
+    type: Object as PropType<Options>,
+    default: (): Options => dropdownPopperDefaultOptions as Options,
+  },
+})
 
-export default defineComponent({
-    components: {
-        Transitionable,
-    },
-    inheritAttrs: false,
-    props: {
-        ...useVariantProps<DropdownExtendedProps, DropdownClassesValidKeys>(),
-        text: {
-            type: String,
-            default: undefined,
-        },
-        teleport: {
-            type: Boolean,
-            default: false,
-        },
-        teleportTo: {
-            type: [String, Object] as PropType<string | HTMLElement>,
-            default: 'body',
-        },
-        tagName: {
-            type: String,
-            default: 'button',
-        },
-        dropdownTagName: {
-            type: String,
-            default: 'div',
-        },
-        dropdownAttributes: {
-            type: Object,
-            default: undefined,
-        },
-        disabled: {
-            type: Boolean,
-            default: undefined,
-        },
-        toggleOnFocus: {
-            type: Boolean,
-            default: true,
-        },
-        toggleOnClick: {
-            type: Boolean,
-            default: true,
-        },
-        toggleOnHover: {
-            type: Boolean,
-            default: false,
-        },
-        hideOnLeaveTimeout: {
-            type: Number,
-            default: 250,
-        },
-        show: {
-            type: Boolean,
-            default: false,
-        },
-        placement: {
-            type: String as PropType<Placement>,
-            default: undefined,
-            validator: (value: Placement | string): boolean => validDropdownPlacements.includes(value),
-        },
-        popperOptions: {
-            type: Object as PropType<Options>,
-            default: (): Options => dropdownPopperDefaultOptions as Options,
-        },
-    },
-    emits: {
-        'update:show': (show: boolean) => typeof show === 'boolean',
-        'focus': (e: FocusEvent) => e instanceof FocusEvent,
-        'blur': (e: FocusEvent) => e instanceof FocusEvent,
-        'blur-on-child': (e: FocusEvent) => e instanceof FocusEvent,
-        'click': (e: MouseEvent) => e instanceof MouseEvent,
-        'mouseover': (e: MouseEvent) => e instanceof MouseEvent,
-        'mouseleave': (e: MouseEvent) => e instanceof MouseEvent,
-        'touchstart': (e: TouchEvent) => e instanceof TouchEvent,
-        'shown': () => true,
-        'hidden': () => true,
-        'before-show': () => true,
-        'before-hide': () => true,
-    },
-    setup(props) {
-        const localValue = useVModel(props, 'modelValue')
-        const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dropdownConfig, 'Dropdown', localValue)
+const emit = defineEmits({
+  'update:show': (show: boolean) => typeof show === 'boolean',
+  'focus': (e: FocusEvent) => e instanceof FocusEvent,
+  'blur': (e: FocusEvent) => e instanceof FocusEvent,
+  'blurOnChild': (e: FocusEvent) => e instanceof FocusEvent,
+  'click': (e: MouseEvent) => e instanceof MouseEvent,
+  'mouseover': (e: MouseEvent) => e instanceof MouseEvent,
+  'mouseleave': (e: MouseEvent) => e instanceof MouseEvent,
+  'touchstart': (e: TouchEvent) => e instanceof TouchEvent,
+  'shown': () => true,
+  'hidden': () => true,
+  'beforeShow': () => true,
+  'beforeHide': () => true,
+})
 
-        const isTouchOnlyDevice = ref<boolean>(false)
+const localValue = useVModel(props, 'modelValue')
+const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dropdownConfig, 'Dropdown', localValue)
+const isTouchOnlyDevice = ref<boolean>(false)
+const shown = ref((configuration as unknown as DropdownExtendedProps).show)
+const initAsShow = ref((configuration as unknown as DropdownExtendedProps).show)
+const hideTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
+const focusableElements = ref<Array<HTMLElement>>([])
+const throttledToggle = ref<null | (() => void)>(null)
+const adjustingPopper = ref<boolean>(false)
+const popperIsAdjusted = ref<boolean>(false)
+const popperAdjusterListener = ref<null | DebouncedFn>(null)
+const popper = ref<PopperInstance | null>(null)
+const dropdown = ref<HTMLDivElement>() as Ref<HTMLDivElement>
+const trigger = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 
-        onMounted(() => {
-            isTouchOnlyDevice.value = getIsTouch()
-        })
+const fullPopperOptions = computed<Options>(() => {
+  const popperOptions = configuration.popperOptions as Options
+  if (configuration.placement !== undefined) {
+    popperOptions.placement = configuration.placement
+  }
+  return popperOptions
+})
 
-        return {
-            configuration,
-            attributes,
-            isTouchOnlyDevice,
-            rounded: props.rounded,
-        }
-    },
-    data({ configuration }) {
-        return {
-            shown: (configuration as unknown as DropdownExtendedProps).show,
+const shouldShowWhenClicked = computed<boolean>(() => isTouchOnlyDevice.value && (configuration.toggleOnFocus === true || configuration.toggleOnHover === true))
 
-            // Disables the animation while the dropdown is being shown
-            initAsShow: (configuration as unknown as DropdownExtendedProps).show,
-            hideTimeout: null as ReturnType<typeof setTimeout> | null,
-            focusableElements: [] as Array<HTMLElement>,
-            throttledToggle: null as null | (() => void),
-            adjustingPopper: false,
-            popperIsAdjusted: false,
-            popperAdjusterListener: null as null | DebouncedFn,
-            popper: null as PopperInstance | null,
-        }
-    },
-    computed: {
-        fullPopperOptions(): Options {
-            const popperOptions = this.configuration.popperOptions as Options
+// Methods
 
-            if (this.configuration.placement !== undefined) {
-                popperOptions.placement = this.configuration.placement
-            }
+const focus = (): void => trigger.value?.focus()
 
-            return popperOptions
-        },
-        shouldShowWhenClicked(): boolean {
-            return this.isTouchOnlyDevice
-                && (this.configuration.toggleOnFocus === true || this.configuration.toggleOnHover === true)
-        },
-    },
-    watch: {
-        popperIsAdjusted(popperIsAdjusted: boolean): void {
-            if (popperIsAdjusted) {
-                this.enablePopperNeedsAdjustmentListener()
-            }
-            else {
-                this.disablePopperNeedsAdjustmentListener()
-            }
-        },
-        'configuration.show': function configurationShowWatch(show: boolean): void {
-            if (show) {
-                this.doShow()
-            }
-            else {
-                this.doHide()
-            }
-        },
-    },
-    mounted() {
-        if (this.isTouchOnlyDevice && this.shown) {
-            window.addEventListener('touchstart', this.touchstartHandler)
-        }
+const onShown = (): void => {
+  emit('shown')
+  emit('update:show', true)
 
-        if (this.configuration.show) {
-            this.updatePopper().then(() => {
-                this.initAsShow = false
-            })
-        }
-    },
-    created() {
-        this.throttledToggle = throttle(this.doToggle, 200)
+  if (isTouchOnlyDevice.value) {
+    window.addEventListener('touchstart', touchstartHandler)
+  }
+  else {
+    addBlurListenersToChildElements()
+  }
+}
 
-        this.popperAdjusterListener = debounce(() => {
-            this.popperIsAdjusted = false
-        }, 200)
-    },
-    beforeUnmount() {
-        if (this.hideTimeout) {
-            clearTimeout(this.hideTimeout)
-        }
+const onHidden = (): void => {
+  emit('hidden')
+  emit('update:show', false)
 
-        this.disablePopperNeedsAdjustmentListener()
+  if (isTouchOnlyDevice.value) {
+    window.removeEventListener('touchstart', touchstartHandler)
+    return
+  }
+  removeBlurListenersFromChildElements()
+}
 
-        if (this.isTouchOnlyDevice && this.shown) {
-            window.removeEventListener('touchstart', this.touchstartHandler)
-        }
-    },
-    methods: {
-        focus(): void {
-            this.getTriggerElement().focus()
-        },
-        onShown(): void {
-            this.$emit('shown')
+const onBeforeShown = (): void => {
+  emit('beforeShow')
+  if (isTouchOnlyDevice.value) {
+    window.addEventListener('touchstart', touchstartHandler)
+  }
+}
 
-            this.$emit('update:show', true)
+const onBeforeHide = (): void => {
+  emit('beforeHide')
+  if (isTouchOnlyDevice.value) {
+    window.removeEventListener('touchstart', touchstartHandler)
+  }
+}
 
-            if (this.isTouchOnlyDevice) {
-                window.addEventListener('touchstart', this.touchstartHandler)
-            }
-           else {
-                this.addBlurListenersToChildElements()
-            }
-        },
-        onHidden(): void {
-            this.$emit('hidden')
+const addBlurListenersToChildElements = (): void => {
+  const dropdown = trigger.value!
+  focusableElements.value = getFocusableElements(dropdown)
+  focusableElements.value.forEach(element => element.addEventListener('blur', blurHandler))
+}
 
-            this.$emit('update:show', false)
+const removeBlurListenersFromChildElements = (): void => {
+  focusableElements.value.forEach(element => element.removeEventListener('blur', blurHandler))
+  focusableElements.value = []
+}
 
-            if (this.isTouchOnlyDevice) {
-                window.removeEventListener('touchstart', this.touchstartHandler)
-            }
-            else {
-                this.removeBlurListenersFromChildElements()
-            }
-        },
-        onBeforeShown(): void {
-            this.$emit('before-show')
-            if (this.isTouchOnlyDevice) {
-                window.addEventListener('touchstart', this.touchstartHandler)
-            }
-        },
-        onBeforeHide(): void {
-            this.$emit('before-hide')
-            if (this.isTouchOnlyDevice) {
-                window.removeEventListener('touchstart', this.touchstartHandler)
-            }
-        },
-        addBlurListenersToChildElements(): void {
-            const dropdown = this.getDropdownElement()
+const dropdownAfterLeave = (): void => {
+  trigger.value?.style.removeProperty('visibility')
+}
 
-            this.focusableElements = getFocusableElements(dropdown)
-            this.focusableElements.forEach(element => element.addEventListener('blur', this.blurHandler))
-        },
-        removeBlurListenersFromChildElements(): void {
-            this.focusableElements.forEach(element => element.removeEventListener('blur', this.blurHandler))
-            this.focusableElements = []
-        },
-        dropdownAfterLeave(): void {
-            this.getDropdownElement().style.removeProperty('visibility')
-        },
-        async adjustPopper(): Promise<void> {
-            // eslint-disable-next-line no-async-promise-executor
-            return new Promise(async (resolve) => {
-                if (this.shown === false && !this.adjustingPopper) {
-                    this.popperIsAdjusted = false
-                    resolve()
-                    return
-                }
+const adjustPopper = async (): Promise<void> => {
+  // eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (resolve) => {
+    if (shown.value === false && !adjustingPopper.value) {
+      popperIsAdjusted.value = false
+      resolve()
+      return
+    }
 
-                if (!this.popper) {
-                    this.popper = await this.createPopper()
-                }
+    if (!popper.value) {
+      popper.value = await createPopper()
+    }
 
-                await this.popper.update()
+    await popper.value?.update()
 
-                resolve()
-            })
-        },
-        updatePopper(): Promise<void> {
-            // eslint-disable-next-line no-async-promise-executor
-            return new Promise(async (resolve) => {
-                if (this.popperIsAdjusted) {
-                    resolve()
-                    return
-                }
+    resolve()
+  })
+}
 
-                // So it appears in the DOM so it can be adjusted
-                this.adjustingPopper = true
+const updatePopper = (): Promise<void> => {
+// eslint-disable-next-line no-async-promise-executor
+  return new Promise(async (resolve) => {
+    if (popperIsAdjusted.value) {
+      resolve()
+      return
+    }
 
-                await this.$nextTick()
+    // So it appears in the DOM so it can be adjusted
+    adjustingPopper.value = true
 
-                await this.adjustPopper()
+    await nextTick()
 
-                // after adjusted it removes the dropdown from the DOM
-                this.adjustingPopper = false
+    await adjustPopper()
 
-                await this.$nextTick()
+    // after adjusted it removes the dropdown from the DOM
+    adjustingPopper.value = false
 
-                // Once removed it can be marked as adjusted so we can enable the
-                // CSS transitions
-                this.popperIsAdjusted = true
+    await nextTick()
 
-                await this.$nextTick()
+    // Once removed it can be marked as adjusted so we can enable the
+    // CSS transitions
+    popperIsAdjusted.value = true
 
-                resolve()
-            })
-        },
-        createPopper(): Promise<PopperInstance> {
-            let popper: PopperInstance
+    await nextTick()
 
-            return new Promise((resolve) => {
-                const popperOptions = this.fullPopperOptions
+    resolve()
+  })
+}
 
-                const originalOnFirstUpdate = popperOptions.onFirstUpdate
+const createPopper = (): Promise<PopperInstance> => {
+  let popper: PopperInstance
 
-                popperOptions.onFirstUpdate = async (arg) => {
-                    if (originalOnFirstUpdate) {
-                        originalOnFirstUpdate(arg)
-                    }
+  return new Promise((resolve) => {
+    const popperOptions = fullPopperOptions.value
 
-                    resolve(popper)
-                }
+    const originalOnFirstUpdate = popperOptions.onFirstUpdate
 
-                popper = createPopper(this.getTriggerElement(), this.getDropdownElement(), this.fullPopperOptions)
-            })
-        },
-        enablePopperNeedsAdjustmentListener(): void {
-            window.addEventListener('resize', this.popperAdjusterListener!)
+    popperOptions.onFirstUpdate = async (arg) => {
+      if (originalOnFirstUpdate) {
+        originalOnFirstUpdate(arg)
+      }
 
-            window.addEventListener('scroll', this.popperAdjusterListener!)
-        },
-        disablePopperNeedsAdjustmentListener(): void {
-            window.removeEventListener('resize', this.popperAdjusterListener!)
+      resolve(popper)
+    }
 
-            window.removeEventListener('scroll', this.popperAdjusterListener!)
+    popper = createPopperBase(
+      trigger.value,
+      dropdown.value,
+      fullPopperOptions.value,
+    )
+  })
+}
 
-            this.popperAdjusterListener!.cancel()
-        },
-        getDropdownElement(): HTMLDivElement {
-            const { dropdown } = this.$refs
-            return dropdown as HTMLDivElement
-        },
-        getTriggerElement(): HTMLButtonElement {
-            const { trigger } = this.$refs
-            return trigger as HTMLButtonElement
-        },
-        doToggle(): void {
-            if (!this.shown) {
-                this.doShow()
-            }
-            else {
-                this.doHide()
-            }
-        },
-        async doShow(): Promise<void> {
-            if (this.hideTimeout) {
-                clearTimeout(this.hideTimeout)
-            }
+const enablePopperNeedsAdjustmentListener = (): void => {
+  window.addEventListener('resize', popperAdjusterListener.value!)
+  window.addEventListener('scroll', popperAdjusterListener.value!)
+}
 
-            this.onBeforeShown()
+const disablePopperNeedsAdjustmentListener = (): void => {
+  window.removeEventListener('resize', popperAdjusterListener.value!)
+  window.removeEventListener('scroll', popperAdjusterListener.value!)
+  popperAdjusterListener.value?.cancel()
+}
 
-            await this.updatePopper()
+const doToggle = (): void => {
+  if (!shown.value) {
+    doShow()
+  }
+  else {
+    doHide()
+  }
+}
 
-            this.shown = true
+const doShow = async (): Promise<void> => {
+  if (hideTimeout.value) {
+    clearTimeout(hideTimeout.value)
+  }
 
-            await this.$nextTick()
+  onBeforeShown()
 
-            this.onShown()
-        },
-        async doHide(): Promise<void> {
-            this.onBeforeHide()
+  await updatePopper()
 
-            this.shown = false
+  shown.value = true
 
-            await this.$nextTick()
+  await nextTick()
 
-            this.onHidden()
-        },
-        clickHandler(e: MouseEvent): void {
-            this.$emit('click', e)
+  onShown()
+}
 
-            if (this.configuration.toggleOnClick) {
-                this.throttledToggle!()
-            }
-            else if (this.shouldShowWhenClicked) {
-                this.doShow()
-            }
-        },
-        focusHandler(e: FocusEvent): void {
-            this.$emit('focus', e)
+const doHide = async (): Promise<void> => {
+  onBeforeHide()
 
-            if (this.isTouchOnlyDevice) {
-                return
-            }
+  shown.value = false
 
-            if (this.configuration.toggleOnFocus) {
-                this.throttledToggle!()
-            }
-        },
-        blurHandler(e: FocusEvent): void {
-            const isChild = this.targetIsChild(e.relatedTarget)
+  await nextTick()
 
-            if (!isChild) {
-                this.$emit('blur', e)
-            }
-            else {
-                this.$emit('blur-on-child', e)
-            }
+  onHidden()
+}
 
-            if (this.isTouchOnlyDevice) {
-                return
-            }
+const targetIsChild = (target: EventTarget | null): boolean => {
+  return elementIsTargetOrTargetChild(target, dropdown.value) || elementIsTargetOrTargetChild(target, trigger.value)
+}
 
-            if (this.configuration.toggleOnFocus && !isChild) {
-                this.doHide()
-            }
-        },
-        targetIsChild(target: EventTarget | null): boolean {
-            return elementIsTargetOrTargetChild(target, this.getDropdownElement())
-                || elementIsTargetOrTargetChild(target, this.getTriggerElement())
-        },
-        mouseoverHandler(e: MouseEvent): void {
-            this.$emit('mouseover', e)
+const clickHandler = (e: MouseEvent): void => {
+  emit('click', e)
+  if (configuration.toggleOnClick) {
+    throttledToggle.value!()
+  }
+  else if (shouldShowWhenClicked.value) {
+   doShow()
+  }
+}
 
-            if (this.isTouchOnlyDevice) {
-                return
-            }
+const focusHandler = (e: FocusEvent): void => {
+  emit('focus', e)
 
-            if (this.configuration.toggleOnHover) {
-                this.doShow()
-            }
-        },
-        mouseleaveHandler(e: MouseEvent): void {
-            this.$emit('mouseleave', e)
+  if (isTouchOnlyDevice.value) {
+    return
+  }
 
-            if (this.isTouchOnlyDevice) {
-                return
-            }
+  if (configuration.toggleOnFocus) {
+    throttledToggle.value!()
+  }
+}
 
-            if (this.configuration.toggleOnHover && !this.targetIsChild(e.relatedTarget)) {
-                this.hideAfterTimeout()
-            }
-        },
-        touchstartHandler(e: TouchEvent) {
-            this.$emit('touchstart', e)
+const blurHandler = (e: FocusEvent): void => {
+  const isChild = targetIsChild(e.relatedTarget)
 
-            if (Array.from(e.targetTouches).some(touch => this.targetIsChild(touch.target))) {
-                return
-            }
+  if (!isChild) {
+    emit('blur', e)
+  }
+  else {
+    emit('blurOnChild', e)
+  }
 
-            if (this.configuration.toggleOnFocus || this.configuration.toggleOnHover) {
-                this.doHide()
-            }
-        },
-        hideAfterTimeout(): void {
-            if (!this.configuration.hideOnLeaveTimeout) {
-                this.doHide()
-            }
-            else {
-                this.hideTimeout = setTimeout(() => {
-                    this.doHide()
-                    this.hideTimeout = null
-                }, this.configuration.hideOnLeaveTimeout)
-            }
-        },
-    },
+  if (isTouchOnlyDevice.value) {
+    return
+  }
+
+  if (configuration.toggleOnFocus && !isChild) {
+    doHide()
+  }
+}
+
+const mouseoverHandler = (e: MouseEvent): void => {
+  emit('mouseover', e)
+
+  if (isTouchOnlyDevice.value) {
+    return
+  }
+
+  if (configuration.toggleOnHover) {
+    doShow()
+  }
+}
+
+const mouseleaveHandler = (e: MouseEvent): void => {
+  emit('mouseleave', e)
+
+  if (isTouchOnlyDevice.value) {
+    return
+  }
+
+  if (configuration.toggleOnHover && !targetIsChild(e.relatedTarget)) {
+    hideAfterTimeout()
+  }
+}
+
+const touchstartHandler = (e: TouchEvent): void => {
+  emit('touchstart', e)
+
+  if (Array.from(e.targetTouches).some(touch => targetIsChild(touch.target))) {
+    return
+  }
+
+  if (configuration.toggleOnFocus || configuration.toggleOnHover) {
+    doHide()
+  }
+}
+
+const hideAfterTimeout = (): void => {
+  if (!configuration.hideOnLeaveTimeout) {
+    doHide()
+    return
+  }
+
+  hideTimeout.value = setTimeout(() => {
+    doHide()
+    hideTimeout.value = null
+  },
+  configuration.hideOnLeaveTimeout,
+  )
+}
+
+// Hooks
+onMounted(() => {
+  isTouchOnlyDevice.value = getIsTouch()
+
+  if (isTouchOnlyDevice.value && shown.value) {
+    window.addEventListener('touchstart', touchstartHandler)
+  }
+
+  if (configuration.show) {
+    updatePopper().then(() => {
+      initAsShow.value = false
+    })
+  }
+})
+
+watch(() => popperIsAdjusted.value, (value: boolean) => {
+  if (value) {
+    enablePopperNeedsAdjustmentListener()
+    return
+  }
+  disablePopperNeedsAdjustmentListener()
+})
+
+watch(() => configuration.show, (isShown) => {
+  if (isShown) {
+    doShow()
+  }
+  doHide()
+})
+
+onBeforeUnmount(() => {
+  if (hideTimeout.value) {
+    clearTimeout(hideTimeout.value)
+  }
+
+  disablePopperNeedsAdjustmentListener()
+
+  if (isTouchOnlyDevice.value && shown.value) {
+    window.removeEventListener('touchstart', touchstartHandler)
+  }
+})
+
+throttledToggle.value = throttle(doToggle, 200)
+
+popperAdjusterListener.value = debounce(() => {
+  popperIsAdjusted.value = false
+}, 200)
+
+defineExpose({
+  doShow,
+  doHide,
+  adjustPopper,
+  focus,
+  shown,
 })
 </script>
 

@@ -125,9 +125,9 @@ export default function useFetchsOptions(
 
         optionsWereFetched.value = true
 
-        emit('fetch-options-success', response)
+        emit('fetchOptionsSuccess', response)
       }).catch((error) => {
-        emit('fetch-options-error', error)
+        emit('fetchOptionsError', error)
       }).then(() => {
         fetchingOptions.value = false
         fetchingMoreOptions.value = false
@@ -199,9 +199,9 @@ export default function useFetchsOptions(
 
         optionsWereFetched.value = true
 
-        emit('fetch-options-success', results)
+        emit('fetchOptionsSuccess', results)
       }).catch((error) => {
-        emit('fetch-options-error', error)
+        emit('fetchOptionsError', error)
       }).then(() => {
         fetchingOptions.value = false
       })

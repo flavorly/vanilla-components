@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { computed, defineComponent, onBeforeUnmount, provide, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
-import { hide } from '@popperjs/core'
 import Dropdown from './partials/dropdown.vue'
 import Trigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
 import { richSelectConfig } from './config'
 import type { MinimumInputLengthTextProp, RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
-import DropdownSimple, { validDropdownPlacements } from '@/components/dropdown/dropdown-simple.vue'
+import DropdownSimple from '@/components/dropdown/dropdown-simple.vue'
+import { validDropdownPlacements } from '@/components/dropdown/config'
 import SimpleSelect from '@/components/select/select.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormErrors from '@/components/forms/form-errors.vue'
@@ -203,10 +203,10 @@ const emit = defineEmits({
   'touchstart': (e: TouchEvent) => e instanceof TouchEvent,
   'shown': () => true,
   'hidden': () => true,
-  'before-show': () => true,
-  'before-hide': () => true,
-  'fetch-options-success': () => true,
-  'fetch-options-error': () => true,
+  'beforeShow': () => true,
+  'beforeHide': () => true,
+  'fetchOptionsSuccess': () => true,
+  'fetchOptionsError': () => true,
   'update:modelValue': () => true,
 })
 
@@ -338,7 +338,11 @@ const usesTags = computed<boolean>(() => configuration.tags === true && configur
 
 const hideDropdown = (): void => dropdownComponent.value!.doHide()
 
-const showDropdown = (): void => dropdownComponent.value!.doShow()
+// const showDropdown = (): void => dropdownComponent.value!.doShow()
+const showDropdown = (): void => {
+  console.log(dropdownComponent.value)
+  dropdownComponent.value!.doShow()
+}
 
 const adjustDropdown = async (): Promise<void> => await dropdownComponent.value!.adjustPopper()
 
@@ -459,7 +463,7 @@ const onOptionSelected = (): void => {
 }
 
 const beforeHideHandler = (): void => {
-  emit('before-hide')
+  emit('beforeHide')
   if (configuration.selectOnClose && !isEqual(localValue, activeOption?.value)
   ) {
     selectOptionFromActiveOption()
@@ -482,7 +486,7 @@ const hiddenHandler = (): void => {
 }
 
 const beforeShowHandler = (): void => {
-  emit('before-show')
+  emit('beforeShow')
 
   initActiveOption()
 
@@ -735,18 +739,18 @@ provide('usesTags', usesTags)
         v-bind="{ hasErrors, errors }"
       >
         <FormErrors
-          v-if="hasErrors && showErrors"
+          v-if="hasErrors && props.showErrors"
           :errors="errors"
         />
       </slot>
       <!-- Feedback -->
       <slot
         name="feedback"
-        v-bind="{ hasErrors, feedback }"
+        v-bind="{ hasErrors, feedback: props.feedback }"
       >
         <FormFeedback
-          v-if="!hasErrors && feedback !== undefined && showFeedback"
-          :text="feedback"
+          v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+          :text="props.feedback"
         />
       </slot>
     </div>

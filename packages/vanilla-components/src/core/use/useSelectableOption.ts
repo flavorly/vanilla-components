@@ -7,7 +7,6 @@ type SelectedOption = NormalizedOption | NormalizedOption[] | undefined
 
 export default function useSelectableOption(
   options: Ref<NormalizedOption[]>,
-
   localValue: Ref<any>,
   multiple: Ref<boolean>,
 ): {
@@ -40,7 +39,7 @@ export default function useSelectableOption(
         // Concat the current selected option list
         .concat(currentSelectedOption)
     }
- else if (currentSelectedOption !== undefined) {
+    else if (currentSelectedOption !== undefined) {
       allOptions = allOptions
 
         // Remove the selected option if already exists in the list so it
@@ -72,35 +71,36 @@ export default function useSelectableOption(
         localValue.value = addToArray(localValue.value, option.value)
         selectedOption.value = addToArray(selectedOption.value, option)
       }
- else {
+      else {
         localValue.value = [option.value]
         selectedOption.value = [option]
       }
     }
- else {
+    else {
       localValue.value = option.value
       selectedOption.value = option
     }
   }
 
   const toggleOption = (option: NormalizedOption): void => {
+    console.log(localValue)
     if (optionIsSelected(option)) {
       if (multiple.value) {
         localValue.value = subtractFromArray(localValue.value, option.value)
       }
- else {
+      else {
         localValue.value = undefined
       }
     }
- else if (multiple.value) {
+    else if (multiple.value) {
       if (Array.isArray(localValue.value)) {
         localValue.value = addToArray(localValue.value, option.value)
       }
- else {
+      else {
         localValue.value = [option.value]
       }
     }
- else {
+    else {
       localValue.value = option.value
     }
   }

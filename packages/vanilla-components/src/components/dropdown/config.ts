@@ -85,6 +85,23 @@ export const dropdownConfig = {
 
 export const dropdownPopperDefaultOptions = popperOptions
 export const dropdownClassesKeys = Object.keys(dropdownConfig.classes)
+export const validDropdownPlacements = [
+  'auto',
+  'auto-start',
+  'auto-end',
+  'top',
+  'top-start',
+  'top-end',
+  'bottom',
+  'bottom-start',
+  'bottom-end',
+  'right',
+  'right-start',
+  'right-end',
+  'left',
+  'left-start',
+  'left-end',
+]
 
 export declare type DropdownClassesValidKeys = keyof typeof dropdownConfig.classes
 export declare type DropdownValue = boolean
