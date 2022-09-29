@@ -15,14 +15,14 @@ const title = 'Vanilla Components'
 const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
 
 const pluginsActive = [
-  whyframe({
-    defaultSrc: '/frames/default',
-  }),
+  // whyframe({
+  //   defaultSrc: '/frames/default',
+  // }),
 
   // Initialize Vue integration plugin
-  whyframeVue({
-    include: /\.(?:vue|md)$/, // also scan in markdown files
-  }),
+  // whyframeVue({
+  //   include: /\.(?:vue|md)$/, // also scan in markdown files
+  // }),
 ]
 
 const plugins = !production

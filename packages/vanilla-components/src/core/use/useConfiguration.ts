@@ -146,8 +146,6 @@ export function useConfiguration<ComponentOptions extends Data>(
 
   const finalClassesListKeys = classesListKeys ?? Object.keys(defaultConfiguration.classes ?? {})
 
-  console.log('Props Values', propsValues.value)
-
   const computedConfiguration = computed(() => ({
     ...props || {},
     ...useParseVariant(

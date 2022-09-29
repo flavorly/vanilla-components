@@ -108,18 +108,18 @@ export default function useFetchsOptions(
           if (nextPage !== undefined && nextPage >= 2) {
             fetchedOptions.value = fetchedOptions.value.concat(getNormalizedOptions(results))
           }
- else {
+          else {
             fetchedOptions.value = getNormalizedOptions(results)
           }
 
           if (hasMorePages) {
             fetchNextPage.value = fetchNextPage.value === undefined ? 2 : fetchNextPage.value + 1
           }
- else {
+          else {
             fetchNextPage.value = undefined
           }
         }
- else {
+        else {
           throw new Error('Options response must be an object with `results` property.')
         }
 
