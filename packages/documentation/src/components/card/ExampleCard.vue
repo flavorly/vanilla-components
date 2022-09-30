@@ -1,13 +1,5 @@
 <script setup type="ts">
-import {
-    Button,
-    Card,
-    Dropdown,
-    DropdownOption,
-} from '@indigit/vanilla-components'
-import { defineComponent } from 'vue'
-
-defineComponent({ name: 'ExampleCard' })
+import { Button, Card, Dropdown, DropdownOption } from '@indigit/vanilla-components'
 </script>
 
 <template>

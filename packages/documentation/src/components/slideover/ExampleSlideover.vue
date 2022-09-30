@@ -1,9 +1,6 @@
 <script setup type="ts">
 import { Button, Slideover } from '@indigit/vanilla-components'
-import { defineComponent, ref } from 'vue'
-
-defineComponent({ name: 'ExampleSlideover' })
-
+import { ref } from 'vue'
 const open = ref(false)
 </script>
 

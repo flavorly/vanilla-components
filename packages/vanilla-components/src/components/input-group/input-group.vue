@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent } from 'vue'
 import type { InputGroupClassesValidKeys, InputGroupProps } from './config'
 import { inputGroupConfig } from './config'
 import { useConfiguration, useVariantProps } from '@/core/use'
@@ -45,8 +44,6 @@ const props = defineProps({
     required: false,
   },
 })
-
-defineComponent({ inheritAttrs: true })
 
 const { configuration, errors, hasErrors } = useConfiguration<InputGroupProps>(inputGroupConfig, 'InputGroup')
 </script>

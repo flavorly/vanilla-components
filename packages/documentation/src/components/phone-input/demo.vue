@@ -1,6 +1,6 @@
 <script setup type="ts">
 import { PhoneInput } from '@indigit/vanilla-components'
-import { defineComponent, onMounted, ref } from 'vue'
+import { ref } from 'vue'
 
 const value = ref('+35191523813')
 const valueCountry = 'PT'

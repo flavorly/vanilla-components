@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance, PropType, Ref } from 'vue'
-import { defineComponent, onMounted, ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import type { ButtonClassesValidKeys, ButtonProps } from './config'
 import { buttonConfig } from './config'
 import LoadingSpinnerIcon from '@/components/icons/spinner.vue'
@@ -40,10 +40,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['click'])
-
-defineComponent({
-  inheritAttrs: false,
-})
 
 const localRef = ref(null) as Ref<ComponentPublicInstance<HTMLInputElement> | null>
 const localValue = ref(props.label)

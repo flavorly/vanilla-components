@@ -1,9 +1,7 @@
 <script setup type="ts">
 import { Dropdown, DropdownOption, DropdownSimple } from '@indigit/vanilla-components'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
-
-defineComponent({ name: 'ExampleDropdown' })
 
 const value = ref(true)
 </script>

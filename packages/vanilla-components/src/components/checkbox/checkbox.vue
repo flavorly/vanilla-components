@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
 import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
 import { checkboxConfig } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
@@ -38,8 +38,6 @@ const props = defineProps({
     },
   },
 })
-
-defineComponent({ inheritAttrs: false })
 
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<CheckboxProps>(checkboxConfig, 'Checkbox', localValue)

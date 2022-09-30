@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, ref } from 'vue'
+import { ref } from 'vue'
 import type { InputClassesValidKeys, InputProps, InputValue } from './config'
 import { inputConfig } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
@@ -26,8 +26,6 @@ const props = defineProps({
     default: 'text',
   },
 })
-
-defineComponent({ inheritAttrs: false })
 
 const localRef = ref(null)
 const localValue = useVModel(props, 'modelValue')

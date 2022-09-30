@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { camelize, computed, defineComponent, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue'
+import { camelize, computed, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue'
 import { useSessionStorage } from '@vueuse/core'
 
 // Lodash
@@ -168,8 +168,6 @@ const emit = defineEmits([
   'openedFilters',
   'openedSettings',
 ])
-
-defineComponent({ inheritAttrs: true })
 
 // ----- Start the Variant -----  //
 const { configuration } = useConfiguration<Types.DatatableProps>(datatableConfig, 'Datatable')

@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import type { PropType, Ref } from 'vue'
-  import { defineComponent, ref, watch } from 'vue'
+  import { ref, watch } from 'vue'
   import type { AvatarClassesValidKeys, AvatarPreview, AvatarProps, AvatarValue } from './config'
   import { avatarConfig } from './config'
   import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
@@ -42,8 +42,6 @@
       default: undefined,
     },
   })
-
-  defineComponent({ inheritAttrs: false })
 
   const localValue: Ref<AvatarValue> = useVModel(props, 'modelValue')
   const { configuration, errors, hasErrors } = useConfiguration<AvatarProps>(avatarConfig, 'Avatar', localValue)

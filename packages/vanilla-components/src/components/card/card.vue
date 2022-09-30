@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { defineComponent, provide, ref } from 'vue'
+import { provide } from 'vue'
 import Footer from './card-footer.vue'
 import type { CardClassesValidKeys, CardProps } from './config'
 import { cardConfig } from './config'
@@ -38,8 +38,6 @@ const props = defineProps({
     default: '',
   },
 })
-
-defineComponent({ inheritAttrs: true })
 
 const { configuration } = useConfiguration<CardProps>(cardConfig, 'Card')
 provide('configuration_vanilla', configuration)

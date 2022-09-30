@@ -1,8 +1,6 @@
 <script setup type="ts">
 import { Checkbox } from '@indigit/vanilla-components'
-import { defineComponent, ref } from 'vue'
-
-defineComponent({ name: 'ExampleCheckbox' })
+import { ref } from 'vue'
 
 const value = ref('accepted')
 const value2 = ref(true)

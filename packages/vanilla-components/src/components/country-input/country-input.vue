@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, defineComponent, watch } from 'vue'
+import { computed, watch } from 'vue'
 import find from 'lodash/find'
 import first from 'lodash/first'
 import type { CountryInputClassesValidKeys, CountryInputProps, CountryValue } from './config'
@@ -64,8 +64,6 @@ const emit = defineEmits([
   'update:countryName',
   'update:modelValue',
 ])
-
-defineComponent({ inheritAttrs: false })
 
 const localValue = useVModel(props, 'modelValue')
 

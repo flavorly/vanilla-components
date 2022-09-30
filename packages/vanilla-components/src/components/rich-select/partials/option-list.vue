@@ -1,6 +1,6 @@
-<script lang="ts">
+<script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { computed, defineComponent, inject } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { RichSelectProps } from '../config'
 import SelectOption from './option.vue'
 import { useInjectsClassesList } from '@/core/use'
@@ -9,92 +9,82 @@ import type { NormalizedOptions } from '@/core/types'
 
 // TODO: Refactor to script setup
 
-export default defineComponent({
-    components: {
-      SelectOption,
-    },
-    props: {
-        options: {
-            type: Array as PropType<NormalizedOptions>,
-            required: true,
-        },
-        deep: {
-            type: Number,
-            default: 0,
-        },
-    },
-    setup(props) {
-        const configuration = inject<RichSelectProps>('configuration_vanilla')!
-        const shown = inject<Ref<boolean>>('shown')
-        const fetchingMoreOptions = inject<Ref<boolean>>('fetchingMoreOptions')!
-        const dropdownBottomReachedHandler = inject<(() => void)>('dropdownBottomReachedHandler')!
+const props = defineProps({
+  options: {
+    type: Array as PropType<NormalizedOptions>,
+    required: true,
+  },
+  deep: {
+    type: Number,
+    default: 0,
+  },
+})
 
-        const maxHeight = computed(() => normalizeMeasure(configuration.maxHeight))
-        const usesMaxHeight = computed((): boolean => props.deep === 0 && maxHeight.value !== undefined)
-        const classesList = useInjectsClassesList()
+// Injected
+const configuration = inject<RichSelectProps>('configuration_vanilla')!
+const shown = inject<Ref<boolean>>('shown')
+const fetchingMoreOptions = inject<Ref<boolean>>('fetchingMoreOptions')!
+const dropdownBottomReachedHandler = inject<(() => void)>('dropdownBottomReachedHandler')!
+const classesList = useInjectsClassesList()
 
-        const bottomReachedObserver = debounce(([event]: [Event]) => {
-            const element = event.target as HTMLUListElement
-            const reached: boolean = Math.ceil(element.scrollHeight - element.scrollTop) === element.clientHeight
+// Template Refs
+const root = ref<null | HTMLLIElement>(null)
+const fetchingMoreOptionsText = ref<null | HTMLLIElement>(null)
 
-            if (reached) {
-                dropdownBottomReachedHandler()
-            }
-        }, 200)
+// Computed
+const maxHeight = computed(() => normalizeMeasure(configuration.maxHeight))
+const usesMaxHeight = computed((): boolean => props.deep === 0 && maxHeight.value !== undefined)
+const showOptions = computed<boolean>((): boolean => props.options.length > 0)
 
-        return {
-            maxHeight,
-            usesMaxHeight,
-            shown,
-            bottomReachedObserver,
-            fetchingMoreOptions,
-            configuration,
-            classesList,
-        }
-    },
-    computed: {
-        showOptions(): boolean {
-            return this.options.length > 0
-        },
-    },
-    watch: {
-        async showOptions(show: boolean) {
-            if (show) {
-                await this.$nextTick()
-                this.$el.addEventListener('scroll', this.bottomReachedObserver)
-            }
-            else {
-                this.$el.removeEventListener('scroll', this.bottomReachedObserver)
-            }
-        },
-        async fetchingMoreOptions(fetchingMoreOptions: boolean) {
-            if (fetchingMoreOptions) {
-                await this.$nextTick()
-                const el = this.$refs.fetchingMoreOptionsText as HTMLLIElement
+const bottomReachedObserver = debounce(([event]: [Event]) => {
+  const element = event.target as HTMLUListElement
+  const reached: boolean = Math.ceil(element.scrollHeight - element.scrollTop) === element.clientHeight
 
-                // TODO: check this
-                if (el) {
-                  el.scrollIntoView({ block: 'end', behavior: 'smooth' })
-                }
-            }
-        },
-    },
-    mounted() {
-        if (this.showOptions) {
-            this.$el.addEventListener('scroll', this.bottomReachedObserver)
-        }
-    },
-    beforeUnmount() {
-        if (this.showOptions) {
-            this.$el.removeEventListener('scroll', this.bottomReachedObserver)
-        }
-    },
+  if (reached) {
+    dropdownBottomReachedHandler()
+  }
+}, 200)
+
+// Watchers
+watch(() => showOptions.value, async (shouldShow: boolean) => {
+  if (shouldShow) {
+    await nextTick
+    root.value!.addEventListener('scroll', bottomReachedObserver)
+  }
+  else {
+    root.value!.removeEventListener('scroll', bottomReachedObserver)
+  }
+})
+
+watch(() => fetchingMoreOptions.value, async (isFetching: boolean) => {
+  if (isFetching) {
+    await nextTick
+    const el = fetchingMoreOptionsText.value! as HTMLLIElement
+
+    // TODO: check this
+    if (el) {
+      el.scrollIntoView({ block: 'end', behavior: 'smooth' })
+    }
+  }
+})
+
+onMounted(() => {
+  if (showOptions.value) {
+    root.value!.addEventListener('scroll', bottomReachedObserver)
+  }
+})
+
+onBeforeUnmount(() => {
+  if (showOptions.value) {
+    root.value!.removeEventListener('scroll', bottomReachedObserver)
+  }
 })
 </script>
 
 <template>
   <ul
     v-if="showOptions"
+    ref="root"
     :class="classesList.optionsList"
     :style="usesMaxHeight ? `max-height: ${maxHeight}; overflow-x: auto;` : undefined"
   >

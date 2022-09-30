@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, defineComponent } from 'vue'
+import { computed } from 'vue'
 import { checkboxConfig } from './config'
 import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
 import type { InputOptions } from '@/core/types'
@@ -42,8 +42,6 @@ const props = defineProps({
     default: 'text',
   },
 })
-
-defineComponent({ inheritAttrs: false })
 
 const { localValue } = useMultipleVModel(props, 'modelValue', true)
 const { configuration, errors, hasErrors } = useConfiguration<CheckboxProps>(checkboxConfig, 'CheckboxGroup', localValue)

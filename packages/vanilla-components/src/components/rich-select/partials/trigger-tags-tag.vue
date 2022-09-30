@@ -1,95 +1,85 @@
-<script lang="ts">
-import type { PropType } from 'vue'
-import { defineComponent, inject } from 'vue'
+<script setup lang="ts">
+import type { ComputedRef, PropType } from 'vue'
+import { computed, defineComponent, inject, nextTick, ref } from 'vue'
 import { useInjectsClassesList } from '@/core/use'
 import { normalizedOptionIsDisabled } from '@/core/helpers'
 import type { NormalizedOption } from '@/core/types'
 import CloseIcon from '@/components/icons/close.vue'
 
-// TODO: Refactor this to script Setup
-export default defineComponent({
-    name: 'RichSelectTriggerTagsTag',
-    components: {
-        CloseIcon,
-    },
-    props: {
-        option: {
-            type: Object as PropType<NormalizedOption>,
-            required: true,
-        },
-    },
-    setup() {
-        const toggleOption = inject<(option: NormalizedOption) => void>('toggleOption')!
-
-        const classesList = useInjectsClassesList()!
-
-        return {
-            toggleOption,
-            classesList,
-        }
-    },
-    computed: {
-        dataValueAttribute(): string {
-            if (typeof this.option.value === 'object') {
-                return JSON.stringify(this.option.value)
-            }
-
-            return String(this.option.value)
-        },
-        isDisabled(): boolean {
-            return normalizedOptionIsDisabled(this.option)
-        },
-    },
-    methods: {
-        focus(): void {
-            this.$el.focus()
-        },
-        getElementIndex(): number {
-            const elements: HTMLElement[] = Array.from(this.$el.parentElement.children)
-
-            return Array.from(elements).findIndex(el => el.isSameNode(this.$el))
-        },
-        focusNextElement(): void {
-            const { parentElement } = this.$el
-            const currentElementIndex = this.getElementIndex()
-            const elements: HTMLElement[] = Array.from(parentElement.children)
-
-            if (currentElementIndex < elements.length - 1) {
-                elements[currentElementIndex + 1].focus()
-            }
-        },
-        focusPrevElement(): void {
-            const { parentElement } = this.$el
-            const currentElementIndex = this.getElementIndex()
-            const elements: HTMLElement[] = Array.from(parentElement.children)
-
-            if (currentElementIndex > 0) {
-                elements[currentElementIndex - 1].focus()
-            }
-        },
-        async unselect(): Promise<void> {
-            const { parentElement } = this.$el
-            const elementIndex = this.getElementIndex()
-
-            this.toggleOption(this.option)
-
-            await this.$nextTick()
-
-            const nextElement: HTMLElement | undefined = parentElement.children[elementIndex]
-
-            if (nextElement) {
-                nextElement.focus()
-            }
-            else if (elementIndex > 0) {
-                parentElement.children[elementIndex - 1].focus()
-            }
-        },
-    },
+const props = defineProps({
+  option: {
+    type: Object as PropType<NormalizedOption>,
+    required: true,
+  },
 })
+
+const toggleOption = inject<(option: NormalizedOption) => void>('toggleOption')!
+const classesList = useInjectsClassesList()!
+
+// Template refs
+const root = ref<HTMLButtonElement | null>(null)
+
+// Computed
+const dataValueAttribute = computed<string>(() => {
+  if (typeof props.option.value === 'object') {
+    return JSON.stringify(props.option.value)
+  }
+
+  return String(props.option.value)
+})
+
+const isDisabled = computed(() => normalizedOptionIsDisabled(props.option)) as ComputedRef<boolean>
+
+// Methods
+
+const focus = (): void => root.value!.focus()
+
+const getElementIndex = (): number => {
+  const elements: HTMLElement[] = Array.from(root.value!.parentElement!.children) as HTMLElement[]
+  return Array.from(elements).findIndex(el => el.isSameNode(root.value))
+}
+
+const focusNextElement = (): void => {
+  const { parentElement } = root.value!
+  const currentElementIndex = getElementIndex()
+  const elements: HTMLElement[] = Array.from(parentElement!.children) as HTMLElement[]
+
+  if (currentElementIndex < elements.length - 1) {
+    elements[currentElementIndex + 1].focus()
+  }
+}
+
+const focusPrevElement = (): void => {
+  const { parentElement } = root.value!
+  const currentElementIndex = getElementIndex()
+  const elements: HTMLElement[] = Array.from(parentElement!.children) as HTMLElement[]
+  if (currentElementIndex > 0) {
+    elements[currentElementIndex - 1].focus()
+  }
+}
+
+const unselect = async (): Promise<void> => {
+  const { parentElement } = root.value!
+  const elementIndex = getElementIndex()
+
+  toggleOption(props.option)
+
+  await nextTick()
+
+  const nextElement: HTMLElement | undefined = parentElement!.children[elementIndex] as HTMLElement
+
+  if (nextElement) {
+    nextElement.focus()
+  }
+  else if (elementIndex > 0) {
+    parentElement!.children[elementIndex - 1].focus()
+  }
+}
 </script>
 
 <template>
   <button
+    ref="root"
     type="button"
     :class="classesList.tag"
     :disabled="isDisabled"
