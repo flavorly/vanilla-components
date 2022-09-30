@@ -70,6 +70,9 @@ export default defineConfig({
       stringify: true,
     },
     plugins,
+    build: {
+      sourcemap: true,
+    },
   },
 
   // Vitepress Config

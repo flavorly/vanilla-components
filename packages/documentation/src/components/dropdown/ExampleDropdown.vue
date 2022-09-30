@@ -12,7 +12,6 @@ const value = ref(true)
   <PreviewWrapper>
     <div class="h-[200px]">
       <div class="flex items-center justify-center mx-auto">
-        <!-- Regular -->
         <Dropdown
           v-model="value"
           text="Options"
