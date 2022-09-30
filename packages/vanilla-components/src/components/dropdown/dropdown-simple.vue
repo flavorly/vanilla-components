@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { Options, Placement, Instance as PopperInstance } from '@popperjs/core'
 import { createPopper as createPopperBase } from '@popperjs/core'
 import { dropdownConfig, dropdownPopperDefaultOptions, validDropdownPlacements } from './config'
@@ -9,7 +9,8 @@ import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import Transitionable from '@/components/misc/transitionable.vue'
 import type { DebouncedFn } from '@/core/types'
 import { debounce, elementIsTargetOrTargetChild, getFocusableElements, isTouchOnlyDevice as getIsTouch, throttle } from '@/core/helpers'
-import { NormalizedOption } from '@/core/types'
+
+/* eslint @typescript-eslint/no-use-before-define: ["off"] */
 
 const props = defineProps({
   ...useVariantProps<DropdownExtendedProps, DropdownClassesValidKeys>(),
@@ -92,18 +93,31 @@ const emit = defineEmits({
 })
 
 const localValue = useVModel(props, 'modelValue')
+
 const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dropdownConfig, 'Dropdown', localValue)
+
 const isTouchOnlyDevice = ref<boolean>(false)
+
 const shown = ref((configuration as unknown as DropdownExtendedProps).show)
+
 const initAsShow = ref((configuration as unknown as DropdownExtendedProps).show)
+
 const hideTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
+
 const focusableElements = ref<Array<HTMLElement>>([])
+
 const throttledToggle = ref<null | (() => void)>(null)
+
 const adjustingPopper = ref<boolean>(false)
+
 const popperIsAdjusted = ref<boolean>(false)
+
 const popperAdjusterListener = ref<null | DebouncedFn>(null)
+
 const popper = ref<PopperInstance | null>(null)
+
 const dropdown = ref<HTMLDivElement>() as Ref<HTMLDivElement>
+
 const trigger = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 
 const fullPopperOptions = computed<Options>(() => {
@@ -116,10 +130,12 @@ const fullPopperOptions = computed<Options>(() => {
 
 const shouldShowWhenClicked = computed<boolean>(() => isTouchOnlyDevice.value && (configuration.toggleOnFocus === true || configuration.toggleOnHover === true))
 
-// Methods
+/** Checks if the target is child */
+const targetIsChild = (target: EventTarget | null): boolean => {
+  return elementIsTargetOrTargetChild(target, dropdown.value) || elementIsTargetOrTargetChild(target, trigger.value)
+}
 
-const focus = (): void => trigger.value?.focus()
-
+/** When dropdown being shown */
 const onShown = (): void => {
   emit('shown')
   emit('update:show', true)
@@ -132,6 +148,7 @@ const onShown = (): void => {
   }
 }
 
+/** When dropdown being hidden */
 const onHidden = (): void => {
   emit('hidden')
   emit('update:show', false)
@@ -143,6 +160,7 @@ const onHidden = (): void => {
   removeBlurListenersFromChildElements()
 }
 
+/** Before being shown */
 const onBeforeShown = (): void => {
   emit('beforeShow')
   if (isTouchOnlyDevice.value) {
@@ -150,6 +168,7 @@ const onBeforeShown = (): void => {
   }
 }
 
+/** Before being hidden */
 const onBeforeHide = (): void => {
   emit('beforeHide')
   if (isTouchOnlyDevice.value) {
@@ -157,21 +176,109 @@ const onBeforeHide = (): void => {
   }
 }
 
+/** Show Dropdown */
+const doShow = async (): Promise<void> => {
+  if (hideTimeout.value) {
+    clearTimeout(hideTimeout.value)
+  }
+
+  onBeforeShown()
+
+  await updatePopper()
+
+  shown.value = true
+
+  await nextTick()
+
+  onShown()
+}
+
+/** Hide Dropdown */
+const doHide = async (): Promise<void> => {
+  onBeforeHide()
+
+  shown.value = false
+
+  await nextTick()
+
+  onHidden()
+}
+
+/** Toggle Hide/Show Dropdown */
+const doToggle = (): void => {
+  if (!shown.value) {
+    doShow()
+  }
+  else {
+    doHide()
+  }
+}
+
+/** On Blur Handler */
+const blurHandler = (e: FocusEvent): void => {
+  const isChild = targetIsChild(e.relatedTarget)
+
+  if (!isChild) {
+    emit('blur', e)
+  }
+  else {
+    emit('blurOnChild', e)
+  }
+
+  if (isTouchOnlyDevice.value) {
+    return
+  }
+
+  if (configuration.toggleOnFocus && !isChild) {
+    doHide()
+  }
+}
+
+/** Add the Blur Event Listeners to the Child Elements */
 const addBlurListenersToChildElements = (): void => {
   const dropdown = trigger.value!
   focusableElements.value = getFocusableElements(dropdown)
   focusableElements.value.forEach(element => element.addEventListener('blur', blurHandler))
 }
 
+/** Remove the Blur Event Listeners to the Child Elements */
 const removeBlurListenersFromChildElements = (): void => {
   focusableElements.value.forEach(element => element.removeEventListener('blur', blurHandler))
   focusableElements.value = []
 }
 
-const dropdownAfterLeave = (): void => {
-  trigger.value?.style.removeProperty('visibility')
+/** Focus the trigger button */
+const focus = (): void => trigger.value?.focus()
+
+/** When the transition is leaving, we will remove the visibility */
+const dropdownAfterLeaveAnimation = (): void | string => trigger.value?.style.removeProperty('visibility')
+
+/** Popper : Create Instance */
+const createPopper = (): Promise<PopperInstance> => {
+  let popper: PopperInstance
+
+  return new Promise((resolve) => {
+    const popperOptions = fullPopperOptions.value
+
+    const originalOnFirstUpdate = popperOptions.onFirstUpdate
+
+    popperOptions.onFirstUpdate = async (arg) => {
+      if (originalOnFirstUpdate) {
+        originalOnFirstUpdate(arg)
+      }
+
+      resolve(popper)
+    }
+
+    popper = createPopperBase(
+      trigger.value,
+      dropdown.value,
+      fullPopperOptions.value,
+    )
+  })
 }
 
+/** Popper : Adjust the position */
 const adjustPopper = async (): Promise<void> => {
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve) => {
@@ -191,6 +298,7 @@ const adjustPopper = async (): Promise<void> => {
   })
 }
 
+/** Popper : Update the instance */
 const updatePopper = (): Promise<void> => {
 // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve) => {
@@ -221,80 +329,20 @@ const updatePopper = (): Promise<void> => {
   })
 }
 
-const createPopper = (): Promise<PopperInstance> => {
-  let popper: PopperInstance
-
-  return new Promise((resolve) => {
-    const popperOptions = fullPopperOptions.value
-
-    const originalOnFirstUpdate = popperOptions.onFirstUpdate
-
-    popperOptions.onFirstUpdate = async (arg) => {
-      if (originalOnFirstUpdate) {
-        originalOnFirstUpdate(arg)
-      }
-
-      resolve(popper)
-    }
-
-    popper = createPopperBase(
-      trigger.value,
-      dropdown.value,
-      fullPopperOptions.value,
-    )
-  })
-}
-
+/** Popper : On resize or scroll, we need to re-adjust */
 const enablePopperNeedsAdjustmentListener = (): void => {
   window.addEventListener('resize', popperAdjusterListener.value!)
   window.addEventListener('scroll', popperAdjusterListener.value!)
 }
 
+/** Popper : On resize or scroll, remove the listeners */
 const disablePopperNeedsAdjustmentListener = (): void => {
   window.removeEventListener('resize', popperAdjusterListener.value!)
   window.removeEventListener('scroll', popperAdjusterListener.value!)
   popperAdjusterListener.value?.cancel()
 }
 
-const doToggle = (): void => {
-  if (!shown.value) {
-    doShow()
-  }
-  else {
-    doHide()
-  }
-}
-
-const doShow = async (): Promise<void> => {
-  if (hideTimeout.value) {
-    clearTimeout(hideTimeout.value)
-  }
-
-  onBeforeShown()
-
-  await updatePopper()
-
-  shown.value = true
-
-  await nextTick()
-
-  onShown()
-}
-
-const doHide = async (): Promise<void> => {
-  onBeforeHide()
-
-  shown.value = false
-
-  await nextTick()
-
-  onHidden()
-}
-
-const targetIsChild = (target: EventTarget | null): boolean => {
-  return elementIsTargetOrTargetChild(target, dropdown.value) || elementIsTargetOrTargetChild(target, trigger.value)
-}
-
+/** On clicking the trigger button, show the dropdown but with throttling */
 const clickHandler = (e: MouseEvent): void => {
   emit('click', e)
   if (configuration.toggleOnClick) {
@@ -305,6 +353,7 @@ const clickHandler = (e: MouseEvent): void => {
   }
 }
 
+/** Handler : On Focus toggle the dropdown */
 const focusHandler = (e: FocusEvent): void => {
   emit('focus', e)
 
@@ -317,25 +366,7 @@ const focusHandler = (e: FocusEvent): void => {
   }
 }
 
-const blurHandler = (e: FocusEvent): void => {
-  const isChild = targetIsChild(e.relatedTarget)
-
-  if (!isChild) {
-    emit('blur', e)
-  }
-  else {
-    emit('blurOnChild', e)
-  }
-
-  if (isTouchOnlyDevice.value) {
-    return
-  }
-
-  if (configuration.toggleOnFocus && !isChild) {
-    doHide()
-  }
-}
-
+/** Handler : On Mouse over, we should show the dropdown if its enabled */
 const mouseoverHandler = (e: MouseEvent): void => {
   emit('mouseover', e)
 
@@ -348,6 +379,7 @@ const mouseoverHandler = (e: MouseEvent): void => {
   }
 }
 
+/** Handler : On Mouse Leave, we should hide the dropdown if its enabled */
 const mouseleaveHandler = (e: MouseEvent): void => {
   emit('mouseleave', e)
 
@@ -360,6 +392,7 @@ const mouseleaveHandler = (e: MouseEvent): void => {
   }
 }
 
+/** Handler : On touching hide the dropdown */
 const touchstartHandler = (e: TouchEvent): void => {
   emit('touchstart', e)
 
@@ -372,6 +405,7 @@ const touchstartHandler = (e: TouchEvent): void => {
   }
 }
 
+/** Hide the dropdown after a certain timeout */
 const hideAfterTimeout = (): void => {
   if (!configuration.hideOnLeaveTimeout) {
     doHide()
@@ -379,14 +413,14 @@ const hideAfterTimeout = (): void => {
   }
 
   hideTimeout.value = setTimeout(() => {
-    doHide()
-    hideTimeout.value = null
-  },
-  configuration.hideOnLeaveTimeout,
+      doHide()
+      hideTimeout.value = null
+    },
+    configuration.hideOnLeaveTimeout,
   )
 }
 
-// Hooks
+/** On Mounted hooks */
 onMounted(() => {
   isTouchOnlyDevice.value = getIsTouch()
 
@@ -401,6 +435,7 @@ onMounted(() => {
   }
 })
 
+/** Popper: Watch if popper was adjusted and register the listeners */
 watch(() => popperIsAdjusted.value, (value: boolean) => {
   if (value) {
     enablePopperNeedsAdjustmentListener()
@@ -409,6 +444,7 @@ watch(() => popperIsAdjusted.value, (value: boolean) => {
   disablePopperNeedsAdjustmentListener()
 })
 
+/** If reactive configuration show/hide changes, we will also trigger internally */
 watch(() => configuration.show, (isShown) => {
   if (isShown) {
     doShow()
@@ -416,6 +452,7 @@ watch(() => configuration.show, (isShown) => {
   doHide()
 })
 
+/** Before unmount, remove event listeners */
 onBeforeUnmount(() => {
   if (hideTimeout.value) {
     clearTimeout(hideTimeout.value)
@@ -428,12 +465,16 @@ onBeforeUnmount(() => {
   }
 })
 
-throttledToggle.value = throttle(doToggle, 200)
+/** Before Mount */
+onBeforeMount(() => {
+  throttledToggle.value = throttle(doToggle, 200)
 
-popperAdjusterListener.value = debounce(() => {
-  popperIsAdjusted.value = false
-}, 200)
+  popperAdjusterListener.value = debounce(() => {
+    popperIsAdjusted.value = false
+  }, 200)
+})
 
+/** Expose component Internal Methods to other components */
 defineExpose({
   doShow,
   doHide,
@@ -486,7 +527,7 @@ defineExpose({
     <Transitionable
       :enabled="popperIsAdjusted || !initAsShow"
       :classes-list="configuration.classes"
-      @after-leave="dropdownAfterLeave"
+      @after-leave="dropdownAfterLeaveAnimation"
     >
       <component
         :is="dropdownTagName"
