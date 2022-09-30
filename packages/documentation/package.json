@@ -1,0 +1,51 @@
+{
+  "name": "@indigit/vanilla-components-documentation",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "vitepress dev --port=3005",
+    "build": "vitepress build",
+    "serve": "vitepress serve",
+    "debug": "vite --debug",
+    "index:build": "node ./lunr.cjs && vitepress build && node ./lunr.cjs"
+  },
+  "devDependencies": {
+    "@whyframe/core": "^0.1.4",
+    "@whyframe/vue": "^0.1.1",
+    "autoprefixer": "^10.3.7",
+    "cheerio": "^1.0.0-rc.12",
+    "patch-package": "^6.4.7",
+    "postcss": "^8.4.16",
+    "postcss-import": "^15.0.0",
+    "postcss-nested": "^5.0.6",
+    "postcss-prefix-selector": "^1.16.0",
+    "vite": "^3.1.0",
+    "vite-plugin-inspect": "^0.7.1"
+  },
+  "dependencies": {
+    "@docsearch/css": "^3.2.1",
+    "@docsearch/js": "^3.2.1",
+    "@faker-js/faker": "^7.5.0",
+    "@headlessui/vue": "^1.7.0",
+    "@heroicons/vue": "^2.0.10",
+    "@indigit/vanilla-components": "workspace:*",
+    "@popperjs/core": "^2.11.2",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/typography": "^0.5.0",
+    "@vueuse/core": "^9.2.0",
+    "body-scroll-lock": "^4.0.0-beta.0",
+    "collect.js": "^4.32.0",
+    "flatpickr": "^4.6.9",
+    "fuse.js": "^6.4.6",
+    "libphonenumber-js": "^1.9.49",
+    "lodash": "^4.17.21",
+    "lunr": "^2.3.9",
+    "markdown-it-include": "^2.0.0",
+    "miragejs": "^0.1.43",
+    "paginatedjs": "^1.1.1",
+    "tailwindcss": "^3.0.16",
+    "vitepress": "^1.0.0-alpha.13",
+    "vue": "^3.2.39"
+  }
+}

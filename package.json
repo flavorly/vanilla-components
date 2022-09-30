@@ -1,92 +1,35 @@
 {
-  "name": "@indigit/vanilla-components",
+  "name": "vanilla-components",
   "version": "0.6.25",
-  "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/igerslike/vanilla-components"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org"
-  },
-  "author": "Jon <support@indigit.pt>",
-  "license": "MIT",
-  "engines": {
-    "node": ">=10"
-  },
-  "sideEffects": false,
-  "private": false,
-  "files": [
-    "dist/**/*"
-  ],
-  "types": "./dist/index.d.ts",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.es.js",
-      "require": "./dist/index.umd.js"
-    }
-  },
+  "description": "",
+  "main": "index.js",
+  "private": true,
   "scripts": {
-    "build": "vite build",
-    "build:watch": "vite build --watch",
-    "build:watch-mon": "nodemon --exec 'yarn lib:build'",
-    "lib:publish": "yarn publish",
-    "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
-    "watch:docs": "yarn --cwd \"docs\" dev",
-    "analyze": "vite build --config analyze.config.js",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
-    "format": "prettier .  --write"
+    "dev": "nr --filter @indigit/vanilla-components dev",
+    "build": "nr --filter @indigit/vanilla-components build",
+    "docs:dev": "nr --filter @indigit/vanilla-components-documentation dev",
+    "docs:build": "nr --filter @indigit/vanilla-components build && nr --filter @indigit/vanilla-components-documentation build",
+    "clean": "rimraf node_modules packages/vanilla-components/node_modules packages/vanilla-components/dist packages/documentation/node_modules",
+    "release": "bumpp package.json packages/vanilla-components/package.json --execute 'nr --filter @indigit/vanilla-components build' && na --filter @indigit/vanilla-components publish --no-git-checks",
+    "docs:index:build" : "nr --filter @indigit/vanilla-components-documentation index:build"
   },
-  "dependencies": {
-    "@headlessui/vue": "^1.5.0",
-    "@heroicons/vue": "^1.0.1",
-    "@popperjs/core": "^2.11.2",
-    "@variantjs/vue": "^0.0.21",
-    "@vueuse/core": "^8.1.2",
-    "axios": "^0.26.1",
-    "crypto-js": "^4.1.1",
-    "flatpickr": "^4.6.9",
-    "fuse.js": "^6.4.6",
-    "libphonenumber-js": "^1.9.49",
-    "moment-timezone": "^0.5.34",
-    "vue": "^3.2.31"
-  },
-  "peerDependencies": {
-    "@headlessui/vue": "^1.5.0",
-    "@heroicons/vue": "^1.0.1",
-    "@popperjs/core": "^2.11.2",
-    "@variantjs/core": "^0.0.87",
-    "@variantjs/vue": "^0.0.21",
-    "body-scroll-lock": "^4.0.0-beta.0",
-    "flatpickr": "^4.6.9",
-    "fuse.js": "^6.4.6",
-    "libphonenumber-js": "^1.9.49",
-    "lodash": "^4.17.21",
-    "moment-timezone": "^0.5.34",
-    "vue": "^3.2.31"
-  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^8.3.0",
-    "@types/crypto-js": "^4.1.1",
-    "@types/lodash": "^4.14.178",
-    "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "@typescript-eslint/parser": "^5.8.0",
-    "@vitejs/plugin-vue": "^2.1.0",
-    "@vue/compiler-sfc": "^3.1.5",
-    "eslint": "^8.7.0",
-    "eslint-config-airbnb-typescript": "^16.1.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-tree-shaking": "^1.9.2",
-    "eslint-plugin-vue": "^8.3.0",
-    "prettier": "^2.3.2",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-visualizer": "^5.5.2",
-    "typescript": "^4.5.4",
-    "vite": "^2.4.3",
-    "vite-plugin-dts": "^0.9.9"
-  }
+    "@antfu/eslint-config-vue": "^0.25.1",
+    "@antfu/ni": "^0.16.3",
+    "@typescript-eslint/eslint-plugin": "^5.30.5",
+    "@typescript-eslint/parser": "^5.30.5",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-import-resolver-typescript": "^3.2.5",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-unicorn": "^43.0.1",
+    "eslint-plugin-vue": "^9.2.0",
+    "pnpm": "^7.5.0",
+    "rimraf": "^3.0.2"
+  },
+  "packageManager": "pnpm@7.1.7"
 }

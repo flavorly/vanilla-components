@@ -1,0 +1,123 @@
+:root {
+    --vp-c-brand: #646cff;
+    --vp-c-brand-light: #747bff;
+    --vt-c-brand-dark: #7f9cf5;
+    --vt-c-brand-highlight: #667eea;
+    --vt-c-green: #6988e6;
+}
+
+.dark body {
+    --vt-c-brand: #a3bffa;
+    --vt-c-brand-light: #7f9cf5;
+    --vt-c-brand-dark: #667eea;
+    --vt-c-brand-highlight: #667eea;
+    --vt-c-green: #7f9cf5;
+    --docsearch-container-background: rgba(0, 0, 0, 0.5);
+    /*--vp-c-bg-mute: #1a1a1a;*/
+}
+
+/**
+ * Component: Sidebar
+ * -------------------------------------------------------------------------- */
+
+
+html.dark {
+    color-scheme: dark;
+}
+
+
+/* Fix for code blocks' one-too-many line */
+.vt-doc pre code > span:last-of-type {
+    display: none;
+}
+
+/* Add missing PHP in code blocks */
+.vt-doc [class~='language-php']::before {
+    content: 'php';
+}
+
+.vt-doc td{
+    font-size:13px;
+    line-height: 13px;
+}
+
+.demo-container{
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    overflow: hidden;
+}
+
+
+
+pre {
+    position: relative;
+}
+.m-mdic-copy-wrapper {
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+}
+.m-mdic-copy-wrapper span.u-mdic-copy-code_lang {
+    position: absolute;
+    top: 3px;
+    right: calc(100% + 4px);
+    font-family: system-ui;
+    font-size: 12px;
+    line-height: 18px;
+    color: #666;
+    opacity: 0.3;
+}
+.m-mdic-copy-wrapper div.u-mdic-copy-notify {
+    display: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 3px 6px;
+    border: 0;
+    border-radius: 3px;
+    background: none;
+    font-family: system-ui;
+    font-size: 12px;
+    line-height: 18px;
+    color: #ffffff;
+    opacity: 0.4;
+    outline: none;
+    right: 100%;
+    padding-right: 4px;
+}
+.m-mdic-copy-wrapper button.u-mdic-copy-btn {
+    position: relative;
+    top: 0;
+    right: 0;
+    padding: 3px 6px;
+    border: 0;
+    border-radius: 3px;
+    /*background: none;*/
+    font-family: system-ui;
+    font-size: 12px;
+    line-height: 18px;
+    color: #666;
+    opacity: 0.3;
+    outline: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+.m-mdic-copy-wrapper button.u-mdic-copy-btn:hover {
+    opacity: 1;
+}
+
+.j-mdic-copy-btn{
+    background-image: url(/copy.svg);
+    background-repeat: no-repeat;
+    width:20px;
+    height:20px;
+}
+
+.DocSearch-Input:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    outline: none !important;
+}

@@ -1,0 +1,39 @@
+<template>
+  <svg
+    viewBox="0 0 20 20"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle
+      cx="10"
+      cy="10"
+      fill="none"
+      r="8"
+      stroke-width="2"
+      stroke="currentColor"
+      transform-origin="center"
+      opacity="0.2"
+    />
+    <circle
+      cx="10"
+      cy="10"
+      fill="none"
+      r="8"
+      stroke-width="2"
+      stroke="currentColor"
+      stroke-dasharray="80"
+      stroke-dashoffset="60"
+      transform-origin="center"
+    >
+      <animateTransform
+        attributeType="xml"
+        attributeName="transform"
+        type="rotate"
+        from="0"
+        to="360"
+        begin="0"
+        dur="1s"
+        repeatCount="indefinite"
+      />
+    </circle>
+  </svg>
+</template>
