@@ -492,15 +492,15 @@ defineExpose({
     :aria-expanded="shown"
     :class="[
       configuration.classes?.trigger,
-      rounded === 'full' ? configuration.classesList.roundedFull : '',
-      rounded === 'top' ? configuration.classesList.roundedTop : '',
-      rounded === 'bottom' ? configuration.classesList.roundedBottom : '',
-      rounded === 'left' ? configuration.classesList.roundedLeft : '',
-      rounded === 'right' ? configuration.classesList.roundedRight : '',
-      rounded === 'top-left' ? configuration.classesList.roundedTopLeft : '',
-      rounded === 'top-right' ? configuration.classesList.roundedTopRight : '',
-      rounded === 'bottom-left' ? configuration.classesList.roundedBottomLeft : '',
-      rounded === 'bottom-right' ? configuration.classesList.roundedBottomRight : '',
+      props.rounded === 'full' ? configuration.classesList.roundedFull : '',
+      props.rounded === 'top' ? configuration.classesList.roundedTop : '',
+      props.rounded === 'bottom' ? configuration.classesList.roundedBottom : '',
+      props.rounded === 'left' ? configuration.classesList.roundedLeft : '',
+      props.rounded === 'right' ? configuration.classesList.roundedRight : '',
+      props.rounded === 'top-left' ? configuration.classesList.roundedTopLeft : '',
+      props.rounded === 'top-right' ? configuration.classesList.roundedTopRight : '',
+      props.rounded === 'bottom-left' ? configuration.classesList.roundedBottomLeft : '',
+      props.rounded === 'bottom-right' ? configuration.classesList.roundedBottomRight : '',
     ]"
     :disabled="configuration.disabled"
     v-bind="{ ...attributes, ...$attrs }"

@@ -27,6 +27,7 @@ const options = [
       <RichSelect
         v-model="value"
         :options="options"
+        :clearable="true"
         feedback="Im useful helper out here, choose wisely"
         placeholder="Please select an option"
       />

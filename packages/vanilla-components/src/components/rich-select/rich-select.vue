@@ -2,6 +2,7 @@
 import type { PropType, Ref } from 'vue'
 import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
+import { onClickOutside } from '@vueuse/core'
 import RichSelectDropdown from './partials/dropdown.vue'
 import RichSelectTrigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
@@ -83,11 +84,11 @@ const props = defineProps({
   },
   closeOnSelect: {
     type: Boolean,
-    default: true,
+    default: undefined,
   },
   selectOnClose: {
     type: Boolean,
-    default: false,
+    default: undefined,
   },
   clearSearchOnClose: {
     type: Boolean,
@@ -95,7 +96,7 @@ const props = defineProps({
   },
   toggleOnFocus: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   toggleOnClick: {
     type: Boolean,
@@ -168,7 +169,7 @@ const props = defineProps({
   },
   teleport: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   teleportTo: {
     type: [String, Object] as PropType<string | HTMLElement>,
@@ -279,6 +280,7 @@ const dropdownComponent = ref<{
 const triggerComponent = ref()
 const dropdownContentComponent = ref()
 const clearButtonComponent = ref()
+const main = ref()
 
 // Computed
 const canFetchOptions: Ref<boolean> = computed(() => (
@@ -440,13 +442,21 @@ const onOptionSelected = (): void => {
 
   // If `closeOnSelect`  is not set hide the dropdown only when is not
   // multiple
-  if (configuration.closeOnSelect === true || (configuration.closeOnSelect === false && configuration.multiple)) {
+  if (
+    configuration.closeOnSelect === true
+
+    // If `closeOnSelect`  is not set hide the dropdown only when is not
+    // multiple
+    || (configuration.closeOnSelect === undefined
+      && !configuration.multiple)
+  ) {
     hideDropdown()
     focusDropdownTrigger()
   }
 }
 
 const beforeHideHandler = (): void => {
+  console.log('Before Hide')
   emit('beforeHide')
   if (configuration.selectOnClose && !isEqual(localValue, activeOption?.value)
   ) {
@@ -455,11 +465,13 @@ const beforeHideHandler = (): void => {
 }
 
 const shownHandler = (): void => {
+  console.log('Shown Handler')
   emit('shown')
   shown.value = true
 }
 
 const hiddenHandler = (): void => {
+  console.log('Shown Handler')
   emit('hidden')
 
   shown.value = false
@@ -501,6 +513,7 @@ const focusHandler = (e: FocusEvent): void => {
 }
 
 const blurOnChildHandler = (e: FocusEvent): void => {
+  console.log('CHILD BLUR HANDLER')
   const target = e.target as HTMLButtonElement | HTMLInputElement
   const relatedTarget = e.relatedTarget as HTMLElement | EventTarget
   const relatedTargetDataset: Data | undefined = relatedTarget instanceof HTMLElement ? relatedTarget.dataset : undefined
@@ -510,14 +523,22 @@ const blurOnChildHandler = (e: FocusEvent): void => {
     && relatedTargetDataset
     && relatedTargetDataset.richSelectFocusable === undefined
   ) {
+    console.log('Focusing', target)
     target.focus()
   }
 }
 
 const blurHandler = (e: FocusEvent): void => {
+  console.log('Blur Handler')
   emit('blur', e)
   hideDropdown()
 }
+
+onClickOutside(main, (event) => {
+  console.log('Clicked outside')
+
+  // hideDropdown()
+})
 
 // ---------------
 // Watchers
@@ -579,6 +600,7 @@ provide('usesTags', usesTags)
 
 <template>
   <div
+    ref="main"
     class="vanilla-rich-select"
     v-bind="attributes"
   >
@@ -586,15 +608,15 @@ provide('usesTags', usesTags)
       :class="configuration.classesList?.wrapper"
     >
       <div class="relative">
-        <SimpleSelect
-          v-model="localValue"
-          :name="configuration.name"
-          :fixed-classes="undefined"
-          :classes="undefined"
-          :multiple="configuration.multiple"
-          :options="flattenedOptions"
-          style="display:none"
-        />
+        <!--        <SimpleSelect -->
+        <!--          v-model="localValue" -->
+        <!--          :name="configuration.name" -->
+        <!--          :fixed-classes="undefined" -->
+        <!--          :classes="undefined" -->
+        <!--          :multiple="configuration.multiple" -->
+        <!--          :options="flattenedOptions" -->
+        <!--          style="display:none" -->
+        <!--        /> -->
 
         <DropdownSimple
           ref="dropdownComponent"

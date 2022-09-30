@@ -1,5 +1,5 @@
 <script setup type="ts">
-import { Dropdown, DropdownOption } from '@indigit/vanilla-components'
+import { Dropdown, DropdownOption, DropdownSimple } from '@indigit/vanilla-components'
 import { defineComponent, ref } from 'vue'
 import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
 
@@ -31,6 +31,12 @@ const value = ref(true)
 
       <div class="flex items-center justify-center mx-auto text-center mt-2">
         <pre>{{ JSON.stringify(value) }}</pre>
+      </div>
+
+      <div class="mt-10">
+        <DropdownSimple text="demo">
+          <p>content</p>
+        </DropdownSimple>
       </div>
     </div>
   </PreviewWrapper>

@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import type { ComputedRef } from 'vue'
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 import OptionsList from './option-list.vue'
 import SearchInput from './search.vue'
 import SelectState from './state.vue'
 import { useInjectsClassesListClass } from '@/core/use'
 import type { NormalizedOptions } from '@/core/types'
+
+const searchInput = ref()
+const optionsList = ref()
+const state = ref()
 
 const options = inject<ComputedRef<NormalizedOptions>>('options')!
 const showSearchInput = inject<ComputedRef<boolean>>('showSearchInput')!
