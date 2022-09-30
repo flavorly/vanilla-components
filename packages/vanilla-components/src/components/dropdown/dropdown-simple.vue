@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { Options, Placement, Instance as PopperInstance } from '@popperjs/core'
 import { createPopper as createPopperBase } from '@popperjs/core'
 import { dropdownConfig, dropdownPopperDefaultOptions, validDropdownPlacements } from './config'
@@ -78,7 +78,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits({
-  'update:show': (show: boolean) => typeof show === 'boolean',
+  'update:show': (show: boolean) => true,
   'focus': (e: FocusEvent) => e instanceof FocusEvent,
   'blur': (e: FocusEvent) => e instanceof FocusEvent,
   'blurOnChild': (e: FocusEvent) => e instanceof FocusEvent,
@@ -93,43 +93,37 @@ const emit = defineEmits({
 })
 
 const localValue = useVModel(props, 'modelValue')
-
 const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dropdownConfig, 'Dropdown', localValue)
 
+// Refs
 const isTouchOnlyDevice = ref<boolean>(false)
-
-const shown = ref((configuration as unknown as DropdownExtendedProps).show)
-
-const initAsShow = ref((configuration as unknown as DropdownExtendedProps).show)
-
+const shown = ref<boolean | undefined>(configuration.show)
+const initAsShow = ref<boolean | undefined>(configuration.show)
 const hideTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
-
 const focusableElements = ref<Array<HTMLElement>>([])
-
 const throttledToggle = ref<null | (() => void)>(null)
-
 const adjustingPopper = ref<boolean>(false)
-
 const popperIsAdjusted = ref<boolean>(false)
-
 const popperAdjusterListener = ref<null | DebouncedFn>(null)
-
 const popper = ref<PopperInstance | null>(null)
 
+// Template Refs
 const dropdown = ref<HTMLDivElement>() as Ref<HTMLDivElement>
-
 const trigger = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 
-const fullPopperOptions = computed<Options>(() => {
+// Computed
+const fullPopperOptions = computed((): Options => {
   const popperOptions = configuration.popperOptions as Options
+
   if (configuration.placement !== undefined) {
     popperOptions.placement = configuration.placement
   }
   return popperOptions
 })
 
-const shouldShowWhenClicked = computed<boolean>(() => isTouchOnlyDevice.value && (configuration.toggleOnFocus === true || configuration.toggleOnHover === true))
+const shouldShowWhenClicked = computed((): boolean => isTouchOnlyDevice.value && (configuration.toggleOnFocus === true || configuration.toggleOnHover === true))
 
+// Methods
 /** Checks if the target is child */
 const targetIsChild = (target: EventTarget | null): boolean => {
   return elementIsTargetOrTargetChild(target, dropdown.value) || elementIsTargetOrTargetChild(target, trigger.value)
@@ -236,8 +230,7 @@ const blurHandler = (e: FocusEvent): void => {
 
 /** Add the Blur Event Listeners to the Child Elements */
 const addBlurListenersToChildElements = (): void => {
-  const dropdown = trigger.value!
-  focusableElements.value = getFocusableElements(dropdown)
+  focusableElements.value = getFocusableElements(dropdown.value)
   focusableElements.value.forEach(element => element.addEventListener('blur', blurHandler))
 }
 
@@ -349,7 +342,7 @@ const clickHandler = (e: MouseEvent): void => {
     throttledToggle.value!()
   }
   else if (shouldShowWhenClicked.value) {
-   doShow()
+    doShow()
   }
 }
 
@@ -420,10 +413,18 @@ const hideAfterTimeout = (): void => {
   )
 }
 
-/** On Mounted hooks */
+// Watchers
+watch(() => popperIsAdjusted.value, (adjustedInto: boolean) => {
+  adjustedInto ? enablePopperNeedsAdjustmentListener() : disablePopperNeedsAdjustmentListener()
+})
+
+watch(() => configuration.show, (isShowing: boolean | undefined) => {
+  isShowing ? doShow() : doHide()
+})
+
+// Hooks
 onMounted(() => {
   isTouchOnlyDevice.value = getIsTouch()
-
   if (isTouchOnlyDevice.value && shown.value) {
     window.addEventListener('touchstart', touchstartHandler)
   }
@@ -435,24 +436,6 @@ onMounted(() => {
   }
 })
 
-/** Popper: Watch if popper was adjusted and register the listeners */
-watch(() => popperIsAdjusted.value, (value: boolean) => {
-  if (value) {
-    enablePopperNeedsAdjustmentListener()
-    return
-  }
-  disablePopperNeedsAdjustmentListener()
-})
-
-/** If reactive configuration show/hide changes, we will also trigger internally */
-watch(() => configuration.show, (isShown) => {
-  if (isShown) {
-    doShow()
-  }
-  doHide()
-})
-
-/** Before unmount, remove event listeners */
 onBeforeUnmount(() => {
   if (hideTimeout.value) {
     clearTimeout(hideTimeout.value)
@@ -465,14 +448,9 @@ onBeforeUnmount(() => {
   }
 })
 
-/** Before Mount */
-onBeforeMount(() => {
-  throttledToggle.value = throttle(doToggle, 200)
-
-  popperAdjusterListener.value = debounce(() => {
-    popperIsAdjusted.value = false
-  }, 200)
-})
+// Rest of the setup
+throttledToggle.value = throttle(doToggle, 200)
+popperAdjusterListener.value = debounce(() => popperIsAdjusted.value = false, 200)
 
 /** Expose component Internal Methods to other components */
 defineExpose({
@@ -484,6 +462,12 @@ defineExpose({
 })
 </script>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
+
 <template>
   <component
     :is="tagName"
@@ -491,7 +475,7 @@ defineExpose({
     :type="tagName === 'button' ? 'button' : undefined"
     :aria-expanded="shown"
     :class="[
-      configuration.classes?.trigger,
+      configuration.classesList?.trigger,
       props.rounded === 'full' ? configuration.classesList.roundedFull : '',
       props.rounded === 'top' ? configuration.classesList.roundedTop : '',
       props.rounded === 'bottom' ? configuration.classesList.roundedBottom : '',
@@ -526,7 +510,7 @@ defineExpose({
   >
     <Transitionable
       :enabled="popperIsAdjusted || !initAsShow"
-      :classes-list="configuration.classes"
+      :classes-list="configuration.classesList"
       @after-leave="dropdownAfterLeaveAnimation"
     >
       <component
@@ -534,9 +518,7 @@ defineExpose({
         v-show="shown || adjustingPopper || initAsShow"
         ref="dropdown"
         :style="adjustingPopper ? 'opacity:0' : undefined"
-        :class="[
-          configuration.classesList?.dropdown,
-        ]"
+        :class="configuration.classesList?.dropdown"
         :aria-hidden="!shown"
         tabindex="-1"
         v-bind="dropdownAttributes"

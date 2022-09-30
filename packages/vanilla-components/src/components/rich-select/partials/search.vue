@@ -16,7 +16,7 @@ const classesList = useInjectsClassesList()!
 
 watch(shown, async (isShown: boolean): Promise<void> => {
     if (isShown) {
-        search.value!.focus()
+      search.value!.focus()
     }
 })
 </script>
