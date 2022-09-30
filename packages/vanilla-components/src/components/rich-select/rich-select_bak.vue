@@ -2,8 +2,8 @@
 import type { PropType, Ref } from 'vue'
 import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
-import RichSelectDropdown from './partials/dropdown.vue'
-import RichSelectTrigger from './partials/trigger.vue'
+import Dropdown from './partials/dropdown.vue'
+import Trigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
 import { richSelectConfig } from './config'
 import type { MinimumInputLengthTextProp, RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
@@ -12,10 +12,25 @@ import { validDropdownPlacements } from '@/components/dropdown/config'
 import SimpleSelect from '@/components/select/select.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormErrors from '@/components/forms/form-errors.vue'
-import type { CSSRawClassesList, Data, FetchOptionsFn, InputOptions, Measure, NormalizedOption, PreFetchOptionsFn } from '@/core/types'
+import type {
+    CSSRawClassesList,
+    Data,
+    FetchOptionsFn,
+    InputOptions,
+    Measure,
+    NormalizedOption,
+    PreFetchOptionsFn,
+} from '@/core/types'
 import { popperOptions, sameWidthModifier } from '@/core/config'
 import { isEqual, throttle } from '@/core/helpers'
-import { useActivableOption, useConfiguration, useFetchsOptions, useMultipleVModel, useSelectableOption, useVariantProps } from '@/core/use'
+import {
+    useActivableOption,
+    useConfiguration,
+    useFetchsOptions,
+    useMultipleVModel,
+    useSelectableOption,
+    useVariantProps,
+} from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<RichSelectProps, RichSelectClassesValidKeys>(),
@@ -83,7 +98,7 @@ const props = defineProps({
   },
   closeOnSelect: {
     type: Boolean,
-    default: true,
+    default: undefined,
   },
   selectOnClose: {
     type: Boolean,
@@ -135,7 +150,7 @@ const props = defineProps({
   },
   clearable: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   maxHeight: {
     type: [Number, String] as PropType<Measure | null>,
@@ -168,7 +183,7 @@ const props = defineProps({
   },
   teleport: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   teleportTo: {
     type: [String, Object] as PropType<string | HTMLElement>,
@@ -268,7 +283,9 @@ const showSearchInput = computed<boolean>(() => {
   return true
 })
 
-// Template Refs
+/**
+ * Dropdown component reference
+ */
 const dropdownComponent = ref<{
   focus: () => void
   doShow: () => void
@@ -276,11 +293,6 @@ const dropdownComponent = ref<{
   adjustPopper: () => Promise<void>
 }>()
 
-const triggerComponent = ref()
-const dropdownContentComponent = ref()
-const clearButtonComponent = ref()
-
-// Computed
 const canFetchOptions: Ref<boolean> = computed(() => (
   fetchsOptions.value
   && optionsWereFetched.value
@@ -324,15 +336,28 @@ const focusDropdownTrigger = (): void => dropdownComponent.value!.focus()
 
 const usesTags = computed<boolean>(() => configuration.tags === true && configuration.multiple === true)
 
-const hideDropdown = (): void => dropdownComponent.value!.doHide()
+const hideDropdown = (): void => {
+  console.log('Should hide')
+  dropdownComponent.value!.doHide()
+}
 
-const showDropdown = (): void => dropdownComponent.value!.doShow()
+// const showDropdown = (): void => dropdownComponent.value!.doShow()
+const showDropdown = (): void => {
+  dropdownComponent.value!.doShow()
+}
 
 const adjustDropdown = async (): Promise<void> => await dropdownComponent.value!.adjustPopper()
 
 const throttledShowDropdown = throttle(showDropdown, 200)
 
-const toggleDropdown = (): void => shown.value ? hideDropdown() : throttledShowDropdown()
+const toggleDropdown = (): void => {
+  console.log('Should Toggle')
+  if (shown.value) {
+    hideDropdown()
+    return
+  }
+  throttledShowDropdown()
+}
 
 const toggleOptionFromActiveOption = (): void => {
   if (activeOption.value === null) {
@@ -440,13 +465,14 @@ const onOptionSelected = (): void => {
 
   // If `closeOnSelect`  is not set hide the dropdown only when is not
   // multiple
-  if (configuration.closeOnSelect === true || (configuration.closeOnSelect === false && configuration.multiple)) {
+  if (configuration.closeOnSelect === true || (configuration.closeOnSelect === undefined && configuration.multiple)) {
     hideDropdown()
     focusDropdownTrigger()
   }
 }
 
 const beforeHideHandler = (): void => {
+  console.log('Should hide')
   emit('beforeHide')
   if (configuration.selectOnClose && !isEqual(localValue, activeOption?.value)
   ) {
@@ -460,6 +486,8 @@ const shownHandler = (): void => {
 }
 
 const hiddenHandler = (): void => {
+
+  console.log('Should hide')
   emit('hidden')
 
   shown.value = false
@@ -630,7 +658,7 @@ provide('usesTags', usesTags)
           @blur-on-child="blurOnChildHandler"
         >
           <template #trigger>
-            <RichSelectTrigger ref="triggerComponent">
+            <Trigger ref="trigger">
               <template #selectorIcon="props">
                 <slot
                   name="selectorIcon"
@@ -661,10 +689,10 @@ provide('usesTags', usesTags)
                   v-bind="props"
                 />
               </template>
-            </RichSelectTrigger>
+            </Trigger>
           </template>
 
-          <RichSelectDropdown ref="dropdownContentComponent">
+          <Dropdown ref="dropdown">
             <template #option="props">
               <slot
                 name="option"
@@ -701,12 +729,12 @@ provide('usesTags', usesTags)
                 v-bind="props"
               />
             </template>
-          </RichSelectDropdown>
+          </Dropdown>
         </DropdownSimple>
 
         <ClearButton
           v-if="showClearButton"
-          ref="clearButtonComponent"
+          ref="clearButton"
           @click="clearValue"
         >
           <template #clearButton="props">

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ComputedRef, Ref } from 'vue'
-import { computed, inject } from 'vue'
+import { computed, inject, ref } from 'vue'
 import type { RichSelectProps } from '../config'
 import SelectTriggerTags from './trigger-tags.vue'
 import { useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
@@ -9,6 +9,7 @@ import SelectorIcon from '@/components/icons/selector.vue'
 import LoadingIcon from '@/components/icons/loading.vue'
 import type { NormalizedOption } from '@/core/types'
 
+const props = defineProps({})
 const configuration = useInjectsConfiguration<RichSelectProps>()
 const selectedOption = inject<ComputedRef<NormalizedOption | undefined | NormalizedOption[]>>('selectedOption')!
 const hasSelectedOption = inject<ComputedRef<boolean>>('hasSelectedOption')!
@@ -17,10 +18,17 @@ const shown = inject<ComputedRef<boolean>>('shown')!
 const usesTags = inject<ComputedRef<boolean>>('usesTags')!
 const classesList = useInjectsClassesList()!
 
+// Template refs
+const fetchingPlaceholder = ref()
+const loadingIcon = ref()
+const placeholder = ref()
+const label = ref()
+const selectorIcon = ref()
+
 // Computed
 const multiple = computed(() => Array.isArray(selectedOption.value))
 
-const label = computed((): string | undefined => {
+const triggerLabel = computed((): string | undefined => {
   if (!hasSelectedOption.value) {
     return undefined
   }
@@ -95,10 +103,10 @@ const showSelectorIcon = computed((): boolean => {
   >
     <slot
       name="label"
-      :label="label"
+      :label="triggerLabel"
       :selected-option="selectedOption"
     >
-      {{ label }}
+      {{ triggerLabel }}
     </slot>
   </span>
 

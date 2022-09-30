@@ -83,7 +83,6 @@ export default function useSelectableOption(
   }
 
   const toggleOption = (option: NormalizedOption): void => {
-    console.log(localValue)
     if (optionIsSelected(option)) {
       if (multiple.value) {
         localValue.value = subtractFromArray(localValue.value, option.value)

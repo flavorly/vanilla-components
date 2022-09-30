@@ -19,7 +19,6 @@ export default function useDefaultName<Props extends Data>(props: Props): string
   ) {
     localName = vm.parent?.props?.name
 
-    // console.log('Component ' + vm?.type.name + ' is taking name from the parent : ' + localName);
     return localName || uniqueId('vc-component-')
   }
   return localName

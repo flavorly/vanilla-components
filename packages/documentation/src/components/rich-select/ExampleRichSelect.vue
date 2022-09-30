@@ -29,7 +29,6 @@ const options = [
         :options="options"
         feedback="Im useful helper out here, choose wisely"
         placeholder="Please select an option"
-        errors="Your Seleection cannot be more than 10 stuff"
       />
       <p>{{ value }}</p>
     </div>
