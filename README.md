@@ -2,81 +2,53 @@
 
 A lightweight Vue 3 component library based merging the best components around to enjoy seamless integr
 
-# Quick Start
 
-yarn install && yarn build
-cd docs
-yarn watch
+# Installation
 
-# Peer Depds
-```
-npm install -g npm-install-peers
-npm-install-peers
+Get started by installing the peer dependencies than, move on installing the package
 
-yarn add @headlessui/vue@^1.5.0 @heroicons/vue@^1.0.1 @popperjs/core@^2.11.2 @variantjs/core@^0.0.87 @variantjs/vue@^0.0.21 body-scroll-lock@^4.0.0-beta.0 flatpickr@^4.6.9 libphonenumber-js@^1.9.49 moment-timezone@^0.5.34 
+```bash
+pnpm add @headlessui/vue@^1.5.0 @popperjs/core@^2.11.2 flatpickr@^4.6.9 libphonenumber-js@^1.9.49 
+pnpm add @indigit/vanilla-components
 ```
 
 ## Usage
 
-First install the library using your prefered package manager
-
-```bash
-yarn add @igerslike/vanilla-components
-```
-
-then you can import the available components like so
+Import the components as needed with the following
 
 ```vue
 import { Button } from '@vanilla-components'
 ```
 
-## Available commands
+## Local & Documentation
 
-Here is a list of all available npm commands.
-
-**Building the library bundles**
+For preview & Local testing please run the following on the root of the project.
+After the commands you should have a local vite server up & running.
 
 ```bash
-yarn lib:build
+pnpm install
+pnpm build
+pnpm docs:dev
 ```
 
-**Publish the Library**
+## Starting Fresh
+
+To start fresh, simply run the following commands
 
 ```bash
-yarn lib:publish
+pnpm clean
+pnpm install
+pnpm build
+pnpm docs:dev
 ```
 
-**Analyzing bundle sizes with [rollup-plugin-visualizer](https://github.com/btd/rollup-plugin-visualizer)**
+## Lunr ( Algolia Alternative )
 
-```bash
-yarn analyze
+Lunr replaces the default Vitepress Algolia Search
+To get the project index correctly do the following:
+
 ```
-
-**Lint all files**
-
-```bash
-yarn lint
-```
-
-**Format all files**
-```bash
-yarn format
-```
-
-**Using the Package on Vuepress or Locally**
-
-`yarn link` then on your vuepress `yarn link "@indigit/vanilla-components"`
-
-Or using pnpm
-``
-
-** Patching **
-
-https://github.com/ds300/patch-package
-
-```bash
-Edit the files in node_modules
-
-npx patch-package @vue/_old_theme
-npx patch-package
+pnpm lunr:start
+pnpm build ( optional if already built )
+pnpm lunr:index
 ```
