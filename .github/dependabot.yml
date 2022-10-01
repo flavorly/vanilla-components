@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Documentation
+  - package-ecosystem: "npm"
+    directory: "/packages/documentation"
+    schedule:
+      interval: "daily"
+
+  # Vanilla components
+  - package-ecosystem: "npm"
+    directory: "/packages/vanilla-components"
+    schedule:
+      interval: "daily"
