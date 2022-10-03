@@ -19,12 +19,14 @@ A lightweight, flexible & customizable ui library for Vue 3
 
 - 🧪 **DX Focused** - Write less code & build faster
 - 🛠 **Totally Configurable** - All components & props are fully customizable via a simple configuration file
+- 🚦 **Variants Concept** - Create multiple variants of the same components. Ex: Error, Success, etc.
 - 🍃 **Tailwind First** - Comes with a sane styling using Tailwind CSS Defaults
 - 🦾 **Vue + TypeScript** - Vue 3 setup + Typescript
-- **Vue 3 Ready** - Vue 3
+- 🟢 **Vue 3 Ready** - Vue 3
 - 🌳 **Tree Shakable** - Import only the components that you need without worry about the size
-- **0 ( ZERO ) css included** - Everything is configurable, means there is no CSS's to include at all
+- ✋ **ZERO css included** - Everything is configurable, means there is no CSS's to include at all
 - 🌜 **Dark/White** - Pixel Perfect design with Dark & White mode included
+- 🔌 **SSR Ready** - Built with SSR in mind
 
 # Installation
 
@@ -75,3 +77,9 @@ pnpm lunr:start
 pnpm build ( optional if already built )
 pnpm lunr:index
 ```
+## Credits
+
+- [VariantJS](https://github.com/variantjs/vue) - Base Inspiration & Code - Thanks to Alfonsobries
+- [VueUse](https://github.com/vueuse/vueuse) - How we could we not credit this?
+- [RobertBoes] - For all the time helping with Troubleshooting
+- All my friends, that could stay online while i was whispering all day long! 
