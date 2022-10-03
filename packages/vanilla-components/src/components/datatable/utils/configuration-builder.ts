@@ -1,5 +1,3 @@
-import merge from 'lodash/merge'
-import assign from 'lodash/assign'
 import type * as Types from '../config'
 import type { Data } from '@/core/types'
 
@@ -88,29 +86,29 @@ export default function configurationBuilder<
     name: props?.uniqueName || props.config?.name,
     primaryKey: props?.primaryKey || props.config?.primaryKey,
     filtersKey: props?.primaryKey || props.config?.primaryKey || props?.primaryKey || props.config?.primaryKey,
-    columns: merge(props?.columns, props.config?.columns),
-    actions: merge(props?.actions, props.config?.actions),
-    filters: merge(props?.filters, props.config?.filters),
+    columns: Object.assign(props?.columns as Types.DatatableColumns, props.config?.columns) as Types.DatatableColumns,
+    actions: Object.assign(props?.actions as Types.DatatableAction[], props.config?.actions) as Types.DatatableAction[],
+    filters: Object.assign(props?.filters as Types.DatatableFilters, props.config?.filters) as Types.DatatableFilters,
 
-    options: merge(
+    options: Object.assign(
       defaultOptions,
       props?.options,
       props.config?.options,
     ),
 
-    translations: assign(
+    translations: Object.assign(
       defaultTranslations,
       props?.translations,
       props.config?.translations,
     ),
 
-    perPageOptions: merge(
+    perPageOptions: Object.assign(
       defaultPerPageOptions,
       props?.perPageOptions,
       props.config?.perPageOptions,
     ),
 
-    pooling: merge(
+    pooling: Object.assign(
       defaultPooling,
       props?.pooling,
       props.config?.pooling,

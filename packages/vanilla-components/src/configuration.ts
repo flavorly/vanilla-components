@@ -1,11 +1,10 @@
-import merge from 'lodash/merge'
 import type { ComponentsConfiguration } from './core/types'
 import * as Components from '@/components'
 
 const mergeConfiguration = (userConfiguration: ComponentsConfiguration = {}) => {
     // Merge Vanilla Components Configuration with the user configuration
     // Return Both Merged Configuration
-    return merge(
+    return Object.assign(
       {
         Avatar: Components.avatarConfig,
         Button: Components.buttonConfig,

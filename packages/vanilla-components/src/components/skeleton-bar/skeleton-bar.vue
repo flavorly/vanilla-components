@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import uniqueId from 'lodash/uniqueId'
 import type { SkeletonBarClassesValidKeys, SkeletonBarProps } from './config'
 import { skeletonBarConfig } from './config'
+import { uniqueId } from '@/core/helpers'
 import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({

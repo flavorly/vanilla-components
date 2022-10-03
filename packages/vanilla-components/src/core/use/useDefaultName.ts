@@ -1,5 +1,5 @@
 import { getCurrentInstance } from 'vue'
-import uniqueId from 'lodash/uniqueId'
+import { uniqueId } from '@/core/helpers'
 import type { Data } from '@/core/types'
 
 /**

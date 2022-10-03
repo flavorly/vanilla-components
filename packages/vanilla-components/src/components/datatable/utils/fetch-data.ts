@@ -1,10 +1,11 @@
-import type { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig, AxiosRequestHeaders } from 'axios'
 import axios from 'axios'
 import type * as Types from '../config'
 
-const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.DatatableQueryData>(
+const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.DatatableQueryData, P extends AxiosRequestHeaders>(
   config: T,
   data: Data,
+  headers: P,
 ): Types.DatatableFetchDataPromise => {
   const isAction = data.action !== null
   const method = isAction ? config?.actionsMethod : config?.fetchMethod
@@ -17,6 +18,11 @@ const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.Da
     url,
     data: postParams,
     params: queryParams,
+    headers: {
+        'Content-Type': 'application/json;charset=utf-8',
+        'X-Requested-With': 'XMLHttpRequest',
+        ...(headers || {}),
+    },
   } as AxiosRequestConfig
 
   return axios(axiosConfig)

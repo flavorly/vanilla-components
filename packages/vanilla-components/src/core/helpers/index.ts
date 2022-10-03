@@ -21,4 +21,5 @@ export { default as isTouchOnlyDevice } from './isTouchOnlyDevice'
 export { default as objectToArrayMap } from './objectToArrayMap'
 export { default as getFocusableElements } from './getFocusableElements'
 export { mergeClasses, mergeClassesFromObject } from './mergeClasses'
+export { default as uniqueId } from './uniqueID'
 

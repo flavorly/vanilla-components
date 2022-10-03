@@ -1,4 +1,3 @@
-import merge from 'lodash/merge'
 import type { Options, Placement } from '@popperjs/core'
 import type { HTMLAttributes } from 'vue'
 import { mergeClasses } from '@/core/helpers'
@@ -166,7 +165,7 @@ export const richSelectConfig = {
     // Errors
     error: {
       classes: {
-          ...merge(defaultVariant, {
+          ...Object.assign(defaultVariant, {
               // Trigger
               trigger: mergeClasses(
                 commonClasses.inputsErrorsBackground,
