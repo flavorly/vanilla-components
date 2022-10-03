@@ -2,7 +2,7 @@
 layout: home
 
 title: Vanilla Components
-titleTemplate: Vanilla Components - A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS
+titleTemplate: A lightweight, flexible & customizable UI library for Vue 3
 
 hero:
     name: Vanilla Components
@@ -14,13 +14,13 @@ hero:
     actions:
       - theme: brand
         text: Get Started
-        link: /introduction
+        link: /guide/quick-start
       - theme: alt
         text: Why Vanilla?
-        link: /guide/why
+        link: /guide/introduction
       - theme: alt
         text: View on GitHub
-        link: https://github.com/igerslike/vanilla-components
+        link: https://github.com/nikuscs/vanilla-components
 
 features:
   - icon: 🧪

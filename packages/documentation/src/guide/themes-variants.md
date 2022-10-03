@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Writing a preset
+# Themes & Variants
 
 ## Creating the project
 

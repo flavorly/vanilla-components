@@ -79,5 +79,5 @@ export * from './types'
 // Plugin to Install
 // ----------------- //
 
-export { default as VanillaComponents } from './plugin'
+export { default as VanillaComponents, default as Plugin } from './plugin'
 

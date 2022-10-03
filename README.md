@@ -40,7 +40,7 @@ pnpm add @indigit/vanilla-components
 Import the components as needed with the following:
 
 ```vue
-import { Button } from '@vanilla-components'
+import { Button } from '@indigit/vanilla-components'
 ```
 
 For more example & demos checkout the [VariantJS](https://github.com/variantjs/vue)

@@ -8,7 +8,7 @@ import './styles/components/vp-doc.css'
 import './styles/components/vp-sponsor.css'
 import './styles/tailwind.css'
 import './styles/custom.css'
-import { VanillaComponents } from '@indigit/vanilla-components'
+import { Plugin } from '@indigit/vanilla-components'
 import { makeServer } from '../../mocks/server'
 import Layout from './Layout.vue'
 import NotFound from './NotFound.vue'
@@ -41,7 +41,7 @@ const theme = {
     Layout,
     NotFound,
     enhanceApp({ app }) {
-      app.use(VanillaComponents)
+      app.use(Plugin)
       app.component('PreviewWrapper', PreviewWrapper)
       if (!import.meta.env.SSR) {
         // Start the fake API server

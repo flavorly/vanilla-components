@@ -4,8 +4,6 @@ import { defineConfig } from 'vitepress'
 // @ts-expect-error
 import MarkitDownInclude from 'markdown-it-include'
 import Inspect from 'vite-plugin-inspect'
-import { whyframe } from '@whyframe/core'
-import { whyframeVue } from '@whyframe/vue'
 import ReplacePackagePlugin from '../plugins/local-link'
 
 const production = process.env.NODE_ENV === 'production'
@@ -14,17 +12,6 @@ const image = `${site}/banner.png`
 const title = 'Vanilla Components'
 const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
 
-const pluginsActive = [
-  // whyframe({
-  //   defaultSrc: '/frames/default',
-  // }),
-
-  // Initialize Vue integration plugin
-  // whyframeVue({
-  //   include: /\.(?:vue|md)$/, // also scan in markdown files
-  // }),
-]
-
 const plugins = !production
   ? [
     ReplacePackagePlugin(),
@@ -32,11 +19,15 @@ const plugins = !production
       build: false,
       outputDir: '.vite-inspect',
     }),
-    ...pluginsActive,
   ]
-  : [
-    ...pluginsActive,
-  ]
+: []
+
+const navQuickStart = [
+  { text: 'Introduction', link: '/guide/introduction' },
+  { text: 'Quick Start', link: '/guide/quick-start' },
+  { text: 'Configuration', link: '/guide/configuration' },
+  { text: 'Themes & Variants', link: '/concepts/variants' },
+]
 
 export default defineConfig({
   // Vue Config
@@ -79,7 +70,7 @@ export default defineConfig({
   srcDir: './src',
   base: '/',
   title: 'Vanilla Components',
-  description: 'Next Generation Frontend Tooling',
+  description: 'A lightweight, flexible & customizable UI library for Vue 3',
   head: [
     ['meta', { name: 'author', content: 'INDIGIT' }],
     ['meta', { name: 'keywords', content: 'components, vue, headless-ui, variantjs, datatables, tailwind' }],
@@ -113,7 +104,7 @@ export default defineConfig({
     logo: '/symbol-gradient.svg',
 
     editLink: {
-      pattern: 'https://github.com/igerslike/vanilla-components/tree/master/packages/documentation/:path',
+      pattern: 'https://github.com/nikuscs/vanilla-components/tree/master/packages/documentation/src/:path',
       text: 'Suggest changes to this page',
     },
 
@@ -121,13 +112,13 @@ export default defineConfig({
       { icon: 'twitter', link: 'https://twitter.com/nikuscs' },
 
       // { icon: 'discord', link: 'https://chat.vitejs.dev' },
-      { icon: 'github', link: 'https://github.com/igerslike' },
+      { icon: 'github', link: 'https://github.com/nikuscs' },
     ],
 
     // algolia: {
     //   appId: '',
-    //   apiKey: 'b573aa848fd57fb47d693b531297403c',
-    //   indexName: 'vitejs',
+    //   apiKey: '',
+    //   indexName: 'vanilla-components',
     //   searchParameters: {
     //     facetFilters: ['tags:en'],
     //   },
@@ -135,51 +126,17 @@ export default defineConfig({
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2019-present Evan You & Vite Contributors',
+      copyright: 'Copyright © 2022-present Pedro Martins + INDIGIT',
     },
 
     nav: [
-      { text: 'Guide', link: '/guide/', activeMatch: '/guide/' },
-      { text: 'Config', link: '/config/', activeMatch: '/config/' },
-      { text: 'Plugins', link: '/plugins/', activeMatch: '/plugins/' },
       {
-        text: 'Links',
-        items: [
-          {
-            text: 'Twitter',
-            link: 'https://twitter.com/vite_js',
-          },
-          {
-            text: 'Discord Chat',
-            link: 'https://chat.vitejs.dev',
-          },
-          {
-            text: 'Awesome Vite',
-            link: 'https://github.com/vitejs/awesome-vite',
-          },
-          {
-            text: 'DEV Community',
-            link: 'https://dev.to/t/vite',
-          },
-          {
-            text: 'Rollup Plugins Compat',
-            link: 'https://vite-rollup-plugins.patak.dev/',
-          },
-          {
-            text: 'Changelog',
-            link: 'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md',
-          },
-        ],
+        text: 'Overview',
+        items: navQuickStart,
       },
-      {
-        text: 'v3 (next)',
-        items: [
-          {
-            text: 'v2.x (stable)',
-            link: 'https://v2.vitejs.dev',
-          },
-        ],
-      },
+      { text: 'Guide', link: '/guide/quick-start', activeMatch: '/guide/' },
+      { text: 'Components', link: '/components/', activeMatch: '/components/' },
+      { text: 'v0.6.27', link: 'https://github.com/nikuscs/vanilla-components' },
     ],
 
     sidebar: {
@@ -187,20 +144,7 @@ export default defineConfig({
         {
           text: 'Getting started',
           collapsible: true,
-          items: [
-            { text: 'Introduction', link: '/introduction' },
-            { text: 'Quick start', link: '/quick-start' },
-          ],
-        },
-        {
-          text: 'Concepts',
-          collapsible: true,
-          items: [
-            { text: 'Variants', link: '/concepts/variants' },
-            { text: 'Configuration', link: '/concepts/configuration' },
-            { text: 'Layouts', link: '/concepts/layouts' },
-            { text: 'Properties', link: '/concepts/layouts' },
-          ],
+          items: navQuickStart,
         },
         {
           text: 'Components',
@@ -221,18 +165,10 @@ export default defineConfig({
           ],
         },
         {
-          text: 'Other Demos',
+          text: 'Integrations',
           collapsible: true,
           items: [
-            { text: 'Programmatic API', link: '/extra-topics/programmatic-api' },
-            { text: 'Alternatives', link: '/extra-topics/alternatives' },
-            { text: 'Install packages', link: '/action/install-packages' },
-            { text: 'Execute command', link: '/action/execute-command' },
-            { text: 'Edit files', link: '/action/edit-files' },
-            { text: 'Delete paths', link: '/action/delete-paths' },
-            { text: 'Apply nested preset', link: '/action/apply-nested-preset' },
-            { text: 'Group', link: '/action/group' },
-            { text: 'Prompt (experimental)', link: '/action/prompt' },
+            { text: 'Laravel + Datatables', link: '/integrations/laravel-datatables' },
           ],
         },
       ],

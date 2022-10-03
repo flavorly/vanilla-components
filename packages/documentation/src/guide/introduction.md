@@ -29,6 +29,10 @@ That being said, i have decided to take a spin on my own library, taking the con
 
 As much as we can, we avoid pulling 3rd party packages, but for what it matters we only include battle tested libraries such as **[HeadlessUI](https://headlessui.com)** to wrap a few components and take advantage of all the accessibility & nice work already done, there is no point on re-inventing the wheel for those cases, lets just style them and take advantage of our Theme & Variations system to achieve what we need.
 
+## The concept
+
+The concept of the project is simple, creating components that have a certain markup, that are fully configurable via a Javascript object, this brings enough flexibility for variants, swaping configuration in real-time & many more!
+
 ## What we are doing next?
 
 Well, the main goals would be improving the current components, add tests, add a few more interesting components, but keep in mind we wanted to keep this library as **small as possible** with the "basics", this would make sure that it will be still maintainable at least for myself, while still providing a nice value for further projects.
