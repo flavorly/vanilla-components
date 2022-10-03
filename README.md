@@ -1,7 +1,30 @@
-# Vanilla Components
+<p align="center">
+<img src="/packages/documentation/src/public/symbol-gradient.svg" height="150">
+</p>
 
-A lightweight Vue 3 component library based merging the best components around to enjoy seamless integr
 
+<h1 align="center">
+Vanilla Components
+</h1>
+
+<p align="center">
+A lightweight, flexible & customizable ui library for Vue 3
+<p>
+  
+<p align="center">
+  <a href="https://vanilla-components.com">Documentation</a> | <a href="https://vanilla-components.com/guide/">Getting Started</a> | <a href="https://vanilla-components.com/guide/#examples">Examples</a> | <a href="https://vanilla-components.com/guide/why">Why Vanilla Components?</a>
+</p>
+
+## Main Features ✨
+
+- 🧪 **DX Focused** - Write less code & build faster
+- 🛠 **Totally Configurable** - All components & props are fully customizable via a simple configuration file
+- 🍃 **Tailwind First** - Comes with a sane styling using Tailwind CSS Defaults
+- 🦾 **Vue + TypeScript** - Vue 3 setup + Typescript
+- **Vue 3 Ready** - Vue 3
+- 🌳 **Tree Shakable** - Import only the components that you need without worry about the size
+- **0 ( ZERO ) css included** - Everything is configurable, means there is no CSS's to include at all
+- 🌜 **Dark/White** - Pixel Perfect design with Dark & White mode included
 
 # Installation
 
