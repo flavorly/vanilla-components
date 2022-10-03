@@ -4,31 +4,31 @@ outline: deep
 
 # Introduction
 
-## Overview
+## Why i should use this?
 
-Preset is a system that makes it easy to perform modifications on a **freshly scaffolded project**.
+- You want a small set of Tailwind, Boostrap or w/e components ready to go for Vue 3
+- You want to use utility classes or classes to style your component, no matter what CSS framework
+- You want to recycle your components between projects with very little effort
+- You want to create different variants of your components in a clean way
+- You want to quickly bootstrap a project and test stuff out without pushing a huge UI framework
+- Your lazy as i am 🦥
+- You are tired of styling things over and over again
+- You are a cool person, and you want to give Vanilla Components a spin! 🥳
 
-It is distributed as a command line tool, which makes it accessible without installation thanks to [`npx`](https://www.npmjs.com/package/npx). It also has a [programmatic API](/extra-topics/programmatic-api) that is useful for building tools with similar needs.
+👉 But hey, if you are not a ready jump right to the Components section!
 
+## Motivation & Story
 
-## Understanding the need
+Vanilla Components was created with the need of re-using components for my own projects & client work, everytime i started a new project i would need  to copy & configure components from previous components, style them over again! After all that, we have found a bug on one of the components? Guess what, lets go back and fix everything! What boring process!
 
-If you are familiar with the concept of **starter projects** or **boilerplates**, this system is an alternative.
+After searching a couple of days for a nice component library i couldn't find myself one that worked perfectly with Tailwind CSS, Vuetify is still material and was really late for a Vue 3 Release, others were too much opinated, etc... long story short that's when i found [Vue Tailwind](https://vue-tailwind.com) and instantly felt in love ❤️ with it, sponsoring the creator with the funds i had on my hands, and trying to support the project as much as i can, but Vue Tailwind was also late for a Vue 3 release that turned to be later on [VariantJS](https://github.com/variantjs/vue) that was recently partially abandoned.
 
-### Problem
+That being said, i have decided to take a spin on my own library, taking the concept of VariantJS and using its core concept to Vanilla Components with my own touch!
 
-The main issue with the concept of boilerplate is that, from the user point of view, it is hard to know what changed compared to the initial project.
+## How "Vanilla" is this?
 
-The features of the boilerplate have to be well-documented, but even then, the users won't know exactly what files have been edited or removed for the boilerplate to work, unless it is also documented — which would be a lot of work.
+As much as we can, we avoid pulling 3rd party packages, but for what it matters we only include battle tested libraries such as **[HeadlessUI](https://headlessui.com)** to wrap a few components and take advantage of all the accessibility & nice work already done, there is no point on re-inventing the wheel for those cases, lets just style them and take advantage of our Theme & Variations system to achieve what we need.
 
-As a boilerplate maintainer, it can be hard as well to keep track of the changes that have been made to the original codebase. It can be easy to forget something in an update, and dead code can be introduced this way.
+## What we are doing next?
 
-Lastly, a project needs to be created from the boilerplate. You can't create a project like you usually do, then consume the boilerplate on top of it.
-
-It also means that if the boilerplate is not actively maintained compared to the project it is built for, it will quickly be out-of-date.
-
-### Solution
-
-A preset, on the other hand, describes the exact changes needed for the features to be added. By reading the preset's code, you know the exact changes it brings.
-
-This solves the previous issue, and makes the maintenance easier, because the overhead caused by all of the files of a boilerplate is gone, and as a preset maintainer, you don't have to maintain every other single file that doesn't change in the preset but need updates because the project on top of which the boilerplate is made was updated.
+Well, the main goals would be improving the current components, add tests, add a few more interesting components, but keep in mind we wanted to keep this library as **small as possible** with the "basics", this would make sure that it will be still maintainable at least for myself, while still providing a nice value for further projects.
