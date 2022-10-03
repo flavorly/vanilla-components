@@ -39,11 +39,13 @@ pnpm add @indigit/vanilla-components
 
 ## Usage
 
-Import the components as needed with the following
+Import the components as needed with the following:
 
 ```vue
 import { Button } from '@vanilla-components'
 ```
+
+For more example & demos checkout the [VariantJS](https://github.com/variantjs/vue)
 
 ## Local & Documentation
 
@@ -77,9 +79,20 @@ pnpm lunr:start
 pnpm build ( optional if already built )
 pnpm lunr:index
 ```
+
 ## Credits
 
+Thanks to: 
 - [VariantJS](https://github.com/variantjs/vue) - Base Inspiration & Code - Thanks to Alfonsobries
 - [VueUse](https://github.com/vueuse/vueuse) - How we could we not credit this?
 - [RobertBoes] - For all the time helping with Troubleshooting
 - All my friends, that could stay online while i was whispering all day long! 
+
+## Contribution
+
+See [Contributing Guide](./CONTRIBUTING.md).
+
+## License
+
+[MIT](./LICENSE) License © 2021-Present [Pedro Martins](https://github.com/nikuscs)
+
