@@ -37,8 +37,6 @@ pnpm add @headlessui/vue@^1.5.0 @popperjs/core@^2.11.2 flatpickr@^4.6.9 libphone
 pnpm add @indigit/vanilla-components
 ```
 
-## Usage
-
 Import the components as needed with the following:
 
 ```vue
@@ -58,8 +56,6 @@ pnpm build
 pnpm docs:dev
 ```
 
-## Starting Fresh
-
 To start fresh, simply run the following commands
 
 ```bash
@@ -69,7 +65,7 @@ pnpm build
 pnpm docs:dev
 ```
 
-## Lunr ( Algolia Alternative )
+### Lunr ( Algolia Alternative )
 
 Lunr replaces the default Vitepress Algolia Search
 To get the project index correctly do the following:
