@@ -2,5 +2,4 @@
 outline: deep
 ---
 
-# Workflow
-
+# Laravel + Datatables

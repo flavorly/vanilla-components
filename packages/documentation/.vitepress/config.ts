@@ -169,7 +169,7 @@ export default defineConfig({
           text: 'Integrations',
           collapsible: true,
           items: [
-            { text: 'Laravel + Datatables', link: '/integrations/laravel-datatables' },
+            { text: 'Laravel + Datatables', link: '/guide/integrations-datatables' },
           ],
         },
       ],
