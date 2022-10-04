@@ -5,7 +5,9 @@ import { commonClasses, enterAndLeave } from '@/core/config'
 import type {
   Data,
   FetchOptionsFn,
-  InputOptions, Measure,
+  InputOptions,
+  Measure,
+  MinimumInputLengthTextProp,
   NormalizedOption,
   NormalizedOptions,
   PreFetchOptionsFn,
@@ -218,8 +220,6 @@ export const richSelectConfig = {
 export const richSelectClassesKeys = Object.keys(richSelectConfig.classes)
 
 export declare type RichSelectClassesValidKeys = keyof typeof richSelectConfig.classes
-
-export declare type MinimumInputLengthTextProp = ((minimumInputLength: number, query?: string) => string) | string
 
 export declare type RichSelectValue = string | number | boolean | undefined | null | Date | Function | symbol | RichSelectValue[]
 

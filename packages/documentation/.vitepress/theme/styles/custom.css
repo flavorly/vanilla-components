@@ -4,6 +4,32 @@
     --vt-c-brand-dark: #7f9cf5;
     --vt-c-brand-highlight: #667eea;
     --vt-c-green: #6988e6;
+
+    --vp-c-brand-dark: #667eea;
+    --vp-c-brand-highlight: #667eea;
+    --vp-c-green: #6988e6;
+
+    --vp-home-hero-image-background-image: linear-gradient( -45deg, #667eea 30%, #747bff 30% );
+    --vp-home-hero-image-filter: blur(72px);
+    --vp-button-brand-bg: var(--vp-c-brand);
+    --vp-button-brand-border: var(--vp-c-brand-light);
+    --vp-button-brand-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-hover-border: var(--vp-c-brand-light);
+    --vp-button-brand-hover-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+    --vp-button-brand-active-border: var(--vp-c-brand-light);
+    --vp-button-brand-active-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+
+    --vp-button-alt-border: var(--vp-c-gray-light-3);
+    --vp-button-alt-text: var(--vp-c-text-light-1);
+    --vp-button-alt-bg: var(--vp-c-gray-light-5);
+    --vp-button-alt-hover-border: var(--vp-c-gray-light-3);
+    --vp-button-alt-hover-text: var(--vp-c-text-light-1);
+    --vp-button-alt-hover-bg: var(--vp-c-gray-light-4);
+    --vp-button-alt-active-border: var(--vp-c-gray-light-3);
+    --vp-button-alt-active-text: var(--vp-c-text-light-1);
+    --vp-button-alt-active-bg: var(--vp-c-gray-light-3);
 }
 
 .dark body {
@@ -120,4 +146,8 @@ pre {
     -moz-box-shadow: none;
     box-shadow: none;
     outline: none !important;
+}
+
+.dark .image-bg{
+    opacity: 0.4;
 }

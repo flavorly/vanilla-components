@@ -7,12 +7,13 @@ import './styles/components/vp-code.css'
 import './styles/components/vp-doc.css'
 import './styles/components/vp-sponsor.css'
 import './styles/tailwind.css'
-import './styles/custom.css'
 import { Plugin } from '@indigit/vanilla-components'
 import { makeServer } from '../../mocks/server'
 import Layout from './Layout.vue'
 import NotFound from './NotFound.vue'
 import PreviewWrapper from './components/PreviewWrapper.vue'
+import './styles/custom.css'
+import DemoComponent from './components/Demo/DemoComponent.vue'
 export { default as VPHomeHero } from './components/VPHomeHero.vue'
 export { default as VPHomeFeatures } from './components/VPHomeFeatures.vue'
 export { default as VPHomeSponsors } from './components/VPHomeSponsors.vue'
@@ -43,6 +44,7 @@ const theme = {
     enhanceApp({ app }) {
       app.use(Plugin)
       app.component('PreviewWrapper', PreviewWrapper)
+      app.component('DemoComponent', DemoComponent)
       if (!import.meta.env.SSR) {
         // Start the fake API server
         makeServer({ environment: 'production' })

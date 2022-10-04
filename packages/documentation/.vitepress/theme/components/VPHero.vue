@@ -3,12 +3,6 @@ import type { DefaultTheme } from 'vitepress/theme'
 import VPButton from './VPButton.vue'
 import VPImage from './VPImage.vue'
 
-export interface HeroAction {
-  theme?: 'brand' | 'alt'
-  text: string
-  link: string
-}
-
 defineProps<{
   name?: string
   text: string
@@ -16,20 +10,49 @@ defineProps<{
   image?: DefaultTheme.ThemeableImage
   actions?: HeroAction[]
 }>()
+
+export interface HeroAction {
+  theme?: 'brand' | 'alt'
+  text: string
+  link: string
+}
 </script>
 
 <template>
-  <div class="VPHero" :class="{ 'has-image': image }">
+  <div
+    class="VPHero"
+    :class="{ 'has-image': image }"
+  >
     <div class="container">
       <div class="main">
-        <h1 v-if="name" class="name">
+        <h1
+          v-if="name"
+          class="name"
+        >
           <span class="clip">{{ name }}</span>
         </h1>
-        <p v-if="text" class="text">{{ text }}</p>
-        <p v-if="tagline" class="tagline">{{ tagline }}</p>
+        <p
+          v-if="text"
+          class="text"
+        >
+          {{ text }}
+        </p>
+        <p
+          v-if="tagline"
+          class="tagline"
+        >
+          {{ tagline }}
+        </p>
 
-        <div v-if="actions" class="actions">
-          <div v-for="action in actions" :key="action.link" class="action">
+        <div
+          v-if="actions"
+          class="actions"
+        >
+          <div
+            v-for="action in actions"
+            :key="action.link"
+            class="action"
+          >
             <VPButton
               tag="a"
               size="medium"
@@ -41,10 +64,16 @@ defineProps<{
         </div>
       </div>
 
-      <div v-if="image" class="image">
+      <div
+        v-if="image"
+        class="image"
+      >
         <div class="image-container">
           <div class="image-bg" />
-          <VPImage class="image-src" :image="image" />
+          <VPImage
+            class="image-src"
+            :image="image"
+          />
         </div>
       </div>
     </div>
@@ -276,6 +305,7 @@ defineProps<{
   background-image: var(--vp-home-hero-image-background-image);
   filter: var(--vp-home-hero-image-filter);
   transform: translate(-50%, -50%);
+  opacity: 0.2;
 }
 
 @media (min-width: 640px) {

@@ -26,6 +26,7 @@ const navQuickStart = [
   { text: 'Introduction', link: '/guide/introduction' },
   { text: 'Quick Start', link: '/guide/quick-start' },
   { text: 'Configuration', link: '/guide/configuration' },
+  { text: 'Workflow', link: '/guide/workflow' },
   { text: 'Themes & Variants', link: '/concepts/variants' },
 ]
 

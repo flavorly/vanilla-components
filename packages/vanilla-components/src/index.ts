@@ -1,3 +1,5 @@
+import { useConfiguration } from '@/core/use'
+
 export { default as Avatar } from './components/avatar/avatar.vue'
 
 export { default as Button } from './components/button/button.vue'
@@ -80,4 +82,14 @@ export * from './types'
 // ----------------- //
 
 export { default as VanillaComponents, default as Plugin } from './plugin'
+
+// ----------------- //
+// Other Utilities
+// ----------------- //
+export {
+  useConfiguration,
+  useVModel,
+  useVariantProps,
+  useMultipleVModel,
+} from './core/use'
 
