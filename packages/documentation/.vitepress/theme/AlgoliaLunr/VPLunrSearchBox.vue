@@ -2,7 +2,7 @@
 import type { DefaultTheme } from 'vitepress/theme'
 import { onMounted } from 'vue'
 import { useData, useRoute, useRouter } from 'vitepress'
-import { lunrsearch as docsearch } from './LunrSearch'
+import { lunrsearch as docsearch } from './lunrSearch'
 
 const router = useRouter()
 const route = useRoute()
