@@ -41,6 +41,14 @@ app.use(VanillaComponents, {
 
 Please also do note, that when you override you will lose the default styling for this component, means that you will have to configure this component on your own. You can find our presets on the official github
 
+## Default Configuration
+
+You can check the default and full configuration here : [Full Configuration](https://github.com/nikuscs/vanilla-components/blob/master/packages/documentation/src/presets/all.json)
+Where it also includes the configuration file separated for each component [here](https://github.com/nikuscs/vanilla-components/blob/master/packages/documentation/src/presets)
+
+Here is a demo of the Input Component Configuration file:
+
+<<< @/presets/Input.json#snippet{1}
 
 ## Tailwind Defaults
 
