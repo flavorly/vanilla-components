@@ -8,8 +8,14 @@
     "resolveJsonModule": true,
     "strict": true,
     "baseUrl": "./",
-    "lib": ["esnext", "dom"],
-    "types": ["vite/client"],
+    "lib": [
+      "esnext",
+      "dom",
+    ],
+    "types": [
+      "vite/client",
+      "node"
+    ],
     "paths": {
       "/@theme/*": [".vitepress/theme/*"],
     },
@@ -20,7 +26,8 @@
     "src/**/*.ts",
     "src/**/*.vue",
     "src/**/*.js",
-    ".vitepress/**/*"
+    ".vitepress/**/*",
+    "utils/*"
   ],
   "exclude": [
     "node_modules"

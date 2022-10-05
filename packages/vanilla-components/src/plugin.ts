@@ -1,5 +1,5 @@
 import type { App } from 'vue'
-import mergeConfiguration from './configuration'
+import { mergeConfiguration } from './configuration'
 import type { ComponentsConfiguration } from './core/types'
 
 const plugin = {

@@ -81,7 +81,10 @@ export * from './types'
 // Plugin to Install
 // ----------------- //
 
-export { default as VanillaComponents, default as Plugin } from './plugin'
+export {
+  default as VanillaComponents,
+  default as Plugin,
+} from './plugin'
 
 // ----------------- //
 // Other Utilities
@@ -92,4 +95,8 @@ export {
   useVariantProps,
   useMultipleVModel,
 } from './core/use'
+
+export {
+  defaultConfiguration,
+} from './configuration'
 

@@ -1,0 +1,39 @@
+{
+    "fixedClasses": {
+        "wrapper": "",
+        "wrapperImageAndButtons": "",
+        "imageAndPreviewContainer": "flex items-center justify-center cursor-pointer",
+        "imagePreviewContainer": "mt-2",
+        "currentImage": "rounded-full h-20 w-20 object-cover",
+        "avatarPlaceholder": "inline-flex items-center justify-center rounded-full h-20 w-20 rounded-full p-5 border border-gray-100 dark:border-gray-500 shadow-sm",
+        "avatarPlaceholderText": "text-sm font-light leading-none",
+        "buttonsContainer": "flex items-center justify-center mt-2",
+        "preview": "relative w-20 h-20 border border-gray-100 dark:border-gray-500 shadow-sm rounded-full"
+    },
+    "classes": {
+        "wrapper": "relative",
+        "wrapperImageAndButtons": "",
+        "imageAndPreviewContainer": "",
+        "imagePreviewContainer": "",
+        "currentImage": "",
+        "avatarPlaceholder": "bg-primary-100 text-primary-800 dark:bg-gray-600 dark:text-white",
+        "avatarPlaceholderText": "",
+        "buttonsContainer": "",
+        "preview": ""
+    },
+    "variants": {
+        "error": {
+            "classes": {
+                "wrapper": "relative",
+                "wrapperImageAndButtons": "",
+                "imageAndPreviewContainer": "",
+                "imagePreviewContainer": "",
+                "currentImage": "",
+                "avatarPlaceholder": "bg-red-100 text-red-500",
+                "avatarPlaceholderText": "",
+                "buttonsContainer": "",
+                "preview": ""
+            }
+        }
+    }
+}

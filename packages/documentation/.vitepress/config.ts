@@ -26,8 +26,8 @@ const navQuickStart = [
   { text: 'Introduction', link: '/guide/introduction' },
   { text: 'Quick Start', link: '/guide/quick-start' },
   { text: 'Configuration', link: '/guide/configuration' },
+  { text: 'Variants & Usage', link: '/guide/variants' },
   { text: 'Workflow', link: '/guide/workflow' },
-  { text: 'Themes & Variants', link: '/concepts/variants' },
 ]
 
 export default defineConfig({
@@ -163,6 +163,13 @@ export default defineConfig({
             { text: 'Dropdown', link: '/components/dropdown/index' },
             { text: 'Slideover', link: '/components/slideover/index' },
             { text: 'Rich Select', link: '/components/rich-select/index' },
+          ],
+        },
+        {
+          text: 'Advanced',
+          collapsible: true,
+          items: [
+            { text: 'Custom Components', link: '/guide/advanced-configuration' },
           ],
         },
         {

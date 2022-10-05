@@ -7,7 +7,8 @@
     "build": "vitepress build",
     "serve": "vitepress serve",
     "debug": "vite --debug",
-    "index:build": "node ./lunr.cjs && vitepress build && node ./lunr.cjs"
+    "index:build": "node ./utils/lunr.cjs && vitepress build && node ./utils/lunr.cjs",
+    "preset:build": "ts-node-esm ./utils/generate-presets.ts"
   },
   "devDependencies": {
     "@whyframe/core": "^0.1.4",

@@ -1,0 +1,26 @@
+{
+    "fixedClasses": {
+        "container": "relative flex-1",
+        "optionContainer": "rounded-lg",
+        "optionContainerSeparated": "space-y-2",
+        "optionContainerNonSeparated": "-space-y-px"
+    },
+    "classes": {
+        "wrapper": "",
+        "container": "",
+        "optionContainer": "",
+        "optionContainerSeparated": "",
+        "optionContainerNonSeparated": ""
+    },
+    "variants": {
+        "error": {
+            "classes": {
+                "wrapper": "",
+                "container": "",
+                "optionContainer": "",
+                "optionContainerSeparated": "",
+                "optionContainerNonSeparated": ""
+            }
+        }
+    }
+}

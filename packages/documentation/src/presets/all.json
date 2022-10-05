@@ -1,0 +1,1335 @@
+{
+    "Avatar": {
+        "fixedClasses": {
+            "wrapper": "",
+            "wrapperImageAndButtons": "",
+            "imageAndPreviewContainer": "flex items-center justify-center cursor-pointer",
+            "imagePreviewContainer": "mt-2",
+            "currentImage": "rounded-full h-20 w-20 object-cover",
+            "avatarPlaceholder": "inline-flex items-center justify-center rounded-full h-20 w-20 rounded-full p-5 border border-gray-100 dark:border-gray-500 shadow-sm",
+            "avatarPlaceholderText": "text-sm font-light leading-none",
+            "buttonsContainer": "flex items-center justify-center mt-2",
+            "preview": "relative w-20 h-20 border border-gray-100 dark:border-gray-500 shadow-sm rounded-full"
+        },
+        "classes": {
+            "wrapper": "relative",
+            "wrapperImageAndButtons": "",
+            "imageAndPreviewContainer": "",
+            "imagePreviewContainer": "",
+            "currentImage": "",
+            "avatarPlaceholder": "bg-primary-100 text-primary-800 dark:bg-gray-600 dark:text-white",
+            "avatarPlaceholderText": "",
+            "buttonsContainer": "",
+            "preview": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "relative",
+                    "wrapperImageAndButtons": "",
+                    "imageAndPreviewContainer": "",
+                    "imagePreviewContainer": "",
+                    "currentImage": "",
+                    "avatarPlaceholder": "bg-red-100 text-red-500",
+                    "avatarPlaceholderText": "",
+                    "buttonsContainer": "",
+                    "preview": ""
+                }
+            }
+        }
+    },
+    "Button": {
+        "fixedClasses": {
+            "button": "block justify-center inline-flex items-center shadow px-4 py-2 focus:ring-offset-2 cursor-pointer h-full",
+            "container": "flex items-center space-x-1",
+            "spinner": "animate-spin -ml-1 mr-1 h-5 w-5 text-whit",
+            "disableOpacity": "opacity-50",
+            "enableOpacity": "opacity-100",
+            "busyOrInvalidState": "cursor-not-allowed"
+        },
+        "classes": {
+            "button": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600",
+            "container": " ",
+            "spinner": "",
+            "disableOpacity": "",
+            "enableOpacity": "",
+            "busyOrInvalidState": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "button": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-500 text-white focus:text-gray-200 bg-red-600",
+                    "container": "",
+                    "spinner": "",
+                    "disableOpacity": "",
+                    "enableOpacity": "",
+                    "busyOrInvalidState": ""
+                }
+            },
+            "errorSoft": {
+                "classes": {
+                    "button": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-500 dark:focus:ring-red-400 text-red-500 focus:text-red-600 dark:text-red-400 bg-white dark:bg-gray-800 border border-red-400 focus:border-red-400 dark:focus:border-red-400",
+                    "container": "",
+                    "spinner": "",
+                    "disableOpacity": "",
+                    "enableOpacity": "",
+                    "busyOrInvalidState": ""
+                }
+            },
+            "primary": {
+                "classes": {
+                    "button": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-500 text-white focus:text-gray-200 bg-primary-600",
+                    "container": "",
+                    "spinner": "",
+                    "disableOpacity": "",
+                    "enableOpacity": "",
+                    "busyOrInvalidState": ""
+                }
+            },
+            "success": {
+                "classes": {
+                    "button": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-green-500 text-white focus:text-gray-200 bg-green-600",
+                    "container": "",
+                    "spinner": "",
+                    "disableOpacity": "",
+                    "enableOpacity": "",
+                    "busyOrInvalidState": ""
+                }
+            },
+            "transparent": {
+                "classes": {
+                    "button": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-transparent border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600",
+                    "container": "",
+                    "spinner": "",
+                    "disableOpacity": "",
+                    "enableOpacity": "",
+                    "busyOrInvalidState": ""
+                }
+            },
+            "paginationButton": {
+                "classes": {
+                    "button": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 cursor-pointer relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 dark:bg-gray-800 dark:text-white dark:hover:text-white dark:border-gray-600 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-primary-300 focus:ring-primary-500 active:bg-gray-100 active:text-gray-500",
+                    "container": "",
+                    "spinner": "",
+                    "disableOpacity": "",
+                    "enableOpacity": "",
+                    "busyOrInvalidState": ""
+                }
+            },
+            "paginationButtonPage": {
+                "classes": {
+                    "button": "text-sm leading-6 whitespace-nowrap text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600 -ml-px",
+                    "container": "",
+                    "spinner": "",
+                    "disableOpacity": "",
+                    "enableOpacity": "",
+                    "busyOrInvalidState": ""
+                }
+            }
+        }
+    },
+    "Card": {
+        "fixedClasses": {
+            "bodyDivided": ""
+        },
+        "classes": {
+            "card": "relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-800/70 dark:text-white dark:shadow-dark-xl dark:border dark:border-white/10",
+            "header": "px-4 py-5 border-b border-gray-200 sm:px-6 dark:border-gray-700",
+            "headerInner": "flex justify-between items-center flex-wrap sm:flex-nowrap",
+            "titleWrapper": "flex items-center text-left",
+            "title": "text-lg leading-6 font-medium text-gray-800 dark:text-white",
+            "subtitle": "mt-1 max-w-2xl text-sm leading-5 text-gray-500 dark:text-gray-400",
+            "actions": "sm:ml-4 mt-4 sm:mt-0 flex space-x-1 content-center flex-wrap flex-shrink",
+            "body": "",
+            "bodyDivided": "sm:divide-y sm:divide-gray-200 dark:divide-gray-800",
+            "bodyDividedDarker": "sm:divide-y sm:divide-gray-200 dark:divide-gray-900",
+            "bodyDarker": "bg-gray-50 dark:bg-gray-800",
+            "bodyWithPadding": "px-4 sm:px-8 py-4 sm:py-8",
+            "footer": "px-4 py-3 flex items-center justify-center sm:justify-end text-right sm:px-6 border-t border-gray-200 dark:border-gray-700",
+            "footerBorder": "border-t border-gray-200 dark:border-gray-700",
+            "footerSimple": "p-4 sm:p-6",
+            "footerSimpleRight": "justify-end text-right flex items-center text-right space-x-2",
+            "footerSimpleLeft": "justify-start text-left flex items-center text-right space-x-2",
+            "footerSimpleCenter": "justify-center text-center flex items-center text-right space-x-2",
+            "footerWithGrid": "p-4 sm:p-6",
+            "footerWithOneGrid": "sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense",
+            "footerWithTwoGrids": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0",
+            "footerWithThreeGrids": "sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense",
+            "footerSplitContainer": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense",
+            "footerSplitLeft": "flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0",
+            "footerSplitRight": "flex mt-0 sm:mt-0 items-center justify-center sm:justify-end",
+            "emptyStateContainer": "flex items-center justify-center text-center px-6 py-8 rounded-lg",
+            "emptyState": "text-sm w-full",
+            "emptyIcon": "text-gray-200 dark:text-gray-600"
+        },
+        "variants": {
+            "simple": {
+                "classes": {
+                    "card": "relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-800/70 dark:text-white dark:shadow-dark-xl dark:border dark:border-white/10",
+                    "header": "px-4 py-5 sm:px-6",
+                    "headerInner": "flex justify-between items-center flex-wrap sm:flex-nowrap",
+                    "titleWrapper": "flex items-center text-left",
+                    "title": "text-lg leading-6 font-medium text-gray-800 dark:text-white",
+                    "subtitle": "mt-1 max-w-2xl text-sm leading-5 text-gray-500 dark:text-gray-400",
+                    "actions": "sm:ml-4 mt-4 sm:mt-0 flex space-x-1 content-center flex-wrap flex-shrink",
+                    "body": "",
+                    "bodyDivided": "sm:divide-y sm:divide-gray-200 dark:divide-gray-800",
+                    "bodyDividedDarker": "sm:divide-y sm:divide-gray-200 dark:divide-gray-900",
+                    "bodyDarker": "bg-gray-50 dark:bg-gray-800",
+                    "bodyWithPadding": "px-4 sm:px-8 py-4 sm:py-8",
+                    "footer": "bg-gray-50 dark:bg-gray-800/50 px-4 py-3 flex items-center justify-end text-right sm:px-6",
+                    "footerBorder": "border-t border-gray-200 dark:border-gray-700",
+                    "footerSimple": "p-4 sm:p-6",
+                    "footerSimpleRight": "justify-end text-right flex items-center text-right space-x-2",
+                    "footerSimpleLeft": "justify-start text-left flex items-center text-right space-x-2",
+                    "footerSimpleCenter": "justify-center text-center flex items-center text-right space-x-2",
+                    "footerWithGrid": "p-4 sm:p-6",
+                    "footerWithOneGrid": "sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense",
+                    "footerWithTwoGrids": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0",
+                    "footerWithThreeGrids": "sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense",
+                    "footerSplitContainer": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense",
+                    "footerSplitLeft": "flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0",
+                    "footerSplitRight": "flex mt-0 sm:mt-0 items-center justify-center sm:justify-end",
+                    "emptyStateContainer": "flex items-center justify-center text-center px-6 py-8 rounded-lg",
+                    "emptyState": "text-sm w-full",
+                    "emptyIcon": "text-gray-200 dark:text-gray-600"
+                }
+            }
+        }
+    },
+    "Checkbox": {
+        "fixedClasses": {
+            "wrapper": "",
+            "wrapperLeft": "flex items-center justify-start",
+            "wrapperCenter": "flex items-center justify-center",
+            "wrapperRight": "flex items-center justify-end",
+            "container": "",
+            "checkbox": "h-5 w-5 transition duration-150 ease-in-out relative",
+            "groupContainer": "space-y-3",
+            "groupCheckboxWrapper": "relative flex items-start",
+            "groupCheckbox": "flex items-center h-5",
+            "groupLabel": "ml-3 text-sm leading-5"
+        },
+        "classes": {
+            "wrapper": "",
+            "wrapperLeft": "",
+            "wrapperCenter": "",
+            "wrapperRight": "",
+            "container": "",
+            "checkbox": "checked:bg-primary-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600",
+            "groupContainer": "",
+            "groupCheckboxWrapper": "",
+            "groupCheckbox": "",
+            "groupLabel": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "",
+                    "container": "",
+                    "checkbox": "text-red-600 border-red-300 placeholder-red-300 dark:bg-gray-900 focus:ring-red-500 checked:bg-red-600 checked:text-white dark:checked:bg-red-600 dark:focus:ring-offset-gray-900",
+                    "groupContainer": "",
+                    "groupCheckboxWrapper": "",
+                    "groupCheckbox": "",
+                    "groupLabel": ""
+                }
+            }
+        }
+    },
+    "CountryInput": {
+        "fixedClasses": {
+            "trigger": "relative"
+        },
+        "classes": {
+            "wrapper": "block w-full",
+            "trigger": "bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+            "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
+            "dropdownContent": "pt-1 space-y-2",
+            "clearButton": "absolute flex items-center justify-center text-gray-600 dark:text-gray-300 dark:text rounded mr-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-opacity-70 top-1/2 right-0 transform -translate-y-1/2 focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600 w-5 h-5 transition duration-100 ease-in-out",
+            "optionsList": "space-y-1",
+            "optionsListLoadingMore": "flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 text-center",
+            "optionWrapper": "",
+            "option": "w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2",
+            "selectedOption": "font-bold bg-gray-50",
+            "highlightedOption": "text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black",
+            "selectedHighlightedOption": "font-semibold",
+            "optionContent": "flex items-center justify-between",
+            "optionLabel": "block truncate",
+            "optionSelectedIcon": "w-5 h-5",
+            "optgroup": "space-y-2",
+            "optgroupContent": "",
+            "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
+            "optgroupOptionsList": "px-2 pb-2",
+            "searchWrapper": "inline-block w-full px-3 py-2",
+            "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+            "searchingText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+            "needsMoreCharsText": "px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center",
+            "noResultsText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+            "selectButtonLabel": "block pr-4 truncate",
+            "selectButtonPlaceholder": "block text-gray-500/90 truncate",
+            "selectButtonSearchingPlaceholder": "block text-gray-400 truncate",
+            "selectButtonLoadingIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+            "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+            "tagsWrapper": "flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8",
+            "tag": "rounded shadow-sm flex items-center cursor-pointer bg-primary-100 dark:bg-primary-500/20 dark:border dark:border-gray-700 m-0.5 h-8 max-w-full text-primary-900 dark:text-white white-space-no text-sm font-semibold focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-opacity-50 focus:ring-primary-600 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed",
+            "tagLabel": "px-3",
+            "tagDeleteButton": "transition duration-100 ease-in-out focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-opacity-50 focus:ring-primary-600 -ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r text-primary-400 focus:text-white hover:text-primary-500 dark:hover:text-white hover:bg-primary-200 focus:bg-primary-500 dark:hover:bg-primary-400/20 dark:focus:bg-primary-500/20",
+            "tagDeleteButtonIcon": "w-3 h-3",
+            "groupedBellow": "rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10",
+            "groupedAbove": "rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10",
+            "stateWrapper": "flex items-center justify-center space-x-1",
+            "stateLoadingIcon": "animate-spin w-3.5 h-3.5 -mr-2",
+            "enterActiveClass": "transition-opacity duration-100 ease-out",
+            "enterFromClass": "transform scale-95 opacity-0",
+            "enterToClass": "transform scale-100 opacity-100",
+            "leaveActiveClass": "transition-opacity duration-100 ease-in",
+            "leaveFromClass": "transform scale-100 opacity-100",
+            "leaveToClass": "transform scale-95 opacity-0"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "block w-full",
+                    "trigger": "bg-white dark:bg-gray-900 border border-red-400 focus:border-red-400 dark:focus:border-red-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500 text-red-400 placeholder-red-400 leading-normal text-sm rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+                    "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
+                    "dropdownContent": "pt-1 space-y-2",
+                    "clearButton": "absolute flex items-center justify-center text-red-400 dark:text-red-300 dark:text rounded mr-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-opacity-70 top-1/2 right-0 transform -translate-y-1/2 focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600 w-5 h-5 transition duration-100 ease-in-out",
+                    "optionsList": "space-y-1",
+                    "optionsListLoadingMore": "flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 text-center",
+                    "optionWrapper": "",
+                    "option": "w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2",
+                    "selectedOption": "font-bold bg-gray-50",
+                    "highlightedOption": "text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black",
+                    "selectedHighlightedOption": "font-semibold",
+                    "optionContent": "flex items-center justify-between",
+                    "optionLabel": "block truncate",
+                    "optionSelectedIcon": "w-5 h-5",
+                    "optgroup": "space-y-2",
+                    "optgroupContent": "",
+                    "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
+                    "optgroupOptionsList": "px-2 pb-2",
+                    "searchWrapper": "inline-block w-full px-3 py-2",
+                    "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+                    "searchingText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+                    "needsMoreCharsText": "px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center",
+                    "noResultsText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+                    "selectButtonLabel": "block pr-4 truncate",
+                    "selectButtonPlaceholder": "block text-gray-500/90 truncate",
+                    "selectButtonSearchingPlaceholder": "block text-gray-400 truncate",
+                    "selectButtonLoadingIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+                    "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+                    "tagsWrapper": "flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8",
+                    "tag": "rounded shadow-sm flex items-center cursor-pointer bg-red-100 dark:bg-red-500/20 m-0.5 h-8 max-w-full text-red-900 dark:text-red-300 white-space-no text-sm white-space-no focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600 focus:ring-opacity-50 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed",
+                    "tagLabel": "px-3",
+                    "tagDeleteButton": "transition duration-100 ease-in-out focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600 focus:ring-opacity-50 -ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r text-red-900 dark:text-red-300 focus:text-white hover:text-red-800 dark:hover:text-red-200 hover:bg-red-200 focus:bg-red-500 dark:hover:bg-red-400/20 dark:focus:bg-red-500/20",
+                    "tagDeleteButtonIcon": "w-3 h-3",
+                    "groupedBellow": "rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10",
+                    "groupedAbove": "rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10",
+                    "stateWrapper": "flex items-center justify-center space-x-1",
+                    "stateLoadingIcon": "animate-spin w-3.5 h-3.5 -mr-2",
+                    "enterActiveClass": "transition-opacity duration-100 ease-out",
+                    "enterFromClass": "transform scale-95 opacity-0",
+                    "enterToClass": "transform scale-100 opacity-100",
+                    "leaveActiveClass": "transition-opacity duration-100 ease-in",
+                    "leaveFromClass": "transform scale-100 opacity-100",
+                    "leaveToClass": "transform scale-95 opacity-0"
+                }
+            }
+        }
+    },
+    "Datatable": {
+        "fixedClasses": {},
+        "classes": {
+            "cardVariant": "",
+            "genericForbidden": "cursor-not-allowed",
+            "genericPointer": "cursor-pointer",
+            "genericFormsContentContainer": "flex items-center justify-center space-x-1 text-xs select-none cursor-pointer",
+            "genericFormsContentLink": "underline flex items-center justify-center space-x-1",
+            "genericFormsContentIcons": "h-4 w-4",
+            "actionsContainer": "inline-flex",
+            "actionsButtonVariant": "primary",
+            "actionsButtonCount": "ml-1 text-xxs text-white xxs:hidden",
+            "headerFiltersContainer": "inline-flex",
+            "headerFiltersIcon": "h-4 h-4 sm:mr-1",
+            "headerFiltersLabel": "hidden sm:block",
+            "headerFiltersCount": "ml-1 text-xxs",
+            "headerSettingsContainer": "inline-flex",
+            "headerSettingsIcon": "h-4 w-4",
+            "headerSettingsRefreshIcon": "h-4 h-4",
+            "headerSettingsRefreshIconAnimation": "animate-spin",
+            "headerSettingsEditIcon": "h-4 h-4",
+            "searchContainer": "px-5 mt-3 mb-3",
+            "searchInputVariant": "compact",
+            "searchInputClasses": "",
+            "searchIcon": "-mr-2 h-4 w-4 text-gray-400",
+            "filtersBarContainer": "px-5 mt-2 my-3",
+            "filtersBarInner": "flex items-center space-x-1 text-xs",
+            "filtersBarBadgesContainer": "flex flex-wrap items-center gap-1",
+            "filtersBadge": "flex-shrink-0 inline-flex items-center py-0.5 pl-2 pr-0.5 rounded-full text-xs font-medium bg-primary-100 text-primary-700",
+            "filtersBadgeLabel": "flex space-x-1",
+            "filtersBadgeRemoveButton": "flex-shrink-0 ml-0.5 h-4 w-4 rounded-full inline-flex items-center justify-center text-primary-400 hover:bg-primary-200 hover:text-primary-500 focus:outline-none focus:bg-primary-500 focus:text-white",
+            "filtersBadgeRemoveIcon": "h-2 w-2",
+            "selectionBarContainer": "px-6 sm:px-8 py-3 bg-primary-100/50 dark:bg-primary-500 items-center text-left text-xs text-primary-900 dark:text-white space-x-1 space-y-1 sm:space-y-0 flex flex-col sm:flex-row",
+            "selectionBarButton": "cursor-pointer inline-flex items-center rounded-md bg-transparent border border-primary-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-primary-900 focus:ring-offset-primary-100 dark:focus:ring-offset-primary-500",
+            "selectionBarOrText": "hidden sm:inline mx-1",
+            "emptyStateContainer": "flex items-center justify-center text-center bg-gray-50 px-6 py-8 dark:bg-gray-800",
+            "emptyStateRow": "flex items-center justify-center",
+            "emptyStateIcon": "text-gray-200 w-28 h-28",
+            "emptyStateInner": "text-sm w-full space-y-2",
+            "emptyStateTitle": "text-small text-gray-500 mb-3 mt-3",
+            "emptyStateText": "",
+            "emptyStateResetFiltersButtonVariant": "primary",
+            "emptyStateResetFiltersButtonIcon": "h-4 w-4",
+            "tableContainer": "datatable overflow-x-auto border-t dark:border-gray-700",
+            "tableClass": "min-w-full m-0 table-auto",
+            "tableBody": "divide-y bg-gray-50 dark:bg-gray-800 divide-gray-200 dark:divide-gray-700/90",
+            "tableRow": "",
+            "tableColumn": "whitespace-nowrap py-2 text-sm text-gray-500 dark:text-white",
+            "tableColumnCheckbox": "px-6 py-3 text-sm w-[10px]",
+            "tableCheckbox": "block transition duration-150 ease-in-out checked:bg-primary-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600 h-4 w-4",
+            "tableHeadColumnCheckbox": "bg-gray-100 text-left text-xs px-6 py-3 leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700",
+            "tableHeadCheckbox": "",
+            "tableHeadColumn": "bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700 dark:text-white",
+            "tableHeadColumnContainer": "group inline-flex",
+            "tableHeadColumnSortContainer": "ml-2 flex-none rounded",
+            "tableHeadColumnLabel": "",
+            "tableHeadColumnSorted": "bg-gray-200 text-gray-900 group-hover:bg-gray-300",
+            "tableHeadColumnNotSorted": "invisible group-focus:visible text-gray-400 group-hover:visible",
+            "tableHeadColumnSortedIcon": "text-gray-400 group-hover:visible group-focus:visible invisible",
+            "tableHeadColumnSortedIconClasses": "h-4 w-4 flex-none rounded",
+            "actionIconContainer": "mx-auto flex flex-shrink-0  items-center justify-center h-12 w-12 rounded-full",
+            "actionIcon": "h-6 w-6",
+            "actionIconContainerDanger": "bg-red-100",
+            "actionIconContainerSuccess": "bg-green-100",
+            "actionIconContainerWarning": "bg-yellow-100",
+            "actionIconContainerInfo": "bg-blue-100",
+            "actionIconDanger": "text-red-600",
+            "actionIconSuccess": "text-green-600",
+            "actionIconWarning": "text-yellow-600",
+            "actionIconInfo": "text-blue-600",
+            "actionsContentContainer": "mt-3 text-center sm:mt-5",
+            "actionsTitle": "text-lg leading-6 font-medium text-gray-900 dark:text-white",
+            "actionsText": "mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300",
+            "paginationContainer": "px-4 py-3 flex items-center justify-between border-gray-200 border-t sm:px-6 dark:border-gray-700",
+            "paginationShortContainer": "flex-1 flex justify-between sm:hidden",
+            "paginationShortIcon": "h-5 w-5",
+            "paginationShortLeft": "mr-2",
+            "paginationShortRight": "ml-2",
+            "paginationFullContainer": "hidden sm:flex-1 sm:flex sm:items-center sm:justify-between",
+            "paginationFullNumberOfRecords": "text-sm leading-5 text-gray-700 dark:text-gray-400",
+            "paginationFullButtonsContainer": "relative z-0 inline-flex shadow-sm cursor-pointer",
+            "paginationFullIcon": "h-6 w-5",
+            "paginationFullLeft": "rounded-l-md rounded-r-none focus:ring-0",
+            "paginationFullRight": "-ml-px rounded-r-md rounded-l-none focus:ring-0",
+            "paginationFullPage": "focus:bg-gray-300/10",
+            "paginationFullPageActive": "bg-primary-50 text-primary-600",
+            "skeletonTableBody": "bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700",
+            "skeletonTableColumn": "px-2 py-3 whitespace-nowrap leading-5"
+        }
+    },
+    "DateTimeInput": {
+        "fixedClasses": {
+            "input": "appearance-none w-full shadow disabled:opacity-50 disabled:cursor-not-allowed",
+            "wrapper": "relative",
+            "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
+            "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",
+            "addonBeforeInputClasses": "pl-10",
+            "addonAfterInputClasses": "pr-10",
+            "addonClasses": "w-5 h-5",
+            "roundedFull": "rounded-lg",
+            "roundedTop": "rounded-none rounded-t-lg",
+            "roundedBottom": "rounded-none rounded-b-lg",
+            "roundedLeft": "rounded-none rounded-l-lg",
+            "roundedRight": "rounded-none rounded-r-lg",
+            "roundedBottomLeft": "rounded-none rounded-bl-lg",
+            "roundedBottomRight": "rounded-none rounded-br-lg",
+            "roundedTopLeft": "rounded-none rounded-tl-lg",
+            "roundedTopRight": "rounded-none rounded-tr-lg"
+        },
+        "classes": {
+            "input": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 px-4 py-2.5",
+            "roundedFull": "",
+            "roundedTop": "",
+            "roundedBottom": "",
+            "roundedLeft": "",
+            "roundedRight": "",
+            "roundedBottomLeft": "",
+            "roundedBottomRight": "",
+            "roundedTopLeft": "",
+            "roundedTopRight": "",
+            "inputBorder": "border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400",
+            "wrapper": "",
+            "addonBefore": "",
+            "addonAfter": "",
+            "addonBeforeInputClasses": "",
+            "addonAfterInputClasses": "",
+            "addonClasses": "text-gray-300 dark:text-gray-600"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "input": "text-red-400 placeholder-red-400 leading-normal text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500",
+                    "inputBorder": "border border-red-400 focus:border-red-400 dark:focus:border-red-400",
+                    "wrapper": "",
+                    "addonBefore": "",
+                    "addonAfter": "",
+                    "addonBeforeInputClasses": "",
+                    "addonAfterInputClasses": "",
+                    "addonClasses": "text-red-300 dark:text-red-300/70"
+                }
+            },
+            "compact": {
+                "classes": {
+                    "input": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 rounded-lg px-4 py-2",
+                    "roundedFull": "",
+                    "roundedTop": "",
+                    "roundedBottom": "",
+                    "roundedLeft": "",
+                    "roundedRight": "",
+                    "roundedBottomLeft": "",
+                    "roundedBottomRight": "",
+                    "roundedTopLeft": "",
+                    "roundedTopRight": "",
+                    "inputBorder": "border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400",
+                    "wrapper": "",
+                    "addonBefore": "",
+                    "addonAfter": "",
+                    "addonBeforeInputClasses": "",
+                    "addonAfterInputClasses": "",
+                    "addonClasses": "text-gray-300 dark:text-gray-600"
+                }
+            }
+        }
+    },
+    "Dialog": {
+        "fixedClasses": {},
+        "classes": {
+            "wrapper": "fixed inset-0 z-30 overflow-y-auto",
+            "inner": "min-h-screen px-4 text-center",
+            "closeButton": "inline-block h-screen align-middle",
+            "overlay": "fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-900/80 backdrop-blur-sm",
+            "modalWithPadding": "px-4 pt-5 pb-4 sm:my-8 sm:p-6",
+            "modal": "relative inline-block align-middle overflow-hidden bg-white dark:bg-gray-800/70 shadow-xl rounded-lg transform transition-all dark:border dark:border-gray-700",
+            "sizeDefault": "max-w-sm w-full sm:max-w-sm sm:w-full",
+            "sizeSmall": "max-w-xs w-full sm:max-w-xs sm:w-full",
+            "sizeMedium": "max-w-md w-full sm:max-w-md sm:w-full",
+            "sizeLarge": "max-w-lg w-full sm:max-w-lg sm:w-full",
+            "sizeFull": " w-full",
+            "title": "px-4 py-5 sm:px-6 text-gray-700",
+            "titleDivided": "border-b dark:border-gray-700",
+            "titleText": "text-lg leading-6 font-medium text-gray-900 dark:text-white",
+            "body": "mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300",
+            "bodyDivided": "sm:divide-y sm:divide-gray-200 dark:divide-gray-800",
+            "bodyDarker": "bg-gray-50 dark:bg-gray-800",
+            "bodyWithPadding": "px-4",
+            "bodyWithPaddingBottom": "pb-4",
+            "bodyWithPaddingTop": "pt-5",
+            "footer": "px-4 py-5",
+            "footerDivided": "border-t border-gray-200 dark:border-gray-700",
+            "footerWithOneButton": "sm:grid sm:grid-cols-1 sm:gap-2 sm:grid-flow-row-dense",
+            "footerWithTwoButtons": "sm:grid sm:grid-cols-2 sm:gap-2 sm:grid-flow-row-dense space-y-2 sm:space-y-0",
+            "footerWithThreeButtons": "sm:grid sm:grid-cols-3 sm:gap-2 sm:grid-flow-row-dense",
+            "overlayEnter": "duration-300 ease-out",
+            "overlayEnterFrom": "opacity-0",
+            "overlayEnterTo": "opacity-100",
+            "overlayLeave": "duration-200 ease-in",
+            "overlayLeaveFrom": "opacity-100",
+            "overlayLeaveTo": "opacity-0",
+            "dialogEnter": "duration-300 ease-out",
+            "dialogEnterFrom": "opacity-0 scale-95",
+            "dialogEnterTo": "opacity-100 scale-100",
+            "dialogLeave": "duration-200 ease-in",
+            "dialogLeaveFrom": "opacity-100 scale-100",
+            "dialogLeaveTo": "opacity-0 scale-95"
+        }
+    },
+    "Dropdown": {
+        "fixedClasses": {},
+        "classes": {
+            "trigger": "",
+            "wrapper": "relative",
+            "container": "flex items-center content-center",
+            "chevronIcon": "-mr-1 ml-2 h-5 w-5",
+            "overlay": "fixed top-0 right-0 left-0 bottom-0 z-[99] bg-black/50",
+            "menuWrapper": "absolute z-[100]",
+            "menuWrapperLeft": "absolute origin-top-left left-0",
+            "menuWrapperRight": "absolute origin-top-right right-0",
+            "menuWrapperCenter": "absolute origin-top-right right-0 left-0 sm:left-auto sm:w-sm",
+            "menuWrapperCenterFull": "absolute origin-top-right right-0 mx-4 left-0 sm:left-auto sm:w-sm",
+            "dropdown": "bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 shadow-lg top-5 focus:ring-0 focus:outline-none overflow-hidden",
+            "roundedFull": "rounded-lg",
+            "roundedTop": "rounded-none rounded-t-lg",
+            "roundedBottom": "rounded-none rounded-b-lg",
+            "roundedLeft": "rounded-none rounded-l-lg",
+            "roundedRight": "rounded-none rounded-r-lg",
+            "roundedBottomLeft": "rounded-none rounded-bl-lg",
+            "roundedBottomRight": "rounded-none rounded-br-lg",
+            "roundedTopLeft": "rounded-none rounded-tl-lg",
+            "roundedTopRight": "rounded-none rounded-tr-lg",
+            "sizeDefault": "w-56",
+            "sizeMedium": "w-64",
+            "sizeLarge": "w-72",
+            "sizeXLarge": "w-80",
+            "sizeXXLarge": "w-96",
+            "sizeFull": "w-full",
+            "menuItemsWrapper": "",
+            "menuItemsWrapperSpaced": "space-y-1",
+            "menuItem": "group flex items-center w-full  text-sm leading-5 space-x-1 cursor-pointer",
+            "menuItemHighlighted": "text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black z-10",
+            "menuItemNotHighlighted": "text-gray-700 dark:text-white",
+            "menuItemSpacing": "px-4 py-3",
+            "arrow": "top-[-5px] invisible -z-[1] before:border-b-0 before:border-r-0 before:absolute before:w-2 before:h-2 before:bg-white  before:dark:bg-gray-900 before:visible before:rotate-45 before:border before:border-1 before:border-gray-300 before:dark:border-gray-700 before:rounded-sm",
+            "enterActiveClass": "transition duration-100 ease-out",
+            "enterFromClass": "transform scale-95 opacity-0",
+            "enterToClass": "transform scale-100 opacity-100",
+            "leaveActiveClass": "transition duration-75 ease-in",
+            "leaveFromClass": "transform scale-100 opacity-100",
+            "leaveToClass": "transform scale-95 opacity-0"
+        }
+    },
+    "FormErrors": {
+        "fixedClasses": {
+            "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-2",
+            "errors": "mt-2 text-xs text-red-400 placeholder-red-400 leading-normal text-sm",
+            "feedback": "mt-2 ml-1 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer",
+            "section": "bg-gray-50 dark:bg-gray-800/50",
+            "sectionDivided": "bg-gray-50 dark:bg-gray-800/50 sm:divide-y sm:divide-gray-200 dark:divide-gray-800"
+        },
+        "classes": {
+            "label": "",
+            "errors": "",
+            "feedback": "",
+            "section": "",
+            "sectionDivided": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "label": "",
+                    "errors": "",
+                    "feedback": "",
+                    "section": "",
+                    "sectionDivided": ""
+                }
+            }
+        }
+    },
+    "FormFeedback": {
+        "fixedClasses": {
+            "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-2",
+            "errors": "mt-2 text-xs text-red-400 placeholder-red-400 leading-normal text-sm",
+            "feedback": "mt-2 ml-1 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer",
+            "section": "bg-gray-50 dark:bg-gray-800/50",
+            "sectionDivided": "bg-gray-50 dark:bg-gray-800/50 sm:divide-y sm:divide-gray-200 dark:divide-gray-800"
+        },
+        "classes": {
+            "label": "",
+            "errors": "",
+            "feedback": "",
+            "section": "",
+            "sectionDivided": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "label": "",
+                    "errors": "",
+                    "feedback": "",
+                    "section": "",
+                    "sectionDivided": ""
+                }
+            }
+        }
+    },
+    "FormLabel": {
+        "fixedClasses": {
+            "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-2",
+            "errors": "mt-2 text-xs text-red-400 placeholder-red-400 leading-normal text-sm",
+            "feedback": "mt-2 ml-1 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer",
+            "section": "bg-gray-50 dark:bg-gray-800/50",
+            "sectionDivided": "bg-gray-50 dark:bg-gray-800/50 sm:divide-y sm:divide-gray-200 dark:divide-gray-800"
+        },
+        "classes": {
+            "label": "",
+            "errors": "",
+            "feedback": "",
+            "section": "",
+            "sectionDivided": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "label": "",
+                    "errors": "",
+                    "feedback": "",
+                    "section": "",
+                    "sectionDivided": ""
+                }
+            }
+        }
+    },
+    "FormSection": {
+        "fixedClasses": {
+            "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-2",
+            "errors": "mt-2 text-xs text-red-400 placeholder-red-400 leading-normal text-sm",
+            "feedback": "mt-2 ml-1 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer",
+            "section": "bg-gray-50 dark:bg-gray-800/50",
+            "sectionDivided": "bg-gray-50 dark:bg-gray-800/50 sm:divide-y sm:divide-gray-200 dark:divide-gray-800"
+        },
+        "classes": {
+            "label": "",
+            "errors": "",
+            "feedback": "",
+            "section": "",
+            "sectionDivided": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "label": "",
+                    "errors": "",
+                    "feedback": "",
+                    "section": "",
+                    "sectionDivided": ""
+                }
+            }
+        }
+    },
+    "Input": {
+        "fixedClasses": {
+            "input": "appearance-none w-full shadow disabled:opacity-50 disabled:cursor-not-allowed",
+            "wrapper": "relative",
+            "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
+            "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",
+            "addonBeforeInputClasses": "pl-10",
+            "addonAfterInputClasses": "pr-10",
+            "addonClasses": "w-5 h-5",
+            "roundedFull": "rounded-lg",
+            "roundedTop": "rounded-none rounded-t-lg",
+            "roundedBottom": "rounded-none rounded-b-lg",
+            "roundedLeft": "rounded-none rounded-l-lg",
+            "roundedRight": "rounded-none rounded-r-lg",
+            "roundedBottomLeft": "rounded-none rounded-bl-lg",
+            "roundedBottomRight": "rounded-none rounded-br-lg",
+            "roundedTopLeft": "rounded-none rounded-tl-lg",
+            "roundedTopRight": "rounded-none rounded-tr-lg"
+        },
+        "classes": {
+            "input": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 px-4 py-2.5",
+            "roundedFull": "",
+            "roundedTop": "",
+            "roundedBottom": "",
+            "roundedLeft": "",
+            "roundedRight": "",
+            "roundedBottomLeft": "",
+            "roundedBottomRight": "",
+            "roundedTopLeft": "",
+            "roundedTopRight": "",
+            "inputBorder": "border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400",
+            "wrapper": "",
+            "addonBefore": "",
+            "addonAfter": "",
+            "addonBeforeInputClasses": "",
+            "addonAfterInputClasses": "",
+            "addonClasses": "text-gray-300 dark:text-gray-600"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "input": "text-red-400 placeholder-red-400 leading-normal text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500",
+                    "inputBorder": "border border-red-400 focus:border-red-400 dark:focus:border-red-400",
+                    "wrapper": "",
+                    "addonBefore": "",
+                    "addonAfter": "",
+                    "addonBeforeInputClasses": "",
+                    "addonAfterInputClasses": "",
+                    "addonClasses": "text-red-300 dark:text-red-300/70"
+                }
+            },
+            "compact": {
+                "classes": {
+                    "input": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 rounded-lg px-4 py-2",
+                    "roundedFull": "",
+                    "roundedTop": "",
+                    "roundedBottom": "",
+                    "roundedLeft": "",
+                    "roundedRight": "",
+                    "roundedBottomLeft": "",
+                    "roundedBottomRight": "",
+                    "roundedTopLeft": "",
+                    "roundedTopRight": "",
+                    "inputBorder": "border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400",
+                    "wrapper": "",
+                    "addonBefore": "",
+                    "addonAfter": "",
+                    "addonBeforeInputClasses": "",
+                    "addonAfterInputClasses": "",
+                    "addonClasses": "text-gray-300 dark:text-gray-600"
+                }
+            }
+        }
+    },
+    "InputGroup": {
+        "fixedClasses": {},
+        "classes": {
+            "wrapper": "grid space-y-2",
+            "wrapperWithPadding": "px-6 py-3.5 mt-0",
+            "label": ""
+        },
+        "variants": {
+            "inline": {
+                "classes": {
+                    "wrapper": "sm:grid sm:grid-cols-3 sm:gap-4",
+                    "wrapperWithPadding": "sm:px-6 px-6 py-5",
+                    "label": "flex items-center text-sm leading-3 font-medium text-gray-500 dark:text-white"
+                }
+            },
+            "content": {
+                "classes": {
+                    "wrapper": "sm:grid",
+                    "wrapperWithPadding": "px-6 py-3 mt-0",
+                    "label": ""
+                }
+            }
+        }
+    },
+    "PhoneInput": {
+        "fixedClasses": {
+            "wrapper": "relative",
+            "inputsContainer": "rounded-lg -space-y-px"
+        },
+        "classes": {
+            "wrapper": "",
+            "inputsContainer": "",
+            "input": {
+                "fixedClasses": {
+                    "addonBeforeInputClasses": "pl-12"
+                }
+            }
+        },
+        "variants": {
+            "error": {
+                "input": {
+                    "fixedClasses": {
+                        "addonBeforeInputClasses": "pl-12"
+                    }
+                }
+            }
+        }
+    },
+    "RichRadio": {
+        "fixedClasses": {
+            "container": "relative flex-1",
+            "optionContainer": "rounded-lg",
+            "optionContainerSeparated": "space-y-2",
+            "optionContainerNonSeparated": "-space-y-px"
+        },
+        "classes": {
+            "wrapper": "",
+            "container": "",
+            "optionContainer": "",
+            "optionContainerSeparated": "",
+            "optionContainerNonSeparated": ""
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "",
+                    "container": "",
+                    "optionContainer": "",
+                    "optionContainerSeparated": "",
+                    "optionContainerNonSeparated": ""
+                }
+            }
+        }
+    },
+    "RichRadioOption": {
+        "fixedClasses": {
+            "disabled": "opacity-50 cursor-not-allowed",
+            "option": "",
+            "checked": "",
+            "unchecked": "",
+            "highlighted": "",
+            "nonHighlighted": "",
+            "separated": "",
+            "firstItem": "rounded-tl-lg rounded-tr-lg",
+            "lastItem": "rounded-bl-lg rounded-br-lg",
+            "compact": "px-4 py-2",
+            "nonCompact": "px-5 py-4",
+            "radio": "",
+            "radioHighlighted": "ring-2 ring-offset-2",
+            "radioChecked": "",
+            "radioUnchecked": "",
+            "radioInner": "",
+            "checkedIconWrapper": "",
+            "checkedIcon": "w-6 h-6",
+            "checkedIconOpacity": "",
+            "contentWrapper": "",
+            "contentWrapperIfNotRadio": "",
+            "contentInner": "",
+            "content": "",
+            "label": "",
+            "labelChecked": "",
+            "labelUnchecked": "",
+            "description": "",
+            "descriptionChecked": "",
+            "descriptionUnchecked": ""
+        },
+        "classes": {
+            "disabled": "",
+            "option": "relative flex px-5 py-4 cursor-pointer focus:outline-none",
+            "checked": "bg-primary-100 dark:bg-primary-500/60 text-white border-primary-200 dark:border-primary-500 z-10",
+            "unchecked": "bg-white dark:bg-gray-900",
+            "highlighted": "ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-primary-600 border border-primary-200 dark:bg-primary-500 dark:border-primary-500 z-10",
+            "nonHighlighted": "border border-gray-200 dark:border-gray-700",
+            "separated": "rounded-lg",
+            "firstItem": "",
+            "lastItem": "",
+            "compact": "",
+            "nonCompact": "",
+            "radio": "h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center flex-shrink-0",
+            "radioHighlighted": "ring-primary-500",
+            "radioChecked": "bg-primary-600 border-transparent dark:bg-gray-900 ring-offset-white dark:ring-offset-gray-900",
+            "radioUnchecked": "bg-white dark:bg-gray-700 border-gray-300",
+            "radioInner": "rounded-full bg-white w-1.5 h-1.5",
+            "checkedIconWrapper": "flex-shrink-0",
+            "checkedIcon": "w-6 h-6",
+            "checkedIconOpacity": "fill-opacity-90 dark:fill-opacity-30 fill-[#4f46e5] dark:fill-[#fff]",
+            "contentWrapper": "ml-3 flex items-center justify-between text-sm",
+            "contentWrapperIfNotRadio": "w-full",
+            "contentInner": "",
+            "content": "flex items-center",
+            "label": "font-medium",
+            "labelChecked": "font-bold text-primary-900 dark:text-white",
+            "labelUnchecked": "font-normal text-gray-900 dark:text-white",
+            "description": "inline",
+            "descriptionChecked": "text-primary-700 dark:text-gray-200",
+            "descriptionUnchecked": "text-gray-500 dark:text-gray-400"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "disabled": "",
+                    "option": "relative flex px-5 py-4 cursor-pointer focus:outline-none",
+                    "checked": "bg-red-100 dark:bg-red-500/30 text-white border-red-200 dark:border-red-500 z-10",
+                    "unchecked": "bg-white dark:bg-gray-900",
+                    "highlighted": "ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-red-600 border border-red-200 dark:bg-red-500 dark:border-red-500 z-10",
+                    "nonHighlighted": "border border-gray-200 dark:border-gray-700",
+                    "separated": "rounded-lg",
+                    "firstItem": "",
+                    "lastItem": "",
+                    "compact": "",
+                    "nonCompact": "",
+                    "radio": "h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center",
+                    "radioHighlighted": "ring-red-500",
+                    "radioChecked": "bg-red-600 border-transparent dark:bg-red-700 ring-offset-white dark:ring-offset-gray-90",
+                    "radioUnchecked": "bg-white dark:bg-gray-700 border-gray-300",
+                    "radioInner": "rounded-full bg-white w-1.5 h-1.5",
+                    "checkedIconWrapper": "flex-shrink-0",
+                    "checkedIcon": "w-6 h-6",
+                    "checkedIconOpacity": "fill-opacity-90 dark:fill-opacity-30 fill-red-300 dark:fill-[#fff]",
+                    "contentWrapper": "ml-3 flex items-center justify-between text-sm",
+                    "contentWrapperIfNotRadio": "w-full",
+                    "contentInner": "",
+                    "content": "flex items-center",
+                    "label": "font-medium",
+                    "labelChecked": "font-bold text-red-900 dark:text-white",
+                    "labelUnchecked": "font-normal text-gray-900 dark:text-white",
+                    "description": "inline",
+                    "descriptionChecked": "text-red-700 dark:text-gray-200",
+                    "descriptionUnchecked": "text-gray-500 dark:text-gray-400"
+                }
+            }
+        }
+    },
+    "RichSelect": {
+        "fixedClasses": {
+            "trigger": "relative"
+        },
+        "classes": {
+            "wrapper": "block w-full",
+            "trigger": "bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+            "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
+            "dropdownContent": "pt-1 space-y-2",
+            "clearButton": "absolute flex items-center justify-center text-gray-600 dark:text-gray-300 dark:text rounded mr-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-opacity-70 top-1/2 right-0 transform -translate-y-1/2 focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600 w-5 h-5 transition duration-100 ease-in-out",
+            "optionsList": "space-y-1",
+            "optionsListLoadingMore": "flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 text-center",
+            "optionWrapper": "",
+            "option": "w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2",
+            "selectedOption": "font-bold bg-gray-50",
+            "highlightedOption": "text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black",
+            "selectedHighlightedOption": "font-semibold",
+            "optionContent": "flex items-center justify-between",
+            "optionLabel": "block truncate",
+            "optionSelectedIcon": "w-5 h-5",
+            "optgroup": "space-y-2",
+            "optgroupContent": "",
+            "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
+            "optgroupOptionsList": "px-2 pb-2",
+            "searchWrapper": "inline-block w-full px-3 py-2",
+            "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+            "searchingText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+            "needsMoreCharsText": "px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center",
+            "noResultsText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+            "selectButtonLabel": "block pr-4 truncate",
+            "selectButtonPlaceholder": "block text-gray-500/90 truncate",
+            "selectButtonSearchingPlaceholder": "block text-gray-400 truncate",
+            "selectButtonLoadingIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+            "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+            "tagsWrapper": "flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8",
+            "tag": "rounded shadow-sm flex items-center cursor-pointer bg-primary-100 dark:bg-primary-500/20 dark:border dark:border-gray-700 m-0.5 h-8 max-w-full text-primary-900 dark:text-white white-space-no text-sm font-semibold focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-opacity-50 focus:ring-primary-600 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed",
+            "tagLabel": "px-3",
+            "tagDeleteButton": "transition duration-100 ease-in-out focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-opacity-50 focus:ring-primary-600 -ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r text-primary-400 focus:text-white hover:text-primary-500 dark:hover:text-white hover:bg-primary-200 focus:bg-primary-500 dark:hover:bg-primary-400/20 dark:focus:bg-primary-500/20",
+            "tagDeleteButtonIcon": "w-3 h-3",
+            "groupedBellow": "rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10",
+            "groupedAbove": "rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10",
+            "stateWrapper": "flex items-center justify-center space-x-1",
+            "stateLoadingIcon": "animate-spin w-3.5 h-3.5 -mr-2",
+            "enterActiveClass": "transition-opacity duration-100 ease-out",
+            "enterFromClass": "transform scale-95 opacity-0",
+            "enterToClass": "transform scale-100 opacity-100",
+            "leaveActiveClass": "transition-opacity duration-100 ease-in",
+            "leaveFromClass": "transform scale-100 opacity-100",
+            "leaveToClass": "transform scale-95 opacity-0"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "block w-full",
+                    "trigger": "bg-white dark:bg-gray-900 border border-red-400 focus:border-red-400 dark:focus:border-red-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500 text-red-400 placeholder-red-400 leading-normal text-sm rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+                    "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
+                    "dropdownContent": "pt-1 space-y-2",
+                    "clearButton": "absolute flex items-center justify-center text-red-400 dark:text-red-300 dark:text rounded mr-3 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-opacity-70 top-1/2 right-0 transform -translate-y-1/2 focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600 w-5 h-5 transition duration-100 ease-in-out",
+                    "optionsList": "space-y-1",
+                    "optionsListLoadingMore": "flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 text-center",
+                    "optionWrapper": "",
+                    "option": "w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2",
+                    "selectedOption": "font-bold bg-gray-50",
+                    "highlightedOption": "text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black",
+                    "selectedHighlightedOption": "font-semibold",
+                    "optionContent": "flex items-center justify-between",
+                    "optionLabel": "block truncate",
+                    "optionSelectedIcon": "w-5 h-5",
+                    "optgroup": "space-y-2",
+                    "optgroupContent": "",
+                    "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
+                    "optgroupOptionsList": "px-2 pb-2",
+                    "searchWrapper": "inline-block w-full px-3 py-2",
+                    "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+                    "searchingText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+                    "needsMoreCharsText": "px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center",
+                    "noResultsText": "px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center",
+                    "selectButtonLabel": "block pr-4 truncate",
+                    "selectButtonPlaceholder": "block text-gray-500/90 truncate",
+                    "selectButtonSearchingPlaceholder": "block text-gray-400 truncate",
+                    "selectButtonLoadingIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+                    "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+                    "tagsWrapper": "flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8",
+                    "tag": "rounded shadow-sm flex items-center cursor-pointer bg-red-100 dark:bg-red-500/20 m-0.5 h-8 max-w-full text-red-900 dark:text-red-300 white-space-no text-sm white-space-no focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600 focus:ring-opacity-50 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed",
+                    "tagLabel": "px-3",
+                    "tagDeleteButton": "transition duration-100 ease-in-out focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600 focus:ring-opacity-50 -ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r text-red-900 dark:text-red-300 focus:text-white hover:text-red-800 dark:hover:text-red-200 hover:bg-red-200 focus:bg-red-500 dark:hover:bg-red-400/20 dark:focus:bg-red-500/20",
+                    "tagDeleteButtonIcon": "w-3 h-3",
+                    "groupedBellow": "rounded-b-none border-b-0 focus:border-b focus:border-primary-500 z-10",
+                    "groupedAbove": "rounded-t-none border-t-0 focus:border-t focus:border-primary-500 z-10",
+                    "stateWrapper": "flex items-center justify-center space-x-1",
+                    "stateLoadingIcon": "animate-spin w-3.5 h-3.5 -mr-2",
+                    "enterActiveClass": "transition-opacity duration-100 ease-out",
+                    "enterFromClass": "transform scale-95 opacity-0",
+                    "enterToClass": "transform scale-100 opacity-100",
+                    "leaveActiveClass": "transition-opacity duration-100 ease-in",
+                    "leaveFromClass": "transform scale-100 opacity-100",
+                    "leaveToClass": "transform scale-95 opacity-0"
+                }
+            }
+        }
+    },
+    "RichSelectOptionWithImage": {
+        "classes": {
+            "wrapper": "relative group",
+            "disabled": "opacity-50 cursor-not-allowed",
+            "labelAndImageWrapper": "relative",
+            "labelAndImageContainer": "flex items-center space-x-2 text-sm block",
+            "labelAndImageContainerSelected": "font-semibold",
+            "labelAndImageContainerRegular": "font-normal",
+            "image": "flex-shrink-0 w-6 h-6 bg-gray-500 dark:bg-gray-800 bg-center bg-cover rounded-full border border-gray-300 dark:border-gray-500 shadow",
+            "label": "block whitespace-nowrap truncate",
+            "description": "w-100 text-xs text-left mt-1 truncate",
+            "descriptionSelected": "font-normal opacity-60",
+            "descriptionRegular": "opacity-60",
+            "selectedIconContainer": "absolute inset-y-0 right-0 flex items-center pl-3 pr-3 text-primary-600",
+            "icon": "w-5 h-5"
+        }
+    },
+    "RichSelectOptionWithIndicators": {
+        "classes": {
+            "wrapper": "relative group",
+            "disabled": "opacity-50 cursor-not-allowed",
+            "labelAndImageWrapper": "relative",
+            "labelAndImageContainer": "flex items-center space-x-2 text-sm block",
+            "labelAndImageContainerSelected": "font-semibold",
+            "labelAndImageContainerRegular": "font-normal",
+            "indicator": "flex-shrink-0 inline-block h-2 w-2 rounded-full",
+            "label": "block whitespace-nowrap truncate",
+            "description": "w-100 text-xs text-left mt-1",
+            "descriptionSelected": "font-normal opacity-60",
+            "descriptionRegular": "opacity-60",
+            "selectedIconContainer": "absolute inset-y-0 right-0 flex items-center pl-3 pr-3 text-primary-600",
+            "icon": "w-5 h-5",
+            "indicatorGreen": "bg-green-400",
+            "indicatorGray": "bg-gray-200",
+            "indicatorRed": "bg-red-400",
+            "indicatorYellow": "bg-yellow-400",
+            "indicatorBlue": "bg-blue-400"
+        }
+    },
+    "RichSelectTagWithImage": {
+        "classes": {
+            "wrapper": "relative group",
+            "disabled": "opacity-50 cursor-not-allowed",
+            "labelAndImageWrapper": "relative",
+            "labelAndImageContainer": "flex items-center space-x-2 text-sm block",
+            "labelAndImageContainerSelected": "font-semibold",
+            "labelAndImageContainerRegular": "font-normal",
+            "image": "flex-shrink-0 w-6 h-6 bg-gray-500 dark:bg-gray-800 bg-center bg-cover rounded-full border border-gray-300 dark:border-gray-500 shadow",
+            "label": "block whitespace-nowrap truncate font-semibold"
+        }
+    },
+    "Select": {
+        "fixedClasses": {
+            "wrapper": "relative",
+            "select": "appearance-none block w-full shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+            "selectIfMultiple": "space-y-2"
+        },
+        "classes": {
+            "wrapper": "",
+            "select": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 rounded-lg",
+            "selectIfMultiple": "",
+            "optGroup": "px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed leading-normal sm:text-sm rounded-lg checked:font-semibold checked:text-primary-900 checked:bg-primary-100 checked:dark:bg-primary-300 checked:dark:text-black select:focus:text-red-100 w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "",
+                    "select": "text-red-400 placeholder-red-400 leading-normal text-sm bg-white dark:bg-gray-900 border border-red-400 focus:border-red-400 dark:focus:border-red-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500",
+                    "selectIfMultiple": "",
+                    "optGroup": "px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed leading-normal sm:text-sm rounded-lg checked:font-semibold checked:text-red-900 checked:bg-red-100 checked:dark:bg-red-300 checked:dark:text-black select:focus:text-red-100 w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2"
+                }
+            }
+        }
+    },
+    "SkeletonBar": {
+        "fixedClasses": "",
+        "classes": {
+            "wrapper": "animate-pulse space-y-1",
+            "class": "h-5 rounded w-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "",
+                    "class": ""
+                }
+            }
+        }
+    },
+    "Slideover": {
+        "fixedClasses": {},
+        "classes": {
+            "wrapper": "absolute inset-0 z-30 overflow-hidden",
+            "overlay": "fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-700/50 backdrop-blur-sm",
+            "innerLeft": "fixed inset-y-0 left-0 pr-10 max-w-full flex",
+            "innerRight": "fixed inset-y-0 right-0 pl-10 max-w-full flex",
+            "slideover": "pointer-events-auto w-screen",
+            "slideoverContainer": "flex h-full flex-col overflow-y-scroll bg-white dark:bg-gray-800 shadow-xl",
+            "slideOverContainerWithPadding": "py-6",
+            "sizeDefault": "max-w-sm",
+            "sizeSmall": "max-w-xs",
+            "sizeMedium": "max-w-md",
+            "sizeLarge": "max-w-lg",
+            "sizeExtraLarge": "max-w-2xl",
+            "sizeFull": " w-full",
+            "body": "relative flex-1",
+            "bodyWithPadding": "px-4 sm:px-6",
+            "bodyWithTitle": "mt-6",
+            "closeButtonContainer": "flex h-7 items-center",
+            "closeButton": "rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2",
+            "closeButtonIcon": "h-6 w-6",
+            "titleContainer": "flex items-start justify-between space-x-3",
+            "titleWrapper": "px-4 sm:px-6",
+            "titleInner": "space-y-1",
+            "titleText": "text-lg font-medium text-gray-900 dark:text-white",
+            "subtitle": "text-sm text-gray-500 dark:text-gray-700",
+            "overlayEnter": "duration-300 ease-out",
+            "overlayEnterFrom": "opacity-0",
+            "overlayEnterTo": "opacity-100",
+            "overlayLeave": "duration-200 ease-in",
+            "overlayLeaveFrom": "opacity-100",
+            "overlayLeaveTo": "opacity-0",
+            "dialogLeftEnter": "transform transition ease-in-out duration-500 sm:duration-700",
+            "dialogLeftEnterFrom": "-translate-x-full",
+            "dialogLeftEnterTo": "translate-x-0",
+            "dialogLeftLeave": "transform transition ease-in-out duration-500 sm:duration-700",
+            "dialogLeftLeaveFrom": "translate-x-0",
+            "dialogLeftLeaveTo": "-translate-x-full",
+            "dialogRightEnter": "transform transition ease-in-out duration-500 sm:duration-700",
+            "dialogRightEnterFrom": "translate-x-full",
+            "dialogRightEnterTo": "translate-x-0",
+            "dialogRightLeave": "transform transition ease-in-out duration-500 sm:duration-700",
+            "dialogRightLeaveFrom": "translate-x-0",
+            "dialogRightLeaveTo": "translate-x-full"
+        }
+    },
+    "StatusIndicator": {
+        "fixedClasses": {
+            "wrapper": "relative",
+            "container": "flex h-3 w-3 flex-shrink-0",
+            "pulsing": "animate-ping absolute inline-flex h-full w-full rounded-full opacity-75",
+            "regular": "relative inline-flex rounded-full h-3 w-3",
+            "background": ""
+        },
+        "classes": {
+            "wrapper": "",
+            "container": "",
+            "pulsing": "",
+            "regular": "",
+            "background": "bg-gray-500"
+        },
+        "variants": {
+            "green": {
+                "classes": {
+                    "background": "bg-green-500"
+                }
+            },
+            "indigo": {
+                "classes": {
+                    "background": "bg-indigo-500"
+                }
+            },
+            "red": {
+                "classes": {
+                    "background": "bg-red-500"
+                }
+            },
+            "blue": {
+                "classes": {
+                    "background": "bg-blue-500"
+                }
+            },
+            "orange": {
+                "classes": {
+                    "background": "bg-orange-500"
+                }
+            }
+        }
+    },
+    "Textarea": {
+        "fixedClasses": {
+            "input": "appearance-none w-full shadow disabled:opacity-50 disabled:cursor-not-allowed",
+            "wrapper": "relative",
+            "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
+            "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",
+            "addonBeforeInputClasses": "pl-10",
+            "addonAfterInputClasses": "pr-10",
+            "addonClasses": "w-5 h-5",
+            "roundedFull": "rounded-lg",
+            "roundedTop": "rounded-none rounded-t-lg",
+            "roundedBottom": "rounded-none rounded-b-lg",
+            "roundedLeft": "rounded-none rounded-l-lg",
+            "roundedRight": "rounded-none rounded-r-lg",
+            "roundedBottomLeft": "rounded-none rounded-bl-lg",
+            "roundedBottomRight": "rounded-none rounded-br-lg",
+            "roundedTopLeft": "rounded-none rounded-tl-lg",
+            "roundedTopRight": "rounded-none rounded-tr-lg"
+        },
+        "classes": {
+            "input": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 px-4 py-2.5",
+            "roundedFull": "",
+            "roundedTop": "",
+            "roundedBottom": "",
+            "roundedLeft": "",
+            "roundedRight": "",
+            "roundedBottomLeft": "",
+            "roundedBottomRight": "",
+            "roundedTopLeft": "",
+            "roundedTopRight": "",
+            "inputBorder": "border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400",
+            "wrapper": "",
+            "addonBefore": "",
+            "addonAfter": "",
+            "addonBeforeInputClasses": "",
+            "addonAfterInputClasses": "",
+            "addonClasses": "text-gray-300 dark:text-gray-600"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "input": "text-red-400 placeholder-red-400 leading-normal text-sm bg-white dark:bg-gray-900 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500",
+                    "inputBorder": "border border-red-400 focus:border-red-400 dark:focus:border-red-400",
+                    "wrapper": "",
+                    "addonBefore": "",
+                    "addonAfter": "",
+                    "addonBeforeInputClasses": "",
+                    "addonAfterInputClasses": "",
+                    "addonClasses": "text-red-300 dark:text-red-300/70"
+                }
+            },
+            "compact": {
+                "classes": {
+                    "input": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400 focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600 rounded-lg px-4 py-2",
+                    "roundedFull": "",
+                    "roundedTop": "",
+                    "roundedBottom": "",
+                    "roundedLeft": "",
+                    "roundedRight": "",
+                    "roundedBottomLeft": "",
+                    "roundedBottomRight": "",
+                    "roundedTopLeft": "",
+                    "roundedTopRight": "",
+                    "inputBorder": "border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400",
+                    "wrapper": "",
+                    "addonBefore": "",
+                    "addonAfter": "",
+                    "addonBeforeInputClasses": "",
+                    "addonAfterInputClasses": "",
+                    "addonClasses": "text-gray-300 dark:text-gray-600"
+                }
+            }
+        }
+    },
+    "Toggle": {
+        "fixedClasses": {
+            "wrapper": "",
+            "wrapperLeft": "flex items-center justify-start",
+            "wrapperCenter": "flex items-center justify-center",
+            "wrapperRight": "flex items-center justify-end",
+            "toggle": "relative inline-flex flex-shrink-0 cursor-pointer border-2 border-transparent h-6 w-11 rounded-full transition-colors ease-in-out duration-200 focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900",
+            "checked": "",
+            "unchecked": "",
+            "iconChecked": "h-3 w-3",
+            "iconUnchecked": "h-3 w-3"
+        },
+        "classes": {
+            "wrapper": "",
+            "wrapperLeft": "",
+            "wrapperCenter": "",
+            "wrapperRight": "",
+            "toggle": "focus:ring-offset-2 focus:ring-primary-600",
+            "checked": "bg-primary-600",
+            "unchecked": "bg-gray-200 dark:bg-gray-900 dark:border-gray-700",
+            "iconChecked": "text-primary-600",
+            "iconUnchecked": "text-gray-400 dark:text-gray-900"
+        },
+        "variants": {
+            "error": {
+                "classes": {
+                    "wrapper": "",
+                    "toggle": "focus:ring-offset-2 focus:ring-red-600",
+                    "checked": "bg-red-600",
+                    "unchecked": "bg-red-600/50 dark:bg-red-500/70",
+                    "iconChecked": "text-red-600",
+                    "iconUnchecked": "text-red-400"
+                }
+            }
+        }
+    }
+}

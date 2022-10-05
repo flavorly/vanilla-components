@@ -1,0 +1,24 @@
+{
+    "fixedClasses": {
+        "wrapper": "relative",
+        "inputsContainer": "rounded-lg -space-y-px"
+    },
+    "classes": {
+        "wrapper": "",
+        "inputsContainer": "",
+        "input": {
+            "fixedClasses": {
+                "addonBeforeInputClasses": "pl-12"
+            }
+        }
+    },
+    "variants": {
+        "error": {
+            "input": {
+                "fixedClasses": {
+                    "addonBeforeInputClasses": "pl-12"
+                }
+            }
+        }
+    }
+}

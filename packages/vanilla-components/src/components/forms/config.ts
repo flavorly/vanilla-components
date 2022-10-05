@@ -20,19 +20,6 @@ export const formsConfig = {
     section: '',
     sectionDivided: '',
   },
-
-  // Variants
-  variants: {
-    error: {
-      classes: {
-        label: '',
-        errors: '',
-        feedback: '',
-        section: '',
-        sectionDivided: '',
-      },
-    },
-  },
 }
 
 export const formClassesKeys = Object.keys(formsConfig.classes)
