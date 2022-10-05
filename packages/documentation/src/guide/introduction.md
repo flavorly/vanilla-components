@@ -4,16 +4,17 @@ outline: deep
 
 # Introduction
 
-## Why i should use this?
+## Why I should use this?
 
-- You want a small set of Tailwind, Boostrap or w/e components ready to go for Vue 3
-- You want to use utility classes or classes to style your component, no matter what CSS framework
-- You want to recycle your components between projects with very little effort
-- You want to create different variants of your components in a clean way
-- You want to quickly bootstrap a project and test stuff out without pushing a huge UI framework
-- Your lazy as i am 🦥
-- You are tired of styling things over and over again
-- You are a cool person, and you want to give Vanilla Components a spin! 🥳
+- I want a small set of Tailwind, Boostrap or w/e components ready to go for Vue 3
+- I want to use utility classes or classes to style your component, no matter what CSS framework
+- I want to recycle your components between projects with very little effort
+- I want to create different variants of your components in a clean & organized way
+- I want to quickly bootstrap a project and test stuff out without pushing a huge UI framework
+- I lazier than you 🦥
+- I am tired of styling things over and over again
+- I am a cool person, and you want to give Vanilla Components a spin! 🥳
+- I am tired of waiting for someone else to update their huge UI Library
 
 👉 But hey, if you are not a ready jump right to the Components section!
 
@@ -25,14 +26,23 @@ After searching a couple of days for a nice component library i couldn't find my
 
 That being said, i have decided to take a spin on my own library, taking the concept of VariantJS and using its core concept to Vanilla Components with my own touch!
 
-## How "Vanilla" is this?
+## Why vanilla?
 
-As much as we can, we avoid pulling 3rd party packages, but for what it matters we only include battle tested libraries such as **[HeadlessUI](https://headlessui.com)** to wrap a few components and take advantage of all the accessibility & nice work already done, there is no point on re-inventing the wheel for those cases, lets just style them and take advantage of our Theme & Variations system to achieve what we need.
+The whole idea is to not "depend" on some package to continue your life or start your next project, so i try to keep the components as plain as possible so whenever a new version of Vue is released, we would be able to quickly shift and get it working in no time.
 
-## The concept
+You may ask yourself, yeah but than why its HeadlessUI and all other packages there as peer dependency? That's right a good a question! At the end of the day we still depend on some 3rd party libraries because at the time being they provide a really great value, but the good thing is we have created a wrapper around there, so if for example HeadlessUI would stop being maintained, we could quickly swap their components for something else, while still keeping the same "api". The same applies for other components, the reason why we called it Vanilla :), because its vanilla as possible!
 
-The concept of the project is simple, creating components that have a certain markup, that are fully configurable via a Javascript object, this brings enough flexibility for variants, swaping configuration in real-time & many more!
+## The core concept
 
-## What we are doing next?
+The concept is pretty simple, less work doing small components while still benefit from the whole styling flexibility.
 
-Well, the main goals would be improving the current components, add tests, add a few more interesting components, but keep in mind we wanted to keep this library as **small as possible** with the "basics", this would make sure that it will be still maintainable at least for myself, while still providing a nice value for further projects.
+## Why not functional components?
+
+Well, i don't have enough time to write function components yet, neither enough knowledge yet to do them the right way.
+If you are a fan of those please check **[HeadlessUI](https://headlessui.com)**.
+
+Plus the whole point of this project is to cut the boring work, we would still have to style functional components over and over every single project. :p
+
+## Roadmap
+
+Well, the main goal would be improving the current components, add tests, add a few more interesting components, but keep in mind we wanted to keep this library as **small as possible** with the "basics", this would make sure that it will be still maintainable at least for myself, while still providing a nice value for further projects.

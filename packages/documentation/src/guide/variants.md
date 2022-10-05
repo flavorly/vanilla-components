@@ -2,104 +2,73 @@
 outline: deep
 ---
 
-# Themes & Variants
+# Variants
 
-## Creating the project
+## Using Variants
 
-In an empty directory, run the following command:
+One of the main features of Vanilla Components is the usage of variants as explained on the [configuration](./configuration) section, when using variants the component will swap the classes automatically while preserving the `fixedClasses` you may use the `variant` prop to quickly toggle different variants. 
 
-```bash
-preset init
+There is one special variant for errors called `error`, this variant it meant to be temporary and once you change or interact the component it will fallback the original variant provided initially ( if any ).
+
+You may use variants as shown bellow :
+```vue
+<template>
+    <Button variant="soft-red"/>
+    <Button :variant="true ? 'soft-red' : 'soft-blue'"/>
+    <!-- This will use "error" variant, and once you hit, it will fallback to soft-red -->
+    <Button variant="soft-red" :errors="'There is something wrong'"/>
+</template>
 ```
 
-Alternatively, you can specify a directory as the second argument to create the preset elsewhere.
-After asking for a preset name, the command will generate the following: 
+You are not limited to configure everything when booting the plugin, you may also define your `classes`, `fixedClasses` & `variants` on your component, this is useful for edge cases or specific scenarios that you want to override something specific.
 
-```
-templates/
-├─ .gitkeep
-preset.ts
-package.json
-tsconfig.json
-README.md
-.gitignore
-```
+:::warning A note on overrides & inline configuration
+Please just keep in mind that when you do this, we will completely **ignore** the global configuration and use the classes, fixedClasses or variants provided "inline".
 
-:::tip Repository initilialization
-Unless you use the `--no-git` flag, a repository will be created and the initial files will be committed.
 :::
 
-## Adding actions
+Here is a small example: 
 
-
-```ts
-export default definePreset({
-  name: 'my-preset',
-  handler: async() => {
-    // Will extract /templates/vue to the target directory
-    await extractTemplates({
-      from: 'vue'
-    })
-
-    // ...
-  },
-})
+```vue
+<template>
+    <Button
+        :variants="{
+            dark: {
+                classes: {
+                    wrapper: 'pt-20'
+                }
+            }
+        }"
+        :classes="{
+            wrapper: 'pt-10'
+        }"
+        :fixed-classes="{
+            wrapper: 'pb-20'
+        }"
+        variant="dark"
+    />
+</template>
 ```
 
-:::tip Actions are globals
-The whole preset API is global, so yUsing options
-:::
+Given the example above we would always use the `pb-20` from the fixed classes, and `pt-20` from `dark` variant we picked up, ignoring the default `pt-10` that was the default value for the key "wrapper".
 
-## Using options
+The actual HTML result would be something like the following :
 
-Preset uses [`cac`](https://github.com/cacjs/cac) to parse command-line arguments. You can set default values to arguments using the `options` property and use the `context` object that is given to `handler` to read their value:
-
-```ts
-export default definePreset({
-  name: 'my-preset',
-  options: {
-    somethingCustom: false
-  },
-  handler: async(context) => {
-    if (context.options.somethingCustom) {
-      // Do something only if --something-custom was used
-    }
-
-    // ...
-  },
-})
+```html
+<button class="pb-20 pt-20"></button>
 ```
 
-Thanks to `cac`, you can set an option to `false` using the `--no-` prefix. In the example below, `customOption` is always `true` unless you use `--no-custom-option`. 
+## Hands on!
 
-```ts
-export default definePreset({
-  options: {
-    customOption: true
-  },
-  // ...
-})
-```
-
-Note that options names are converted to `camelCase`.
-
-## Testing the preset locally
-
-In order to try your preset, you can simply use its path:
-
-```ts
-preset apply /path/to/your/preset/project
-```
-
-## Next steps
+Yes, your not limited to have a fixed color or style set in your component! But enough of talk, lets see some real example.
 
 
-:::tip Archiving edited files
-When creating a preset from a test project, if you committed its initial state and started editing it, you can use `git diff` to list the modified files.
+<script setup>
+    import ExampleVariants from './components/variants-demo.vue';
+</script>
 
-Combined with `git archive`, you can zip up all of the files you edited and unzip them in the templates directory of your preset.
+<ExampleVariants />
 
-```bash
-git archive -o update.zip HEAD $(git diff --diff-filter=M --name-only)
-```
-:::
+And here is the code :
+
+<<< @/guide/components/variants-demo.vue

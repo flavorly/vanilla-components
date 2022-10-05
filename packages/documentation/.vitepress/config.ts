@@ -24,16 +24,16 @@ const plugins = !production
 
 const navQuickStart = [
   { text: 'Introduction', link: '/guide/introduction' },
-  { text: 'Quick Start', link: '/guide/quick-start' },
+  { text: 'Installation', link: '/guide/quick-start' },
   { text: 'Configuration', link: '/guide/configuration' },
   { text: 'Variants & Usage', link: '/guide/variants' },
-  { text: 'Workflow', link: '/guide/workflow' },
+  { text: 'Shared Props', link: '/guide/props' },
 ]
 
 export default defineConfig({
   // Vue Config
   vue: {
-    reactivityTransform: false,
+    reactivityTransform: true,
   },
 
   // Vite config
