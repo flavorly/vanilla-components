@@ -3,11 +3,10 @@ import type { PropType, Ref } from 'vue'
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { RichSelectProps } from '../config'
 import SelectOption from './option.vue'
+import LoadingIcon from '@/components/icons/loading.vue'
 import { useInjectsClassesList } from '@/core/use'
 import { debounce, normalizeMeasure } from '@/core/helpers'
 import type { NormalizedOptions } from '@/core/types'
-
-// TODO: Refactor to script setup
 
 const props = defineProps({
   options: {
@@ -119,7 +118,12 @@ onBeforeUnmount(() => {
       ref="fetchingMoreOptionsText"
       key="loading_more"
       :class="classesList.optionsListLoadingMore"
-      v-text="configuration.loadingMoreResultsText"
-    />
+    >
+      <LoadingIcon
+        ref="loadingIcon"
+        :class="classesList.selectButtonLoadingIcon"
+      />
+      <span>{{ configuration.loadingMoreResultsText }}</span>
+    </li>
   </ul>
 </template>

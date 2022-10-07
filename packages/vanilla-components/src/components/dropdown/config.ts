@@ -138,6 +138,7 @@ export declare type DropdownExtendedProps = WithVariantPropsAndClassesList<{
   toggleOnFocus?: boolean
   toggleOnClick?: boolean
   toggleOnHover?: boolean
+  closeOnClickAway?: boolean
 
   show?: boolean
 

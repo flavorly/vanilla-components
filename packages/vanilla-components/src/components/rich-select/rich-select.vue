@@ -119,11 +119,11 @@ const props = defineProps({
   },
   noResultsText: {
     type: String,
-    default: 'No options found',
+    default: 'We couldn\'t find any options.',
   },
   searchingText: {
     type: String,
-    default: 'Searching...',
+    default: 'Searching, please wait...',
   },
   loadingClosedPlaceholder: {
     type: String,
@@ -613,6 +613,7 @@ provide('usesTags', usesTags)
           :toggle-on-focus="false"
           :toggle-on-click="false"
           :toggle-on-hover="false"
+          :close-on-click-away="false"
           :popper-options="configuration.dropdownPopperOptions"
           :placement="configuration.dropdownPlacement"
           :tag-name="usesTags ? 'div' : 'button'"

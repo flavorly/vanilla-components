@@ -60,6 +60,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  closeOnClickAway: {
+    type: Boolean,
+    default: true,
+  },
   hideOnLeaveTimeout: {
     type: Number,
     default: 250,
@@ -216,7 +220,9 @@ const blurHandler = (e: FocusEvent): void => {
   const isChild = targetIsChild(e.relatedTarget)
 
   if (!isChild) {
-    emit('blur', e)
+    if (props.closeOnClickAway) {
+      emit('blur', e)
+    }
   }
   else {
     emit('blurOnChild', e)
@@ -227,7 +233,9 @@ const blurHandler = (e: FocusEvent): void => {
   }
 
   if (configuration.toggleOnFocus && !isChild) {
-    doHide()
+    if (props.closeOnClickAway) {
+      doHide()
+    }
   }
 }
 
@@ -455,7 +463,9 @@ onBeforeUnmount(() => {
 // Headless ui does something similar, by trapping & also listening events
 // This also prevents the teleport from being considered a click outside.
 onClickOutside(root, () => {
-  doHide()
+  if (props.closeOnClickAway) {
+    doHide()
+  }
 }, {
   ignore: [
     root,

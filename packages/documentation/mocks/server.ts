@@ -119,13 +119,13 @@ const paginate = (records: Record<string, any>[], request: Request, baseUrl: str
 
 export function makeServer({ environment = 'development' } = {}) {
     return createServer({
-
         environment,
         logging: false,
         trackRequests: false,
         models: {
             payment: Model,
         },
+        useDefaultPassthroughs: true,
         factories: {
             payment: Factory.extend({
                 id(i) {
@@ -153,6 +153,7 @@ export function makeServer({ environment = 'development' } = {}) {
                     '/datatables',
                 )
             })
+            this.passthrough('https://www.omdbapi.com')
         },
     })
 }

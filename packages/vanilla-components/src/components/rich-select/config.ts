@@ -58,8 +58,6 @@ const defaultVariant = {
     // We could also have here space-y-1
     optionsList: '',
 
-    optionsListLoadingMore: 'flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 text-center',
-
     // Option wrapper
     optionWrapper: '',
 
@@ -102,9 +100,12 @@ const defaultVariant = {
     ),
 
     // State texts
-    searchingText: 'px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center',
-    needsMoreCharsText: 'px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center',
-    noResultsText: 'px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center',
+    searchingText: 'flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2',
+    needsMoreCharsText: 'flex items-center justify-center px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center space-x-2',
+    noResultsText: 'flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2',
+
+    // optionsListLoadingMore: 'flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 text-center',
+    optionsListLoadingMore: 'flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2',
 
     // Select button
     selectButtonLabel: 'block pr-4 truncate',

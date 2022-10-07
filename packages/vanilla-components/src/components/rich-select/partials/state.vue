@@ -3,6 +3,7 @@ import type { ComputedRef, Ref } from 'vue'
 import { computed, inject } from 'vue'
 import type { RichSelectProps } from '../config'
 import { useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
+import LoadingIcon from '@/components/icons/loading.vue'
 
 const options = inject<ComputedRef<RichSelectProps>>('options')!
 const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
@@ -23,8 +24,13 @@ const classesList = useInjectsClassesList()!
     <div
       v-if="fetchingOptions"
       :class="classesList.searchingText"
-      v-text="configuration.searchingText"
-    />
+    >
+      <LoadingIcon
+        ref="loadingIcon"
+        :class="classesList.selectButtonLoadingIcon"
+      />
+      <span>{{ configuration.searchingText }}</span>
+    </div>
     <div
       v-else-if="needsMoreCharsToFetch"
       :class="classesList.needsMoreCharsText"

@@ -104,7 +104,7 @@ const showSelectorIcon = computed((): boolean => {
     <slot
       name="label"
       :label="triggerLabel"
-      :selected-option="selectedOption"
+      :option="selectedOption"
     >
       {{ triggerLabel }}
     </slot>

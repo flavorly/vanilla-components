@@ -4,7 +4,7 @@ outline: deep
 
 # Rich Select
 
-A nice description should go here
+A full-fledged select component with support for custom options, custom values, ajax loading, options prefetching, tags, keyboard accessibility, searching & many more.
 
 !!!include(./src/parts/title-preview.md)!!!
 

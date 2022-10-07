@@ -26,6 +26,7 @@ watch(shown, async (isShown: boolean): Promise<void> => {
     <input
       ref="search"
       v-model="searchQuery"
+      type="search"
       data-rich-select-focusable
       :placeholder="configuration.searchBoxPlaceholder"
       :class="classesList.searchInput"

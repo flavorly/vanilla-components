@@ -127,6 +127,7 @@ export default function useFetchsOptions(
 
         emit('fetchOptionsSuccess', response)
       }).catch((error) => {
+        console.log('Failed to Fetch', error)
         emit('fetchOptionsError', error)
       }).then(() => {
         fetchingOptions.value = false
@@ -201,6 +202,7 @@ export default function useFetchsOptions(
 
         emit('fetchOptionsSuccess', results)
       }).catch((error) => {
+        console.log('Failed to Fetch', error)
         emit('fetchOptionsError', error)
       }).then(() => {
         fetchingOptions.value = false

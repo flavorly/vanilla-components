@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import { FormLabel, RichSelect } from '@indigit/vanilla-components'
+import { FormLabel, RichSelect, RichSelectOptionImage, RichSelectOptionIndicator } from '@indigit/vanilla-components'
 import { ref } from 'vue'
 const value = ref('Option 1')
 const value2 = ref(['Option 1', 'Option 2'])
+const value3 = ref(null)
+const value4 = ref([])
+const value5 = ref(null)
+const value6 = ref(null)
+
 const options = [
     { value: 'Option 1', text: 'One Option' },
     { value: 'Option 2', text: 'Two Options' },
@@ -67,14 +72,16 @@ const optionsOrders = [
   },
 ]
 
-const fetchOptions = (query: string, nextPage?: number) => {
-  const url = `https://www.omdbapi.com/?apikey=e1b3617e&s=${query}&page=${nextPage || 1}`
+const fetchOptions = (query?: string, nextPage?: number) => {
+  const url = `https://www.omdbapi.com/?apikey=dac6304b&s=${query}&page=${nextPage || 1}`
   return fetch(url)
     .then(response => response.json())
-    .then(data => ({
-      results: data.Search as Record<string, any>[],
-      hasMorePages: data.Search && data.totalResults > (data.Search.length * (nextPage || 1)) * 10,
-    }))
+    .then((data) => {
+      return {
+        results: data.Search as Record<string, any>[],
+        hasMorePages: data.Search && data.totalResults > (data.Search.length * (nextPage || 1)) * 10,
+      }
+    })
 }
 </script>
 
@@ -98,7 +105,7 @@ const fetchOptions = (query: string, nextPage?: number) => {
           v-model="value2"
           :options="options"
           :clearable="true"
-          feedback="Im useful helper out here, choose wisely"
+          feedback="Multiple select is also possible"
           placeholder="Please select an option"
           multiple
           tags
@@ -108,14 +115,144 @@ const fetchOptions = (query: string, nextPage?: number) => {
       <!-- Persons -->
       <div class="w-full">
         <RichSelect
-          v-model="value2"
-          :options="options"
-          :clearable="true"
-          feedback="Im useful helper out here, choose wisely"
-          placeholder="Please select an option"
-          multiple
-          tags
-        />
+          v-model="value3"
+          feedback="A select with a list of persons"
+          :options="optionsPersons"
+          placeholder="Please select a person"
+        >
+          <template #label="{ option: { raw: person }, className, isSelected, hasErrors }">
+            <RichSelectOptionImage
+              :name="person?.text"
+              :image="person?.image"
+              :selected="isSelected"
+              :disabled="person?.disabled"
+              :parent-classes="className"
+              :has-errors="hasErrors"
+            />
+          </template>
+          <template #option="{ option: { raw: person }, className, isSelected, hasErrors }">
+            <RichSelectOptionImage
+              class="px-3 py-2"
+              :name="person?.text"
+              :image="person?.image"
+              :description="person?.description"
+              :selected="isSelected"
+              :disabled="person?.disabled"
+              :parent-classes="className"
+              :has-errors="hasErrors"
+            />
+          </template>
+        </RichSelect>
+      </div>
+
+      <!-- Persons + Tags -->
+      <div class="w-full">
+        <RichSelect
+          v-model="value4"
+          feedback="Persons + Multiple + Tags"
+          :options="optionsPersons"
+          :tags="true"
+          :multiple="true"
+          placeholder="Please select a person"
+        >
+          <template #tagLabel="{ option: { raw: person }, className, isSelected, hasErrors }">
+            <RichSelectOptionImage
+              :name="person?.text"
+              :image="person?.image"
+              :selected="isSelected"
+              :disabled="person?.disabled"
+              :parent-classes="className"
+              :has-errors="hasErrors"
+            />
+          </template>
+          <template #option="{ option: { raw: person }, className, isSelected, hasErrors }">
+            <RichSelectOptionImage
+              class="px-3 py-2"
+              :name="person?.text"
+              :image="person?.image"
+              :description="person?.description"
+              :selected="isSelected"
+              :disabled="person?.disabled"
+              :parent-classes="className"
+              :has-errors="hasErrors"
+            />
+          </template>
+        </RichSelect>
+      </div>
+
+      <!-- Indicators -->
+      <div class="w-full">
+        <RichSelect
+          v-model="value5"
+          feedback="Example with indicators"
+          :options="optionsOrders"
+          placeholder="Please select a order status"
+          clearable
+        >
+          <template #label="{ option: { raw: order }, className, isSelected }">
+            <RichSelectOptionIndicator
+              :name="order.text"
+              :status="order.status"
+              :description="order.description"
+              :selected="isSelected"
+              :disabled="order.disabled"
+              :parent-classes="className"
+            />
+          </template>
+          <template #option="{ option: { raw: order }, className, isSelected }">
+            <RichSelectOptionIndicator
+              class="px-3 py-2"
+              :name="order?.text"
+              :status="order?.status"
+              :description="order?.description"
+              :selected="isSelected"
+              :disabled="order?.disabled"
+              :parent-classes="className"
+            />
+          </template>
+        </RichSelect>
+      </div>
+
+      <!-- Fetching -->
+      <div class="w-full">
+        <RichSelect
+          v-model="value6"
+          feedback="Type a movie name to search"
+          placeholder="Ex: Search for the Matrix or Pokemon"
+          :fetch-options="fetchOptions"
+          :minimum-input-length="3"
+          value-attribute="imdbID"
+          text-attribute="Title"
+        >
+          <template #option="{ option: { raw: movie }, className, isSelected }">
+            <div
+              class="px-3 py-2"
+              :class="className"
+            >
+              <div class="relative">
+                <div
+                  :class="[isSelected ? 'font-medium' : 'font-normal']"
+                  class="flex items-center space-x-2 text-sm block"
+                >
+                  <div
+                    class="flex-shrink-0 w-10 h-10 bg-gray-500 bg-center bg-cover rounded-lg"
+                    :style="{ backgroundImage: `url(${movie?.Poster})` }"
+                  />
+                  <span
+                    class="block whitespace-nowrap truncate"
+                    v-html="`${movie?.imdbID} - ${movie?.Title}`"
+                  />
+                </div>
+              </div>
+              <div
+                v-if="movie?.Year"
+                class="w-100 text-xs text-left mt-1"
+                :class="[isSelected ? 'font-normal opacity-60' : 'opacity-60']"
+                v-html="`This movie was released in the year of ${movie?.Year}`"
+              />
+            </div>
+          </template>
+        </RichSelect>
       </div>
     </div>
   </PreviewWrapper>
