@@ -1,4 +1,4 @@
-<script setup type="ts">
+<script setup lang="ts">
 import { Button } from '@indigit/vanilla-components'
 </script>
 

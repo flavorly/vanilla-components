@@ -54,7 +54,6 @@ const optionClasses = computed(() => {
 }) as Ref<CssClass[]>
 
 // Methods
-
 const scrollIntoViewIfNecessary = () => {
   if (shown?.value && isActive.value) {
     const li = elementList.value?.$el as HTMLLIElement

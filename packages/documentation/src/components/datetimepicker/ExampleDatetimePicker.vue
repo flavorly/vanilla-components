@@ -1,4 +1,4 @@
-<script setup type="ts">
+<script setup lang="ts">
 import { DateTimeInput } from '@indigit/vanilla-components'
 import { ref } from 'vue'
 

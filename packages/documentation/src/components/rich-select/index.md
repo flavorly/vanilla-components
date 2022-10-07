@@ -16,7 +16,7 @@ import ExampleRichSelect from './ExampleRichSelect.vue';
 
 !!!include(./src/parts/title-snippet.md)!!!
 
-<<< @/components/rich-select/ExampleRichSelect.vue
+<<< @/components/rich-select/ExampleRichSelectPreview.vue
 
 !!!include(./src/parts/title-props.md)!!!
 
@@ -28,8 +28,6 @@ import ExampleRichSelect from './ExampleRichSelect.vue';
 
 
 !!!include(./src/parts/title-slots.md)!!!
-
-!!!include(./src/parts/default-slots.md)!!!
 
 
 

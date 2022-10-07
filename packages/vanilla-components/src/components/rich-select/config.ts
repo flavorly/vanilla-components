@@ -55,7 +55,8 @@ const defaultVariant = {
     ),
 
     // Option list
-    optionsList: 'space-y-1',
+    // We could also have here space-y-1
+    optionsList: '',
 
     optionsListLoadingMore: 'flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 text-center',
 
@@ -70,9 +71,9 @@ const defaultVariant = {
       'px-3 py-2',
     ),
 
-    selectedOption: 'font-bold bg-gray-50',
+    selectedOption: 'bg-gray-50 dark:bg-gray-800',
     highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black',
-    selectedHighlightedOption: 'font-semibold',
+    selectedHighlightedOption: 'font-semibold bg-gray-50 dark:bg-gray-800',
 
     //  Option content
     optionContent: 'flex items-center justify-between',

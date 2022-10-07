@@ -1,5 +1,5 @@
-<script setup type="ts">
-import { Dropdown, DropdownOption, DropdownSimple } from '@indigit/vanilla-components'
+<script setup lang="ts">
+import { DropdownMenu, DropdownOption, Dropdown } from '@indigit/vanilla-components'
 import { ref } from 'vue'
 import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
 
@@ -10,7 +10,7 @@ const value = ref(true)
   <PreviewWrapper>
     <div class="h-[200px]">
       <div class="flex items-center justify-center mx-auto">
-        <Dropdown
+        <DropdownMenu
           v-model="value"
           text="Options"
         >
@@ -24,7 +24,7 @@ const value = ref(true)
             <CheckCircleIcon class="w-5 h-5 mr-2" />
             <span>Mark as Done</span>
           </DropdownOption>
-        </Dropdown>
+        </DropdownMenu>
       </div>
 
       <div class="flex items-center justify-center mx-auto text-center mt-2">
@@ -32,9 +32,9 @@ const value = ref(true)
       </div>
 
       <div class="mt-10">
-        <DropdownSimple text="demo">
+        <Dropdown text="demo">
           <p>content</p>
-        </DropdownSimple>
+        </Dropdown>
       </div>
     </div>
   </PreviewWrapper>

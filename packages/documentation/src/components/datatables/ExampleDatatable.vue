@@ -1,4 +1,4 @@
-<script setup type="ts">
+<script setup lang="ts">
 import { Datatable, DropdownOption } from '@indigit/vanilla-components'
 import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
 

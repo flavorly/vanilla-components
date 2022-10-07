@@ -1,5 +1,5 @@
-<script setup type="ts">
-import { Button, Card, Dropdown, DropdownOption } from '@indigit/vanilla-components'
+<script setup lang="ts">
+import { Button, Card, DropdownMenu, DropdownOption } from '@indigit/vanilla-components'
 </script>
 
 <template>
@@ -11,14 +11,14 @@ import { Button, Card, Dropdown, DropdownOption } from '@indigit/vanilla-compone
         subtitle="Here you can have your favorite payments methods"
       >
         <template #actions>
-          <Dropdown text="Options">
+          <DropdownMenu text="Options">
             <DropdownOption>
               <span>Copy Stuff</span>
             </DropdownOption>
             <DropdownOption>
               <span>Mark as Done</span>
             </DropdownOption>
-          </Dropdown>
+          </DropdownMenu>
         </template>
 
         <div class="p-5 text-sm">

@@ -1,4 +1,4 @@
-<script setup type="ts">
+<script setup lang="ts">
 import { Input } from '@indigit/vanilla-components'
 import { ref } from 'vue'
 const value = ref(null)

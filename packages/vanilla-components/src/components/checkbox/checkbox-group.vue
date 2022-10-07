@@ -44,7 +44,7 @@ const props = defineProps({
 })
 
 const { localValue } = useMultipleVModel(props, 'modelValue', true)
-const { configuration, errors, hasErrors } = useConfiguration<CheckboxProps>(checkboxConfig, 'CheckboxGroup', localValue)
+const { configuration, errors, hasErrors, variant } = useConfiguration<CheckboxProps>(checkboxConfig, 'CheckboxGroup', localValue)
 
 const { normalizedOptions } = useMultipleOptions(
   computed(() => props.options as InputOptions | undefined),
@@ -72,7 +72,7 @@ const { normalizedOptions } = useMultipleOptions(
             v-model="localValue"
             :name="option.value"
             :value="option.value"
-            :variant="localVariant"
+            :variant="variant"
           />
         </div>
         <div :class="configuration.classesList.groupLabel">
@@ -85,20 +85,20 @@ const { normalizedOptions } = useMultipleOptions(
     </div>
     <slot
       name="errors"
-      v-bind="{ hasErrors, localErrors }"
+      v-bind="{ hasErrors, errors }"
     >
       <FormErrors
-        v-if="hasErrors && showErrors"
-        :errors="localErrors"
+        v-if="hasErrors && errors"
+        :errors="errors"
       />
     </slot>
     <slot
       name="feedback"
-      v-bind="{ hasErrors, feedback }"
+      v-bind="{ hasErrors, feedback: props.feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && feedback !== undefined && showFeedback"
-        :text="feedback"
+        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        :text="props.feedback"
       />
     </slot>
   </div>

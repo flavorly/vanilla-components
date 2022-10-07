@@ -155,7 +155,7 @@ const props = defineProps({
   },
   minimumInputLength: {
     type: Number,
-    default: undefined,
+    default: 2,
   },
   minimumInputLengthText: {
     type: [Function, String] as PropType<MinimumInputLengthTextProp>,

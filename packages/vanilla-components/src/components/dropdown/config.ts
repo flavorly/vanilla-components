@@ -24,7 +24,7 @@ export const dropdownConfig = {
     container: 'flex items-center content-center',
 
     // container: 'inline-flex items-center content-center',
-    chevronIcon: '-mr-1 ml-2 h-5 w-5',
+    chevronIcon: '-mr-1 ml-2 h-4 w-4',
     overlay: 'fixed top-0 right-0 left-0 bottom-0 z-[99] bg-black/50',
 
     menuWrapper: 'absolute z-[100]',
@@ -38,8 +38,7 @@ export const dropdownConfig = {
     dropdown: mergeClasses(
       commonClasses.dropdownsBackground,
       commonClasses.dropdownsBorder,
-
-      // commonClasses.dropdownsRadius,
+      commonClasses.dropdownsRadius,
       commonClasses.dropdownsShadows,
       'top-5',
       'focus:ring-0 focus:outline-none',
@@ -69,7 +68,7 @@ export const dropdownConfig = {
     menuItem: 'group flex items-center w-full  text-sm leading-5 space-x-1 cursor-pointer',
     menuItemHighlighted: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black z-10',
     menuItemNotHighlighted: 'text-gray-700 dark:text-white',
-    menuItemSpacing: 'px-4 py-3',
+    menuItemSpacing: 'px-3 py-2',
 
     arrow: 'top-[-5px] invisible -z-[1] before:border-b-0 before:border-r-0 before:absolute before:w-2 before:h-2 before:bg-white  before:dark:bg-gray-900 before:visible before:rotate-45 before:border before:border-1 before:border-gray-300 before:dark:border-gray-700 before:rounded-sm',
 

@@ -22,7 +22,7 @@
     withDefaultPadding: {
       type: [Boolean] as PropType<boolean>,
       required: false,
-      default: false,
+      default: true,
     },
   })
 
