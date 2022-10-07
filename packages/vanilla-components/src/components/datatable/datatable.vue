@@ -35,7 +35,7 @@ import FunnelIcon from '@/components/icons/hero/outline/FunnelIcon.vue'
 import CogIcon from '@/components/icons/hero/solid/CogIcon.vue'
 import EllipsisVerticalIcon from '@/components/icons/hero/solid/EllipsisVerticalIcon.vue'
 import DropdownOption from '@/components/dropdown/dropdown-option.vue'
-import Dropdown from '@/components/dropdown/dropdown.vue'
+import Dropdown from '@/components/dropdown/dropdown-menu.vue'
 import Card from '@/components/card/card.vue'
 
 import type { CSSClassesList, NormalizedOption } from '@/core/types'

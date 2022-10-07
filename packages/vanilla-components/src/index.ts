@@ -30,9 +30,9 @@ export { default as DateTimeInput } from './components/datetime-input/datetime-i
 export { default as Dialog } from './components/dialog/dialog.vue'
 export { default as DialogFooter } from './components/dialog/partials/footer.vue'
 
-export { default as Dropdown } from './components/dropdown/dropdown.vue'
+export { default as DropdownMenu } from './components/dropdown/dropdown-menu.vue'
 export { default as DropdownOption } from './components/dropdown/dropdown-option.vue'
-export { default as DropdownSimple } from './components/dropdown/dropdown-simple.vue'
+export { default as Dropdown } from './components/dropdown/dropdown.vue'
 
 export { default as FormErrors } from './components/forms/form-errors.vue'
 export { default as FormFeedback } from './components/forms/form-feedback.vue'

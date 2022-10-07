@@ -8,7 +8,7 @@ import ClearButton from './partials/clear-button.vue'
 import { richSelectConfig } from './config'
 import type { RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
 import type { CSSRawClassesList, Data, FetchOptionsFn, InputOptions, Measure, MinimumInputLengthTextProp, NormalizedOption, PreFetchOptionsFn } from '@/core/types'
-import DropdownSimple from '@/components/dropdown/dropdown-simple.vue'
+import DropdownSimple from '@/components/dropdown/dropdown.vue'
 import { validDropdownPlacements } from '@/components/dropdown/config'
 import SimpleSelect from '@/components/select/select.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
@@ -168,7 +168,7 @@ const props = defineProps({
   },
   teleport: {
     type: Boolean,
-    default: false,
+    default: true,
   },
   teleportTo: {
     type: [String, Object] as PropType<string | HTMLElement>,

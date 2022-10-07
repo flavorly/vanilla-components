@@ -29,6 +29,7 @@ watch(shown, async (isShown: boolean): Promise<void> => {
       data-rich-select-focusable
       :placeholder="configuration.searchBoxPlaceholder"
       :class="classesList.searchInput"
+      @input="$event.target.composing = false"
       @keydown.down="keydownDownHandler"
       @keydown.up="keydownUpHandler"
       @keydown.enter="keydownEnterHandler"
