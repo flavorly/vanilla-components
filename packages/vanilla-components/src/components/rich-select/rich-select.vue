@@ -613,7 +613,7 @@ provide('usesTags', usesTags)
           :toggle-on-focus="false"
           :toggle-on-click="false"
           :toggle-on-hover="false"
-          :close-on-click-away="false"
+          :close-on-click-away="true"
           :popper-options="configuration.dropdownPopperOptions"
           :placement="configuration.dropdownPlacement"
           :tag-name="usesTags ? 'div' : 'button'"
