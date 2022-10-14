@@ -37,7 +37,6 @@
     "@vueuse/core": "^9.2.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "collect.js": "^4.32.0",
-    "flatpickr": "^4.6.9",
     "fuse.js": "^6.4.6",
     "libphonenumber-js": "^1.9.49",
     "lodash": "^4.17.21",
@@ -46,6 +45,7 @@
     "miragejs": "^0.1.43",
     "paginatedjs": "^1.1.1",
     "tailwindcss": "^3.0.16",
+    "v-calendar": "3.0.0-alpha.8",
     "vitepress": "^1.0.0-alpha.13",
     "vue": "^3.2.39"
   }

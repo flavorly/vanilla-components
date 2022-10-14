@@ -4,8 +4,15 @@ outline: deep
 
 # Datetime Picker
 
-A date time picker bootstrap by the only and only library [Flatpickr](https://flatpickr.js.org/). Beautiful styled with Tailwind CSS & Made Vanilla just for you! :smile:
-This component extends the default [VanillaInput](/components/input/index)
+A date time picker bootstrap by [VCalendar](https://vcalendar.io/). Styled and aligned with your current theme & styles from vanilla components.
+
+:::warning
+This is NOT an office vanilla components component, a full-fledged date time picker takes a lot of effort, so i have have just bootstraped this one for now :)
+There are plans to port an official datetime picker. But meanwhile enjoy this amazing experience by V-Calendar!
+
+**Note: Keep in mind that to have the correct styles you must import the theme css file.**
+:::
+
 
 !!!include(./src/parts/title-preview.md)!!!
 

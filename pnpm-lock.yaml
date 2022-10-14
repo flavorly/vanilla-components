@@ -62,9 +62,10 @@ importers:
       patch-package: ^6.4.7
       postcss: ^8.4.16
       postcss-import: ^15.0.0
-      postcss-nested: ^5.0.6
+      postcss-nested: ^6.0.0
       postcss-prefix-selector: ^1.16.0
       tailwindcss: ^3.0.16
+      v-calendar: 3.0.0-alpha.8
       vite: ^3.1.0
       vite-plugin-inspect: ^0.7.1
       vitepress: ^1.0.0-alpha.13
@@ -92,6 +93,7 @@ importers:
       miragejs: 0.1.45
       paginatedjs: 1.1.1
       tailwindcss: 3.1.8_postcss@8.4.16
+      v-calendar: 3.0.0-alpha.8_vue@3.2.39
       vitepress: 1.0.0-alpha.15_tbpndr44ulefs3hehwpi2mkf2y
       vue: 3.2.39
     devDependencies:
@@ -102,7 +104,7 @@ importers:
       patch-package: 6.4.7
       postcss: 8.4.16
       postcss-import: 15.0.0_postcss@8.4.16
-      postcss-nested: 5.0.6_postcss@8.4.16
+      postcss-nested: 6.0.0_postcss@8.4.16
       postcss-prefix-selector: 1.16.0_postcss@8.4.16
       vite: 3.1.2
       vite-plugin-inspect: 0.7.1_vite@3.1.2
@@ -110,7 +112,7 @@ importers:
   packages/vanilla-components:
     specifiers:
       '@antfu/eslint-config': ^0.27.0
-      '@antfu/ni': ^0.16.3
+      '@antfu/ni': ^0.18.2
       '@headlessui/vue': ^1.7.0
       '@popperjs/core': ^2.11.6
       '@rollup/plugin-typescript': ^8.5.0
@@ -120,7 +122,7 @@ importers:
       '@vitejs/plugin-vue': ^3.1.0
       '@vue/compiler-sfc': ^3.2.39
       '@vueuse/core': ^9.2.0
-      axios: ^0.27.2
+      axios: ^1.1.2
       bumpp: ^8.2.1
       eslint: ^8.23.1
       eslint-config-airbnb-base: ^15.0.0
@@ -131,7 +133,6 @@ importers:
       eslint-plugin-tree-shaking: ^1.9.2
       eslint-plugin-unicorn: ^44.0.0
       eslint-plugin-vue: ^9.4.0
-      flatpickr: ^4.6.9
       fuse.js: ^6.4.6
       libphonenumber-js: ^1.9.49
       lodash: ^4.17.21
@@ -140,6 +141,7 @@ importers:
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-visualizer: ^5.8.1
       typescript: ^4.8.3
+      v-calendar: 3.0.0-alpha.8
       vite: ^3.1.2
       vite-plugin-dts: ^1.5.0
       vue: ^3.2.39
@@ -147,15 +149,15 @@ importers:
       '@headlessui/vue': 1.7.2_vue@3.2.39
       '@popperjs/core': 2.11.6
       '@vueuse/core': 9.2.0_vue@3.2.39
-      axios: 0.27.2
-      flatpickr: 4.6.13
+      axios: 1.1.2
       fuse.js: 6.6.2
       libphonenumber-js: 1.10.13
       lodash: 4.17.21
+      v-calendar: 3.0.0-alpha.8_vue@3.2.39
       vue: 3.2.39
     devDependencies:
       '@antfu/eslint-config': 0.27.0_yrisjsf4wr624f2tej33jrxlfy
-      '@antfu/ni': 0.16.3
+      '@antfu/ni': 0.18.2
       '@rollup/plugin-typescript': 8.5.0_wolqyj7yoan7276t7qkuwshr3y
       '@types/lodash': 4.14.185
       '@typescript-eslint/eslint-plugin': 5.37.0_22c5fnooleyfkzrkkgdmel5kmi
@@ -441,6 +443,11 @@ packages:
     hasBin: true
     dev: true
 
+  /@antfu/ni/0.18.2:
+    resolution: {integrity: sha512-OZalxEGupqCd8hKV2wyT5IHQTx1BR5/iXZEbseLpSdgcSn8fLjLOqi+LLhLly0a1XIkCAUeknV5/JXvMbjIstA==}
+    hasBin: true
+    dev: true
+
   /@babel/code-frame/7.18.6:
     resolution: {integrity: sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==}
     engines: {node: '>=6.9.0'}
@@ -684,6 +691,10 @@ packages:
     resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
     dev: false
 
+  /@popperjs/core/2.4.0:
+    resolution: {integrity: sha512-NMrDy6EWh9TPdSRiHmHH2ye1v5U0gBD7pRYwSwJvomx7Bm4GG04vu63dYiVzebLOx2obPpJugew06xVP0Nk7hA==}
+    dev: false
+
   /@rollup/plugin-typescript/8.5.0_wolqyj7yoan7276t7qkuwshr3y:
     resolution: {integrity: sha512-wMv1/scv0m/rXx21wD2IsBbJFba8wGF3ErJIr6IKRfRj49S85Lszbxb4DCo8iILpluTjk2GAAu9CoZt4G3ppgQ==}
     engines: {node: '>=8.0.0'}
@@ -819,7 +830,6 @@ packages:
 
   /@types/lodash/4.14.185:
     resolution: {integrity: sha512-evMDG1bC4rgQg4ku9tKpuMh5iBNEwNa3tf9zRHdP1qlv+1WUg44xat4IxCE14gIpZRGUUWAx2VhItCZc25NfMA==}
-    dev: true
 
   /@types/mdast/3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
@@ -1261,11 +1271,12 @@ packages:
       postcss-value-parser: 4.2.0
     dev: true
 
-  /axios/0.27.2:
-    resolution: {integrity: sha512-t+yRIyySRTp/wua5xEr+z1q60QmLq8ABsS5O9Me1AsE5dfKqgnCFzwiCZZ/cGNd1lq4/7akDWMxdhVlucjmnOQ==}
+  /axios/1.1.2:
+    resolution: {integrity: sha512-bznQyETwElsXl2RK7HLLwb5GPpOLlycxHCtrpDR/4RqqBzjARaOTo3jz4IgtntWUYee7Ne4S8UHd92VCuzPaWA==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
+      proxy-from-env: 1.1.0
     transitivePeerDependencies:
       - debug
     dev: false
@@ -1562,6 +1573,19 @@ packages:
 
   /csstype/2.6.21:
     resolution: {integrity: sha512-Z1PhmomIfypOpoMjRQB70jfvy/wxT50qW08YXO5lMIJkrdq4yOTR+AW7FqutScmB9NkLwxo+jU+kZLbofZZq/w==}
+
+  /date-fns-tz/1.3.7_date-fns@2.29.3:
+    resolution: {integrity: sha512-1t1b8zyJo+UI8aR+g3iqr5fkUHWpd58VBx8J/ZSQ+w7YrGlw80Ag4sA86qkfCXRBLmMc4I2US+aPMd4uKvwj5g==}
+    peerDependencies:
+      date-fns: '>=2.0.0'
+    dependencies:
+      date-fns: 2.29.3
+    dev: false
+
+  /date-fns/2.29.3:
+    resolution: {integrity: sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==}
+    engines: {node: '>=0.11'}
+    dev: false
 
   /debug/2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
@@ -3780,6 +3804,17 @@ packages:
     dependencies:
       postcss: 8.4.16
       postcss-selector-parser: 6.0.10
+    dev: false
+
+  /postcss-nested/6.0.0_postcss@8.4.16:
+    resolution: {integrity: sha512-0DkamqrPcmkBDsLn+vQDIrtkSbNkv5AD/M322ySo9kqFkCIYklym2xEmWkwo+Y3/qZo34tzEPNUw4y7yMCdv5w==}
+    engines: {node: '>=12.0'}
+    peerDependencies:
+      postcss: ^8.2.14
+    dependencies:
+      postcss: 8.4.16
+      postcss-selector-parser: 6.0.10
+    dev: true
 
   /postcss-prefix-selector/1.16.0_postcss@8.4.16:
     resolution: {integrity: sha512-rdVMIi7Q4B0XbXqNUEI+Z4E+pueiu/CS5E6vRCQommzdQ/sgsS4dK42U7GX8oJR+TJOtT+Qv3GkNo6iijUMp3Q==}
@@ -3836,6 +3871,10 @@ packages:
       kleur: 3.0.3
       sisteransi: 1.0.5
     dev: true
+
+  /proxy-from-env/1.1.0:
+    resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
+    dev: false
 
   /punycode/2.1.1:
     resolution: {integrity: sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==}
@@ -4403,6 +4442,19 @@ packages:
 
   /util-deprecate/1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==}
+
+  /v-calendar/3.0.0-alpha.8_vue@3.2.39:
+    resolution: {integrity: sha512-T23H5UbK0EomrwArlF/jrT2LFbV/lu+Bp9JroZ1paN6rPoaMyvE+HrLxvAmUgi+pODrdTURDMzM3+WPgeFKEBQ==}
+    peerDependencies:
+      vue: ^3.1.0
+    dependencies:
+      '@popperjs/core': 2.4.0
+      '@types/lodash': 4.14.185
+      date-fns: 2.29.3
+      date-fns-tz: 1.3.7_date-fns@2.29.3
+      lodash: 4.17.21
+      vue: 3.2.39
+    dev: false
 
   /validate-npm-package-license/3.0.4:
     resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
