@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { DateTimeInput, Input as VanillaInput } from '@indigit/vanilla-components'
+import { DateTimeInput, DateTimeInputCalendar, Input as VanillaInput } from '@indigit/vanilla-components'
 import { ref } from 'vue'
 
 const value = ref('2011-01-01 0:00:01')
 const value2 = ref('2022-01-01 0:00:01')
+const value3 = ref([])
 </script>
 
 <template>
   <PreviewWrapper>
     <div class="h-[400px]">
       <!-- Regular -->
-      <DateTimeInput
+      <DateTimeInputCalendar
         v-model="value"
         :is-dark="false"
         :is24hr="false"
@@ -31,7 +32,13 @@ const value2 = ref('2022-01-01 0:00:01')
             v-on="inputEvents"
           />
         </template>
-      </DateTimeInput>
+      </DateTimeInputCalendar>
+
+      <DateTimeInput
+        v-model="value3"
+        :disabled="false"
+        selection-mode="range"
+      />
 
       <div class="flex items-center justify-center mx-auto text-center mt-2">
         <pre>{{ JSON.stringify(value) }}</pre>

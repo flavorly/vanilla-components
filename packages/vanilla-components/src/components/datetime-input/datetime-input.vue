@@ -1,22 +1,15 @@
-<script setup>
-import type { PropType } from 'vue'
-import { computed, ref } from 'vue'
-import {
-  areDatesEqual,
-  convertTo24Hour,
-  isDateBetween,
-} from './useDates'
-import Button from '@/components/button/button.vue'
+<script lang="ts" setup>
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
+import DomHandler from './dom-handler'
+import useCalendarState from './useDates'
+import type { DateTimeInputProps } from './config'
+import { dateTimeInputConfig } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import type { InputProps } from '@/components/input/config'
-import { inputConfig } from '@/components/input/config'
-
-/* eslint @typescript-eslint/no-use-before-define: ["off"] */
+import { Button } from '@/index'
 
 const props = defineProps({
   ...useVariantProps(),
   modelValue: {
-    type: [String, undefined],
     default: undefined,
   },
   selectionMode: {
@@ -26,6 +19,10 @@ const props = defineProps({
   dateFormat: {
     type: String,
     default: null,
+  },
+  disabled: {
+    type: Boolean,
+    default: false,
   },
   inline: {
     type: Boolean,
@@ -176,331 +173,73 @@ const emit = defineEmits([
   'keydown',
 ])
 
+const localValue = useVModel(props, 'modelValue')
+const { configuration, errors, hasErrors } = useConfiguration<DateTimeInputProps>(dateTimeInputConfig, 'DateTimeInput', localValue)
+
 // Template Refs
+const inputRef = ref(null)
+const overlayRef = ref(null)
+
+const {
+  currentSecond,
+  currentMinute,
+  currentHour,
+  currentMonth,
+  currentYear,
+  currentView,
+  pm,
+  viewDate,
+  incrementYear,
+  incrementMinute,
+  incrementHour,
+  incrementSecond,
+  incrementDecade,
+  decrementYear,
+  decrementHour,
+  decrementMinute,
+  decrementSecond,
+  decrementDecade,
+  isMonthSelected,
+  isYearSelected,
+  isValidSelection,
+  isRangeSelection,
+  isMultipleSelection,
+  isSingleSelection,
+  isComparable,
+  isSelected,
+  parseValue,
+  optionsYearPicker,
+  optionsMonthPicker,
+  optionsWeekDays,
+  optionsMonths,
+  locale,
+  formatValue,
+  formattedCurrentSecond,
+  formattedCurrentMinute,
+  formattedCurrentHour,
+  getMonthName,
+  getYear,
+  areDatesEqual,
+  labelClear,
+  labelToday,
+  labelWeekHeader,
+} = useCalendarState(props, localValue)
 
 // Reactive
-const currentMonth = ref(null)
-const currentYear = ref(null)
-const currentHour = ref(null)
-const currentMinute = ref(null)
-const currentSecond = ref(null)
-const pm = ref(null)
 const focused = ref(false)
-const overlayVisible = ref(false)
-const currentView = ref(props.view)
+const overlayVisible = ref(true)
 const navigationState = ref(null)
-
-const localValue = useVModel(props, 'modelValue')
-const { configuration, errors, hasErrors } = useConfiguration<InputProps>(inputConfig, 'DateTimeInput', localValue)
+const preventFocus = ref(null)
+const timePickerChange = ref(null)
+const outsideClickListener = ref(null)
+const scrollHandlerListener = ref(null)
+const typeUpdate = ref(null)
+const selectionStartDate = ref(null)
+const selectionEndDate = ref(null)
+const timePickerTimer = ref(null)
 
 // Computed
-const isSingleSelection = computed<boolean>(() => props.selectionMode === 'single')
-
-const isRangeSelection = computed<boolean>(() => props.selectionMode === 'range')
-
-const isMultipleSelection = computed<boolean>(() => props.selectionMode === 'multiple')
-
-const isEnabled = computed<boolean>(() => props?.disabled || props?.readonly)
-
-const viewDate = computed(() => {
-  let propValue = localValue.value
-
-  if (propValue && Array.isArray(propValue)) {
-    if (isRangeSelection.value) {
-      propValue = propValue[1] || propValue[0]
-    }
-    else if (isMultipleSelection.value) {
-      propValue = propValue[propValue.length - 1]
-    }
-  }
-
-  if (propValue && typeof propValue !== 'string') {
-    return propValue
-  }
-  else {
-    const today = new Date()
-
-    if (props.maxDate && props.maxDate < today) {
-      return props.maxDate
-    }
-
-    if (props.minDate && props.minDate > today) {
-      return props.minDate
-    }
-
-    return today
-  }
-})
-
-// Methods - Random
-const validateTime = (hour, minute, second, pm) => {
-  let value = isComparable() ? localValue.value : this.viewDate
-  const convertedHour = convertTo24Hour(hour, pm, props.hourFormat)
-
-  if (isRangeSelection.value) {
-    value = localValue.value[1] || localValue.value[0]
-  }
-
-  if (isMultipleSelection.value) {
-    value = localValue.value[localValue.value.length - 1]
-  }
-
-  const valueDateString = value ? value.toDateString() : null
-
-  if (props.minDate && valueDateString && props.minDate.toDateString() === valueDateString) {
-    if (props.minDate.getHours() > convertedHour) {
-      return false
-    }
-
-    if (props.minDate.getHours() === convertedHour) {
-      if (props.minDate.getMinutes() > minute) {
-        return false
-      }
-
-      if (props.minDate.getMinutes() === minute) {
-        if (props.minDate.getSeconds() > second) {
-          return false
-        }
-      }
-    }
-  }
-
-  if (props.maxDate && valueDateString && props.maxDate.toDateString() === valueDateString) {
-    if (props.maxDate.getHours() < convertedHour) {
-      return false
-    }
-
-    if (props.maxDate.getHours() === convertedHour) {
-      if (props.maxDate.getMinutes() < minute) {
-        return false
-      }
-
-      if (props.maxDate.getMinutes() === minute) {
-        if (props.maxDate.getSeconds() < second) {
-          return false
-        }
-      }
-    }
-  }
-
-  return true
-}
-
-// Methods - Increment / Decrement
-
-const incrementSecond = (event) => {
-  const newSecond = currentSecond.value + props.stepSecond
-
-  if (validateTime(currentHour.value, currentMinute.value, newSecond, true)) {
-    currentSecond.value = newSecond > 59 ? newSecond - 60 : newSecond
-  }
-
-  event.preventDefault()
-}
-
-const incrementMinute = (event) => {
-  const newMinute = currentMinute.value + props.stepMinute
-
-  if (validateTime(currentHour.value, newMinute, currentSecond.value, true)) {
-    currentMinute.value = newMinute > 59 ? newMinute - 60 : newMinute
-  }
-
-  event.preventDefault()
-}
-
-const incrementHour = (event) => {
-  const prevHour = currentHour.value
-  let newHour = currentHour.value + props.stepHour
-  let newPM = pm.value
-
-  if (props.hourFormat === '24') {
-    newHour = newHour >= 24 ? newHour - 24 : newHour
-  }
-  else if (props.hourFormat === '12') {
-    // Before the AM/PM break, now after
-    if (prevHour < 12 && newHour > 11) {
-      newPM = !pm.value
-    }
-
-    newHour = newHour >= 13 ? newHour - 12 : newHour
-  }
-
-  if (validateTime(newHour, currentMinute.value, currentSecond.value, newPM)) {
-    currentHour.value = newHour
-    pm.value = newPM
-  }
-
-  event.preventDefault()
-}
-
-const incrementYear = () => currentYear.value++
-
-const incrementDecade = () => currentYear.value = currentYear.value + 10
-
-const decrementSecond = (event) => {
-  let newSecond = currentSecond.value - props.stepSecond
-
-  newSecond = newSecond < 0 ? 60 + newSecond : newSecond
-
-  if (validateTime(currentHour.value, currentMinute.value, newSecond, true)) {
-    currentSecond.value = newSecond
-  }
-
-  event.preventDefault()
-}
-
-const decrementMinute = (event) => {
-  let newMinute = currentMinute.value - props.stepMinute
-
-  newMinute = newMinute < 0 ? 60 + newMinute : newMinute
-
-  if (validateTime(currentHour.value, newMinute, currentSecond.value, true)) {
-    currentMinute.value = newMinute
-  }
-
-  event.preventDefault()
-}
-
-const decrementHour = (event) => {
-  let newHour = currentHour.value - props.stepHour
-  let newPM = pm.value
-
-  if (props.hourFormat === '24') {
-    newHour = newHour < 0 ? 24 + newHour : newHour
-  }
-  else if (props.hourFormat === '12') {
-    // If we were at noon/midnight, then switch
-    if (currentHour.value === 12) {
-      newPM = !pm.value
-    }
-    newHour = newHour <= 0 ? 12 + newHour : newHour
-  }
-
-  if (validateTime(newHour, currentMinute.value, currentSecond.value, newPM)) {
-    currentHour.value = newHour
-    pm.value = newPM
-  }
-  event.preventDefault()
-}
-
-const decrementYear = () => currentYear.value--
-
-const decrementDecade = () => currentYear.value = currentYear.value - 10
-
-// Methods - Is booleans
-const isComparable = () => localValue.value !== undefined && typeof props.modelValue !== 'string'
-
-const isSelected = (date) => {
-  if (!isComparable()) {
-    return false
-  }
-  if (!localValue.value) {
-    return false
-  }
-
-  if (isSingleSelection.value) {
-    return areDatesEqual(localValue.value, date)
-  }
-
-  if (isMultipleSelection.value) {
-    let selected = false
-    for (const date of localValue.value) {
-      selected = areDatesEqual(date, date)
-      if (selected) {
-        break
-      }
-    }
-    return selected
-  }
-
-  if (isRangeSelection.value) {
-    if (localValue.value[1]) {
-      return areDatesEqual(localValue.value[0], date)
-        || areDatesEqual(localValue.value[1], date)
-        || isDateBetween(localValue.value[0], localValue.value[1], date)
-    }
-    else {
-      return areDatesEqual(localValue.value[0], date)
-    }
-  }
-  return false
-}
-
-const isDateDisabled = (day, month, year) => {
-  if (props.disabledDates) {
-    for (const disabledDate of props.disabledDates) {
-      if (disabledDate.getFullYear() === year && disabledDate.getMonth() === month && disabledDate.getDate() === day) {
-        return true
-      }
-    }
-  }
-
-  return false
-}
-
-const isDayDisabled = (day, month, year) => {
-  if (props.disabledDays) {
-    const weekday = new Date(year, month, day)
-    const weekdayNumber = weekday.getDay()
-
-    return props.disabledDays.includes(weekdayNumber)
-  }
-
-  return false
-}
-
-const isSelectable = (day, month, year, otherMonth) => {
-  let validMin = true
-  let validMax = true
-  let validDate = true
-  let validDay = true
-
-  if (otherMonth && !props.selectOtherMonths) {
-    return false
-  }
-
-  if (props.minDate) {
-    if (props.minDate.getFullYear() > year) {
-      validMin = false
-    }
-    else if (props.minDate.getFullYear() === year) {
-      if (props.minDate.getMonth() > month) {
-        validMin = false
-      }
-      else if (props.minDate.getMonth() === month) {
-        if (props.minDate.getDate() > day) {
-          validMin = false
-        }
-      }
-    }
-  }
-
-  if (props.maxDate) {
-    if (props.maxDate.getFullYear() < year) {
-      validMax = false
-    }
-    else if (props.maxDate.getFullYear() === year) {
-      if (props.maxDate.getMonth() < month) {
-        validMax = false
-      }
-      else if (props.maxDate.getMonth() === month) {
-        if (props.maxDate.getDate() < day) {
-          validMax = false
-        }
-      }
-    }
-  }
-
-  if (props.disabledDates) {
-    validDate = !isDateDisabled(day, month, year)
-  }
-
-  if (props.disabledDays) {
-    validDay = !isDayDisabled(day, month, year)
-  }
-
-  return validMin && validMax && validDate && validDay
-}
+const isEnabled = computed<boolean>(() => props?.disabled || props?.readonly || true)
 
 const navigateBackwards = (event: Event | KeyboardEvent) => {
   event.preventDefault()
@@ -531,9 +270,8 @@ const navigateBackwards = (event: Event | KeyboardEvent) => {
     }
   }
 }
-
 const navigateForward = (event: Event | KeyboardEvent) => {
-  event.preventDefault()
+  console.log('navigateForward', currentView.value, event, isEnabled.value)
 
   if (!isEnabled.value) {
     return
@@ -545,7 +283,7 @@ const navigateForward = (event: Event | KeyboardEvent) => {
     incrementDecade()
   }
   else {
-    if (event.shiftKey) {
+    if (event?.shiftKey) {
       incrementYear()
     }
     else {
@@ -554,103 +292,651 @@ const navigateForward = (event: Event | KeyboardEvent) => {
         incrementYear()
       }
       else {
-        currentMonth.value++
+        console.log('Im hereeeee', currentMonth.value)
+        currentMonth.value = currentMonth.value + 1
+        console.log('Im hereeeee', currentMonth.value)
       }
       emit('month-change', { month: currentMonth.value + 1, year: currentYear.value })
     }
   }
 }
+const switchToMonthView = (event: Event | KeyboardEvent) => {
+  currentView.value = 'month'
+  setTimeout(focusUpdate, 0)
+  event.preventDefault()
+}
+const switchToYearView = (event: Event | KeyboardEvent) => {
+  currentView.value = 'year'
+  setTimeout(focusUpdate, 0)
+  event.preventDefault()
+}
 
-// Methods - Events Listeners
+const toggleAMPM = (event: Event | KeyboardEvent) => {
+  pm.value = !pm.value
+  updateModelTime()
+  event.preventDefault()
+}
+
+// Methods - Focus & Traps
+const focusUpdate = () => {
+  let cell
+
+  if (navigationState.value) {
+    if (navigationState.value.button) {
+      focusableCell()
+      if (navigationState.value.backward) {
+        DomHandler.findSingle(overlayRef.value, '.p-datepicker-prev').focus()
+      }
+      else {
+        DomHandler.findSingle(overlayRef.value, '.p-datepicker-next').focus()
+      }
+    }
+    else {
+      if (navigationState.value.backward) {
+        let cells
+
+        if (currentView.value === 'month') {
+          cells = DomHandler.find(overlayRef.value, '.p-monthpicker .p-monthpicker-month:not(.p-disabled)')
+        }
+        else if (currentView.value === 'year') {
+          cells = DomHandler.find(overlayRef.value, '.p-yearpicker .p-yearpicker-year:not(.p-disabled)')
+        }
+        else {
+          cells = DomHandler.find(overlayRef.value, '.p-datepicker-calendar td span:not(.p-disabled):not(.p-ink)')
+        }
+
+        if (cells && cells.length > 0) {
+          cell = cells[cells.length - 1]
+        }
+      }
+      else {
+        if (currentView.value === 'month') {
+          cell = DomHandler.findSingle(overlayRef.value, '.p-monthpicker .p-monthpicker-month:not(.p-disabled)')
+        }
+        else if (currentView.value === 'year') {
+          cell = DomHandler.findSingle(overlayRef.value, '.p-yearpicker .p-yearpicker-year:not(.p-disabled)')
+        }
+        else {
+          cell = DomHandler.findSingle(overlayRef.value, '.p-datepicker-calendar td span:not(.p-disabled):not(.p-ink)')
+        }
+      }
+
+      if (cell) {
+        cell.tabIndex = '0'
+        cell.focus()
+      }
+    }
+
+    navigationState.value = null
+    return
+  }
+
+  focusableCell()
+}
+const focusableCell = () => {
+  let cell
+
+  if (currentView.value === 'month') {
+    const cells = DomHandler.find(overlayRef.value, '.p-monthpicker .p-monthpicker-month')
+    const selectedCell = DomHandler.findSingle(overlayRef.value, '.p-monthpicker .p-monthpicker-month.p-highlight')
+
+    cells.forEach(cell => (cell.tabIndex = -1))
+    cell = selectedCell || cells[0]
+  }
+  else if (currentView.value === 'year') {
+    const cells = DomHandler.find(overlayRef.value, '.p-yearpicker .p-yearpicker-year')
+    const selectedCell = DomHandler.findSingle(overlayRef.value, '.p-yearpicker .p-yearpicker-year.p-highlight')
+
+    cells.forEach(cell => (cell.tabIndex = -1))
+    cell = selectedCell || cells[0]
+  }
+  else {
+    cell = DomHandler.findSingle(overlayRef.value, 'span.p-highlight')
+
+    if (!cell) {
+      const todayCell = DomHandler.findSingle(overlayRef.value, 'td.p-datepicker-today span:not(.p-disabled):not(.p-ink')
+
+      if (todayCell) {
+        cell = todayCell
+      }
+      else {
+        cell = DomHandler.findSingle(overlayRef.value, '.p-datepicker-calendar td span:not(.p-disabled):not(.p-ink')
+      }
+    }
+  }
+
+  if (cell) {
+    cell.tabIndex = '0'
+
+    if (!preventFocus.value && (!navigationState.value || !navigationState.value.button) && !timePickerChange.value) {
+      cell.focus()
+    }
+
+    preventFocus.value = false
+  }
+}
+
+// Methods - Update
+const updateCurrentTimeMeta = (date) => {
+  let currentHour = date.getHours()
+
+  if (props.hourFormat === '12') {
+    pm.value = currentHour > 11
+
+    if (currentHour >= 12) {
+      currentHour = currentHour === 12 ? 12 : currentHour - 12
+    }
+    else {
+      currentHour = currentHour === 0 ? 12 : currentHour
+    }
+  }
+
+  currentHour.value = Math.floor(currentHour / props.stepHour) * props.stepHour
+  currentMinute.value = Math.floor(date.getMinutes() / props.stepMinute) * props.stepMinute
+  currentSecond.value = Math.floor(date.getSeconds() / props.stepSecond) * props.stepSecond
+}
+const updateCurrentMetaData = () => {
+  currentMonth.value = viewDate.value.getMonth()
+  currentYear.value = viewDate.value.getFullYear()
+
+  if (props.showTime || props.timeOnly) {
+    updateCurrentTimeMeta(viewDate.value)
+  }
+}
+
+const clearTimePickerTimer = () => {
+  if (timePickerTimer.value) {
+    clearInterval(timePickerTimer.value)
+  }
+}
+
+const repeat = (event, interval, type, direction) => {
+  const i = interval || 500
+
+  clearTimePickerTimer()
+
+  timePickerTimer.value = setTimeout(() => repeat(event, 100, type, direction), i)
+
+  switch (type) {
+    case 0:
+      if (direction === 1) {
+        incrementHour(event)
+      }
+      else {
+        decrementHour(event)
+      }
+      break
+
+    case 1:
+      if (direction === 1) {
+        incrementMinute(event)
+      }
+      else {
+        decrementMinute(event)
+      }
+      break
+
+    case 2:
+      if (direction === 1) {
+        incrementSecond(event)
+      }
+      else {
+        decrementSecond(event)
+      }
+      break
+  }
+}
+
 const onPreviousButtonClick = (event) => {
   if (props.showOtherMonths) {
     navigationState.value = { backward: true, button: true }
     navigateBackwards(event)
   }
 }
-
 const onNextButtonClick = (event) => {
   if (props.showOtherMonths) {
     navigationState.value = { backward: false, button: true }
-    navForward(event)
+    navigateForward(event)
   }
 }
+const onOutsideClickListener = (unbind: boolean) => {
+  if (unbind) {
+    if (outsideClickListener.value) {
+      document.removeEventListener('mousedown', outsideClickListener.value)
+      outsideClickListener.value = null
+    }
+    return
+  }
+
+  if (!outsideClickListener.value) {
+    outsideClickListener.value = (event) => {
+      if (overlayVisible.value) {
+        overlayVisible.value = false
+      }
+    }
+
+    document.addEventListener('mousedown', outsideClickListener.value)
+  }
+}
+const onScrollListener = (unbind: boolean) => {
+  // if (scrollHandlerListener.value) {
+  //   scrollHandlerListener.value.onScrollListener(true)
+  // }
+  //
+  // if (!scrollHandlerListener.value) {
+  //   scrollHandlerListener.value = new ConnectedOverlayScrollHandler(this.$refs.container, () => {
+  //     if (overlayVisible.value) {
+  //       overlayVisible.value = false
+  //     }
+  //   })
+  // }
+  //
+  // scrollHandlerListener.value.onScrollListener()
+}
+const onInput = (event: Event | KeyboardEvent) => {
+  try {
+    selectionStartDate.value = inputRef.value.selectionStart
+    selectionEndDate.value = inputRef.value.selectionEnd
+
+    const value = parseValue(event.target.value)
+
+    if (isValidSelection(value)) {
+      typeUpdate.value = true
+      updateModel(value)
+    }
+  }
+  catch (err) {}
+  emit('input', event)
+}
+
+const onInputClick = () => {
+  if (props.showOnFocus && isEnabled.value && !overlayVisible.value) {
+    overlayVisible.value = true
+  }
+}
+
+const onFocus = (event: Event | KeyboardEvent) => {
+  if (props.showOnFocus && isEnabled.value) {
+    overlayVisible.value = true
+  }
+
+  focused.value = true
+  emit('focus', event)
+}
+
+const onBlur = (event: Event | KeyboardEvent) => {
+  emit('blur', { originalEvent: event, value: event.target.value })
+
+  focused.value = false
+  event.target.value = formatValue(localValue.value)
+}
+
+const onKeyDown = (event: Event | KeyboardEvent) => {
+  if (event.code === 'ArrowDown' && overlayRef.value) {
+    console.log('Focus Trap')
+
+    // this.trapFocus(event)
+  }
+  else if (event.code === 'ArrowDown' && !overlayRef.value) {
+    overlayVisible.value = true
+  }
+  else if (event.code === 'Escape') {
+    if (overlayVisible.value) {
+      overlayVisible.value = false
+      event.preventDefault()
+    }
+  }
+  else if (event.code === 'Tab') {
+    if (overlayRef.value) {
+      DomHandler.getFocusableElements(overlayRef.value).forEach(el => (el.tabIndex = '-1'))
+    }
+
+    if (overlayVisible.value) {
+      overlayVisible.value = false
+    }
+  }
+}
+
+const switchViewButtonDisabled = () => {
+  return props.numberOfMonths > 1 || props.disabled
+}
+
+const selectDate = (dateMeta) => {
+  let date = new Date(dateMeta.year, dateMeta.month, dateMeta.day)
+
+  if (props.showTime) {
+    if (props.hourFormat === '12' && pm.value && currentHour.value !== 12) {
+      date.setHours(currentHour.value + 12)
+    }
+    else {
+      date.setHours(currentHour.value)
+    }
+
+    date.setMinutes(currentMinute.value)
+    date.setSeconds(currentSecond.value)
+  }
+
+  if (props.minDate && props.minDate > date) {
+    date = props.minDate
+    currentHour.value = date.getHours()
+    currentMinute.value = date.getMinutes()
+    currentSecond.value = date.getSeconds()
+  }
+
+  if (props.maxDate && props.maxDate < date) {
+    date = props.maxDate
+    currentHour.value = date.getHours()
+    currentMinute.value = date.getMinutes()
+    currentSecond.value = date.getSeconds()
+  }
+
+  let modelVal = null
+
+  if (isSingleSelection.value) {
+    modelVal = date
+  }
+  else if (isMultipleSelection.value) {
+    modelVal = localValue.value ? [...localValue.value, date] : [date]
+  }
+  else if (isRangeSelection.value) {
+    if (localValue.value && localValue.value.length) {
+      let startDate = localValue.value[0]
+      let endDate = localValue.value[1]
+
+      if (!endDate && date.getTime() >= startDate.getTime()) {
+        endDate = date
+      }
+      else {
+        startDate = date
+        endDate = null
+      }
+
+      modelVal = [startDate, endDate]
+    }
+    else {
+      modelVal = [date, null]
+    }
+  }
+
+  if (modelVal !== null) {
+    updateModel(modelVal)
+  }
+
+  if (isRangeSelection.value && props.hideOnRangeSelection && modelVal[1] !== null) {
+    setTimeout(() => {
+      overlayVisible.value = false
+    }, 150)
+  }
+
+  emit('date-select', date)
+}
+
+const onMonthSelect = (event, index) => {
+  if (props.view === 'month') {
+    onDateSelect(event, { year: currentYear.value, month: index, day: 1, selectable: true })
+  }
+ else {
+    currentMonth.value = index
+    currentView.value = 'date'
+    emit('month-change', { month: currentMonth.value + 1, year: currentYear.value })
+  }
+
+  // setTimeout(this.updateFocus, 0)
+}
+
+const onYearSelect = (event, year) => {
+  if (props.view === 'year') {
+    onDateSelect(event, { year, month: 0, day: 1, selectable: true })
+  }
+ else {
+    currentYear.value = year
+    currentView.value = 'month'
+    emit('year-change', { month: currentMonth.value + 1, year: currentYear.value })
+  }
+
+  // setTimeout(updateFocus, 0)
+}
+
+const onTimePickerElementMouseDown = (event: Event | KeyboardEvent, type, direction) => {
+  if (isEnabled.value) {
+    repeat(event, null, type, direction)
+    event.preventDefault()
+  }
+}
+
+const onTimePickerElementMouseUp = (event: Event | KeyboardEvent) => {
+  if (isEnabled.value) {
+    clearTimePickerTimer()
+    updateModelTime()
+    event.preventDefault()
+  }
+}
+
+const shouldSelectDate = () => {
+  if (isMultipleSelection.value) {
+    return props.maxDateCount != null ? props.maxDateCount > (localValue.value ? localValue.value.length : 0) : true
+  }
+  return true
+}
+
+const onDateSelect = (event, dateMeta) => {
+  console.log('Date selected', props.disabled)
+  if (props.disabled || !dateMeta.selectable) {
+    return
+  }
+
+  DomHandler.find(overlayRef.value, '.p-datepicker-calendar td span:not(.p-disabled)').forEach(cell => (cell.tabIndex = -1))
+
+  if (event) {
+    event.currentTarget.focus()
+  }
+
+  if (isMultipleSelection.value && isSelected(dateMeta)) {
+    const newValue = localValue.value.filter(date => !areDatesEqual(date, dateMeta))
+    updateModel(newValue)
+  }
+  else {
+    if (shouldSelectDate(dateMeta)) {
+      if (dateMeta.otherMonth) {
+        currentMonth.value = dateMeta.month
+        currentYear.value = dateMeta.year
+        selectDate(dateMeta)
+      }
+      else {
+        selectDate(dateMeta)
+      }
+    }
+  }
+
+  if (isSingleSelection.value && (!props.showTime || props.hideOnDateTimeSelect)) {
+    setTimeout(() => {
+      inputRef.value?.focus()
+    }, 150)
+  }
+}
+
+const onTimePickerElementMouseLeave = () => {
+  clearTimePickerTimer()
+}
+
+const onContainerButtonKeydown = (event: Event | KeyboardEvent) => {
+  switch (event.code) {
+    case 'Tab':
+     // this.trapFocus(event)
+      console.log('Trap Focus')
+      break
+
+    case 'Escape':
+      overlayVisible.value = false
+      event.preventDefault()
+      break
+
+    default:
+      // Noop
+      break
+  }
+  emit('keydown', event)
+}
+
+const updateModel = (value) => {
+  localValue.value = value
+}
+
+const updateModelTime = () => {
+  timePickerChange.value = true
+  let value = isComparable() ? localValue.value : viewDate
+
+  if (isRangeSelection.value) {
+    value = localValue.value[1] || localValue.value[0]
+  }
+
+  if (isMultipleSelection.value) {
+    value = localValue.value[localValue.value.length - 1]
+  }
+
+  value = value ? new Date(value.getTime()) : new Date()
+
+  if (props.hourFormat === '12') {
+    if (currentHour.value === 12) {
+      value.setHours(pm.value ? 12 : 0)
+    }
+    else {
+      value.setHours(pm.value ? currentHour.value + 12 : currentHour.value)
+    }
+  }
+  else {
+    value.setHours(currentHour.value)
+  }
+
+  value.setMinutes(currentMinute.value)
+  value.setSeconds(currentSecond.value)
+
+  if (isRangeSelection.value) {
+    if (localValue.value[1]) {
+      value = [localValue.value[0], value]
+    }
+    else {
+      value = [value, null]
+    }
+  }
+
+  if (isMultipleSelection.value) {
+    value = [...localValue.value.slice(0, -1), value]
+  }
+
+  updateModel(value)
+  emit('date-select', value)
+  setTimeout(() => (timePickerChange.value = false), 0)
+}
+
+onMounted(() => {
+  if (props.inline) {
+    overlayRef.value && overlayRef.value.setAttribute(props.name, '')
+
+    if (!props.disabled) {
+      preventFocus.value = true
+      focusableCell()
+
+      if (props.numberOfMonths === 1) {
+        overlayRef.value.style.width = `${DomHandler.getOuterWidth(overlayRef.value.$el)}px`
+      }
+    }
+  }
+  else {
+    inputRef.value.value = formatValue(localValue.value)
+  }
+
+  console.log('here', optionsMonths())
+})
+
+onBeforeMount(() => {
+  updateCurrentMetaData()
+})
+
+watch(() => localValue.value, (newValue) => {
+  //
+  updateCurrentMetaData()
+
+  if (!typeUpdate.value && !props.inline && inputRef.value) {
+    inputRef.value.value = formatValue(newValue)
+  }
+
+  typeUpdate.value = false
+})
+
+// watch(() => currentMonth.value, () => {
+//   updateCurrentMetaData()
+// })
 </script>
 
 <template>
   <span
-    :id="id"
+    :id="`span.${props.name}`"
     ref="container"
-    :class="containerClass"
+    class="p-calendar p-component p-inputwrapper"
+    :class="{
+      'p-calendar-w-btn': false,
+      'p-calendar-timeonly': props.timeOnly,
+      'p-calendar-disabled': props.disabled,
+      'p-inputwrapper-filled': localValue.value,
+      'p-inputwrapper-focus': focused.value,
+    }"
   >
     <input
       v-if="!inline"
-      :id="inputId"
-      :ref="inputRef"
+      :id="props.name"
+      ref="inputRef"
       type="text"
       role="combobox"
       class="p-inputtext p-component"
-      :class="[inputClass]"
-      :style="inputStyle"
-      :placeholder="placeholder"
       aria-autocomplete="none"
       aria-haspopup="dialog"
       :aria-expanded="overlayVisible"
-      :aria-controls="panelId"
-      :aria-labelledby="ariaLabelledby"
-      :aria-label="ariaLabel"
+      :aria-controls="props.name"
+      aria-labelledby="Input Date"
+      :aria-label="props.name"
       inputmode="none"
-      :disabled="disabled"
+      :disabled="props.disabled"
       :readonly="!manualInput"
       :tabindex="0"
-      v-bind="inputProps"
       @input="onInput"
       @click="onInputClick"
       @focus="onFocus"
       @blur="onBlur"
       @keydown="onKeyDown"
     >
-    <CalendarButton
-      v-if="showIcon"
-      :icon="icon"
-      class="p-datepicker-trigger"
-      :disabled="disabled"
-      type="button"
-      :aria-label="$primevue.config.locale.chooseDate"
-      aria-haspopup="dialog"
-      :aria-expanded="overlayVisible"
-      :aria-controls="panelId"
-      @click="onButtonClick"
-    />
-    <Portal
-      :append-to="appendTo"
-      :disabled="inline"
+    <teleport
+      :to="appendTo"
+      :disabled="true"
     >
       <transition
         name="p-connected-overlay"
-        @enter="onOverlayEnter($event)"
-        @after-enter="onOverlayEnterComplete"
-        @after-leave="onOverlayAfterLeave"
-        @leave="onOverlayLeave"
       >
         <div
-          v-if="inline || overlayVisible"
-          :id="panelId"
-          :ref="overlayRef"
-          :class="panelStyleClass"
-          :style="panelStyle"
+          v-if="inline || overlayVisible || true"
+          :id="name"
+          ref="overlayRef"
           :role="inline ? null : 'dialog'"
           :aria-modal="inline ? null : 'true'"
-          :aria-label="$primevue.config.locale.chooseDate"
-          v-bind="panelProps"
-          @click="onOverlayClick"
-          @keydown="onOverlayKeyDown"
-          @mouseup="onOverlayMouseUp"
+          aria-label="Choose your date"
+          class="p-datepicker p-component fooo mt-20"
+          :class="[
+            {
+              'p-datepicker-inline': props.inline,
+              'p-disabled': props.disabled,
+              'p-datepicker-timeonly': props.timeOnly,
+              'p-datepicker-multiple-month': props.numberOfMonths > 1,
+              'p-datepicker-monthpicker': currentView === 'month',
+              'p-datepicker-yearpicker': currentView === 'year',
+              'p-datepicker-touch-ui': touchUI,
+              'p-input-filled': 'filled',
+            },
+          ]"
         >
           <template v-if="!timeOnly">
             <div class="p-datepicker-group-container">
               <div
-                v-for="(month, groupIndex) of months"
+                v-for="(month, groupIndex) of optionsMonths()"
                 :key="month.month + month.year"
                 class="p-datepicker-group"
               >
@@ -658,13 +944,10 @@ const onNextButtonClick = (event) => {
                   <slot name="header" />
                   <Button
                     v-show="showOtherMonths ? groupIndex === 0 : false"
-                    v-ripple
                     class="p-datepicker-prev p-link"
                     type="button"
-                    :disabled="disabled"
-                    :aria-label="currentView === 'year' ? $primevue.config.locale.prevDecade : currentView === 'month' ? $primevue.config.locale.prevYear : $primevue.config.locale.prevMonth"
-                    @click="onPrevButtonClick"
-                    @keydown="onContainerButtonKeydown"
+                    :aria-label="currentView === 'year' ? locale.prevDecade : currentView === 'month' ? locale.prevYear : locale.prevMonth"
+                    @click="onPreviousButtonClick"
                   >
                     <span class="p-datepicker-prev-icon pi pi-chevron-left" />
                   </Button>
@@ -673,10 +956,8 @@ const onNextButtonClick = (event) => {
                       v-if="currentView === 'date'"
                       type="button"
                       class="p-datepicker-month p-link"
-                      :disabled="switchViewButtonDisabled"
-                      :aria-label="$primevue.config.locale.chooseMonth"
+                      :aria-label="locale.chooseMonth"
                       @click="switchToMonthView"
-                      @keydown="onContainerButtonKeydown"
                     >
                       {{ getMonthName(month.month) }}
                     </Button>
@@ -684,10 +965,8 @@ const onNextButtonClick = (event) => {
                       v-if="currentView !== 'year'"
                       type="button"
                       class="p-datepicker-year p-link"
-                      :disabled="switchViewButtonDisabled"
-                      :aria-label="$primevue.config.locale.chooseYear"
+                      :aria-label="locale.chooseYear"
                       @click="switchToYearView"
-                      @keydown="onContainerButtonKeydown"
                     >
                       {{ getYear(month) }}
                     </Button>
@@ -697,19 +976,16 @@ const onNextButtonClick = (event) => {
                     >
                       <slot
                         name="decade"
-                        :years="yearPickerValues"
-                      > {{ yearPickerValues[0] }} - {{ yearPickerValues[yearPickerValues.length - 1] }} </slot>
+                        :years="optionsYearPicker"
+                      > {{ optionsYearPicker[0] }} - {{ optionsYearPicker[optionsYearPicker.length - 1] }} </slot>
                     </span>
                   </div>
                   <Button
                     v-show="showOtherMonths ? (numberOfMonths === 1 ? true : groupIndex === numberOfMonths - 1) : false"
-                    v-ripple
                     class="p-datepicker-next p-link"
                     type="button"
-                    :disabled="disabled"
-                    :aria-label="currentView === 'year' ? $primevue.config.locale.nextDecade : currentView === 'month' ? $primevue.config.locale.nextYear : $primevue.config.locale.nextMonth"
+                    :aria-label="currentView === 'year' ? locale.nextDecade : currentView === 'month' ? locale.nextYear : locale.nextMonth"
                     @click="onNextButtonClick"
-                    @keydown="onContainerButtonKeydown"
                   >
                     <span class="p-datepicker-next-icon pi pi-chevron-right" />
                   </Button>
@@ -729,10 +1005,10 @@ const onNextButtonClick = (event) => {
                           scope="col"
                           class="p-datepicker-weekheader p-disabled"
                         >
-                          <span>{{ weekHeaderLabel }}</span>
+                          <span>{{ labelWeekHeader }}</span>
                         </th>
                         <th
-                          v-for="weekDay of weekDays"
+                          v-for="weekDay of optionsWeekDays()"
                           :key="weekDay"
                           scope="col"
                           :abbr="weekDay"
@@ -765,7 +1041,7 @@ const onNextButtonClick = (event) => {
                           :class="{ 'p-datepicker-other-month': date.otherMonth, 'p-datepicker-today': date.today }"
                         >
                           <span
-                            v-ripple
+
                             :class="{ 'p-highlight': isSelected(date), 'p-disabled': !date.selectable }"
                             draggable="false"
                             :aria-selected="isSelected(date)"
@@ -796,9 +1072,8 @@ const onNextButtonClick = (event) => {
               class="p-monthpicker"
             >
               <span
-                v-for="(m, i) of monthPickerValues"
+                v-for="(m, i) of optionsMonthPicker()"
                 :key="m"
-                v-ripple
                 class="p-monthpicker-month"
                 :class="{ 'p-highlight': isMonthSelected(i) }"
                 @click="onMonthSelect($event, i)"
@@ -819,9 +1094,9 @@ const onNextButtonClick = (event) => {
               class="p-yearpicker"
             >
               <span
-                v-for="y of yearPickerValues"
+                v-for="y of optionsYearPicker()"
                 :key="y"
-                v-ripple
+
                 class="p-yearpicker-year"
                 :class="{ 'p-highlight': isYearSelected(y) }"
                 @click="onYearSelect($event, y)"
@@ -844,9 +1119,8 @@ const onNextButtonClick = (event) => {
           >
             <div class="p-hour-picker">
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.nextHour"
+                :aria-label="locale.nextHour"
                 type="button"
                 @mousedown="onTimePickerElementMouseDown($event, 0, 1)"
                 @mouseup="onTimePickerElementMouseUp($event)"
@@ -861,9 +1135,8 @@ const onNextButtonClick = (event) => {
               </Button>
               <span>{{ formattedCurrentHour }}</span>
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.prevHour"
+                :aria-label="locale.prevHour"
                 type="button"
                 @mousedown="onTimePickerElementMouseDown($event, 0, -1)"
                 @mouseup="onTimePickerElementMouseUp($event)"
@@ -882,10 +1155,9 @@ const onNextButtonClick = (event) => {
             </div>
             <div class="p-minute-picker">
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.nextMinute"
-                :disabled="disabled"
+                :aria-label="locale.nextMinute"
+                :disabled="props.disabled"
                 type="button"
                 @mousedown="onTimePickerElementMouseDown($event, 1, 1)"
                 @mouseup="onTimePickerElementMouseUp($event)"
@@ -900,10 +1172,8 @@ const onNextButtonClick = (event) => {
               </Button>
               <span>{{ formattedCurrentMinute }}</span>
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.prevMinute"
-                :disabled="disabled"
+                :aria-label="locale.prevMinute"
                 type="button"
                 @mousedown="onTimePickerElementMouseDown($event, 1, -1)"
                 @mouseup="onTimePickerElementMouseUp($event)"
@@ -928,10 +1198,8 @@ const onNextButtonClick = (event) => {
               class="p-second-picker"
             >
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.nextSecond"
-                :disabled="disabled"
+                :aria-label="locale.nextSecond"
                 type="button"
                 @mousedown="onTimePickerElementMouseDown($event, 2, 1)"
                 @mouseup="onTimePickerElementMouseUp($event)"
@@ -946,10 +1214,8 @@ const onNextButtonClick = (event) => {
               </Button>
               <span>{{ formattedCurrentSecond }}</span>
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.prevSecond"
-                :disabled="disabled"
+                :aria-label="locale.prevSecond"
                 type="button"
                 @mousedown="onTimePickerElementMouseDown($event, 2, -1)"
                 @mouseup="onTimePickerElementMouseUp($event)"
@@ -964,33 +1230,29 @@ const onNextButtonClick = (event) => {
               </Button>
             </div>
             <div
-              v-if="hourFormat == '12'"
+              v-if="hourFormat === '12'"
               class="p-separator"
             >
               <span>{{ timeSeparator }}</span>
             </div>
             <div
-              v-if="hourFormat == '12'"
+              v-if="hourFormat === '12'"
               class="p-ampm-picker"
             >
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.am"
+                :aria-label="locale.am"
                 type="button"
-                :disabled="disabled"
-                @click="toggleAMPM($event)"
+                @click="toggleAMPM()"
               >
                 <span class="pi pi-chevron-up" />
               </Button>
               <span>{{ pm ? 'PM' : 'AM' }}</span>
               <Button
-                v-ripple
                 class="p-link"
-                :aria-label="$primevue.config.locale.pm"
+                :aria-label="locale.pm"
                 type="button"
-                :disabled="disabled"
-                @click="toggleAMPM($event)"
+                @click="toggleAMPM"
               >
                 <span class="pi pi-chevron-down" />
               </Button>
@@ -1000,29 +1262,29 @@ const onNextButtonClick = (event) => {
             v-if="showButtonBar"
             class="p-datepicker-buttonbar"
           >
-            <CalendarButton
-              type="button"
-              :label="todayLabel"
-              class="p-button-text"
-              @click="onTodayButtonClick($event)"
-              @keydown="onContainerButtonKeydown"
-            />
-            <CalendarButton
-              type="button"
-              :label="clearLabel"
-              class="p-button-text"
-              @click="onClearButtonClick($event)"
-              @keydown="onContainerButtonKeydown"
-            />
+            <!--            <CalendarButton -->
+            <!--              type="button" -->
+            <!--              :label="todayLabel" -->
+            <!--              class="p-button-text" -->
+            <!--              @click="onTodayButtonClick($event)" -->
+            <!--              @keydown="onContainerButtonKeydown" -->
+            <!--            /> -->
+            <!--            <CalendarButton -->
+            <!--              type="button" -->
+            <!--              :label="clearLabel" -->
+            <!--              class="p-button-text" -->
+            <!--              @click="onClearButtonClick($event)" -->
+            <!--              @keydown="onContainerButtonKeydown" -->
+            <!--            /> -->
           </div>
           <slot name="footer" />
         </div>
       </transition>
-    </Portal>
+    </teleport>
   </span>
 </template>
 
-<style>
+<style scoped>
 .p-calendar {
   position: relative;
   display: inline-flex;
