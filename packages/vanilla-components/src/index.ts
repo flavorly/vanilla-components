@@ -26,7 +26,6 @@ export { default as DatatableRowSkeleton } from './components/datatable/partials
 export { default as DatatableSearchBar } from './components/datatable/partials/search-bar.vue'
 
 export { default as DateTimeInput } from './components/datetime-input/datetime-input.vue'
-export { default as DateTimeInputCalendar } from './components/datetime-input/datetime-input-calendar.vue'
 
 export { default as Dialog } from './components/dialog/dialog.vue'
 export { default as DialogFooter } from './components/dialog/partials/footer.vue'
