@@ -24,7 +24,7 @@ export const dropdownConfig = {
     container: 'flex items-center content-center',
 
     // container: 'inline-flex items-center content-center',
-    chevronIcon: '-mr-1 ml-2 h-4 w-4',
+    chevronIcon: '-mr-1 ml-2 h-3 w-3',
     overlay: 'fixed top-0 right-0 left-0 bottom-0 z-[99] bg-black/50',
 
     menuWrapper: 'absolute z-[100]',

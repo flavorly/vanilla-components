@@ -40,7 +40,7 @@ const selectDragAttribute = {
       </DateTimeInput>
 
       <div class="flex items-center justify-center mx-auto text-center mt-2">
-        <pre>From: {{ JSON.stringify(rangeValue?.start) || '-' }} | To: {{ JSON.stringify(rangeValue?.end) || '-' }}</pre>
+        <pre class="text-xs">From: {{ JSON.stringify(rangeValue?.start) || '-' }} | To: {{ JSON.stringify(rangeValue?.end) || '-' }}</pre>
       </div>
     </div>
 
@@ -56,7 +56,7 @@ const selectDragAttribute = {
       />
 
       <div class="flex items-center justify-center mx-auto text-center mt-2">
-        <pre>{{ JSON.stringify(value) || '-' }}</pre>
+        <pre class="text-xs">{{ JSON.stringify(value) || '-' }}</pre>
       </div>
     </div>
 
@@ -82,7 +82,7 @@ const selectDragAttribute = {
       </div>
 
       <div class="flex items-center justify-center mx-auto text-center mt-2">
-        <pre>From: {{ JSON.stringify(rangeValue?.start) || '-' }} | To: {{ JSON.stringify(rangeValue?.end) || '-' }}</pre>
+        <pre class="text-xs">From: {{ JSON.stringify(rangeValue?.start) || '-' }} | To: {{ JSON.stringify(rangeValue?.end) || '-' }}</pre>
       </div>
     </div>
   </PreviewWrapper>
