@@ -157,7 +157,7 @@ export default defineConfig({
             { text: 'Country Input', link: '/components/country-input/index' },
             { text: 'Phone Input', link: '/components/phone-input/index' },
             { text: 'Checkbox', link: '/components/checkbox/index' },
-            { text: 'Date Time Picker', link: '/components/datetimepicker/index' },
+            { text: 'Datetime Picker', link: '/components/datetimepicker/index' },
             { text: 'Card', link: '/components/card/index' },
             { text: 'Datatables', link: '/components/datatables/index' },
             { text: 'Dropdown', link: '/components/dropdown/index' },

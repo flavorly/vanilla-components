@@ -22,9 +22,9 @@ Once installed on your project, install also the `peer dependencies`, those are 
 # Using pnpm
 pnpm add @headlessui/vue @popperjs/core flatpickr libphonenumber-js
 # Using Yarn
-yarn add @headlessui/vue @popperjs/core flatpickr libphonenumber-js
+yarn add @headlessui/vue @popperjs/core libphonenumber-js
 # Using npm
-npm add @headlessui/vue @popperjs/core flatpickr libphonenumber-js
+npm add @headlessui/vue @popperjs/core libphonenumber-js
 ```
 
 
@@ -70,4 +70,26 @@ Typescript types are also exported from the library, in case you need them to ty
 <script setup lang="ts">
 import type { ButtonProps } from '@indigit/vanilla-components'
 </script>
+```
+
+## Using Tailwind
+
+If you are using Tailwind please ensure your configuration file matches the following:
+
+```js
+const defaultTheme = require('tailwindcss/defaultTheme');
+const colors = require('tailwindcss/colors');
+module.exports = {
+    // the rest of  your configuration..
+    theme: {
+        colors: {
+            primary: colors.indigo, // alias "primary" to "indigo"
+        },
+    },
+    plugins: [
+        require('@tailwindcss/typography'),
+        require('@tailwindcss/aspect-ratio'),
+        require('@tailwindcss/forms'),
+    ],
+}
 ```
