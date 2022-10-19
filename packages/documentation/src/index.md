@@ -33,8 +33,8 @@ features:
     title: Tailwind Styled
     details: Presets included by default for Tailwind CSS LTS, Regular & Error Variants
   - icon: ✋
-    title: Zero CSS
-    details: That's right, zero CSS included, only utility classes for your components.
+    title: Near Zero CSS
+    details: That's right, core components bring zero CSS included, only utility classes for your components.
   - icon: 🌳
     title: Tree Shakable
     details: Import only the components that you need without worry about your bundle size.

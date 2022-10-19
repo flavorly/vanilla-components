@@ -22,7 +22,7 @@ const valueMultiple = ref([])
     </div>
 
     <div class="flex items-center justify-center mx-auto text-center mt-2">
-      <pre>{{ JSON.stringify(value) }}</pre>
+      <pre class="text-xs">{{ JSON.stringify(value) }}</pre>
     </div>
 
     <div class="h-1 my-5" />
@@ -47,7 +47,7 @@ const valueMultiple = ref([])
     </div>
 
     <div class="flex items-center justify-center mx-auto text-center mt-2">
-      <pre>{{ JSON.stringify(valueMultiple) }}</pre>
+      <pre class="text-xs">{{ JSON.stringify(valueMultiple) }}</pre>
     </div>
 
     <div class="h-1 my-5" />
@@ -63,7 +63,7 @@ const valueMultiple = ref([])
     </div>
 
     <div class="flex items-center justify-center mx-auto text-center mt-2">
-      <pre>{{ JSON.stringify(value2) }}</pre>
+      <pre class="text-xs">{{ JSON.stringify(value2) }}</pre>
     </div>
   </PreviewWrapper>
 </template>

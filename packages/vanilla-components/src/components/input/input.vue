@@ -39,6 +39,12 @@ const togglePassword = () => {
 }
 </script>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
+
 <template>
   <div class="vc-input">
     <div :class="configuration.classesList.wrapper">

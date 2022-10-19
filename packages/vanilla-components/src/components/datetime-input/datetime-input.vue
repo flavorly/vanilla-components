@@ -1,94 +1,81 @@
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import { onMounted, ref } from 'vue'
-import Flatpickr from 'flatpickr'
+import { defineComponent } from 'vue'
+import { DatePicker } from 'v-calendar'
+import ClearButton from '../rich-select/partials/clear-button.vue'
+import { baseProps } from './baseProps'
+import type { DateTimeInputProps } from './config'
 import { dateTimeInputConfig } from './config'
-import type { DateTimeInputClassesValidKeys, DateTimeInputProps, DateTimeInputValue } from './config'
-import FormErrors from '@/components/forms/form-errors.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
-import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import { hasSlot } from '@/core/helpers'
+import VanillaInput from '@/components/input/input.vue'
+import { get } from '@/core/helpers'
+import { useConfiguration, useVModel } from '@/core/use'
 
-const props = defineProps({
-  ...useVariantProps<DateTimeInputProps, DateTimeInputClassesValidKeys>(),
-  modelValue: {
-    type: [String, undefined] as PropType<DateTimeInputValue>,
-    default: undefined,
-  },
-  options: {
-    type: [Object] as PropType<object>,
-    default: () => {
-      return {
-        enableTime: true,
-        time_24hr: true,
-      }
-    },
-  },
-  type: {
-    type: [String] as PropType<string>,
-    default: 'text',
-  },
+const props = defineProps(baseProps)
+const localValue = useVModel(props, 'modelValue')
+const { configuration, errors, variant } = useConfiguration<DateTimeInputProps>(dateTimeInputConfig, 'DateTimeInput', localValue)
+const mergedProps = { ...DatePicker.props, ...baseProps }
+
+const DateTimePicker = defineComponent({
+  name: 'DateTimePicker',
+  extends: DatePicker,
+  props: mergedProps,
 })
 
-const localValue = useVModel(props, 'modelValue')
-const flatpickrInput = ref(null)
-const { configuration, errors, hasErrors } = useConfiguration<DateTimeInputProps>(dateTimeInputConfig, 'DateTimeInput', localValue)
-onMounted(() => Flatpickr(flatpickrInput.value, props.options))
+const formatRange = (start: Date, end: Date) => {
+  if (!start || !end) {
+    return ''
+  }
+  return `${start || ''} - ${start || ''}`
+}
 </script>
 
 <template>
-  <div class="vanilla-input">
-    <div :class="configuration.classesList.wrapper">
-      <div
-        v-if="hasSlot($slots.before)"
-        :class="configuration.classesList.addonBefore"
-      >
-        <slot name="before" />
-      </div>
-      <input
-        :id="name"
-        v-bind="$attrs"
-        ref="flatpickrInput"
-        v-model="localValue"
-        :name="name"
-        :class="[
-          hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
-          hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
-          configuration.classesList.input,
-        ]"
-        :type="type"
-      >
-      <div
-        v-if="hasSlot($slots.after) || hasErrors"
-        :class="configuration.classesList.addonAfter"
-      >
-        <slot name="after">
-          <ExclamationCircleIcon
-            v-if="hasErrors"
-            :class="configuration.classesList.addonClasses"
+  <DateTimePicker
+    v-model="localValue"
+    :input-debounce="1200"
+    :update-on-input="false"
+    :popover="{ visibility: 'focus' }"
+  >
+    <template
+      v-if="props.inline === false"
+      #default="scope"
+    >
+      <slot v-bind="scope">
+        <div :class="configuration.classesList.wrapper">
+          <VanillaInput
+            v-if="get($attrs, 'is-range', false) === false"
+            :model-value="scope.inputValue"
+            :placeholder="props.placeholder"
+            :errors="errors"
+            :variant="variant"
+            v-on="scope.inputEvents"
           />
-        </slot>
-      </div>
-    </div>
-    <slot
-      name="errors"
-      v-bind="{ hasErrors, errors }"
+          <VanillaInput
+            v-if="get($attrs, 'is-range', false) === true"
+            :model-value="formatRange(scope.inputValue.start, scope.inputValue.end)"
+            :placeholder="props.placeholder"
+            :errors="errors"
+            :variant="variant"
+            v-on="{ ...scope.inputEvents.start, ...scope.inputEvents.end }"
+          />
+          <ClearButton
+            v-if="get($attrs, 'is-required', false) === false"
+            :class="configuration.classesList?.clearButton"
+            @click="localValue = null"
+          />
+        </div>
+      </slot>
+    </template>
+    <template
+      v-for="(_, slot) of $slots"
+      #[slot]="scope"
     >
-      <FormErrors
-        v-if="hasErrors && props.showErrors"
-        :errors="errors"
+      <slot
+        v-if="slot !== 'default'"
+        :key="slot"
+        :name="slot"
+        v-bind="scope"
       />
-    </slot>
-    <slot
-      name="feedback"
-      v-bind="{ hasErrors, feedback: props.feedback }"
-    >
-      <FormFeedback
-        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
-        :text="props.feedback"
-      />
-    </slot>
-  </div>
+    </template>
+  </DateTimePicker>
 </template>
 

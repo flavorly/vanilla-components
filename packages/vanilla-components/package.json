@@ -53,7 +53,6 @@
     "@popperjs/core": "^2.11.6",
     "@vueuse/core": "^9.2.0",
     "axios": "^1.1.2",
-    "flatpickr": "^4.6.9",
     "fuse.js": "^6.4.6",
     "libphonenumber-js": "^1.9.49",
     "lodash": "^4.17.21",
@@ -63,7 +62,8 @@
     "@headlessui/vue": "^1.7.0",
     "@popperjs/core": "^2.11.6",
     "axios": "^1.1.2",
-    "vue": "^3.2.39"
+    "vue": "^3.2.39",
+    "v-calendar": "3.0.0-alpha.8"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",
