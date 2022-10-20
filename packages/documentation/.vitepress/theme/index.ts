@@ -1,3 +1,4 @@
+// Styles
 import './styles/fonts.css'
 import './styles/vars.css'
 import './styles/base.css'
@@ -10,13 +11,18 @@ import './styles/tailwind.css'
 import './styles/custom.css'
 import './styles/v-calendar/v-calendar.pcss'
 import './styles/shiki-tags/shiki-tags.pcss'
+import './styles/why-frame/whyframe.pcss'
+
+// Plugins
 import { Plugin } from '@indigit/vanilla-components'
 import { makeServer } from '../../mocks/server'
+
+// Vue Templates
 import Layout from './Layout.vue'
 import NotFound from './NotFound.vue'
 import PreviewWrapper from './components/PreviewWrapper.vue'
-
 import DemoComponent from './components/Demo/DemoComponent.vue'
+import DynamicLayout from './why-frame/DynamicLayout.vue'
 export { default as VPHomeHero } from './components/VPHomeHero.vue'
 export { default as VPHomeFeatures } from './components/VPHomeFeatures.vue'
 export { default as VPHomeSponsors } from './components/VPHomeSponsors.vue'
@@ -26,23 +32,9 @@ export { default as VPTeamPageTitle } from './components/VPTeamPageTitle.vue'
 export { default as VPTeamPageSection } from './components/VPTeamPageSection.vue'
 export { default as VPTeamMembers } from './components/VPTeamMembers.vue'
 
-// import DynamicLayout from './why-frame/DynamicLayout.vue'
-
-const demoConfiguration = {
-  Input: {
-    fixedClasses: {
-      input: '',
-    },
-    classes: {
-      input: '',
-      wrapper: 'relative-custom',
-    },
-  },
-}
-
 const theme = {
-    // Layout: DynamicLayout,
-    Layout,
+     Layout: DynamicLayout,
+    //Layout,
     NotFound,
     enhanceApp({ app }) {
       app.use(Plugin)

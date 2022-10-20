@@ -2,6 +2,8 @@ import { resolve } from 'path'
 import { defineConfig } from 'vitepress'
 import MarkitDownInclude from 'markdown-it-include'
 import Inspect from 'vite-plugin-inspect'
+import { whyframe } from '@whyframe/core'
+import { whyframeVue } from '@whyframe/vue'
 import ReplacePackagePlugin from '../plugins/local-link'
 import highlighter from './shiki-tags/highlighter'
 
@@ -18,8 +20,13 @@ const plugins = !production
       build: false,
       outputDir: '.vite-inspect',
     }),
+    whyframe({ defaultSrc: '/frames/default' }),
+    whyframeVue({ include: /\.(?:vue|md)$/ }),
   ]
-: []
+: [
+    whyframe({ defaultSrc: '/frames/default' }),
+    whyframeVue({ include: /\.(?:vue|md)$/ }),
+  ]
 
 const navQuickStart = [
   { text: 'Introduction', link: '/guide/introduction' },

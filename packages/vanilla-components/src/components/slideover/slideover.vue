@@ -89,24 +89,34 @@ const props = defineProps({
 const emit = defineEmits(['update:modelValue', 'open', 'close'])
 
 const localValue = useVModel(props, 'modelValue')
-const { configuration } = useConfiguration<SlideoverProps>(slideoverConfig, 'SkeletonBar', localValue)
+const { configuration } = useConfiguration<SlideoverProps>(slideoverConfig, 'Slideover', localValue)
 
-const close = () => localValue.value = false
-const open = () => localValue.value = true
+const close = () => {
+  setTimeout(() => {
+    localValue.value = false
+    emit('close')
+  }, 50)
+}
+
+const open = () => {
+    localValue.value = true
+    emit('open')
+}
+
 const closeOnClickOutside = () => props.closeableOnClickOutside && close()
+
+defineExpose({ open, close })
 
 provide('configuration_vanilla', configuration)
 </script>
 
 <template>
   <TransitionRoot
-    appear
     :show="localValue"
-    as="template"
+    as="div"
   >
     <HeadlessDialog
       :as="as"
-      :open="localValue"
       :initial-focus="null"
       @close="close"
     >
