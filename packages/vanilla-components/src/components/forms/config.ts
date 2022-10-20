@@ -5,20 +5,24 @@ import type { Data, WithVariantProps } from '@/core/types'
 
 export const formsConfig = {
   fixedClasses: {
-    label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-2',
-    errors: mergeClasses('mt-2 text-xs', commonClasses.inputsErrorText),
-    feedback: 'mt-2 ml-1 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer',
-    section: 'bg-gray-50 dark:bg-gray-800/50',
-    sectionDivided: 'bg-gray-50 dark:bg-gray-800/50 sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
-  },
-
-  // Default Input appearance
-  classes: {
     label: '',
     errors: '',
     feedback: '',
     section: '',
     sectionDivided: '',
+    sectionSpaced: '',
+    sectionFilled: '',
+  },
+
+  // Default Input appearance
+  classes: {
+    label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1',
+    errors: mergeClasses('mt-2 text-xs', commonClasses.inputsErrorText),
+    feedback: 'mt-2 ml-1 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer',
+    section: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-700',
+    sectionDivided: '',
+    sectionSpaced: '',
+    sectionFilled: 'bg-gray-50 dark:bg-gray-800/50',
   },
 }
 

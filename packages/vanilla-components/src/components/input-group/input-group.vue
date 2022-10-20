@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import Fuse from 'fuse.js'
 import type { InputGroupClassesValidKeys, InputGroupProps } from './config'
 import { inputGroupConfig } from './config'
 import { useConfiguration, useVariantProps } from '@/core/use'
@@ -7,7 +8,6 @@ import { hasSlot } from '@/core/helpers'
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormLabel from '@/components/forms/form-label.vue'
-
 const props = defineProps({
   ...useVariantProps<InputGroupProps, InputGroupClassesValidKeys>(),
   errors: {
@@ -40,34 +40,32 @@ const props = defineProps({
   },
   withPadding: {
     type: [Boolean] as PropType<boolean>,
-    default: false,
+    default: true,
     required: false,
   },
 })
 
-const { configuration, errors, hasErrors } = useConfiguration<InputGroupProps>(inputGroupConfig, 'InputGroup')
+const { configuration, errors, hasErrors, variant } = useConfiguration<InputGroupProps>(inputGroupConfig, 'InputGroup')
+console.log(configuration.withPadding)
 </script>
 
 <template>
   <div
-    class="vc-group"
-    :class="[withPadding ? configuration.classesList.wrapperWithPadding : '']"
+    class="vc-group px-6 py-3 mt-0 grid space-y-2"
+    :class="[configuration.withPadding ? configuration.classesList.wrapperWithPadding : '']"
   >
     <!-- Label And Input -->
-    <div class="vc-inputs-group">
-      <slot name="label">
-        <FormLabel
-          v-if="label !== undefined"
-          :label="label"
-          :for="name"
-        />
-      </slot>
-      <div
-        class="vc-inputs-container"
-        :class="[
-          configuration.classesList.wrapper,
-        ]"
-      >
+    <div :class="configuration.classesList.wrapper">
+      <div :class="configuration.classesList.labelWrapper">
+        <slot name="label">
+          <FormLabel
+            v-if="label !== undefined"
+            :label="label"
+            :for="name"
+          />
+        </slot>
+      </div>
+      <div :class="configuration.classesList.inputWrapper">
         <div
           v-if="hasSlot($slots.before)"
           :class="configuration.classesList.addonBefore"

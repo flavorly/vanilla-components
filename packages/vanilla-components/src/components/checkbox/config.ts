@@ -10,11 +10,14 @@ export const checkboxConfig = {
     wrapperRight: 'flex items-center justify-end',
     container: '',
     checkbox: 'h-5 w-5 transition duration-150 ease-in-out relative',
-
+    label: {
+      label: '',
+    },
     groupContainer: 'space-y-3',
     groupCheckboxWrapper: 'relative flex items-start',
     groupCheckbox: 'flex items-center h-5',
-    groupLabel: 'ml-3 text-sm leading-5',
+    groupLabelWrapper: 'ml-3 text-sm leading-5',
+    groupLabelFeedback: 'text-gray-500',
   },
 
   // Default Input appearance
@@ -29,10 +32,14 @@ export const checkboxConfig = {
       'checked:bg-primary-600 checked:text-white',
       'dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600',
     ),
+    label: {
+      label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer',
+    },
     groupContainer: '',
     groupCheckboxWrapper: '',
     groupCheckbox: '',
-    groupLabel: '',
+    groupLabelWrapper: '',
+    groupLabelFeedback: '',
   },
 
   // Variants
@@ -48,10 +55,13 @@ export const checkboxConfig = {
           'checked:bg-red-600 checked:text-white',
           'dark:checked:bg-red-600 dark:focus:ring-offset-gray-900',
         ),
+        label: {
+          label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer',
+        },
         groupContainer: '',
         groupCheckboxWrapper: '',
         groupCheckbox: '',
-        groupLabel: '',
+        groupLabelWrapper: '',
       },
     },
   },

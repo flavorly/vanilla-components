@@ -97,7 +97,6 @@ const { configuration, errors, hasErrors } = useConfiguration<DialogProps>(dialo
 
 const close = () => {
   if (!props.closeable) {
-    localValue.value = true
     return
   }
 
@@ -105,8 +104,11 @@ const close = () => {
     localValue.value = true
     return
   }
-  localValue.value = false
-  emit('close')
+
+  setTimeout(() => {
+    localValue.value = false
+    emit('close')
+  }, 50)
 }
 
 const open = () => {
@@ -125,7 +127,6 @@ provide('configuration_vanilla', configuration)
   >
     <HeadlessDialog
       :as="as"
-      :open="localValue"
       :initial-focus="null"
       @close="close"
     >
@@ -203,7 +204,7 @@ provide('configuration_vanilla', configuration)
                   bodyDivided ? configuration.classesList.bodyDivided : '',
                   bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
                   bodyWithPadding && (!hasSlot($slots.header) || title === undefined) ? configuration.classesList.bodyWithPaddingTop : '',
-                  bodyWithPadding && !hasSlot($slots.footer) ? configuration.classesList.bodyWithPaddingBottom : '',
+                  bodyWithPadding && hasSlot($slots.footer) ? configuration.classesList.bodyWithPaddingBottom : '',
                   bodyDarker ? configuration.classesList.bodyDarker : '',
                   bodyClasses,
                 ]"

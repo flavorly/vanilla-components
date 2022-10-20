@@ -176,6 +176,13 @@ export default defineConfig({
             { text: 'Laravel + Datatables', link: '/guide/integrations-datatables' },
           ],
         },
+        {
+          text: 'Example',
+          collapsible: true,
+          items: [
+            { text: 'Form Sections & Groups', link: '/guide/examples-form-sections' },
+          ],
+        },
       ],
     },
   },
