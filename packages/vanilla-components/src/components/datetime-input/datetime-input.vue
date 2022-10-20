@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineComponent } from 'vue'
-import { DatePicker } from 'v-calendar'
+import { DatePicker } from '@indigit/v-calendar'
 import ClearButton from '../rich-select/partials/clear-button.vue'
 import { baseProps } from './baseProps'
 import type { DateTimeInputProps } from './config'
@@ -12,6 +12,7 @@ import { useConfiguration, useVModel } from '@/core/use'
 const props = defineProps(baseProps)
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, variant } = useConfiguration<DateTimeInputProps>(dateTimeInputConfig, 'DateTimeInput', localValue)
+
 const mergedProps = { ...DatePicker.props, ...baseProps }
 
 const DateTimePicker = defineComponent({

@@ -1,7 +1,5 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vitepress'
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 import MarkitDownInclude from 'markdown-it-include'
 import Inspect from 'vite-plugin-inspect'
 import ReplacePackagePlugin from '../plugins/local-link'
@@ -64,7 +62,8 @@ export default defineConfig({
     },
     plugins,
     build: {
-      sourcemap: true,
+      sourcemap: false,
+      chunkSizeWarningLimit: 16000,
     },
   },
 
@@ -113,19 +112,8 @@ export default defineConfig({
 
     socialLinks: [
       { icon: 'twitter', link: 'https://twitter.com/nikuscs' },
-
-      // { icon: 'discord', link: 'https://chat.vitejs.dev' },
       { icon: 'github', link: 'https://github.com/nikuscs' },
     ],
-
-    // algolia: {
-    //   appId: '',
-    //   apiKey: '',
-    //   indexName: 'vanilla-components',
-    //   searchParameters: {
-    //     facetFilters: ['tags:en'],
-    //   },
-    // },
 
     footer: {
       message: 'Released under the MIT License.',

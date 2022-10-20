@@ -17,16 +17,16 @@ There are plans to port an official datetime picker. But meanwhile enjoy this am
 
 ### Install V-Calendar
 
-Start by installing the [VCalendar](https://vcalendar.io/) for this case we will be using the @next branch, that brings support to vue 3
+Start by installing the [VCalendar](https://vcalendar.io/) for this case we will be using the `@next` branch with our own fork to support type `module` until the original maintainer finishes it, that brings support to vue 3
 and will soon be refactored properly to composition API. Please follow the V-Calendar installation guide for more details.
 
 ```bash
 # Using pnpm
-pnpm add v-calendar@next
+pnpm add @indigit/v-calendar@next
 # Using Yarn
-yarn add v-calendar@next
+yarn add @indigit/v-calendar@next
 # Using npm
-npm add v-calendar@next
+npm add @indigit/v-calendar@next
 ```
 
 
@@ -58,7 +58,7 @@ The default slot is pre-filled, please check bellow.
 
 ### Slot `default`
 
-This is the default slot of the component, by default a [Vanilla Text Input](/components/input) is used to display the value.
+This is the default slot of the component, by default a [Vanilla Text Input](/components/input/index) is used to display the value.
 But you are free to use whatever you want for this slot, the slot is also forwarded to the V-Calendar component.
 
 | Attribute   | Description      | Type     |
@@ -70,7 +70,7 @@ But you are free to use whatever you want for this slot, the slot is also forwar
 
 Because you cannot really use the full power of Vanilla Components here and name your classes, a CSS file must be included to match your styles.
 While you can do this on your own and use direct the v-calendar css file, we have prepared a small CSS file that you can use to match your theme, the same theme being used
-with your Vanilla Components setup, in case you are using Tailwind CSS, you can check the [Tailwind CSS Configuration](../../configuration#tailwind-defaults) section for more info.
+with your Vanilla Components setup, in case you are using Tailwind CSS, you can check the [Tailwind CSS Configuration](/guide/configuration#tailwind-defaults) section for more info.
 
 We leverage the `colors.primary` from TailwindCSS to match you current theme, same with the dark mode via `class`.
 
