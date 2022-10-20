@@ -5,6 +5,7 @@ import { defineConfig } from 'vitepress'
 import MarkitDownInclude from 'markdown-it-include'
 import Inspect from 'vite-plugin-inspect'
 import ReplacePackagePlugin from '../plugins/local-link'
+import highlighter from './shiki-tags/highlighter'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanillacomponents.dev' : 'http://localhost:3000'
@@ -95,6 +96,7 @@ export default defineConfig({
 
   // Plugins Configuration
   markdown: {
+    highlight: await highlighter(),
     config(md) {
       md.use(MarkitDownInclude)
     },

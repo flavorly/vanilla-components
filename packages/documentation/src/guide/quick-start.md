@@ -51,13 +51,13 @@ The plugin accepts a `second argument` that could be used to provide your own co
 ## Basic Usage
 After installed, you may import the components as you need them, if you are not happy with the namings go further and create an alias. You can see the full list of named exports [here](https://github.com/nikuscs/vanilla-components/blob/master/packages/vanilla-components/src/index.ts), that should be always up-to-date.
 
-```vue{2,6}
+```vue
 <script setup lang="ts">
-import { Button, Avatar as MyOwnAvatarComponent } from '@indigit/vanilla-components'
+import { Button, Avatar as MyOwnAvatarComponent } from '@indigit/vanilla-components' // [!vp focus:1]
 </script>
 
 <template>
-    <MyOwnAvatarComponent />
+    <MyOwnAvatarComponent /> // [!vp focus:1]
     <Button>Continue</Button>
 </template>
 ```
@@ -66,9 +66,9 @@ import { Button, Avatar as MyOwnAvatarComponent } from '@indigit/vanilla-compone
 
 Typescript types are also exported from the library, in case you need them to type your templates/scripts.
 
-```vue{2}
+```vue
 <script setup lang="ts">
-import type { ButtonProps } from '@indigit/vanilla-components'
+import type { ButtonProps } from '@indigit/vanilla-components'  // [!vp focus:1]
 </script>
 ```
 
@@ -80,10 +80,10 @@ If you are using Tailwind please ensure your configuration file matches the foll
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 module.exports = {
-    // the rest of  your configuration..
+    // the rest of  your configuration..  // [!vp focus:11]
     theme: {
         colors: {
-            primary: colors.indigo, // alias "primary" to "indigo"
+            primary: colors.indigo, // alias "primary" to "indigo"  
         },
     },
     plugins: [

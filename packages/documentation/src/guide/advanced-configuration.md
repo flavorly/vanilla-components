@@ -8,12 +8,12 @@ outline: deep
 
 That's all clear when you want to override our components, but what if you want to keep a single design system in place and also style your own components? That's ok! You can still include the configuration as it was a "regular" Vanilla component, like the following:
 
-```js{2,6-14}
+```js
 import { createApp } from 'vue'
-import { Plugin } from '@indigit/vanilla-components'
+import { Plugin } from '@indigit/vanilla-components' // [!vp focus:1]
 const app = createApp()
 
-app.use(VanillaComponents, {
+app.use(VanillaComponents, { // [!vp focus:12]
     MyOwnComponent: {
         fixedClasses: {
           input: 'border-t-md',

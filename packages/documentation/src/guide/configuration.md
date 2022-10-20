@@ -25,13 +25,13 @@ The library comes out of the box configured to be used with [Tailwind](https://t
 
 Here is a small demo overriding the `Input` component:
 
-```js{2,6-17}
+```js
 import { createApp } from 'vue'
-import { Plugin } from '@indigit/vanilla-components'
+import { Plugin } from '@indigit/vanilla-components' // [!vp focus:1]
 const app = createApp()
 
 app.use(VanillaComponents, {
-    Input: {
+    Input: { // [!vp focus:12]
         fixedClasses: {
           input: 'm-5 shadow-xl',
         },
@@ -87,7 +87,7 @@ You are not limited to set a configuration on a file and load it, even tough we 
 As mentioned before you may also override the props default values from the components using the variants & other settings, just keep in mind to always use valid types, as this could bring unwanted behaviours.
 
 
-```js{9,15}
+```ts
 import { createApp } from 'vue'
 import { Plugin } from '@indigit/vanilla-components'
 const app = createApp()
