@@ -2,11 +2,33 @@
 import { ref } from 'vue'
 import {
   Card,
+  Checkbox,
   CheckboxGroup,
+  CountryInput,
   FormSection,
   InputGroup,
+  PhoneInput,
   Input as VanillaInput,
+  Select as VanillaSelect,
 } from '@indigit/vanilla-components'
+
+const form = ref({
+  name: '',
+  email_provider: undefined,
+  email: '',
+  phone: '',
+  address: {
+    road: '',
+    number: '',
+    city: '',
+    country: '',
+  },
+  phoneCountry: 'PT',
+  password: '',
+  password_confirmation: '',
+  terms: false,
+  skills: [],
+})
 </script>
 
 <template>
@@ -21,8 +43,20 @@ import {
           variant="inline"
         >
           <VanillaInput
+            v-model="form.email"
             name="email"
             placeholder="Enter your personal email here"
+          />
+
+          <VanillaSelect
+            v-model="form.email_provider"
+            name="email_provider"
+            placeholder="Whats your e-mail provider?"
+            :options="[
+              { text: 'Gmail', value: 'gmail' },
+              { text: 'Yahoo', value: 'yahoo' },
+              { text: 'Hey', value: 'hey' },
+            ]"
           />
         </InputGroup>
 
@@ -32,11 +66,13 @@ import {
           feedback="Your first and last name are required"
         >
           <VanillaInput
+            v-model="form.password"
             name="password"
             type="password"
             placeholder="A secure password to test"
           />
           <VanillaInput
+            v-model="form.password_confirmation"
             name="password_confirmation"
             type="password"
             placeholder="Repeat your password"
@@ -63,20 +99,41 @@ import {
         >
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-y-2 gap-x-2">
             <VanillaInput
+              v-model="form.address.road"
               name="address"
               placeholder="Ex: Something Road"
             />
             <VanillaInput
+              v-model="form.address.number"
               name="door"
               placeholder="N31"
             />
           </div>
           <div class="grid grid-cols-1">
             <VanillaInput
+              v-model="form.address.city"
               name="city"
               placeholder="City. Ex: Porto"
             />
           </div>
+          <div class="grid grid-cols-1">
+            <CountryInput
+              v-model="form.address.country"
+              name="country"
+              placeholder="Selec your home country"
+            />
+          </div>
+        </InputGroup>
+
+        <InputGroup
+          label="Phone Number"
+          name="phone"
+        >
+          <PhoneInput
+            v-model="form.phone"
+            v-model:countryCode="form.phoneCountry"
+            name="phone"
+          />
         </InputGroup>
 
         <InputGroup
@@ -84,6 +141,7 @@ import {
           name="skills"
         >
           <CheckboxGroup
+            v-model="form.skills"
             name="skills"
             :options="[
               { text: 'Vue', value: 'vue', description: 'Is Vue your stack?' },
@@ -93,8 +151,24 @@ import {
               { text: 'Ember', value: 'ember', description: 'Good stuff, but... vue' },
             ]"
           />
-        </inputgroup>
+        </InputGroup>
+
+        <InputGroup
+          label="Terms and Conditions"
+          name="terms"
+        >
+          <Checkbox
+            v-model="form.terms"
+            name="skills"
+          >
+            <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">Accepting the terms of service is required to continue, by accepting you agree that we will mine all your data, password and do whatever we want, for what it matters this is just to test</span>
+          </Checkbox>
+        </InputGroup>
       </FormSection>
     </Card>
+
+    <div class="flex items-center justify-center mx-auto text-center mt-5">
+      <pre class="text-xs"> {{ JSON.stringify(form, null, 2) }}</pre>
+    </div>
   </PreviewWrapper>
 </template>

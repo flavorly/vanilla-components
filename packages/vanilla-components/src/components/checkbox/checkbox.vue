@@ -32,9 +32,19 @@ const props = defineProps({
   align: {
     type: [String] as PropType<string>,
     required: false,
-    default: 'left',
+    default: 'left-top',
     validator(align: string) {
-      return ['left', 'right', 'center'].includes(align)
+      return [
+        'left-top',
+        'left-center',
+        'left-bottom',
+        'right-top',
+        'right-center',
+        'right-bottom',
+        'center-top',
+        'center-center',
+        'center-bottom',
+      ].includes(align)
     },
   },
 })
@@ -97,9 +107,15 @@ const isChecked = computed(() => {
     <div
       :class="[
         configuration.classesList.wrapper,
-        align === 'center' ? configuration.classesList.wrapperCenter : '',
-        align === 'left' ? configuration.classesList.wrapperLeft : '',
-        align === 'right' ? configuration.classesList.wrapperRight : '',
+        align === 'left-top' ? configuration.classesList.wrapperLeftTop : '',
+        align === 'left-center' ? configuration.classesList.wrapperLeftCenter : '',
+        align === 'left-bottom' ? configuration.classesList.wrapperLeftBottom : '',
+        align === 'right-top' ? configuration.classesList.wrapperRightTop : '',
+        align === 'right-center' ? configuration.classesList.wrapperRightCenter : '',
+        align === 'right-bottom' ? configuration.classesList.wrapperRightBottom : '',
+        align === 'center-top' ? configuration.classesList.wrapperCenterTop : '',
+        align === 'center-center' ? configuration.classesList.wrapperCenterCenter : '',
+        align === 'center-bottom' ? configuration.classesList.wrapperCenterBottom : '',
       ]"
     >
       <input
@@ -113,6 +129,7 @@ const isChecked = computed(() => {
         v-bind="$attrs"
         @change="emitUpdate"
       >
+      <slot />
     </div>
     <slot
       name="errors"

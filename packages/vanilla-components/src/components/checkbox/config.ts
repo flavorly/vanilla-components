@@ -4,10 +4,17 @@ import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from 
 
 export const checkboxConfig = {
   fixedClasses: {
-    wrapper: '',
-    wrapperLeft: 'flex items-center justify-start',
-    wrapperCenter: 'flex items-center justify-center',
-    wrapperRight: 'flex items-center justify-end',
+    wrapper: 'flex',
+    wrapperLeftTop: 'justify-start items-start',
+    wrapperLeftCenter: 'justify-start items-center',
+    wrapperLeftBottom: 'justify-start items-end',
+    wrapperRightTop: 'justify-end items-start',
+    wrapperRightCenter: 'justify-end items-center',
+    wrapperRightBottom: 'justify-end items-end',
+    wrapperCenterTop: 'justify-center items-start',
+    wrapperCenterCenter: 'justify-center items-center',
+    wrapperCenterBottom: 'justify-center items-end',
+
     container: '',
     checkbox: 'h-5 w-5 transition duration-150 ease-in-out relative',
     label: {
@@ -23,9 +30,15 @@ export const checkboxConfig = {
   // Default Input appearance
   classes: {
     wrapper: '',
-    wrapperLeft: '',
-    wrapperCenter: '',
-    wrapperRight: '',
+    wrapperLeftTop: '',
+    wrapperLeftCenter: '',
+    wrapperLeftBottom: '',
+    wrapperRightTop: '',
+    wrapperRightCenter: '',
+    wrapperRightBottom: '',
+    wrapperCenterTop: '',
+    wrapperCenterCenter: '',
+    wrapperCenterBottom: '',
 
     container: '',
     checkbox: mergeClasses(
