@@ -110,6 +110,10 @@ const fetchOptions = (query?: string, nextPage?: number) => {
 
 The function will receive the current query and the next page number, and should return an object with the results and a boolean to indicate if there are more pages to load.
 
+:::info :bulb: Accessing the raw option
+After the option is normalized, it is than passed to the component and everything else will be ignored, but you can still access
+the raw option of your data by using `option.raw` in the `option` slot.
+:::
 
 !!!include(./src/parts/title-slots.md)!!!
 
