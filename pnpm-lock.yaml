@@ -70,6 +70,7 @@ importers:
       vite-plugin-inspect: ^0.7.5
       vitepress: ^1.0.0-alpha.21
       vue: ^3.2.41
+      vue-json-pretty: ^2.2.2
     dependencies:
       '@docsearch/css': 3.2.1
       '@docsearch/js': 3.2.1_tbpndr44ulefs3hehwpi2mkf2y
@@ -96,6 +97,7 @@ importers:
       tailwindcss: 3.2.0_postcss@8.4.18
       vitepress: 1.0.0-alpha.21_tbpndr44ulefs3hehwpi2mkf2y
       vue: 3.2.41
+      vue-json-pretty: 2.2.2_vue@3.2.41
     devDependencies:
       '@whyframe/core': 0.1.8_vite@3.1.8
       '@whyframe/vue': 0.1.3_hdtuukyshs4n67vld5fapchteu
@@ -4420,6 +4422,15 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /vue-json-pretty/2.2.2_vue@3.2.41:
+    resolution: {integrity: sha512-eZkcJKrzGmKNto0ZqTjUkIFP1SMaoDxW6VLtRj0awmIqpN7glFZLBm5tNYMJcdgTGweDp4zIPyvaewZVs3Exvg==}
+    engines: {node: '>= 10.0.0', npm: '>= 5.0.0'}
+    peerDependencies:
+      vue: '>=3.0.0'
+    dependencies:
+      vue: 3.2.41
+    dev: false
 
   /vue/3.2.41:
     resolution: {integrity: sha512-uuuvnrDXEeZ9VUPljgHkqB5IaVO8SxhPpqF2eWOukVrBnRBx2THPSGQBnVRt0GrIG1gvCmFXMGbd7FqcT1ixNQ==}

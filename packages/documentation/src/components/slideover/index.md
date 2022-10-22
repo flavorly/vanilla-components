@@ -14,9 +14,9 @@ A dialog with a slideover behaviour backed by HeadlessUI dialogs :smile:
 
 <ExampleSlideover />
 
-!!!include(./src/parts/title-snippet.md)!!!
-
+:::details :surfer: Click to expand the code
 <<< @/components/slideover/ExampleSlideover.vue
+:::
 
 !!!include(./src/parts/title-props.md)!!!
 

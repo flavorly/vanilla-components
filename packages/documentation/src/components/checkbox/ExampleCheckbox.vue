@@ -17,7 +17,7 @@ const valueMultiple = ref([])
         checked-value="accepted"
         unchecked-value="notAccepted"
         feedback="Im useful helper out here, choose wisely"
-        align="center"
+        align="center-center"
       />
     </div>
 
@@ -58,7 +58,7 @@ const valueMultiple = ref([])
         v-model="value2"
         errors="Sorry for this name is already taken"
         feedback="I only show when i dont have errors"
-        align="center"
+        align="center-center"
       />
     </div>
 

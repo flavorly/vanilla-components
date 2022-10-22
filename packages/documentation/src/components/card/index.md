@@ -14,9 +14,9 @@ A beautiful card to use on your application to display resource, forms or anythi
 
 <ExampleCard />
 
-!!!include(./src/parts/title-snippet.md)!!!
-
+:::details :surfer: Click to expand the code
 <<< @/components/card/ExampleCard.vue
+:::
 
 !!!include(./src/parts/title-props.md)!!!
 

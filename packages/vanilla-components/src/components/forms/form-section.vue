@@ -38,9 +38,9 @@ console.log('FormSection', configuration.classesList, props.divided)
     :is="props.as"
     class="form-section"
     :class="[
-      props.filled === true ? configuration.classesList.sectionFilled : '',
-      props.divided === true ? configuration.classesList.sectionDivided : '',
-      props.spaced === true ? configuration.classesList.sectionSpaced : '',
+      props.filled ? configuration.classesList.sectionFilled : '',
+      props.divided ? configuration.classesList.sectionDivided : '',
+      props.spaced ? configuration.classesList.sectionSpaced : '',
     ]"
   >
     <slot />

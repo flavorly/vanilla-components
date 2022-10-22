@@ -27,13 +27,9 @@ const value = ref(true)
         </DropdownMenu>
       </div>
 
-      <div class="flex items-center justify-center mx-auto text-center mt-2">
-        <pre class="text-xs">{{ JSON.stringify(value) }}</pre>
-      </div>
-
-      <div class="mt-10">
-        <Dropdown text="demo">
-          <p>content</p>
+      <div class="mt-10 flex items-center justify-center mx-auto">
+        <Dropdown text="Totally Vanilla Vanilla">
+          <p>Im a content inside the dropdown</p>
         </Dropdown>
       </div>
     </div>

@@ -12,6 +12,7 @@ import './styles/custom.css'
 import './styles/v-calendar/v-calendar.pcss'
 import './styles/shiki-tags/shiki-tags.pcss'
 import './styles/why-frame/whyframe.pcss'
+import 'vue-json-pretty/lib/styles.css'
 
 // Plugins
 import { Plugin } from '@indigit/vanilla-components'
@@ -34,7 +35,8 @@ export { default as VPTeamMembers } from './components/VPTeamMembers.vue'
 
 const theme = {
      Layout: DynamicLayout,
-    //Layout,
+
+    // Layout,
     NotFound,
     enhanceApp({ app }) {
       app.use(Plugin)

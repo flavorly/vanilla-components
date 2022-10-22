@@ -14,9 +14,9 @@ A Avatar component useful for User Profile Pictures, support uploading new pictu
 
 <ExampleAvatar />
 
-!!!include(./src/parts/title-snippet.md)!!!
-
+:::details :surfer: Click to expand the code
 <<< @/components/avatar/ExampleAvatar.vue
+:::
 
 !!!include(./src/parts/title-props.md)!!!
 
@@ -56,7 +56,6 @@ Slot to override the default upload button next to the profile photo
 | Attribute                 | Description                 | Type             |
 |:--------------------------|:----------------------------|:-----------------|
 | `triggerFileUploadAction` | Function to trigger upload  | `Function`       |
-| `hasErrors`               | If the component has errors | `Boolean`        |
 | `photoPreview`            | Base64 enconded blob        | `[Blog, String]` |
 
 
@@ -67,7 +66,6 @@ Slot to override the default reset button next to the profile photo and when a p
 | Attribute      | Description                  | Type             |
 |:---------------|:-----------------------------|:-----------------|
 | `resetPhoto`   | Function to reset the upload | `Function`       |
-| `hasErrors`    | If the component has errors  | `Boolean`        |
 | `photoPreview` | Base64 enconded blob         | `[Blog, String]` |
 
 

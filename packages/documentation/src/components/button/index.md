@@ -14,9 +14,10 @@ A Native `<button />`  with batteries included for loading state, variants & man
 
 <ExampleButton />
 
-!!!include(./src/parts/title-snippet.md)!!!
-
+:::details :surfer: Click to expand the code
 <<< @/components/button/ExampleButton.vue
+:::
+
 
 !!!include(./src/parts/title-props.md)!!!
 

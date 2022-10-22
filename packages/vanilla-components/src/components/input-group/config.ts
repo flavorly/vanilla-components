@@ -12,11 +12,13 @@ export const inputGroupConfig = {
   },
   variants: {
     inline: {
-      wrapper: 'sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pt-5 sm:pt-0',
-      labelWrapper: 'sm:mt-px sm:pt-2 block',
-      inputWrapper: 'mt-1 sm:col-span-2 sm:mt-0',
-      wrapperWithPadding: 'px-6 py-3.5 mt-0',
-      label: '',
+      classes: {
+        wrapper: 'sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pt-5 sm:pt-0 content-center',
+        labelWrapper: 'flex items-center justify-start h-full',
+        inputWrapper: 'mt-1 sm:col-span-2 sm:mt-0 flex flex-col space-y-2',
+        wrapperWithPadding: 'px-6 py-3.5 mt-0',
+        label: '',
+      },
     },
 
     // inline: {

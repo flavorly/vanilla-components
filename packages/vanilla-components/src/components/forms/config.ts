@@ -19,9 +19,9 @@ export const formsConfig = {
     label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1',
     errors: mergeClasses('mt-2 text-xs', commonClasses.inputsErrorText),
     feedback: 'mt-2 ml-1 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer',
-    section: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-700',
-    sectionDivided: '',
-    sectionSpaced: '',
+    section: '',
+    sectionDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-700',
+    sectionSpaced: 'space-y-2',
     sectionFilled: 'bg-gray-50 dark:bg-gray-800/50',
   },
 }

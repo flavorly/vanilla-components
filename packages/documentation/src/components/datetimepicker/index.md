@@ -38,9 +38,9 @@ npm add @indigit/v-calendar@next
 
 <ExampleDatetimePicker />
 
-!!!include(./src/parts/title-snippet.md)!!!
-
+:::details :surfer: Click to expand the code
 <<< @/components/datetimepicker/ExampleDatetimePicker.vue
+:::
 
 !!!include(./src/parts/title-props.md)!!!
 

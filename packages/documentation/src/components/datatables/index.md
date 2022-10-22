@@ -38,9 +38,9 @@ But enough of talk, lets see it in action!
 
 <ExampleDatatable />
 
-!!!include(./src/parts/title-snippet.md)!!!
-
+:::details :surfer: Click to expand the code
 <<< @/components/datatables/ExampleDatatable.vue
+:::
 
 !!!include(./src/parts/title-props.md)!!!
 
@@ -71,7 +71,9 @@ But enough of talk, lets see it in action!
 
 Here you will find a sample of JSON configuration that you can pass on prop `config`. For a more in depth example please check the demo available on the snippet.
 
+:::details :surfer: Click to check the demo configuration
 <<< @/components/datatables/demo-config.json
+:::
 
 ## API Response & Requests :desert_island:
 
@@ -81,7 +83,11 @@ While we don't dictate how you should handle your data response, and you are sti
 
 While making this library my main use case was to use it along with Laravel ® + InertiaJS ®. Bellow you find a demo data of what your API should reply for the default fetchData, you can also find more details in the source code of the MirageJS mock server on this repository:
 
+
+:::details :surfer: Click to check the demo response
 <<< @/components/datatables/demo-response.json
+:::
+
 
 Response must include : 
 
@@ -96,7 +102,9 @@ Response must include :
 All requests made by the table are using Axios, this way you can hook your credentials or authorization with Axios Interceptor
 Bellow you will find what parameters are sent to server-side so you can build any server side adaptors.
 
+:::details :surfer: Click to check the demo request
 <<< @/components/datatables/demo-request.json
+:::
 
 Request Params explained :
 

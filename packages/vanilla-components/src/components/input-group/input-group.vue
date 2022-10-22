@@ -93,7 +93,10 @@ console.log(configuration.withPadding)
       </div>
     </div>
     <!-- Errors & Feedback -->
-    <div class="vc-errors-and-feedback">
+    <div
+      v-if="(hasErrors && showErrors) || (feedback !== undefined && showFeedback)"
+      class="vc-errors-and-feedback"
+    >
       <slot
         name="errors"
         v-bind="{ hasErrors, errors }"

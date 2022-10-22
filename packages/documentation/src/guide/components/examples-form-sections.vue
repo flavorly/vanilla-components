@@ -11,6 +11,7 @@ import {
   Input as VanillaInput,
   Select as VanillaSelect,
 } from '@indigit/vanilla-components'
+import VueJsonPretty from 'vue-json-pretty'
 
 const form = ref({
   name: '',
@@ -28,6 +29,7 @@ const form = ref({
   password_confirmation: '',
   terms: false,
   skills: [],
+  lead_source: null,
 })
 </script>
 
@@ -154,6 +156,17 @@ const form = ref({
         </InputGroup>
 
         <InputGroup
+          label="Where you found us?"
+          name="lead_source"
+          variant="inline"
+        >
+          <VanillaInput
+            v-model="form.lead_source"
+            name="lead_source"
+          />
+        </InputGroup>
+
+        <InputGroup
           label="Terms and Conditions"
           name="terms"
         >
@@ -168,7 +181,10 @@ const form = ref({
     </Card>
 
     <div class="flex items-center justify-center mx-auto text-center mt-5">
-      <pre class="text-xs"> {{ JSON.stringify(form, null, 2) }}</pre>
+      <VueJsonPretty
+        show-icon
+        :data="form"
+      />
     </div>
   </PreviewWrapper>
 </template>

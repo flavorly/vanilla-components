@@ -49,6 +49,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['click', 'update:modelValue'])
+
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<CheckboxProps>(checkboxConfig, 'Checkbox', localValue)
 
@@ -128,8 +130,9 @@ const isChecked = computed(() => {
         type="checkbox"
         v-bind="$attrs"
         @change="emitUpdate"
+        @click="$emit('click', $event)"
       >
-      <slot />
+      <slot v-bind="{ hasErrors, errors }" />
     </div>
     <slot
       name="errors"

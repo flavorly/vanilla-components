@@ -9,14 +9,14 @@ A Native `<input />` for text, number, etc. with additional features for passwor
 !!!include(./src/parts/title-preview.md)!!!
 
 <script setup>
-import Demo from './demo.vue';
+import ExampleInput from './ExampleInput.vue';
 </script>
 
-<Demo />
+<ExampleInput />
 
-!!!include(./src/parts/title-snippet.md)!!!
-
-<<< @/components/input/demo.vue
+:::details :surfer: Click to expand the code
+<<< @/components/input/ExampleInput.vue
+:::
 
 !!!include(./src/parts/title-props.md)!!!
 
@@ -30,6 +30,12 @@ import Demo from './demo.vue';
 !!!include(./src/parts/title-slots.md)!!!
 
 !!!include(./src/parts/default-slots.md)!!!
+
+!!!include(./src/parts/title-events.md)!!!
+
+| Event   | Description             | Value     |
+|:--------|:------------------------|:----------|
+!!!include(./src/parts/events-model-value.md)!!!
 
 
 

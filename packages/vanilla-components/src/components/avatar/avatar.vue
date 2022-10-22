@@ -137,7 +137,7 @@
             v-if="photoPreview"
             class="mt-2"
           >
-            <span
+            <div
               :style="`background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('${photoPreview}');`"
               :class="configuration.classesList.preview"
             />
