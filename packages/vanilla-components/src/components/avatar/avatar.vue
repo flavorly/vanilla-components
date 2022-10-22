@@ -43,6 +43,13 @@
     },
   })
 
+  const emit = defineEmits([
+    'update:modelValue',
+    'previewUpdated',
+    'previewReset',
+    'uploadTriggered',
+  ])
+
   const localValue: Ref<AvatarValue> = useVModel(props, 'modelValue')
   const { configuration, errors, hasErrors } = useConfiguration<AvatarProps>(avatarConfig, 'Avatar', localValue)
 
@@ -53,6 +60,7 @@
     const reader = new FileReader()
     reader.onload = (event: ProgressEvent<FileReader>) => {
       photoPreview.value = event?.target?.result
+      emit('previewUpdated', photoPreview.value)
     }
 
     localValue.value = photoInput?.value?.files[0]
@@ -63,12 +71,14 @@
 
   const triggerFileUploadAction = () => {
     photoInput.value.click()
+    emit('uploadTriggered', true)
   }
 
   const resetPhoto = () => {
     localValue.value = undefined
     photoPreview.value = null
     photoInput.value.value = null
+    emit('previewReset', true)
   }
 
   watch(() => props.currentPhotoUrl, (newValue: string | undefined) => {

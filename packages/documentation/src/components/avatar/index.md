@@ -71,3 +71,13 @@ Slot to override the default reset button next to the profile photo and when a p
 
 !!!include(./src/parts/slots-feedback-errors.md)!!!
 
+
+!!!include(./src/parts/title-events.md)!!!
+
+| Event   | Description             | Value     |
+|:--------|:------------------------|:----------|
+!!!include(./src/parts/events-model-value.md)!!!
+| `open` | Slideover was opened | `Boolean` |
+| `previewUpdated` | Preview was updated | `Blob` |
+| `previewReset` | Preview was removed/reset | `true` |
+| `uploadTriggered` | Upload button pressed | `true` |
