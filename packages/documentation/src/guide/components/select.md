@@ -4,7 +4,7 @@ outline: deep
 
 # Select
 
-A Native `<select />` support regular options, multiple & manymore.
+A Native `<select />` support regular options, multiple & many more.
 
 !!!include(./src/parts/title-preview.md)!!!
 
@@ -38,7 +38,7 @@ By default all slots get all the props and configuration from the component.
 
 This slot is used to render each option, please keep mind if you override this slot
 You must also make sure to support nested/children elements for groups.
-If you are looking for a select with more options please checkout the [RichSelect](/components/rich-select) component.
+If you are looking for a select with more options please checkout the [RichSelect](/guide/components/rich-select) component.
 
 | Attribute       | Description                                  | Type              |
 |:----------------|:---------------------------------------------|:------------------|

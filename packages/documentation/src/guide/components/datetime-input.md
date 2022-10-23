@@ -55,7 +55,7 @@ The default slot is pre-filled, please check bellow.
 
 ### Slot `default`
 
-This is the default slot of the component, by default a [Vanilla Text Input](/components/input/index) is used to display the value.
+This is the default slot of the component, by default a [Vanilla Text Input](/guide/components/input) is used to display the value.
 But you are free to use whatever you want for this slot, the slot is also forwarded to the V-Calendar component.
 
 | Attribute   | Description      | Type     |

@@ -74,7 +74,7 @@ Props available for this component extending the default variant & global props.
 
 ### Checkbox Group Options
 
-The options for the checkbox group, works exactly the same way as the options for [RichSelect](/components/rich-select/#options).
+The options for the checkbox group, works exactly the same way as the options for [RichSelect](/guide/components/rich-select#options).
 Passing options without any structure defined, will require you to fill the `valueAttribute` and `textAttribute` props so we can grab them from your options
 
 Here is a small example of normalized options:

@@ -1,14 +1,27 @@
 {
-    "fixedClasses": "",
-    "classes": {
+    "fixedClasses": {
         "wrapper": "animate-pulse space-y-1",
+        "class": ""
+    },
+    "classes": {
+        "wrapper": "",
         "class": "h-5 rounded w-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700"
     },
     "variants": {
-        "error": {
+        "vanilla": {
+            "classes": {
+                "class": "bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700"
+            }
+        },
+        "bar": {
+            "classes": {
+                "class": "h-5 rounded w-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700"
+            }
+        },
+        "circle": {
             "classes": {
                 "wrapper": "",
-                "class": ""
+                "class": "h-5 w-5 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700"
             }
         }
     }

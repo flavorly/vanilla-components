@@ -66,17 +66,17 @@ const formatRange = (start: Date, end: Date) => {
         </div>
       </slot>
     </template>
-    <template
-      v-for="(_, slot) of $slots"
-      #[slot]="scope"
-    >
-      <slot
-        v-if="slot !== 'default'"
-        :key="slot"
-        :name="slot"
-        v-bind="scope"
-      />
-    </template>
+<!--    <template-->
+<!--      v-for="(_, slot) of $slots"-->
+<!--      #[slot]="scope"-->
+<!--    >-->
+<!--      <slot-->
+<!--        v-if="slot !== 'default'"-->
+<!--        :key="slot"-->
+<!--        :name="slot"-->
+<!--        v-bind="scope"-->
+<!--      />-->
+<!--    </template>-->
   </DateTimePicker>
 </template>
 
