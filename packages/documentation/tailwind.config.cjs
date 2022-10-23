@@ -19,6 +19,7 @@ module.exports = {
       yellow: colors.amber,
       green: colors.emerald,
       indigo: colors.indigo,
+      orange: colors.orange,
       blue: colors.blue,
       pink: colors.pink,
       gray: colors.zinc, // To match Vitepresss Dark mode

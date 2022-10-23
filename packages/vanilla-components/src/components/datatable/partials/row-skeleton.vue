@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { useInjectsClassesList } from '@/core/use'
-import SkeletonBar from '@/components/skeleton-bar/skeleton-bar.vue'
+import Skeleton from '@/components/skeleton/skeleton.vue'
 
 const props = defineProps({
   numberOfColumns: {
@@ -28,7 +28,7 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
         :key="columnIndex"
         :class="[classesList.skeletonTableColumn]"
       >
-        <SkeletonBar :count="1" />
+        <Skeleton :count="1" />
       </td>
     </tr>
   </tbody>

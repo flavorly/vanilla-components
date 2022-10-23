@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import type { SkeletonBarClassesValidKeys, SkeletonBarProps } from './config'
-import { skeletonBarConfig } from './config'
+import { skeletonConfig } from './config'
 import { uniqueId } from '@/core/helpers'
 import { useConfiguration, useVariantProps } from '@/core/use'
 
@@ -18,7 +18,7 @@ const props = defineProps({
     required: false,
   },
 })
-const { configuration } = useConfiguration<SkeletonBarProps>(skeletonBarConfig, 'SkeletonBar')
+const { configuration } = useConfiguration<SkeletonBarProps>(skeletonConfig, 'SkeletonBar')
 </script>
 
 <template>

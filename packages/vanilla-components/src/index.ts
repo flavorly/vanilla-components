@@ -62,7 +62,7 @@ export { default as RichSelectTagImage } from './components/rich-select-tag-imag
 export { default as Select } from './components/select/select.vue'
 export { default as SelectOption } from './components/select/option.vue'
 
-export { default as SkeletonBar } from './components/skeleton-bar/skeleton-bar.vue'
+export { default as Skeleton } from './components/skeleton/skeleton.vue'
 
 export { default as Slideover } from './components/slideover/slideover.vue'
 

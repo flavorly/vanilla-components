@@ -25,7 +25,7 @@ export const defaultConfiguration = {
   RichSelectOptionWithIndicators: Components.richSelectOptionWithIndicatorsConfig,
   RichSelectTagWithImage: Components.richSelectTagWithImageConfig,
   Select: Components.selectConfig,
-  SkeletonBar: Components.skeletonBarConfig,
+  SkeletonBar: Components.skeletonConfig,
   Slideover: Components.slideoverConfig,
   StatusIndicator: Components.statusIndicatorConfig,
   Textarea: Components.textareaConfig,
