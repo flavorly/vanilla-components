@@ -1,9 +1,8 @@
 {
   "name": "vanilla-components",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "",
   "main": "index.js",
-  "private": true,
   "scripts": {
     "dev": "nr --filter @indigit/vanilla-components dev",
     "build": "nr --filter @indigit/vanilla-components build",
