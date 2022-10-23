@@ -10,14 +10,10 @@ and another totally done from scratch that provides way more control over the dr
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleDropdown from './ExampleDropdown.vue';
-</script>
-
 <ExampleDropdown />
 
 :::details :surfer: Click to expand the code
-<<< @/components/dropdown/ExampleDropdown.vue
+<<< @/components/ExampleDropdown.vue
 :::
 
 

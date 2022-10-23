@@ -9,14 +9,10 @@ Useful to display additional context from the edges of the screen.
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleSlideover from './ExampleSlideover.vue';
-</script>
-
 <ExampleSlideover />
 
 :::details :surfer: Click to expand the code
-<<< @/components/slideover/ExampleSlideover.vue
+<<< @/components/ExampleSlideover.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!

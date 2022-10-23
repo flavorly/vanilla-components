@@ -2,7 +2,7 @@
 outline: deep
 ---
 
-# Datatables
+# Datatable
 
 One of the most valued components of Vanilla Components, Datatables to display your bulk resources, perform actions
 filter results, search & many more features, everything perfectly designed with Tailwind CSS.
@@ -32,14 +32,11 @@ But enough of talk, lets see it in action!
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleDatatable from './ExampleDatatable.vue';
-</script>
 
 <ExampleDatatable />
 
 :::details :surfer: Click to expand the code
-<<< @/components/datatables/ExampleDatatable.vue
+<<< @/components/ExampleDatatable.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!
@@ -72,7 +69,7 @@ But enough of talk, lets see it in action!
 Here you will find a sample of JSON configuration that you can pass on prop `config`. For a more in depth example please check the demo available on the snippet.
 
 :::details :surfer: Click to check the demo configuration
-<<< @/components/datatables/demo-config.json
+<<< @/json/demo-config.json
 :::
 
 ## API Response & Requests :desert_island:
@@ -85,7 +82,7 @@ While making this library my main use case was to use it along with Laravel ® +
 
 
 :::details :surfer: Click to check the demo response
-<<< @/components/datatables/demo-response.json
+<<< @/json/demo-response.json
 :::
 
 
@@ -103,7 +100,7 @@ All requests made by the table are using Axios, this way you can hook your crede
 Bellow you will find what parameters are sent to server-side so you can build any server side adaptors.
 
 :::details :surfer: Click to check the demo request
-<<< @/components/datatables/demo-request.json
+<<< @/json/demo-request.json
 :::
 
 Request Params explained :

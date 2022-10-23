@@ -8,14 +8,10 @@ A beautiful card to use on your application to display resource, forms or anythi
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleCard from './ExampleCard.vue';
-</script>
-
 <ExampleCard />
 
 :::details :surfer: Click to expand the code
-<<< @/components/card/ExampleCard.vue
+<<< @/components/ExampleCard.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!

@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from 'vitepress'
-import Layout from '../Layout.vue'
+import Layout from '../components/Layout.vue'
 import FrameDefaultLayout from './FrameDefaultLayout.vue'
 
 const route = useRoute()

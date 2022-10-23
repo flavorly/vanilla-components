@@ -2,20 +2,17 @@
 outline: deep
 ---
 
-# Country
+# Country Input
 
 A `<RichSelect />` made only to pick a list of countries with beautiful flags for each country. Add your favorite countries & search for other countries. 
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-import ExampleCountryInput from './ExampleCountryInput.vue';
-</script>
 
 <ExampleCountryInput />
 
 :::details :surfer: Click to expand the code
-<<< @/components/country-input/ExampleCountryInput.vue
+<<< @/components/ExampleCountryInput.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!

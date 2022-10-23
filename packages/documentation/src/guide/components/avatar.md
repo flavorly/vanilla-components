@@ -8,14 +8,11 @@ A Avatar component useful for User Profile Pictures, support uploading new pictu
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleAvatar from './ExampleAvatar.vue';
-</script>
 
 <ExampleAvatar />
 
 :::details :surfer: Click to expand the code
-<<< @/components/avatar/ExampleAvatar.vue
+<<< @/components/ExampleAvatar.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!

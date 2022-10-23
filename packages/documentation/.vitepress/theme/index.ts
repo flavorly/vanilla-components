@@ -16,13 +16,11 @@ import 'vue-json-pretty/lib/styles.css'
 
 // Plugins
 import { Plugin } from '@indigit/vanilla-components'
-import { makeServer } from '../../mocks/server'
+import { makeServer } from '../../utils/server'
 
 // Vue Templates
-import Layout from './Layout.vue'
-import NotFound from './NotFound.vue'
-import PreviewWrapper from './components/PreviewWrapper.vue'
-import DemoComponent from './components/Demo/DemoComponent.vue'
+import Layout from './components/Layout.vue'
+import NotFound from './components/NotFound.vue'
 import DynamicLayout from './why-frame/DynamicLayout.vue'
 export { default as VPHomeHero } from './components/VPHomeHero.vue'
 export { default as VPHomeFeatures } from './components/VPHomeFeatures.vue'
@@ -40,8 +38,14 @@ const theme = {
     NotFound,
     enhanceApp({ app }) {
       app.use(Plugin)
-      app.component('PreviewWrapper', PreviewWrapper)
-      app.component('DemoComponent', DemoComponent)
+
+      // Auto-register components
+      const components = import.meta.glob('../../src/components/*.vue', { eager: true })
+      Object.entries(components).forEach(([path, definition]) => {
+        const componentName = path.split('/').pop().replace(/\.\w+$/, '')
+        app.component(componentName, definition.default)
+      })
+
       if (!import.meta.env.SSR) {
         // Start the fake API server
         makeServer({ environment: 'production' })

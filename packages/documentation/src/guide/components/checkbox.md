@@ -9,15 +9,10 @@ This wil also cover Checkbox groups!
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleCheckbox from './ExampleCheckbox.vue';
-    import ExampleCheckboxGroup from './ExampleCheckboxGroup.vue';
-</script>
-
 <ExampleCheckbox />
 
 :::details :surfer: Click to expand the code
-<<< @/components/checkbox/ExampleCheckbox.vue
+<<< @/components/ExampleCheckbox.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!
@@ -62,7 +57,7 @@ A nice use-case for this, is whenever you want to select multiple items at once,
 <ExampleCheckboxGroup />
 
 :::details :surfer: Click to expand the code
-<<< @/components/checkbox/ExampleCheckboxGroup.vue
+<<< @/components/ExampleCheckboxGroup.vue
 :::
 
 ## Checkbox Group Props :inbox_tray:

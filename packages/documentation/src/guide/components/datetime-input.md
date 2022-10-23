@@ -9,7 +9,7 @@ This component is just a wrapper around the original component with a few tweaks
 So expect the same props, slots, events & more.
 
 :::warning
-This is NOT an office vanilla components component, a full-fledged date time picker takes a lot of effort, so we have have just bootstrapped this one for now :)
+This is NOT an official vanilla components component, a full-fledged date time picker takes a lot of effort, so we have have just bootstrapped this one for now :)
 There are plans to port an official datetime picker. But meanwhile enjoy this amazing experience by V-Calendar!
 
 **Note:** Please keep in mind for this case you must include the CSS file. Please check the [theme](#theme-styles)
@@ -32,14 +32,11 @@ npm add @indigit/v-calendar@next
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleDatetimePicker from './ExampleDatetimePicker.vue';
-</script>
 
 <ExampleDatetimePicker />
 
 :::details :surfer: Click to expand the code
-<<< @/components/datetimepicker/ExampleDatetimePicker.vue
+<<< @/components/ExampleDatetimePicker.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!

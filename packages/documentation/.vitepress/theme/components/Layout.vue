@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import { provide, watch } from 'vue'
 import { useRoute } from 'vitepress'
-import { useCloseSidebarOnEscape, useSidebar } from './composables/sidebar.js'
-import VPSkipLink from './components/VPSkipLink.vue'
-import VPBackdrop from './components/VPBackdrop.vue'
-import VPNav from './components/VPNav.vue'
-import VPLocalNav from './components/VPLocalNav.vue'
-import VPSidebar from './components/VPSidebar.vue'
-import VPContent from './components/VPContent.vue'
-import VPFooter from './components/VPFooter.vue'
+import { useCloseSidebarOnEscape, useSidebar } from '../composables/sidebar.js'
+import VPSkipLink from './VPSkipLink.vue'
+import VPBackdrop from './VPBackdrop.vue'
+import VPNav from './VPNav.vue'
+import VPLocalNav from './VPLocalNav.vue'
+import VPSidebar from './VPSidebar.vue'
+import VPContent from './VPContent.vue'
+import VPFooter from './VPFooter.vue'
 
 const {
   isOpen: isSidebarOpen,

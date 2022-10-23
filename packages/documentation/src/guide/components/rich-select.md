@@ -8,14 +8,10 @@ A full-fledged select component with support for custom options, custom values, 
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-import ExampleRichSelect from './ExampleRichSelect.vue';
-</script>
-
 <ExampleRichSelect />
 
 :::details :surfer: Click to expand the code
-<<< @/components/rich-select/ExampleRichSelect.vue
+<<< @/components/ExampleRichSelect.vue
 :::
 
 !!!include(./src/parts/title-props.md)!!!

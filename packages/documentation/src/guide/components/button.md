@@ -8,14 +8,10 @@ A Native `<button />`  with batteries included for loading state, variants & man
 
 !!!include(./src/parts/title-preview.md)!!!
 
-<script setup>
-    import ExampleButton from './ExampleButton.vue';
-</script>
-
 <ExampleButton />
 
 :::details :surfer: Click to expand the code
-<<< @/components/button/ExampleButton.vue
+<<< @/components/ExampleButton.vue
 :::
 
 
