@@ -71,7 +71,10 @@ watch(isOpen, (val: boolean) => {
 </script>
 
 <template>
-  <Dialog v-model="isOpen">
+  <Dialog
+    v-model="isOpen"
+    :body-with-padding="true"
+  >
     <slot
       name="icon"
       v-bind="{

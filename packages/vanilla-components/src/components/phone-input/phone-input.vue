@@ -21,7 +21,7 @@ const props = defineProps({
     default: undefined,
   },
   countryCode: {
-    type: [String] as PropType<CountryCode>,
+    type: [String] as PropType<CountryCode | string>,
     default: '',
   },
   phonePlaceholder: {
@@ -75,12 +75,12 @@ const emit = defineEmits([
 const localRefPhone = ref(null)
 const localRefCountry = ref(null)
 const localValue = useVModel(props, 'modelValue')
-const phoneCountryCode: CountryCode | Ref = ref(props.countryCode)
-const phoneDialCode: CountryCallingCode | Ref = ref(null)
+const phoneCountryCode = ref<CountryCode>(props.countryCode)
+const phoneDialCode = ref<CountryCallingCode | string[] | number>(null)
 const phoneNumber: Ref<string | undefined> = ref(localValue.value)
 const isValidPhoneNumber: Ref<boolean> = ref(false)
 const placeholder = ref<string | number | undefined>(props.phonePlaceholder)
-const parsedPhoneNumber: Ref<PhoneNumber> | Ref = ref(null)
+const parsedPhoneNumber = ref<PhoneNumber>(null)
 
 const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountryCodeValue: CountryCode) => {
   if (!phoneNumberValue || !phoneCountryCodeValue) {
@@ -118,7 +118,7 @@ const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInpu
 
 // Watch Country Code and Phone number together
 // When one changes we will trigger the model value & emit back
-watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) => {
+watch([phoneCountryCode, phoneNumber, localValue], ([newPhoneCountryCode, newPhoneNumber]) => {
   attemptToParseNumber(newPhoneNumber, newPhoneCountryCode)
 
   const examplePlaceHolder = getExampleNumber(newPhoneCountryCode, examples)?.nationalNumber as string | undefined

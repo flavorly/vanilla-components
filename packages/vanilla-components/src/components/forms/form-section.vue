@@ -6,18 +6,43 @@ import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<FormSectionProps, FormClassesValidKeys>(),
-  safe: {
+  divided: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+    required: false,
+  },
+  as: {
+    type: [String] as PropType<string>,
+    default: 'div',
+    required: false,
+  },
+  spaced: {
     type: [Boolean] as PropType<boolean>,
     default: true,
     required: false,
   },
+  filled: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+    required: false,
+  },
 })
 
-const { configuration } = useConfiguration<FormSectionProps>(formsConfig, 'FormLabel')
+const { configuration } = useConfiguration<FormSectionProps>(formsConfig, 'FormSection')
+
+console.log('FormSection', configuration.classesList, props.divided)
 </script>
 
 <template>
-  <form :class="configuration.classesList.section">
+  <component
+    :is="props.as"
+    class="form-section"
+    :class="[
+      props.filled ? configuration.classesList.sectionFilled : '',
+      props.divided ? configuration.classesList.sectionDivided : '',
+      props.spaced ? configuration.classesList.sectionSpaced : '',
+    ]"
+  >
     <slot />
-  </form>
+  </component>
 </template>

@@ -63,12 +63,8 @@ The actual HTML result would be something like the following :
 Yes, your not limited to have a fixed color or style set in your component! But enough of talk, lets see some real example.
 
 
-<script setup>
-    import ExampleVariants from './components/variants-demo.vue';
-</script>
-
 <ExampleVariants />
 
 And here is the code :
 
-<<< @/guide/components/variants-demo.vue
+<<< @/components/variants-demo.vue

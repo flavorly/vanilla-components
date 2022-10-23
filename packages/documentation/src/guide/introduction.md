@@ -8,10 +8,10 @@ outline: deep
 
 - I want a small set of Tailwind, Boostrap or w/e components ready to go for Vue 3
 - I want to use utility classes or classes to style your component, no matter what CSS framework
-- I want to recycle your components between projects with very little effort
+- I want to recycle components between projects with very little effort
 - I want to create different variants of your components in a clean & organized way
 - I want to quickly bootstrap a project and test stuff out without pushing a huge UI framework
-- I lazier than you 🦥
+- I'm lazier than you 🦥
 - I am tired of styling things over and over again
 - I am a cool person, and you want to give Vanilla Components a spin! 🥳
 - I am tired of waiting for someone else to update their huge UI Library

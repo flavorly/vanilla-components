@@ -75,10 +75,16 @@ const { normalizedOptions } = useMultipleOptions(
             :variant="variant"
           />
         </div>
-        <div :class="configuration.classesList.groupLabel">
+        <div :class="configuration.classesList.groupLabelWrapper">
           <FormLabel
             :for="option.value.toString()"
             :label="option.text.toString()"
+            :classes="configuration.classesList.label"
+          />
+          <span
+            v-if="option.raw?.description"
+            :class="configuration.classesList.groupLabelFeedback"
+            v-text="option.raw?.description"
           />
         </div>
       </div>

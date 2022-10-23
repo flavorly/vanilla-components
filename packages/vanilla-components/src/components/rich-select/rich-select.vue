@@ -638,7 +638,7 @@ provide('usesTags', usesTags)
           @mousedown="mousedownHandler"
           @blur-on-child="blurOnChildHandler"
         >
-          <template #trigger>
+          <template #trigger="props">
             <RichSelectTrigger ref="triggerComponent">
               <template #selectorIcon="props">
                 <slot
@@ -698,9 +698,9 @@ provide('usesTags', usesTags)
                 v-bind="props"
               />
             </template>
-            <template #dropdownButton="props">
+            <template #dropdownBottom="props">
               <slot
-                name="dropdownButton"
+                name="dropdownBottom"
                 v-bind="props"
               />
             </template>

@@ -11,6 +11,7 @@ import InputGroup from '@/components/input-group/input-group.vue'
 import { useInjectsClassesList } from '@/core/use'
 import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
 import Button from '@/components/button/button.vue'
+import FormSection from '@/components/forms/form-section.vue'
 
 const props = defineProps({
   userSettings: {
@@ -80,59 +81,61 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
     :title="translations.settings"
     as="form"
     size="medium"
+    :body-with-padding="false"
     @submit.prevent="saveSettings"
   >
-    <InputGroup
-      :label="translations.settingsItemsPerPage"
-      name="perPage"
-      layout="inline"
-    >
-      <Select
-        v-model="localSettings.perPage"
-        :options="perPageOptions"
-      />
-    </InputGroup>
-
-    <InputGroup
-      :label="translations.settingsItemsPerPage"
-      name="visibleColumns"
-      layout="inline"
-    >
-      <CheckboxGroup
-        v-model="localSettings.visibleColumns"
-        :options="columnsNormalized"
-      />
-    </InputGroup>
-
-    <InputGroup
-      :label="translations.settingsItemsPerPage"
-      name="useStorage"
-      layout="inline"
-    >
-      <Toggle
-        v-model="localSettings.useStorage"
-      />
-    </InputGroup>
-
-    <InputGroup
-      :label="translations.settingsPersistSelection"
-      name="saveSelection"
-      layout="inline"
-    >
-      <Toggle
-        v-model="localSettings.saveSelection"
-      />
-    </InputGroup>
-
-    <InputGroup layout="content">
-      <span
-        :class="[classesList.genericFormsContentContainer]"
-        @click="resetSettings"
+    <FormSection divided>
+      <InputGroup
+        :label="translations.settingsItemsPerPage"
+        name="perPage"
       >
-        <TrashIcon :class="[classesList.genericFormsContentIcons]" />
-        <span v-text="translations.settingsReset" />
-      </span>
-    </InputGroup>
+        <Select
+          v-model="localSettings.perPage"
+          :options="perPageOptions"
+        />
+      </InputGroup>
+
+      <InputGroup
+        :label="translations.settingsVisibility"
+        name="visibleColumns"
+      >
+        <CheckboxGroup
+          v-model="localSettings.visibleColumns"
+          :options="columnsNormalized"
+        />
+      </InputGroup>
+
+      <InputGroup
+        :label="translations.settingsItemsPerPage"
+        name="useStorage"
+      >
+        <Toggle
+          v-model="localSettings.useStorage"
+        />
+      </InputGroup>
+
+      <InputGroup
+        :label="translations.settingsPersistSelection"
+        name="saveSelection"
+      >
+        <Toggle
+          v-model="localSettings.saveSelection"
+        />
+      </InputGroup>
+
+      <InputGroup
+        variant="content"
+        with-padding
+      >
+        <span
+          :class="[classesList.genericFormsContentContainer]"
+          @click="resetSettings"
+        >
+          <TrashIcon :class="[classesList.genericFormsContentIcons]" />
+          <span v-text="translations.settingsReset" />
+        </span>
+      </InputGroup>
+    </FormSection>
 
     <!-- Footer -->
     <template #footer>

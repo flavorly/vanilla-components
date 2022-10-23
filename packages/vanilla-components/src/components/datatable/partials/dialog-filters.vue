@@ -99,6 +99,7 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
   <Dialog
     v-model="isOpen"
     :title="translations.filters"
+    :body-with-padding="true"
     as="form"
     size="medium"
     @submit.prevent="saveSettings"
@@ -172,7 +173,7 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
       </InputGroup>
     </template>
 
-    <InputGroup layout="content">
+    <InputGroup variant="content">
       <div :class="[classesList.genericFormsContentContainer]">
         <span
           :class="[classesList.genericFormsContentLink]"

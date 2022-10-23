@@ -1,3 +1,3 @@
 ## Slots :dna:
 
-Slots available for this component, please mind the functionality.
+Current slots available for this component are the following:

@@ -58,6 +58,6 @@ const className = useInjectsClassesListClass('dropdownContent')
       </template>
     </OptionsList>
 
-    <slot name="dropdownButton" />
+    <slot name="dropdownBottom" />
   </div>
 </template>

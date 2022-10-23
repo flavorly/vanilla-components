@@ -4,35 +4,55 @@ import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from 
 
 export const checkboxConfig = {
   fixedClasses: {
-    wrapper: '',
-    wrapperLeft: 'flex items-center justify-start',
-    wrapperCenter: 'flex items-center justify-center',
-    wrapperRight: 'flex items-center justify-end',
+    wrapper: 'flex',
+    wrapperLeftTop: 'justify-start items-start',
+    wrapperLeftCenter: 'justify-start items-center',
+    wrapperLeftBottom: 'justify-start items-end',
+    wrapperRightTop: 'justify-end items-start',
+    wrapperRightCenter: 'justify-end items-center',
+    wrapperRightBottom: 'justify-end items-end',
+    wrapperCenterTop: 'justify-center items-start',
+    wrapperCenterCenter: 'justify-center items-center',
+    wrapperCenterBottom: 'justify-center items-end',
+
     container: '',
     checkbox: 'h-5 w-5 transition duration-150 ease-in-out relative',
-
+    label: {
+      label: '',
+    },
     groupContainer: 'space-y-3',
     groupCheckboxWrapper: 'relative flex items-start',
     groupCheckbox: 'flex items-center h-5',
-    groupLabel: 'ml-3 text-sm leading-5',
+    groupLabelWrapper: 'ml-3 text-sm leading-5',
+    groupLabelFeedback: 'text-gray-500',
   },
 
   // Default Input appearance
   classes: {
     wrapper: '',
-    wrapperLeft: '',
-    wrapperCenter: '',
-    wrapperRight: '',
+    wrapperLeftTop: '',
+    wrapperLeftCenter: '',
+    wrapperLeftBottom: '',
+    wrapperRightTop: '',
+    wrapperRightCenter: '',
+    wrapperRightBottom: '',
+    wrapperCenterTop: '',
+    wrapperCenterCenter: '',
+    wrapperCenterBottom: '',
 
     container: '',
     checkbox: mergeClasses(
       'checked:bg-primary-600 checked:text-white',
       'dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600',
     ),
+    label: {
+      label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer',
+    },
     groupContainer: '',
     groupCheckboxWrapper: '',
     groupCheckbox: '',
-    groupLabel: '',
+    groupLabelWrapper: '',
+    groupLabelFeedback: '',
   },
 
   // Variants
@@ -48,10 +68,13 @@ export const checkboxConfig = {
           'checked:bg-red-600 checked:text-white',
           'dark:checked:bg-red-600 dark:focus:ring-offset-gray-900',
         ),
+        label: {
+          label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer',
+        },
         groupContainer: '',
         groupCheckboxWrapper: '',
         groupCheckbox: '',
-        groupLabel: '',
+        groupLabelWrapper: '',
       },
     },
   },

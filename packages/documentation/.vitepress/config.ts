@@ -4,7 +4,7 @@ import MarkitDownInclude from 'markdown-it-include'
 import Inspect from 'vite-plugin-inspect'
 import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
-import ReplacePackagePlugin from '../plugins/local-link'
+import ReplacePackagePlugin from '../utils/local-link'
 import highlighter from './shiki-tags/highlighter'
 
 const production = process.env.NODE_ENV === 'production'
@@ -20,11 +20,11 @@ const plugins = !production
       build: false,
       outputDir: '.vite-inspect',
     }),
-    whyframe({ defaultSrc: '/frames/default' }),
+    whyframe({ defaultSrc: '/parts/frame' }),
     whyframeVue({ include: /\.(?:vue|md)$/ }),
   ]
 : [
-    whyframe({ defaultSrc: '/frames/default' }),
+    whyframe({ defaultSrc: '/parts/frame' }),
     whyframeVue({ include: /\.(?:vue|md)$/ }),
   ]
 
@@ -148,18 +148,26 @@ export default defineConfig({
           text: 'Components',
           collapsible: true,
           items: [
-            { text: 'Avatar', link: '/components/avatar/index' },
-            { text: 'Button', link: '/components/button/index' },
-            { text: 'Input', link: '/components/input/index' },
-            { text: 'Country Input', link: '/components/country-input/index' },
-            { text: 'Phone Input', link: '/components/phone-input/index' },
-            { text: 'Checkbox', link: '/components/checkbox/index' },
-            { text: 'Datetime Picker', link: '/components/datetimepicker/index' },
-            { text: 'Card', link: '/components/card/index' },
-            { text: 'Datatables', link: '/components/datatables/index' },
-            { text: 'Dropdown', link: '/components/dropdown/index' },
-            { text: 'Slideover', link: '/components/slideover/index' },
-            { text: 'Rich Select', link: '/components/rich-select/index' },
+            { text: 'Avatar', link: '/guide/components/avatar' },
+            { text: 'Button', link: '/guide/components/button' },
+            { text: 'Card', link: '/guide/components/card' },
+            { text: 'Checkbox', link: '/guide/components/checkbox' },
+            { text: 'Country Input', link: '/guide/components/country-input' },
+            { text: 'Datatables', link: '/guide/components/datatable' },
+            { text: 'Datetime Picker', link: '/guide/components/datetime-input' },
+            { text: 'Dialog', link: '/guide/components/dialog' },
+            { text: 'Dropdown', link: '/guide/components/dropdown' },
+            { text: 'Forms', link: '/guide/components/forms' },
+            { text: 'Input', link: '/guide/components/input' },
+            { text: 'Phone Input', link: '/guide/components/phone-input' },
+            { text: 'Rich Radio', link: '/guide/components/rich-radio' },
+            { text: 'Rich Select', link: '/guide/components/rich-select' },
+            { text: 'Select', link: '/guide/components/select' },
+            { text: 'Skeletons', link: '/guide/components/skeleton' },
+            { text: 'Slideover', link: '/guide/components/slideover' },
+            { text: 'Status Indicator', link: '/guide/components/status-indicator' },
+            { text: 'Textarea', link: '/guide/components/textarea' },
+            { text: 'Toggle', link: '/guide/components/toggle' },
           ],
         },
         {
@@ -174,6 +182,13 @@ export default defineConfig({
           collapsible: true,
           items: [
             { text: 'Laravel + Datatables', link: '/guide/integrations-datatables' },
+          ],
+        },
+        {
+          text: 'Examples',
+          collapsible: true,
+          items: [
+            { text: 'Form Sections & Groups', link: '/guide/examples-form-sections' },
           ],
         },
       ],
