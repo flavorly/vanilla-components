@@ -8,7 +8,7 @@ import { useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProp
 import FormErrors from '@/components/forms/form-errors.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormLabel from '@/components/forms/form-label.vue'
-import Toggle from '@/components/Toggle/Toggle.vue'
+import Toggle from '@/components/toggle/toggle.vue'
 
 const props = defineProps({
   ...useVariantProps<ToggleProps, ToggleClassesValidKeys>(),
