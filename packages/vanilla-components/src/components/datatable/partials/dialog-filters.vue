@@ -17,6 +17,7 @@ import Input from '@/components/input/input.vue'
 import Textarea from '@/components/textarea/textarea.vue'
 import DateTimeInput from '@/components/datetime-input/datetime-input.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
+import FormSection from '@/components/forms/form-section.vue'
 
 const props = defineProps({
   filters: {
@@ -99,96 +100,98 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
   <Dialog
     v-model="isOpen"
     :title="translations.filters"
-    :body-with-padding="true"
+    :body-darker="true"
     as="form"
     size="medium"
     @submit.prevent="saveSettings"
   >
-    <template
-      v-for="(filter) in filters"
-      :key="filter.name"
-    >
-      <InputGroup
-        :label="filter.label"
-        :name="filter.name"
-        :layout="filter.layout || 'inline'"
+    <FormSection divided>
+      <template
+        v-for="(filter) in filters"
+        :key="filter.name"
       >
-        <Select
-          v-if="filter.component === 'VanillaSelect'"
-          v-model="localFilters[filter.name]"
-          :model-value="getFilterValue(filter.name) || null"
-          :options="filter.options"
-          v-bind="filter.props"
-          :show-empty="true"
-        />
-
-        <RichSelect
-          v-if="filter.component === 'VanillaRichSelect'"
-          v-model="localFilters[filter.name]"
-          :model-value="getFilterValue(filter.name) || null"
-          :placeholder="filter.placeholder"
-          :options="filter.options"
-          v-bind="filter.props"
-        />
-
-        <Input
-          v-if="filter.component === 'VanillaInput'"
-          v-model="localFilters[filter.name]"
-          :model-value="getFilterValue(filter.name) || null"
-          :placeholder="filter.placeholder"
-          v-bind="filter.props"
-        />
-
-        <Checkbox
-          v-if="filter.component === 'VanillaCheckbox'"
-          v-model="localFilters[filter.name]"
-          :model-value="getFilterValue(filter.name) || null"
-          :placeholder="filter.placeholder"
-          v-bind="filter.props"
-        />
-
-        <Toggle
-          v-if="filter.component === 'VanillaToggle'"
-          v-model="localFilters[filter.name]"
-          :model-value="getFilterValue(filter.name) || null"
-          :placeholder="filter.placeholder"
-          v-bind="filter.props"
-        />
-
-        <Textarea
-          v-if="filter.component === 'VanillaTextarea'"
-          v-model="localFilters[filter.name]"
-          :model-value="getFilterValue(filter.name) || null"
-          :placeholder="filter.placeholder"
-          v-bind="filter.props"
-        />
-
-        <DateTimeInput
-          v-if="filter.component === 'VanillaDatetimePicker'"
-          v-model="localFilters[filter.name]"
-          :model-value="getFilterValue(filter.name) || null"
-          :placeholder="filter.placeholder"
-          v-bind="filter.props"
-        />
-      </InputGroup>
-    </template>
-
-    <InputGroup variant="content">
-      <div :class="[classesList.genericFormsContentContainer]">
-        <span
-          :class="[classesList.genericFormsContentLink]"
-          @click="resetSettings"
+        <InputGroup
+          :label="filter.label"
+          :name="filter.name"
+          :variant="filter.layout || 'inline'"
         >
-          <TrashIcon :class="[classesList.genericFormsContentIcons]" />
-          <span v-text="translations.filtersReset" />
-        </span>
-        <span v-text="translations.filtersResetOr" />
-        <span
-          :class="[classesList.genericFormsContentLink]"
-          v-text="translations.filtersCopy"
-        />
-      </div>
-    </InputGroup>
+          <Select
+            v-if="filter.component === 'VanillaSelect'"
+            v-model="localFilters[filter.name]"
+            :model-value="getFilterValue(filter.name) || null"
+            :options="filter.options"
+            v-bind="filter.props"
+            :show-empty="true"
+          />
+
+          <RichSelect
+            v-if="filter.component === 'VanillaRichSelect'"
+            v-model="localFilters[filter.name]"
+            :model-value="getFilterValue(filter.name) || null"
+            :placeholder="filter.placeholder"
+            :options="filter.options"
+            v-bind="filter.props"
+          />
+
+          <Input
+            v-if="filter.component === 'VanillaInput'"
+            v-model="localFilters[filter.name]"
+            :model-value="getFilterValue(filter.name) || null"
+            :placeholder="filter.placeholder"
+            v-bind="filter.props"
+          />
+
+          <Checkbox
+            v-if="filter.component === 'VanillaCheckbox'"
+            v-model="localFilters[filter.name]"
+            :model-value="getFilterValue(filter.name) || null"
+            :placeholder="filter.placeholder"
+            v-bind="filter.props"
+          />
+
+          <Toggle
+            v-if="filter.component === 'VanillaToggle'"
+            v-model="localFilters[filter.name]"
+            :model-value="getFilterValue(filter.name) || null"
+            :placeholder="filter.placeholder"
+            v-bind="filter.props"
+          />
+
+          <Textarea
+            v-if="filter.component === 'VanillaTextarea'"
+            v-model="localFilters[filter.name]"
+            :model-value="getFilterValue(filter.name) || null"
+            :placeholder="filter.placeholder"
+            v-bind="filter.props"
+          />
+
+          <DateTimeInput
+            v-if="filter.component === 'VanillaDatetimePicker'"
+            v-model="localFilters[filter.name]"
+            :model-value="getFilterValue(filter.name) || null"
+            :placeholder="filter.placeholder"
+            v-bind="filter.props"
+          />
+        </InputGroup>
+      </template>
+
+      <InputGroup variant="content">
+        <div :class="[classesList.genericFormsContentContainer]">
+          <span
+            :class="[classesList.genericFormsContentLink]"
+            @click="resetSettings"
+          >
+            <TrashIcon :class="[classesList.genericFormsContentIcons]" />
+            <span v-text="translations.filtersReset" />
+          </span>
+          <span v-text="translations.filtersResetOr" />
+          <span
+            :class="[classesList.genericFormsContentLink]"
+            v-text="translations.filtersCopy"
+          />
+        </div>
+      </InputGroup>
+    </FormSection>
 
     <!-- Footer -->
     <template #footer>

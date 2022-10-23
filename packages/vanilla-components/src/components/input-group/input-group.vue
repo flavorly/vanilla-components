@@ -43,20 +43,52 @@ const props = defineProps({
     default: true,
     required: false,
   },
+  alignLabel: {
+    type: [String] as PropType<string>,
+    required: false,
+    default: 'left-center',
+    validator(align: string) {
+      return [
+        'left-top',
+        'left-center',
+        'left-bottom',
+        'right-top',
+        'right-center',
+        'right-bottom',
+        'center-top',
+        'center-center',
+        'center-bottom',
+      ].includes(align)
+    },
+  },
 })
 
 const { configuration, errors, hasErrors, variant } = useConfiguration<InputGroupProps>(inputGroupConfig, 'InputGroup')
-console.log(configuration.withPadding)
 </script>
 
 <template>
   <div
-    class="vc-group px-6 py-3 mt-0 grid space-y-2"
-    :class="[configuration.withPadding ? configuration.classesList.wrapperWithPadding : '']"
+    :class="[
+      configuration.classesList.container,
+      configuration.withPadding ? configuration.classesList.containerWithPadding : '',
+    ]"
   >
     <!-- Label And Input -->
     <div :class="configuration.classesList.wrapper">
-      <div :class="configuration.classesList.labelWrapper">
+      <div
+        :class="[
+          configuration.classesList.labelWrapper,
+          alignLabel === 'left-top' ? configuration.classesList.labelWrapperLeftTop : '',
+          alignLabel === 'left-center' ? configuration.classesList.labelWrapperLeftCenter : '',
+          alignLabel === 'left-bottom' ? configuration.classesList.labelWrapperLeftBottom : '',
+          alignLabel === 'right-top' ? configuration.classesList.labelWrapperRightTop : '',
+          alignLabel === 'right-center' ? configuration.classesList.labelWrapperRightCenter : '',
+          alignLabel === 'right-bottom' ? configuration.classesList.labelWrapperRightBottom : '',
+          alignLabel === 'center-top' ? configuration.classesList.labelWrapperCenterTop : '',
+          alignLabel === 'center-center' ? configuration.classesList.labelWrapperCenterCenter : '',
+          alignLabel === 'center-bottom' ? configuration.classesList.labelWrapperCenterBottom : '',
+        ]"
+      >
         <slot name="label">
           <FormLabel
             v-if="label !== undefined"
@@ -65,7 +97,11 @@ console.log(configuration.withPadding)
           />
         </slot>
       </div>
-      <div :class="configuration.classesList.inputWrapper">
+      <div
+        :class="[
+          configuration.classesList.inputWrapper,
+        ]"
+      >
         <div
           v-if="hasSlot($slots.before)"
           :class="configuration.classesList.addonBefore"

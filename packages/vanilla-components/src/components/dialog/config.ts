@@ -10,14 +10,14 @@ export const dialogConfig = {
     wrapper: 'fixed inset-0 z-30 overflow-y-auto',
     inner: 'min-h-screen px-4 text-center',
     closeButton: 'inline-block h-screen align-middle',
-    overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-900/80 backdrop-blur-sm',
+    overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-900/90 backdrop-blur-sm',
 
     modalWithPadding: 'px-4 pt-5 pb-4 sm:my-8 sm:p-6',
 
     modal: mergeClasses(
       '',
       'relative inline-block align-middle overflow-hidden',
-      'bg-white dark:bg-gray-800/70',
+      'bg-white dark:bg-gray-800',
       'shadow-xl',
       'rounded-lg',
       'transform transition-all',
@@ -38,7 +38,7 @@ export const dialogConfig = {
     // Body
     body: 'mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300',
     bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
-    bodyDarker: 'bg-gray-50 dark:bg-gray-800',
+    bodyDarker: 'bg-gray-50 dark:bg-gray-900/60',
 
     // bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
     bodyWithPadding: 'px-4',

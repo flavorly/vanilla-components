@@ -39,7 +39,7 @@ export default function configurationBuilder<
     searchPlaceholder: 'Search your latest Payments',
 
     selectRows: 'You currently have :rows payments selected',
-    selectedUndo: 'Deselect',
+    selectedUndo: 'Deselect all',
     selectAllOr: 'Select current page or',
     selectAllMatching: 'Select all records matching filter',
     selectAllMatchingUndo: 'Select only current page',

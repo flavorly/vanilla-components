@@ -1,37 +1,53 @@
 import type { InputHTMLAttributes } from 'vue'
 import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import { commonClasses } from '@/core/config'
 
 export const inputGroupConfig = {
-  fixedClasses: {},
+  fixedClasses: {
+    wrapper: '',
+    container: '',
+    containerWithPadding: 'px-6 py-3.5',
+    label: '',
+    labelWrapperLeftTop: commonClasses.leftTop,
+    labelWrapperLeftCenter: commonClasses.leftCenter,
+    labelWrapperLeftBottom: commonClasses.leftBottom,
+    labelWrapperRightTop: commonClasses.rightTop,
+    labelWrapperRightCenter: commonClasses.rightCenter,
+    labelWrapperRightBottom: commonClasses.rightBottom,
+    labelWrapperCenterTop: commonClasses.centerTop,
+    labelWrapperCenterCenter: commonClasses.centerCenter,
+    labelWrapperCenterBottom: commonClasses.centerBottom,
+    inputWrapper: '',
+  },
   classes: {
     wrapper: 'grid space-y-2',
-    labelWrapper: 'vc-input-label sm:mt-px sm:pt-2 block',
-    inputWrapper: 'vc-inputs-container mt-0 grid space-y-2',
-    wrapperWithPadding: 'px-6 py-3.5 mt-0',
+    container: 'block sm:grid space-y-2',
+    containerWithPadding: '',
     label: '',
+    labelWrapper: 'sm:mt-px sm:pt-0 flex',
+    labelWrapperLeftTop: '',
+    labelWrapperLeftCenter: '',
+    labelWrapperLeftBottom: '',
+    labelWrapperRightTop: '',
+    labelWrapperRightCenter: '',
+    labelWrapperRightBottom: '',
+    labelWrapperCenterTop: '',
+    labelWrapperCenterCenter: '',
+    labelWrapperCenterBottom: '',
+    inputWrapper: 'flex mt-0 grid space-y-2',
   },
   variants: {
     inline: {
       classes: {
-        wrapper: 'sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 pt-5 sm:pt-0 content-center',
+        wrapper: 'sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 content-center',
         labelWrapper: 'flex items-center justify-start h-full',
         inputWrapper: 'mt-1 sm:col-span-2 sm:mt-0 flex flex-col space-y-2',
-        wrapperWithPadding: 'px-6 py-3.5 mt-0',
         label: '',
       },
     },
-
-    // inline: {
-    //   classes: {
-    //     wrapper: 'sm:grid sm:grid-cols-3 sm:gap-4',
-    //     wrapperWithPadding: 'sm:px-6 px-6 py-5',
-    //     label: 'flex items-center text-sm leading-3 font-medium text-gray-500 dark:text-white',
-    //   },
-    // },
     content: {
       classes: {
         wrapper: 'sm:grid',
-        wrapperWithPadding: 'px-6 py-3 mt-0',
         label: '',
       },
     },

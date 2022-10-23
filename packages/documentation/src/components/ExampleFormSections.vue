@@ -177,6 +177,16 @@ const form = ref({
             <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">Accepting the terms of service is required to continue, by accepting you agree that we will mine all your data, password and do whatever we want, for what it matters this is just to test</span>
           </Checkbox>
         </InputGroup>
+
+        <InputGroup
+          label="👋 One last thing"
+          variant="content"
+          align-label="center-center"
+        >
+          <span class="text-center text-xs text-gray-500 dark:text-gray-400">You can also include content here with the Input group as "content" variant, this is a great
+            place to include additional context in-between the forms.
+          </span>
+        </InputGroup>
       </FormSection>
     </Card>
 

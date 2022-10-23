@@ -81,13 +81,14 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
     :title="translations.settings"
     as="form"
     size="medium"
-    :body-with-padding="false"
+    :body-darker="true"
     @submit.prevent="saveSettings"
   >
     <FormSection divided>
       <InputGroup
         :label="translations.settingsItemsPerPage"
         name="perPage"
+        variant="inline"
       >
         <Select
           v-model="localSettings.perPage"
@@ -108,6 +109,7 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
       <InputGroup
         :label="translations.settingsItemsPerPage"
         name="useStorage"
+        variant="inline"
       >
         <Toggle
           v-model="localSettings.useStorage"
@@ -117,6 +119,7 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
       <InputGroup
         :label="translations.settingsPersistSelection"
         name="saveSelection"
+        variant="inline"
       >
         <Toggle
           v-model="localSettings.saveSelection"

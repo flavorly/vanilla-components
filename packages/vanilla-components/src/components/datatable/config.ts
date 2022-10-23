@@ -45,7 +45,7 @@ export const datatableConfig = {
     filtersBadgeRemoveIcon: 'h-2 w-2',
 
     selectionBarContainer: 'px-6 sm:px-8 py-3 bg-primary-100/50 dark:bg-primary-500 items-center text-left text-xs text-primary-900 dark:text-white space-x-1 space-y-1 sm:space-y-0 flex flex-col sm:flex-row',
-    selectionBarButton: 'cursor-pointer inline-flex items-center rounded-md bg-transparent border border-primary-900 dark:border-white px-2.5 py-1.5 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-offset-2 focus:ring-primary-900 focus:ring-offset-primary-100 dark:focus:ring-offset-primary-500',
+    selectionBarButton: 'cursor-pointer inline-flex items-center rounded-md bg-transparent text-xs font-semibold focus:outline-none focus:underline',
     selectionBarOrText: 'hidden sm:inline mx-1',
 
     emptyStateContainer: 'flex items-center justify-center text-center bg-gray-50 px-6 py-8 dark:bg-gray-800',

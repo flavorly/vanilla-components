@@ -52,6 +52,17 @@ const commonClasses = {
 
   // Options
   optionOrItemDisabled: 'opacity-50 cursor-not-allowed',
+
+  // Positioning
+  leftTop: 'justify-start items-start',
+  leftCenter: 'justify-start items-center',
+  leftBottom: 'justify-start items-end',
+  rightTop: 'justify-end items-start',
+  rightCenter: 'justify-end items-center',
+  rightBottom: 'justify-end items-end',
+  centerTop: 'justify-center items-start',
+  centerCenter: 'justify-center items-center',
+  centerBottom: 'justify-center items-end',
 }
 
 export {

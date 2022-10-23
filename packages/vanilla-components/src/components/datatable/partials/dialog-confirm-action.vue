@@ -74,6 +74,7 @@ watch(isOpen, (val: boolean) => {
   <Dialog
     v-model="isOpen"
     :body-with-padding="true"
+    :body-darker="false"
   >
     <slot
       name="icon"

@@ -640,7 +640,7 @@ const executeAction = (action: Types.DatatableAction) => {
             resetAllFilters()
         }
 
-        // Clear all the filters in case it was defined on the action scope
+        //  Executes a given callback if its required
         if (action?.after?.callback !== undefined) {
             action.after.callback(action)
         }
