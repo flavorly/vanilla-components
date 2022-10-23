@@ -68,3 +68,10 @@ Yes, your not limited to have a fixed color or style set in your component! But 
 And here is the code :
 
 <<< @/components/variants-demo.vue
+
+## Errors Variant
+
+All components should include the `default` variant and `error` variant, the `error` variant is meant to be used when you want to show an error message to the user, this variant will be automatically applied when you provide the `errors` prop to the component.
+Once you "touch" the v-model of the component the `error` variant will be removed and the component will fallback to the original variant.
+
+This is really useful when errors are coming from the backend ( Ex: Inertia ) and you want to flash them but instantly remove as soon as the user tries again.
