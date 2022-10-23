@@ -1,5 +1,4 @@
-import type { InputHTMLAttributes } from 'vue'
-import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from '@/core/types'
+import type { InputOptions, NormalizedOption, NormalizedOptions, ObjectWithProperties, WithVariantPropsAndClassesList } from '@/core/types'
 
 export const richRadioConfig = {
   fixedClasses: {
@@ -43,12 +42,13 @@ export declare type RichRadioValue = RichRadioSimpleValue | RichRadioSimpleValue
 
 export declare type RichRadioProps = WithVariantPropsAndClassesList<{
     modelValue?: RichRadioValue
-    value?: RichRadioValue
-    checkedValue?: RichRadioValue
-    uncheckedValue?: RichRadioValue
-  }
-  & InputHTMLAttributes & Data & {
-  type?: 'checkbox'
-  checked?: boolean
-}, RichRadioClassesValidKeys>
+    disabled?: boolean
+    options?: InputOptions | NormalizedOption[] | NormalizedOptions
+    normalizeOptions?: boolean
+    valueAttribute?: string
+    textAttribute?: string
+    separated?: boolean
+    radio?: boolean
+    compact?: boolean
+  }, RichRadioClassesValidKeys>
 

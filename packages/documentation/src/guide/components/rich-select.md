@@ -21,7 +21,7 @@ A full-fledged select component with support for custom options, custom values, 
 | `modelValue`               | The value for the element                                      | `Any`             | `undefined`      |
 | `name`                     | The name for the actual underlying select                      | `String`          | `''`             |
 | `options`                  | Array of options for the select                                | `Array`           | `undefined`      |
-| `normalizeOptions`         | Array of options already normalized                            | `Array`           | `undefined`      |
+| `normalizeOptions`         | If we should normalize the options                             | `Array`           | `undefined`      |
 | `multiple`                 | Allow/Deny multiple selections                                 | `Boolean`         | `false`          |
 | `disabled`                 | If the selection is enable/disabled                            | `Boolean`         | `false`          |
 | `tags`                     | If tags/pills should be used instead                           | `Boolean`         | `false`          |

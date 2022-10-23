@@ -68,7 +68,7 @@ Props available for this component extending the default variant & global props.
 |:-------------------|:-----------------------------------------|:----------------|:------------|
 | `modelValue`       | A v-model for the elements               | `Array`         | `undefined` |
 | `options`          | Array of options for the select          | `Array`         | `undefined` |
-| `normalizeOptions` | Array of options already normalized      | `Array`         | `undefined` |
+| `normalizeOptions` | If we should normalize the options      | `Array`         | `undefined` |
 | `valueAttribute`   | Value Attribute key to search on options | `String`        | `undefined` |
 | `textAttribute`    | Label Attribute key to search on options | `String`        | `undefined` |
 

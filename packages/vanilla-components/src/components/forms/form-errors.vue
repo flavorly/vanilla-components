@@ -6,6 +6,11 @@ import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<FormErrorsProps, FormClassesValidKeys>(),
+  errors: {
+    type: [Array, String] as PropType<string[] | string>,
+    default: undefined,
+    required: true,
+  },
   safe: {
     type: [Boolean] as PropType<boolean>,
     default: true,

@@ -18,7 +18,7 @@ const props = defineProps({
   },
   spaced: {
     type: [Boolean] as PropType<boolean>,
-    default: true,
+    default: false,
     required: false,
   },
   filled: {
@@ -29,8 +29,6 @@ const props = defineProps({
 })
 
 const { configuration } = useConfiguration<FormSectionProps>(formsConfig, 'FormSection')
-
-console.log('FormSection', configuration.classesList, props.divided)
 </script>
 
 <template>
