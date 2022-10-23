@@ -10,20 +10,18 @@ const open = ref(false)
       label="Open Slideover"
       @click="open = !open"
     />
-    <div class="h-[120px]">
-      <Slideover
-        v-model="open"
-        :teleport="false"
-        title="Payments"
-        subtitle="Want to create new payments? Worry not, this a demo payment slideover"
-      >
-        <div class="absolute inset-0 px-4 sm:px-6">
-          <div
-            class="h-full border-2 border-dashed border-gray-200 dark:border-gray-600"
-            aria-hidden="true"
-          />
-        </div>
-      </Slideover>
-    </div>
+    <Slideover
+      v-model="open"
+      :teleport="false"
+      title="Payments"
+      subtitle="Want to create new payments? Worry not, this a demo payment slideover"
+    >
+      <div class="absolute inset-0 px-4 sm:px-6">
+        <div
+          class="h-full border-2 border-dashed border-gray-200 dark:border-gray-600"
+          aria-hidden="true"
+        />
+      </div>
+    </Slideover>
   </PreviewWrapper>
 </template>

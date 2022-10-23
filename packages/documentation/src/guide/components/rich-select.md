@@ -217,7 +217,7 @@ It can be used as a slot for the `option` and `label` slot.
 
 Use cases: Display orders status, Tickets Status, etc
 
-### Option Tag with with Image
+### Option Tag with Image
 
 Same as the option with image but when being used with tags.
 
