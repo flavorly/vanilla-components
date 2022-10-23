@@ -42,6 +42,7 @@ interface ComponentsConfiguration {
   StatusIndicator?: Components.StatusIndicatorProps
   Textarea?: Components.TextareaProps
   Toggle?: Components.ToggleProps
+  ToggleGroup?: Components.ToggleProps
   [key: string]: any
 }
 

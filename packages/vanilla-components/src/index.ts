@@ -71,6 +71,7 @@ export { default as StatusIndicator } from './components/status-indicator/status
 export { default as Textarea } from './components/textarea/textarea.vue'
 
 export { default as Toggle } from './components/toggle/toggle.vue'
+export { default as ToggleGroup } from './components/toggle/toggle-group.vue'
 
 // ----------------- //
 // Types
