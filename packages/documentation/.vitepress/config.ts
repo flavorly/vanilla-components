@@ -131,8 +131,8 @@ export default defineConfig({
         text: 'Overview',
         items: navQuickStart,
       },
-      { text: 'Guide', link: '/guide/quick-start', activeMatch: '/guide/' },
-      { text: 'Components', link: '/components/', activeMatch: '/components/' },
+      { text: 'Guide', link: '/guide/quick-start', activeMatch: '/guide/quick-start' },
+      { text: 'Components', link: '/guide/components-list', activeMatch: '/guide/components-list' },
       { text: 'v0.6.27', link: 'https://github.com/nikuscs/vanilla-components' },
     ],
 
