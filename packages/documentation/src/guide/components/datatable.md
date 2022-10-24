@@ -5,9 +5,9 @@ outline: deep
 # Datatable
 
 One of the most valued components of Vanilla Components, Datatables to display your bulk resources, perform actions
-filter results, search & many more features, everything perfectly designed with Tailwind CSS.
+filter results, search & many more features, everything is perfectly designed with Tailwind CSS.
 
-The datatable component includes a lot of features and we plan to include more with time without making it to complicated to keep it as much `vanilla` as possible :smile: .
+The data table component includes a lot of features and we plan to include more with time without making it too complicated to keep it as much `vanilla` as possible :smile: .
 feel free to explore most of them but some highlights:
 
 - Data Fetched via Axios just provide an endpoint
@@ -28,7 +28,7 @@ feel free to explore most of them but some highlights:
 - Laravel Adaptor ( Coming soon )
 - InertiaJS Adaptor ( Coming soon )
 
-But enough of talk, lets see it in action!
+But enough talk, let's see it in action!
 
 !!!include(./src/parts/title-preview.md)!!!
 
@@ -66,7 +66,7 @@ But enough of talk, lets see it in action!
 
 ## Configuration :joystick:
 
-Here you will find a sample of JSON configuration that you can pass on prop `config`. For a more in depth example please check the demo available on the snippet.
+Here you will find a sample of JSON configuration that you can pass on prop `config`. For a more in-depth example please check the demo available on the snippet.
 
 :::details :surfer: Click to check the demo configuration
 <<< @/json/demo-config.json
@@ -76,9 +76,9 @@ Here you will find a sample of JSON configuration that you can pass on prop `con
 
 ### Server Side Response
 
-While we don't dictate how you should handle your data response, and you are still free to override the default **fetchData** method. You are still required to follow some patterns when it comes to pagination. 
+While we don't dictate how you should handle your data response, you are still free to override the default **fetchData** method. You are still required to follow some patterns when it comes to pagination.
 
-While making this library my main use case was to use it along with Laravel ® + InertiaJS ®. Bellow you find a demo data of what your API should reply for the default fetchData, you can also find more details in the source code of the MirageJS mock server on this repository:
+While making this library my main use case was to use it along with Laravel ® + InertiaJS ®. Below, you find demo data of what your API should reply for the default fetchData, you can also find more details in the source code of the MirageJS mock server on this repository:
 
 
 :::details :surfer: Click to check the demo response
@@ -86,7 +86,7 @@ While making this library my main use case was to use it along with Laravel ® +
 :::
 
 
-Response must include : 
+The response must include :
 
 | Key     | Description                                        |
 |:--------|:---------------------------------------------------|
@@ -97,7 +97,7 @@ Response must include :
 ### Client Side Request
 
 All requests made by the table are using Axios, this way you can hook your credentials or authorization with Axios Interceptor
-Bellow you will find what parameters are sent to server-side so you can build any server side adaptors.
+Below, you will find what parameters are sent to the server-side so you can build any server-side adaptors.
 
 :::details :surfer: Click to check the demo request
 <<< @/json/demo-request.json
@@ -135,12 +135,11 @@ Request Params explained :
 
 !!!include(./src/parts/title-slots.md)!!!
 
-Besides, the regular static slots, datatable also provides dynamic slots for rows columns & actions
+Besides, the regular static slots, data table also provides dynamic slots for rows columns & actions
 
 :::warning Work in progress
 Please keep in mind some slots override can break functionality is this is a work in progress.
 :::
-
 
 ### Slot Dynamic `row<ColumnName>`
 
@@ -212,7 +211,7 @@ Overrides the datatable search bar
 
 ### Slot `headerFiltersActive`
 
-When filters are enabled and some filter is applied, a little bar shows bellow the search bar
+When filters are enabled and some filter is applied, a little bar shows Below the search bar
 This slot gives you the ability to override this piece.
 
 | Attribute            | Description                                    | Type       |

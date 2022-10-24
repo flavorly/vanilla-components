@@ -6,11 +6,12 @@ outline: deep
 
 ## Using Variants
 
-One of the main features of Vanilla Components is the usage of variants as explained on the [configuration](./configuration) section, when using variants the component will swap the classes automatically while preserving the `fixedClasses` you may use the `variant` prop to quickly toggle different variants. 
+One of the main features of Vanilla Components is the usage of variants as explained in the [configuration](./configuration) section, when using variants the component will swap the classes automatically while preserving the `fixedClasses` you may use the `variant` prop to quickly toggle different variants.
 
-There is one special variant for errors called `error`, this variant it meant to be temporary and once you change or interact the component it will fallback the original variant provided initially ( if any ).
+There is one special variant for errors called `error`, this variant is meant to be temporary and once you change or interact with the component it will fall back to the original variant provided initially ( if any ).
 
-You may use variants as shown bellow :
+You may use variants as shown below:
+
 ```vue
 <template>
     <Button variant="soft-red"/>
@@ -20,11 +21,10 @@ You may use variants as shown bellow :
 </template>
 ```
 
-You are not limited to configure everything when booting the plugin, you may also define your `classes`, `fixedClasses` & `variants` on your component, this is useful for edge cases or specific scenarios that you want to override something specific.
+You are not limited to configuring everything when booting the plugin, you may also define your `classes`, `fixedClasses` & `variants` on your component, this is useful for edge cases or specific scenarios that you want to override something specific.
 
 :::warning A note on overrides & inline configuration
-Please just keep in mind that when you do this, we will completely **ignore** the global configuration and use the classes, fixedClasses or variants provided "inline".
-
+Please just keep in mind that when you do this, we will completely **ignore** the global configuration and use the classes, fixedClasses, or variants provided "inline".
 :::
 
 Here is a small example: 
@@ -50,7 +50,7 @@ Here is a small example:
 </template>
 ```
 
-Given the example above we would always use the `pb-20` from the fixed classes, and `pt-20` from `dark` variant we picked up, ignoring the default `pt-10` that was the default value for the key "wrapper".
+Given the example above we would always use the `pb-20` from the fixed classes, and `pt-20` from the `dark` variant we picked up, ignoring the default `pt-10` that was the default value for the key "wrapper".
 
 The actual HTML result would be something like the following :
 
@@ -60,7 +60,7 @@ The actual HTML result would be something like the following :
 
 ## Hands on!
 
-Yes, your not limited to have a fixed color or style set in your component! But enough of talk, lets see some real example.
+Yes, you are not limited to having a fixed color or style set in your component! But enough talk, let's see some real examples.
 
 
 <ExampleVariants />
@@ -72,6 +72,6 @@ And here is the code :
 ## Errors Variant
 
 All components should include the `default` variant and `error` variant, the `error` variant is meant to be used when you want to show an error message to the user, this variant will be automatically applied when you provide the `errors` prop to the component.
-Once you "touch" the v-model of the component the `error` variant will be removed and the component will fallback to the original variant.
+Once you "touch" the v-model of the component the `error` variant will be removed and the component will fall back to the original variant.
 
-This is really useful when errors are coming from the backend ( Ex: Inertia ) and you want to flash them but instantly remove as soon as the user tries again.
+This is really useful when errors are coming from the backend ( Ex: Inertia ) and you want to flash them but instantly remove them as soon as the user tries again.

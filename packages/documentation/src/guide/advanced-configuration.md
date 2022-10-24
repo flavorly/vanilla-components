@@ -6,7 +6,7 @@ outline: deep
 
 ## Style your own components
 
-That's all clear when you want to override our components, but what if you want to keep a single design system in place and also style your own components? That's ok! You can still include the configuration as it was a "regular" Vanilla component, like the following:
+That's all clear when you want to override our components, but what if you want to keep a single design system in place and also style your components? That's ok! You can still include the configuration as it was a "regular" Vanilla component, like the following:
 
 ```js
 import { createApp } from 'vue'
@@ -28,7 +28,7 @@ app.use(VanillaComponents, { // [!vp focus:12]
 ```
 
 
-Here is a demo structure on how we recommend to have it structured in your project.
+Here is a demo structure of how we recommend having it structured in your project.
 Where the `config.ts` is your configuration file with your Configuration and Types ( if that's the case)
 
 ```
@@ -106,7 +106,7 @@ export declare type MyOwnComponentProps = WithVariantPropsAndClassesList<{
 } & InputHTMLAttributes & Data, MyOwnComponentClassesValidKeys>
 ```
 
-Finally! You might use your component as any other component like the follwing: 
+Finally! You might use your component as any other component like the following:
 
 ```vue
 <template>
@@ -122,8 +122,6 @@ Finally! You might use your component as any other component like the follwing:
 
 The `useConfiguration` provided by the package, takes 3 arguments: 
 
-- The first argument ( Required ) - **default** configuration of the component, this the configuration of classes & fixed classes for the given component if nothing else is provided.
-
 - The second argument ( Required ) - **name** of your component, you can give any name of your choice, as long as it matches the name provided on the initial `app.use(VanillaComponents,{})` configuration provided to vue.
 
 - The third argument is a `Ref` usually your model value, this will ensure that if your component is on a state error and you change the model value, it will go back into the original variant, this is optional.
@@ -134,7 +132,8 @@ It also returns the following refs for your own usage on the template
 - **errors** - Contains the errors of the component if any
 - **hasErrors** - Boolean that contains if the component has / not errors
 
-Here is a small example of using `useConfiguration`: 
+Here is a small example of using `useConfiguration`:
+
 
 ```vue
 <script setup>
@@ -170,7 +169,7 @@ const {
 </template>
 ```
 
-That's it! With this in mind you are free to start being creative and create your own thing.
+That's it! With this in mind, you are free to start being creative and create your own thing.
 
 
 
