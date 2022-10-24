@@ -45,7 +45,7 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
       return props.name || false
     },
   },
-  hasItemBellow: {
+  hasItemBelow: {
     type: Boolean as PropType<boolean>,
     default: false,
     required: false,

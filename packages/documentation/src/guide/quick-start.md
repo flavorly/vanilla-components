@@ -6,7 +6,8 @@ outline: deep
 
 ## Installation
 
-Please install with your favorite package manager.
+Please install it with your favorite package manager.
+
 ```bash
 # Using pnpm
 pnpm add @indigit/vanilla-components
@@ -42,14 +43,15 @@ const app = createApp()
 app.use(VanillaComponents, {})
 ```
 
-::: warning
-Please keep in mind, that by installing the plugin it WON'T register the components globally, you still need to import the components per page-basis or where you need them, this is done by design.
+:::warning
+Please keep in mind, that installing the plugin WON'T register the components globally, you still need to import the components per page basis or where you need them, this is done by design.
 :::
 
-The plugin accepts a `second argument` that could be used to provide your own configuration, this topic is covered fully on the next chapter [Configuration](./configuration)
+The plugin accepts a `second argument` that could be used to provide your configuration, this topic is covered fully in the next chapter [Configuration](./configuration)
 
 ## Basic Usage
-After installed, you may import the components as you need them, if you are not happy with the namings go further and create an alias. You can see the full list of named exports [here](https://github.com/nikuscs/vanilla-components/blob/master/packages/vanilla-components/src/index.ts), that should be always up-to-date.
+
+After installation, you may import the components as you need them, if you are not happy with the namings go further and create an alias. You can see the full list of named exports [here](https://github.com/nikuscs/vanilla-components/blob/master/packages/vanilla-components/src/index.ts), that should be always up-to-date.
 
 ```vue
 <script setup lang="ts">
@@ -62,7 +64,7 @@ import { Button, Avatar as MyOwnAvatarComponent } from '@indigit/vanilla-compone
 </template>
 ```
 
-## Types
+## Typescript
 
 Typescript types are also exported from the library, in case you need them to type your templates/scripts.
 

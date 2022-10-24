@@ -51,7 +51,7 @@ npm add @indigit/v-calendar@next
 !!!include(./src/parts/title-slots.md)!!!
 
 All the default slots of [VCalendar](https://vcalendar.io/api/v1.0/datepicker.html#scoped-slots) are available normally for usage.
-The default slot is pre-filled, please check bellow.
+The default slot is pre-filled, please check Below.
 
 ### Slot `default`
 

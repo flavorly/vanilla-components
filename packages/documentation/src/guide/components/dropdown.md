@@ -21,7 +21,7 @@ and another totally done from scratch that provides way more control over the dr
 
 ### Dropdown Menu Props
 
-Bellow are the props for the Dropdown Menu component based on Headless UI
+Below are the props for the Dropdown Menu component based on Headless UI
 
 | Prop              | Description                                     | Accepted Values | Default     |
 |:------------------|:------------------------------------------------|:----------------|:------------|
@@ -46,7 +46,7 @@ Bellow are the props for the Dropdown Menu component based on Headless UI
 
 ### Dropdown Props
 
-Bellow are the props for the Dropdown component, totally vanilla implementation
+Below are the props for the Dropdown component, totally vanilla implementation
 
 
 | Prop                 | Description                                      | Accepted Values | Default     |

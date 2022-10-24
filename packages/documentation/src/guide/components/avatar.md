@@ -4,7 +4,7 @@ outline: deep
 
 # Avatar
 
-A Avatar component useful for User Profile Pictures, support uploading new pictures or display an existing one.
+An Avatar component useful for User Profile Pictures, support uploading new pictures, or display an existing one.
 
 !!!include(./src/parts/title-preview.md)!!!
 
@@ -40,7 +40,7 @@ Slot dedicated to show the current photo preview, binds *all the props* passed t
 
 ### Slot `preview`
 
-Slot dedicated to show the preview of the new uploaded photo, binds *all the props* passed to the component, plus the following:
+Slot dedicated to showing the preview of the new uploaded photo, binds *all the props* passed to the component, plus the following:
 
 | Attribute      | Description          | Type             |
 |:---------------|:---------------------|:-----------------|

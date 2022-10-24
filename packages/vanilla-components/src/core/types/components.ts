@@ -87,7 +87,7 @@ type ComponentProps<
       default: string | boolean
       required: boolean
     }
-    hasItemBellow: {
+    hasItemBelow: {
       type: PropType<boolean>
       default: boolean
       required: boolean
@@ -147,7 +147,7 @@ type ComponentProps<
       default: string | boolean
       required: boolean
     }
-    hasItemBellow: {
+    hasItemBelow: {
       type: PropType<boolean>
       default: boolean
       required: boolean
