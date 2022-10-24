@@ -8,10 +8,9 @@ import ReplacePackagePlugin from '../utils/local-link'
 import highlighter from './shiki-tags/highlighter'
 
 const production = process.env.NODE_ENV === 'production'
-const site = production ? 'https://vanillacomponents.dev' : 'http://localhost:3000'
-const image = `${site}/banner.png`
+const site = production ? 'https://vanilla-components.com' : 'http://localhost:3005'
 const title = 'Vanilla Components'
-const description = 'A beautiful set of Vanilla Components for Vue 3 + Tailwind CSS'
+const description = 'A lightweight, flexible & customizable UI library for Vue 3, styled with Tailwind CSS'
 
 const plugins = !production
   ? [
@@ -90,13 +89,13 @@ export default defineConfig({
     ['meta', { name: 'twitter:site', content: site }],
     ['meta', { name: 'twitter:title', value: title }],
     ['meta', { name: 'twitter:description', value: description }],
-    ['meta', { name: 'twitter:image', content: image }],
+    ['meta', { name: 'twitter:image', content: '/seo.png' }],
     ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
     ['meta', { property: 'og:site', content: site }],
     ['meta', { property: 'og:site_name', content: title }],
     ['meta', { property: 'og:title', content: title }],
-    ['meta', { property: 'og:image', content: image }],
+    ['meta', { property: 'og:image', content: '/seo.png' }],
     ['meta', { property: 'og:description', content: description }],
   ],
 
