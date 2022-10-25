@@ -12,7 +12,7 @@ A lightweight, flexible & customizable ui library for Vue 3
 <p>
   
 <p align="center">
-  <a href="https://vanilla-components.com">Documentation</a> | <a href="https://vanilla-components.com/guide/quick-start.html">Getting Started</a> | | <a href="https://vanilla-components.com/guide/introduction.html">Why Vanilla Components?</a>
+  <a href="https://vanilla-components.com">Documentation</a> | <a href="https://vanilla-components.com/guide/quick-start.html">Getting Started</a> | <a href="https://vanilla-components.com/guide/introduction.html">Why Vanilla Components?</a>
 </p>
 
 ## Main Features ✨

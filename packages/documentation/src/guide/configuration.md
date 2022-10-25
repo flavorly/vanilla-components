@@ -118,13 +118,17 @@ Here is a demo tailwind configuration:
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 module.exports = {
-    // the rest of  your configuration..
+    // the rest of  your configuration.. //[!vp focus:15]
+    content: [
+        "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
+        "./node_modules/@indigit/vanilla-components/dist/components/**/*.{ts,vue}",
+    ],
     theme: {
-        colors: {// [!vp focus:2]
+        colors: {
             primary: colors.indigo, // alias "primary" to "indigo"
         },
     },
-    plugins: [// [!vp focus:5]
+    plugins: [
         require('@tailwindcss/typography'),
         require('@tailwindcss/aspect-ratio'),
         require('@tailwindcss/forms'),
