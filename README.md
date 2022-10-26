@@ -43,8 +43,6 @@ Import the components as needed with the following:
 import { Button } from '@indigit/vanilla-components'
 ```
 
-For more example & demos checkout the [VariantJS](https://github.com/variantjs/vue)
-
 ## Local & Documentation
 
 For preview & Local testing please run the following on the root of the project.
