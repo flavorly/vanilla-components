@@ -1,4 +1,5 @@
 import type * as Types from '../config'
+import useFetchData from './fetch-data'
 import type { Data } from '@/core/types'
 
 export default function configurationBuilder<
@@ -114,7 +115,7 @@ export default function configurationBuilder<
       props.config?.pooling,
     ),
 
-    fetchData: props?.fetchData || props.config?.fetchData || undefined,
+    fetchData: props?.fetchData || props.config?.fetchData || useFetchData,
     fetchEndpoint: props?.fetchEndpoint || props?.config?.fetchEndpoint || undefined,
     fetchMethod: props?.fetchMethod || props?.config?.fetchMethod || 'POST',
 

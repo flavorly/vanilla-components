@@ -34,6 +34,7 @@ const commonClasses = {
 
   // Buttons
   buttonRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900',
+  buttonSizing: 'h-full',
   buttonErrorsRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600',
 
   buttonRadius: 'rounded-md',

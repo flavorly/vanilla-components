@@ -395,6 +395,8 @@ const fetchFromServer = (then = () => {}) => {
                 datatable.onExceptionCallback(error)
             }
 
+            console.log('[REST] 🚀 Got error', error)
+
             // Emit  error
             emit('fetchError', {
                 error,
@@ -1003,7 +1005,7 @@ provide('datatable_translations', datatable.translations)
         <slot
           name="headerSettings"
           v-bind="{
-            refreshable: options.refreshable,
+            refreshable: datatable.options.refreshable,
             isFetching,
             isShowingSettings,
             userSettings,
@@ -1019,7 +1021,7 @@ provide('datatable_translations', datatable.translations)
 
             <!-- Refresh -->
             <DropdownOption
-              v-if="options.refreshable"
+              v-if="datatable.options.refreshable"
               @click="refresh"
             >
               <ArrowPathIcon
@@ -1042,11 +1044,11 @@ provide('datatable_translations', datatable.translations)
       </template>
 
       <!-- Search Bar -->
-      <template v-if="options.searchable && !hasAnyItemsSelected">
+      <template v-if="datatable.options.searchable && !hasAnyItemsSelected">
         <slot
           name="headerSearch"
           v-bind="{
-            searchable: options.searchable,
+            searchable: datatable.options.searchable,
             hasAnyItemsSelected,
             query: queryData.search,
             placeholder: translations.searchPlaceholder,
@@ -1240,7 +1242,7 @@ provide('datatable_translations', datatable.translations)
             >
               <!-- Checkbox is not slottable -->
               <td
-                v-if="options.selectable"
+                v-if="datatable.options.selectable"
                 :class="[
                   classesList.tableColumnCheckbox,
                 ]"
@@ -1320,6 +1322,7 @@ provide('datatable_translations', datatable.translations)
           :showing-from="results.meta?.from"
           :showing-to="results.meta?.to"
           :total="results.meta?.total"
+          :show-pages="true"
           @navigate="onPageNavigated"
         />
       </slot>
@@ -1390,7 +1393,7 @@ provide('datatable_translations', datatable.translations)
       v-bind="{
         isShowingSettings,
         userSettings,
-        perPageOptions,
+        perPageOptions: datatable.perPageOptions,
         columns: columnsComputed,
       }"
     >
@@ -1399,7 +1402,7 @@ provide('datatable_translations', datatable.translations)
         v-model="isShowingSettings"
         :user-settings="userSettings"
         :default-settings="userSettingsDefault"
-        :per-page-options="perPageOptions"
+        :per-page-options="datatable.perPageOptions"
         :columns="columnsComputed"
         @settings-reset="resetAllSettings"
       />

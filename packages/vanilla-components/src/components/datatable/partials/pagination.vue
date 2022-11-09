@@ -97,7 +97,9 @@ const pagesLimited = computed(() => {
 </script>
 
 <template>
-  <div :class="[classesList.paginationContainer]">
+  <div
+    :class="[classesList.paginationContainer]"
+  >
     <div :class="[classesList.paginationShortContainer]">
       <Button
         variant="paginationButton"

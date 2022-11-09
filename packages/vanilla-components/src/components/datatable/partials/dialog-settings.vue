@@ -23,7 +23,7 @@ const props = defineProps({
     required: true,
   },
   perPageOptions: {
-    type: [Object] as PropType<Types.DatatablePageOptions>,
+    type: [Object, Array] as PropType<Types.DatatablePageOptions>,
     required: true,
   },
   columns: {

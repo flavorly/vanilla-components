@@ -121,23 +121,23 @@ export function useConfiguration<ComponentOptions extends Data>(
   if (modelValue !== undefined) {
     watch(() => modelValue?.value, () => {
       errors.value = undefined
-      variant.value = props.variant as string | undefined
+      variant.value = props?.variant as string | undefined
     })
   }
 
   // Watch the variant change and re-pass it
-  watch(() => props.variant, (newVariant) => {
+  watch(() => props?.variant, (newVariant) => {
     variant.value = newVariant as string | undefined
   })
 
   // If the actual errors changes, we will also update it
-  watch(() => props.errors, (newErrors: any) => {
+  watch(() => props?.errors, (newErrors: any) => {
     errors.value = newErrors
     if (hasErrors.value) {
       variant.value = 'error'
     }
     else {
-      variant.value = props.variant as string | undefined
+      variant.value = props?.variant as string | undefined
     }
   })
 
