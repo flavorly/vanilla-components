@@ -256,7 +256,7 @@ const fetchData: Types.DatatableFetchDataFunction = datatable?.fetchData || useF
 // ---------------------------- //
 
 /** Current Ids being shown on hte page */
-const currentPageIds = computed(() => results.data.map(item => item.id) || []) as Ref<string[]>
+const currentPageIds = computed(() => results.data?.map(item => item.id) || []) as Ref<string[]>
 
 /** Result Hash */
 const resultsHash = computed(() => JSON.stringify(results.data)) as Ref<string>

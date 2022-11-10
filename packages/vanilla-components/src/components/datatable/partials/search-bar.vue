@@ -21,6 +21,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue'])
 
+const search = ref<HTMLElement>()
 const localValue = useVModel(props, 'modelValue')
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 </script>
@@ -29,13 +30,12 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
   <div :class="[classesList.searchContainer]">
     <Input
       ref="search"
-      v-model="localValue"
+      v-model.lazy="localValue"
       name="search"
       :class="[
         classesList.searchInputClasses,
         !searchable ? classesList.genericForbidden : '',
       ]"
-      :disabled="!searchable"
       :placeholder="placeholder"
       :variant="classesList.searchInputVariant"
       type="search"
