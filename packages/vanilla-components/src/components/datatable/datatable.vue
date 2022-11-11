@@ -372,6 +372,7 @@ const fetchFromServer = (then = () => {}) => {
     // console.log('[REST] 🚀 Calling the server');
 
     isFetching.value = true
+
     return fetchData(datatable, queryData)
 
         // Resolve
@@ -406,7 +407,9 @@ const fetchFromServer = (then = () => {}) => {
 
         // Finally
         .then(() => {
+          setTimeout(() => {
             isFetching.value = false
+          }, 300)
         })
         .then(then)
 }
@@ -1223,8 +1226,9 @@ provide('datatable_translations', datatable.translations)
               }"
             >
               <RowSkeleton
-                :number-of-columns="visibleColumnsCount"
+                :columns="columnsComputed"
                 :number-of-rows="results.data.length || queryData.perPage"
+                :is-selectable="datatable.options.selectable"
               />
             </slot>
           </template>

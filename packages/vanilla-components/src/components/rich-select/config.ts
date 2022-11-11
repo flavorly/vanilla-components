@@ -53,6 +53,7 @@ const defaultVariant = {
       commonClasses.iconsSize,
       commonClasses.inputsTransition,
     ),
+    clearButtonIcon: 'fill-current h-4 w-4',
 
     // Option list
     // We could also have here space-y-1

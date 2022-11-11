@@ -2,6 +2,7 @@
 import { useInjectsClassesListClass } from '@/core/use'
 import CloseIcon from '@/components/icons/close.vue'
 const className = useInjectsClassesListClass('clearButton')
+const iconClassName = useInjectsClassesListClass('clearButtonIcon')
 </script>
 
 <template>
@@ -11,7 +12,7 @@ const className = useInjectsClassesListClass('clearButton')
     :class="className"
   >
     <slot name="clearButton">
-      <CloseIcon class="w-4 h-4" />
+      <CloseIcon :class="iconClassName" />
     </slot>
   </button>
 </template>

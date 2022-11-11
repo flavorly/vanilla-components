@@ -119,7 +119,7 @@ export default function configurationBuilder<
     fetchEndpoint: props?.fetchEndpoint || props?.config?.fetchEndpoint || undefined,
     fetchMethod: props?.fetchMethod || props?.config?.fetchMethod || 'POST',
 
-    actionsEndpoint: props?.actionsEndpoint || props.config?.actionsEndpoint?.method || undefined,
+    actionsEndpoint: props?.actionsEndpoint || props?.config?.fetchEndpoint || undefined,
     actionsMethod: props?.actionsMethod || props.config?.actionsMethod?.method || 'POST',
 
     onActionExecutedCallback: props?.onActionExecutedCallback || props.config?.onActionExecutedCallback || undefined,
