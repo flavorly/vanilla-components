@@ -17,6 +17,7 @@ export default function configurationBuilder<
     searchable: true,
     showSettings: true,
     showNumberOfItems: true,
+    showPages: false,
     striped: false,
     compact: true,
     refreshable: true,

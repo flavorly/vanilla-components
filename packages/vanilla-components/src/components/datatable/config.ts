@@ -132,6 +132,7 @@ export declare interface DatatableOptions {
   refreshable?: boolean
   manageSettings?: boolean
   showTotalItems?: boolean
+  showPages?: boolean
   compact?: boolean
   striped?: boolean
 }

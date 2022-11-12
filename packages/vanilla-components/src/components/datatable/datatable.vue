@@ -1329,7 +1329,7 @@ provide('datatable_translations', datatable.translations)
           :showing-from="results.meta?.from"
           :showing-to="results.meta?.to"
           :total="results.meta?.total"
-          :show-pages="true"
+          :show-pages="datatable.options.showPages"
           @navigate="onPageNavigated"
         />
       </slot>
