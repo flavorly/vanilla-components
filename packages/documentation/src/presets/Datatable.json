@@ -42,7 +42,7 @@
         "emptyStateResetFiltersButtonVariant": "primary",
         "emptyStateResetFiltersButtonIcon": "h-4 w-4",
         "tableContainer": "datatable overflow-x-auto border-t dark:border-gray-700",
-        "tableClass": "min-w-full m-0 table-auto",
+        "tableClass": "min-w-full m-0 table-fixed",
         "tableBody": "divide-y bg-gray-50 dark:bg-gray-800 divide-gray-200 dark:divide-gray-700/90",
         "tableRow": "",
         "tableColumn": "whitespace-nowrap py-2 text-sm text-gray-500 dark:text-white",

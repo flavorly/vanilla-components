@@ -31,6 +31,8 @@ const { configuration } = useConfiguration<SkeletonBarProps>(skeletonConfig, 'Sk
       :key="uniqueId(`${current}_${index}`)"
       :class="configuration.classesList.class"
       v-bind="$attrs"
-    />
+    >
+      <slot />
+    </div>
   </component>
 </template>

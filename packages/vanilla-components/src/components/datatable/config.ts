@@ -58,12 +58,13 @@ export const datatableConfig = {
     emptyStateResetFiltersButtonIcon: 'h-4 w-4',
 
     tableContainer: 'datatable overflow-x-auto border-t dark:border-gray-700',
-    tableClass: 'min-w-full m-0 table-auto',
+    tableClass: 'min-w-full m-0 table-fixed',
     tableBody: 'divide-y bg-gray-50 dark:bg-gray-800 divide-gray-200 dark:divide-gray-700/90',
     tableRow: '',
-    tableColumn: 'whitespace-nowrap py-2 text-sm text-gray-500 dark:text-white',
+    tableColumn: 'whitespace-nowrap py-2 pr-2 text-sm text-gray-500 dark:text-white',
     tableColumnCheckbox: 'px-6 py-3 text-sm w-[10px]',
     tableCheckbox: 'rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 block transition duration-150 ease-in-out dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600 h-4 w-4',
+    tableIdColumn: 'w-[60px]',
 
     tableHeadColumnCheckbox: 'bg-gray-100 text-left text-xs px-6 py-3 leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700',
     tableHeadCheckbox: '', // Inherits main checkbox.
@@ -108,7 +109,7 @@ export const datatableConfig = {
     paginationFullPageActive: 'bg-primary-50 text-primary-600',
 
     skeletonTableBody: 'bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700',
-    skeletonTableColumn: 'px-2 py-3 whitespace-nowrap leading-5',
+    skeletonTableColumn: 'py-2 pr-3 whitespace-nowrap leading-5',
   },
 }
 

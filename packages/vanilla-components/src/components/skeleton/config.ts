@@ -14,20 +14,20 @@ export const skeletonConfig = {
     vanilla: {
       classes: {
         class: 'bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700',
-      }
+      },
     },
     bar: {
       classes: {
         class: 'h-5 rounded w-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700',
-      }
+      },
     },
     circle: {
       classes: {
         wrapper: '',
         class: 'h-5 w-5 rounded-full bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-500 dark:to-gray-700',
-      }
-    }
-  }
+      },
+    },
+  },
 }
 
 export const skeletonClassesKeys = Object.keys(skeletonConfig.classes)

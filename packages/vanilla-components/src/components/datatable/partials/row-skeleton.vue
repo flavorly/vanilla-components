@@ -43,9 +43,14 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
       <td
         v-for="(column, columnIndex) in columns"
         :key="columnIndex"
-        :class="[classesList.skeletonTableColumn]"
+        :class="[
+          classesList.skeletonTableColumn,
+          column.name.toLocaleLowerCase() === 'id' ? classesList.tableIdColumn : '',
+        ]"
       >
-        <Skeleton :count="1" />
+        <Skeleton
+          :count="1"
+        />
       </td>
     </tr>
   </tbody>

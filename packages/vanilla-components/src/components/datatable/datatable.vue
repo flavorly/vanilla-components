@@ -1274,7 +1274,10 @@ provide('datatable_translations', datatable.translations)
                   v-for="(column) in columnsComputed"
                   v-show="userSettings.visibleColumns.includes(column.name)"
                   :key="column.name"
-                  :class="classesList.tableColumn"
+                  :class="[
+                    classesList.tableColumn,
+                    column.name.toLocaleLowerCase() === 'id' ? classesList.tableIdColumn : '',
+                  ]"
                 >
                   <!-- Slot for the row -->
                   <slot
