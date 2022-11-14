@@ -73,7 +73,7 @@ export const datatableConfig = {
     tableHeadColumnContainer: 'group inline-flex',
     tableHeadColumnSortContainer: 'ml-2 flex-none rounded',
     tableHeadColumnLabel: '',
-    tableHeadColumnSorted: 'bg-gray-200 text-gray-900 group-hover:bg-gray-300',
+    tableHeadColumnSorted: 'bg-gray-200 dark:bg-gray-800 text-gray-900 dark:text-gray-200 group-hover:bg-gray-300 dark:group-hover:bg-gray-600',
     tableHeadColumnNotSorted: 'invisible group-focus:visible text-gray-400 group-hover:visible',
     tableHeadColumnSortedIcon: 'text-gray-400 group-hover:visible group-focus:visible invisible',
     tableHeadColumnSortedIconClasses: 'h-4 w-4 flex-none rounded',
@@ -115,7 +115,7 @@ export const datatableConfig = {
       'inline relative after:content-[\'\'] after:absolute after:-inset-0.5 after:animate-pulse after:h-5 after:w-full after:min-w-[2rem] after:rounded after:transition-all after:duration-500 after:inline-block',
       'after:bg-gradient-to-r',
       'after:from-gray-100 after:to-gray-200',
-      'dark:after:from-gray-100 dark:after:to-gray-200',
+      'dark:after:from-gray-500 dark:after:to-gray-700',
     ),
   },
 }
