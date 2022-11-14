@@ -1,5 +1,6 @@
 import type { InputHTMLAttributes } from 'vue'
 import type { Data, InputOptions, NormalizedOption, NormalizedOptions, WithVariantPropsAndClassesList } from '@/core/types'
+import { mergeClasses } from '@/core/helpers'
 
 export const datatableConfig = {
   fixedClasses: {},
@@ -110,6 +111,12 @@ export const datatableConfig = {
 
     skeletonTableBody: 'bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700',
     skeletonTableColumn: 'py-2 pr-3 whitespace-nowrap leading-5',
+    skeletonPlaceholder: mergeClasses(
+      'inline relative after:content-[\'\'] after:absolute after:-inset-0.5 after:animate-pulse after:h-5 after:w-full after:min-w-[2rem] after:rounded after:transition-all after:duration-500 after:inline-block',
+      'after:bg-gradient-to-r',
+      'after:from-gray-100 after:to-gray-200',
+      'dark:after:from-gray-100 dark:after:to-gray-200',
+    ),
   },
 }
 

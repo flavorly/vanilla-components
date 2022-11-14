@@ -17,8 +17,19 @@ const props = defineProps({
     default: 'div',
     required: false,
   },
+  width: {
+    type: [String, undefined] as PropType<string | undefined>,
+    default: '100%',
+    required: false,
+  },
 })
 const { configuration } = useConfiguration<SkeletonBarProps>(skeletonConfig, 'SkeletonBar')
+</script>
+
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
 </script>
 
 <template>
@@ -31,6 +42,7 @@ const { configuration } = useConfiguration<SkeletonBarProps>(skeletonConfig, 'Sk
       :key="uniqueId(`${current}_${index}`)"
       :class="configuration.classesList.class"
       v-bind="$attrs"
+      :style="{ width: props.width }"
     >
       <slot />
     </div>

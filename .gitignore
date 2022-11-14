@@ -2,3 +2,9 @@ node_modules
 dist
 *.zip
 .idea
+.DS_Store
+packages/.DS_Store
+packages/documentation/.DS_Store
+packages/documentation/src/.DS_Store
+packages/vanilla-components/.DS_Store
+packages/documentation/.vitepress/.DS_Store

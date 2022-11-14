@@ -49,7 +49,7 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
         ]"
       >
         <Skeleton
-          :count="1"
+          :width="column.name.toLocaleLowerCase() === 'id' ? `${Math.floor(Math.random() * (3 - 1 + 1) + 1)}rem` : `${Math.floor(Math.random() * (12 - 7 + 1) + 7)}rem`"
         />
       </td>
     </tr>
