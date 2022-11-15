@@ -37,7 +37,7 @@ importers:
       '@docsearch/css': ^3.3.0
       '@docsearch/js': ^3.3.0
       '@faker-js/faker': ^7.6.0
-      '@flavorly/v-calendar': 3.0.0-alpha.10
+      '@flavorly/v-calendar': 3.0.0-alpha.11
       '@flavorly/vanilla-components': workspace:0.7.3
       '@headlessui/vue': ^1.7.4
       '@heroicons/vue': ^2.0.13
@@ -75,7 +75,7 @@ importers:
       '@docsearch/css': 3.3.0
       '@docsearch/js': 3.3.0_tbpndr44ulefs3hehwpi2mkf2y
       '@faker-js/faker': 7.6.0
-      '@flavorly/v-calendar': 3.0.0-alpha.10_vue@3.2.45
+      '@flavorly/v-calendar': 3.0.0-alpha.11_vue@3.2.45
       '@flavorly/vanilla-components': link:../vanilla-components
       '@headlessui/vue': 1.7.4_vue@3.2.45
       '@heroicons/vue': 2.0.13_vue@3.2.45
@@ -115,7 +115,7 @@ importers:
     specifiers:
       '@antfu/eslint-config': ^0.27.0
       '@antfu/ni': ^0.18.5
-      '@flavorly/v-calendar': 3.0.0-alpha.10
+      '@flavorly/v-calendar': 3.0.0-alpha.11
       '@headlessui/vue': ^1.7.4
       '@popperjs/core': ^2.11.6
       '@rollup/plugin-typescript': ^9.0.2
@@ -148,7 +148,7 @@ importers:
       vite-plugin-dts: ^1.7.1
       vue: ^3.2.45
     dependencies:
-      '@flavorly/v-calendar': 3.0.0-alpha.10_vue@3.2.45
+      '@flavorly/v-calendar': 3.0.0-alpha.11_vue@3.2.45
       '@headlessui/vue': 1.7.4_vue@3.2.45
       '@popperjs/core': 2.11.6
       '@vueuse/core': 9.5.0_vue@3.2.45
@@ -504,8 +504,8 @@ packages:
     engines: {node: '>=14.0.0', npm: '>=6.0.0'}
     dev: false
 
-  /@flavorly/v-calendar/3.0.0-alpha.10_vue@3.2.45:
-    resolution: {integrity: sha512-BA2+wo84boFbYwN0VNk/1x6AL9eLc3xaA7Ts2qhuWhVEXhuceYnKuSPLi/Yk8CAnGBy8RjnKUDx/31r8w/8YTA==}
+  /@flavorly/v-calendar/3.0.0-alpha.11_vue@3.2.45:
+    resolution: {integrity: sha512-MkKpX5+LfVAYVpA7VoJBQcdgrUazjkCCZrwMRcABsoKJ+isw/N1KIgWmtDbgrxu8ScRKt0XyTg0VmI4j3eoTJQ==}
     peerDependencies:
       vue: ^3.1.0
     dependencies:

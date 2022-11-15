@@ -27,7 +27,7 @@
     "@docsearch/css": "^3.3.0",
     "@docsearch/js": "^3.3.0",
     "@faker-js/faker": "^7.6.0",
-    "@flavorly/v-calendar": "3.0.0-alpha.10",
+    "@flavorly/v-calendar": "3.0.0-alpha.11",
     "@flavorly/vanilla-components": "workspace:0.7.3",
     "@headlessui/vue": "^1.7.4",
     "@heroicons/vue": "^2.0.13",

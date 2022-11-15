@@ -75,7 +75,7 @@ Create a file somewhere in your project and name it for ex: `v-calendar.pcss` an
 
 :::details 👉 Click here to check the full CSS file
 ```css
-@import 'v-calendar/dist/style.css';
+@import '@flavorly/v-calendar/dist/style.css';
 
 @tailwind components;
 
