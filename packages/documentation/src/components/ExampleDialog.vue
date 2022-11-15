@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Dialog } from '@favlorly/vanilla-components'
+import { Button, Dialog } from '@flavorly/vanilla-components'
 import { CheckIcon } from '@heroicons/vue/24/solid/index.js'
 import { ref } from 'vue'
 const open = ref(false)

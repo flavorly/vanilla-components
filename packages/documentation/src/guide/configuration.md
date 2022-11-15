@@ -27,7 +27,7 @@ Here is a small demo overriding the `Input` component:
 
 ```js
 import { createApp } from 'vue'
-import { Plugin } from '@favlorly/vanilla-components' // [!vp focus:1]
+import { Plugin } from '@flavorly/vanilla-components' // [!vp focus:1]
 const app = createApp()
 
 app.use(VanillaComponents, {
@@ -88,7 +88,7 @@ As mentioned before you may also override the props default values from the comp
 
 ```ts
 import { createApp } from 'vue'
-import { Plugin } from '@favlorly/vanilla-components'
+import { Plugin } from '@flavorly/vanilla-components'
 const app = createApp()
 
 app.use(VanillaComponents, {
@@ -121,7 +121,7 @@ module.exports = {
     // the rest of  your configuration.. //[!vp focus:15]
     content: [
         "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
-        "./node_modules/@favlorly/vanilla-components/dist/components/**/*.{ts,vue}",
+        "./node_modules/@flavorly/vanilla-components/dist/components/**/*.{ts,vue}",
     ],
     theme: {
         colors: {

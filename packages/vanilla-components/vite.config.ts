@@ -72,7 +72,7 @@ export default defineConfig(() => {
             'flatpickr': 'flatpickr',
             'libphonenumber-js': 'libphonenumber-js',
             'fuse.js': 'fusejs',
-            '@favlorly/v-calendar': 'v-calendar',
+            '@flavorly/v-calendar': 'v-calendar',
           },
         },
       },

@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
 
-const packageName = /@favlorly\/vanilla-components/
+const packageName = /@flavorly\/vanilla-components/
 
 export default (): Plugin => ({
   name: 'vite:local-package-replacement',

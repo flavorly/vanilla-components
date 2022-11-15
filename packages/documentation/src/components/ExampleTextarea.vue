@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Textarea as VanillaTextArea } from '@favlorly/vanilla-components'
+import { Textarea as VanillaTextArea } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref(null)
 const valueErrors = ref(null)

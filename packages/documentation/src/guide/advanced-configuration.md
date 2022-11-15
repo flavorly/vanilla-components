@@ -10,7 +10,7 @@ That's all clear when you want to override our components, but what if you want 
 
 ```js
 import { createApp } from 'vue'
-import { Plugin } from '@favlorly/vanilla-components' // [!vp focus:1]
+import { Plugin } from '@flavorly/vanilla-components' // [!vp focus:1]
 const app = createApp()
 
 app.use(VanillaComponents, { // [!vp focus:12]
@@ -44,7 +44,7 @@ Here is a small custom Vue component example `MyOwnComponent.vue`
 
 ```vue
 <script setup lang="ts">
-import { useConfiguration } from '@favlorly/vanilla-components'
+import { useConfiguration } from '@flavorly/vanilla-components'
 import type { MyOwnComponentProps } from './config'
 import { myOwnComponentConfig } from './config'
 const { 
@@ -68,7 +68,7 @@ And here is the configuration being imported as `config.ts` on the component
 
 ```ts
 import type { InputHTMLAttributes } from 'vue'
-import type { Data, WithVariantPropsAndClassesList } from '@favlorly/vanilla-components'
+import type { Data, WithVariantPropsAndClassesList } from '@flavorly/vanilla-components'
 
 export const myOwnComponentConfig = {
     
@@ -137,7 +137,7 @@ Here is a small example of using `useConfiguration`:
 
 ```vue
 <script setup>
-import { useConfiguration } from '@favlorly/vanilla-components'
+import { useConfiguration } from '@flavorly/vanilla-components'
 const { 
 	configuration,
     errors,

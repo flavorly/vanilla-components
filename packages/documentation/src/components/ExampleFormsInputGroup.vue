@@ -6,7 +6,7 @@ import {
   InputGroup,
   Input as VanillaInput,
   Select as VanillaSelect,
-} from '@favlorly/vanilla-components'
+} from '@flavorly/vanilla-components'
 </script>
 
 <template>

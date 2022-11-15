@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ToggleGroup } from '@favlorly/vanilla-components'
+import { ToggleGroup } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref([])
 </script>

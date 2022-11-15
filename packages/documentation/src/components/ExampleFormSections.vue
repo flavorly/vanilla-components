@@ -10,7 +10,7 @@ import {
   PhoneInput,
   Input as VanillaInput,
   Select as VanillaSelect,
-} from '@favlorly/vanilla-components'
+} from '@flavorly/vanilla-components'
 import VueJsonPretty from 'vue-json-pretty'
 
 const form = ref({

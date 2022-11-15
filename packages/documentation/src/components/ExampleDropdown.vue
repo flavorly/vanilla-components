@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Dropdown, DropdownMenu, DropdownOption } from '@favlorly/vanilla-components'
+import { Dropdown, DropdownMenu, DropdownOption } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormErrors, FormFeedback, FormLabel, Input as VanillaInput } from '@favlorly/vanilla-components'
+import { FormErrors, FormFeedback, FormLabel, Input as VanillaInput } from '@flavorly/vanilla-components'
 </script>
 
 <template>

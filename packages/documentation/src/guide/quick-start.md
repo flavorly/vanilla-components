@@ -10,11 +10,11 @@ Please install it with your favorite package manager.
 
 ```bash
 # Using pnpm
-pnpm add @favlorly/vanilla-components
+pnpm add @flavorly/vanilla-components
 # Using Yarn
-yarn add @favlorly/vanilla-components
+yarn add @flavorly/vanilla-components
 # Using npm
-npm install @favlorly/vanilla-components
+npm install @flavorly/vanilla-components
 ```
 
 Once installed on your project, install also the `peer dependencies`, those are packages that are required for Vanilla Components to work, but they are not bundled with Vanilla Components:
@@ -36,9 +36,9 @@ This setup is only required to register the global & default configuration, no c
 
 ```js{2,6}
 import { createApp } from 'vue'
-import { Plugin } from '@favlorly/vanilla-components'
+import { Plugin } from '@flavorly/vanilla-components'
 // Or If you prefer
-import { VanillaComponents } from '@favlorly/vanilla-components'
+import { VanillaComponents } from '@flavorly/vanilla-components'
 const app = createApp()
 app.use(VanillaComponents, {})
 ```
@@ -55,7 +55,7 @@ After installation, you may import the components as you need them, if you are n
 
 ```vue
 <script setup lang="ts">
-import { Button, Avatar as MyOwnAvatarComponent } from '@favlorly/vanilla-components' // [!vp focus:1]
+import { Button, Avatar as MyOwnAvatarComponent } from '@flavorly/vanilla-components' // [!vp focus:1]
 </script>
 
 <template>
@@ -70,7 +70,7 @@ Typescript types are also exported from the library, in case you need them to ty
 
 ```vue
 <script setup lang="ts">
-import type { ButtonProps } from '@favlorly/vanilla-components'  // [!vp focus:1]
+import type { ButtonProps } from '@flavorly/vanilla-components'  // [!vp focus:1]
 </script>
 ```
 
@@ -85,7 +85,7 @@ module.exports = {
     // the rest of  your configuration.. // [!vp focus:15]
     content: [
         "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
-        "./node_modules/@favlorly/vanilla-components/dist/components/**/*.{ts,vue}",
+        "./node_modules/@flavorly/vanilla-components/dist/components/**/*.{ts,vue}",
     ],
     theme: { 
         colors: {

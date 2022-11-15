@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineComponent } from 'vue'
-import { DatePicker } from '@favlorly/v-calendar'
+import { DatePicker } from '@flavorly/v-calendar'
 import ClearButton from '../rich-select/partials/clear-button.vue'
 import { baseProps } from './baseProps'
 import type { DateTimeInputProps } from './config'

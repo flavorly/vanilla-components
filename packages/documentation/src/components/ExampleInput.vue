@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Input } from '@favlorly/vanilla-components'
+import { Input } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref(null)
 const valueErrors = ref(null)

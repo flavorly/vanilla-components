@@ -46,7 +46,7 @@ export default defineConfig({
     optimizeDeps: {
       exclude: [],
       include: [
-        '@favlorly/vanilla-components',
+        '@flavorly/vanilla-components',
       ],
       force: true,
     },

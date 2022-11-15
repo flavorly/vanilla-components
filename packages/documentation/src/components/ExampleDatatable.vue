@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Datatable, DropdownOption } from '@favlorly/vanilla-components'
+import { Datatable, DropdownOption } from '@flavorly/vanilla-components'
 import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
 
 const onFetched = () => {

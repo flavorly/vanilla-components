@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { StatusIndicator } from '@favlorly/vanilla-components'
+import { StatusIndicator } from '@flavorly/vanilla-components'
 </script>
 
 <template>

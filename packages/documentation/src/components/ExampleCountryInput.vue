@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CountryInput } from '@favlorly/vanilla-components'
+import { CountryInput } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 
 const value = ref('PT')

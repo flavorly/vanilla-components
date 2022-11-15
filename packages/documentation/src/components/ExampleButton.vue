@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@favlorly/vanilla-components'
+import { Button } from '@flavorly/vanilla-components'
 </script>
 
 <template>

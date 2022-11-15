@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RichRadio } from '@favlorly/vanilla-components'
+import { RichRadio } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref('vps1')
 const value2 = ref('vps1')

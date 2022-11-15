@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Card, DropdownMenu, DropdownOption } from '@favlorly/vanilla-components'
+import { Button, Card, DropdownMenu, DropdownOption } from '@flavorly/vanilla-components'
 </script>
 
 <template>
