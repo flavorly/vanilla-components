@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Button } from '@indigit/vanilla-components'
+import { Button } from '@favlorly/vanilla-components'
 
 // The current variant
 const variant = ref('superCool')

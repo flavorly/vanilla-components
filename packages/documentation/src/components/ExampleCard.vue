@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Card, DropdownMenu, DropdownOption } from '@indigit/vanilla-components'
+import { Button, Card, DropdownMenu, DropdownOption } from '@favlorly/vanilla-components'
 </script>
 
 <template>

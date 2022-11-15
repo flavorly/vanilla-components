@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ToggleGroup } from '@indigit/vanilla-components'
+import { ToggleGroup } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref([])
 </script>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Checkbox } from '@indigit/vanilla-components'
+import { Checkbox } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 
 const value = ref('accepted')

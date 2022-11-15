@@ -1,5 +1,5 @@
 import { existsSync, rmSync, writeFileSync } from 'fs'
-import { defaultConfiguration } from '@indigit/vanilla-components'
+import { defaultConfiguration } from '@favlorly/vanilla-components'
 
 function generate() {
   const path = './src/presets/all.json'

@@ -39,8 +39,8 @@ importers:
       '@faker-js/faker': ^7.6.0
       '@headlessui/vue': ^1.7.3
       '@heroicons/vue': ^2.0.12
-      '@indigit/v-calendar': 3.0.0-alpha.10
-      '@indigit/vanilla-components': workspace:*
+      '@favlorly/v-calendar': 3.0.0-alpha.10
+      '@favlorly/vanilla-components': workspace:*
       '@popperjs/core': ^2.11.6
       '@tailwindcss/aspect-ratio': ^0.4.2
       '@tailwindcss/forms': ^0.5.3
@@ -77,8 +77,8 @@ importers:
       '@faker-js/faker': 7.6.0
       '@headlessui/vue': 1.7.3_vue@3.2.41
       '@heroicons/vue': 2.0.12_vue@3.2.41
-      '@indigit/v-calendar': 3.0.0-alpha.10_vue@3.2.41
-      '@indigit/vanilla-components': link:../vanilla-components
+      '@favlorly/v-calendar': 3.0.0-alpha.10_vue@3.2.41
+      '@favlorly/vanilla-components': link:../vanilla-components
       '@popperjs/core': 2.11.6
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.0
       '@tailwindcss/forms': 0.5.3_tailwindcss@3.2.0
@@ -116,7 +116,7 @@ importers:
       '@antfu/eslint-config': ^0.27.0
       '@antfu/ni': ^0.18.2
       '@headlessui/vue': ^1.7.3
-      '@indigit/v-calendar': 3.0.0-alpha.10
+      '@favlorly/v-calendar': 3.0.0-alpha.10
       '@popperjs/core': ^2.11.6
       '@rollup/plugin-typescript': ^9.0.1
       '@types/lodash': ^4.14.186
@@ -149,7 +149,7 @@ importers:
       vue: ^3.2.41
     dependencies:
       '@headlessui/vue': 1.7.3_vue@3.2.41
-      '@indigit/v-calendar': 3.0.0-alpha.10_vue@3.2.41
+      '@favlorly/v-calendar': 3.0.0-alpha.10_vue@3.2.41
       '@popperjs/core': 2.11.6
       '@vueuse/core': 9.3.1_vue@3.2.41
       axios: 1.1.3
@@ -539,7 +539,7 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
-  /@indigit/v-calendar/3.0.0-alpha.10_vue@3.2.41:
+  /@favlorly/v-calendar/3.0.0-alpha.10_vue@3.2.41:
     resolution: {integrity: sha512-TpH1AXLBy7i2PJUUCy21drXwhxYDhvwJ9gvA7OUxRVAObDjQ5arDbO3KxtNxlD7j1DgIXfVmP1rlXDa9FCgRfw==}
     peerDependencies:
       vue: ^3.1.0

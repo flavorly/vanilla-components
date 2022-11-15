@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { PhoneInput } from '@indigit/vanilla-components'
+import { PhoneInput } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 
 const value = ref('+35191523813')

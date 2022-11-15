@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
-import type { Data, WithVariantPropsAndClassesList } from '@indigit/vanilla-components'
+import type { Data, WithVariantPropsAndClassesList } from '@favlorly/vanilla-components'
 
 export const myOwnComponentConfig = {
   fixedClasses: {

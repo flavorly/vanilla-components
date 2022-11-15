@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { DateTimeInput } from '@indigit/vanilla-components'
+import { DateTimeInput } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 
 const value = ref('2011-01-01 0:00:01')

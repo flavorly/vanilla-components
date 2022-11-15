@@ -46,7 +46,7 @@ export default defineConfig({
     optimizeDeps: {
       exclude: [],
       include: [
-        '@indigit/vanilla-components',
+        '@favlorly/vanilla-components',
       ],
       force: true,
     },
@@ -79,7 +79,7 @@ export default defineConfig({
   title: 'Vanilla Components',
   description: 'A lightweight, flexible & customizable UI library for Vue 3',
   head: [
-    ['meta', { name: 'author', content: 'INDIGIT' }],
+    ['meta', { name: 'author', content: 'Flavorly' }],
     ['meta', { name: 'keywords', content: 'components, vue, headless-ui, variantjs, datatables, tailwind' }],
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/symbol-gradient.svg' }],
     ['meta', { name: 'HandheldFriendly', content: 'True' }],
@@ -112,18 +112,18 @@ export default defineConfig({
     logo: '/symbol-gradient.svg',
 
     editLink: {
-      pattern: 'https://github.com/nikuscs/vanilla-components/tree/master/packages/documentation/src/:path',
+      pattern: 'https://github.com/flavorly/vanilla-components/tree/master/packages/documentation/src/:path',
       text: 'Suggest changes to this page',
     },
 
     socialLinks: [
-      { icon: 'twitter', link: 'https://twitter.com/nikuscs' },
-      { icon: 'github', link: 'https://github.com/nikuscs' },
+      { icon: 'twitter', link: 'https://twitter.com/flavorly' },
+      { icon: 'github', link: 'https://github.com/flavorly/vanilla-components' },
     ],
 
     footer: {
       message: 'Released under the MIT License.',
-      copyright: 'Copyright © 2022-present Pedro Martins + INDIGIT',
+      copyright: 'Copyright © 2022-present - Flavorly ®',
     },
 
     nav: [
@@ -133,7 +133,7 @@ export default defineConfig({
       },
       { text: 'Guide', link: '/guide/quick-start', activeMatch: '/guide/quick-start' },
       { text: 'Components', link: '/guide/components-list', activeMatch: '/guide/components-list' },
-      { text: 'v0.6.27', link: 'https://github.com/nikuscs/vanilla-components' },
+      { text: 'v0.6.27', link: 'https://github.com/flavorly/vanilla-components' },
     ],
 
     sidebar: {

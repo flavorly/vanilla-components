@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Select } from '@indigit/vanilla-components'
+import { Select } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref(undefined)
 const value2 = ref(undefined)
