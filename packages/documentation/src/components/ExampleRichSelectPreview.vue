@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormLabel, RichSelect } from '@indigit/vanilla-components'
+import { FormLabel, RichSelect } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref('Option 1')
 const value2 = ref(['Option 1', 'Option 2'])

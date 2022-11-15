@@ -34,13 +34,13 @@ Get started by installing the peer dependencies than, move on installing the pac
 
 ```bash
 pnpm add @headlessui/vue@^1.5.0 @popperjs/core@^2.11.2 flatpickr@^4.6.9 libphonenumber-js@^1.9.49 
-pnpm add @indigit/vanilla-components
+pnpm add @favlorly/vanilla-components
 ```
 
 Import the components as needed with the following:
 
 ```vue
-import { Button } from '@indigit/vanilla-components'
+import { Button } from '@favlorly/vanilla-components'
 ```
 
 ## Local & Documentation
@@ -88,5 +88,5 @@ See [Contributing Guide](./CONTRIBUTING.md).
 
 ## License
 
-[MIT](./LICENSE) License © 2021-Present [Pedro Martins](https://github.com/nikuscs)
+[MIT](./LICENSE) License © 2021-Present [Pedro Martins](https://github.com/flavorly)
 

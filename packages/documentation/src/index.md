@@ -20,7 +20,7 @@ hero:
         link: /guide/introduction
       - theme: alt
         text: View on GitHub
-        link: https://github.com/nikuscs/vanilla-components
+        link: https://github.com/flavorly/vanilla-components
 
 features:
   - icon: 🧪

@@ -13,7 +13,7 @@ Components contain three major keys that can be set: `fixedClasses`, `classes`, 
 - **`variants`** - This is an object with your own variant, each variant contains its own `classes` & `props`
 - **`props`** - This will provide/override the default props for this component, so they are injected as you need.
 
-With this little system, you can imagine how flexible this can be, the limit is your imagination! We will get deeper into this Below. You can see the demo of the **Input** config [here](https://github.com/nikuscs/vanilla-components/blob/0c8308bcfb2be5c59d6b3dbb9488157a6a1f95d4/packages/vanilla-components/src/components/input/config.ts#L35)
+With this little system, you can imagine how flexible this can be, the limit is your imagination! We will get deeper into this Below. You can see the demo of the **Input** config [here](https://github.com/flavorly/vanilla-components/blob/0c8308bcfb2be5c59d6b3dbb9488157a6a1f95d4/packages/vanilla-components/src/components/input/config.ts#L35)
 
 :::info Shared Props on Vanilla Components
 To check the full list of the available properties for all components please check the [props section](./props)
@@ -21,13 +21,13 @@ To check the full list of the available properties for all components please che
 
 ## Components
 
-The library comes out of the box configured to be used with [Tailwind](https://tailwindcss.com), you are free to change this configuration and provide your own when installing the plugin. The configuration keys can be found [here](https://github.com/nikuscs/vanilla-components/blob/0c8308bcfb2be5c59d6b3dbb9488157a6a1f95d4/packages/vanilla-components/src/configuration.ts#L9), you can even include configuration for your components and ***leverage the configuration system*** for your components
+The library comes out of the box configured to be used with [Tailwind](https://tailwindcss.com), you are free to change this configuration and provide your own when installing the plugin. The configuration keys can be found [here](https://github.com/flavorly/vanilla-components/blob/0c8308bcfb2be5c59d6b3dbb9488157a6a1f95d4/packages/vanilla-components/src/configuration.ts#L9), you can even include configuration for your components and ***leverage the configuration system*** for your components
 
 Here is a small demo overriding the `Input` component:
 
 ```js
 import { createApp } from 'vue'
-import { Plugin } from '@indigit/vanilla-components' // [!vp focus:1]
+import { Plugin } from '@favlorly/vanilla-components' // [!vp focus:1]
 const app = createApp()
 
 app.use(VanillaComponents, {
@@ -50,8 +50,8 @@ Please also note that when you override, you will lose the default styling for t
 
 ## Default Configuration
 
-You can check the default and full configuration here : [full Configuration](https://github.com/nikuscs/vanilla-components/blob/master/packages/documentation/src/presets/all.json)
-Where it also includes the configuration file separated for each component [here](https://github.com/nikuscs/vanilla-components/blob/master/packages/documentation/src/presets)
+You can check the default and full configuration here : [full Configuration](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets/all.json)
+Where it also includes the configuration file separated for each component [here](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets)
 
 Here is a demo of the Input Component Configuration file:
 
@@ -88,7 +88,7 @@ As mentioned before you may also override the props default values from the comp
 
 ```ts
 import { createApp } from 'vue'
-import { Plugin } from '@indigit/vanilla-components'
+import { Plugin } from '@favlorly/vanilla-components'
 const app = createApp()
 
 app.use(VanillaComponents, {
@@ -121,7 +121,7 @@ module.exports = {
     // the rest of  your configuration.. //[!vp focus:15]
     content: [
         "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
-        "./node_modules/@indigit/vanilla-components/dist/components/**/*.{ts,vue}",
+        "./node_modules/@favlorly/vanilla-components/dist/components/**/*.{ts,vue}",
     ],
     theme: {
         colors: {

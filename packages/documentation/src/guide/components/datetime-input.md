@@ -22,11 +22,11 @@ and will soon be refactored properly to composition API. Please follow the V-Cal
 
 ```bash
 # Using pnpm
-pnpm add @indigit/v-calendar@next
+pnpm add @favlorly/v-calendar@next
 # Using Yarn
-yarn add @indigit/v-calendar@next
+yarn add @favlorly/v-calendar@next
 # Using npm
-npm add @indigit/v-calendar@next
+npm add @favlorly/v-calendar@next
 ```
 
 

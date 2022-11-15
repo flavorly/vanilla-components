@@ -1,6 +1,6 @@
 import type { Plugin } from 'vite'
 
-const packageName = /@indigit\/vanilla-components/
+const packageName = /@favlorly\/vanilla-components/
 
 export default (): Plugin => ({
   name: 'vite:local-package-replacement',

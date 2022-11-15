@@ -10,11 +10,11 @@ Please install it with your favorite package manager.
 
 ```bash
 # Using pnpm
-pnpm add @indigit/vanilla-components
+pnpm add @favlorly/vanilla-components
 # Using Yarn
-yarn add @indigit/vanilla-components
+yarn add @favlorly/vanilla-components
 # Using npm
-npm install @indigit/vanilla-components
+npm install @favlorly/vanilla-components
 ```
 
 Once installed on your project, install also the `peer dependencies`, those are packages that are required for Vanilla Components to work, but they are not bundled with Vanilla Components:
@@ -36,9 +36,9 @@ This setup is only required to register the global & default configuration, no c
 
 ```js{2,6}
 import { createApp } from 'vue'
-import { Plugin } from '@indigit/vanilla-components'
+import { Plugin } from '@favlorly/vanilla-components'
 // Or If you prefer
-import { VanillaComponents } from '@indigit/vanilla-components'
+import { VanillaComponents } from '@favlorly/vanilla-components'
 const app = createApp()
 app.use(VanillaComponents, {})
 ```
@@ -51,11 +51,11 @@ The plugin accepts a `second argument` that could be used to provide your config
 
 ## Basic Usage
 
-After installation, you may import the components as you need them, if you are not happy with the namings go further and create an alias. You can see the full list of named exports [here](https://github.com/nikuscs/vanilla-components/blob/master/packages/vanilla-components/src/index.ts), that should be always up-to-date.
+After installation, you may import the components as you need them, if you are not happy with the namings go further and create an alias. You can see the full list of named exports [here](https://github.com/flavorly/vanilla-components/blob/master/packages/vanilla-components/src/index.ts), that should be always up-to-date.
 
 ```vue
 <script setup lang="ts">
-import { Button, Avatar as MyOwnAvatarComponent } from '@indigit/vanilla-components' // [!vp focus:1]
+import { Button, Avatar as MyOwnAvatarComponent } from '@favlorly/vanilla-components' // [!vp focus:1]
 </script>
 
 <template>
@@ -70,7 +70,7 @@ Typescript types are also exported from the library, in case you need them to ty
 
 ```vue
 <script setup lang="ts">
-import type { ButtonProps } from '@indigit/vanilla-components'  // [!vp focus:1]
+import type { ButtonProps } from '@favlorly/vanilla-components'  // [!vp focus:1]
 </script>
 ```
 
@@ -85,7 +85,7 @@ module.exports = {
     // the rest of  your configuration.. // [!vp focus:15]
     content: [
         "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
-        "./node_modules/@indigit/vanilla-components/dist/components/**/*.{ts,vue}",
+        "./node_modules/@favlorly/vanilla-components/dist/components/**/*.{ts,vue}",
     ],
     theme: { 
         colors: {

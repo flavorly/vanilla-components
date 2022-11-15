@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Avatar } from '@indigit/vanilla-components'
+import { Avatar } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref(null)
 const value2 = ref(null)

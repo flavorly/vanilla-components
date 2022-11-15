@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Skeleton, Card } from '@indigit/vanilla-components'
+import { Skeleton, Card } from '@favlorly/vanilla-components'
 </script>
 
 <template>

@@ -15,7 +15,7 @@ import './styles/why-frame/whyframe.pcss'
 import 'vue-json-pretty/lib/styles.css'
 
 // Plugins
-import { Plugin } from '@indigit/vanilla-components'
+import { Plugin } from '@favlorly/vanilla-components'
 import { makeServer } from '../../utils/server'
 
 // Vue Templates

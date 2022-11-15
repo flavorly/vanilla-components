@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormSection, Input as VanillaInput } from '@indigit/vanilla-components'
+import { FormSection, Input as VanillaInput } from '@favlorly/vanilla-components'
 </script>
 
 <template>

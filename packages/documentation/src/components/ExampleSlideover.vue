@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button, Slideover } from '@indigit/vanilla-components'
+import { Button, Slideover } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 const open = ref(false)
 </script>

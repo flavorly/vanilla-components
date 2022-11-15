@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Toggle } from '@indigit/vanilla-components'
+import { Toggle } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 
 const value = ref('accepted')

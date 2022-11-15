@@ -1,10 +1,10 @@
 {
-  "name": "@indigit/vanilla-components",
+  "name": "@favlorly/vanilla-components",
   "version": "0.7.3",
   "type": "module",
   "sideEffects": false,
   "private": false,
-  "author": "Jon <support@indigit.pt>",
+  "author": "Jon <support@favlorly.pt>",
   "license": "ISC",
   "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
   "keywords": [
@@ -17,7 +17,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nikuscs/vanilla-components"
+    "url": "git+https://github.com/flavorly/vanilla-components"
   },
   "publishConfig": {
     "access": "public",
@@ -56,14 +56,14 @@
     "fuse.js": "^6.6.2",
     "libphonenumber-js": "^1.10.14",
     "lodash": "^4.17.21",
-    "@indigit/v-calendar": "3.0.0-alpha.10",
+    "@favlorly/v-calendar": "3.0.0-alpha.10",
     "vue": "^3.2.41"
   },
   "peerDependencies": {
     "@headlessui/vue": "^1.7.0",
     "@popperjs/core": "^2.11.6",
     "axios": "^1.1.2",
-    "@indigit/v-calendar": "3.0.0-alpha.10",
+    "@favlorly/v-calendar": "3.0.0-alpha.10",
     "vue": "^3.2.39"
   },
   "devDependencies": {

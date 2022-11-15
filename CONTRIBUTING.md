@@ -26,11 +26,11 @@ You may wish to test your locally-modified copy of Vanilla Components against an
 ```json
 {
   "dependencies": {
-    "@indigit/vanilla-components": "*"
+    "@favlorly/vanilla-components": "*"
   },
   "pnpm": {
     "overrides": {
-      "@indigit/vanilla-components": "link:../path/to/vanilla-components/packages/vanilla-components"
+      "@favlorly/vanilla-components": "link:../path/to/vanilla-components/packages/vanilla-components"
     }
   }
 }

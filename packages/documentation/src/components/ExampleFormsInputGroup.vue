@@ -6,7 +6,7 @@ import {
   InputGroup,
   Input as VanillaInput,
   Select as VanillaSelect,
-} from '@indigit/vanilla-components'
+} from '@favlorly/vanilla-components'
 </script>
 
 <template>

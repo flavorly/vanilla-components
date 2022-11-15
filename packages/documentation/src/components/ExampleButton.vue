@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Button } from '@indigit/vanilla-components'
+import { Button } from '@favlorly/vanilla-components'
 </script>
 
 <template>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { CheckboxGroup } from '@indigit/vanilla-components'
+import { CheckboxGroup } from '@favlorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref([])
 </script>
