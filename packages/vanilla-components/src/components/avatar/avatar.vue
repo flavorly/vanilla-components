@@ -136,7 +136,7 @@
             >
             <span
               v-else
-              :class="configuration.classesList.avatarPlaceholder"
+              :class="configuration.classesList.avatarPlaceholderText"
             >
               <span :class="configuration.classesList.avatarPlaceholder">{{ avatarInitials }}</span>
             </span>
