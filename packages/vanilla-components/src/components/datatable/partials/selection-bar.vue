@@ -38,6 +38,10 @@ const deselectMatching = () => {
 
 const translations = useInjectDatatableTranslations()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+defineOptions({
+  name: 'VanillaDatatableSkeletonBar',
+})
 </script>
 
 <template>

@@ -132,6 +132,11 @@ watch([phoneCountryCode, phoneNumber, localValue], ([newPhoneCountryCode, newPho
   emit('update:phoneNumberNational', phoneNumber.value)
   emit('update:phoneNumberInternational', localValue.value)
 }, { immediate: true })
+
+defineOptions({
+  name: 'VanillaPhoneInput',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

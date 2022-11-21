@@ -935,6 +935,11 @@ provide('configuration_vanilla_datatable', configuration)
 
 // ----- Provide data to sub components -----  //
 provide('datatable_translations', datatable.translations)
+
+defineOptions({
+  name: 'VanillaDatatable',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

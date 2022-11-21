@@ -27,6 +27,11 @@
   })
 
   const classesList = useInjectsClassesList()!
+
+  defineOptions({
+    name: 'VanillaDropdownOption',
+    inheritAttrs: true,
+  })
 </script>
 
 <template>

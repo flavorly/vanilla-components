@@ -117,6 +117,10 @@ const open = () => {
 }
 
 provide('configuration_vanilla', configuration)
+
+defineOptions({
+  name: 'VanillaDialog',
+})
 </script>
 
 <template>

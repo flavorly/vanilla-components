@@ -157,7 +157,7 @@ export declare interface DatatableFilter {
   layout?: string
   component: string
   placeholder?: string
-  value?: string | undefined | null | number
+  value?: string | undefined | null | number | boolean
   defaultValue?: string | undefined | null | number
   options?: undefined | InputOptions | NormalizedOption[] | NormalizedOptions
   rules?: undefined | string[]

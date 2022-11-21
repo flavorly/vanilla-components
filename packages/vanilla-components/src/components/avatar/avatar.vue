@@ -86,6 +86,11 @@
       photoPreview.value = null
     }
   })
+
+  defineOptions({
+    name: 'VanillaAvatar',
+    inheritAttrs: false,
+  })
 </script>
 
 <template>

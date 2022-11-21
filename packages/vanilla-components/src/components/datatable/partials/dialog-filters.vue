@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { ref, watch } from 'vue'
+import { defineAsyncComponent, ref, watch } from 'vue'
 import find from 'lodash/find'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
@@ -9,13 +9,6 @@ import { useInjectsClassesList } from '@/core/use'
 import { isEqual } from '@/core/helpers'
 import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
 import Dialog from '@/components/dialog/dialog.vue'
-import Select from '@/components/select/select.vue'
-import RichSelect from '@/components/rich-select/rich-select.vue'
-import Checkbox from '@/components/checkbox/checkbox.vue'
-import Toggle from '@/components/toggle/toggle.vue'
-import Input from '@/components/input/input.vue'
-import Textarea from '@/components/textarea/textarea.vue'
-import DateTimeInput from '@/components/datetime-input/datetime-input.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
 import FormSection from '@/components/forms/form-section.vue'
 
@@ -35,6 +28,15 @@ const emit = defineEmits([
   'filtersSaved',
   'filtersReset',
 ])
+
+// Components Async
+const Select = defineAsyncComponent(() => import('@/components/select/select.vue'))
+const RichSelect = defineAsyncComponent(() => import('@/components/rich-select/rich-select.vue'))
+const Checkbox = defineAsyncComponent(() => import('@/components/checkbox/checkbox.vue'))
+const Toggle = defineAsyncComponent(() => import('@/components/toggle/toggle.vue'))
+const Input = defineAsyncComponent(() => import('@/components/input/input.vue'))
+const Textarea = defineAsyncComponent(() => import('@/components/textarea/textarea.vue'))
+const DateTimeInput = defineAsyncComponent(() => import('@/components/datetime-input/datetime-input.vue'))
 
 const isOpen = ref(false) as Ref<boolean>
 const localFilters = ref({}) as Ref<Types.DatatableSavedFilter>
@@ -94,6 +96,10 @@ watch(isOpen, (val: boolean) => {
 // Provide Translations
 const translations = useInjectDatatableTranslations()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+defineOptions({
+  name: 'VanillaDatatableFiltersDialog',
+})
 </script>
 
 <template>
@@ -118,7 +124,6 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
           <Select
             v-if="filter.component === 'VanillaSelect'"
             v-model="localFilters[filter.name]"
-            :model-value="getFilterValue(filter.name) || null"
             :options="filter.options"
             v-bind="filter.props"
             :show-empty="true"

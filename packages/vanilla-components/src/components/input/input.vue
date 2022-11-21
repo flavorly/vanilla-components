@@ -37,12 +37,11 @@ const togglePassword = () => {
   showingPassword.value = !showingPassword.value
   localType.value = showingPassword.value ? 'text' : 'password'
 }
-</script>
 
-<script lang="ts">
-export default {
+defineOptions({
+  name: 'VanillaInput',
   inheritAttrs: false,
-}
+})
 </script>
 
 <template>

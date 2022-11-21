@@ -24,6 +24,11 @@ const props = defineProps({
 const localRef = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<TextareaProps>(textareaConfig, 'Textarea', localValue)
+
+defineOptions({
+  name: 'VanillaTextarea',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

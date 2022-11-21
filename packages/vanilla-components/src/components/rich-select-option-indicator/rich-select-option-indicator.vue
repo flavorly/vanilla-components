@@ -48,6 +48,11 @@ const indicatorClass = computed(() => {
     blue: configuration.classesList?.indicatorBlue,
   }[props.status]
 })
+
+defineOptions({
+  name: 'VanillaRichSelectOptionWithIndicator',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

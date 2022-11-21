@@ -9,6 +9,11 @@ const props = defineProps({
     default: true,
   },
 })
+
+defineOptions({
+  name: 'VanillaTransionable',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

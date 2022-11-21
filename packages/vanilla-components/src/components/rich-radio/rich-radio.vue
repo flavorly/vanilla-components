@@ -60,6 +60,11 @@ const normalizedOptions = normalizeOptions(
   props.textAttribute,
   props.valueAttribute,
 )
+
+defineOptions({
+  name: 'VanillaRichRadio',
+  inheritAttrs: false,
+})
 </script>
 
 <template>
@@ -97,6 +102,7 @@ const normalizedOptions = normalizeOptions(
               :compact="compact"
               :radio="radio"
               :variant="variant"
+              v-bind="$attrs"
               :disabled="option.disabled || false"
             >
               <template #radioIcon>

@@ -38,6 +38,10 @@ const resetFilters = () => {
 }
 
 const actionWithoutRecords = () => emit('actionWithoutRecords')
+
+defineOptions({
+  name: 'VanillaDatatableEmptyState',
+})
 </script>
 
 <template>

@@ -102,6 +102,11 @@ const isChecked = computed(() => {
   return localValue.value === props.checkedValue
 })
 const { configuration, errors, hasErrors } = useConfiguration<ToggleProps>(toggleConfig, 'Toggle', localValue)
+
+defineOptions({
+  name: 'VanillaToggle',
+  inheritAttrs: false,
+})
 </script>
 
 <template>
