@@ -12,7 +12,7 @@ const props = defineProps({
     required: true,
   },
   value: {
-    type: [Number, String] as PropType<number | string>,
+    type: [Number, String] as PropType<number | string | any>,
     required: true,
   },
   withLabel: {

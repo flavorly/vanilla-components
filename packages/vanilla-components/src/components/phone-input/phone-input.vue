@@ -21,7 +21,7 @@ const props = defineProps({
     default: undefined,
   },
   countryCode: {
-    type: [String] as PropType<CountryCode | string>,
+    type: [String] as PropType<CountryCode>,
     default: '',
   },
   phonePlaceholder: {

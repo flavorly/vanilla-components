@@ -6,7 +6,7 @@ import type * as Types from '@/components/datatable/config'
 
 const props = defineProps({
   numberOfRows: {
-    type: [Number] as PropType<number>,
+    type: [Number, String] as PropType<number>,
     required: true,
   },
   columns: {

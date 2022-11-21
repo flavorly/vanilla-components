@@ -41,7 +41,7 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
     required: false,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
-    default(props): string {
+    default(props): string | boolean {
       return props.name || false
     },
   },

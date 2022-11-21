@@ -83,8 +83,8 @@ type ComponentProps<
       required: boolean
     }
     autocomplete: {
-      type: PropType<string | boolean>
-      default: string | boolean
+      type: PropType<string>
+      default: string
       required: boolean
     }
     hasItemBelow: {

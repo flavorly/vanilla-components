@@ -84,7 +84,7 @@ defineOptions({
       >
         <RadioGroupOption
           v-for="(option, index) in normalizedOptions"
-          :key="option.value"
+          :key="option.value.toString()"
           v-slot="{ active, checked }"
           as="div"
           :value="option.value"

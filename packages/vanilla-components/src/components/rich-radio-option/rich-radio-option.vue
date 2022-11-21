@@ -41,7 +41,7 @@ const props = defineProps({
     default: undefined,
   },
   disabled: {
-    type: Boolean as PropType<boolean>,
+    type: [Boolean, String] as PropType<boolean| string>,
     default: false,
   },
 })

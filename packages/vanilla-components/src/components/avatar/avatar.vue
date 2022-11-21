@@ -138,7 +138,7 @@
               v-else
               :class="configuration.classesList.avatarPlaceholder"
             >
-              <span :class="configuration.classesList.avatarPlaceholderText">{{ avatarInitials }}</span>
+              <span :class="configuration.classesList.avatarPlaceholder">{{ avatarInitials }}</span>
             </span>
           </div>
         </slot>
