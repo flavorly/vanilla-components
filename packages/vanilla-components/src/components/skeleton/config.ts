@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'vue'
-import type { Data, WithVariantProps } from '@/core/types'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
 export const skeletonConfig = {
   fixedClasses: {
@@ -34,8 +34,8 @@ export const skeletonClassesKeys = Object.keys(skeletonConfig.classes)
 
 export declare type SkeletonBarClassesValidKeys = keyof typeof skeletonConfig.classes
 
-export declare type SkeletonBarProps = WithVariantProps<{
+export declare type SkeletonBarProps = WithVariantPropsAndClassesList<{
   count?: number
   as?: string
-} & InputHTMLAttributes & Data>
+} & InputHTMLAttributes & Data, SkeletonBarClassesValidKeys>
 
