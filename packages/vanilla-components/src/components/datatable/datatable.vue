@@ -1073,7 +1073,7 @@ defineOptions({
                 v-bind="{
                   resetFiltersAndSearch,
                   filters: filtersComputed,
-                  filtersActiveCount,
+                  filtersActiveCount
                 }"
               />
             </template>

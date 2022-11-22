@@ -110,5 +110,6 @@ export declare type InputProps = WithVariantPropsAndClassesList<{
   modelValue?: InputValue
   type?: string
   placeholder?: string
+  copiable?: boolean
 } & InputHTMLAttributes & Data, InputClassesValidKeys>
 

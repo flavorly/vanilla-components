@@ -12,7 +12,7 @@ export const datatableConfig = {
 
     genericForbidden: 'cursor-not-allowed',
     genericPointer: 'cursor-pointer',
-    genericFormsContentContainer: 'flex items-center justify-center space-x-1 text-xs select-none cursor-pointer',
+    genericFormsContentContainer: 'flex items-center justify-center space-x-1 text-xs select-none cursor-pointer dark:text-white',
     genericFormsContentLink: 'underline flex items-center justify-center space-x-1',
     genericFormsContentIcons: 'h-4 w-4',
 
