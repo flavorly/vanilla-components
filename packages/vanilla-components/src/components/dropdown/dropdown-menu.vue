@@ -215,7 +215,7 @@
 
   defineOptions({
     name: 'VanillaDropdownMenu',
-    inheritAttrs: false,
+    inheritAttrs: true,
   })
 </script>
 

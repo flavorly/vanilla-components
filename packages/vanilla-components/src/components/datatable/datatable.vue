@@ -50,98 +50,10 @@ const props = defineProps({
       return {}
     },
   },
-  uniqueName: {
-    type: [String] as PropType<string>,
-    required: true,
-  },
-  primaryKey: {
-    type: [String] as PropType<string>,
-    required: false,
-    default: 'id',
-  },
-  columns: {
-    type: [Array] as PropType<Types.DatatableColumns>,
-    required: false,
-    default() {
-      return []
-    },
-  },
-  options: {
-    type: [Object] as PropType<Types.DatatableOptions>,
-    required: false,
-    default() {
-      return []
-    },
-  },
-  actions: {
-    type: [Array] as PropType<Types.DatatableActionsType>,
-    default() {
-      return []
-    },
-  },
-  pooling: {
-    type: [Object] as PropType<Types.DatatablePooling>,
-    default: undefined,
-  },
-  filters: {
-    type: [Array] as PropType<Types.DatatableFilters>,
-    default() {
-      return []
-    },
-  },
-  filtersKey: {
-    type: [String] as PropType<string | number>,
-    required: false,
-    default(rawProps: { uniqueName: string | number }) {
-      return rawProps.uniqueName
-    },
-  },
-  filtersBaseUrl: {
-    type: [String] as PropType<string | undefined>,
-    required: false,
-    default: undefined,
-  },
-  perPageOptions: {
-    type: [Array] as PropType<Types.DatatablePageOptions>,
-    default() {
-      return []
-    },
-  },
-  translations: {
-    type: [Object] as PropType<Types.DatatableTranslations>,
-    default: undefined,
-    required: false,
-  },
   fetchData: {
     type: [Function, undefined] as PropType<Types.DatatableFetchDataFunction | undefined>,
     required: false,
     default: undefined,
-  },
-  fetchEndpoint: {
-    type: [String] as PropType<string | undefined>,
-    required: false,
-    default: undefined,
-  },
-  fetchMethod: {
-    type: [String] as PropType<string>,
-    required: false,
-    default: 'POST',
-    validator(method: string) {
-      return ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method)
-    },
-  },
-  actionsEndpoint: {
-    type: [String, undefined] as PropType<string | undefined>,
-    required: false,
-    default: undefined,
-  },
-  actionsMethod: {
-    type: [String] as PropType<string>,
-    required: false,
-    default: 'POST',
-    validator(method: string) {
-      return ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method)
-    },
   },
   onActionExecutedCallback: {
     type: [Function, undefined] as PropType<Types.DatatableActionExecutedFunction | undefined>,
@@ -955,7 +867,7 @@ defineOptions({
         <slot
           name="headerActions"
           v-bind="{
-            actions,
+            actions: datatable.actions,
             hasActions,
             hasAnyItemsSelected,
             onActionSelected,
@@ -1451,14 +1363,14 @@ defineOptions({
       v-bind="{
         isShowingFilters,
         userSettings,
-        filters,
+        filters: datatable.filters,
       }"
     >
       <!-- Action Confirmation Modal -->
       <DialogFilters
         v-model="isShowingFilters"
         :user-settings="userSettings"
-        :filters="filters"
+        :filters="datatable.filters"
         @filters-reset="onFiltersReset"
         @filters-saved="onFiltersSaved"
       />

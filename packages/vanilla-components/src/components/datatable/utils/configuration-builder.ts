@@ -85,43 +85,39 @@ export default function configurationBuilder<
   ] as Types.DatatablePageOptions
 
   return {
-    name: props?.uniqueName || props.config?.name,
-    primaryKey: props?.primaryKey || props.config?.primaryKey,
-    filtersKey: props?.primaryKey || props.config?.primaryKey || props?.primaryKey || props.config?.primaryKey,
-    columns: Object.assign(props?.columns as Types.DatatableColumns, props.config?.columns) as Types.DatatableColumns,
-    actions: Object.assign(props?.actions as Types.DatatableAction[], props.config?.actions) as Types.DatatableAction[],
-    filters: Object.assign(props?.filters as Types.DatatableFilters, props.config?.filters) as Types.DatatableFilters,
+    name: props.config?.name,
+    primaryKey: props.config?.primaryKey || 'id',
+    filtersKey: props.config?.primaryKey || props.config?.primaryKey,
+    columns: Object.assign(props.config?.columns) as Types.DatatableColumns,
+    actions: Object.assign(props.config?.actions) as Types.DatatableAction[],
+    filters: Object.assign(props.config?.filters) as Types.DatatableFilters,
 
     options: Object.assign(
       defaultOptions,
-      props?.options,
       props.config?.options,
     ),
 
     translations: Object.assign(
       defaultTranslations,
-      props?.translations,
       props.config?.translations,
     ),
 
     perPageOptions: Object.assign(
       defaultPerPageOptions,
-      props?.perPageOptions,
       props.config?.perPageOptions,
     ),
 
     pooling: Object.assign(
       defaultPooling,
-      props?.pooling,
       props.config?.pooling,
     ),
 
     fetchData: props?.fetchData || props.config?.fetchData || useFetchData,
-    fetchEndpoint: props?.fetchEndpoint || props?.config?.fetchEndpoint || undefined,
-    fetchMethod: props?.fetchMethod || props?.config?.fetchMethod || 'POST',
+    fetchEndpoint: props?.config?.fetchEndpoint || undefined,
+    fetchMethod: props?.config?.fetchMethod || 'POST',
 
-    actionsEndpoint: props?.actionsEndpoint || props?.config?.fetchEndpoint || undefined,
-    actionsMethod: props?.actionsMethod || props.config?.actionsMethod?.method || 'POST',
+    actionsEndpoint: props?.config?.fetchEndpoint || undefined,
+    actionsMethod: props.config?.actionsMethod?.method || 'POST',
 
     onActionExecutedCallback: props?.onActionExecutedCallback || props.config?.onActionExecutedCallback || undefined,
     onExceptionCallback: props?.onExceptionCallback || props.config?.onExceptionCallback || undefined,
