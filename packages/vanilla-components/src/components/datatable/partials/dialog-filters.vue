@@ -12,6 +12,8 @@ import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
 import Dialog from '@/components/dialog/dialog.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
 import FormSection from '@/components/forms/form-section.vue'
+import ClipboardIcon from '@/components/icons/hero/outline/ClipboardIcon.vue'
+import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
 
 const props = defineProps({
   filters: {
@@ -210,6 +212,14 @@ defineOptions({
             <span v-text="translations.filtersReset" />
           </span>
           <span v-text="translations.filtersResetOr" />
+          <ClipboardIcon
+            v-if="!copied"
+            :class="[classesList.genericFormsContentIcons]"
+          />
+          <CheckIcon
+            v-if="copied"
+            :class="[classesList.genericFormsContentIcons]"
+          />
           <span
             v-if="!copied"
             :class="[classesList.genericFormsContentLink]"
