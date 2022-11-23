@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import { useInjectsClassesList } from '@/core/use'
 const classesList = useInjectsClassesList()!
+
+defineOptions({
+  name: 'VanillaCardEmptyPlaceholder',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

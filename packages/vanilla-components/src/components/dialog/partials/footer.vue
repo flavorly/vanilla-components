@@ -31,6 +31,10 @@ onMounted(() => {
     footerClasses.value = classesList.value.footerWithThreeButtons
   }
 })
+
+defineOptions({
+  name: 'VanillaDialogFooter',
+})
 </script>
 
 <template>

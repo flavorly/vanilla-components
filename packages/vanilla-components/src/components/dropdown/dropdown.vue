@@ -487,12 +487,11 @@ defineExpose({
   focus,
   shown,
 })
-</script>
 
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-}
+defineOptions({
+  name: 'VanillaDropdown',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

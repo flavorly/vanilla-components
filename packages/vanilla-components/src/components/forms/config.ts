@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
 import { commonClasses } from '@/core/config'
 import { mergeClasses } from '@/core/helpers'
-import type { Data, WithVariantProps } from '@/core/types'
+import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
 
 export const formsConfig = {
   fixedClasses: {
@@ -30,21 +30,21 @@ export const formClassesKeys = Object.keys(formsConfig.classes)
 
 export declare type FormClassesValidKeys = keyof typeof formsConfig.classes
 
-export declare type FormErrorsProps = WithVariantProps<{
+export declare type FormErrorsProps = WithVariantPropsAndClassesList<{
   errors?: string | undefined
   safe?: boolean
-} & InputHTMLAttributes & Data>
+} & InputHTMLAttributes & Data, FormClassesValidKeys>
 
-export declare type FormFeedbackProps = WithVariantProps<{
+export declare type FormFeedbackProps = WithVariantPropsAndClassesList<{
   text?: string | undefined
   safe?: boolean
-} & InputHTMLAttributes & Data>
+} & InputHTMLAttributes & Data, FormClassesValidKeys>
 
-export declare type FormLabelProps = WithVariantProps<{
+export declare type FormLabelProps = WithVariantPropsAndClassesList<{
   errors?: string | undefined
   safe?: boolean
-} & InputHTMLAttributes & Data>
+} & InputHTMLAttributes & Data, FormClassesValidKeys>
 
-export declare type FormSectionProps = WithVariantProps<{
-} & InputHTMLAttributes & Data>
+export declare type FormSectionProps = WithVariantPropsAndClassesList<{
+} & InputHTMLAttributes & Data, FormClassesValidKeys>
 

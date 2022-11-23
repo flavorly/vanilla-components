@@ -60,7 +60,7 @@ const props = defineProps({
     type: Object as PropType<NormalizedOption>,
     default: (props: SelectProps) => {
       return {
-        value: undefined,
+        value: null,
         text: props.placeholder,
       }
     },
@@ -78,6 +78,10 @@ const { normalizedOptions } = useMultipleOptions(
   computed(() => props.normalizeOptions!),
 )
 provide('configuration_vanilla', configuration)
+
+defineOptions({
+  name: 'VanillaSelect',
+})
 </script>
 
 <template>
@@ -89,7 +93,6 @@ provide('configuration_vanilla', configuration)
         v-model="localValue"
         :name="name"
         :autocomplete="props.autocomplete"
-        v-bind="$attrs"
         :class="[
           configuration.classesList?.select,
           configuration.multiple ? configuration.classesList?.selectIfMultiple : '',
@@ -99,6 +102,7 @@ provide('configuration_vanilla', configuration)
         <SelectOption
           v-if="empty && showEmpty"
           :option="empty"
+          :selected="true"
         />
         <slot
           name="option"

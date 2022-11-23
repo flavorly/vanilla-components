@@ -68,6 +68,10 @@ const cancelText = computed(() => {
 watch(isOpen, (val: boolean) => {
   emit('update:modelValue', val)
 })
+
+defineOptions({
+  name: 'VanillaDatatableConfirmActionDialog',
+})
 </script>
 
 <template>

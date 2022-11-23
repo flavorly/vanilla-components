@@ -34,6 +34,10 @@ const selectAction = (action: object) => {
 // Provide Translations
 const translations = useInjectDatatableTranslations()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+defineOptions({
+  name: 'VanillaDatatableActions',
+})
 </script>
 
 <template>

@@ -65,6 +65,11 @@ const nameLabel = computed(() => {
 
   return props.country.label
 })
+
+defineOptions({
+  name: 'VanillaCountryInputOption',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

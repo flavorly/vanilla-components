@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { ref } from 'vue'
+import { useClipboard } from '@vueuse/core'
 import type { InputClassesValidKeys, InputProps, InputValue } from './config'
 import { inputConfig } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
@@ -10,6 +11,8 @@ import FormFeedback from '@/components/forms/form-feedback.vue'
 import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
 import EyeIcon from '@/components/icons/hero/solid/EyeIcon.vue'
 import EyeSlashIcon from '@/components/icons/hero/solid/EyeSlashIcon.vue'
+import ClipboardIcon from '@/components/icons/hero/outline/ClipboardIcon.vue'
+import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
 
 const props = defineProps({
   ...useVariantProps<InputProps, InputClassesValidKeys>(),
@@ -25,6 +28,10 @@ const props = defineProps({
     type: [String] as PropType<string>,
     default: 'text',
   },
+  copiable: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
 })
 
 const localRef = ref(null)
@@ -32,17 +39,20 @@ const localValue = useVModel(props, 'modelValue')
 const localType = ref(props.type)
 const { configuration, errors, hasErrors } = useConfiguration<InputProps>(inputConfig, 'Input', localValue)
 
+// Show hide password if type password
 const showingPassword = ref(false)
 const togglePassword = () => {
   showingPassword.value = !showingPassword.value
   localType.value = showingPassword.value ? 'text' : 'password'
 }
-</script>
 
-<script lang="ts">
-export default {
+// Clipboard handler
+const { text, copy, copied, isSupported } = useClipboard()
+
+defineOptions({
+  name: 'VanillaInput',
   inheritAttrs: false,
-}
+})
 </script>
 
 <template>
@@ -86,7 +96,7 @@ export default {
       >
       <!-- After Input -->
       <div
-        v-if="hasSlot($slots.after) || hasErrors || type === 'password'"
+        v-if="hasSlot($slots.after) || hasErrors || (type === 'password' || props.copiable)"
         :class="configuration.classesList.addonAfter"
       >
         <slot
@@ -94,7 +104,7 @@ export default {
           v-bind="{ hasErrors, type, showingPassword, className: configuration.classesList.addonClasses }"
         >
           <ExclamationCircleIcon
-            v-if="hasErrors && type !== 'password'"
+            v-if="hasErrors && (type !== 'password' && !props.copiable)"
             :class="configuration.classesList.addonClasses"
           />
           <EyeIcon
@@ -106,6 +116,15 @@ export default {
             v-if="showingPassword"
             :class="configuration.classesList.addonClasses"
             @click="togglePassword"
+          />
+          <ClipboardIcon
+            v-show="props.copiable && !copied"
+            :class="configuration.classesList.addonClasses"
+            @click="copy(localValue)"
+          />
+          <CheckIcon
+            v-show="props.copiable && copied"
+            :class="configuration.classesList.addonClasses"
           />
         </slot>
       </div>

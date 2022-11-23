@@ -22,6 +22,11 @@ const props = defineProps({
   },
 })
 const { configuration } = useConfiguration<FormLabelProps>(formsConfig, 'FormLabel')
+
+defineOptions({
+  name: 'VanillaFormLabel',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

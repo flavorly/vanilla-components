@@ -66,6 +66,11 @@ onMounted(() => {
     }
   }
 })
+
+defineOptions({
+  name: 'VanillaButton',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

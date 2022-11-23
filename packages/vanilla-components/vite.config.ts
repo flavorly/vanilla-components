@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import copy from 'rollup-plugin-copy'
+import DefineOptions from 'unplugin-vue-define-options/vite'
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import * as pkg from './package.json'
@@ -28,6 +29,9 @@ export default defineConfig(() => {
           }
         },
       }),
+
+      // Define options for name components & what not
+      DefineOptions(),
 
       // Copy vue files so Webstorm can be happy.
 

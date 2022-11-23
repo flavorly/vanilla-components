@@ -12,6 +12,11 @@ const props = defineProps({
   },
 })
 const { configuration } = useConfiguration<StatusIndicatorProps>(statusIndicatorConfig, 'StatusIndicator')
+
+defineOptions({
+  name: 'VanillaStatusIndicator',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

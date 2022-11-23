@@ -29,6 +29,11 @@ const props = defineProps({
 })
 
 const { configuration } = useConfiguration<FormSectionProps>(formsConfig, 'FormSection')
+
+defineOptions({
+  name: 'VanillaFormSection',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

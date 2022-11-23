@@ -108,6 +108,11 @@ const closeOnClickOutside = () => props.closeableOnClickOutside && close()
 defineExpose({ open, close })
 
 provide('configuration_vanilla', configuration)
+
+defineOptions({
+  name: 'VanillaSlideover',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

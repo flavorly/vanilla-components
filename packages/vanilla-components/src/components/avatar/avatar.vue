@@ -86,6 +86,11 @@
       photoPreview.value = null
     }
   })
+
+  defineOptions({
+    name: 'VanillaAvatar',
+    inheritAttrs: false,
+  })
 </script>
 
 <template>
@@ -131,9 +136,9 @@
             >
             <span
               v-else
-              :class="configuration.classesList.avatarPlaceholder"
+              :class="configuration.classesList.avatarPlaceholderText"
             >
-              <span :class="configuration.classesList.avatarPlaceholderText">{{ avatarInitials }}</span>
+              <span :class="configuration.classesList.avatarPlaceholder">{{ avatarInitials }}</span>
             </span>
           </div>
         </slot>

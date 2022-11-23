@@ -13,5 +13,7 @@ export declare type TextareaValue = string | number | string[] | undefined
 export declare type TextareaProps = WithVariantPropsAndClassesList<{
   modelValue?: TextareaValue
   rows?: string | number
+  placeholder?: string
+  copiable?: boolean
 } & InputHTMLAttributes & Data, TextareaClassesValidKeys>
 

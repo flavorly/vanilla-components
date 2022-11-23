@@ -582,6 +582,11 @@ provide('fetchingMoreOptions', fetchingMoreOptions)
 provide('dropdownBottomReachedHandler', dropdownBottomReachedHandler)
 
 provide('usesTags', usesTags)
+
+defineOptions({
+  name: 'VanillaRichSelect',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

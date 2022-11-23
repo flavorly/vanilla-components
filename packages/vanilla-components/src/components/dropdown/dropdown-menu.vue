@@ -212,6 +212,11 @@
   }, { immediate: false })
 
   provide('configuration_vanilla', configuration)
+
+  defineOptions({
+    name: 'VanillaDropdownMenu',
+    inheritAttrs: true,
+  })
 </script>
 
 <template>

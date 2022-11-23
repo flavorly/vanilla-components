@@ -12,7 +12,7 @@ export const datatableConfig = {
 
     genericForbidden: 'cursor-not-allowed',
     genericPointer: 'cursor-pointer',
-    genericFormsContentContainer: 'flex items-center justify-center space-x-1 text-xs select-none cursor-pointer',
+    genericFormsContentContainer: 'flex items-center justify-center space-x-1 text-xs select-none cursor-pointer dark:text-white',
     genericFormsContentLink: 'underline flex items-center justify-center space-x-1',
     genericFormsContentIcons: 'h-4 w-4',
 
@@ -30,6 +30,7 @@ export const datatableConfig = {
     headerSettingsRefreshIcon: 'h-4 h-4',
     headerSettingsRefreshIconAnimation: 'animate-spin',
     headerSettingsEditIcon: 'h-4 h-4',
+    headerSettingsSearchIcon: 'h-4 h-4',
 
     searchContainer: 'px-5 mt-3 mb-3',
     searchInputVariant: 'compact',
@@ -58,7 +59,8 @@ export const datatableConfig = {
     emptyStateResetFiltersButtonVariant: 'primary',
     emptyStateResetFiltersButtonIcon: 'h-4 w-4',
 
-    tableContainer: 'datatable overflow-x-auto border-t dark:border-gray-700',
+    tableContainer: 'datatable overflow-x-auto dark:border-gray-700',
+    tableContainerBorder: 'border-t',
     tableClass: 'min-w-full m-0 table-fixed',
     tableBody: 'divide-y bg-gray-50 dark:bg-gray-800 divide-gray-200 dark:divide-gray-700/90',
     tableRow: '',
@@ -135,13 +137,16 @@ export declare interface DatatableUserSettings {
 
 export declare interface DatatableOptions {
   selectable?: boolean
+  allSelectable?: boolean
   searchable?: boolean
+  isSearchHidden?: boolean
   refreshable?: boolean
   manageSettings?: boolean
   showTotalItems?: boolean
   showPages?: boolean
   compact?: boolean
   striped?: boolean
+  filtersHashingMethod?: string
 }
 
 export declare interface DatatablePooling {
@@ -157,7 +162,7 @@ export declare interface DatatableFilter {
   layout?: string
   component: string
   placeholder?: string
-  value?: string | undefined | null | number
+  value?: string | undefined | null | number | boolean
   defaultValue?: string | undefined | null | number
   options?: undefined | InputOptions | NormalizedOption[] | NormalizedOptions
   rules?: undefined | string[]
@@ -207,6 +212,7 @@ export declare interface DatatableTranslations {
   filtersReset?: string
   filtersResetOr?: string
   filtersCopy?: string
+  filtersCopied?: string
   filtersSaveAndClose?: string
   filtersRemove?: string
 
@@ -372,6 +378,7 @@ export declare interface DatatableConfiguration {
   fetchData?: DatatableFetchDataFunction
   fetchEndpoint?: string
   fetchMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'
+  originUrl?: string | undefined
 
   actionsEndpoint?: string
   actionsMethod?: string | 'GET' | 'POST' | 'PUT' | 'DELETE'

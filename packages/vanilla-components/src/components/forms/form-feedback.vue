@@ -24,6 +24,11 @@ const clicked = () => {
   emit('feedbackClick', true)
   emit('click', true)
 }
+
+defineOptions({
+  name: 'VanillaFormFeedback',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

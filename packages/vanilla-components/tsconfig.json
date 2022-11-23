@@ -32,5 +32,6 @@
     {
       "path": "./tsconfig.node.json"
     }
-  ]
+  ],
+  "types": ["unplugin-vue-macros/define-options"]
 }

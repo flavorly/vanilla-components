@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import find from 'lodash/find'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
 import { useInjectsClassesList } from '@/core/use'
+import type { NormalizedOption } from '@/core/types'
 
 const props = defineProps({
   filter: {
@@ -10,7 +12,7 @@ const props = defineProps({
     required: true,
   },
   value: {
-    type: [Number, String] as PropType<number | string>,
+    type: [Number, String] as PropType<number | string | any>,
     required: true,
   },
   withLabel: {
@@ -24,6 +26,22 @@ const emit = defineEmits(['filterRemove'])
 
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 const translations = useInjectDatatableTranslations()!
+
+const translateFilterValue = (filter: Types.DatatableFilter): any => {
+  if (filter?.options !== undefined) {
+    let value = filter.value
+    if (value === 'true' || value === 'false') {
+       value = value === 'true'
+    }
+    const selectedOption = find(filter.options, { value }) as NormalizedOption
+    return selectedOption?.text || filter.value
+  }
+  return filter.value
+}
+
+defineOptions({
+  name: 'VanillaDatatableFilterBadge',
+})
 </script>
 
 <template>
@@ -34,7 +52,7 @@ const translations = useInjectDatatableTranslations()!
           v-if="withLabel && filter?.label"
           v-html="`${filter.label}: `"
         />
-        <span v-html="filter.value" />
+        <span v-text="translateFilterValue(filter)" />
       </div>
     </slot>
     <button

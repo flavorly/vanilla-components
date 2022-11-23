@@ -27,6 +27,11 @@ const formatRange = (start: Date, end: Date) => {
   }
   return `${start || ''} - ${start || ''}`
 }
+
+defineOptions({
+  name: 'VanillaDateTimeInput',
+  inheritAttrs: true,
+})
 </script>
 
 <template>

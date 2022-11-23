@@ -73,6 +73,10 @@ watch(isOpen, (val: boolean) => {
 // Provide Translations
 const translations = useInjectDatatableTranslations()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+
+defineOptions({
+  name: 'VanillaDatatableSettingsDialog',
+})
 </script>
 
 <template>
