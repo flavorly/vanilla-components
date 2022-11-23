@@ -8,6 +8,7 @@ import { dateTimeInputConfig } from './config'
 import VanillaInput from '@/components/input/input.vue'
 import { get } from '@/core/helpers'
 import { useConfiguration, useVModel } from '@/core/use'
+import ClientOnly from '@/components/misc/client-only.vue'
 
 const props = defineProps(baseProps)
 const localValue = useVModel(props, 'modelValue')
@@ -35,53 +36,55 @@ defineOptions({
 </script>
 
 <template>
-  <DateTimePicker
-    v-model="localValue"
-    :input-debounce="1200"
-    :update-on-input="false"
-    :popover="{ visibility: 'focus' }"
-  >
-    <template
-      v-if="props.inline === false"
-      #default="scope"
+  <ClientOnly>
+    <DateTimePicker
+      v-model="localValue"
+      :input-debounce="1200"
+      :update-on-input="false"
+      :popover="{ visibility: 'focus' }"
     >
-      <slot v-bind="scope">
-        <div :class="configuration.classesList.wrapper">
-          <VanillaInput
-            v-if="get($attrs, 'is-range', false) === false"
-            :model-value="scope.inputValue"
-            :placeholder="props.placeholder"
-            :errors="errors"
-            :variant="variant"
-            v-on="scope.inputEvents"
-          />
-          <VanillaInput
-            v-if="get($attrs, 'is-range', false) === true"
-            :model-value="formatRange(scope.inputValue.start, scope.inputValue.end)"
-            :placeholder="props.placeholder"
-            :errors="errors"
-            :variant="variant"
-            v-on="{ ...scope.inputEvents.start, ...scope.inputEvents.end }"
-          />
-          <ClearButton
-            v-if="get($attrs, 'is-required', false) === false"
-            :class="configuration.classesList?.clearButton"
-            @click="localValue = null"
-          />
-        </div>
-      </slot>
-    </template>
-<!--    <template-->
-<!--      v-for="(_, slot) of $slots"-->
-<!--      #[slot]="scope"-->
-<!--    >-->
-<!--      <slot-->
-<!--        v-if="slot !== 'default'"-->
-<!--        :key="slot"-->
-<!--        :name="slot"-->
-<!--        v-bind="scope"-->
-<!--      />-->
-<!--    </template>-->
-  </DateTimePicker>
+      <template
+        v-if="props.inline === false"
+        #default="scope"
+      >
+        <slot v-bind="scope">
+          <div :class="configuration.classesList.wrapper">
+            <VanillaInput
+              v-if="get($attrs, 'is-range', false) === false"
+              :model-value="scope.inputValue"
+              :placeholder="props.placeholder"
+              :errors="errors"
+              :variant="variant"
+              v-on="scope.inputEvents"
+            />
+            <VanillaInput
+              v-if="get($attrs, 'is-range', false) === true"
+              :model-value="formatRange(scope.inputValue.start, scope.inputValue.end)"
+              :placeholder="props.placeholder"
+              :errors="errors"
+              :variant="variant"
+              v-on="{ ...scope.inputEvents.start, ...scope.inputEvents.end }"
+            />
+            <ClearButton
+              v-if="get($attrs, 'is-required', false) === false"
+              :class="configuration.classesList?.clearButton"
+              @click="localValue = null"
+            />
+          </div>
+        </slot>
+      </template>
+    <!--    <template -->
+    <!--      v-for="(_, slot) of $slots" -->
+    <!--      #[slot]="scope" -->
+    <!--    > -->
+    <!--      <slot -->
+    <!--        v-if="slot !== 'default'" -->
+    <!--        :key="slot" -->
+    <!--        :name="slot" -->
+    <!--        v-bind="scope" -->
+    <!--      /> -->
+    <!--    </template> -->
+    </DateTimePicker>
+  </ClientOnly>
 </template>
 

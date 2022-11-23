@@ -1,4 +1,9 @@
+import { isServer } from '@/core/helpers'
+
 function event(name: string) {
+  if (isServer()) {
+    return
+  }
   const event = new Event(name)
   document.dispatchEvent(event)
   return event

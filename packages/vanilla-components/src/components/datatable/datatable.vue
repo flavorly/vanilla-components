@@ -41,7 +41,7 @@ import Card from '@/components/card/card.vue'
 
 import type { CSSClassesList, NormalizedOption } from '@/core/types'
 import { useConfiguration, useDynamicSlots, useVariantProps } from '@/core/use'
-import { isEqual } from '@/core/helpers'
+import { isServer } from '@/core/helpers'
 
 const props = defineProps({
   ...useVariantProps<Types.DatatableProps, Types.DatatableClassesValidKeys>(),
@@ -525,6 +525,10 @@ const resetFiltersAndSearch = (shouldRefresh = true) => {
 
 /** Resets the URL if any filters or w/e applied  */
 const resetUrl = () => {
+  if (isServer()) {
+    return
+  }
+
   if (datatable.originUrl !== undefined) {
     window.history.pushState({}, document.title, datatable.originUrl)
   }
@@ -763,7 +767,6 @@ const onSearchToggle = () => {
     deselectAllItems()
   }
 }
-
 
 /**
  * Converts the local storage to the local user settings on mounted

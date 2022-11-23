@@ -48,6 +48,7 @@ export { default as InputGroup } from './components/input-group/input-group.vue'
 
 export { default as Fragment } from './components/misc/fragment.vue'
 export { default as Transitionable } from './components/misc/transitionable.vue'
+export { default as ClientOnly } from './components/misc/client-only.vue'
 
 export { default as PhoneInput } from './components/phone-input/phone-input.vue'
 

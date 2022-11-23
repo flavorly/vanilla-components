@@ -6,6 +6,7 @@ import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
 import ReplacePackagePlugin from '../utils/local-link'
 import highlighter from './shiki-tags/highlighter'
+import DefineOptions from 'unplugin-vue-define-options/vite'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanilla-components.com' : 'http://localhost:3005'
@@ -19,10 +20,12 @@ const plugins = !production
       build: false,
       outputDir: '.vite-inspect',
     }),
+    DefineOptions(),
     whyframe({ defaultSrc: '/parts/frame' }),
     whyframeVue({ include: /\.(?:vue|md)$/ }),
   ]
 : [
+    DefineOptions(),
     whyframe({ defaultSrc: '/parts/frame' }),
     whyframeVue({ include: /\.(?:vue|md)$/ }),
   ]
@@ -70,6 +73,9 @@ export default defineConfig({
     build: {
       sourcemap: false,
       chunkSizeWarningLimit: 16000,
+    },
+    ssr: {
+      noExternal: ['@flavorly/vanilla-components'],
     },
   },
 

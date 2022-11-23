@@ -7,7 +7,7 @@ import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
 import Button from '@/components/button/button.vue'
 import { useInjectsClassesList } from '@/core/use'
-import { Base64, isEqual } from '@/core/helpers'
+import { Base64, isEqual, isServer } from '@/core/helpers'
 import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
 import Dialog from '@/components/dialog/dialog.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
@@ -100,6 +100,9 @@ const resetFilters = () => {
 const { text, copy, copied, isSupported } = useClipboard()
 
 const copyFiltersLink = (): void => {
+  if (isServer()) {
+    return
+  }
   const url = new URL(window.location.href)
   const params = new URLSearchParams(url.search)
   const filtersKey = camelize(`${props.configuration.name}`)

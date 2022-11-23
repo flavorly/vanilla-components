@@ -11,7 +11,14 @@ import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 import Transitionable from '@/components/misc/transitionable.vue'
 import type { DebouncedFn } from '@/core/types'
-import { debounce, elementIsTargetOrTargetChild, getFocusableElements, isTouchOnlyDevice as getIsTouch, throttle } from '@/core/helpers'
+import {
+  debounce,
+  elementIsTargetOrTargetChild,
+  getFocusableElements,
+  isTouchOnlyDevice as getIsTouch,
+  isServer,
+  throttle,
+} from '@/core/helpers'
 /* eslint @typescript-eslint/no-use-before-define: ["off"] */
 
 const props = defineProps({
@@ -138,6 +145,10 @@ const targetIsChild = (target: EventTarget | null): boolean => {
 
 /** When dropdown being shown */
 const onShown = (): void => {
+  if (isServer()) {
+    return
+  }
+
   emit('shown')
   emit('update:show', true)
 
@@ -151,6 +162,10 @@ const onShown = (): void => {
 
 /** When dropdown being hidden */
 const onHidden = (): void => {
+  if (isServer()) {
+    return
+  }
+
   emit('hidden')
   emit('update:show', false)
 
@@ -163,6 +178,10 @@ const onHidden = (): void => {
 
 /** Before being shown */
 const onBeforeShown = (): void => {
+  if (isServer()) {
+    return
+  }
+
   emit('beforeShow')
   if (isTouchOnlyDevice.value) {
     window.addEventListener('touchstart', touchstartHandler)
@@ -171,6 +190,9 @@ const onBeforeShown = (): void => {
 
 /** Before being hidden */
 const onBeforeHide = (): void => {
+  if (isServer()) {
+    return
+  }
   emit('beforeHide')
   if (isTouchOnlyDevice.value) {
     window.removeEventListener('touchstart', touchstartHandler)
@@ -335,12 +357,18 @@ const updatePopper = (): Promise<void> => {
 
 /** Popper : On resize or scroll, we need to re-adjust */
 const enablePopperNeedsAdjustmentListener = (): void => {
+  if (isServer()) {
+    return
+  }
   window.addEventListener('resize', popperAdjusterListener.value!)
   window.addEventListener('scroll', popperAdjusterListener.value!)
 }
 
 /** Popper : On resize or scroll, remove the listeners */
 const disablePopperNeedsAdjustmentListener = (): void => {
+  if (isServer()) {
+    return
+  }
   window.removeEventListener('resize', popperAdjusterListener.value!)
   window.removeEventListener('scroll', popperAdjusterListener.value!)
   popperAdjusterListener.value?.cancel()
@@ -435,6 +463,10 @@ watch(() => configuration.show, (isShowing: boolean | undefined) => {
 
 // Hooks
 onMounted(() => {
+  if (isServer()) {
+    return
+  }
+
   isTouchOnlyDevice.value = getIsTouch()
   if (isTouchOnlyDevice.value && shown.value) {
     window.addEventListener('touchstart', touchstartHandler)
@@ -448,6 +480,11 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+
+  if (isServer()) {
+    return
+  }
+
   if (hideTimeout.value) {
     clearTimeout(hideTimeout.value)
   }
