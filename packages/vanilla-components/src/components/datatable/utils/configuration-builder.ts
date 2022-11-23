@@ -14,13 +14,16 @@ export default function configurationBuilder<
 
   const defaultOptions = {
     selectable: true,
+    allSelectable: true,
     searchable: true,
+    isSearchHidden: false,
     showSettings: true,
     showNumberOfItems: true,
     showPages: false,
     striped: false,
     compact: true,
     refreshable: true,
+    filtersHashingMethod: 'query',
   } as Types.DatatableOptions
 
   const defaultTranslations = {
@@ -52,6 +55,7 @@ export default function configurationBuilder<
     filtersReset: 'Reset Filters',
     filtersResetOr: 'or',
     filtersCopy: 'Copy Filters Link',
+    filtersCopied: 'Copied to Clipboard',
     filtersSaveAndClose: 'Save & Close',
     filtersRemove: 'Remove',
 
@@ -115,6 +119,7 @@ export default function configurationBuilder<
     fetchData: props?.fetchData || props.config?.fetchData || useFetchData,
     fetchEndpoint: props?.config?.fetchEndpoint || undefined,
     fetchMethod: props?.config?.fetchMethod || 'POST',
+    originUrl: props.config?.originUrl || undefined,
 
     actionsEndpoint: props?.config?.fetchEndpoint || undefined,
     actionsMethod: props.config?.actionsMethod?.method || 'POST',

@@ -1,4 +1,5 @@
 export { default as addToArray } from './addToArray'
+export { default as Base64 } from './base64'
 export { default as debounce } from './debounce'
 export { default as elementIsTargetOrTargetChild } from './elementIsTargetOrTargetChild'
 export { default as filterOptions } from './filterOptions'

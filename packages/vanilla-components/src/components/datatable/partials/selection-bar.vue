@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { useInjectDatatableTranslations } from '../utils'
+import { useInjectDatatableConfiguration, useInjectDatatableTranslations } from '../utils'
 import { useInjectsClassesList, useReplacePlaceholders } from '@/core/use'
 
 const props = defineProps({
@@ -37,10 +37,11 @@ const deselectMatching = () => {
 }
 
 const translations = useInjectDatatableTranslations()!
+const configuration = useInjectDatatableConfiguration()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
 defineOptions({
-  name: 'VanillaDatatableSkeletonBar',
+  name: 'VanillaDatatableSelectionBar',
 })
 </script>
 
@@ -54,18 +55,19 @@ defineOptions({
       v-html="useReplacePlaceholders(translations.selectedUndo)"
     />
     <span
+      v-if="configuration.options.allSelectable"
       :class="[classesList.selectionBarOrText]"
       v-html="useReplacePlaceholders(translations.selectAllOr)"
     />
     <a
-      v-if="!isAllSelected"
+      v-if="configuration.options.allSelectable && !isAllSelected"
       :class="[classesList.selectionBarButton]"
       tabindex="0"
       @click="selectMatching"
       v-html="useReplacePlaceholders(translations.selectAllMatching, { rows: countTotal })"
     />
     <a
-      v-if="isAllSelected"
+      v-if="configuration.options.allSelectable && isAllSelected"
       :class="[classesList.selectionBarButton]"
       tabindex="0"
       @click="deselectMatching"

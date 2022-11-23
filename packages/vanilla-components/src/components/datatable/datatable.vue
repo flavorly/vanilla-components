@@ -33,6 +33,7 @@ import Button from '@/components/button/button.vue'
 import ArrowPathIcon from '@/components/icons/hero/outline/ArrowPathIcon.vue'
 import FunnelIcon from '@/components/icons/hero/outline/FunnelIcon.vue'
 import CogIcon from '@/components/icons/hero/solid/CogIcon.vue'
+import SearchIcon from '@/components/icons/hero/solid/MagnifyingGlassIcon.vue'
 import EllipsisVerticalIcon from '@/components/icons/hero/solid/EllipsisVerticalIcon.vue'
 import DropdownOption from '@/components/dropdown/dropdown-option.vue'
 import Dropdown from '@/components/dropdown/dropdown-menu.vue'
@@ -40,6 +41,7 @@ import Card from '@/components/card/card.vue'
 
 import type { CSSClassesList, NormalizedOption } from '@/core/types'
 import { useConfiguration, useDynamicSlots, useVariantProps } from '@/core/use'
+import { isEqual } from '@/core/helpers'
 
 const props = defineProps({
   ...useVariantProps<Types.DatatableProps, Types.DatatableClassesValidKeys>(),
@@ -132,6 +134,9 @@ const currentAction = ref(undefined) as Ref<undefined | Types.DatatableAction>
 
 /** Stores the pooling interval */
 const poolingInterval = ref(undefined) as Ref<undefined | number>
+
+/** Showing/Hiding Searchbar */
+const isShowingSearchbar = ref<boolean>(!datatable.options.isSearchHidden)
 
 /** Default Settings */
 const userSettingsDefault = {
@@ -508,6 +513,7 @@ const resetFiltersAndSearch = (shouldRefresh = true) => {
 
     resetAllFilters(false)
     resetSearchQuery(false)
+    resetUrl()
 
     // Refresh the items
     if (!shouldRefresh) {
@@ -515,6 +521,24 @@ const resetFiltersAndSearch = (shouldRefresh = true) => {
     }
     refresh()
     showLoadingAnimation.value = false
+}
+
+/** Resets the URL if any filters or w/e applied  */
+const resetUrl = () => {
+  if (datatable.originUrl !== undefined) {
+    window.history.pushState({}, document.title, datatable.originUrl)
+  }
+  else {
+    const url = new URL(window.location.href)
+    const params = new URLSearchParams(url.search)
+    for (const [key, value] of params) {
+      if (key.startsWith(datatable.name)) {
+        params.delete(key)
+      }
+    }
+    url.search = params.toString()
+    window.history.replaceState({}, '', url.toString())
+  }
 }
 
 /** Reset all settings  */
@@ -730,6 +754,18 @@ const onFiltersVisit = () => {
 }
 
 /**
+ * On toggle the search button in case hidden
+ **/
+
+const onSearchToggle = () => {
+  isShowingSearchbar.value = !isShowingSearchbar.value
+  if (hasAnyItemsSelected.value && isShowingSearchbar.value) {
+    deselectAllItems()
+  }
+}
+
+
+/**
  * Converts the local storage to the local user settings on mounted
  **/
 const fromUserStorageToUserSettings = () => {
@@ -760,9 +796,29 @@ const fromUserStorageToUserSettings = () => {
 }
 
 /**
+ * Takes the original filters injected and attempts to put them on local storage
+ * this usefull if the server has sent a specific value for the filter initiall
+ *
+ **/
+const fromCurrentFiltersStateToLocalStorage = () => {
+  if (Object.keys(datatable.filters).length > 0) {
+    // foreach object with javascript
+    Object.keys(datatable.filters).forEach((key: string) => {
+      const filterObject = datatable.filters[key]
+      if (filterObject.value !== undefined && filterObject.value !== filterObject.defaultValue) {
+        userStorage.value.filters[filterObject.name] = filterObject.value
+      }
+    })
+  }
+}
+
+/**
  * On Mounted, execute the stack
  **/
 onMounted(() => {
+    // Ensure if we have filters from the URL / Inject initial we also move them to session
+    fromCurrentFiltersStateToLocalStorage()
+
     // Mount the session
     fromUserStorageToUserSettings()
 
@@ -845,8 +901,11 @@ const classesList = configuration.classesList as CSSClassesList<Types.DatatableC
 // ----- Provide data to sub components -----  //
 provide('configuration_vanilla_datatable', configuration)
 
-// ----- Provide data to sub components -----  //
-provide('datatable_translations', datatable.translations)
+// ----- Provide Configuration -----  //
+provide('datatable_configuration', datatable)
+
+// ----- Functions to other components  -----  //
+provide('datatable_reset_url_function', resetUrl)
 
 defineOptions({
   name: 'VanillaDatatable',
@@ -941,6 +1000,15 @@ defineOptions({
               </Button>
             </template>
 
+            <!-- SearchBar Toggle -->
+            <DropdownOption
+              v-if="datatable.options.isSearchHidden"
+              @click="onSearchToggle"
+            >
+              <SearchIcon :class="[classesList.headerSettingsSearchIcon]" />
+              <span v-text="translations.search" />
+            </DropdownOption>
+
             <!-- Refresh -->
             <DropdownOption
               v-if="datatable.options.refreshable"
@@ -966,7 +1034,7 @@ defineOptions({
       </template>
 
       <!-- Search Bar -->
-      <template v-if="datatable.options.searchable && !hasAnyItemsSelected">
+      <template v-if="(datatable.options.searchable && isShowingSearchbar) && !hasAnyItemsSelected">
         <slot
           name="headerSearch"
           v-bind="{
@@ -1039,7 +1107,12 @@ defineOptions({
       </template>
 
       <!-- Actual Table -->
-      <div :class="classesList.tableContainer">
+      <div
+        :class="[
+          classesList.tableContainer,
+          hasAnyItemsSelected ? classesList.tableContainerBorder : '',
+        ]"
+      >
         <template v-if="!showBeInLoadingState && results.data.length <= 0 ">
           <EmptyState
             :has-filters-or-search="hasFiltersOrSearchApplied"
@@ -1073,7 +1146,7 @@ defineOptions({
                 v-bind="{
                   resetFiltersAndSearch,
                   filters: filtersComputed,
-                  filtersActiveCount
+                  filtersActiveCount,
                 }"
               />
             </template>
@@ -1371,6 +1444,7 @@ defineOptions({
         v-model="isShowingFilters"
         :user-settings="userSettings"
         :filters="datatable.filters"
+        :configuration="datatable"
         @filters-reset="onFiltersReset"
         @filters-saved="onFiltersSaved"
       />

@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { defineAsyncComponent, ref, watch } from 'vue'
+import { camelize, defineAsyncComponent, inject, ref, watch } from 'vue'
 import find from 'lodash/find'
+import { useClipboard } from '@vueuse/core'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
 import Button from '@/components/button/button.vue'
 import { useInjectsClassesList } from '@/core/use'
-import { isEqual } from '@/core/helpers'
+import { Base64, isEqual } from '@/core/helpers'
 import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
 import Dialog from '@/components/dialog/dialog.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
@@ -21,8 +22,11 @@ const props = defineProps({
     type: [Object] as PropType<Types.DatatableUserSettings>,
     required: true,
   },
+  configuration: {
+    type: [Object] as PropType<Types.DatatableConfiguration>,
+    required: true,
+  },
 })
-
 const emit = defineEmits([
   'update:modelValue',
   'filtersSaved',
@@ -40,6 +44,7 @@ const DateTimeInput = defineAsyncComponent(() => import('@/components/datetime-i
 
 const isOpen = ref(false) as Ref<boolean>
 const localFilters = ref({}) as Ref<Types.DatatableSavedFilter>
+const resetUrl = inject('datatable_reset_url_function') as Function
 
 // Once props changes, destruct the local filters value
 watch(
@@ -82,10 +87,31 @@ const saveSettings = () => {
 }
 
 // Reset Filters
-const resetSettings = () => {
+const resetFilters = () => {
   isOpen.value = false
   localFilters.value = {}
+  resetUrl()
   emit('filtersReset', true)
+}
+
+// Copy Filters Link
+const { text, copy, copied, isSupported } = useClipboard()
+
+const copyFiltersLink = (): void => {
+  const url = new URL(window.location.href)
+  const params = new URLSearchParams(url.search)
+  const filtersKey = camelize(`${props.configuration.name}`)
+
+  if (props.configuration.options.filtersHashingMethod === 'query') {
+    Object.entries(localFilters.value).map(([key, value]) => {
+      return params.append(`${filtersKey}[${key}]`, value as string)
+    })
+  }
+  else {
+    params.set(filtersKey, Base64.encode(JSON.stringify(localFilters.value)))
+  }
+  url.search = params.toString()
+  copy(url.toString())
 }
 
 // Open / Close Modal
@@ -132,7 +158,6 @@ defineOptions({
           <RichSelect
             v-if="filter.component === 'VanillaRichSelect'"
             v-model="localFilters[filter.name]"
-            :model-value="getFilterValue(filter.name) || null"
             :placeholder="filter.placeholder"
             :options="filter.options"
             v-bind="filter.props"
@@ -141,7 +166,6 @@ defineOptions({
           <Input
             v-if="filter.component === 'VanillaInput'"
             v-model="localFilters[filter.name]"
-            :model-value="getFilterValue(filter.name) || null"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
           />
@@ -149,7 +173,6 @@ defineOptions({
           <Checkbox
             v-if="filter.component === 'VanillaCheckbox'"
             v-model="localFilters[filter.name]"
-            :model-value="getFilterValue(filter.name) || null"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
           />
@@ -157,7 +180,6 @@ defineOptions({
           <Toggle
             v-if="filter.component === 'VanillaToggle'"
             v-model="localFilters[filter.name]"
-            :model-value="getFilterValue(filter.name) || null"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
           />
@@ -165,7 +187,6 @@ defineOptions({
           <Textarea
             v-if="filter.component === 'VanillaTextarea'"
             v-model="localFilters[filter.name]"
-            :model-value="getFilterValue(filter.name) || null"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
           />
@@ -173,7 +194,6 @@ defineOptions({
           <DateTimeInput
             v-if="filter.component === 'VanillaDatetimePicker'"
             v-model="localFilters[filter.name]"
-            :model-value="getFilterValue(filter.name) || null"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
           />
@@ -184,15 +204,23 @@ defineOptions({
         <div :class="[classesList.genericFormsContentContainer]">
           <span
             :class="[classesList.genericFormsContentLink]"
-            @click="resetSettings"
+            @click="resetFilters"
           >
             <TrashIcon :class="[classesList.genericFormsContentIcons]" />
             <span v-text="translations.filtersReset" />
           </span>
           <span v-text="translations.filtersResetOr" />
           <span
+            v-if="!copied"
             :class="[classesList.genericFormsContentLink]"
+            @click="copyFiltersLink"
             v-text="translations.filtersCopy"
+          />
+          <span
+            v-if="copied"
+            :class="[classesList.genericFormsContentLink]"
+            @click="copyFiltersLink"
+            v-text="translations.filtersCopied"
           />
         </div>
       </InputGroup>
