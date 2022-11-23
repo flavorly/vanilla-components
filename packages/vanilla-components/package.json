@@ -57,7 +57,7 @@
     "fuse.js": "^6.6.2",
     "libphonenumber-js": "^1.10.14",
     "lodash": "^4.17.21",
-    "unplugin-vue-define-options": "^0.12.8",
+    "unplugin-vue-define-options": "^1.0.0",
     "vue": "^3.2.45"
   },
   "peerDependencies": {
