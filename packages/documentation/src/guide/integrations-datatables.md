@@ -69,8 +69,14 @@ use Flavorly\VanillaComponents\Datatables\Options\General\Options;
 class User extends Datatable
 {
 
+    public function query(): Builder|ScoutBuilder|null
+    {
+        return User::query()->where('user_id', auth()->id());
+    }
+    
     public function fetchEndpoint(): ?string
     {
+        // Endpoint where the datatable will fetch the data from
         return route('datatables.demo');
     }
     
@@ -405,7 +411,8 @@ Filters can modify the query by using the `applyUsing()` method, this method acc
 - **query** - The current query that is being executed, this is a Laravel Query Builder or a Scout Builder instance
 - **column** - The column name that is being filtered, this is the name that you provided on the filter
 - **value** - The value that the user provided on the filter
-- 
+
+
 ### Filters - Adding your own Components
 
 Filters are generic enough to take any component of your choice, they will simply forward value/default value and tell vue what component should render.
@@ -414,8 +421,194 @@ You may define the `->component()` method that accepts any string, all you need 
 
 You may also use the `->attributes()` method to forward any attributes to the component. Please keep in mind that we will ignore certain attributes like `v-model`, `v-bind` and so on.
 
+### Filters - Copy URL
+
+You will notice that when opening the filters modal/dialog, you will are able to copy the direct link for this specific filter, this is useful if you want to share a specific filter with someone else.
+The filters key is based on the `->name()` method, so make sure to use a unique name for table.
+
+## Options
+
+Options are a way to customize the table with certain features, you may use the `options()` method to return a `Options` instace
+
+Here is a list of the options that are available:
+
+- **refreshable()** - Turn on/off the refresh button. Default: `true`
+- **searchable()** - Turn on/off the search input. Default: `true`
+- **hideSearchBar()** - Hides the search bar by default and places a icon to toggle it. Default: `false`
+- **selectable()** - Turn on/off the selection. Default: `true`
+- **canSelectAllMatching()** - Enable or disable select all records matching feature. Default: `true`
+- **compact()** - Makes the table compact. Default: `false`
+- **striped()** - Makes the table striped. Default: `false`
+- **manageSettings()** - Enable or disable settings management. Default: `true`
+- **showTotalNumberOfItems()** - Show the total number of items. Default: `true`
+- **showCurrentPage()** - Show the current page. Default: `true`
+- **showNextPages()** - Show the next pages. Default: `true`
+- **showPages()** - Show/hide pages. Default : `false`
 
 
+Here is a small example of how to use the options:
+
+```php
+public function options(): array| Options
+{
+    return Options::make()
+        ->refreshable()
+        ->hideSearchBar();
+}
+```
+
+## Advanced Options
+
+While the most basic options are covered in the sections above, datatable provides way more options that can be used to customize the table.
+
+
+### Modifying the query
+
+Sometimes and most likely you will want to define a query for the datatable
+You may do this using the `query()` method inside the datatable, that must return a Eloquent Query builder
+If you do prefer you may also inject the query directly to the `response` as the following example:
+
+```php
+<?php
+namespace App\Http\Controllers;
+
+use App\Datatables\Users\User as UserTable;
+
+class DatatableController extends Controller
+{
+    public function usersTable()
+    {
+        $query = User::query()->where('is_admin', true);
+        return (new UserTable())->response($query);
+    }
+    
+    public function usersTableExample()
+    {
+        // Passing a eloquent model class is also possible!
+        return (new UserTable())->response(User::class);
+    }
+}
+```
+
+### Model Primary Key
+
+By default, the datatable will attempt to resolve the Model based on the query that you pass for it, it will also attempt to discover the primary key to be used for the datatable
+if for any reason it's unable to resolve, it fall back to `id` as the primary key.
+
+If for some reason you want to modify this you are able to use another key by defining a `primaryKey()` method on the datatable, this method must return a string.
+
+```php
+public function primaryKey(): ?string
+{
+   return 'uuid';
+}
+```
+
+### Origin URL
+
+Datatables always live on a page of your application, with features like reset filters
+we need to know where the datatable are coming from, this is done by using the `originUrl()` method, this method must return a string.
+This way, when reseting filters, we will know the exact url to redirect to and to transform, if no URL is provided the `current url` will be used.
+
+```php
+public function originUrl(): string
+{
+    return route('users.index');
+}
+```
+
+### Polling
+
+Sometimes its really nice if we could have our data to be pooled every X seconds, this is possible on Vanilla Datatables! :p
+
+To enable polling you must use the `polling()` method, this method must return `Polling` instance with your configuration.
+Polling is disabled by default, and the times are always in `seconds`, accepts also a closure to define time.
+Its possible also to stop polling when the data changes.
+
+```php
+use Flavorly\VanillaComponents\Core\Polling\Polling;
+
+public function polling(): Polling
+{
+    return Polling::make()
+    ->every(10)
+    ->during(60)
+    ->stopOnDataChange();
+}
+```
+
+### Name & Unique Table ID
+
+Each datatable must have a unique name, the name is used to store the settings for the datatable on the user browser, and also to identify the datatable when using the `Copy Filter Link` feature on the frontend.
+
+By default, we will simply hash the Datatable namespace and use it as a unique identifier, but you may also define your own name by using the `name()` method.
+
+```php
+public function name(): string
+{
+    return 'users-table';
+}
+
+// Or even
+public function name(): string
+{
+    return 'users-payments';
+}
+```
+
+### Translations
+
+There a few translations that are used on the datatable, you may define your own translations by using the `translations()` method, this method must return an array of translations.
+You may also override the default translations by overriding the `defaultTranslations()` method.
+
+```php
+public function translations(): array
+{
+    return [
+        'title' => 'Items',
+        'subtitle' => 'Here you can check your latest items',
+        'resource' => 'Item',
+        'resources' => 'Items',
+        
+        'actionsButton' => 'Actions',
+        'actionsSelectedRows' => 'With =>rows selected',
+        // ... and more
+    ];
+}
+
+// or if you prefer you may also merge with the defaults
+public function translations(): array
+{
+     return $this->mergeTranslations(['title' => 'Users']);
+}
+```
+
+## Fetch Endpoint & Actions Endpoint
+
+Datatable requires an endpoint to pull the json data to feed the table, in order to configure that please use the `fetchEndpoint()` method, this method must return a string.
+Keep in mind this needs to be a full qualified URL, using the `route()` helper is recommended
+
+Vanilla components uses axios to perform the requests by default, so if you are using Laravel you should probably be fine!
+
+
+```php
+public function fetchEndpoint(): ?string
+{
+    return route('datatables.demo');
+}
+```
+
+Actions can be sent to a separate endpoint if you would like, if thats the case you pay use the `actionsEndpoint()` method, this method must return a string.
+If nothing is provided for the actions endpoint, the fetch endpoint will be used instead.
+
+```php
+public function actionsEndpoint(): ?string
+{
+    return route('datatables.demo.some.action');
+}
+```
+
+If you readed till here your the real MPV, otherwise thank you for reading this far, I hope you enjoy using Vanilla Components as much as I do!
 
 
 
