@@ -61,7 +61,7 @@ export default function configurationBuilder<
 
     settings: 'Settings',
     settingsItemsPerPage: 'Items p/ Page',
-    settingsVisibility: 'Visibility',
+    settingsVisibility: 'Hidden Columns',
     settingsPersist: 'Persist Settings',
     settingsPersistSelection: 'Save Selected',
     settingsReset: 'Reset to Default Settings',

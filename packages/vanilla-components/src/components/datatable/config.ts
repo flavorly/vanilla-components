@@ -127,7 +127,7 @@ export const datatableClassesKeys = Object.keys(datatableConfig.classes)
 export declare type DatatableClassesValidKeys = keyof typeof datatableConfig.classes
 
 export declare interface DatatableUserSettings {
-  visibleColumns: string[]
+  hiddenColumns: string[]
   perPage: number
   useStorage: boolean
   saveSelection: boolean

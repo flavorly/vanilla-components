@@ -102,10 +102,10 @@ defineOptions({
 
       <InputGroup
         :label="translations.settingsVisibility"
-        name="visibleColumns"
+        name="hiddenColumns"
       >
         <CheckboxGroup
-          v-model="localSettings.visibleColumns"
+          v-model="localSettings.hiddenColumns"
           :options="columnsNormalized"
         />
       </InputGroup>

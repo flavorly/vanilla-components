@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
 import { camelize, computed, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue'
-import { useSessionStorage } from '@vueuse/core'
+import { useLocalStorage, useSessionStorage } from '@vueuse/core'
 
 // Lodash
 import each from 'lodash/each'
@@ -140,7 +140,7 @@ const isShowingSearchbar = ref<boolean>(!datatable.options.isSearchHidden)
 
 /** Default Settings */
 const userSettingsDefault = {
-    visibleColumns: filter(datatable.columns, { hidden: false }).map(c => c.name) as string[],
+    hiddenColumns: filter(datatable.columns, { hidden: true }).map(c => c.name),
     perPage: datatable.perPageOptions[0]?.value as number,
     useStorage: true as boolean,
     saveSelection: true as boolean,
@@ -152,7 +152,7 @@ const userSettingsDefault = {
 const userSettings = reactive({ ...userSettingsDefault }) as Types.DatatableUserSettings
 
 /** Stores the user given settings & local/session storage */
-const userStorage = useSessionStorage(camelize(datatable.name.toString()), userSettings, {})
+const userStorage = useLocalStorage(camelize(datatable.name.toString()), userSettings, {})
 
 /** Query Data being passed to the server */
 const queryData = reactive({
@@ -190,7 +190,7 @@ const hasFilters = computed(() => datatable.filters.length > 0) as Ref<boolean>
 const hasActions = computed(() => datatable.actions.length > 0) as Ref<boolean>
 
 /** Returns the current count of visible columns, excluding the hidden ones and the select column */
-const visibleColumnsCount = computed(() => userSettings.visibleColumns?.length + (datatable.options.selectable ? 1 : 0)) as Ref<number>
+const visibleColumnsCount = computed(() => userSettings.hiddenColumns?.length - (datatable.options.selectable ? 1 : 0)) as Ref<number>
 
 /** Returns the number of items selected, in case all is selected, we return the total number of rows matching */
 const selectedItemsCount = computed(() => queryData.selectedAll ? results?.meta?.total : queryData.selected.length) as Ref<number>
@@ -226,7 +226,7 @@ const columnsComputed = computed(() => {
     return datatable.columns.map((column: Types.DatatableColumn) => {
         return {
             ...column,
-            visible: userSettings.visibleColumns.includes(column.name),
+            visible: !userSettings.hiddenColumns.includes(column.name),
             isSorted: queryData.sorting.some(c => c.column === column.name),
             isSortedAsc: queryData.sorting.some(c => c.column === column.name && c.direction === 'asc'),
             isSortedDesc: queryData.sorting.some(c => c.column === column.name && c.direction === 'desc'),
@@ -455,7 +455,6 @@ const poolForever = (enable = false, every = 20) => {
 
 /** Resets the sorting  */
 const resetSorting = () => {
-    // TODO : Check this to reset link
     queryData.sorting = []
 }
 
@@ -775,6 +774,13 @@ const fromUserStorageToUserSettings = () => {
     // User don't want to use storage
     if (userStorage.value?.useStorage === false) {
         return
+    }
+
+    // Ensure we remove invalid columns from the storage
+    if (userStorage.value.hiddenColumns.length) {
+        userStorage.value.hiddenColumns = userStorage.value.hiddenColumns.filter((column: string) => {
+            return find(columnsComputed.value, { name: column })
+        })
     }
 
     // Merge into user settings
@@ -1267,7 +1273,7 @@ defineOptions({
               >
                 <td
                   v-for="(column) in columnsComputed"
-                  v-show="userSettings.visibleColumns.includes(column.name)"
+                  v-show="column.visible"
                   :key="column.name"
                   :class="[
                     classesList.tableColumn,

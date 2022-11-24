@@ -138,7 +138,7 @@ defineOptions({
     <div :class="[classesList.paginationFullContainer]">
       <div>
         <p
-          v-if="showNumberOfItems"
+          v-if="showNumberOfItems && total > 0"
           :class="[classesList.paginationFullNumberOfRecords]"
         >
           <span

@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { Datatable, DropdownOption } from '@flavorly/vanilla-components'
+import { Datatable } from '@flavorly/vanilla-components'
 import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
 
-const onFetched = () => {
-  // Update our little demo height.
-  window.parent.postMessage('mounted', '*')
+const onGenericEvent = (e) => {
+  console.log('Datatable Event dispatched', e)
 }
 
 // Options
 const options = {
+  allSelectable: true,
+  isSearchHidden: false,
   selectable: true,
   searchable: true,
   refreshable: true,
@@ -192,6 +193,7 @@ const poolingOptions = {
 const config = {
   name: 'ExampleDatatable',
   primaryKey: 'id',
+  fetchEndpoint: '/datatables',
   columns,
   actions,
   filters,
@@ -207,19 +209,10 @@ const config = {
     <div>
       <Datatable
         :config="config"
-        unique-name="payments"
-        :columns="columns"
-        :options="options"
-        :translations="translations"
-        :actions="actions"
-        :per-page-options="perPageItemsOptions"
-        :filters="filters"
-        fetch-endpoint="/datatables"
-        actions-endpoint="/datatables"
-        @fetched-success="onFetched"
-        @fetch-error="onFetched"
-        @opened-settings="onFetched"
-        @opened-filters="onFetched"
+        @fetched-success="onGenericEvent"
+        @fetch-error="onGenericEvent"
+        @opened-settings="onGenericEvent"
+        @opened-filters="onGenericEvent"
       >
         <template #rowId="{ result, resultRaw }">
           <span><u>{{ result }}</u></span>

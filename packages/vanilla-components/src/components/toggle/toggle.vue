@@ -147,30 +147,32 @@ defineOptions({
       <span
         :class="[
           configuration.classesList.iconWrapper,
-          isChecked ?  configuration.classesList.transitionChecked :  configuration.classesList.transitionUnchecked
+          isChecked ? configuration.classesList.transitionChecked : configuration.classesList.transitionUnchecked,
         ]"
         aria-hidden="true"
       >
         <!-- Checked Slot -->
-        <slot
-          :is-checked="isChecked"
-          name="unchecked"
-        >
-          <VanillaUncheckedIcon
-            v-if="!isChecked"
-            :class="configuration.classesList.iconUnchecked"
-          />
-        </slot>
-        <!-- Un-Checked Slot -->
-        <slot
-          :is-checked="isChecked"
-          name="checked"
-        >
-          <VanillaCheckedIcon
-            v-if="isChecked"
-            :class="configuration.classesList.iconChecked"
-          />
-        </slot>
+        <template v-if="isChecked">
+          <slot
+            :is-checked="isChecked"
+            name="unchecked"
+          >
+            <VanillaUncheckedIcon
+              :class="configuration.classesList.iconUnchecked"
+            />
+          </slot>
+        </template>
+        <template v-else>
+          <slot
+            :is-checked="isChecked"
+            name="checked"
+          >
+            <VanillaCheckedIcon
+              v-if="isChecked"
+              :class="configuration.classesList.iconChecked"
+            />
+          </slot>
+        </template>
       </span>
     </button>
   </div>

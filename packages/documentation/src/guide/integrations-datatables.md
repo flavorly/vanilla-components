@@ -4,7 +4,7 @@ outline: deep
 
 # Laravel + Datatables
 
-The following package provides a simple & first party integration between Laravel and the Datatable Component.
+The following package provides a simple & first party integration between [Laravel](https://laravel.com/) and the [Datatable Component](./components/datatable).
 Never again will you have to write a single line of Javascript to get your tables up and running.
 Please keep in mind the current implementation is intended to be simple and easy to use, if you are looking for a more advanced package please
 checkout AG-Grid or similar, since we WON'T over-complicate this package.
@@ -28,6 +28,42 @@ to search through your models, and the big plus it also supports **Database**, *
 # Install Scout for Search
 # For more information please visit https://laravel.com/docs/scout
 composer require laravel/scout
+```
+
+On your model add the Laravel Scout `Searchable` trait, and define the `toSearchableArray` method, this method is used to
+search your model.
+
+```php
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Laravel\Scout\Searchable;// [!vp focus:1]
+
+class Payment extends Model
+{
+    use Searchable; // [!vp focus:1]
+    use HasFactory;
+    
+    public function searchableUsing() // [!vp focus:5]
+    {
+        // If can use any engines of your choice here
+        return app(EngineManager::class)->engine('database');
+    }
+
+    #[SearchUsingPrefix(['id', 'gateway'])] // [!vp focus:9]
+    public function toSearchableArray()
+    {
+        return [
+            'id' => $this->id,
+            'gateway' => $this->gateway,
+            'status' => $this->status,
+        ];
+    }
+}
+
 ```
 
 Next, install our Package:
