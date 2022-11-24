@@ -158,6 +158,8 @@ defineOptions({
             :options="filter.options"
             v-bind="filter.props"
             :show-empty="true"
+            :feedback="filter.feedback"
+            :errors="filter.errors"
           />
 
           <RichSelect
@@ -166,6 +168,8 @@ defineOptions({
             :placeholder="filter.placeholder"
             :options="filter.options"
             v-bind="filter.props"
+            :feedback="filter.feedback"
+            :errors="filter.errors"
           />
 
           <Input
@@ -173,6 +177,8 @@ defineOptions({
             v-model="localFilters[filter.name]"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
+            :feedback="filter.feedback"
+            :errors="filter.errors"
           />
 
           <Checkbox
@@ -180,6 +186,8 @@ defineOptions({
             v-model="localFilters[filter.name]"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
+            :feedback="filter.feedback"
+            :errors="filter.errors"
           />
 
           <Toggle
@@ -187,6 +195,8 @@ defineOptions({
             v-model="localFilters[filter.name]"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
+            :feedback="filter.feedback"
+            :errors="filter.errors"
           />
 
           <Textarea
@@ -194,6 +204,8 @@ defineOptions({
             v-model="localFilters[filter.name]"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
+            :feedback="filter.feedback"
+            :errors="filter.errors"
           />
 
           <DateTimeInput
@@ -201,6 +213,8 @@ defineOptions({
             v-model="localFilters[filter.name]"
             :placeholder="filter.placeholder"
             v-bind="filter.props"
+            :feedback="filter.feedback"
+            :errors="filter.errors"
           />
         </InputGroup>
       </template>

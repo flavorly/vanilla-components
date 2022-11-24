@@ -160,6 +160,8 @@ export declare interface DatatableFilter {
   name: string
   label: string
   layout?: string
+  feedback?: string
+  errors?: string
   component: string
   placeholder?: string
   value?: string | undefined | null | number | boolean

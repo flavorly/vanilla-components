@@ -57,6 +57,7 @@ export const selectConfig = {
           commonClasses.inputsErrorsBackground,
           commonClasses.inputsErrorsBorder,
           commonClasses.inputsErrorsRing,
+          commonClasses.inputsRadius,
         ),
         selectIfMultiple: '',
 

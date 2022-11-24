@@ -479,6 +479,9 @@ const resetFilter = (filterToClear: Types.DatatableFilter, shouldRefresh = true)
         return
     }
 
+    // We need to deselect
+    deselectAllItems()
+
     userSettings.filters = { ...omit(userSettings.filters, filterToClear.name) }
     queryData.filters = { ...omit(queryData.filters, filterToClear.name) }
 
@@ -1119,7 +1122,7 @@ defineOptions({
       <div
         :class="[
           classesList.tableContainer,
-          hasAnyItemsSelected ? classesList.tableContainerBorder : '',
+          (hasAnyItemsSelected || filtersActiveCount > 0) ? classesList.tableContainerBorder : '',
         ]"
       >
         <template v-if="!showBeInLoadingState && results.data.length <= 0 ">

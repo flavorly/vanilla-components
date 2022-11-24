@@ -113,7 +113,7 @@ export function useConfiguration<ComponentOptions extends Data>(
   const hasErrors = computed(() => errors?.value !== undefined && errors?.value !== null && errors?.value !== '') as ComputedRef<boolean>
 
   // If there is any error, we will just set the variant to the error one
-  if (errors.value !== undefined && errors.value !== '') {
+  if (errors.value !== undefined && errors.value !== '' && errors.value !== null) {
       variant.value = 'error'
   }
 
