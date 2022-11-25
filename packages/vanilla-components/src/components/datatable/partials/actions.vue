@@ -69,7 +69,7 @@ defineOptions({
           :name="action.slotName"
           v-bind="{ selectAction }"
         >
-          <span>{{ action.name }}</span>
+          <span>{{ action.label }}</span>
         </slot>
       </DropdownOption>
     </template>

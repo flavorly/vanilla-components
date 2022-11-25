@@ -290,6 +290,7 @@ export declare interface DatatableAction {
   after?: {
     clearSelected?: boolean
     resetFilters?: boolean
+    refresh?: boolean
     pooling?: DatatablePooling
     callback?: ActionCallback
   }

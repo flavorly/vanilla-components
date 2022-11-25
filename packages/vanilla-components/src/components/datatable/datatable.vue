@@ -616,6 +616,11 @@ const executeAction = (action: Types.DatatableAction) => {
 
         // Reset the action
         resetAction()
+
+        // Refresh again, because the first one is just to trigger the actual action.
+        if (action?.after?.refresh || true) {
+          refresh()
+        }
     }
 
     // Emit Action
