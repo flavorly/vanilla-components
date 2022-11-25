@@ -69,7 +69,7 @@ const defaultVariant = {
       'cursor-pointer disabled:cursor-not-allowed',
       'text-sm font-normal',
       'px-3 py-2',
-      'focus:outline-none focus:bg-primary-100 focus:dark:bg-primary-300 focus:text-primary-900 focus:dark:text-black focus:dark:text-primary-300',
+      'focus:outline-none',
     ),
 
     selectedOption: 'bg-gray-50 dark:bg-gray-800 focus:outline-none',
