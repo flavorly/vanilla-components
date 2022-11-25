@@ -66,7 +66,7 @@ importers:
       postcss-prefix-selector: ^1.16.0
       shiki: ^0.11.1
       tailwindcss: ^3.2.4
-      unplugin-vue-define-options: ^0.12.8
+      unplugin-vue-define-options: ^1.0.0
       vite: ^3.2.4
       vite-plugin-inspect: ^0.7.8
       vitepress: ^1.0.0-alpha.29
@@ -96,7 +96,7 @@ importers:
       paginatedjs: 1.1.1
       shiki: 0.11.1
       tailwindcss: 3.2.4_postcss@8.4.19
-      unplugin-vue-define-options: 0.12.8
+      unplugin-vue-define-options: 1.0.0
       vitepress: 1.0.0-alpha.29_tbpndr44ulefs3hehwpi2mkf2y
       vue: 3.2.45
       vue-json-pretty: 2.2.3_vue@3.2.45
@@ -137,9 +137,8 @@ importers:
       eslint-import-resolver-typescript: ^3.5.2
       eslint-plugin-import: ^2.26.0
       eslint-plugin-tree-shaking: ^1.10.0
-      eslint-plugin-unicorn: ^44.0.2
+      eslint-plugin-unicorn: ^45.0.0
       eslint-plugin-vue: ^9.7.0
-      focus-trap: ^7.1.0
       fuse.js: ^6.6.2
       libphonenumber-js: ^1.10.14
       lodash: ^4.17.21
@@ -148,7 +147,7 @@ importers:
       rollup-plugin-copy: ^3.4.0
       rollup-plugin-visualizer: ^5.8.3
       typescript: ^4.8.4
-      unplugin-vue-define-options: ^0.12.8
+      unplugin-vue-define-options: ^1.0.0
       vite: ^3.2.4
       vite-plugin-dts: ^1.7.1
       vue: ^3.2.45
@@ -157,13 +156,12 @@ importers:
       '@headlessui/vue': 1.7.4_vue@3.2.45
       '@popperjs/core': 2.11.6
       '@vueuse/core': 9.6.0_vue@3.2.45
-      '@vueuse/integrations': 9.6.0_dpkmfrlozyzugxiczrcouyzpty
+      '@vueuse/integrations': 9.6.0_zjg7w4qcxwmiid3w5feg3wwgmu
       axios: 1.2.0
-      focus-trap: 7.1.0
       fuse.js: 6.6.2
       libphonenumber-js: 1.10.14
       lodash: 4.17.21
-      unplugin-vue-define-options: 0.12.8
+      unplugin-vue-define-options: 1.0.0
       vue: 3.2.45
     devDependencies:
       '@antfu/eslint-config': 0.31.0_jhu7zgeqyurmlzutcabokcuzgq
@@ -182,7 +180,7 @@ importers:
       eslint-import-resolver-typescript: 3.5.2_ktrec6dplf4now6nlbc6d67jee
       eslint-plugin-import: 2.26.0_vc54pluhgv7booofyyjouvuf74
       eslint-plugin-tree-shaking: 1.10.0
-      eslint-plugin-unicorn: 44.0.2_eslint@8.28.0
+      eslint-plugin-unicorn: 45.0.0_eslint@8.28.0
       eslint-plugin-vue: 9.7.0_eslint@8.28.0
       pnpm: 7.17.0
       prettier: 2.8.0
@@ -1127,7 +1125,7 @@ packages:
       - vue
     dev: false
 
-  /@vueuse/integrations/9.6.0_dpkmfrlozyzugxiczrcouyzpty:
+  /@vueuse/integrations/9.6.0_zjg7w4qcxwmiid3w5feg3wwgmu:
     resolution: {integrity: sha512-+rs2OWY/3spxoAGQMnlHQpxf8ErAYf4D1bT0aXaPnxphmtYgexm6KIjTFpBbcQnHwVi1g2ET1SJoQL16yDrgWA==}
     peerDependencies:
       async-validator: '*'
@@ -1168,7 +1166,6 @@ packages:
       '@vueuse/core': 9.6.0_vue@3.2.45
       '@vueuse/shared': 9.6.0_vue@3.2.45
       axios: 1.2.0
-      focus-trap: 7.1.0
       fuse.js: 6.6.2
       vue-demi: 0.13.11_vue@3.2.45
     transitivePeerDependencies:
@@ -2381,6 +2378,31 @@ packages:
       strip-indent: 3.0.0
     dev: true
 
+  /eslint-plugin-unicorn/45.0.0_eslint@8.28.0:
+    resolution: {integrity: sha512-iP8cMRxXKHonKioOhnCoCcqVhoqhAp6rB+nsoLjXFDxTHz3btWMAp8xwzjHA0B1K6YV/U/Yvqn1bUXZt8sJPuQ==}
+    engines: {node: '>=14.18'}
+    peerDependencies:
+      eslint: '>=8.28.0'
+    dependencies:
+      '@babel/helper-validator-identifier': 7.19.1
+      ci-info: 3.6.2
+      clean-regexp: 1.0.0
+      eslint: 8.28.0
+      eslint-utils: 3.0.0_eslint@8.28.0
+      esquery: 1.4.0
+      indent-string: 4.0.0
+      is-builtin-module: 3.2.0
+      jsesc: 3.0.2
+      lodash: 4.17.21
+      pluralize: 8.0.0
+      read-pkg-up: 7.0.1
+      regexp-tree: 0.1.24
+      regjsparser: 0.9.1
+      safe-regex: 2.1.1
+      semver: 7.3.8
+      strip-indent: 3.0.0
+    dev: true
+
   /eslint-plugin-vue/9.7.0_eslint@8.28.0:
     resolution: {integrity: sha512-DrOO3WZCZEwcLsnd3ohFwqCoipGRSTKTBTnLwdhqAbYZtzWl0o7D+D8ZhlmiZvABKTEl8AFsqH1GHGdybyoQmw==}
     engines: {node: ^14.17.0 || >=16.0.0}
@@ -2628,12 +2650,6 @@ packages:
   /flatted/3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
-
-  /focus-trap/7.1.0:
-    resolution: {integrity: sha512-CuJvwUBfJCWcU6fc4xr3UwMF5vWnox4isXAixCwrPzCsPKOQjP9T+nTlYT2t+vOmQL8MOQ16eim99XhjQHAuiQ==}
-    dependencies:
-      tabbable: 6.0.1
-    dev: false
 
   /follow-redirects/1.15.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
@@ -3113,6 +3129,17 @@ packages:
     hasBin: true
     dependencies:
       argparse: 2.0.1
+    dev: true
+
+  /jsesc/0.5.0:
+    resolution: {integrity: sha512-uZz5UnB7u4T9LvwmFqXii7pZSouaRPorGs5who1Ip7VO0wxanFvBL7GkM6dTHlgX+jhBApRetaWpnDabOeTcnA==}
+    hasBin: true
+    dev: true
+
+  /jsesc/3.0.2:
+    resolution: {integrity: sha512-xKqzzWXDttJuOcawBt4KnKHHIf5oQ/Cxax+0PWFG+DFDgHNAdi+TXECADI+RYiFUMmx8792xsMbbgXj4CwnP4g==}
+    engines: {node: '>=6'}
+    hasBin: true
     dev: true
 
   /json-parse-even-better-errors/2.3.1:
@@ -3975,6 +4002,13 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /regjsparser/0.9.1:
+    resolution: {integrity: sha512-dQUtn90WanSNl+7mQKcXAgZxvUe7Z0SqXlgzv0za4LwiUhyzBC58yQO3liFoUgu8GiJVInAhJjkj1N0EtQ5nkQ==}
+    hasBin: true
+    dependencies:
+      jsesc: 0.5.0
+    dev: true
+
   /require-directory/2.1.1:
     resolution: {integrity: sha512-fGxEI7+wsG9xrvdjsrlmL22OMTTiHRwAMroiEeMgq8gzoLC/PQr7RsRDSTLUg/bZAZtF+TVIkHc6/4RIKrui+Q==}
     engines: {node: '>=0.10.0'}
@@ -4288,10 +4322,6 @@ packages:
       tslib: 2.4.1
     dev: true
 
-  /tabbable/6.0.1:
-    resolution: {integrity: sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==}
-    dev: false
-
   /tailwindcss/3.2.4_postcss@8.4.19:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
@@ -4470,8 +4500,8 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /unplugin-vue-define-options/0.12.8:
-    resolution: {integrity: sha512-/5NjICUI9Ick6LI31pc0jTh7DUdEBerLS3UKor3AanldLtqKWYd0lzjHjgg4JXUvuOEkpDf7e0f3jpqE362mKA==}
+  /unplugin-vue-define-options/1.0.0:
+    resolution: {integrity: sha512-j90zM7NhZXBL5uMlHKzSOjvU98lFcIErdgAhj7bEEdvZarkwOkEUgMFsZDwStN9FEcMAiS/BTvcyGfItu3ry/g==}
     engines: {node: '>=14.19.0'}
     dependencies:
       '@rollup/pluginutils': 4.2.1
