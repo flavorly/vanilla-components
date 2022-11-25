@@ -4,9 +4,11 @@ import { inject, ref } from 'vue'
 import OptionsList from './option-list.vue'
 import SearchInput from './search.vue'
 import SelectState from './state.vue'
-import { useInjectsClassesListClass } from '@/core/use'
+import { useInjectsClassesListClass, useInjectsConfiguration } from '@/core/use'
 import type { NormalizedOptions } from '@/core/types'
+import type { RichSelectProps } from '@/components/rich-select/config'
 
+const root = ref()
 const searchInput = ref()
 const optionsList = ref()
 const state = ref()
@@ -14,10 +16,19 @@ const state = ref()
 const options = inject<ComputedRef<NormalizedOptions>>('options')!
 const showSearchInput = inject<ComputedRef<boolean>>('showSearchInput')!
 const className = useInjectsClassesListClass('dropdownContent')
+const classNameWithSearch = useInjectsClassesListClass('dropdownContentWithSearch')
+const shown = inject<ComputedRef<boolean>>('shown')!
+const configuration = useInjectsConfiguration<RichSelectProps>()
 </script>
 
 <template>
-  <div :class="className">
+  <div
+    ref="root"
+    :class="[
+      className,
+      !configuration.hideSearchBox ? classNameWithSearch : '',
+    ]"
+  >
     <SearchInput
       v-if="showSearchInput"
       ref="searchInput"

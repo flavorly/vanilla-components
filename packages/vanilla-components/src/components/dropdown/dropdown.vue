@@ -3,7 +3,8 @@ import type { PropType, Ref } from 'vue'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { Options, Placement, Instance as PopperInstance } from '@popperjs/core'
 import { createPopper as createPopperBase } from '@popperjs/core'
-import { onClickOutside, refThrottled } from '@vueuse/core'
+import { onClickOutside, refThrottled, useFocus } from '@vueuse/core'
+import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
 import { dropdownConfig, dropdownPopperDefaultOptions, validDropdownPlacements } from './config'
 import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
@@ -16,6 +17,7 @@ import {
   isTouchOnlyDevice as getIsTouch,
   isServer,
 } from '@/core/helpers'
+
 /* eslint @typescript-eslint/no-use-before-define: ["off"] */
 
 const props = defineProps({
@@ -76,6 +78,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  trapFocus: {
+    type: Boolean,
+    default: true,
+  },
   placement: {
     type: String as PropType<Placement>,
     default: undefined,
@@ -121,6 +127,16 @@ const popper = ref<PopperInstance | null>(null)
 const dropdown = ref<HTMLDivElement>() as Ref<HTMLDivElement>
 const trigger = ref<HTMLButtonElement>() as Ref<HTMLButtonElement>
 const root = ref<HTMLDivElement>() as Ref<HTMLDivElement>
+
+// Watcher for Focus Trap
+const { activate, deactivate } = useFocusTrap(dropdown, {
+  setReturnFocus: trigger.value,
+  returnFocusOnDeactivate: false,
+  delayInitialFocus: true,
+  clickOutsideDeactivates: true,
+  escapeDeactivates: true,
+})
+const { focused } = useFocus(trigger)
 
 // Computed
 const fullPopperOptions = computed((): Options => {
@@ -210,9 +226,16 @@ const doShow = async (): Promise<void> => {
     shown.value = true
   }
 
-  await nextTick()
+  await nextTick().then(() => {
+    if (props.trapFocus) {
+      try {
+        activate()
+      }
+      catch (e) {}
+    }
 
-  onShown()
+    onShown()
+  })
 }
 
 /** Hide Dropdown */
@@ -221,9 +244,16 @@ const doHide = async (): Promise<void> => {
 
   shown.value = false
 
-  await nextTick()
-
-  onHidden()
+  await nextTick().then(() => {
+    if (props.trapFocus) {
+      try {
+        deactivate()
+      }
+catch (e) {}
+    }
+    onHidden()
+    focused.value = true
+  })
 }
 
 /** Toggle Hide/Show Dropdown */
@@ -436,6 +466,15 @@ const touchstartHandler = (e: TouchEvent): void => {
   }
 }
 
+const keydownEscHandler = (e: KeyboardEvent): void => {
+  emit('keydown', e)
+
+  if (shown.value === false) {
+    return
+  }
+  doHide()
+}
+
 /** Hide the dropdown after a certain timeout */
 const hideAfterTimeout = (): void => {
   if (!configuration.hideOnLeaveTimeout) {
@@ -498,8 +537,8 @@ onBeforeUnmount(() => {
 // Headless ui does something similar, by trapping & also listening events
 // This also prevents the teleport from being considered a click outside.
 onClickOutside(root, () => {
-  if (props.closeOnClickAway) {
-    doHide()
+  if (props.closeOnClickAway && shown.value) {
+      doHide()
   }
 }, {
   ignore: [

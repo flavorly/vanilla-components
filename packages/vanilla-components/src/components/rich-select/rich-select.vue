@@ -2,6 +2,7 @@
 import type { PropType, Ref } from 'vue'
 import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
+import { refThrottled } from '@vueuse/core'
 import RichSelectDropdown from './partials/dropdown.vue'
 import RichSelectTrigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
@@ -14,7 +15,7 @@ import SimpleSelect from '@/components/select/select.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormErrors from '@/components/forms/form-errors.vue'
 import { popperOptions, sameWidthModifier } from '@/core/config'
-import { isEqual, throttle } from '@/core/helpers'
+import { isEqual } from '@/core/helpers'
 import { useActivableOption, useConfiguration, useFetchsOptions, useMultipleVModel, useSelectableOption, useVariantProps } from '@/core/use'
 
 const props = defineProps({
@@ -106,6 +107,10 @@ const props = defineProps({
     default: false,
   },
   closeOnClickAway: {
+    type: Boolean,
+    default: true,
+  },
+  closeOnPressEscape: {
     type: Boolean,
     default: true,
   },
@@ -267,7 +272,7 @@ const {
 } = useActivableOption(flattenedOptions, localValue)
 
 const originalShown = ref(props.show)
-const shown = ref<boolean>(props.show)
+const shown = refThrottled<boolean>(originalShown, 1000)
 
 const showSearchInput = computed<boolean>(() => {
   if (configuration.hideSearchBox) {
@@ -334,7 +339,9 @@ const dropdownClasses: Ref<CSSRawClassesList> = computed(() => {
 
 const showClearButton: Ref<boolean> = computed(() => (hasSelectedOption.value && configuration.clearable === true && configuration.disabled !== true))
 
-const focusDropdownTrigger = (): void => dropdownComponent.value!.focus()
+const focusDropdownTrigger = (): void => {
+  dropdownComponent.value!.focus()
+}
 
 const usesTags = computed<boolean>(() => configuration.tags === true && configuration.multiple === true)
 
@@ -537,13 +544,17 @@ const blurOnChildHandler = (e: FocusEvent): void => {
     && relatedTargetDataset
     && relatedTargetDataset.richSelectFocusable === undefined
   ) {
-    target.focus()
+
+    // TODO: need to check if we can remove this part
+    // target.focus()
   }
 }
 
 const blurHandler = (e: FocusEvent): void => {
   emit('blur', e)
-  hideDropdown()
+  if (shown.value) {
+    hideDropdown()
+  }
 }
 
 // ---------------

@@ -142,6 +142,7 @@ export declare type DropdownExtendedProps = WithVariantPropsAndClassesList<{
   closeOnClickAway?: boolean
 
   show?: boolean
+  trapFocus?: boolean
 
   hideOnLeaveTimeout?: number
 

@@ -50,7 +50,7 @@ const valueFromSelect = ref()
                 { value: 'Option 1', text: 'One Option' },
                 { value: 'Option 2', text: 'Two Options' },
               ]"
-              :teleport="false"
+              :teleport="true"
               :clearable="true"
               :hide-search-box="true"
               feedback="Im useful helper out here, choose wisely"

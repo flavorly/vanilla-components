@@ -34,7 +34,10 @@ const value = ref(false)
               Click here
             </Button>
           </template>
-          <p>Im a content inside the dropdown</p>
+          <div class="py-2 px-2 grid grid-cols-1 gap-2">
+            <Button>Im a button inside this</Button>
+            <Button>Im a button inside this</Button>
+          </div>
         </Dropdown>
       </div>
     </div>

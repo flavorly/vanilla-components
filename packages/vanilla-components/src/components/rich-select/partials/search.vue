@@ -17,17 +17,17 @@ const classesList = useInjectsClassesList()!
 watch(() => shown.value, async (isShown: boolean): Promise<void> => {
   await nextTick(() => {
     if (shown.value) {
-      search.value.focus({ preventScroll: true })
+      // search.value.focus({ preventScroll: true })
     }
   })
 
   if (shown.value) {
-    search.value.focus({ preventScroll: true })
+    // search.value.focus({ preventScroll: true })
   }
 })
 
 onMounted(() => {
-  search.value.focus({ preventScroll: true })
+  // search.value.focus({ preventScroll: true })
 })
 </script>
 
