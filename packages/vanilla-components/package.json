@@ -85,7 +85,7 @@
     "eslint-import-resolver-typescript": "^3.5.2",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-tree-shaking": "^1.10.0",
-    "eslint-plugin-unicorn": "^44.0.2",
+    "eslint-plugin-unicorn": "^45.0.0",
     "eslint-plugin-vue": "^9.7.0",
     "pnpm": "^7.16.0",
     "prettier": "^2.7.1",
