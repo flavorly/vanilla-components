@@ -139,6 +139,7 @@ importers:
       eslint-plugin-tree-shaking: ^1.10.0
       eslint-plugin-unicorn: ^45.0.0
       eslint-plugin-vue: ^9.7.0
+      focus-trap: ^7.1.0
       fuse.js: ^6.6.2
       libphonenumber-js: ^1.10.14
       lodash: ^4.17.21
@@ -156,8 +157,9 @@ importers:
       '@headlessui/vue': 1.7.4_vue@3.2.45
       '@popperjs/core': 2.11.6
       '@vueuse/core': 9.6.0_vue@3.2.45
-      '@vueuse/integrations': 9.6.0_zjg7w4qcxwmiid3w5feg3wwgmu
+      '@vueuse/integrations': 9.6.0_dpkmfrlozyzugxiczrcouyzpty
       axios: 1.2.0
+      focus-trap: 7.1.0
       fuse.js: 6.6.2
       libphonenumber-js: 1.10.14
       lodash: 4.17.21
@@ -1125,7 +1127,7 @@ packages:
       - vue
     dev: false
 
-  /@vueuse/integrations/9.6.0_zjg7w4qcxwmiid3w5feg3wwgmu:
+  /@vueuse/integrations/9.6.0_dpkmfrlozyzugxiczrcouyzpty:
     resolution: {integrity: sha512-+rs2OWY/3spxoAGQMnlHQpxf8ErAYf4D1bT0aXaPnxphmtYgexm6KIjTFpBbcQnHwVi1g2ET1SJoQL16yDrgWA==}
     peerDependencies:
       async-validator: '*'
@@ -1166,6 +1168,7 @@ packages:
       '@vueuse/core': 9.6.0_vue@3.2.45
       '@vueuse/shared': 9.6.0_vue@3.2.45
       axios: 1.2.0
+      focus-trap: 7.1.0
       fuse.js: 6.6.2
       vue-demi: 0.13.11_vue@3.2.45
     transitivePeerDependencies:
@@ -2650,6 +2653,12 @@ packages:
   /flatted/3.2.7:
     resolution: {integrity: sha512-5nqDSxl8nn5BSNxyR3n4I6eDmbolI6WT+QqR547RwxQapgjQBmtktdP+HTBb/a/zLsbzERTONyUB5pefh5TtjQ==}
     dev: true
+
+  /focus-trap/7.1.0:
+    resolution: {integrity: sha512-CuJvwUBfJCWcU6fc4xr3UwMF5vWnox4isXAixCwrPzCsPKOQjP9T+nTlYT2t+vOmQL8MOQ16eim99XhjQHAuiQ==}
+    dependencies:
+      tabbable: 6.0.1
+    dev: false
 
   /follow-redirects/1.15.2:
     resolution: {integrity: sha512-VQLG33o04KaQ8uYi2tVNbdrWp1QWxNNea+nmIB4EVM28v0hmP17z7aG1+wAkNzVq4KeXTq3221ye5qTJP91JwA==}
@@ -4321,6 +4330,10 @@ packages:
       '@pkgr/utils': 2.3.1
       tslib: 2.4.1
     dev: true
+
+  /tabbable/6.0.1:
+    resolution: {integrity: sha512-SYJSIgeyXW7EuX1ytdneO5e8jip42oHWg9xl/o3oTYhmXusZVgiA+VlPvjIN+kHii9v90AmzTZEBcsEvuAY+TA==}
+    dev: false
 
   /tailwindcss/3.2.4_postcss@8.4.19:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
