@@ -36,7 +36,7 @@
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.8",
     "@vueuse/core": "^9.5.0",
-    "unplugin-vue-define-options": "^0.12.8",
+    "unplugin-vue-define-options": "^1.0.0",
     "body-scroll-lock": "^4.0.0-beta.0",
     "collect.js": "^4.34.3",
     "fuse.js": "^6.6.2",
