@@ -74,7 +74,7 @@ const defaultVariant = {
 
     selectedOption: 'bg-gray-50 dark:bg-gray-800 focus:outline-none',
     highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black focus:outline-none',
-    selectedHighlightedOption: 'font-semibold bg-primary-50 dark:bg-gray-800 focus:outline-none',
+    selectedHighlightedOption: 'font-semibold bg-primary-50 dark:bg-primary-400 dark:text-black focus:outline-none',
 
     //  Option content
     optionContent: 'flex items-center justify-between',
