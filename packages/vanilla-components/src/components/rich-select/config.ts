@@ -26,7 +26,7 @@ const defaultVariant = {
       // commonClasses.inputsRadius,
 
       // Only way to get border-b-none and etc working :(
-      'relative flex items-center justify-between w-full focus:z-10',
+      'relative flex items-center justify-between w-full focus:z-10 cursor-pointer',
       commonClasses.inputsText,
       commonClasses.inputsTransition,
       commonClasses.inputsShadows,
@@ -43,7 +43,8 @@ const defaultVariant = {
     ),
 
     // Dropdown content
-    dropdownContent: 'pt-1 space-y-2',
+    dropdownContent: 'space-y-1',
+    dropdownContentWithSearch: 'pt-1',
 
     // Clear button
     clearButton: mergeClasses(
@@ -60,7 +61,7 @@ const defaultVariant = {
     optionsList: '',
 
     // Option wrapper
-    optionWrapper: '',
+    optionWrapper: 'focus:outline-none',
 
     // Option button
     option: mergeClasses(
@@ -68,11 +69,12 @@ const defaultVariant = {
       'cursor-pointer disabled:cursor-not-allowed',
       'text-sm font-normal',
       'px-3 py-2',
+      'focus:outline-none focus:bg-primary-100 focus:dark:bg-primary-300 focus:text-primary-900 focus:dark:text-black focus:dark:text-primary-300',
     ),
 
-    selectedOption: 'bg-gray-50 dark:bg-gray-800',
-    highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black',
-    selectedHighlightedOption: 'font-semibold bg-gray-50 dark:bg-gray-800',
+    selectedOption: 'bg-gray-50 dark:bg-gray-800 focus:outline-none',
+    highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black focus:outline-none',
+    selectedHighlightedOption: 'font-semibold bg-primary-50 dark:bg-gray-800 focus:outline-none',
 
     //  Option content
     optionContent: 'flex items-center justify-between',
@@ -232,6 +234,7 @@ export declare type RichSelectProps = WithVariantPropsAndClassesList<{
   multiple?: boolean
   name?: string
   tags?: boolean
+  show?: boolean
   normalizeOptions?: boolean
   valueAttribute?: string
   textAttribute?: string
@@ -246,6 +249,7 @@ export declare type RichSelectProps = WithVariantPropsAndClassesList<{
   toggleOnClick?: boolean
   closeOnSelect?: boolean
   selectOnClose?: boolean
+  closeOnPressEscape?: boolean
   clearable?: boolean
   disabled?: boolean
   placeholder?: string

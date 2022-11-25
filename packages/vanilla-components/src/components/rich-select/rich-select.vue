@@ -2,6 +2,7 @@
 import type { PropType, Ref } from 'vue'
 import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
+import { refThrottled } from '@vueuse/core'
 import RichSelectDropdown from './partials/dropdown.vue'
 import RichSelectTrigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
@@ -14,7 +15,7 @@ import SimpleSelect from '@/components/select/select.vue'
 import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormErrors from '@/components/forms/form-errors.vue'
 import { popperOptions, sameWidthModifier } from '@/core/config'
-import { isEqual, throttle } from '@/core/helpers'
+import { isEqual } from '@/core/helpers'
 import { useActivableOption, useConfiguration, useFetchsOptions, useMultipleVModel, useSelectableOption, useVariantProps } from '@/core/use'
 
 const props = defineProps({
@@ -101,6 +102,18 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  toggleOnHover: {
+    type: Boolean,
+    default: false,
+  },
+  closeOnClickAway: {
+    type: Boolean,
+    default: true,
+  },
+  closeOnPressEscape: {
+    type: Boolean,
+    default: true,
+  },
   valueAttribute: {
     type: String,
     default: undefined,
@@ -173,6 +186,10 @@ const props = defineProps({
   teleportTo: {
     type: [String, Object] as PropType<string | HTMLElement>,
     default: 'body',
+  },
+  show: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -254,7 +271,8 @@ const {
   setPrevOptionActive,
 } = useActivableOption(flattenedOptions, localValue)
 
-const shown = ref<boolean>(false)
+const originalShown = ref(props.show)
+const shown = refThrottled<boolean>(originalShown, 1000)
 
 const showSearchInput = computed<boolean>(() => {
   if (configuration.hideSearchBox) {
@@ -321,19 +339,27 @@ const dropdownClasses: Ref<CSSRawClassesList> = computed(() => {
 
 const showClearButton: Ref<boolean> = computed(() => (hasSelectedOption.value && configuration.clearable === true && configuration.disabled !== true))
 
-const focusDropdownTrigger = (): void => dropdownComponent.value!.focus()
+const focusDropdownTrigger = (): void => {
+  dropdownComponent.value!.focus()
+}
 
 const usesTags = computed<boolean>(() => configuration.tags === true && configuration.multiple === true)
 
-const hideDropdown = (): void => dropdownComponent.value!.doHide()
+const hideDropdown = (): void => {
+  shown.value = false
+  dropdownComponent.value!.doHide()
+}
 
-const showDropdown = (): void => dropdownComponent.value!.doShow()
+const showDropdown = (): void => {
+  shown.value = true
+  dropdownComponent.value!.doShow()
+}
 
 const adjustDropdown = async (): Promise<void> => await dropdownComponent.value!.adjustPopper()
 
-const throttledShowDropdown = throttle(showDropdown, 200)
-
-const toggleDropdown = (): void => shown.value ? hideDropdown() : throttledShowDropdown()
+const toggleDropdown = (): void => {
+  shown.value ? hideDropdown() : showDropdown()
+}
 
 const toggleOptionFromActiveOption = (): void => {
   if (activeOption.value === null) {
@@ -358,7 +384,7 @@ const keydownDownHandler = (e: KeyboardEvent): void => {
   e.preventDefault()
 
   if (shown.value === false) {
-    throttledShowDropdown()
+    showDropdown()
     return
   }
   setNextOptionActive()
@@ -379,7 +405,7 @@ const keydownUpHandler = (e: KeyboardEvent): void => {
   e.preventDefault()
 
   if (shown.value === false) {
-    throttledShowDropdown()
+    showDropdown()
     return
   }
   setPrevOptionActive()
@@ -399,7 +425,7 @@ const keydownSpaceHandler = (e: KeyboardEvent): void => {
   e.preventDefault()
 
   if (configuration.toggleOnClick && shown.value === false) {
-    throttledShowDropdown()
+    showDropdown()
   }
   else if (shown.value === true) {
     toggleOptionFromActiveOption()
@@ -493,8 +519,9 @@ const mousedownHandler = (e: MouseEvent): void => {
     // If it has as search box I need to prevent default to ensure the search
     // box keep focused
     if (showSearchInput.value && shown.value === false) {
-      e.preventDefault()
+       e.preventDefault()
     }
+
     toggleDropdown()
   }
 }
@@ -503,7 +530,7 @@ const focusHandler = (e: FocusEvent): void => {
   emit('focus', e)
 
   if (configuration.toggleOnFocus) {
-    throttledShowDropdown()
+    showDropdown()
   }
 }
 
@@ -517,13 +544,17 @@ const blurOnChildHandler = (e: FocusEvent): void => {
     && relatedTargetDataset
     && relatedTargetDataset.richSelectFocusable === undefined
   ) {
-    target.focus()
+
+    // TODO: need to check if we can remove this part
+    // target.focus()
   }
 }
 
 const blurHandler = (e: FocusEvent): void => {
   emit('blur', e)
-  hideDropdown()
+  if (shown.value) {
+    hideDropdown()
+  }
 }
 
 // ---------------
@@ -618,7 +649,7 @@ defineOptions({
           :toggle-on-focus="false"
           :toggle-on-click="false"
           :toggle-on-hover="false"
-          :close-on-click-away="true"
+          :close-on-click-away="props.closeOnClickAway"
           :popper-options="configuration.dropdownPopperOptions"
           :placement="configuration.dropdownPlacement"
           :tag-name="usesTags ? 'div' : 'button'"

@@ -39,7 +39,7 @@ const { configuration } = useConfiguration<RichSelectTagWithImageProps>(richSele
 
 defineOptions({
   name: 'VanillaRichSelectOptionTagWithImage',
-  inheritAttrs: false,
+  inheritAttrs: true,
 })
 </script>
 

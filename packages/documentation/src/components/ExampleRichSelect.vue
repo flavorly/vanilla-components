@@ -42,6 +42,12 @@ const optionsPersons = [
     description: 'This an additional text for your select',
     image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
   },
+  {
+    value: 'armando-sharlaton2',
+    text: 'Another person here',
+    description: 'This an additional text for your select',
+    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+  },
 ]
 
 const optionsOrders = [
@@ -153,6 +159,7 @@ const fetchOptions = (query?: string, nextPage?: number) => {
           :options="optionsPersons"
           :tags="true"
           :multiple="true"
+          :clearable="true"
           placeholder="Please select a person"
         >
           <template #tagLabel="{ option: { raw: person }, className, isSelected, hasErrors }">

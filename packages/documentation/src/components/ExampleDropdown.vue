@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { Dropdown, DropdownMenu, DropdownOption } from '@flavorly/vanilla-components'
+import { Button, Dropdown, DropdownMenu, DropdownOption } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
 
-const value = ref(true)
+const value = ref(false)
 </script>
 
 <template>
@@ -28,8 +28,16 @@ const value = ref(true)
       </div>
 
       <div class="mt-10 flex items-center justify-center mx-auto">
-        <Dropdown text="Totally Vanilla Vanilla">
-          <p>Im a content inside the dropdown</p>
+        <Dropdown :teleport="true">
+          <template #trigger>
+            <Button class="btn">
+              Click here
+            </Button>
+          </template>
+          <div class="py-2 px-2 grid grid-cols-1 gap-2">
+            <Button>Im a button inside this</Button>
+            <Button>Im a button inside this</Button>
+          </div>
         </Dropdown>
       </div>
     </div>

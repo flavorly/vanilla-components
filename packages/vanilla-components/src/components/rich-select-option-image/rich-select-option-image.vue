@@ -47,6 +47,7 @@ defineOptions({
 
 <template>
   <div
+    v-bind="$attrs"
     :class="[
       parentClasses,
       configuration.classesList.wrapper,

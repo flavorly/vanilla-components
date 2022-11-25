@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { Button, Dialog } from '@flavorly/vanilla-components'
+import { Button, Dialog, RichSelect } from '@flavorly/vanilla-components'
 import { CheckIcon } from '@heroicons/vue/24/solid/index.js'
 import { ref } from 'vue'
 const open = ref(false)
 const open2 = ref(false)
+const valueFromSelect = ref()
 </script>
 
 <template>
@@ -40,6 +41,21 @@ const open2 = ref(false)
             <p class="text-sm text-gray-500">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.
             </p>
+          </div>
+
+          <div class="my-2">
+            <RichSelect
+              v-model="valueFromSelect"
+              :options="[
+                { value: 'Option 1', text: 'One Option' },
+                { value: 'Option 2', text: 'Two Options' },
+              ]"
+              :teleport="true"
+              :clearable="true"
+              :hide-search-box="true"
+              feedback="Im useful helper out here, choose wisely"
+              placeholder="Please select an option"
+            />
           </div>
         </div>
       </div>

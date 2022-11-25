@@ -16,6 +16,9 @@ const props = defineProps({
     type: Number,
     default: 0,
   },
+  index: {
+    type: [Number, String, undefined],
+  },
 })
 
 const elementList = ref(null) as Ref<ComponentPublicInstance<HTMLInputElement> | null>
