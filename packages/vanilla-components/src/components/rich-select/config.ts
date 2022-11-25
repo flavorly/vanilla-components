@@ -26,7 +26,7 @@ const defaultVariant = {
       // commonClasses.inputsRadius,
 
       // Only way to get border-b-none and etc working :(
-      'relative flex items-center justify-between w-full focus:z-10',
+      'relative flex items-center justify-between w-full focus:z-10 cursor-pointer',
       commonClasses.inputsText,
       commonClasses.inputsTransition,
       commonClasses.inputsShadows,
@@ -72,7 +72,7 @@ const defaultVariant = {
 
     selectedOption: 'bg-gray-50 dark:bg-gray-800',
     highlightedOption: 'text-primary-900 bg-primary-100 dark:bg-primary-300 dark:text-black',
-    selectedHighlightedOption: 'font-semibold bg-gray-50 dark:bg-gray-800',
+    selectedHighlightedOption: 'font-semibold bg-primary-50 dark:bg-gray-800',
 
     //  Option content
     optionContent: 'flex items-center justify-between',
@@ -232,6 +232,7 @@ export declare type RichSelectProps = WithVariantPropsAndClassesList<{
   multiple?: boolean
   name?: string
   tags?: boolean
+  show?: boolean
   normalizeOptions?: boolean
   valueAttribute?: string
   textAttribute?: string

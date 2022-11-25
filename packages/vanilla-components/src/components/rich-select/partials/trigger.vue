@@ -53,6 +53,11 @@ const showSelectorIcon = computed((): boolean => {
 
   return !hasSelectedOption || configuration.disabled === true
 })
+
+defineOptions({
+  name: 'VanillaRichSelectTrigger',
+  inheritAttrs: false,
+})
 </script>
 
 <template>

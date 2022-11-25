@@ -3,9 +3,7 @@ import type { PropType, Ref } from 'vue'
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { Options, Placement, Instance as PopperInstance } from '@popperjs/core'
 import { createPopper as createPopperBase } from '@popperjs/core'
-
-// import { markSibling, onClickOutside } from 'vue-click-outside-of'
-import { onClickOutside } from '@vueuse/core'
+import { onClickOutside, refThrottled } from '@vueuse/core'
 import { dropdownConfig, dropdownPopperDefaultOptions, validDropdownPlacements } from './config'
 import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
 import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
@@ -17,7 +15,6 @@ import {
   getFocusableElements,
   isTouchOnlyDevice as getIsTouch,
   isServer,
-  throttle,
 } from '@/core/helpers'
 /* eslint @typescript-eslint/no-use-before-define: ["off"] */
 
@@ -57,7 +54,7 @@ const props = defineProps({
   },
   toggleOnFocus: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   toggleOnClick: {
     type: Boolean,
@@ -110,11 +107,11 @@ const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dr
 
 // Refs
 const isTouchOnlyDevice = ref<boolean>(false)
-const shown = ref<boolean | undefined>(configuration.show)
+const originalShown = ref<boolean>(configuration.show)
+const shown = refThrottled<boolean>(originalShown, 1000)
 const initAsShow = ref<boolean | undefined>(configuration.show)
 const hideTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const focusableElements = ref<Array<HTMLElement>>([])
-const throttledToggle = ref<null | (() => void)>(null)
 const adjustingPopper = ref<boolean>(false)
 const popperIsAdjusted = ref<boolean>(false)
 const popperAdjusterListener = ref<null | DebouncedFn>(null)
@@ -209,7 +206,9 @@ const doShow = async (): Promise<void> => {
 
   await updatePopper()
 
-  shown.value = true
+  if (!shown.value) {
+    shown.value = true
+  }
 
   await nextTick()
 
@@ -378,7 +377,7 @@ const disablePopperNeedsAdjustmentListener = (): void => {
 const clickHandler = (e: MouseEvent): void => {
   emit('click', e)
   if (configuration.toggleOnClick) {
-    throttledToggle.value!()
+    doToggle()
   }
   else if (shouldShowWhenClicked.value) {
     doShow()
@@ -394,7 +393,7 @@ const focusHandler = (e: FocusEvent): void => {
   }
 
   if (configuration.toggleOnFocus) {
-    throttledToggle.value!()
+      doToggle()
   }
 }
 
@@ -480,7 +479,6 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
-
   if (isServer()) {
     return
   }
@@ -513,7 +511,6 @@ onClickOutside(root, () => {
 })
 
 // Rest of the setup
-throttledToggle.value = throttle(doToggle, 200)
 popperAdjusterListener.value = debounce(() => popperIsAdjusted.value = false, 200)
 
 /** Expose component Internal Methods to other components */
@@ -527,7 +524,7 @@ defineExpose({
 
 defineOptions({
   name: 'VanillaDropdown',
-  inheritAttrs: true,
+  inheritAttrs: false,
 })
 </script>
 

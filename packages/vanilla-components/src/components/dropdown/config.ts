@@ -42,6 +42,7 @@ export const dropdownConfig = {
       commonClasses.dropdownsShadows,
       'top-5',
       'focus:ring-0 focus:outline-none',
+      'z-[99]',
       'overflow-hidden',
     ),
 

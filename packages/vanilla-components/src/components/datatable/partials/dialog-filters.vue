@@ -167,9 +167,10 @@ defineOptions({
             v-model="localFilters[filter.name]"
             :placeholder="filter.placeholder"
             :options="filter.options"
-            v-bind="filter.props"
             :feedback="filter.feedback"
             :errors="filter.errors"
+            v-bind="filter.props"
+            :teleport="false"
           />
 
           <Input

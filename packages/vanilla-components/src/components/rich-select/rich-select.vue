@@ -101,6 +101,14 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  toggleOnHover: {
+    type: Boolean,
+    default: false,
+  },
+  closeOnClickAway: {
+    type: Boolean,
+    default: true,
+  },
   valueAttribute: {
     type: String,
     default: undefined,
@@ -173,6 +181,10 @@ const props = defineProps({
   teleportTo: {
     type: [String, Object] as PropType<string | HTMLElement>,
     default: 'body',
+  },
+  show: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -254,7 +266,8 @@ const {
   setPrevOptionActive,
 } = useActivableOption(flattenedOptions, localValue)
 
-const shown = ref<boolean>(false)
+const originalShown = ref(props.show)
+const shown = ref<boolean>(props.show)
 
 const showSearchInput = computed<boolean>(() => {
   if (configuration.hideSearchBox) {
@@ -325,15 +338,21 @@ const focusDropdownTrigger = (): void => dropdownComponent.value!.focus()
 
 const usesTags = computed<boolean>(() => configuration.tags === true && configuration.multiple === true)
 
-const hideDropdown = (): void => dropdownComponent.value!.doHide()
+const hideDropdown = (): void => {
+  shown.value = false
+  dropdownComponent.value!.doHide()
+}
 
-const showDropdown = (): void => dropdownComponent.value!.doShow()
+const showDropdown = (): void => {
+  shown.value = true
+  dropdownComponent.value!.doShow()
+}
 
 const adjustDropdown = async (): Promise<void> => await dropdownComponent.value!.adjustPopper()
 
-const throttledShowDropdown = throttle(showDropdown, 200)
-
-const toggleDropdown = (): void => shown.value ? hideDropdown() : throttledShowDropdown()
+const toggleDropdown = (): void => {
+  shown.value ? hideDropdown() : showDropdown()
+}
 
 const toggleOptionFromActiveOption = (): void => {
   if (activeOption.value === null) {
@@ -358,7 +377,7 @@ const keydownDownHandler = (e: KeyboardEvent): void => {
   e.preventDefault()
 
   if (shown.value === false) {
-    throttledShowDropdown()
+    showDropdown()
     return
   }
   setNextOptionActive()
@@ -379,7 +398,7 @@ const keydownUpHandler = (e: KeyboardEvent): void => {
   e.preventDefault()
 
   if (shown.value === false) {
-    throttledShowDropdown()
+    showDropdown()
     return
   }
   setPrevOptionActive()
@@ -399,7 +418,7 @@ const keydownSpaceHandler = (e: KeyboardEvent): void => {
   e.preventDefault()
 
   if (configuration.toggleOnClick && shown.value === false) {
-    throttledShowDropdown()
+    showDropdown()
   }
   else if (shown.value === true) {
     toggleOptionFromActiveOption()
@@ -493,8 +512,9 @@ const mousedownHandler = (e: MouseEvent): void => {
     // If it has as search box I need to prevent default to ensure the search
     // box keep focused
     if (showSearchInput.value && shown.value === false) {
-      e.preventDefault()
+       e.preventDefault()
     }
+
     toggleDropdown()
   }
 }
@@ -503,7 +523,7 @@ const focusHandler = (e: FocusEvent): void => {
   emit('focus', e)
 
   if (configuration.toggleOnFocus) {
-    throttledShowDropdown()
+    showDropdown()
   }
 }
 
@@ -618,7 +638,7 @@ defineOptions({
           :toggle-on-focus="false"
           :toggle-on-click="false"
           :toggle-on-hover="false"
-          :close-on-click-away="true"
+          :close-on-click-away="props.closeOnClickAway"
           :popper-options="configuration.dropdownPopperOptions"
           :placement="configuration.dropdownPlacement"
           :tag-name="usesTags ? 'div' : 'button'"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ComputedRef, Ref } from 'vue'
-import { inject, ref, watch } from 'vue'
+import { inject, nextTick, onMounted, ref, watch } from 'vue'
 import type { RichSelectProps } from '../config'
 import { useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
 
@@ -14,10 +14,20 @@ const keydownEnterHandler = inject<(e: KeyboardEvent) => void>('keydownEnterHand
 const keydownEscHandler = inject<(e: KeyboardEvent) => void>('keydownEscHandler')
 const classesList = useInjectsClassesList()!
 
-watch(shown, async (isShown: boolean): Promise<void> => {
-    if (isShown) {
-      search.value!.focus()
+watch(() => shown.value, async (isShown: boolean): Promise<void> => {
+  await nextTick(() => {
+    if (shown.value) {
+      search.value.focus({ preventScroll: true })
     }
+  })
+
+  if (shown.value) {
+    search.value.focus({ preventScroll: true })
+  }
+})
+
+onMounted(() => {
+  search.value.focus({ preventScroll: true })
 })
 </script>
 
@@ -30,6 +40,7 @@ watch(shown, async (isShown: boolean): Promise<void> => {
       data-rich-select-focusable
       :placeholder="configuration.searchBoxPlaceholder"
       :class="classesList.searchInput"
+      tabindex="1"
       @input="$event.target.composing = false"
       @keydown.down="keydownDownHandler"
       @keydown.up="keydownUpHandler"

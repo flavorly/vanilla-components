@@ -31,7 +31,7 @@ const formatRange = (start: Date, end: Date) => {
 
 defineOptions({
   name: 'VanillaDateTimeInput',
-  inheritAttrs: true,
+  inheritAttrs: false,
 })
 </script>
 
@@ -42,6 +42,7 @@ defineOptions({
       :input-debounce="1200"
       :update-on-input="false"
       :popover="{ visibility: 'focus' }"
+      v-bind="$attrs"
     >
       <template
         v-if="props.inline === false"
