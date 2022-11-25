@@ -11,7 +11,7 @@
         "menuWrapperRight": "absolute origin-top-right right-0",
         "menuWrapperCenter": "absolute origin-top-right right-0 left-0 sm:left-auto sm:w-sm",
         "menuWrapperCenterFull": "absolute origin-top-right right-0 mx-4 left-0 sm:left-auto sm:w-sm",
-        "dropdown": "bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg top-5 focus:ring-0 focus:outline-none overflow-hidden",
+        "dropdown": "bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg top-5 focus:ring-0 focus:outline-none z-[99] overflow-hidden",
         "roundedFull": "rounded-lg",
         "roundedTop": "rounded-none rounded-t-lg",
         "roundedBottom": "rounded-none rounded-b-lg",

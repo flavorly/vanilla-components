@@ -7,4 +7,5 @@ packages/.DS_Store
 packages/documentation/.DS_Store
 packages/documentation/src/.DS_Store
 packages/vanilla-components/.DS_Store
+packages/vanilla-components/presets
 packages/documentation/.vitepress/.DS_Store

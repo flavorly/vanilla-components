@@ -191,6 +191,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  trapFocus: {
+    type: Boolean,
+    default: true,
+  },
 })
 
 const emit = defineEmits({
@@ -656,6 +660,7 @@ defineOptions({
           :tabindex="usesTags && !hasSelectedOption ? 0 : undefined"
           :teleport="configuration.teleport"
           :teleport-to="configuration.teleportTo"
+          :trap-focus="props.trapFocus"
           data-rich-select-focusable
           @mouseover="$emit('mouseover', $event)"
           @mouseleave="$emit('mouseleave', $event)"

@@ -170,7 +170,7 @@ defineOptions({
             :feedback="filter.feedback"
             :errors="filter.errors"
             v-bind="filter.props"
-            :teleport="false"
+            :teleport="true"
           />
 
           <Input

@@ -11,7 +11,7 @@
         "wrapperCenterCenter": "justify-center items-center",
         "wrapperCenterBottom": "justify-center items-end",
         "container": "",
-        "checkbox": "h-5 w-5 transition duration-150 ease-in-out relative",
+        "checkbox": "h-5 w-5 transition duration-150 ease-in-out relative rounded",
         "label": {
             "label": ""
         },
@@ -33,7 +33,7 @@
         "wrapperCenterCenter": "",
         "wrapperCenterBottom": "",
         "container": "",
-        "checkbox": "checked:bg-primary-600 checked:text-white dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600",
+        "checkbox": "border-gray-300 text-primary-600 focus:ring-primary-500 dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600",
         "label": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer"
         },

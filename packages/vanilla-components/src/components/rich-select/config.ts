@@ -263,5 +263,6 @@ export declare type RichSelectProps = WithVariantPropsAndClassesList<{
   dropdownPopperOptions?: Options
   teleport?: boolean
   teleportTo?: string | HTMLElement
+  trapFocus?: boolean
 } & HTMLAttributes & Data, RichSelectClassesValidKeys>
 
