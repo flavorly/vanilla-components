@@ -1,6 +1,6 @@
 {
   "name": "@flavorly/vanilla-components",
-  "version": "0.7.8",
+  "version": "0.7.9",
   "type": "module",
   "sideEffects": false,
   "private": false,
