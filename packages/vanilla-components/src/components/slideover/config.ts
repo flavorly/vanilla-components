@@ -13,17 +13,26 @@ export const slideoverConfig = {
 
     innerLeft: 'fixed inset-y-0 left-0 pr-10 max-w-full flex ',
     innerRight: 'fixed inset-y-0 right-0 pl-10 max-w-full flex',
+    innerTop: 'fixed inset-x-0 pb-10 max-w-full flex',
+    innerBottom: 'fixed bottom-0 pt-10 max-w-full flex',
 
-    slideover: 'pointer-events-auto w-screen',
+    slideover: 'pointer-events-auto w-screen mx-auto',
     slideoverContainer: 'flex h-full flex-col overflow-y-scroll bg-white dark:bg-gray-800 shadow-xl',
     slideOverContainerWithPadding: 'py-6',
 
-    sizeDefault: 'max-w-sm',
-    sizeSmall: 'max-w-xs',
-    sizeMedium: 'max-w-md',
-    sizeLarge: 'max-w-lg',
-    sizeExtraLarge: 'max-w-2xl',
-    sizeFull: ' w-full',
+    sizeWidthDefault: 'max-w-sm',
+    sizeWidthSmall: 'max-w-xs',
+    sizeWidthMedium: 'max-w-md',
+    sizeWidthLarge: 'max-w-lg',
+    sizeWidthExtraLarge: 'max-w-2xl',
+    sizeWidthFull: ' w-full',
+
+    sizeHeightDefault: 'max-h-sm',
+    sizeHeightSmall: 'max-h-xs',
+    sizeHeightMedium: 'max-h-md',
+    sizeHeightLarge: 'max-h-lg',
+    sizeHeightExtraLarge: 'max-h-2xl',
+    sizeHeightFull: ' h-full',
 
     // Body
     body: 'relative flex-1',
@@ -78,6 +87,22 @@ export const slideoverConfig = {
     dialogRightLeave: 'transform transition ease-in-out duration-500 sm:duration-700',
     dialogRightLeaveFrom: 'translate-x-0',
     dialogRightLeaveTo: 'translate-x-full',
+
+    // Transition for Modal from Top
+    dialogTopEnter: 'transform transition ease-in-out duration-500 sm:duration-700',
+    dialogTopEnterFrom: '-translate-y-full',
+    dialogTopEnterTo: 'translate-y-0',
+    dialogTopLeave: 'transform transition ease-in-out duration-500 sm:duration-700',
+    dialogTopLeaveFrom: 'translate-y-0',
+    dialogTopLeaveTo: '-translate-y-full',
+
+    // Transition for Modal from Bottom
+    dialogBottomEnter: 'transform transition ease-in-out duration-500 sm:duration-700',
+    dialogBottomEnterFrom: 'translate-y-full',
+    dialogBottomEnterTo: 'translate-y-0',
+    dialogBottomLeave: 'transform transition ease-in-out duration-500 sm:duration-700',
+    dialogBottomLeaveFrom: 'translate-y-0',
+    dialogBottomLeaveTo: 'translate-y-full',
   },
 }
 

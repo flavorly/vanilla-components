@@ -32,7 +32,7 @@ Useful to display additional context from the edges of the screen.
 | `paddingOnContainer`      | Give padding on the container of the whole slideover | `Boolean`                         | `true`      |
 | `showHeader`              | Show or hide the slideover header                    | `Boolean`                         | `true`      |
 | `as`                      | Render as a the following tag or component           | `String`                          | `div`       |
-| `position`                | Position of the slideover                            | `left`,`right`                    | `right`     |
+| `position`                | Position of the slideover                            | `left`,`right`, `top`, `bottom`   | `right`     |
 | `size`                    | Size of the slideover                                | `default`,`medium`,`large`,`full` | `medium`    |
 
 

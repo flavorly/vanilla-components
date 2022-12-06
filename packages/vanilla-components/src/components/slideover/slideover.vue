@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import { provide } from 'vue'
+import type { PropType, Ref } from 'vue'
+import { computed, provide } from 'vue'
 import {
     DialogOverlay,
     DialogTitle,
@@ -73,7 +73,7 @@ const props = defineProps({
     required: false,
     default: 'right',
     validator(position: string) {
-      return ['left', 'right'].includes(position)
+      return ['left', 'right', 'top', 'bottom'].includes(position)
     },
   },
   size: {
@@ -104,6 +104,89 @@ const open = () => {
 }
 
 const closeOnClickOutside = () => props.closeableOnClickOutside && close()
+
+const innerClasses = computed(() => {
+  return {
+    right: configuration.classesList.innerRight,
+    left: configuration.classesList.innerLeft,
+    top: configuration.classesList.innerTop,
+    bottom: configuration.classesList.innerBottom,
+  }[props.position]
+})
+
+const enterClass = computed(() => {
+  return {
+    right: configuration.classesList.dialogRightEnter,
+    left: configuration.classesList.dialogLeftEnter,
+    top: configuration.classesList.dialogTopEnter,
+    bottom: configuration.classesList.dialogBottomEnter,
+  }[props.position]
+})
+
+const enterFromClass = computed(() => {
+  return {
+    right: configuration.classesList.dialogRightEnterFrom,
+    left: configuration.classesList.dialogLeftEnterFrom,
+    top: configuration.classesList.dialogTopEnterFrom,
+    bottom: configuration.classesList.dialogBottomEnterFrom,
+  }[props.position]
+})
+
+const enterToClass = computed(() => {
+  return {
+    right: configuration.classesList.dialogRightEnterTo,
+    left: configuration.classesList.dialogLeftEnterTo,
+    top: configuration.classesList.dialogTopEnterTo,
+    bottom: configuration.classesList.dialogBottomEnterTo,
+  }[props.position]
+})
+
+const leaveClass = computed(() => {
+  return {
+    right: configuration.classesList.dialogRightLeave,
+    left: configuration.classesList.dialogLeftLeave,
+    top: configuration.classesList.dialogTopLeave,
+    bottom: configuration.classesList.dialogBottomLeave,
+  }[props.position]
+})
+
+const leaveFromClass = computed(() => {
+  return {
+    right: configuration.classesList.dialogRightLeaveFrom,
+    left: configuration.classesList.dialogLeftLeaveFrom,
+    top: configuration.classesList.dialogTopLeaveFrom,
+    bottom: configuration.classesList.dialogBottomLeaveFrom,
+  }[props.position]
+})
+
+const leaveToClass = computed(() => {
+  return {
+    right: configuration.classesList.dialogRightLeaveTo,
+    left: configuration.classesList.dialogLeftLeaveTo,
+    top: configuration.classesList.dialogTopLeaveTo,
+    bottom: configuration.classesList.dialogBottomLeaveTo,
+  }[props.position]
+})
+
+const sizeClass = computed(() => {
+  if (props.position === 'right' || props.position === 'left') {
+    return {
+      default: configuration.classesList.sizeWidthDefault,
+      small: configuration.classesList.sizeWidthSmall,
+      medium: configuration.classesList.sizeWidthMedium,
+      large: configuration.classesList.sizeWidthLarge,
+      full: configuration.classesList.sizeWidthFull,
+    }[props.size]
+  }
+
+  return {
+    default: configuration.classesList.sizeHeightDefault,
+    small: configuration.classesList.sizeHeightSmall,
+    medium: configuration.classesList.sizeHeightMedium,
+    large: configuration.classesList.sizeHeightLarge,
+    full: configuration.classesList.sizeHeightFull,
+  }[props.size]
+})
 
 defineExpose({ open, close })
 
@@ -141,29 +224,21 @@ defineOptions({
           />
         </TransitionChild>
         <div
-          :class="[
-            position === 'left' ? configuration.classesList.innerLeft : '',
-            position === 'right' ? configuration.classesList.innerRight : '',
-          ]"
+          :class="innerClasses"
         >
           <TransitionChild
             as="template"
-            :enter="position === 'left' ? configuration.classesList.dialogLeftEnter : configuration.classesList.dialogRightEnter"
-            :enter-from="position === 'left' ? configuration.classesList.dialogLeftEnterFrom : configuration.classesList.dialogRightEnterFrom"
-            :enter-to="position === 'left' ? configuration.classesList.dialogLeftEnterTo : configuration.classesList.dialogRightEnterTo"
-            :leave="position === 'left' ? configuration.classesList.dialogLeftLeave : configuration.classesList.dialogRightLeave"
-            :leave-from="position === 'left' ? configuration.classesList.dialogLeftLeaveFrom : configuration.classesList.dialogRightLeaveFrom"
-            :leave-to="position === 'left' ? configuration.classesList.dialogLeftLeaveTo : configuration.classesList.dialogRightLeaveTo"
+            :enter="enterClass"
+            :enter-from="enterFromClass"
+            :enter-to="enterToClass"
+            :leave="leaveClass"
+            :leave-from="leaveFromClass"
+            :leave-to="leaveToClass"
           >
             <div
               :class="[
                 configuration.classesList.slideover,
-                size === 'default' ? configuration.classesList.sizeDefault : '',
-                size === 'small' ? configuration.classesList.sizeSmall : '',
-                size === 'medium' ? configuration.classesList.sizeMedium : '',
-                size === 'large' ? configuration.classesList.sizeLarge : '',
-                size === 'extra-large' ? configuration.classesList.sizeExtraLarge : '',
-                size === 'full' ? configuration.classesList.sizeFull : '',
+                sizeClass,
               ]"
             >
               <div
