@@ -52,6 +52,7 @@ A full-fledged select component with support for custom options, custom values, 
 | `minimumResultsForSearch`  | Minimum amount of results to consider the search               | `Number`          | `undefined`      |
 | `teleport`                 | If we should teleport the dropdown                             | `Boolean`         | `true`           |
 | `teleportTo`               | Element / Ref to teleport into                                 | `String`          | `body`           |
+| `trapFocus`                | If we should trap the focus inside the dropdown                | `Boolean`         | `true`           |
 
 
 ## Options

@@ -25,8 +25,8 @@ feel free to explore most of them but some highlights:
 - Local Storage Persistence for Selected, Filters & Columns visibility
 - Pooling & Pooling Only After Actions
 - Translatable
-- Laravel Adaptor ( Coming soon )
-- InertiaJS Adaptor ( Coming soon )
+- [Laravel Adaptor](./../integrations-datatables.md)
+- Hybridly + InertiaJS Adaptor ( Coming soon )
 
 But enough talk, let's see it in action!
 
@@ -44,22 +44,7 @@ But enough talk, let's see it in action!
 | Prop                       | Description                              | Accepted Values       | Default            |
 |:---------------------------|:-----------------------------------------|:----------------------|:-------------------|
 | `config`                   | Array of configuration to the table      | [Object]              | `{}`               |
-| `uniqueName`               | Unique name for this table               | [String,Number]       | `Required`         |
-| `primaryKey`               | Primary Key for the resources            | [String,Number]       | `id`               |
-| `columns`                  | Array of Columns                         | [Array]               | `Required`         |
-| `options`                  | Default Options for the table            | [Object]              | `Required`         |
-| `actions`                  | Array of Actions                         | [Array]               | `[]`               |
-| `pooling`                  | Pooling Configuration                    | [Object]              | `undefined`        |
-| `filters`                  | Array of Filters                         | [Array]               | `[]`               |
-| `filtersKey`               | Key string used to generate filters link | [String]              | `props.PrimaryKey` |
-| `filtersBaseUrl`           | URL to use to generate filters link      | [String]              | `undefined`        |
-| `perPageOptions`           | Options of how many items p/ page        | [Array]               | `[]`               |
-| `translations`             | Translations key:value                   | [Object]              | `undefined`        |
 | `fetchData`                | Promise / Function to fetch data         | [Function, undefined] | `undefined`        |
-| `fetchEndpoint`            | Endpoint to Fetch Data from              | [Function, undefined] | `undefined`        |
-| `fetchMethod`              | HTTP Method to use to fetch              | ['get','put','post']  | `post`             |
-| `actionsEndpoint`          | Endpoint to send Actions to              | [Function, undefined] | `undefined`        |
-| `actionsMethod`            | HTTP Method to send Actions              | ['get','put','post']  | `post`             |
 | `onActionExecutedCallback` | Hook/Function after Action executed      | [Function, undefined] | `undefined`        |
 | `onExceptionCallback`      | Hook/Function after Axios Exception      | [Function, undefined] | `undefined`        |
 

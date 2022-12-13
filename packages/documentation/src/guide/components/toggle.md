@@ -16,14 +16,15 @@ A toggle is a switch that can be turned on or off. I can be used to change setti
 
 !!!include(./src/parts/title-props.md)!!!
 
-| Prop             | Description               | Accepted Values                                                 | Default     |
-|:-----------------|:--------------------------|:----------------------------------------------------------------|:------------|
-| `modelValue`     | The value for the element | `Any`                                                           | `undefined` |
-| `checked`        | Default state for toggle  | `Boolean`                                                       | `false`     |
-| `value`          | Initial value             | `[Boolean,Any]`                                                 | `false'`    |
-| `checkedValue`   | Checked Value             | `[Boolean,Any]`                                                 | `true'`     |
-| `uncheckedValue` | Un-checked Value          | `[Boolean,Any]`                                                 | `false'`    |
-| `align`          | Position of the toggle    | `['left-top', 'left-center', 'left-bottom','right-bottom', ..]` | `left-top'` |
+| Prop             | Description                | Accepted Values                                                 | Default     |
+|:-----------------|:---------------------------|:----------------------------------------------------------------|:------------|
+| `modelValue`     | The value for the element  | `Any`                                                           | `undefined` |
+| `checked`        | Default state for toggle   | `Boolean`                                                       | `false`     |
+| `value`          | Initial value              | `[Boolean,Any]`                                                 | `false'`    |
+| `checkedValue`   | Checked Value              | `[Boolean,Any]`                                                 | `true'`     |
+| `uncheckedValue` | Un-checked Value           | `[Boolean,Any]`                                                 | `false'`    |
+| `align`          | Position of the toggle     | `['left-top', 'left-center', 'left-bottom','right-bottom', ..]` | `left-top'` |
+| `icon`           | If we should show the icon | `Boolean`                                                       | `true`      |
 
 
 !!!include(./src/parts/title-slots.md)!!!

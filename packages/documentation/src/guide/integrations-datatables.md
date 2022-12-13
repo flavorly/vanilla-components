@@ -292,7 +292,7 @@ The hooks accept a *callback* that will be executed when the action is about to 
 
 - **onFailed** - Dispatched when the action failed to execute with `exception` and also emits a `Flavorly\VanillaComponents\Events\DatatableActionFailed`
 
-- **onFailed** - Dispatched when the action failed to execute with `exception` and also emits a `Flavorly\VanillaComponents\Events\DatatableActionFailed`
+- **onSuccess** - Dispatched when the action failed to execute with `success` and also emits a `Flavorly\VanillaComponents\Events\DatatableActionSuccess`
 
 - **onFinished** - Dispatched `always` on finish no matter if success or not and also emits a `Flavorly\VanillaComponents\Events\DatatableActionFinished`
 
