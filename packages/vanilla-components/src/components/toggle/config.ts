@@ -116,5 +116,6 @@ export declare type ToggleProps = WithVariantPropsAndClassesList<{
     uncheckedValue?: ToggleValue
     type?: 'Toggle'
     checked?: boolean
+    icon?: boolean
 } & InputHTMLAttributes & Data, ToggleClassesValidKeys>
 

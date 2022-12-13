@@ -43,6 +43,8 @@ Below are the props for the Dropdown Menu component based on Headless UI
 | `showArrow`       | Show the dropdown arrow relative to the trigger | `Boolean`       | `false`     |
 | `size`            | The size of the dropdown                        | `string`        | `default`   |
 | `position`        | The alignment/position of the trigger           | `string`        | `center`    |
+| `trapFocus`       | If we should trap the focus inside the dropdown | `Boolean`       | `true`      |
+
 
 ### Dropdown Props
 
@@ -66,6 +68,8 @@ Below are the props for the Dropdown component, totally vanilla implementation
 | `placement`          | The placement of the dropdown ( Popper )         | `string`        | `undefined` |
 | `show`               | If the dropdown should start as shown            | `Boolean`       | `false`     |
 | `popperOptions`      | Additional raw popper options                    | `Object`        | `undefined` |
+| `trapFocus`          | If we should trap the focus inside the dropdown  | `Boolean`       | `true`      |
+
 
 
 !!!include(./src/parts/title-slots.md)!!!

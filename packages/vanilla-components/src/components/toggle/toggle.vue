@@ -47,6 +47,10 @@ const props = defineProps({
       ].includes(align)
     },
   },
+  icon: {
+    type: [Boolean] as PropType<boolean>,
+    default: true,
+  },
 })
 
 const emit = defineEmits(['update:modelValue', 'updated:checked'])
@@ -157,8 +161,9 @@ defineOptions({
             :is-checked="isChecked"
             name="unchecked"
           >
-            <VanillaUncheckedIcon
-              :class="configuration.classesList.iconUnchecked"
+            <VanillaCheckedIcon
+              v-if="icon"
+              :class="configuration.classesList.iconChecked"
             />
           </slot>
         </template>
@@ -167,9 +172,9 @@ defineOptions({
             :is-checked="isChecked"
             name="checked"
           >
-            <VanillaCheckedIcon
-              v-if="isChecked"
-              :class="configuration.classesList.iconChecked"
+            <VanillaUncheckedIcon
+              v-if="icon"
+              :class="configuration.classesList.iconUnchecked"
             />
           </slot>
         </template>
