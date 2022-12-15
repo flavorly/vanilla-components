@@ -1,10 +1,11 @@
 <script setup lang="ts">
-  import type { ComponentPublicInstance, PropType } from 'vue'
+  import type { ComponentPublicInstance, PropType, Ref } from 'vue'
   import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
   import type { Options, Placement } from '@popperjs/core'
-  import { createPopper } from '@popperjs/core'
+  import { createPopper, hide } from '@popperjs/core'
   import type { Instance as PopperInstance } from '@popperjs/core/lib/types'
   import { Menu as HeadlessMenu, MenuButton, MenuItems } from '@headlessui/vue'
+  import { onClickOutside } from '@vueuse/core'
   import { dropdownConfig, dropdownPopperDefaultOptions } from './config'
   import type { DropdownClassesValidKeys, DropdownProps } from './config'
   import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
@@ -61,6 +62,10 @@
       type: Boolean,
       default: false,
     },
+    closeOnClickAway: {
+      type: Boolean,
+      default: true,
+    },
     placement: {
       type: String as PropType<Placement>,
       default: undefined,
@@ -107,10 +112,12 @@
   const localValue = useVModel(props, 'modelValue')
   const { configuration } = useConfiguration<DropdownProps>(dropdownConfig, 'Dropdown', localValue)
 
-  const button = ref<ComponentPublicInstance<HTMLInputElement> | undefined>(undefined)
-  const menu = ref(undefined)
+  // Template Refs
   const menuItems = ref(undefined)
   const popperInstance = ref<PopperInstance | null>(null)
+  const dropdown = ref<HTMLDivElement>() as Ref<HTMLDivElement>
+  const trigger = ref<ComponentPublicInstance<HTMLInputElement> | undefined>()
+  const root = ref<HTMLDivElement>() as Ref<HTMLDivElement>
 
   const popperComputedOptions = computed((): Options => {
     const popperOptions = configuration.popperOptions as Options
@@ -123,21 +130,21 @@
   })
 
   const toggleDropdown = () => {
-    button.value?.$el.click()
+    trigger.value?.$el.click()
   }
 
   const hideDropdown = () => {
     if (localValue.value === false) {
       return
     }
-    toggleDropdown()
+    localValue.value = false
   }
 
   const showDropdown = () => {
     if (localValue.value === true) {
       return
     }
-    toggleDropdown()
+    localValue.value = true
   }
 
   const toggleOnHoverHandler = throttle(() => {
@@ -162,7 +169,7 @@
   }
 
   const createPopperInstance = () => {
-    if (!props.usePopper || !menu.value || !button.value?.$el) {
+    if (!props.usePopper || !dropdown.value || !trigger.value?.$el) {
       return
     }
 
@@ -170,7 +177,7 @@
       return
     }
 
-    popperInstance.value = createPopper(button.value?.$el, menu?.value, popperComputedOptions.value)
+    popperInstance.value = createPopper(trigger.value?.$el, dropdown?.value, popperComputedOptions.value)
   }
 
   const destroyPopperInstance = () => {
@@ -178,7 +185,7 @@
   }
 
   const refreshPopperInstance = () => {
-    const headlessUIState = menu.value !== undefined
+    const headlessUIState = dropdown.value !== undefined
     if (headlessUIState) {
       createPopperInstance()
     }
@@ -211,6 +218,20 @@
     createPopperInstance()
   }, { immediate: false })
 
+  // Click away handler
+  onClickOutside(root, () => {
+    if (props.closeOnClickAway && localValue.value) {
+      hideDropdown()
+    }
+  }, {
+    ignore: [
+      root,
+      trigger,
+      dropdown,
+    ],
+    detectIframe: true,
+  })
+
   provide('configuration_vanilla', configuration)
 
   defineOptions({
@@ -222,6 +243,7 @@
 <template>
   <HeadlessMenu
     v-slot="{ open }"
+    ref="root"
     as="div"
     :class="[
       teleport ? configuration.classesList.wrapper : '',
@@ -229,7 +251,7 @@
   >
     <!-- Trigger -->
     <MenuButton
-      ref="button"
+      ref="trigger"
       as="div"
       :class="configuration.classesList.container"
     >
@@ -264,7 +286,7 @@
       :disabled="!teleport"
     >
       <div
-        ref="menu"
+        ref="dropdown"
         :class="[
           configuration.classesList.menuWrapper,
           !usePopper && position === 'left' ? configuration.classesList.menuWrapperLeft : '',

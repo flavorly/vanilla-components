@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
 
 const value = ref(false)
+const value2 = ref(false)
 </script>
 
 <template>
@@ -13,6 +14,25 @@ const value = ref(false)
         <DropdownMenu
           v-model="value"
           text="Options"
+        >
+          <!-- Option -->
+          <DropdownOption>
+            <DocumentDuplicateIcon class="w-5 h-5 mr-2" />
+            <span>Copy Stuff</span>
+          </DropdownOption>
+          <!-- Option -->
+          <DropdownOption>
+            <CheckCircleIcon class="w-5 h-5 mr-2" />
+            <span>Mark as Done</span>
+          </DropdownOption>
+        </DropdownMenu>
+      </div>
+
+      <div class="flex items-center justify-center mx-auto">
+        <DropdownMenu
+          v-model="value2"
+          overlay
+          text="Dropdown with Overlay"
         >
           <!-- Option -->
           <DropdownOption>

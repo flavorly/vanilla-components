@@ -118,6 +118,7 @@ export declare type DropdownProps = WithVariantPropsAndClassesList<{
   toggleOnFocus?: boolean
   toggleOnClick?: boolean
   toggleOnHover?: boolean
+  closeOnClickAway?: boolean
   placement?: Placement | string
   popperOptions?: Options
   usePopper?: boolean
