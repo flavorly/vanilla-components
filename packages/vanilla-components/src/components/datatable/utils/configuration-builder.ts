@@ -5,6 +5,10 @@ import type { Data } from '@/core/types'
 export default function configurationBuilder<
   Props extends Types.DatatableConfiguration | Data,
 >(props: Props): Types.DatatableConfiguration {
+  if (props?.config == null) {
+    throw new Error('Datatable configuration is not defined. Pleaes pass a config prop to the Datatable component.')
+  }
+
   const defaultPooling = {
     enable: false,
     interval: 5,
@@ -92,9 +96,9 @@ export default function configurationBuilder<
     name: props.config?.name,
     primaryKey: props.config?.primaryKey || 'id',
     filtersKey: props.config?.primaryKey || props.config?.primaryKey,
-    columns: Object.assign(props.config?.columns) as Types.DatatableColumns,
-    actions: Object.assign(props.config?.actions) as Types.DatatableAction[],
-    filters: Object.assign(props.config?.filters) as Types.DatatableFilters,
+    columns: props.config?.columns as Types.DatatableColumns,
+    actions: props.config?.actions as Types.DatatableAction[],
+    filters: props.config?.filters as Types.DatatableFilters,
 
     options: Object.assign(
       defaultOptions,
