@@ -105,9 +105,13 @@ use Flavorly\VanillaComponents\Datatables\Options\General\Options;
 class User extends Datatable
 {
 
-    public function query(): Builder|ScoutBuilder|null
+    public function query(): mixed
     {
         return User::query()->where('user_id', auth()->id());
+        
+        // You can also return a closure or a relationship here
+        // return fn() => User::query()->where('user_id', auth()->id());
+        // Auth::user()->payments();
     }
     
     public function fetchEndpoint(): ?string
@@ -373,8 +377,6 @@ Make sure to return an array of filters from the `filters()` method.
 use Flavorly\VanillaComponents\Datatables\Filters\Filter;
 use Flavorly\VanillaComponents\Core\Components\Input;
 use Flavorly\VanillaComponents\Core\Components\RichSelect;
-use Flavorly\VanillaComponents\Core\Components\Input;
-use Flavorly\VanillaComponents\Datatables\Options\General\Options;
 use Flavorly\VanillaComponents\Core\Option\Option;
 
 public function filters(): array
@@ -523,6 +525,21 @@ class DatatableController extends Controller
         // Passing a eloquent model class is also possible!
         return (new UserTable())->response(User::class);
     }
+    
+    // Or if you prefer a simplified version  
+    public function usersTable(Request $request)
+    {
+        $datatable = (new UserTable());
+
+        if($request->wantsJson() && $request->method() === 'POST'){
+            return $datatable->response();
+        }
+           
+        // Or Hybridly! No bad feelings!
+        return inertia('backend', [
+            'datatable' => $datatable->toArray(),
+        ]);
+    }
 }
 ```
 
@@ -646,6 +663,23 @@ public function actionsEndpoint(): ?string
 
 If you readed till here your the real MPV, otherwise thank you for reading this far, I hope you enjoy using Vanilla Components as much as I do!
 
+
+## Transforming Data
+
+Sometimes you may want to transform the data before it gets to the frontend, this is possible by using the `transform()` method, this method must return an array and accepts the current row as the first argument.
+
+```php
+public function transform(Payment $payment): array
+{
+        return [
+            'id' => $payment->id,
+            'gateway' => $payment->gateway,
+            'amount' => $payment->amount,
+            'user.name' => fn() => $payment->user->full_name,
+            'created_at' => $payment->created_at->format('Y-m-d H:i:s'),
+        ];
+}
+```
 
 
 
