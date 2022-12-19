@@ -72,9 +72,9 @@ Next, install our Package:
 composer require flavorly/laravel-vanilla-components
 
 # Optional for Vendor Files & Translations
-php artisan vendor:publish --tag="laravel-vanilla-components-migrations"
-php artisan vendor:publish --tag="laravel-vanilla-components-config"
-php artisan vendor:publish --tag="laravel-vanilla-components-translations
+php artisan vendor:publish --tag="vanilla-components-migrations"
+php artisan vendor:publish --tag="vanilla-components-config"
+php artisan vendor:publish --tag="vanilla-components-translations
 ```
 
 That's it! You should be ready to create your first table!

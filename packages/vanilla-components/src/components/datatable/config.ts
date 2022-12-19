@@ -71,7 +71,7 @@ export const datatableConfig = {
 
     tableHeadColumnCheckbox: 'bg-gray-100 text-left text-xs px-6 py-3 leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700',
     tableHeadCheckbox: '', // Inherits main checkbox.
-    tableHeadColumn: 'bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700 dark:text-white',
+    tableHeadColumn: 'py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700 dark:text-white',
     tableHeadColumnContainer: 'group inline-flex',
     tableHeadColumnSortContainer: 'ml-2 flex-none rounded',
     tableHeadColumnLabel: '',
@@ -233,10 +233,12 @@ export declare interface DatatableTranslations {
   recordsEmptyWithFiltersOrSearchAction?: string
 
   settingsPerPage?: string
+  selectOption?: string
 
   showingFrom?: string
   nextPage?: string
   previousPage?: string
+
 }
 
 export declare interface DatatableColumn {

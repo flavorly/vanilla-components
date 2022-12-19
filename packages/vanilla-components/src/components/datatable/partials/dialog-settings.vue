@@ -97,6 +97,7 @@ defineOptions({
         <Select
           v-model="localSettings.perPage"
           :options="perPageOptions"
+          :placeholder="translations.selectOption"
         />
       </InputGroup>
 

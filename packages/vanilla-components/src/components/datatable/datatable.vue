@@ -1100,7 +1100,7 @@ defineOptions({
       </template>
 
       <!-- Current items selected -->
-      <template v-if="hasAnyItemsSelected">
+      <template v-if="hasAnyItemsSelected && hasActions">
         <slot
           name="selection"
           v-bind="{
@@ -1127,7 +1127,7 @@ defineOptions({
       <div
         :class="[
           classesList.tableContainer,
-          (hasAnyItemsSelected || filtersActiveCount > 0) ? classesList.tableContainerBorder : '',
+          ((hasAnyItemsSelected && hasActions || filtersActiveCount > 0)) ? classesList.tableContainerBorder : '',
         ]"
       >
         <template v-if="!showBeInLoadingState && results.data.length <= 0 ">

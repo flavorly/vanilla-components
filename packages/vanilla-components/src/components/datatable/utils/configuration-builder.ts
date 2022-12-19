@@ -78,6 +78,7 @@ export default function configurationBuilder<
     recordsEmptyWithFiltersOrSearchAction: 'Reset Query',
 
     settingsPerPage: ':count Items per page',
+    selectOption: 'Select an option',
 
     showingFrom: 'Showing :from to :to of :total results',
     nextPage: 'Next',
@@ -110,10 +111,7 @@ export default function configurationBuilder<
       props.config?.translations,
     ),
 
-    perPageOptions: Object.assign(
-      defaultPerPageOptions,
-      props.config?.perPageOptions,
-    ),
+    perPageOptions: props.config?.perPageOptions || defaultPerPageOptions,
 
     pooling: Object.assign(
       defaultPooling,
