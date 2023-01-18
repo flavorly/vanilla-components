@@ -41,7 +41,7 @@ const props = defineProps({
     default: undefined,
   },
   disabled: {
-    type: [Boolean, String] as PropType<boolean| string>,
+    type: [Boolean, String] as PropType<boolean | string>,
     default: false,
   },
 })
@@ -100,13 +100,19 @@ defineOptions({
               v-bind="{ checked, option }"
             >
               <RadioGroupLabel
-                as="p"
+                as="div"
                 :class="[
                   checked ? configuration.classesList?.labelChecked : configuration.classesList?.labelUnchecked,
                   configuration.classesList?.label,
                 ]"
-                v-html="option.text"
-              />
+              >
+                <slot
+                  name="labelText"
+                  v-bind="{ checked, option }"
+                >
+                  {{ option.text }}
+                </slot>
+              </RadioGroupLabel>
             </slot>
             <!-- Label Description -->
             <slot
@@ -121,9 +127,14 @@ defineOptions({
                   checked ? configuration.classesList?.descriptionChecked : configuration.classesList?.descriptionUnchecked,
                 ]"
               >
-                <span
-                  v-html="option?.raw?.description"
-                />
+                <slot
+                  name="descriptionText"
+                  v-bind="{ checked, option, description: option?.raw?.description }"
+                >
+                  <span
+                    v-html="option?.raw?.description"
+                  />
+                </slot>
               </RadioGroupDescription>
             </slot>
           </div>

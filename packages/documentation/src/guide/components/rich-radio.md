@@ -59,13 +59,38 @@ the raw option of your data by using `option.raw` in the `option` slot.
 
 !!!include(./src/parts/title-slots.md)!!!
 
-By default all slots get all the props and configuration from the component.
+By default all slots get all the props and configuration from the component, for option slots you always get the `normalizedOption` that contains the raw option. 
+Option slots also gets the `index`, `active`, `checked` that are forwarded to all slots.
 
 ### Slot `option`
 
 The Rich Radio component doesn't do much itself, the slot option contains all the logic for
 manipulating the styles, by default we will provide a `RichRadioOption` component that you can use.
 But feel free to create your own component and use it instead. Here is the scope passed to the option.
+
+### Slot `radioIcon`
+
+The slot `radioIcon` is used to replace the default radio icon with your own custom icon.
+
+### Slot `label`
+
+The slot `label` is used to replace the whole label with your own custom label, keep in mind it will also remove the default styling
+
+### Slot `labelText`
+
+The slot `labelText` is used to override the default label text while keeping the default styling, you can use this slot to add images or other labels as a label.
+
+### Slot `description`
+
+The slot `description` is used to override the default description, keep in mind it will also remove the default styling
+
+### Slot `descriptionText`
+
+The slot `descriptionText` is used to override the default description text while keeping the default styling, you can use this slot to add images or other labels as a description.
+
+### Slot `svgIcon`
+
+The slot `svgIcon` is used to override the default svg icon when the option is checked.
 
 !!!include(./src/parts/default-slots.md)!!!
 

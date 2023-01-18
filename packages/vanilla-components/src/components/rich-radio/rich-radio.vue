@@ -90,7 +90,10 @@ defineOptions({
           :value="option.value"
           :disabled="option?.disabled || false"
         >
-          <slot name="option">
+          <slot
+            name="option"
+            v-bind="{ option, active, checked, index, totalOptions: normalizeOptions.length, separated, radio, variant, disabled: option.disabled || false }"
+          >
             <!-- Option -->
             <RichRadioOption
               :option="option"
@@ -119,9 +122,23 @@ defineOptions({
                 />
               </template>
 
+              <template #labelText>
+                <slot
+                  name="labelText"
+                  v-bind="{ option, active, checked, index, compact, radio }"
+                />
+              </template>
+
               <template #description>
                 <slot
                   name="description"
+                  v-bind="{ option, active, checked, index, compact, radio }"
+                />
+              </template>
+
+              <template #descriptionText>
+                <slot
+                  name="descriptionText"
                   v-bind="{ option, active, checked, index, compact, radio }"
                 />
               </template>
