@@ -218,6 +218,9 @@ const hasFiltersOrSearchApplied = computed(() => filtersActiveCount.value > 0 ||
 /** Whenever to show the loading state or not */
 const showBeInLoadingState = computed(() => isFetching.value || showLoadingAnimation.value)
 
+/** Whether to show the settings dropdown or not */
+const showSettingsDropdown = computed(() => [datatable.options.isSearchHidden, datatable.options.refreshable, datatable.options.manageSettings].includes(true))
+
 /**
  * Map the columns, so we can include if the column is visible or not
  * if it's sorted or not and so on, so we don't need to evaluate it each time we need.
@@ -1010,7 +1013,10 @@ defineOptions({
             refresh,
           }"
         >
-          <Dropdown :class="[classesList.headerSettingsContainer]">
+          <Dropdown
+            v-if="showSettingsDropdown"
+            :class="[classesList.headerSettingsContainer]"
+          >
             <template #trigger>
               <Button>
                 <EllipsisVerticalIcon :class="[classesList.headerSettingsIcon]" />
@@ -1039,8 +1045,12 @@ defineOptions({
               />
               <span v-text="translations.refresh" />
             </DropdownOption>
+
             <!-- Edit Settings -->
-            <DropdownOption @click="onSettingsVisit">
+            <DropdownOption
+              v-if="datatable.options.manageSettings"
+              @click="onSettingsVisit"
+            >
               <CogIcon :class="[classesList.headerSettingsEditIcon]" />
               <span v-text="translations.settings" />
             </DropdownOption>
