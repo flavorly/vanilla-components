@@ -122,7 +122,7 @@ watch([phoneCountryCode, phoneNumber, localValue], ([newPhoneCountryCode, newPho
   attemptToParseNumber(newPhoneNumber, newPhoneCountryCode)
 
   const examplePlaceHolder = getExampleNumber(newPhoneCountryCode, examples)?.nationalNumber as string | undefined
-  if (examplePlaceHolder) {
+  if (examplePlaceHolder && (props.phonePlaceholder === '' || props.phonePlaceholder === undefined)) {
     placeholder.value = examplePlaceHolder
   }
 
