@@ -1372,6 +1372,7 @@ defineOptions({
           :showing-to="results.meta?.to"
           :total="results.meta?.total"
           :show-pages="datatable.options.showPages"
+          :show-number-of-items="datatable.options.showTotalItems"
           @navigate="onPageNavigated"
         />
       </slot>
