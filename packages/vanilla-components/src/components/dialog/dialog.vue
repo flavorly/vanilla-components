@@ -90,6 +90,10 @@ const emit = defineEmits([
   'update:modelValue',
   'close',
   'open',
+  'opening',
+  'opened',
+  'closing',
+  'closed',
 ])
 
 const localValue = useVModel(props, 'modelValue')
@@ -116,6 +120,8 @@ const open = () => {
   emit('open')
 }
 
+const emitTransitionEvent = (event: 'opening' | 'opened' | 'closing' | 'closed') => emit(event)
+
 provide('configuration_vanilla', configuration)
 
 defineOptions({
@@ -128,6 +134,10 @@ defineOptions({
     appear
     :show="localValue"
     as="template"
+    @before-enter="emitTransitionEvent('opening')"
+    @after-enter="emitTransitionEvent('opened')"
+    @before-leave="emitTransitionEvent('closing')"
+    @after-leave="emitTransitionEvent('closed')"
   >
     <HeadlessDialog
       :as="as"
