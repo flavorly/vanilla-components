@@ -86,7 +86,15 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:modelValue', 'open', 'close'])
+const emit = defineEmits([
+  'update:modelValue',
+  'open',
+  'close',
+  'opening',
+  'opened',
+  'closing',
+  'closed',
+])
 
 const localValue = useVModel(props, 'modelValue')
 const { configuration } = useConfiguration<SlideoverProps>(slideoverConfig, 'Slideover', localValue)
@@ -102,6 +110,8 @@ const open = () => {
     localValue.value = true
     emit('open')
 }
+
+const emitTransitionEvent = (event: 'opening' | 'opened' | 'closing' | 'closed') => emit(event)
 
 const closeOnClickOutside = () => props.closeableOnClickOutside && close()
 
@@ -202,6 +212,10 @@ defineOptions({
   <TransitionRoot
     :show="localValue"
     as="div"
+    @before-enter="emitTransitionEvent('opening')"
+    @after-enter="emitTransitionEvent('opened')"
+    @before-leave="emitTransitionEvent('closing')"
+    @after-leave="emitTransitionEvent('closed')"
   >
     <HeadlessDialog
       :as="as"

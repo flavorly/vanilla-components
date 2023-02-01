@@ -73,6 +73,10 @@ Slot to override the close icon on the top right corner of the slideover
 !!!include(./src/parts/events-model-value.md)!!!
 | `open` | Slideover was opened | `Boolean` |
 | `close` | Slideover was closed | `Boolean` |
+| `opening` | Slideover is about to be opened — before the transition starts | `Boolean` |
+| `opened` | Slideover was opened — after the transition finishes | `Boolean` |
+| `closing` | Slideover is about to be closed — before the transition starts | `Boolean` |
+| `closed` | Slideover was closed — after the transition finishes | `Boolean` |
 
 :::warning :bulb: A note on closing and open
 The `open` and `close` events are emitted when the slideover is opened or closed, but the `modelValue` is not updated yet.
