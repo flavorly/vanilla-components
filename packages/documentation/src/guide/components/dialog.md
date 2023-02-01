@@ -22,10 +22,10 @@ A Dialog component is a modal window that can be used to display information or 
 | `title`                   | A title for the dialog                         | `String`                                  | `undefined` |
 | `teleport`                | If we should teleport the dropdown             | `Boolean`                                 | `true`      |
 | `teleportTo`              | Element to teleport                            | `string`                                  | `body`      |
-| `closeableOnClickOutside` | Clicking outside closes the slideover          | `Boolean`                                 | `true`      |
-| `overlay`                 | Adds a overlay behind the slideover            | `Boolean`                                 | `true`      |
-| `closeable`               | If we should allow open/close the slideover    | `Boolean`                                 | `true`      |
-| `closeableOnPressEscape`  | Keyboard ESC closes the slideover              | `Boolean`                                 | `true`      |
+| `closeableOnClickOutside` | Clicking outside closes the dialog             | `Boolean`                                 | `true`      |
+| `overlay`                 | Adds a overlay behind the dialog               | `Boolean`                                 | `true`      |
+| `closeable`               | If we should allow open/close the dialog       | `Boolean`                                 | `true`      |
+| `closeableOnPressEscape`  | Keyboard ESC closes the dialog                 | `Boolean`                                 | `true`      |
 | `paddingOnModal`          | Give padding to the whole modal                | `Boolean`                                 | `true`      |
 | `bodyDivided`             | Divide the items inside the body               | `Boolean`                                 | `false`     |
 | `bodyDarker`              | Darkens the modal body, for easier reading     | `Boolean`                                 | `false`     |
@@ -57,11 +57,15 @@ Footer part of the modal, usually used to place buttons or actions.
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
 !!!include(./src/parts/events-model-value.md)!!!
-| `open` | Slideover was opened | `Boolean` |
-| `close` | Slideover was closed | `Boolean` |
+| `open` | Dialog was opened | `Boolean` |
+| `close` | Dialog was closed | `Boolean` |
+| `opening` | Dialog is about to be opened — before the transition starts | `Boolean` |
+| `opened` | Dialog was opened — after the transition finishes | `Boolean` |
+| `closing` | Dialog is about to be closed — before the transition starts | `Boolean` |
+| `closed` | Dialog was closed — after the transition finishes | `Boolean` |
 
 :::warning :bulb: A note on closing and open
-The `open` and `close` events are emitted when the slideover is opened or closed, but the `modelValue` is not updated yet.
+The `open` and `close` events are emitted when the dialog is opened or closed, but the `modelValue` is not updated yet.
 It will take a few milliseconds in order to circumvent the `transition` effect and provide a smooth experience.
 :::
 
