@@ -153,6 +153,7 @@ export default defineConfig({
           text: 'Components',
           collapsible: true,
           items: [
+            { text: 'Alert', link: '/guide/components/alert' },
             { text: 'Avatar', link: '/guide/components/avatar' },
             { text: 'Button', link: '/guide/components/button' },
             { text: 'Card', link: '/guide/components/card' },
