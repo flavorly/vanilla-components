@@ -1,5 +1,7 @@
 import { useConfiguration } from '@/core/use'
 
+export { default as Alert, default as VanillaAlert } from './components/alert/alert.vue'
+
 export { default as Avatar, default as VanillaAvatar } from './components/avatar/avatar.vue'
 
 export { default as Button, default as VanillaButton } from './components/button/button.vue'

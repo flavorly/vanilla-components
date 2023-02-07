@@ -6,6 +6,7 @@ outline: deep
 
 Here you will find the list of components available, and the ones coming soon.
 
+- ✅ [Alert](/guide/components/alert)
 - ✅ [Avatar](/guide/components/avatar)
 - ✅ [Button](/guide/components/button)
 - ✅ [Card](/guide/components/card)
