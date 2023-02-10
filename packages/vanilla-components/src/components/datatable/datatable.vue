@@ -41,7 +41,7 @@ import Card from '@/components/card/card.vue'
 
 import type { CSSClassesList, NormalizedOption } from '@/core/types'
 import { useConfiguration, useDynamicSlots, useVariantProps } from '@/core/use'
-import { isServer } from '@/core/helpers'
+import { get, isServer } from '@/core/helpers'
 
 const props = defineProps({
   ...useVariantProps<Types.DatatableProps, Types.DatatableClassesValidKeys>(),
@@ -1304,7 +1304,7 @@ defineOptions({
                       name="rowSkeleton"
                       v-bind="{
                         column,
-                        result: result[column.name],
+                        result: get(result, column.name),
                         resultRaw: result,
                         isLoading: showBeInLoadingState,
                       }"
@@ -1313,7 +1313,7 @@ defineOptions({
                         :class="configuration.classesList.skeletonPlaceholder"
                       >
                         <span class="opacity-0">
-                          {{ result[column.name] }}
+                          {{ get(result, column.name) }}
                         </span>
                       </div>
                     </slot>
@@ -1324,17 +1324,17 @@ defineOptions({
                       :name="column.slotName"
                       v-bind="{
                         column,
-                        result: result[column.name],
+                        result: get(result, column.name),
                         resultRaw: result,
                         isLoading: showBeInLoadingState,
                       }"
                     >
                       <div
                         v-if="column?.raw && !column.component"
-                        v-html="result[column.name]"
+                        v-html="get(result, column.name)"
                       />
                       <div v-else-if="!column?.raw">
-                        {{ result[column.name] }}
+                        {{ get(result, column.name) }}
                       </div>
                       <div v-else-if="column.component && column.component !== ''">
                       <!-- Components support coming soon -->
