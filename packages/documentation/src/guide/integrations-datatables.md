@@ -20,8 +20,19 @@ checkout AG-Grid or similar, since we WON'T over-complicate this package.
 
 ## Installation
 
-Get started by installing [Laravel Scout](https://laravel.com/docs/scout), Scout is used to perform the search
-on the datatable, we did not feel like we should implement our own method to search, since scout provide a nice way already
+Get started by installing our official Laravel Package:
+
+```bash
+composer require flavorly/laravel-vanilla-components
+
+# Optional for Vendor Files & Translations
+php artisan vendor:publish --tag="vanilla-components-config"
+php artisan vendor:publish --tag="vanilla-components-translations
+```
+
+### Search - Laravel Scout
+Optionally but recommended, install [Laravel Scout](https://laravel.com/docs/scout), Scout is used to perform the search
+on the datatable ONLY if your model uses the `Searchable` trait, we did not feel like we should implement our own method to search, since scout provide a nice way already
 to search through your models, and the big plus it also supports **Database**, **Algolia**, **Meilisearch** drivers out of the box.
 
 ```bash
@@ -66,18 +77,11 @@ class Payment extends Model
 
 ```
 
-Next, install our Package:
+### Search - Without Scout
 
-```bash
-composer require flavorly/laravel-vanilla-components
+If scout is not your thing, you can still use the search feature, a really basic query using ``like`` will be used to search your models.
+You are still free to modify this behavior by overriding the `applySearch` method on your table. We will discuss this later on.
 
-# Optional for Vendor Files & Translations
-php artisan vendor:publish --tag="vanilla-components-migrations"
-php artisan vendor:publish --tag="vanilla-components-config"
-php artisan vendor:publish --tag="vanilla-components-translations
-```
-
-That's it! You should be ready to create your first table!
 
 ## Create your first table
 
@@ -680,6 +684,31 @@ public function transform(Payment $payment): array
         ];
 }
 ```
+
+## Overriding Search Query, Sorting Query & Filtering Query
+
+Sometimes you may want to override the default search, sorting or filtering query, this is possible by using the `applySearch()`, `applyQuerySorting()` or `applyQueryFilters()` methods, these methods must return a Eloquent Query Builder.
+All of the methods get the current query as the first argument, and the Payload instance ( with your frontend data ) as the second argument.
+
+There you are free to modify the query as you wish, and return it back to the datatable.
+
+Here is an example of the standard implementation of the `applyQueryFilters()` method:
+
+```php
+protected function applyQueryFilters(Builder $query, RequestPayload $payload): Builder
+{
+    return $query->when($payload->hasFilters(), function (Builder $subQuery) use($payload){
+        // Each column that needs to be sorted
+        $payload
+            ->getFilters()
+            // Apply Sorting
+            ->each(fn (Filter $filter) => $filter->apply($subQuery, $filter->getName(), $filter->getValue()));
+        return $subQuery;
+    });
+}
+```
+
+
 
 
 
