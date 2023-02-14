@@ -354,8 +354,103 @@ Actions also provide a set of other methods that you may use to customize the ac
 
 - **polling()** - Accepts a `Flavorly\VanillaComponents\Core\Polling\Polling` instance and can be used to start polling the server after the action is executed, useful if you expect something to change within a timeframe after the action is executed.
 
+### Actions - Redirect
 
-Thats it! You should be covered using actions in full! The rest of UI and customization is up to you using the Vue component and slots and what not.
+If you want to redirect to a certain page after an action you are allowed to do so using the `redirect()` fluent method, the redirect will take 2 parameters one, for the **url** and another if you want to open in a new tab or not, the default is `false` which means it will open in the same tab.
+
+```php
+Action::make()
+    ->name('visit_google')
+    ->label('Visit Google')
+    ->redirect('https://google.com', openInNewTab: true)
+```
+
+### Actions - Inertia & Hybridly
+
+You may want to dispatch a inertia call after the action is executed, you can do that by using the `inertia()` or `hybridly()` fluent method, this method accepts a closure or a object that receives a `Flavorly\VanillaComponents\Core\Integrations\VanillaInertia` or `Flavorly\VanillaComponents\Core\Integrations\VanillaHybridly` instance that can be used to define the inertia call that will be dispatched after the action is executed.
+
+First install the adapter package with one of the following commands:
+
+For Inertia: 
+```bash
+# Using pnpm
+pnpm add @flavorly/vanilla-components-inertia
+# Using Yarn
+yarn add @flavorly/vanilla-components-inertia
+# Using npm
+npm add @flavorly/vanilla-components-inertia
+```
+
+For Hybridly:
+```bash
+# Using pnpm
+pnpm add @flavorly/vanilla-components-hybridly
+# Using Yarn
+yarn add @flavorly/vanilla-components-hybridly
+# Using npm
+npm add @flavorly/vanilla-components-hybridly
+```
+
+On your table actions you should be able to do the following:
+
+```php
+Action::make()
+    ->name('delete')
+    ->label('Delete')
+    ->inertia(function(VanillaInertia $inertia) {
+        // Reload can only be used standalone, for other calls you must use the visit method
+        $inertia
+            ->route('index') // Shortcut for Laravel route
+            ->visit(route('index'))
+            ->only(['foo', 'bar'])
+            ->method('put')
+            ->data(['foo' => 'bar'])
+            ->post(['foo' => 'bar'])
+            ->options([
+                'headers' => [
+                    'some-weirdo-header' => csrf_token()
+                ]
+            ]);
+    })
+
+Action::make()
+    ->name('delete')
+    ->label('Delete')
+    ->inertia(function(VanillaHybridly $hybridly) {
+        // Expect same methods as Inertia + Hybridly goodies
+        $hybridly
+            ->route('index')
+            ->except(['foo', 'bar']);
+           
+    })
+```
+
+On your frontend, you should then pass your configuration into the proper adapter, so it can transform and register all the necessary callbacks, here is a small example on how to do it:
+
+```vue
+<script setup>
+import { Datatable } from "@flavorly/vanilla-components";
+import { useInertiaDatatable } from "@flavorly/vanilla-components-inertia";
+import { useHybridlyDatatable } from "@flavorly/vanilla-components-hybridly";
+
+const props = defineProps({
+    usersTable: [Object, Array],
+    paymentsTable: [Object, Array],
+});
+
+// Choose what you love! :p
+const usersTable = useInertiaDatatable(props.usersTable);
+const usersTable = useHybridlyDatatable(props.usersTable);
+</script>
+
+<template>
+    <Datatable :config="usersTable" />
+</template>
+```
+
+# Actions - Final Note
+
+That's it! You should be covered using actions in full! The rest of UI and customization is up to you using the Vue component and slots and what not.
 
 
 ## Filters
