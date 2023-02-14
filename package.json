@@ -1,18 +1,14 @@
 {
   "name": "vanilla-components",
-  "version": "0.7.23",
+  "version": "0.7.24",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "nr --filter @flavorly/vanilla-components dev",
-    "build": "nr --filter @flavorly/vanilla-components build",
+    "build": "pnpm -r build",
     "docs:dev": "nr --filter @flavorly/vanilla-components-documentation dev",
-    "docs:build": "nr --filter @flavorly/vanilla-components build && nr --filter @flavorly/vanilla-components-documentation build",
-
     "clean": "rimraf node_modules packages/vanilla-components/node_modules packages/vanilla-components/dist packages/documentation/node_modules packages/documentation/.vitepress/dist",
-
-    "release": "bumpp package.json packages/vanilla-components/package.json --execute 'nr --filter @flavorly/vanilla-components build' && na --filter @flavorly/vanilla-components publish --no-git-checks",
-
+    "release": "bumpp package.json packages/*/package.json --all --execute 'pnpm -r build' --commit \"release: v\" && pnpm -r publish --no-git-checks --access=public",
     "docs:index:build": "nr --filter @flavorly/vanilla-components-documentation index:build",
     "lunr:remove": "rm packages/documentation/.vitepress/index/lunr.cjs",
     "lunr:start": "cp packages/documentation/.vitepress/index/lunr.demo.cjs packages/documentation/.vitepress/index/lunr.cjs",
