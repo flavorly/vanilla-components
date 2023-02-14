@@ -25,8 +25,8 @@ feel free to explore most of them but some highlights:
 - Local Storage Persistence for Selected, Filters & Columns visibility
 - Pooling & Pooling Only After Actions
 - Translatable
-- [Laravel Adaptor](./../integrations-datatables.md)
-- Hybridly + InertiaJS Adaptor ( Coming soon )
+- [Laravel Adapter](./../integrations-datatables.md)
+- Hybridly + InertiaJS Adapter
 
 But enough talk, let's see it in action!
 
@@ -82,7 +82,7 @@ The response must include :
 ### Client Side Request
 
 All requests made by the table are using Axios, this way you can hook your credentials or authorization with Axios Interceptor
-Below, you will find what parameters are sent to the server-side so you can build any server-side adaptors.
+Below, you will find what parameters are sent to the server-side so you can build any server-side adapters.
 
 :::details :surfer: Click to check the demo request
 <<< @/json/demo-request.json

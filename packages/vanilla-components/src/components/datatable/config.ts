@@ -261,7 +261,7 @@ export declare type DatatableColumnComputed = {
   sortedTimes?: number
 } & DatatableColumn
 
-export declare type ActionCallback = (action: DatatableAction) => void
+export declare type ActionCallback = (action: DatatableAction, data: DatatableQueryData, datatable: DatatableConfiguration) => void
 
 export declare interface DatatableAction {
   name: string
@@ -288,6 +288,7 @@ export declare interface DatatableAction {
       }
     }
     callback?: ActionCallback
+    [key: string]: any
   }
   after?: {
     clearSelected?: boolean
@@ -295,6 +296,11 @@ export declare interface DatatableAction {
     refresh?: boolean
     pooling?: DatatablePooling
     callback?: ActionCallback
+    redirect?: {
+      url?: string
+      newTab?: boolean
+    }
+    [key: string]: any
   }
 
   [key: string]: any
@@ -395,7 +401,7 @@ export declare interface DatatableConfiguration {
 }
 
 export declare type DatatableFetchDataFunction = (configuration: DatatableConfiguration, data: DatatableQueryData) => DatatableFetchDataPromise
-export declare type DatatableActionExecutedFunction = (action: DatatableAction) => Promise<never>
+export declare type DatatableActionExecutedFunction = (action: DatatableAction, data: DatatableQueryData) => Promise<never>
 export declare type DatatableExceptionFunction = (error: object) => Promise<never>
 
 export declare type DatatableFetchDataPromise = Promise<{

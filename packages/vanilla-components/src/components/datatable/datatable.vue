@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { camelize, computed, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue'
+import { camelize, computed, onMounted, onUnmounted, provide, reactive, ref, toRaw, unref, watch } from 'vue'
 import { useLocalStorage, useSessionStorage } from '@vueuse/core'
 
 // Lodash
@@ -573,8 +573,10 @@ const executeAction = (action: Types.DatatableAction) => {
         return
     }
 
+    const queryDataImmutable = { ...queryData }
+
     if (action?.before?.callback !== undefined) {
-        action.before.callback(action)
+        action.before.callback(action, queryDataImmutable, datatable)
     }
 
     // Assign to action data & send
@@ -594,7 +596,18 @@ const executeAction = (action: Types.DatatableAction) => {
 
         //  Executes a given callback if its required
         if (action?.after?.callback !== undefined) {
-            action.after.callback(action)
+            action.after.callback(action, queryDataImmutable, datatable)
+        }
+
+        // Redirect after
+        if (action?.after?.redirect && action?.after?.redirect?.url !== undefined) {
+          if (action?.after?.redirect.newTab && !isServer()) {
+            window.open(action?.after?.redirect.url, '_blank')
+          }
+
+          if (!action?.after?.redirect.newTab && !isServer()) {
+            window.location.href = action?.after?.redirect.url
+          }
         }
 
         // If we need to pull data after an action has been started
@@ -614,7 +627,7 @@ const executeAction = (action: Types.DatatableAction) => {
 
         // Always execute the given callback after the action is fired.
         if (datatable?.onActionExecutedCallback !== undefined) {
-            datatable.onActionExecutedCallback(action)
+            datatable.onActionExecutedCallback(action, queryDataImmutable)
         }
 
         // Reset the action

@@ -1,19 +1,23 @@
 {
-  "name": "@flavorly/vanilla-components",
+  "name": "@flavorly/vanilla-components-inertia",
   "version": "0.7.23",
   "type": "module",
   "sideEffects": false,
   "private": false,
   "author": "Jon <support@flavorly.pt>",
   "license": "ISC",
-  "description": "🤌 A lightweight Vue 3 Component Library based on VariantJS & Headless UI",
+  "description": "🤌 Inertia integration for @flavorly/vanilla-components",
   "keywords": [
     "component library",
     "ui components",
     "vuejs",
     "vue",
     "tailwind",
-    "vue3"
+    "vue3",
+    "Inertia",
+    "Inertia JS",
+    "Laravel Inertia",
+    "Laravel"
   ],
   "repository": {
     "type": "git",
@@ -30,44 +34,28 @@
     "dist"
   ],
   "types": "./dist/index.d.ts",
-  "main": "./dist/vanilla-components.umd.js",
-  "module": "./dist/vanilla-components.es.js",
+  "main": "./dist/vanilla-components-inertia.umd.js",
+  "module": "./dist/vanilla-components-inertia.es.js",
   "exports": {
     ".": {
-      "import": "./dist/vanilla-components.es.js",
-      "require": "./dist/vanilla-components.umd.js"
+      "import": "./dist/vanilla-components-inertia.es.js",
+      "require": "./dist/vanilla-components-inertia.umd.js"
     }
   },
   "scripts": {
     "build": "vite build",
     "build:watch": "vite build --watch",
-    "build:watch-mon": "nodemon --exec 'pnpm lib:build'",
     "lib:publish": "pnpm publish",
-    "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
-    "watch:docs": "pnpm --cwd \"docs\" dev",
     "lint": "eslint --ext .js,.vue --ignore-path ../../.gitignore --fix packages/src",
     "format": "prettier ../..  --write"
   },
   "dependencies": {
-    "@flavorly/v-calendar": "3.0.0-alpha.11",
-    "@headlessui/vue": "^1.7.4",
-    "@popperjs/core": "^2.11.6",
-    "@vueuse/core": "^9.5.0",
-    "@vueuse/integrations": "^9.6.0",
-    "axios": "^1.1.3",
-    "focus-trap": "^7.1.0",
-    "fuse.js": "^6.6.2",
-    "libphonenumber-js": "^1.10.14",
-    "lodash": "^4.17.21",
-    "unplugin-vue-define-options": "^1.0.0",
-    "vue": "^3.2.45"
+    "@flavorly/vanilla-components": "workspace:*",
+    "@inertiajs/vue3": "^1.0.1"
   },
   "peerDependencies": {
-    "@flavorly/v-calendar": "3.0.0-alpha.11",
-    "@headlessui/vue": "^1.7.0",
-    "@popperjs/core": "^2.11.6",
-    "axios": "^1.1.2",
-    "vue": "^3.2.45"
+    "@flavorly/vanilla-components": "workspace:*",
+    "@inertiajs/vue3": "^1.0.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.34.0",
@@ -76,8 +64,6 @@
     "@types/lodash": "^4.14.189",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
-    "@vitejs/plugin-vue": "^3.2.0",
-    "@vue/compiler-sfc": "^3.2.45",
     "bumpp": "^8.2.1",
     "eslint": "^8.27.0",
     "eslint-config-airbnb-base": "^15.0.0",
