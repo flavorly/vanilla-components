@@ -40,7 +40,7 @@
   },
   "scripts": {
     "build": "vite build",
-    "build:watch": "vite build --watch",
+    "build:watch": "APP_ENV=watch vite build --watch",
     "build:watch-mon": "nodemon --exec 'pnpm lib:build'",
     "lib:publish": "pnpm publish",
     "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",

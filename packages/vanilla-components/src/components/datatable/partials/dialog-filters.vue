@@ -3,7 +3,6 @@ import type { PropType, Ref } from 'vue'
 import { camelize, defineAsyncComponent, inject, ref, watch } from 'vue'
 import find from 'lodash/find'
 import { useClipboard } from '@vueuse/core'
-import queryString from 'query-string'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
 import Button from '@/components/button/button.vue'
@@ -60,7 +59,7 @@ watch(
 
 // Resolve the value for the filter
 const getFilterDefaultValue = (name: string): unknown => {
-  return find(props.filters, { name })?.defaultValue || ''
+  return find(props.filters, { name })?.defaultValue || null
 }
 
 // Resolve the value for the filter
@@ -76,7 +75,16 @@ const getFilterValue = (name: string): unknown => {
 // Cleanup empty filters on save
 const cleanupEmptyFilters = (filters: object) => {
   return Object.fromEntries(Object.entries(filters).filter(([key, v]) => {
-    return v != null && v !== '' && v !== getFilterDefaultValue(key)
+    if (v === null && v === '') {
+      return false
+    }
+    if (Array.isArray(v) && v.length <= 0) {
+      return false
+    }
+    if (typeof v === 'object' && Object.keys(v).length <= 0) {
+      return false
+    }
+    return v !== getFilterDefaultValue(key)
   }))
 }
 
@@ -170,7 +178,7 @@ defineOptions({
             :errors="filter?.errors"
             v-bind="filter?.props"
             :teleport="true"
-            :multiple="true"
+            :multiple="filter?.multiple"
           />
 
           <VanillaInput

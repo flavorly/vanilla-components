@@ -13,47 +13,43 @@ const externals = [
   ...Object.keys(pkg.peerDependencies || {}),
 ]
 
-const production = process.env.NODE_ENV === 'production'
-
-const plugins = !production
-  ? [
-    vue(),
-    DefineOptions(),
-  ]
-  : [
-    vue(),
-    DefineOptions(),
-    copy({
-      targets: [
-        // Vue Components
-        { src: 'src/components/**/*.vue', dest: 'dist' },
-
-        // Vanilla Components Configuration
-        { src: 'src/components/**/config.ts', dest: 'dist' },
-
-        // Vanilla Base Configuration
-        { src: 'src/core/config/*.ts', dest: 'dist' },
-      ],
-      hook: 'writeBundle',
-      flatten: false, // Keep directory structure
-    }),
-    dts({
-      cleanVueFileName: false,
-      staticImport: false,
-      skipDiagnostics: true,
-      outputDir: 'dist',
-      beforeWriteFile(filePath, content) {
-        return {
-          filePath: filePath.replace('packages/vanilla-components/src', ''),
-          content,
-        }
-      },
-    }),
-  ]
-
 export default defineConfig(() => {
   return {
-    plugins,
+    plugins: process.env.APP_ENV !== 'watch'
+      // eslint-disable-next-line multiline-ternary
+      ? [
+      vue(),
+      DefineOptions(),
+      copy({
+        targets: [
+          // Vue Components
+          { src: 'src/components/**/*.vue', dest: 'dist' },
+
+          // Vanilla Components Configuration
+          { src: 'src/components/**/config.ts', dest: 'dist' },
+
+          // Vanilla Base Configuration
+          { src: 'src/core/config/*.ts', dest: 'dist' },
+        ],
+        hook: 'writeBundle',
+        flatten: false, // Keep directory structure
+      }),
+      dts({
+        cleanVueFileName: false,
+        staticImport: false,
+        skipDiagnostics: true,
+        outputDir: 'dist',
+        beforeWriteFile(filePath, content) {
+          return {
+            filePath: filePath.replace('packages/vanilla-components/src', ''),
+            content,
+          }
+        },
+      }),
+    ] : [
+      vue(),
+      DefineOptions(),
+    ],
     resolve: {
       alias: [
         { find: '/^~/', replacement: '' },

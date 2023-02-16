@@ -170,6 +170,7 @@ export declare interface DatatableFilter {
   rules?: undefined | string[]
   props?: DatatableFilterProp[]
   fetchEndpoint?: string
+  multiple?: boolean
   valueAttribute?: string
   textAttribute?: string
 }

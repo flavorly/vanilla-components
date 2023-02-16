@@ -234,6 +234,7 @@ const emit = defineEmits({
   'hidden': () => true,
   'beforeShow': () => true,
   'beforeHide': () => true,
+  'optionsSelected': () => true,
   'fetchOptionsSuccess': () => true,
   'fetchOptionsError': () => true,
   'update:modelValue': () => true,
@@ -621,6 +622,12 @@ const blurHandler = (e: FocusEvent): void => {
 // ---------------
 
 watch(() => localValue.value, () => onOptionSelected())
+
+watch(() => selectedOption.value, () => {
+  emit('optionsSelected', {
+    options: selectedOption.value,
+  })
+})
 
 onBeforeUnmount(() => fetchOptionsCancel())
 
