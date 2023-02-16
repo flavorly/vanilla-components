@@ -178,7 +178,7 @@ const currentPageIds = computed(() => results.data?.map(item => item.id) || []) 
 /** Result Hash */
 const resultsHash = computed(() => JSON.stringify(results.data)) as Ref<string>
 
-const hasResults = computed(() => results.data !== undefined && results.data !== null && results.data.length > 0)
+const hasResults = computed(() => results.data !== null && results.data.length > 0)
 
 /** If there is currently selected items on the config */
 const hasAnyItemsSelected = computed(() => queryData.selectedAll || queryData.selected.length > 0) as Ref<boolean>

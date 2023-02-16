@@ -40,7 +40,7 @@ const Select = defineAsyncComponent(() => import('@/components/select/select.vue
 const RichSelect = defineAsyncComponent(() => import('@/components/rich-select/rich-select.vue'))
 const Checkbox = defineAsyncComponent(() => import('@/components/checkbox/checkbox.vue'))
 const Toggle = defineAsyncComponent(() => import('@/components/toggle/toggle.vue'))
-const Input = defineAsyncComponent(() => import('@/components/input/input.vue'))
+const VanillaInput = defineAsyncComponent(() => import('@/components/input/input.vue'))
 const Textarea = defineAsyncComponent(() => import('@/components/textarea/textarea.vue'))
 const DateTimeInput = defineAsyncComponent(() => import('@/components/datetime-input/datetime-input.vue'))
 
@@ -156,66 +156,69 @@ defineOptions({
             v-if="filter.component === 'VanillaSelect'"
             v-model="localFilters[filter.name]"
             :options="filter.options"
-            v-bind="filter.props"
+            v-bind="filter?.props"
             :show-empty="true"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <RichSelect
             v-if="filter.component === 'VanillaRichSelect'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
+            :placeholder="filter?.placeholder"
+            :fetch-endpoint="filter?.fetchEndpoint"
+            :value-attribute="filter?.valueAttribute"
+            :text-attribute="filter?.textAttribute"
             :options="filter.options"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
-            v-bind="filter.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
+            v-bind="filter?.props"
             :teleport="true"
           />
 
-          <Input
+          <VanillaInput
             v-if="filter.component === 'VanillaInput'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <Checkbox
             v-if="filter.component === 'VanillaCheckbox'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <Toggle
             v-if="filter.component === 'VanillaToggle'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <Textarea
             v-if="filter.component === 'VanillaTextarea'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <DateTimeInput
             v-if="filter.component === 'VanillaDatetimePicker'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
         </InputGroup>
       </template>

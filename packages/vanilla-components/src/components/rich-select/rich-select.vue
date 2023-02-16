@@ -3,12 +3,23 @@ import type { PropType, Ref } from 'vue'
 import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
 import { refThrottled } from '@vueuse/core'
+import { useCookies } from '@vueuse/integrations/useCookies'
 import RichSelectDropdown from './partials/dropdown.vue'
 import RichSelectTrigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
 import { richSelectConfig } from './config'
 import type { RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
-import type { CSSRawClassesList, Data, FetchOptionsFn, InputOptions, Measure, MinimumInputLengthTextProp, NormalizedOption, PreFetchOptionsFn } from '@/core/types'
+import type {
+  CSSRawClassesList,
+  Data,
+  FetchOptionsFn,
+  FetchedOptions,
+  InputOptions,
+  Measure,
+  MinimumInputLengthTextProp,
+  NormalizedOption,
+  PreFetchOptionsFn,
+} from '@/core/types'
 import DropdownSimple from '@/components/dropdown/dropdown.vue'
 import { validDropdownPlacements } from '@/components/dropdown/config'
 import SimpleSelect from '@/components/select/select.vue'
@@ -58,6 +69,10 @@ const props = defineProps({
     default: false,
   },
   placeholder: {
+    type: String,
+    default: undefined,
+  },
+  fetchEndpoint: {
     type: String,
     default: undefined,
   },
@@ -224,6 +239,35 @@ const {
   errors,
 } = useConfiguration<RichSelectProps>(richSelectConfig, 'RichSelect', localValue)
 
+// Base function for fetching options when url is provided
+const fetchOptionsBaseFunction = (query?: string, nextPage?: number): FetchedOptions => {
+  // Extract proper token from cookies ( Laravel )
+
+  const token = useCookies().get('XSRF-TOKEN')
+  const url = new URL(configuration.fetchEndpoint)
+
+  url.search = new URLSearchParams([['query', query], ['page', nextPage || '1']]).toString()
+
+  return fetch(url, {
+    headers: {
+      'Accept': 'application/json',
+      'X-Requested-With': 'XMLHttpRequest',
+      'X-XSRF-TOKEN': token ? decodeURIComponent(token) : '',
+    },
+  })
+  .then(response => response.json())
+  .then((data) => {
+    return {
+      results: data.data as Record<string, any>[],
+      hasMorePages: data.data && data.next_page_url,
+    }
+  })
+}
+
+const fetchOptions = typeof configuration.fetchOptions === 'undefined' && configuration.fetchEndpoint !== undefined
+  ? fetchOptionsBaseFunction
+  : configuration.fetchOptions
+
 const searchQuery = ref<string | undefined>(undefined)
 
 const {
@@ -247,7 +291,7 @@ const {
   computed(() => configuration.valueAttribute),
   computed(() => configuration.normalizeOptions!),
   searchQuery,
-  computed(() => configuration.fetchOptions),
+  computed(() => fetchOptions),
   computed(() => configuration.prefetchOptions!),
   computed(() => configuration.delay),
   computed(() => configuration.minimumInputLength),
@@ -783,7 +827,7 @@ defineOptions({
         v-bind="{ hasErrors, feedback: props.feedback }"
       >
         <FormFeedback
-          v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+          v-if="!hasErrors && props.feedback && props.showFeedback"
           :text="props.feedback"
         />
       </slot>

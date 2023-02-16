@@ -17,6 +17,7 @@ export default defineConfig(() => {
   return {
     plugins: [
       vue(),
+
       dts({
         cleanVueFileName: false,
         staticImport: false,

@@ -59,6 +59,7 @@
     "fuse.js": "^6.6.2",
     "libphonenumber-js": "^1.10.14",
     "lodash": "^4.17.21",
+    "universal-cookie": "^4.0.4",
     "unplugin-vue-define-options": "^1.0.0",
     "vue": "^3.2.45"
   },

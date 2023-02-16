@@ -153,7 +153,7 @@ export function makeServer({ environment = 'development' } = {}) {
                     '/datatables',
                 )
             })
-            this.passthrough('https://www.omdbapi.com')
+            this.passthrough('https://www.omdbapi.com', 'https://hybridly.test/*')
         },
     })
 }
