@@ -87,7 +87,7 @@ By default, the select component will take the `value` to the `v-model`and the `
 You can also nest the options by using the `children` key, or even disable an option by using the `disabled` key.
 
 This should be more than enough to cover the most basic usage cases, 
-but if you need more control you can also use the `fetchOptions` prop to pass a function that will load your results via AJAX, Axios or any other method of your choice.
+but if you need more control you can also use the `fetchOptions` prop to pass a function that will load your results via Fetch or any other method of your choice.
 
 Here is an example of how to use the `fetchOptions` prop to retrieve results from an external API:
 

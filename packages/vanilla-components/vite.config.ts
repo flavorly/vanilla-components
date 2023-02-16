@@ -13,44 +13,47 @@ const externals = [
   ...Object.keys(pkg.peerDependencies || {}),
 ]
 
+const production = process.env.NODE_ENV === 'production'
+
+const plugins = !production
+  ? [
+    vue(),
+    DefineOptions(),
+  ]
+  : [
+    vue(),
+    DefineOptions(),
+    copy({
+      targets: [
+        // Vue Components
+        { src: 'src/components/**/*.vue', dest: 'dist' },
+
+        // Vanilla Components Configuration
+        { src: 'src/components/**/config.ts', dest: 'dist' },
+
+        // Vanilla Base Configuration
+        { src: 'src/core/config/*.ts', dest: 'dist' },
+      ],
+      hook: 'writeBundle',
+      flatten: false, // Keep directory structure
+    }),
+    dts({
+      cleanVueFileName: false,
+      staticImport: false,
+      skipDiagnostics: true,
+      outputDir: 'dist',
+      beforeWriteFile(filePath, content) {
+        return {
+          filePath: filePath.replace('packages/vanilla-components/src', ''),
+          content,
+        }
+      },
+    }),
+  ]
+
 export default defineConfig(() => {
   return {
-    plugins: [
-      vue(),
-
-      dts({
-        cleanVueFileName: false,
-        staticImport: false,
-        skipDiagnostics: true,
-        outputDir: 'dist',
-        beforeWriteFile(filePath, content) {
-          return {
-            filePath: filePath.replace('packages/vanilla-components/src', ''),
-            content,
-          }
-        },
-      }),
-
-      // Define options for name components & what not
-      DefineOptions(),
-
-      // Copy vue files so Webstorm can be happy.
-
-      copy({
-        targets: [
-          // Vue Components
-          { src: 'src/components/**/*.vue', dest: 'dist' },
-
-          // Vanilla Components Configuration
-          { src: 'src/components/**/config.ts', dest: 'dist' },
-
-          // Vanilla Base Configuration
-          { src: 'src/core/config/*.ts', dest: 'dist' },
-        ],
-        hook: 'writeBundle',
-        flatten: false, // Keep directory structure
-      }),
-    ],
+    plugins,
     resolve: {
       alias: [
         { find: '/^~/', replacement: '' },
@@ -73,7 +76,6 @@ export default defineConfig(() => {
             '@vueuse/core': 'vue-use',
             '@popperjs/core': 'popperjs',
             '@headlessui/vue': 'headlessui-vue',
-            'axios': 'axios',
             'flatpickr': 'flatpickr',
             'libphonenumber-js': 'libphonenumber-js',
             'fuse.js': 'fusejs',

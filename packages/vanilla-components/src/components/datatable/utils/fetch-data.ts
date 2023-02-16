@@ -1,11 +1,10 @@
-import type { AxiosRequestConfig, AxiosRequestHeaders } from 'axios'
-import axios from 'axios'
 import type * as Types from '../config'
+import { useFetchData } from '@/core/use'
 
-const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.DatatableQueryData, P extends AxiosRequestHeaders>(
+const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.DatatableQueryData, P extends RequestInit>(
   config: T,
   data: Data,
-  headers: P,
+  options: P,
 ): Types.DatatableFetchDataPromise => {
   const isAction = data.action !== null
   const method = isAction ? config?.actionsMethod : config?.fetchMethod
@@ -13,26 +12,12 @@ const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.Da
   const postParams = method === 'POST' ? data : {}
   const queryParams = method === 'GET' ? data : {}
 
-  const axiosConfig = {
+  const finalOptions = {
     method,
-    url,
-    data: postParams,
-    params: queryParams,
-    headers: {
-        'Content-Type': 'application/json;charset=utf-8',
-        'X-Requested-With': 'XMLHttpRequest',
-        ...(headers || {}),
-    },
-  } as AxiosRequestConfig
-
-  return axios(axiosConfig)
-    .then(response => ({
-      data: response.data?.data,
-      links: response.data?.links,
-      meta: response.data?.meta,
-      responses: response.data?.responses,
-      resolved: true,
-    }))
+    body: JSON.stringify(postParams),
+    ...options,
+  }
+  return useFetchData(url, queryParams, finalOptions)
 }
 
 export default fetchData

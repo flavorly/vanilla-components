@@ -190,10 +190,14 @@ const poolingOptions = {
   stopWhenDataChanges: true,
 }
 
+const fetchEndpoint = new URL('/datatables', document.baseURI).href
+console.log('Fetch Endpoint', fetchEndpoint)
+
+// A function to get the current url plus a endpoint
 const config = {
   name: 'ExampleDatatable',
   primaryKey: 'id',
-  fetchEndpoint: '/datatables',
+  fetchEndpoint: new URL('/datatables', document.baseURI),
   columns,
   actions,
   filters,

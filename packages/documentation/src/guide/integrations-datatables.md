@@ -740,7 +740,7 @@ public function translations(): array
 Datatable requires an endpoint to pull the json data to feed the table, in order to configure that please use the `fetchEndpoint()` method, this method must return a string.
 Keep in mind this needs to be a full qualified URL, using the `route()` helper is recommended
 
-Vanilla components uses axios to perform the requests by default, so if you are using Laravel you should probably be fine!
+Vanilla components uses fetch to perform the requests by default, so if you are using Laravel you should probably be fine!
 
 
 ```php

@@ -1,5 +1,6 @@
 import type { ComputedRef, Ref } from 'vue'
 import { computed, ref, watch } from 'vue'
+import { isNumber } from '@vueuse/core'
 import { addToArray, isEqual, subtractFromArray } from '@/core/helpers'
 import type { NormalizedOption } from '@/core/types'
 
@@ -18,7 +19,12 @@ export default function useSelectableOption(
   } {
   const optionIsSelected = (option: NormalizedOption): boolean => {
     if (multiple.value) {
-      return Array.isArray(localValue.value) && localValue.value.some(value => isEqual(value, option.value))
+      // Ensure if its a number that it is converted to string as well for type weak comparison
+      return Array.isArray(localValue.value)
+        && localValue.value.some(value =>
+          isEqual(value, option.value)
+          || ((isNumber(value) || isNumber(option.value)) && isEqual(value.toString(), option.value.toString())),
+        )
     }
 
     return isEqual(localValue.value, option.value)

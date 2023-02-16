@@ -3,11 +3,12 @@ import type { PropType, Ref } from 'vue'
 import { camelize, defineAsyncComponent, inject, ref, watch } from 'vue'
 import find from 'lodash/find'
 import { useClipboard } from '@vueuse/core'
+import queryString from 'query-string'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
 import Button from '@/components/button/button.vue'
 import { useInjectsClassesList } from '@/core/use'
-import { Base64, isEqual, isServer } from '@/core/helpers'
+import { Base64, isEqual, isServer, urlHelper } from '@/core/helpers'
 import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
 import Dialog from '@/components/dialog/dialog.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
@@ -103,20 +104,15 @@ const copyFiltersLink = (): void => {
   if (isServer()) {
     return
   }
-  const url = new URL(window.location.href)
-  const params = new URLSearchParams(url.search)
   const filtersKey = camelize(`${props.configuration.name}`)
+  const query = {
+    [filtersKey]: props.configuration.options.filtersHashingMethod === 'query'
+      ? localFilters.value
+      : Base64.encode(JSON.stringify(localFilters.value)),
+  }
 
-  if (props.configuration.options.filtersHashingMethod === 'query') {
-    Object.entries(localFilters.value).map(([key, value]) => {
-      return params.append(`${filtersKey}[${key}]`, value as string)
-    })
-  }
-  else {
-    params.set(filtersKey, Base64.encode(JSON.stringify(localFilters.value)))
-  }
-  url.search = params.toString()
-  copy(url.toString())
+  const finalUrl = urlHelper(window.location.href, query)
+  copy(finalUrl)
 }
 
 // Open / Close Modal
@@ -174,6 +170,7 @@ defineOptions({
             :errors="filter?.errors"
             v-bind="filter?.props"
             :teleport="true"
+            :multiple="true"
           />
 
           <VanillaInput

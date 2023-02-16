@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
 import { refThrottled } from '@vueuse/core'
-import { useCookies } from '@vueuse/integrations/useCookies'
+import { isEmpty } from 'lodash'
 import RichSelectDropdown from './partials/dropdown.vue'
 import RichSelectTrigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
@@ -27,7 +27,15 @@ import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormErrors from '@/components/forms/form-errors.vue'
 import { popperOptions, sameWidthModifier } from '@/core/config'
 import { isEqual } from '@/core/helpers'
-import { useActivableOption, useConfiguration, useFetchsOptions, useMultipleVModel, useSelectableOption, useVariantProps } from '@/core/use'
+import {
+  useActivableOption,
+  useConfiguration,
+  useFetchData,
+  useFetchsOptions,
+  useMultipleVModel,
+  useSelectableOption,
+  useVariantProps,
+} from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<RichSelectProps, RichSelectClassesValidKeys>(),
@@ -241,22 +249,10 @@ const {
 
 // Base function for fetching options when url is provided
 const fetchOptionsBaseFunction = (query?: string, nextPage?: number): FetchedOptions => {
-  // Extract proper token from cookies ( Laravel )
-
-  const token = useCookies().get('XSRF-TOKEN')
-  const url = new URL(configuration.fetchEndpoint)
-
-  url.search = new URLSearchParams([['query', query], ['page', nextPage || '1']]).toString()
-
-  return fetch(url, {
-    headers: {
-      'Accept': 'application/json',
-      'X-Requested-With': 'XMLHttpRequest',
-      'X-XSRF-TOKEN': token ? decodeURIComponent(token) : '',
-    },
-  })
-  .then(response => response.json())
-  .then((data) => {
+  return useFetchData(configuration.fetchEndpoint, {
+    query,
+    page: nextPage || 1,
+  }).then((data) => {
     return {
       results: data.data as Record<string, any>[],
       hasMorePages: data.data && data.next_page_url,
@@ -264,9 +260,25 @@ const fetchOptionsBaseFunction = (query?: string, nextPage?: number): FetchedOpt
   })
 }
 
-const fetchOptions = typeof configuration.fetchOptions === 'undefined' && configuration.fetchEndpoint !== undefined
-  ? fetchOptionsBaseFunction
-  : configuration.fetchOptions
+const prefetchOptionsBaseFunction = (currentValue: any) => {
+  return useFetchData(configuration.fetchEndpoint, {
+    values: currentValue,
+  }).then((data) => {
+    return data.data
+  })
+}
+
+let fetchOptions = undefined as FetchOptionsFn | undefined
+let preFetchOptions = undefined as PreFetchOptionsFn | boolean
+
+if (typeof configuration.fetchOptions === 'undefined' && configuration.fetchEndpoint !== undefined) {
+  fetchOptions = fetchOptionsBaseFunction
+  preFetchOptions = prefetchOptionsBaseFunction
+}
+else {
+  fetchOptions = configuration.fetchOptions
+  preFetchOptions = configuration.prefetchOptions
+}
 
 const searchQuery = ref<string | undefined>(undefined)
 
@@ -292,7 +304,7 @@ const {
   computed(() => configuration.normalizeOptions!),
   searchQuery,
   computed(() => fetchOptions),
-  computed(() => configuration.prefetchOptions!),
+  computed(() => preFetchOptions),
   computed(() => configuration.delay),
   computed(() => configuration.minimumInputLength),
   computed(() => configuration.minimumInputLengthText!),
@@ -355,10 +367,11 @@ const canFetchOptions: Ref<boolean> = computed(() => (
 ))
 
 const canPreFetchOptions: Ref<boolean> = computed(() => {
-  if (typeof configuration.prefetchOptions === 'function') {
-    return optionsWereFetched.value
-  }
-  return canFetchOptions.value
+  // if (typeof preFetchOptions === 'function') {
+  //   return optionsWereFetched.value
+  // }
+  // return canFetchOptions.value
+  return preFetchOptions && !optionsWereFetched.value && (localValue.value !== null && !isEmpty(localValue.value))
 })
 
 const dropdownClasses: Ref<CSSRawClassesList> = computed(() => {
@@ -552,10 +565,8 @@ const hiddenHandler = (): void => {
 
 const beforeShowHandler = (): void => {
   emit('beforeShow')
-
   initActiveOption()
-
-  if (canFetchOptions.value) {
+  if (canFetchOptions.value && !optionsWereFetched.value) {
     doFetchOptions()
   }
 }
@@ -613,9 +624,11 @@ watch(() => localValue.value, () => onOptionSelected())
 
 onBeforeUnmount(() => fetchOptionsCancel())
 
-if (configuration.prefetchOptions && canPreFetchOptions.value) {
-  doPrefetchOptions()
-}
+onMounted(() => {
+  if (canPreFetchOptions.value) {
+    doPrefetchOptions()
+  }
+})
 
 /**
  * Provided data
