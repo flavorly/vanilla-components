@@ -9,9 +9,11 @@ import collect from 'collect.js'
 
 /** Fake a look a like Laravel Pagination */
 const paginate = (records: Record<string, any>[], request: Request, baseUrl: string) => {
-    if (!request) {
+    if (!request || typeof window === 'undefined' || typeof document === 'undefined' || import.meta.env.SSR) {
       return
     }
+
+    const fakeDocument = window || baseUrl
 
     const postData = JSON.parse(request.requestBody)
 
@@ -92,7 +94,7 @@ const paginate = (records: Record<string, any>[], request: Request, baseUrl: str
     }
 
     const generateUrl = (params: object) => {
-        const userUrl = new URL('/datatables', document.baseURI)
+        const userUrl = new URL('/datatables', fakeDocument.baseURI)
         const urlParams = new URLSearchParams(userUrl.search)
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-expect-error
