@@ -6,7 +6,6 @@ import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import ReplacePackagePlugin from '../utils/local-link'
-import highlighter from './shiki-tags/highlighter'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanilla-components.com' : 'http://localhost:3005'
@@ -138,7 +137,7 @@ export default defineConfig({
       },
       { text: 'Guide', link: '/guide/quick-start', activeMatch: '/guide/quick-start' },
       { text: 'Components', link: '/guide/components-list', activeMatch: '/guide/components-list' },
-      { text: 'v0.6.27', link: 'https://github.com/flavorly/vanilla-components' },
+      { text: 'v0.7.28', link: 'https://github.com/flavorly/vanilla-components' },
     ],
 
     sidebar: {
