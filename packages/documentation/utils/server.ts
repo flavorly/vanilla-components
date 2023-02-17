@@ -15,8 +15,9 @@ const paginate = (records: Record<string, any>[], request: Request, baseUrl: str
 
     const postData = JSON.parse(request.requestBody)
 
-    if (postData)
-        console.log('[REST] Got Post from Fake API', postData)
+    if (postData) {
+      console.log('[REST] Got Post from Fake API', postData)
+    }
 
     // Search the items function
     const search = (query: string, collection: ReadonlyArray<unknown>) => {
@@ -90,11 +91,21 @@ const paginate = (records: Record<string, any>[], request: Request, baseUrl: str
         console.log('[REST] 👉 Sorting, Demo only supports', pluckColumns, pluckDirections)
     }
 
+    const generateUrl = (params: object) => {
+        const userUrl = new URL('/datatables', document.baseURI)
+        const urlParams = new URLSearchParams(userUrl.search)
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        Object.keys(params).forEach(key => urlParams.set(key, params[key]))
+        userUrl.search = urlParams.toString()
+        return userUrl
+    }
+
     // Apply Filters
     const pagesList = []
     for (let i = 1; i < totalPages; i++) {
         pagesList.push({
-            url: `${baseUrl}/?page=${i}`,
+            url: generateUrl({ page: i.toString() }),
             label: i,
             active: i === page,
         })
@@ -103,8 +114,8 @@ const paginate = (records: Record<string, any>[], request: Request, baseUrl: str
     return {
         data: items,
         links: {
-            next: hasNextPage ? `${baseUrl}/?page=${nextPage}` : null,
-            previous: hasPreviousPage ? `${baseUrl}/?page=${previousPage}` : null,
+            next: hasNextPage ? generateUrl({ page: nextPage.toString() }) : null,
+            previous: hasPreviousPage ? generateUrl({ page: previousPage.toString() }) : null,
             pages: pagesList,
         },
         meta: {
@@ -153,7 +164,7 @@ export function makeServer({ environment = 'development' } = {}) {
                     '/datatables',
                 )
             })
-            this.passthrough('https://www.omdbapi.com')
+            this.passthrough('https://www.omdbapi.com', 'https://hybridly.test/*')
         },
     })
 }

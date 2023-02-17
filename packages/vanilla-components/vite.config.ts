@@ -15,26 +15,11 @@ const externals = [
 
 export default defineConfig(() => {
   return {
-    plugins: [
+    plugins: process.env.APP_ENV !== 'watch'
+      // eslint-disable-next-line multiline-ternary
+      ? [
       vue(),
-      dts({
-        cleanVueFileName: false,
-        staticImport: false,
-        skipDiagnostics: true,
-        outputDir: 'dist',
-        beforeWriteFile(filePath, content) {
-          return {
-            filePath: filePath.replace('packages/vanilla-components/src', ''),
-            content,
-          }
-        },
-      }),
-
-      // Define options for name components & what not
       DefineOptions(),
-
-      // Copy vue files so Webstorm can be happy.
-
       copy({
         targets: [
           // Vue Components
@@ -49,6 +34,21 @@ export default defineConfig(() => {
         hook: 'writeBundle',
         flatten: false, // Keep directory structure
       }),
+      dts({
+        cleanVueFileName: false,
+        staticImport: false,
+        skipDiagnostics: true,
+        outputDir: 'dist',
+        beforeWriteFile(filePath, content) {
+          return {
+            filePath: filePath.replace('packages/vanilla-components/src', ''),
+            content,
+          }
+        },
+      }),
+    ] : [
+      vue(),
+      DefineOptions(),
     ],
     resolve: {
       alias: [
@@ -72,7 +72,6 @@ export default defineConfig(() => {
             '@vueuse/core': 'vue-use',
             '@popperjs/core': 'popperjs',
             '@headlessui/vue': 'headlessui-vue',
-            'axios': 'axios',
             'flatpickr': 'flatpickr',
             'libphonenumber-js': 'libphonenumber-js',
             'fuse.js': 'fusejs',

@@ -12,7 +12,7 @@ const props = defineProps({
     required: true,
   },
   value: {
-    type: [Number, String] as PropType<number | string | any>,
+    type: [Number, String, Array, Object] as PropType<number | string | any | string[] | object>,
     required: true,
   },
   withLabel: {
@@ -28,7 +28,7 @@ const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 const translations = useInjectDatatableTranslations()!
 
 const translateFilterValue = (filter: Types.DatatableFilter): any => {
-  if (filter?.options !== undefined) {
+  if (filter?.options !== undefined && !(typeof filter.value == 'object' && Object.keys(filter.value).length > 0)) {
     let value = filter.value
     if (value === 'true' || value === 'false') {
        value = value === 'true'
@@ -36,6 +36,11 @@ const translateFilterValue = (filter: Types.DatatableFilter): any => {
     const selectedOption = find(filter.options, { value }) as NormalizedOption
     return selectedOption?.text || filter.value
   }
+
+  if (Array.isArray(filter?.value) && filter?.value.length > 0) {
+    return filter.value.join(',')
+  }
+
   return filter.value
 }
 

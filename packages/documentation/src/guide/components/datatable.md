@@ -10,7 +10,7 @@ filter results, search & many more features, everything is perfectly designed wi
 The data table component includes a lot of features and we plan to include more with time without making it too complicated to keep it as much `vanilla` as possible :smile: .
 feel free to explore most of them but some highlights:
 
-- Data Fetched via Axios just provide an endpoint
+- Data Fetched via Fetch just provide an endpoint
 - Bulk Selection with persistence
 - Bulk Actions
 - Actions with Hooks, totally configurable
@@ -41,12 +41,12 @@ But enough talk, let's see it in action!
 
 !!!include(./src/parts/title-props.md)!!!
 
-| Prop                       | Description                              | Accepted Values       | Default            |
-|:---------------------------|:-----------------------------------------|:----------------------|:-------------------|
-| `config`                   | Array of configuration to the table      | [Object]              | `{}`               |
-| `fetchData`                | Promise / Function to fetch data         | [Function, undefined] | `undefined`        |
-| `onActionExecutedCallback` | Hook/Function after Action executed      | [Function, undefined] | `undefined`        |
-| `onExceptionCallback`      | Hook/Function after Axios Exception      | [Function, undefined] | `undefined`        |
+| Prop                       | Description                         | Accepted Values       | Default            |
+|:---------------------------|:------------------------------------|:----------------------|:-------------------|
+| `config`                   | Array of configuration to the table | [Object]              | `{}`               |
+| `fetchData`                | Promise / Function to fetch data    | [Function, undefined] | `undefined`        |
+| `onActionExecutedCallback` | Hook/Function after Action executed | [Function, undefined] | `undefined`        |
+| `onExceptionCallback`      | Hook/Function after Fetch Exception | [Function, undefined] | `undefined`        |
 
 
 ## Configuration :joystick:
@@ -81,7 +81,7 @@ The response must include :
 
 ### Client Side Request
 
-All requests made by the table are using Axios, this way you can hook your credentials or authorization with Axios Interceptor
+All requests made by the table are using Fetch, if you want to use your own adapter you can override the default fetchData method.
 Below, you will find what parameters are sent to the server-side so you can build any server-side adapters.
 
 :::details :surfer: Click to check the demo request

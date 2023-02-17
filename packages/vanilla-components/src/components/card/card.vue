@@ -55,7 +55,7 @@ defineOptions({
     v-bind="$attrs"
   >
     <div
-      v-if="hasSlot($slots.title) || hasSlot($slots.subtitle) || hasSlot($slots.actions) || title !== undefined || subtitle !== undefined"
+      v-if="hasSlot($slots.title) || hasSlot($slots.subtitle) || hasSlot($slots.actions) || title !== '' || subtitle !== ''"
       :class="[
         configuration.classesList.header,
       ]"
@@ -69,7 +69,7 @@ defineOptions({
         <div :class="configuration.classesList.titleWrapper">
           <div>
             <h3
-              v-if="hasSlot($slots.title) || title !== undefined"
+              v-if="hasSlot($slots.title) || title !== ''"
               :class="configuration.classesList.title"
             >
               <slot name="title">
@@ -79,7 +79,7 @@ defineOptions({
               </slot>
             </h3>
             <p
-              v-if="hasSlot($slots.subtitle) || subtitle !== undefined"
+              v-if="hasSlot($slots.subtitle) || subtitle !== ''"
               :class="configuration.classesList.subtitle"
             >
               <slot name="subtitle">

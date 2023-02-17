@@ -27,11 +27,11 @@ Here is a small demo overriding the `Input` component:
 
 ```js
 import { createApp } from 'vue'
-import { Plugin } from '@flavorly/vanilla-components' // [!vp focus:1]
+import { Plugin } from '@flavorly/vanilla-components' // [!code  focus]:1]
 const app = createApp()
 
 app.use(VanillaComponents, {
-    Input: { // [!vp focus:12]
+    Input: { // [!code  focus]:12]
         fixedClasses: {
           input: 'm-5 shadow-xl',
         },
@@ -64,7 +64,7 @@ You are not limited to setting a configuration on a file and loading it, even th
 ```vue
 <template>
     <Button
-        :variants="{ // [!vp focus:14]
+        :variants="{ // [!code  focus]:14]
             orange: {
                 classes: {
                     foo: 'bar'
@@ -93,13 +93,13 @@ const app = createApp()
 
 app.use(VanillaComponents, {
     Input: { 
-        props: { // [!vp focus:4]
+        props: { // [!code  focus]:4]
           // Here we are expecting a string
           placeholder: true,
         }
     },
     Dialog: {
-        props: {// [!vp focus:4]
+        props: {// [!code  focus]:4]
           // Here we are expecting a boolean, but we getting a string! :(
           closeOnLeaving: 'yes',
         }

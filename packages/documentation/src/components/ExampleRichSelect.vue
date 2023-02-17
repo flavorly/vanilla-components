@@ -7,6 +7,7 @@ const value3 = ref(null)
 const value4 = ref([])
 const value5 = ref(null)
 const value6 = ref(null)
+const value7 = ref(null)
 
 const options = [
     { value: 'Option 1', text: 'One Option' },
@@ -257,6 +258,38 @@ const fetchOptions = (query?: string, nextPage?: number) => {
                 :class="[isSelected ? 'font-normal opacity-60' : 'opacity-60']"
                 v-html="`This movie was released in the year of ${movie?.Year}`"
               />
+            </div>
+          </template>
+        </RichSelect>
+      </div>
+
+      <!-- Fetching with Endpoint -->
+      <div class="w-full">
+        <RichSelect
+          v-model="value7"
+          feedback="Type a movie name to search"
+          placeholder="Ex: Search for the Matrix or Pokemon"
+          fetch-endpoint="https://hybridly.test/api/payments"
+          :minimum-input-length="3"
+          value-attribute="id"
+          text-attribute="gateway"
+        >
+          <template #option="{ option: { raw: payment }, className, isSelected }">
+            <div
+              class="px-3 py-2"
+              :class="className"
+            >
+              <div class="relative">
+                <div
+                  :class="[isSelected ? 'font-medium' : 'font-normal']"
+                  class="flex items-center space-x-2 text-sm block"
+                >
+                  <span
+                    class="block whitespace-nowrap truncate"
+                    v-html="`${payment?.gateway} - ${payment?.id}`"
+                  />
+                </div>
+              </div>
             </div>
           </template>
         </RichSelect>

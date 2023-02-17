@@ -152,7 +152,7 @@ export default function useFetchsOptions(
     if (nextPage !== undefined && nextPage >= 2) {
       fetchingMoreOptions.value = true
     }
- else {
+    else {
       fetchingOptions.value = true
     }
 

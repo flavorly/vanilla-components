@@ -169,6 +169,10 @@ export declare interface DatatableFilter {
   options?: undefined | InputOptions | NormalizedOption[] | NormalizedOptions
   rules?: undefined | string[]
   props?: DatatableFilterProp[]
+  fetchEndpoint?: string
+  multiple?: boolean
+  valueAttribute?: string
+  textAttribute?: string
 }
 
 export declare interface DatatableFilterProp {

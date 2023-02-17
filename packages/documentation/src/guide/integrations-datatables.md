@@ -51,20 +51,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Laravel\Scout\Searchable;// [!vp focus:1]
+use Laravel\Scout\Searchable;// [!code  focus]:1]
 
 class Payment extends Model
 {
-    use Searchable; // [!vp focus:1]
+    use Searchable; // [!code  focus]:1]
     use HasFactory;
     
-    public function searchableUsing() // [!vp focus:5]
+    public function searchableUsing() // [!code  focus]:5]
     {
         // If can use any engines of your choice here
         return app(EngineManager::class)->engine('database');
     }
 
-    #[SearchUsingPrefix(['id', 'gateway'])] // [!vp focus:9]
+    #[SearchUsingPrefix(['id', 'gateway'])] // [!code  focus]:9]
     public function toSearchableArray()
     {
         return [
@@ -229,7 +229,7 @@ Make sure to return an array of columns from the `columns()` method.
 // Import at the top level
 use Flavorly\VanillaComponents\Datatables\Columns\Column;
 
-public function columns(): array // [!vp focus:8]
+public function columns(): array // [!code  focus]:8]
 {
     return [
         Column::make()->name('id')->label('ID')->sortable(),
@@ -740,7 +740,7 @@ public function translations(): array
 Datatable requires an endpoint to pull the json data to feed the table, in order to configure that please use the `fetchEndpoint()` method, this method must return a string.
 Keep in mind this needs to be a full qualified URL, using the `route()` helper is recommended
 
-Vanilla components uses axios to perform the requests by default, so if you are using Laravel you should probably be fine!
+Vanilla components uses fetch to perform the requests by default, so if you are using Laravel you should probably be fine!
 
 
 ```php

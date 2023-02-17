@@ -235,6 +235,7 @@ export declare type RichSelectProps = WithVariantPropsAndClassesList<{
   name?: string
   tags?: boolean
   show?: boolean
+  fetchEndpoint?: string
   normalizeOptions?: boolean
   valueAttribute?: string
   textAttribute?: string

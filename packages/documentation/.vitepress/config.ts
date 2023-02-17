@@ -4,9 +4,9 @@ import MarkitDownInclude from 'markdown-it-include'
 import Inspect from 'vite-plugin-inspect'
 import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
+import DefineOptions from 'unplugin-vue-define-options/vite'
 import ReplacePackagePlugin from '../utils/local-link'
 import highlighter from './shiki-tags/highlighter'
-import DefineOptions from 'unplugin-vue-define-options/vite'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanilla-components.com' : 'http://localhost:3005'
@@ -107,7 +107,6 @@ export default defineConfig({
 
   // Plugins Configuration
   markdown: {
-    highlight: await highlighter(),
     config(md) {
       md.use(MarkitDownInclude)
     },

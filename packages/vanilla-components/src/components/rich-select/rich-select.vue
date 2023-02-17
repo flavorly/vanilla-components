@@ -1,14 +1,25 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { computed, onBeforeUnmount, provide, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
 import { refThrottled } from '@vueuse/core'
+import { isEmpty } from 'lodash'
 import RichSelectDropdown from './partials/dropdown.vue'
 import RichSelectTrigger from './partials/trigger.vue'
 import ClearButton from './partials/clear-button.vue'
 import { richSelectConfig } from './config'
 import type { RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
-import type { CSSRawClassesList, Data, FetchOptionsFn, InputOptions, Measure, MinimumInputLengthTextProp, NormalizedOption, PreFetchOptionsFn } from '@/core/types'
+import type {
+  CSSRawClassesList,
+  Data,
+  FetchOptionsFn,
+  FetchedOptions,
+  InputOptions,
+  Measure,
+  MinimumInputLengthTextProp,
+  NormalizedOption,
+  PreFetchOptionsFn,
+} from '@/core/types'
 import DropdownSimple from '@/components/dropdown/dropdown.vue'
 import { validDropdownPlacements } from '@/components/dropdown/config'
 import SimpleSelect from '@/components/select/select.vue'
@@ -16,7 +27,15 @@ import FormFeedback from '@/components/forms/form-feedback.vue'
 import FormErrors from '@/components/forms/form-errors.vue'
 import { popperOptions, sameWidthModifier } from '@/core/config'
 import { isEqual } from '@/core/helpers'
-import { useActivableOption, useConfiguration, useFetchsOptions, useMultipleVModel, useSelectableOption, useVariantProps } from '@/core/use'
+import {
+  useActivableOption,
+  useConfiguration,
+  useFetchData,
+  useFetchsOptions,
+  useMultipleVModel,
+  useSelectableOption,
+  useVariantProps,
+} from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<RichSelectProps, RichSelectClassesValidKeys>(),
@@ -58,6 +77,10 @@ const props = defineProps({
     default: false,
   },
   placeholder: {
+    type: String,
+    default: undefined,
+  },
+  fetchEndpoint: {
     type: String,
     default: undefined,
   },
@@ -211,6 +234,7 @@ const emit = defineEmits({
   'hidden': () => true,
   'beforeShow': () => true,
   'beforeHide': () => true,
+  'optionsSelected': () => true,
   'fetchOptionsSuccess': () => true,
   'fetchOptionsError': () => true,
   'update:modelValue': () => true,
@@ -223,6 +247,39 @@ const {
   hasErrors,
   errors,
 } = useConfiguration<RichSelectProps>(richSelectConfig, 'RichSelect', localValue)
+
+// Base function for fetching options when url is provided
+const fetchOptionsBaseFunction = (query?: string, nextPage?: number): FetchedOptions => {
+  return useFetchData(configuration.fetchEndpoint, {
+    query,
+    page: nextPage || 1,
+  }).then((data) => {
+    return {
+      results: data.data as Record<string, any>[],
+      hasMorePages: data.data && data.next_page_url,
+    }
+  })
+}
+
+const prefetchOptionsBaseFunction = (currentValue: any) => {
+  return useFetchData(configuration.fetchEndpoint, {
+    values: currentValue,
+  }).then((data) => {
+    return data.data
+  })
+}
+
+let fetchOptions = undefined as FetchOptionsFn | undefined
+let preFetchOptions = undefined as PreFetchOptionsFn | boolean
+
+if (typeof configuration.fetchOptions === 'undefined' && configuration.fetchEndpoint !== undefined) {
+  fetchOptions = fetchOptionsBaseFunction
+  preFetchOptions = prefetchOptionsBaseFunction
+}
+else {
+  fetchOptions = configuration.fetchOptions
+  preFetchOptions = configuration.prefetchOptions
+}
 
 const searchQuery = ref<string | undefined>(undefined)
 
@@ -247,8 +304,8 @@ const {
   computed(() => configuration.valueAttribute),
   computed(() => configuration.normalizeOptions!),
   searchQuery,
-  computed(() => configuration.fetchOptions),
-  computed(() => configuration.prefetchOptions!),
+  computed(() => fetchOptions),
+  computed(() => preFetchOptions),
   computed(() => configuration.delay),
   computed(() => configuration.minimumInputLength),
   computed(() => configuration.minimumInputLengthText!),
@@ -311,10 +368,11 @@ const canFetchOptions: Ref<boolean> = computed(() => (
 ))
 
 const canPreFetchOptions: Ref<boolean> = computed(() => {
-  if (typeof configuration.prefetchOptions === 'function') {
-    return optionsWereFetched.value
-  }
-  return canFetchOptions.value
+  // if (typeof preFetchOptions === 'function') {
+  //   return optionsWereFetched.value
+  // }
+  // return canFetchOptions.value
+  return preFetchOptions && !optionsWereFetched.value && (localValue.value !== null && !isEmpty(localValue.value))
 })
 
 const dropdownClasses: Ref<CSSRawClassesList> = computed(() => {
@@ -508,10 +566,8 @@ const hiddenHandler = (): void => {
 
 const beforeShowHandler = (): void => {
   emit('beforeShow')
-
   initActiveOption()
-
-  if (canFetchOptions.value) {
+  if (canFetchOptions.value && !optionsWereFetched.value) {
     doFetchOptions()
   }
 }
@@ -567,11 +623,19 @@ const blurHandler = (e: FocusEvent): void => {
 
 watch(() => localValue.value, () => onOptionSelected())
 
+watch(() => selectedOption.value, () => {
+  emit('optionsSelected', {
+    options: selectedOption.value,
+  })
+})
+
 onBeforeUnmount(() => fetchOptionsCancel())
 
-if (configuration.prefetchOptions && canPreFetchOptions.value) {
-  doPrefetchOptions()
-}
+onMounted(() => {
+  if (canPreFetchOptions.value) {
+    doPrefetchOptions()
+  }
+})
 
 /**
  * Provided data
@@ -783,7 +847,7 @@ defineOptions({
         v-bind="{ hasErrors, feedback: props.feedback }"
       >
         <FormFeedback
-          v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+          v-if="!hasErrors && props.feedback && props.showFeedback"
           :text="props.feedback"
         />
       </slot>

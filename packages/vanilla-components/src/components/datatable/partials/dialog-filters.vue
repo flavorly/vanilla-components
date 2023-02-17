@@ -7,7 +7,7 @@ import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
 import Button from '@/components/button/button.vue'
 import { useInjectsClassesList } from '@/core/use'
-import { Base64, isEqual, isServer } from '@/core/helpers'
+import { Base64, isEqual, isServer, urlHelper } from '@/core/helpers'
 import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
 import Dialog from '@/components/dialog/dialog.vue'
 import InputGroup from '@/components/input-group/input-group.vue'
@@ -40,7 +40,7 @@ const Select = defineAsyncComponent(() => import('@/components/select/select.vue
 const RichSelect = defineAsyncComponent(() => import('@/components/rich-select/rich-select.vue'))
 const Checkbox = defineAsyncComponent(() => import('@/components/checkbox/checkbox.vue'))
 const Toggle = defineAsyncComponent(() => import('@/components/toggle/toggle.vue'))
-const Input = defineAsyncComponent(() => import('@/components/input/input.vue'))
+const VanillaInput = defineAsyncComponent(() => import('@/components/input/input.vue'))
 const Textarea = defineAsyncComponent(() => import('@/components/textarea/textarea.vue'))
 const DateTimeInput = defineAsyncComponent(() => import('@/components/datetime-input/datetime-input.vue'))
 
@@ -59,7 +59,7 @@ watch(
 
 // Resolve the value for the filter
 const getFilterDefaultValue = (name: string): unknown => {
-  return find(props.filters, { name })?.defaultValue || ''
+  return find(props.filters, { name })?.defaultValue || null
 }
 
 // Resolve the value for the filter
@@ -75,7 +75,16 @@ const getFilterValue = (name: string): unknown => {
 // Cleanup empty filters on save
 const cleanupEmptyFilters = (filters: object) => {
   return Object.fromEntries(Object.entries(filters).filter(([key, v]) => {
-    return v != null && v !== '' && v !== getFilterDefaultValue(key)
+    if (v === null && v === '') {
+      return false
+    }
+    if (Array.isArray(v) && v.length <= 0) {
+      return false
+    }
+    if (typeof v === 'object' && Object.keys(v).length <= 0) {
+      return false
+    }
+    return v !== getFilterDefaultValue(key)
   }))
 }
 
@@ -103,20 +112,15 @@ const copyFiltersLink = (): void => {
   if (isServer()) {
     return
   }
-  const url = new URL(window.location.href)
-  const params = new URLSearchParams(url.search)
   const filtersKey = camelize(`${props.configuration.name}`)
+  const query = {
+    [filtersKey]: props.configuration.options.filtersHashingMethod === 'query'
+      ? localFilters.value
+      : Base64.encode(JSON.stringify(localFilters.value)),
+  }
 
-  if (props.configuration.options.filtersHashingMethod === 'query') {
-    Object.entries(localFilters.value).map(([key, value]) => {
-      return params.append(`${filtersKey}[${key}]`, value as string)
-    })
-  }
-  else {
-    params.set(filtersKey, Base64.encode(JSON.stringify(localFilters.value)))
-  }
-  url.search = params.toString()
-  copy(url.toString())
+  const finalUrl = urlHelper(window.location.href, query)
+  copy(finalUrl)
 }
 
 // Open / Close Modal
@@ -156,66 +160,70 @@ defineOptions({
             v-if="filter.component === 'VanillaSelect'"
             v-model="localFilters[filter.name]"
             :options="filter.options"
-            v-bind="filter.props"
+            v-bind="filter?.props"
             :show-empty="true"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <RichSelect
             v-if="filter.component === 'VanillaRichSelect'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
+            :placeholder="filter?.placeholder"
+            :fetch-endpoint="filter?.fetchEndpoint"
+            :value-attribute="filter?.valueAttribute"
+            :text-attribute="filter?.textAttribute"
             :options="filter.options"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
-            v-bind="filter.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
+            v-bind="filter?.props"
             :teleport="true"
+            :multiple="filter?.multiple"
           />
 
-          <Input
+          <VanillaInput
             v-if="filter.component === 'VanillaInput'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <Checkbox
             v-if="filter.component === 'VanillaCheckbox'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <Toggle
             v-if="filter.component === 'VanillaToggle'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <Textarea
             v-if="filter.component === 'VanillaTextarea'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
 
           <DateTimeInput
             v-if="filter.component === 'VanillaDatetimePicker'"
             v-model="localFilters[filter.name]"
-            :placeholder="filter.placeholder"
-            v-bind="filter.props"
-            :feedback="filter.feedback"
-            :errors="filter.errors"
+            :placeholder="filter?.placeholder"
+            v-bind="filter?.props"
+            :feedback="filter?.feedback"
+            :errors="filter?.errors"
           />
         </InputGroup>
       </template>

@@ -168,7 +168,7 @@ defineOptions({
       v-bind="{ hasErrors, feedback }"
     >
       <FormFeedback
-        v-if="!hasErrors && props.feedback !== undefined && props.showFeedback"
+        v-if="!hasErrors && props.feedback && props.showFeedback"
         :text="props.feedback"
       />
     </slot>
