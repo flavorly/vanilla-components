@@ -11,10 +11,11 @@ The data table component includes a lot of features and we plan to include more 
 feel free to explore most of them but some highlights:
 
 - Data Fetched via Fetch just provide an endpoint
-- Bulk Selection with persistence
+- Bulk Selection with persistence on Local Storage
 - Bulk Actions
 - Actions with Hooks, totally configurable
-- Filters with more than 5 different types of components to use
+- Filters with more than 5 different types of components to use & Persisted on Local Storage
+- Copy Friendly Filters Link to share with your pals
 - Handcrafts with TailwindCSS + Dark Mode
 - Settings to Hide/Show Pages
 - Multi-Column sorting

@@ -234,7 +234,7 @@ public function columns(): array // [!code  focus]:8]
     return [
         Column::make()->name('id')->label('ID')->sortable(),
         Column::make()->name('name')->label('Name')->raw()->sortable(),
-        Column::make()->name('email')->label('Email')->sortable(),
+        Column::make()->name('email')->label('Email')->sortable(applySortUsing: fn($query, $direction) => $query->orderBy('email', $direction)),
     ];
 }
 
@@ -509,6 +509,11 @@ public function filters(): array
             RichSelect::make()
                 ->name('banned')
                 ->label('Banned')
+                 // NEW: This will make the select multiple and allow to toggle multiple options
+                ->multiple()
+                 // NEW: Pick a endpoint to fetch options from
+                ->fetchOptionsFrom(route('api.fetch-users'),'name', 'id')
+                // Other options
                 ->options([
                     // Note here we are using the Options class to generate actual options instead of a plain array
                     Option::make()

@@ -45,6 +45,7 @@ A full-fledged select component with support for custom options, custom values, 
 | `clearable`                | If we should allow selected value to be unselected             | `Boolean`         | `false`          |
 | `maxHeight`                | Max Height of the dropdown                                     | `Number`          | `250`            |
 | `fetchOptions`             | A function/promise that returns the results                    | `Function`        | `undefined`      |
+| `fetchEndpoint`             | A Url String to fetch options from                             | `String`               | `undefined`      |
 | `prefetchOptions`          | Initial set of options when a fetchOptions function is defined | `Array`           | `undefined`      |
 | `delay`                    | Delay between pulling new options when bottom is reached       | `Number`          | `250`            |
 | `minimumInputLength`       | Number of characters required to trigger the search            | `Number`          | `2`              |
@@ -55,7 +56,7 @@ A full-fledged select component with support for custom options, custom values, 
 | `trapFocus`                | If we should trap the focus inside the dropdown                | `Boolean`         | `true`           |
 
 
-## Options
+## Options - Static
 
 When using the `options` prop you can pass an array of objects of your choice and use the `valueAttribute` and `textAttribute` props to define which keys to use for the value and text.
 This will make it easier to use the component with your own data without worry about the structure.
@@ -89,6 +90,8 @@ You can also nest the options by using the `children` key, or even disable an op
 This should be more than enough to cover the most basic usage cases, 
 but if you need more control you can also use the `fetchOptions` prop to pass a function that will load your results via Fetch or any other method of your choice.
 
+## Options - Dynamic Fetch / API
+
 Here is an example of how to use the `fetchOptions` prop to retrieve results from an external API:
 
 ```ts
@@ -105,12 +108,50 @@ const fetchOptions = (query?: string, nextPage?: number) => {
 }
 ```
 
+
 The function will receive the current query and the next page number, and should return an object with the results and a boolean to indicate if there are more pages to load.
 
 :::info :bulb: Accessing the raw option
 After the option is normalized, it is than passed to the component and everything else will be ignored, but you can still access
 the raw option of your data by using `option.raw` in the `option` slot.
 :::
+
+## Options - Load from endpoint
+
+If you want to load the options from an endpoint of your backend, you may use the `fetchEndpoint` prop, the props accepts a full qualified URL and it will perform a `GET`request to your url
+with a `query` parameter containing the current search query and a `page` parameter containing the current page wanted.
+This also supports lazy loading of options once you reach the bottom of the dropdown, incrementing the page number.
+
+The response must contain an array with a property called `data` containing the options and a property called `next_page_url` indicating if there are more pages to load and the url of the next page.
+
+If you are using [Laravel](https://laravel.com/) you can use the [paginate](https://laravel.com/docs/9.x/pagination#paginating-eloquent-results) method to return the options and the next page url.
+
+```json
+{
+"data": [
+    {"id": 1, "name": "Option 1"},
+    {"id": 2, "name": "Option 2"}
+],
+"next_page_url": "https://your-api.com/options?page=2"
+}
+```
+
+You may also combine this with `text-attribute` and `value-attribute` to pick which properties to use for the value and text of the options.
+
+If you are using the [Vanilla Components Laravel](https://github.com/flavorly/laravel-vanilla-components) package you may use the helper `ResolveRichSelectOptions` function that does all the heavy lifting for you,
+including the pagination, selecting or filtering only via certain columns and use Laravel Scout for searching!
+
+```php
+Route::get('/users', function(Request $request){
+    return ResolveRichSelectOptions::for(User::class, ['name', 'email']);
+})->middleware('web')->name('api.fetch-users');
+```
+
+But that's not all! Every little detail matters! Because when you close or refresh your page sometimes you may have selected & persisted a v-model of previous selected models, but because we are not preteching any options
+Your select might look empty! But don't worry, we got you covered! The `GET` performed to your server also sends a query parameter called `values` that contains the current selected value(s), so you can use that to preselect the options
+anytime and return the appropriate options to be pre-fetched and always included on the component initial state. Once again if you are using the Laravel Package this is all done for you as well! :)
+
+
 
 !!!include(./src/parts/title-slots.md)!!!
 
