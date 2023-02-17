@@ -67,7 +67,6 @@
     "@flavorly/v-calendar": "3.0.0-alpha.11",
     "@headlessui/vue": "^1.7.0",
     "@popperjs/core": "^2.11.6",
-    "axios": "^1.1.2",
     "vue": "^3.2.45"
   },
   "devDependencies": {
