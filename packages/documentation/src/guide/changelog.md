@@ -8,7 +8,7 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
-### 0.7.29
+### 0.7.30
 
 - General: Removed Axios Dependency in favor of native Fetch
 - Rich Select: Added support for pulling options from an API endpoint
