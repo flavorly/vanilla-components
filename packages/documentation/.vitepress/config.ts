@@ -137,7 +137,7 @@ export default defineConfig({
       },
       { text: 'Guide', link: '/guide/quick-start', activeMatch: '/guide/quick-start' },
       { text: 'Components', link: '/guide/components-list', activeMatch: '/guide/components-list' },
-      { text: 'v0.7.28', link: 'https://github.com/flavorly/vanilla-components' },
+      { text: 'v0.7.29', link: 'https://github.com/flavorly/vanilla-components' },
     ],
 
     sidebar: {

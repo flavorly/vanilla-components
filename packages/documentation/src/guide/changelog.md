@@ -8,7 +8,7 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
-### 0.7.28
+### 0.7.29
 
 - General: Removed Axios Dependency in favor of native Fetch
 - Rich Select: Added support for pulling options from an API endpoint
@@ -18,6 +18,10 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 - Datatables: Rich select filters now supports pre-fetching while using API Endpoint
 - Datatables: Refactor to how filters are cleaned up, supporting arrays as values for filters
 - General : Bugfixes
+- 
+### 0.7.27
+
+- Nothing
 
 ### 0.7.27
 
