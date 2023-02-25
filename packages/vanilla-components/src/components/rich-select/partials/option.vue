@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance, PropType, Ref } from 'vue'
 import { computed, inject, nextTick, ref, watch } from 'vue'
+import type { CssClass, NormalizedOption } from '../../../core/types'
+import { normalizedOptionIsDisabled } from '../../../core/helpers'
+import { useInjectsClassesList } from '../../../core/use'
+import CheckmarkIcon from '../../icons/checkmark.vue'
 import SelectOptionsList from './option-list.vue'
-import type { CssClass, NormalizedOption } from '@/core/types'
-import { normalizedOptionIsDisabled } from '@/core/helpers'
-import { useInjectsClassesList } from '@/core/use'
-import CheckmarkIcon from '@/components/icons/checkmark.vue'
 
 const props = defineProps({
   option: {

@@ -1,5 +1,5 @@
 import type { ComponentsConfiguration } from './core/types'
-import * as Components from '@/components'
+import * as Components from './components'
 
 export const defaultConfiguration = {
   Avatar: Components.avatarConfig,

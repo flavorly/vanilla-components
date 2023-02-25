@@ -1,5 +1,5 @@
 import type * as Types from '../config'
-import { useFetchData } from '@/core/use'
+import { useFetchData } from '../../../core/use'
 
 const fetchData = <T extends Types.DatatableConfiguration, Data extends Types.DatatableQueryData, P extends RequestInit>(
   config: T,

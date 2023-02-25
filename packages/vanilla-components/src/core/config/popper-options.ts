@@ -1,5 +1,5 @@
 import type { Modifier, ModifierArguments } from '@popperjs/core'
-import type { Data } from '@/core/types'
+import type { Data } from '../types'
 
 const popperOptions = {
   placement: 'bottom-end',

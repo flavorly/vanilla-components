@@ -3,8 +3,8 @@ import type { PropType } from 'vue'
 import find from 'lodash/find'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
-import { useInjectsClassesList } from '@/core/use'
-import type { NormalizedOption } from '@/core/types'
+import { useInjectsClassesList } from '../../../core/use'
+import type { NormalizedOption } from '../../../core/types'
 
 const props = defineProps({
   filter: {

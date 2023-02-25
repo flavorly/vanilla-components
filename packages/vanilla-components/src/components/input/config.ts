@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
-import { commonClasses } from '@/core/config'
-import { mergeClasses } from '@/core/helpers'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import { commonClasses } from '../../core/config'
+import { mergeClasses } from '../../core/helpers'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 const defaultInput = {
   input: mergeClasses(

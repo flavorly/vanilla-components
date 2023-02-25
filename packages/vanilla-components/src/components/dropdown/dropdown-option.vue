@@ -1,7 +1,7 @@
 <script setup lang="ts">
   import type { PropType } from 'vue'
   import { MenuItem } from '@headlessui/vue'
-  import { useInjectsClassesList } from '@/core/use'
+  import { useInjectsClassesList } from '../../core/use'
 
   const props = defineProps({
     text: {

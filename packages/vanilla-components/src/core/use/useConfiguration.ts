@@ -1,8 +1,8 @@
 import type { ComponentInternalInstance, ComputedRef, Ref } from 'vue'
 import { camelize, computed, getCurrentInstance, inject, reactive, ref, watch } from 'vue'
-import { get, isEqual, isPrimitive, pick } from '@/core/helpers'
-import { useParseVariant } from '@/core/use'
-import type { ComponentsConfiguration, Data } from '@/core/types'
+import { get, isEqual, isPrimitive, pick } from '../helpers'
+import { useParseVariant } from '../use'
+import type { ComponentsConfiguration, Data } from '../types'
 
 /**
  * Extract the defined props from the component

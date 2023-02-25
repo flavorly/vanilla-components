@@ -2,11 +2,11 @@
 import type { PropType, Ref } from 'vue'
 import { computed, inject, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import type { RichSelectProps } from '../config'
+import { useInjectsClassesList } from '../../../core/use'
+import { debounce, normalizeMeasure } from '../../../core/helpers'
+import type { NormalizedOptions } from '../../../core/types'
+import LoadingIcon from '../../icons/loading.vue'
 import SelectOption from './option.vue'
-import LoadingIcon from '@/components/icons/loading.vue'
-import { useInjectsClassesList } from '@/core/use'
-import { debounce, normalizeMeasure } from '@/core/helpers'
-import type { NormalizedOptions } from '@/core/types'
 
 const props = defineProps({
   options: {

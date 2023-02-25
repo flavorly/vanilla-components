@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance, PropType, Ref } from 'vue'
 import { onMounted, ref } from 'vue'
-import { useInjectsClassesList } from '@/core/use'
-import type { CssClass } from '@/core/types'
+import { useInjectsClassesList } from '../../../core/use'
+import type { CssClass } from '../../../core/types'
 
 const props = defineProps({
   divided: {

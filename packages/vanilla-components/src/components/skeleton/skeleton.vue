@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import { uniqueId } from '../../core/helpers'
+import { useConfiguration, useVariantProps } from '../../core/use'
 import type { SkeletonBarClassesValidKeys, SkeletonBarProps } from './config'
 import { skeletonConfig } from './config'
-import { uniqueId } from '@/core/helpers'
-import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<SkeletonBarProps, SkeletonBarClassesValidKeys>(),
@@ -37,8 +37,8 @@ defineOptions({
     :class="configuration.classesList.wrapper"
   >
     <div
-      v-for="(current, index) in count"
-      :key="uniqueId(`${current}_${index}`)"
+      v-for="(index) in count"
+      :key="uniqueId(`skeleton_${index}`)"
       :class="configuration.classesList.class"
       v-bind="$attrs"
       :style="{ width: props.width }"

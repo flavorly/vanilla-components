@@ -4,11 +4,6 @@ import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
 import { refThrottled } from '@vueuse/core'
 import isEmpty from 'lodash/isEmpty'
-import RichSelectDropdown from './partials/dropdown.vue'
-import RichSelectTrigger from './partials/trigger.vue'
-import ClearButton from './partials/clear-button.vue'
-import { richSelectConfig } from './config'
-import type { RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
 import type {
   CSSRawClassesList,
   Data,
@@ -19,14 +14,9 @@ import type {
   MinimumInputLengthTextProp,
   NormalizedOption,
   PreFetchOptionsFn,
-} from '@/core/types'
-import DropdownSimple from '@/components/dropdown/dropdown.vue'
-import { validDropdownPlacements } from '@/components/dropdown/config'
-import SimpleSelect from '@/components/select/select.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
-import FormErrors from '@/components/forms/form-errors.vue'
-import { popperOptions, sameWidthModifier } from '@/core/config'
-import { isEqual } from '@/core/helpers'
+} from '../../core/types'
+import { popperOptions, sameWidthModifier } from '../../core/config'
+import { isEqual } from '../../core/helpers'
 import {
   useActivableOption,
   useConfiguration,
@@ -35,7 +25,17 @@ import {
   useMultipleVModel,
   useSelectableOption,
   useVariantProps,
-} from '@/core/use'
+} from '../../core/use'
+import DropdownSimple from '../dropdown/dropdown.vue'
+import { validDropdownPlacements } from '../dropdown/config'
+import SimpleSelect from '../select/select.vue'
+import FormFeedback from '../forms/form-feedback.vue'
+import FormErrors from '../forms/form-errors.vue'
+import RichSelectDropdown from './partials/dropdown.vue'
+import RichSelectTrigger from './partials/trigger.vue'
+import ClearButton from './partials/clear-button.vue'
+import { richSelectConfig } from './config'
+import type { RichSelectClassesValidKeys, RichSelectProps, RichSelectValue } from './config'
 
 const props = defineProps({
   ...useVariantProps<RichSelectProps, RichSelectClassesValidKeys>(),

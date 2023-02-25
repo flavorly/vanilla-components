@@ -1,6 +1,6 @@
 import { isObject } from '@vueuse/core'
-import type { CSSClassKeyValuePair, CSSClasses, CssClass } from '@/core/types'
-import { get } from '@/core/helpers'
+import type { CSSClassKeyValuePair, CSSClasses, CssClass } from '../types'
+import { get } from '../helpers'
 
 /**
  * Select the clases

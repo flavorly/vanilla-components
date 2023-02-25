@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { RadioGroupDescription, RadioGroupLabel } from '@headlessui/vue'
+import { useConfiguration, useVariantProps } from '../../core/use'
+import type { NormalizedOption } from '../../core/types'
 import type { RichRadioOptionClassesValidKeys, RichRadioOptionProps } from './config'
 import { richRadioOptionConfig } from './config'
-import { useConfiguration, useVariantProps } from '@/core/use'
-import type { NormalizedOption } from '@/core/types'
 
 const props = defineProps({
   ...useVariantProps<RichRadioOptionProps, RichRadioOptionClassesValidKeys>(),

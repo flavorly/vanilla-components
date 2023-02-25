@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import { useConfiguration } from '../../core/use'
 import type { RichSelectTagWithImageProps } from './config'
 import { richSelectTagWithImageConfig } from './config'
-import { useConfiguration } from '@/core/use'
 
 const props = defineProps({
   name: {

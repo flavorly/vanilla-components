@@ -1,4 +1,4 @@
-import type { NormalizedOption, NormalizedOptions } from '@/core/types'
+import type { NormalizedOption, NormalizedOptions } from '../types'
 
 const filterOptions = (options: NormalizedOptions, query: string): NormalizedOptions => {
   if (query === '') {

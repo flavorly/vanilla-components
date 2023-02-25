@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import { computed, getCurrentInstance, ref, watch } from 'vue'
-import type { Data } from '@/core/types'
+import type { Data } from '../types'
 
 export default function useMultipleVModel<P extends Data, K extends keyof P, C extends boolean>(
   props: P,

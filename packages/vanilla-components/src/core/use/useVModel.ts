@@ -1,6 +1,6 @@
 import type { Ref } from 'vue'
 import { getCurrentInstance, ref, watch } from 'vue'
-import type { Data } from '@/core/types'
+import type { Data } from '../types'
 
 export default function useVModel<P extends Data, K extends keyof P>(
   props: P,

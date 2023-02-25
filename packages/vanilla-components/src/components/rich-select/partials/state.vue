@@ -2,8 +2,8 @@
 import type { ComputedRef, Ref } from 'vue'
 import { computed, inject } from 'vue'
 import type { RichSelectProps } from '../config'
-import { useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
-import LoadingIcon from '@/components/icons/loading.vue'
+import { useInjectsClassesList, useInjectsConfiguration } from '../../../core/use'
+import LoadingIcon from '../../icons/loading.vue'
 
 const options = inject<ComputedRef<RichSelectProps>>('options')!
 const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!

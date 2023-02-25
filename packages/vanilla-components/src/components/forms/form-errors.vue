@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import { useConfiguration, useVariantProps } from '../../core/use'
 import type { FormClassesValidKeys, FormErrorsProps } from './config'
 import { formsConfig } from './config'
-import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<FormErrorsProps, FormClassesValidKeys>(),

@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
-import { mergeClasses } from '@/core/helpers'
-import { commonClasses } from '@/core/config'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import { mergeClasses } from '../../core/helpers'
+import { commonClasses } from '../../core/config'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const buttonConfig = {
   fixedClasses: {

@@ -3,11 +3,11 @@ import type { PropType } from 'vue'
 import { ref } from 'vue'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
-import { useInjectsClassesList } from '@/core/use'
-import Dropdown from '@/components/dropdown/dropdown-menu.vue'
-import DropdownOption from '@/components/dropdown/dropdown-option.vue'
-import Button from '@/components/button/button.vue'
-import ChevronDownIcon from '@/components/icons/hero/solid/ChevronDownIcon.vue'
+import { useInjectsClassesList } from '../../../core/use'
+import Dropdown from '../../dropdown/dropdown-menu.vue'
+import DropdownOption from '../../dropdown/dropdown-option.vue'
+import Button from '../../button/button.vue'
+import ChevronDownIcon from '../../icons/hero/solid/ChevronDownIcon.vue'
 
 const props = defineProps({
   actions: {

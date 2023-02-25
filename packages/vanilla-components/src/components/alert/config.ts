@@ -1,6 +1,5 @@
 import type { InputHTMLAttributes } from 'vue'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
-import type { AvatarClassesValidKeys } from '@/components/avatar/config'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const alertConfig = {
   fixedClasses: {
@@ -110,4 +109,4 @@ export declare type AlertProps = WithVariantPropsAndClassesList<{
   subtitle?: string
   closable?: boolean
   closeAfter?: number
-} & InputHTMLAttributes & Data, AvatarClassesValidKeys>
+} & InputHTMLAttributes & Data, AlertClassesValidKeys>

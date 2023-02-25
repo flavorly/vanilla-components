@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { useInjectsClassesList } from '@/core/use'
-import Skeleton from '@/components/skeleton/skeleton.vue'
-import type * as Types from '@/components/datatable/config'
+import { useInjectsClassesList } from '../../../core/use'
+import Skeleton from '../../skeleton/skeleton.vue'
+import type * as Types from '../../datatable/config'
 
 const props = defineProps({
   numberOfRows: {

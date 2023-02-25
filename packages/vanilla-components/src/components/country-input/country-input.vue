@@ -3,13 +3,13 @@ import type { PropType } from 'vue'
 import { computed, watch } from 'vue'
 import find from 'lodash/find'
 import first from 'lodash/first'
+import { countries, filterCountriesByName } from '../../core/utils'
+import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '../../core/types'
+import { useAttributesAndProps, useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import CountryOption from '../country-input/country-input-option.vue'
+import RichSelect from '../rich-select/rich-select.vue'
 import type { CountryInputClassesValidKeys, CountryInputProps, CountryValue } from './config'
 import { countryInputConfig } from './config'
-import CountryOption from '@/components/country-input/country-input-option.vue'
-import RichSelect from '@/components/rich-select/rich-select.vue'
-import { countries, filterCountriesByName } from '@/core/utils'
-import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '@/core/types'
-import { useAttributesAndProps, useConfiguration, useVModel, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<CountryInputProps, CountryInputClassesValidKeys>(),

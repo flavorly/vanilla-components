@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed } from 'vue'
-import type { NormalizedOption } from '@/core/types'
-import { useInjectsClassesList } from '@/core/use'
-import SelectOption from '@/components/select/option.vue'
+import type { NormalizedOption } from '../../core/types'
+import { useInjectsClassesList } from '../../core/use'
+import SelectOption from '../select/option.vue'
 
 const props = defineProps({
     option: {

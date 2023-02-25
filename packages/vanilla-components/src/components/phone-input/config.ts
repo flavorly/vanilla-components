@@ -1,6 +1,6 @@
 import type { CountryCode } from 'libphonenumber-js/types'
 import type { InputHTMLAttributes } from 'vue'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const phoneInputConfig = {
   fixedClasses: {

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { ref } from 'vue'
-import Input from '@/components/input/input.vue'
-import MagnifyingGlassIcon from '@/components/icons/hero/solid/MagnifyingGlassIcon.vue'
-import { useInjectsClassesList, useVModel } from '@/core/use'
+import { useInjectsClassesList, useVModel } from '../../../core/use'
+import Input from '../../input/input.vue'
+import MagnifyingGlassIcon from '../../icons/hero/solid/MagnifyingGlassIcon.vue'
 
 const props = defineProps({
   modelValue: {

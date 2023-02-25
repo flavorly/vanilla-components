@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import { useConfiguration, useVariantProps } from '../../core/use'
 import type { StatusIndicatorClassesValidKeys, StatusIndicatorProps } from './config'
 import { statusIndicatorConfig } from './config'
-import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<StatusIndicatorProps, StatusIndicatorClassesValidKeys>(),

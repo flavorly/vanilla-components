@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes } from 'vue'
-import { mergeClasses } from '@/core/helpers'
-import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from '@/core/types'
+import { mergeClasses } from '../../core/helpers'
+import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const checkboxConfig = {
   fixedClasses: {

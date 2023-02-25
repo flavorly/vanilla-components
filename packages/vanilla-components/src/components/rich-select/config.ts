@@ -1,7 +1,7 @@
 import type { Options, Placement } from '@popperjs/core'
 import type { HTMLAttributes } from 'vue'
-import { mergeClasses } from '@/core/helpers'
-import { commonClasses, enterAndLeave } from '@/core/config'
+import { mergeClasses } from '../../core/helpers'
+import { commonClasses, enterAndLeave } from '../../core/config'
 import type {
   Data,
   FetchOptionsFn,
@@ -12,7 +12,7 @@ import type {
   NormalizedOptions,
   PreFetchOptionsFn,
   WithVariantPropsAndClassesList,
-} from '@/core/types'
+} from '../../core/types'
 
 const defaultVariant = {
     wrapper: 'block w-full',

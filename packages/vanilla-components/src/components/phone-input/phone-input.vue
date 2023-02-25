@@ -4,15 +4,15 @@ import type { CountryCallingCode, CountryCode, PhoneNumber } from 'libphonenumbe
 import { ref, watch } from 'vue'
 import { getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js'
 import examples from 'libphonenumber-js/mobile/examples'
-import { phoneInputConfig } from './config'
+import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '../../core/types'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import { countryCodes } from '../../core/utils'
+import CountryInput from '../country-input/country-input.vue'
+import FormErrors from '../forms/form-errors.vue'
+import FormFeedback from '../forms/form-feedback.vue'
+import Input from '../input/input.vue'
 import type { PhoneInputClassesValidKeys, PhoneInputProps } from './config'
-import CountryInput from '@/components/country-input/country-input.vue'
-import FormErrors from '@/components/forms/form-errors.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
-import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '@/core/types'
-import Input from '@/components/input/input.vue'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import { countryCodes } from '@/core/utils'
+import { phoneInputConfig } from './config'
 
 const props = defineProps({
   ...useVariantProps<PhoneInputProps, PhoneInputClassesValidKeys>(),

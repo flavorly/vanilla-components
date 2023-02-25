@@ -3,7 +3,7 @@ import type { ComputedRef, Ref } from 'vue'
 import { computed, inject } from 'vue'
 import type { RichSelectProps } from '../config'
 import { richSelectConfig } from '../config'
-import { useConfiguration, useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
+import { useConfiguration, useInjectsClassesList, useInjectsConfiguration } from '../../../core/use'
 
 const props = defineProps({})
 const options = inject<ComputedRef<RichSelectProps>>('options')!

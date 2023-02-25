@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useInjectsClassesList } from '@/core/use'
+import { useInjectsClassesList } from '../../core/use'
 const classesList = useInjectsClassesList()!
 
 defineOptions({

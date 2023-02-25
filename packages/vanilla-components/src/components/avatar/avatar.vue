@@ -1,12 +1,12 @@
 <script setup lang="ts">
   import type { PropType, Ref } from 'vue'
   import { ref, watch } from 'vue'
-  import type { AvatarClassesValidKeys, AvatarPreview, AvatarProps, AvatarValue } from './config'
+  import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+  import FormErrors from '../forms/form-errors.vue'
+  import FormFeedback from '../forms/form-feedback.vue'
+  import Button from '../button/button.vue'
   import { avatarConfig } from './config'
-  import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-  import FormErrors from '@/components/forms/form-errors.vue'
-  import FormFeedback from '@/components/forms/form-feedback.vue'
-  import Button from '@/components/button/button.vue'
+  import type { AvatarClassesValidKeys, AvatarPreview, AvatarProps, AvatarValue } from './config'
 
   const props = defineProps({
     ...useVariantProps<AvatarProps, AvatarClassesValidKeys>(),

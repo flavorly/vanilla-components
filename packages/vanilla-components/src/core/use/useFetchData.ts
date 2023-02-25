@@ -1,6 +1,6 @@
 import { useCookies } from '@vueuse/integrations/useCookies'
 import merge from 'lodash/merge'
-import { urlHelper } from '@/core/helpers'
+import { urlHelper } from '../helpers'
 
 export default function useFetchData(
   url: string,

@@ -1,4 +1,4 @@
-import { useConfiguration } from '@/core/use'
+import { useConfiguration } from './core/use'
 
 export { default as Alert, default as VanillaAlert } from './components/alert/alert.vue'
 

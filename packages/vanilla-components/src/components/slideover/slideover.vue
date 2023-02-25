@@ -8,11 +8,11 @@ import {
     TransitionChild,
     TransitionRoot,
 } from '@headlessui/vue'
+import { hasSlot } from '../../core/helpers'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import XMarkIcon from '../icons/hero/outline/XMarkIcon.vue'
 import type { SlideoverClassesValidKeys, SlideoverProps } from './config'
 import { slideoverConfig } from './config'
-import XMarkIcon from '@/components/icons/hero/outline/XMarkIcon.vue'
-import { hasSlot } from '@/core/helpers'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<SlideoverProps, SlideoverClassesValidKeys>(),

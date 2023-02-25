@@ -5,7 +5,6 @@ import Inspect from 'vite-plugin-inspect'
 import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
 import DefineOptions from 'unplugin-vue-define-options/vite'
-import ReplacePackagePlugin from '../utils/local-link'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanilla-components.com' : 'http://localhost:3005'
@@ -14,7 +13,7 @@ const description = 'A lightweight, flexible & customizable UI library for Vue 3
 
 const plugins = !production
   ? [
-    ReplacePackagePlugin(),
+    // ReplacePackagePlugin(),
     Inspect({
       build: false,
       outputDir: '.vite-inspect',
@@ -60,8 +59,7 @@ export default defineConfig({
     },
     resolve: {
       alias: [
-        { find: '@vanilla', replacement: resolve(__dirname, '../../vanilla-components') },
-        { find: '@', replacement: resolve(__dirname, '../../vanilla-components/src') },
+        { find: '@flavorly/vanilla-components', replacement: resolve(__dirname, '../../vanilla-components/src') },
         { find: './VPNavBarSearch.vue', replacement: resolve(__dirname, './theme/AlgoliaLunr/VPNavBarSearch.vue') },
       ],
     },
