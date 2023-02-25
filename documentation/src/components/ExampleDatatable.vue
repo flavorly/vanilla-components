@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { Datatable } from '@flavorly/vanilla-components'
 import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
+import _default from '@flavorly/vanilla-components/components/icons/flag-async.vue'
+import type = _default.props.country.type
 
 const onGenericEvent = (e) => {
   console.log('Datatable Event dispatched', e)
@@ -190,14 +192,13 @@ const poolingOptions = {
   stopWhenDataChanges: true,
 }
 
-const fetchEndpoint = new URL('/datatables', document.baseURI).href
-console.log('Fetch Endpoint', fetchEndpoint)
+const fetchEndpoint = new URL('/datatables', typeof window === 'undefined' || typeof document === 'undefined' ? undefined : document.baseURI).href
 
 // A function to get the current url plus a endpoint
 const config = {
   name: 'ExampleDatatable',
   primaryKey: 'id',
-  fetchEndpoint: new URL('/datatables', document.baseURI),
+  fetchEndpoint,
   columns,
   actions,
   filters,

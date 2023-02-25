@@ -29,6 +29,10 @@ const props = defineProps({
     type: [Number] as PropType<number>,
     default: undefined,
   },
+  dismissLabel: {
+    type: [String] as PropType<string>,
+    default: 'Dismiss',
+  },
 })
 
 const emit = defineEmits(['close'])
@@ -116,7 +120,7 @@ onMounted(() => {
               :class="configuration.classesList.closeButton"
               @click="close"
             >
-              <span class="sr-only">Dismiss</span>
+              <span class="sr-only">{{ props.dismissLabel }}</span>
 
               <XMarkIcon
                 :class="configuration.classesList.closeButtonIcon"

@@ -12,8 +12,12 @@
     "paths": {
       "@flavorly/vanilla-components": ["./packages/vanilla-components/src/index.ts"],
       "@flavorly/vanilla-components-hybridly": ["./packages/vanilla-components-hybridly/src/index.ts"],
-      "@flavorly/vanilla-components-inertia": ["./packages/vanilla-components-inertia/src/index.ts"],
+      "@flavorly/vanilla-components-inertia": ["./packages/vanilla-components-inertia/src/index.ts"]
     },
+    "include": [
+        "documentation/**/*",
+        "packages/**/*"
+    ],
     "types": [
       "vite/client",
       "node",

@@ -8,9 +8,7 @@ With Alert components you can provide contextual feedback messages for typical u
 
 <!--@include: ./parts/title-preview.md-->
 
-::: raw
 <ExampleAlert />
-::: raw
 
 :::details :surfer: Click to expand the code
 <<< @/components/ExampleAlert.vue

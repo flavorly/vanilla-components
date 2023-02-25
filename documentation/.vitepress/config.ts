@@ -1,7 +1,8 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vitepress'
-import MarkitDownInclude from 'markdown-it-include'
 import DefineOptions from 'unplugin-vue-define-options/vite'
+import { whyframe } from '@whyframe/core'
+import { whyframeVue } from '@whyframe/vue'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanilla-components.com' : 'http://localhost:3005'
@@ -28,7 +29,7 @@ export default defineConfig({
     resolve: {
       alias: [
         { find: '@flavorly/vanilla-components', replacement: resolve(__dirname, '../../packages/vanilla-components/src') },
-        { find: './VPNavBarSearch.vue', replacement: resolve(__dirname, './theme/AlgoliaLunr/VPNavBarSearch.vue') },
+        { find: './VPNavBarSearch.vue', replacement: resolve(__dirname, './lunr/VPNavBarSearch.vue') },
       ],
     },
     json: {
@@ -36,11 +37,20 @@ export default defineConfig({
     },
     plugins: [
       DefineOptions(),
+      whyframe({
+        defaultSrc: '/frames/default', // provide our own html
+      }),
+
+      // Initialize Vue integration plugin
+      whyframeVue({
+        include: /\.(?:vue|md)$/, // also scan in markdown files
+      }),
     ],
-    build: {
-      sourcemap: false,
-      chunkSizeWarningLimit: 16000,
-    },
+
+    // build: {
+    //   sourcemap: false,
+    //   chunkSizeWarningLimit: 16000,
+    // },
     ssr: {
       noExternal: ['@flavorly/vanilla-components'],
     },
@@ -71,13 +81,6 @@ export default defineConfig({
     ['meta', { property: 'og:image', content: '/seo.png' }],
     ['meta', { property: 'og:description', content: description }],
   ],
-
-  // Plugins Configuration
-  markdown: {
-    config(md) {
-      md.use(MarkitDownInclude)
-    },
-  },
 
   // Theme Configuration
   themeConfig: {
@@ -112,12 +115,10 @@ export default defineConfig({
       '/': [
         {
           text: 'Getting started',
-          collapsible: true,
           items: navQuickStart,
         },
         {
           text: 'Components',
-          collapsible: true,
           items: [
             { text: 'Alert', link: '/guide/components/alert' },
             { text: 'Avatar', link: '/guide/components/avatar' },
@@ -144,21 +145,18 @@ export default defineConfig({
         },
         {
           text: 'Advanced',
-          collapsible: true,
           items: [
             { text: 'Custom Components', link: '/guide/advanced-configuration' },
           ],
         },
         {
           text: 'Integrations',
-          collapsible: true,
           items: [
             { text: 'Laravel + Datatables', link: '/guide/integrations-datatables' },
           ],
         },
         {
           text: 'Examples',
-          collapsible: true,
           items: [
             { text: 'Form Sections & Groups', link: '/guide/examples-form-sections' },
           ],

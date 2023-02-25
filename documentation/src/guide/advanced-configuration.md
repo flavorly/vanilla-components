@@ -10,10 +10,10 @@ That's all clear when you want to override our components, but what if you want 
 
 ```js
 import { createApp } from 'vue'
-import { Plugin } from '@flavorly/vanilla-components' // [!code  focus]:1]
+import { Plugin } from '@flavorly/vanilla-components' // [!code focus:1]
 const app = createApp()
 
-app.use(VanillaComponents, { // [!code  focus]:12]
+app.use(VanillaComponents, { // [!code focus:12]
     MyOwnComponent: {
         fixedClasses: {
           input: 'border-t-md',

@@ -177,7 +177,7 @@ const currentPageIds = computed(() => results.data?.map(item => item.id) || []) 
 /** Result Hash */
 const resultsHash = computed(() => JSON.stringify(results.data)) as Ref<string>
 
-const hasResults = computed(() => results.data !== null && results.data.length > 0)
+const hasResults = computed(() => typeof results.data !== 'undefined' && results.data.length > 0)
 
 /** If there is currently selected items on the config */
 const hasAnyItemsSelected = computed(() => queryData.selectedAll || queryData.selected.length > 0) as Ref<boolean>
@@ -1152,7 +1152,7 @@ defineOptions({
           ((hasAnyItemsSelected && hasActions || filtersActiveCount > 0)) ? classesList.tableContainerBorder : '',
         ]"
       >
-        <template v-if="!showBeInLoadingState && results.data.length <= 0 ">
+        <template v-if="!showBeInLoadingState && !hasResults ">
           <EmptyState
             :has-filters-or-search="hasFiltersOrSearchApplied"
             :is-fetching="isFetching"
@@ -1253,12 +1253,12 @@ defineOptions({
                 isFetching,
                 showBeInLoadingState,
                 columnsCount: visibleColumnsCount,
-                rowsCount: results.data.length || queryData.perPage,
+                rowsCount: results.data?.length || queryData.perPage,
               }"
             >
               <RowSkeleton
                 :columns="columnsComputed"
-                :number-of-rows="results.data.length || queryData.perPage"
+                :number-of-rows="results.data?.length || queryData.perPage"
                 :is-selectable="datatable.options.selectable"
               />
             </slot>

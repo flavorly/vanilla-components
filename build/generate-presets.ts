@@ -1,5 +1,5 @@
 import { existsSync, rmSync, writeFileSync } from 'fs'
-import { defaultConfiguration } from '../packages/vanilla-components/src'
+import { defaultConfiguration } from './packages/vanilla-components/src'
 
 function generate() {
   const path = './presets/all.json'

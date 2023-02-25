@@ -55,11 +55,11 @@ After installation, you may import the components as you need them, if you are n
 
 ```vue
 <script setup lang="ts">
-import { Button, Avatar as MyOwnAvatarComponent } from '@flavorly/vanilla-components' // [!code  focus]:1]
+import { Button, Avatar as MyOwnAvatarComponent } from '@flavorly/vanilla-components' // [!code focus:1]
 </script>
 
 <template>
-    <MyOwnAvatarComponent /> // [!code  focus]:1]
+    <MyOwnAvatarComponent /> // [!code focus:1]
     <Button>Continue</Button>
 </template>
 ```
@@ -70,7 +70,7 @@ Typescript types are also exported from the library, in case you need them to ty
 
 ```vue
 <script setup lang="ts">
-import type { ButtonProps } from '@flavorly/vanilla-components'  // [!code  focus]:1]
+import type { ButtonProps } from '@flavorly/vanilla-components'  // [!code focus:1]
 </script>
 ```
 
@@ -82,7 +82,7 @@ If you are using Tailwind please ensure your configuration file matches the foll
 const defaultTheme = require('tailwindcss/defaultTheme');
 const colors = require('tailwindcss/colors');
 module.exports = {
-    // the rest of  your configuration.. // [!code  focus]:15]
+    // the rest of  your configuration.. // [!code focus:15]
     content: [
         "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
         "./node_modules/@flavorly/vanilla-components/dist/components/**/*.{ts,vue}",

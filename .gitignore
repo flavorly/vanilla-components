@@ -5,7 +5,7 @@ dist
 .DS_Store
 documentation/.vitepress/dist
 documentation/.vitepress/cache
-documentation/.vitepress/index/lunr.cjs
+documentation/.vitepress/lunr/lunr.cjs
 packages/.DS_Store
 packages/documentation/.DS_Store
 packages/documentation/src/.DS_Store
