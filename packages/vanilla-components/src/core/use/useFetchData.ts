@@ -3,7 +3,7 @@ import merge from 'lodash/merge'
 import { urlHelper } from '../helpers'
 
 export default function useFetchData(
-  url: string,
+  url: string | undefined,
   query: null | object = null,
   options: RequestInit = {},
 ): Promise<any> {

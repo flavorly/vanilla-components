@@ -9,6 +9,7 @@ import { makeServer } from '../miragejs/server'
 import './styles/brand.css'
 import './styles/tailwind.css'
 import './styles/v-calendar.pcss'
+import './styles/custom.css'
 import 'vue-json-pretty/lib/styles.css'
 
 export default {

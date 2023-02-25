@@ -1,5 +1,6 @@
 // Adapted from https://github.com/BLE-LTER/Lunr-Index-and-Search-for-Static-Sites/blob/master/build_index.js
-
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 const path = require('path')
 const fs = require('fs')
 const lunr = require('lunr')

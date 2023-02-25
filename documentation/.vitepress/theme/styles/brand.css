@@ -18,8 +18,10 @@
     --vp-c-scrollbar: var(--vp-c-gray-light-5);
     --vp-button-alt-border: var(--vp-c-gray-light-1);
 
+    /*--vp-nav-bg-color: rgba(36,36,36,.7);*/
+
     /* Hero */
-    --vp-home-hero-image-background-image: linear-gradient( -45deg, #667eea 30%, #747bff 30% );
+    --vp-home-hero-image-background-image: linear-gradient( -45deg, #667eea 30%, #747bff 30%);
     --vp-home-hero-image-filter: blur(72px);
     --vp-button-brand-bg: var(--vp-c-brand);
     --vp-button-brand-border: var(--vp-c-brand-light);
@@ -41,12 +43,34 @@
     --vp-button-alt-active-bg: var(--vp-c-gray-light-3);
 }
 
+@keyframes image-gradient {
+    0% {
+        background-position: 0% 50%;
+        border-radius: 75px;
+        transform: rotate(0deg);
+    }
+    50% {
+        background-position: 100% 50%;
+        border-radius: 150px;
+        transform: rotate(100deg);
+    }
+    100% {
+        background-position: 0% 50%;
+        border-radius: 75px;
+        transform: rotate(00deg);
+    }
+}
+
+.image-bg{
+    animation: image-gradient 10s ease infinite;
+    opacity: 0.5;
+}
+
 html.dark {
     color-scheme: dark;
     --vp-c-scrollbar: var(--vp-c-black-mute);
     --vp-button-alt-bg: var(--vp-c-gray-light-5);
     --vp-button-alt-text: var(--vp-c-white);
-    /*--vp-button-alt-border: var(--vp-c-gray-dark-3);*/
 }
 
 .dark {
@@ -142,26 +166,6 @@ a:has(code) {
     color: inherit;
     transition: color 0.25s;
 }
-
-/*hr {*/
-/*    margin: 4rem 0 !important;*/
-/*}*/
-
-/*.vp-doc h2 {*/
-/*    margin-top: 5rem !important;*/
-/*}*/
-
-/*.vp-doc h3 {*/
-/*    margin-top: 3rem !important;*/
-/*}*/
-
-/*.vp-doc .custom-block {*/
-/*    margin: 3rem 0 !important;*/
-/*}*/
-
-/*.vp-doc h1 + h2 {*/
-/*    margin-top: 2.5rem !important;*/
-/*}*/
 
 footer p.message {
     display: inline-flex;

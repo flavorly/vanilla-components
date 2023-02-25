@@ -1,9 +1,13 @@
 import { parse, stringify } from 'qs'
 
-const urlBuilder = (url: string, query: object | null): string => {
+const urlBuilder = (url: string | undefined, query: object | null): string => {
+  if (!url) {
+    return ''
+  }
   const isFullQualifiedUrl = url.startsWith('http://') || url.startsWith('https://')
   if (!isFullQualifiedUrl) {
     console.warn('The URL provided is not a full qualified URL')
+    return url
   }
 
   const parsedUrl = new URL(url)

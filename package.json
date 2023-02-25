@@ -4,14 +4,13 @@
   "version": "0.7.30",
   "packageManager": "pnpm@7.13.4",
   "scripts": {
-    "build": "pnpm -r build",
+    "build": "pnpm -r build && tsx ./build/generate-presets.ts",
     "release": "bumpp package.json packages/*/package.json --all --execute 'pnpm -r build' --commit \"release: v\" && pnpm -r publish --no-git-checks",
     "clean": "rimraf node_modules packages/vanilla-components/node_modules packages/vanilla-components/dist documentation/node_modules documentation/.vitepress/dist documentation/node_modules documentation/.vitepress/cache",
     "docs:dev": "vitepress dev documentation",
     "docs:build": "vitepress build documentation",
     "docs:index:fresh": "rm -f documentation/.vitepress/lunr/lunr.cjs && cp documentation/.vitepress/lunr/lunr.stub.cjs documentation/.vitepress/lunr/lunr.cjs",
-    "docs:index:build": "pnpm docs:index:fresh && vitepress build documentation && node ./build/lunr.cjs",
-    "lunr:index": "nr --filter @flavorly/vanilla-components-documentation index:build"
+    "docs:index:build": "pnpm docs:index:fresh && vitepress build documentation && node ./build/lunr.cjs"
   },
   "keywords": [],
   "author": "",

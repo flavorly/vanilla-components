@@ -192,7 +192,9 @@ const poolingOptions = {
   stopWhenDataChanges: true,
 }
 
-const fetchEndpoint = new URL('/datatables', typeof window === 'undefined' || typeof document === 'undefined' ? undefined : document.baseURI).href
+// const fetchEndpoint = new URL('/datatables', typeof window === 'undefined' || typeof document === 'undefined' ? undefined : document.baseURI).href
+
+const fetchEndpoint = '/datatables'
 
 // A function to get the current url plus a endpoint
 const config = {
