@@ -37,7 +37,6 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
     },
   },
   autocomplete: {
-    type: [String, Boolean] as PropType<string | boolean>,
     required: false,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error

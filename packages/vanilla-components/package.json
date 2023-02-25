@@ -35,7 +35,8 @@
   "exports": {
     ".": {
       "require": "./dist/index.js",
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "typesVersions": {
@@ -49,15 +50,8 @@
     }
   },
   "scripts": {
-    "build": "vite build",
-    "unbuild": "unbuild",
-    "build:watch": "APP_ENV=watch vite build --watch",
-    "build:watch-mon": "nodemon --exec 'pnpm lib:build'",
-    "lib:publish": "pnpm publish",
-    "watch:both": "concurrently \"yarn && yarn watch:lib\" \"yarn && yarn watch:docs\"",
-    "watch:docs": "pnpm --cwd \"docs\" dev",
-    "lint": "eslint --ext .js,.vue --ignore-path ../../.gitignore --fix packages/src",
-    "format": "prettier ../..  --write"
+    "build": "unbuild",
+    "stub": "unbuild --stub"
   },
   "dependencies": {
     "@flavorly/v-calendar": "3.0.0-alpha.11",
@@ -71,8 +65,7 @@
     "lodash": "^4.17.21",
     "qs": "^6.11.0",
     "universal-cookie": "^4.0.4",
-    "unplugin-vue-define-options": "^1.0.0",
-    "vue": "^3.2.45"
+    "unplugin-vue-define-options": "^1.0.0"
   },
   "peerDependencies": {
     "@flavorly/v-calendar": "3.0.0-alpha.11",
@@ -81,32 +74,7 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
-    "@antfu/eslint-config": "^0.34.0",
-    "@antfu/ni": "^0.20.0",
-    "@rollup/plugin-typescript": "^11.0.0",
     "@types/lodash": "^4.14.189",
-    "@types/qs": "^6.9.7",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
-    "@vitejs/plugin-vue": "^4.0.0",
-    "@vue/compiler-sfc": "^3.2.45",
-    "bumpp": "^8.2.1",
-    "eslint": "^8.27.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-tree-shaking": "^1.10.0",
-    "eslint-plugin-unicorn": "^45.0.0",
-    "eslint-plugin-vue": "^9.7.0",
-    "pnpm": "^7.16.0",
-    "prettier": "^2.7.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-visualizer": "^5.8.3",
-    "typescript": "^4.8.4",
-    "vite": "^4.1.1",
-    "vite-plugin-dts": "^1.7.1",
-    "unbuild": "^1.0.2"
+    "@types/qs": "^6.9.7"
   }
 }

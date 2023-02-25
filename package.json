@@ -1,12 +1,10 @@
 {
-  "name": "vanilla-components",
+  "private": true,
   "version": "0.7.30",
-  "description": "",
-  "main": "index.js",
+  "packageManager": "pnpm@7.13.4",
   "scripts": {
-    "dev": "nr --filter @flavorly/vanilla-components dev",
     "build": "pnpm -r build",
-    "docs:dev": "nr --filter @flavorly/vanilla-components-documentation dev",
+    "docs:dev": "vitepress dev documentation",
     "clean": "rimraf node_modules packages/vanilla-components/node_modules packages/vanilla-components/dist packages/documentation/node_modules packages/documentation/.vitepress/dist",
     "release": "bumpp package.json packages/*/package.json --all --execute 'pnpm -r build' --commit \"release: v\" && pnpm --filter \"!./packages/documentation\" -r publish --no-git-checks",
     "docs:index:build": "nr --filter @flavorly/vanilla-components-documentation index:build",
@@ -19,9 +17,19 @@
   "license": "ISC",
   "devDependencies": {
     "@antfu/eslint-config-vue": "^0.27.0",
-    "@antfu/ni": "^0.18.5",
+    "@docsearch/css": "^3.3.3",
+    "@docsearch/js": "^3.3.3",
+    "@flavorly/v-calendar": "3.0.0-alpha.11",
+    "@flavorly/vanilla-components": "workspace:*",
+    "@headlessui/vue": "^1.7.4",
+    "@heroicons/vue": "^2.0.16",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/nesting": "0.0.0-insiders.565cd3e",
+    "@tailwindcss/typography": "^0.5.9",
     "@typescript-eslint/eslint-plugin": "^5.43.0",
     "@typescript-eslint/parser": "^5.43.0",
+    "autoprefixer": "^10.4.13",
     "bumpp": "^8.2.1",
     "eslint": "^8.27.0",
     "eslint-config-airbnb-base": "^15.0.0",
@@ -29,8 +37,32 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-unicorn": "^44.0.2",
     "eslint-plugin-vue": "^9.7.0",
-    "pnpm": "^7.16.0",
-    "rimraf": "^3.0.2"
+    "markdown-it-include": "^2.0.0",
+    "postcss-import": "^15.1.0",
+    "postcss-prefix-selector": "^1.16.0",
+    "rimraf": "^3.0.2",
+    "shiki": "^0.14.1",
+    "shiki-processor": "^0.1.3",
+    "tailwindcss": "^3.2.7",
+    "tsx": "^3.12.3",
+    "type-fest": "^3.5.7",
+    "typescript": "^4.9.5",
+    "unbuild": "1.1.1",
+    "unplugin-vue-define-options": "^1.0.0",
+    "vite": "^4.1.1",
+    "vitepress": "1.0.0-alpha.46",
+    "vitest": "^0.28.5",
+    "vue": "^3.2.47",
+    "vue-json-pretty": "^2.2.3"
   },
-  "packageManager": "pnpm@7.1.7"
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@algolia/client-search",
+        "react",
+        "react-dom",
+        "@types/react"
+      ]
+    }
+  }
 }

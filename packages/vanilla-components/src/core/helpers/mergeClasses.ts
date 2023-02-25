@@ -15,7 +15,9 @@ export const selectClasses = (classesObject: CSSClassKeyValuePair): CSSClasses =
 export const mergeClasses = (...classes: CSSClasses): string => classes
   .map((className: CssClass): string => {
     if (typeof className === 'string' || className === undefined) {
-      return className || ''
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      return className
     }
 
     if (Array.isArray(className)) {

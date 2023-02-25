@@ -10,11 +10,4 @@ export default defineBuildConfig({
   peerDependencies: [...Object.keys(pkg.peerDependencies || {})],
   declaration: true,
   clean: true,
-  externals: [
-    'vue',
-    'vite',
-    '@flavorly/v-calenda',
-    '@headlessui/vue',
-    '@popperjs/core'
-  ]
 })

@@ -12,6 +12,8 @@ const popperOptions = {
     },
   ],
   strategy: 'absolute',
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   onFirstUpdate: undefined,
 }
 

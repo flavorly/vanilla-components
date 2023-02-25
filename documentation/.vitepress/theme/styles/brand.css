@@ -1,0 +1,169 @@
+/* Subject to changes */
+:root {
+    --vp-c-brand: #646cff;
+    --vp-c-brand-light: #747bff;
+    --vp-c-brand-lighter: #8b5cf6;
+    --vp-c-brand-dark: #667eea;
+    --vp-c-brand-darker: #8b5cf6;
+
+    --vp-code-line-height: 1.8;
+    --docsearch-container-background: rgba(0, 0, 0, 0.5);
+
+    --vp-logo-shadow-1: #646cff;
+    --vp-logo-shadow-2: #747bff;
+    --vp-logo-shadow-3: #667eea;
+    --vp-logo-shadow-4: #a78bfa;
+    --vp-logo-shadow-5: #8b5cf6;
+
+    --vp-c-scrollbar: var(--vp-c-gray-light-5);
+    --vp-button-alt-border: var(--vp-c-gray-light-1);
+
+    /* Hero */
+    --vp-home-hero-image-background-image: linear-gradient( -45deg, #667eea 30%, #747bff 30% );
+    --vp-home-hero-image-filter: blur(72px);
+    --vp-button-brand-bg: var(--vp-c-brand);
+    --vp-button-brand-border: var(--vp-c-brand-light);
+    --vp-button-brand-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-hover-border: var(--vp-c-brand-light);
+    --vp-button-brand-hover-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-hover-bg: var(--vp-c-brand-light);
+    --vp-button-brand-active-border: var(--vp-c-brand-light);
+    --vp-button-brand-active-text: var(--vp-c-text-dark-1);
+    --vp-button-brand-active-bg: var(--vp-button-brand-bg);
+
+    --vp-button-alt-text: var(--vp-c-text-2);
+    --vp-button-alt-bg: var(--vp-c-gray-light-1);
+    --vp-button-alt-hover-border: var(--vp-c-gray-light-3);
+    --vp-button-alt-hover-text: var(--vp-c-gray-dark-1);
+    --vp-button-alt-hover-bg: var(--vp-c-gray-light-4);
+    --vp-button-alt-active-border: var(--vp-c-gray-light-3);
+    --vp-button-alt-active-text: var(--vp-c-text-light-1);
+    --vp-button-alt-active-bg: var(--vp-c-gray-light-3);
+}
+
+html.dark {
+    color-scheme: dark;
+    --vp-c-scrollbar: var(--vp-c-black-mute);
+    --vp-button-alt-bg: var(--vp-c-gray-light-5);
+    --vp-button-alt-text: var(--vp-c-white);
+    /*--vp-button-alt-border: var(--vp-c-gray-dark-3);*/
+}
+
+.dark {
+    /*--vp-c-brand: #d1a5ff;*/
+    /*--vp-c-brand-light: #e9d5ff;*/
+    /*--vp-c-brand-lighter: #f3e8ff;*/
+    /*--vp-c-brand-dark: #f5d0fe;*/
+    /*--vp-c-brand-darker: #f0abfc;*/
+
+    /*--vp-c-scrollbar: var(--vp-c-black-mute);*/
+    /*--vp-button-alt-border: var(--vp-c-gray-dark-3);*/
+}
+
+/* Sidebar scrollbar */
+
+aside.VPSidebar {
+    scrollbar-width: thin;
+    scrollbar-color: var(--vp-c-scrollbar) transparent;
+}
+
+aside.VPSidebar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+aside.VPSidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+aside.VPSidebar::-webkit-scrollbar-thumb {
+    border-radius: 100vh;
+    background: var(--vp-c-scrollbar) !important;
+    border: 3px solid var(--vp-c-scrollbar) !important;
+}
+
+/* Sidebar links */
+
+.VPSidebar .link {
+    position: relative;
+}
+
+.VPSidebar .link::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 2.5px;
+    height: 20px;
+    background: var(--vp-c-brand);
+    transform: scaleY(0);
+    border-radius: 100px;
+    transition: all 250ms;
+    opacity: 0;
+}
+
+.VPSidebar .link.active::after {
+    transform: scaleY(1);
+    opacity: 1;
+}
+
+.VPSidebarGroup .items {
+    padding-left: 7px;
+    transition: all 300ms;
+}
+
+.VPSidebarGroup .items .link .link-text {
+    display: inline-block;
+    transition: all 300ms;
+}
+
+.VPSidebarGroup .items .link:not(.active):hover .link-text {
+    transform: translateX(2px);
+}
+
+/* Docs right sidebar */
+.VPDocAsideOutline > div.content .outline-title {
+    font-size: 15px !important;
+    position: relative;
+    top: -6px;
+}
+
+pre code {
+    tab-size: 2 !important;
+}
+
+a:has(code) {
+    text-decoration: underline;
+    color: var(--vp-c-text-code) !important;
+}
+
+.vp-doc a > code {
+    color: inherit;
+    transition: color 0.25s;
+}
+
+hr {
+    margin: 4rem 0 !important;
+}
+
+.vp-doc h2 {
+    margin-top: 5rem !important;
+}
+
+.vp-doc h3 {
+    margin-top: 3rem !important;
+}
+
+.vp-doc .custom-block {
+    margin: 3rem 0 !important;
+}
+
+.vp-doc h1 + h2 {
+    margin-top: 2.5rem !important;
+}
+
+footer p.message {
+    display: inline-flex;
+    align-items: center;
+}
