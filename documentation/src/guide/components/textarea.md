@@ -6,7 +6,7 @@ outline: deep
 
 A Native `<textarea />` for long text, comments, etc.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleTextarea />
 
@@ -14,7 +14,7 @@ A Native `<textarea />` for long text, comments, etc.
 <<< @/components/ExampleTextarea.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop         | Description                     | Accepted Values | Default     |
 |:-------------|:--------------------------------|:----------------|:------------|
@@ -22,15 +22,15 @@ A Native `<textarea />` for long text, comments, etc.
 | `rows`       | Number of rows for the textarea | `Number`        | `4`         |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
-<!--@include: ./parts/default-slots.md-->
+<!--@include: ../../parts/default-slots.md-->
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 
 
 

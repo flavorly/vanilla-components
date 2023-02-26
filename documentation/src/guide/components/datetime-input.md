@@ -20,50 +20,22 @@ There are plans to port an official datetime picker. But meanwhile enjoy this am
 Start by installing the [VCalendar](https://vcalendar.io/) for this case we will be using the `@next` branch with our own fork to support type `module` until the original maintainer finishes it, that brings support to vue 3
 and will soon be refactored properly to composition API. Please follow the V-Calendar installation guide for more details.
 
-```bash
-# Using pnpm
+
+::: code-group
+```bash [pnpm]
 pnpm add @flavorly/v-calendar@next
-# Using Yarn
-yarn add @flavorly/v-calendar@next
-# Using npm
-npm add @flavorly/v-calendar@next
 ```
 
+```bash [Yarn]
+yarn add @flavorly/v-calendar@next
+```
 
-<!--@include: ./parts/title-preview.md-->
-
-
-<ExampleDatetimePicker />
-
-:::details :surfer: Click to expand the code
-<<< @/components/ExampleDatetimePicker.vue
+```bash [npm]
+npm install @flavorly/v-calendar@next
+```
 :::
 
-<!--@include: ./parts/title-props.md-->
-
-| Prop         | Description               | Accepted Values | Default     |
-|:-------------|:--------------------------|:----------------|:------------|
-| `modelValue` | The value for the element | `Any`           | `undefined` |
-| `options`    | Flatpickr Options         | `Object`        | `undefined` |
-| `type`       | Type of input             | `String`        | `'text'`    |
-
-
-<!--@include: ./parts/title-slots.md-->
-
-All the default slots of [VCalendar](https://vcalendar.io/api/v1.0/datepicker.html#scoped-slots) are available normally for usage.
-The default slot is pre-filled, please check Below.
-
-### Slot `default`
-
-This is the default slot of the component, by default a [Vanilla Text Input](/guide/components/input) is used to display the value.
-But you are free to use whatever you want for this slot, the slot is also forwarded to the V-Calendar component.
-
-| Attribute   | Description      | Type     |
-|:------------|:-----------------|:---------|
-| `className` | Classes injected | `String` |
-
-
-## Theme & Styles
+## Tailwind, Theme & Style
 
 Because you cannot really use the full power of Vanilla Components here and name your classes, a CSS file must be included to match your styles.
 While you can do this on your own and use direct the v-calendar css file, we have prepared a small CSS file that you can use to match your theme, the same theme being used
@@ -71,12 +43,11 @@ with your Vanilla Components setup, in case you are using Tailwind CSS, you can 
 
 We leverage the `colors.primary` from TailwindCSS to match you current theme, same with the dark mode via `class`.
 
-Create a file somewhere in your project and name it for ex: `v-calendar.pcss` and add the following content:
+Create a file in your project and name it for ex: `v-calendar.pcss` or `v-calendar.css` and add the following content assuming you are using `post-css` & `postcss-nesting`:
 
-:::details 👉 Click here to check the full CSS file
 ```css
+/** Ex: styles/v-calendar.css */
 @import '@flavorly/v-calendar/dist/style.css';
-
 @tailwind components;
 
 .vc-container {
@@ -265,5 +236,58 @@ Create a file somewhere in your project and name it for ex: `v-calendar.pcss` an
     }
 }
 ```
+
+Dont forget also to include in your app entry point the following example:
+
+```ts
+import { initializeHybridly } from 'hybridly/vue'
+import { createHead } from '@vueuse/head'
+import { Plugin } from '@flavorly/vanilla-components'
+import 'virtual:hybridly/router'
+import './tailwind.css'
+import './v-calendar.css' // [!code focus]
+
+initializeHybridly({
+	pages: import.meta.glob('@/views/pages/**/*.vue', { eager: true }),
+	cleanup: true,
+	enhanceVue: (vue) => {
+		vue.use(createHead())
+		vue.use(Plugin)
+	},
+})
+```
+
+
+<!--@include: ../../parts/title-preview.md-->
+
+
+<ExampleDatetimePicker />
+
+:::details :surfer: Click to expand the code
+<<< @/components/ExampleDatetimePicker.vue
 :::
+
+<!--@include: ../../parts/title-props.md-->
+
+| Prop         | Description               | Accepted Values | Default     |
+|:-------------|:--------------------------|:----------------|:------------|
+| `modelValue` | The value for the element | `Any`           | `undefined` |
+| `options`    | Flatpickr Options         | `Object`        | `undefined` |
+| `type`       | Type of input             | `String`        | `'text'`    |
+
+
+<!--@include: ../../parts/title-slots.md-->
+
+All the default slots of [VCalendar](https://vcalendar.io/api/v1.0/datepicker.html#scoped-slots) are available normally for usage.
+The default slot is pre-filled, please check Below.
+
+### Slot `default`
+
+This is the default slot of the component, by default a [Vanilla Text Input](/guide/components/input) is used to display the value.
+But you are free to use whatever you want for this slot, the slot is also forwarded to the V-Calendar component.
+
+| Attribute   | Description      | Type     |
+|:------------|:-----------------|:---------|
+| `className` | Classes injected | `String` |
+
 

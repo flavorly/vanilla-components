@@ -7,7 +7,7 @@ outline: deep
 A Native `<input type="checkbox" />` to check items or multiple items at once, once again batteries included!
 This wil also cover Checkbox groups!
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleCheckbox />
 
@@ -15,7 +15,7 @@ This wil also cover Checkbox groups!
 <<< @/components/ExampleCheckbox.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop             | Description                | Accepted Values                                                 | Default     |
 |:-----------------|:---------------------------|:----------------------------------------------------------------|:------------|
@@ -27,7 +27,7 @@ This wil also cover Checkbox groups!
 | `align`          | Position of the checkbox   | `['left-top', 'left-center', 'left-bottom','right-bottom', ..]` | `left-top'` |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `default`
 
@@ -35,16 +35,16 @@ The default slot is used to display the label of the checkbox, but you can be cr
 
 | Attribute   | Description               | Type                         |
 |:------------|:--------------------------|:-----------------------------|
-<!--@include: ./parts/slots-default-binds.md-->
+<!--@include: ../../parts/slots-default-binds.md-->
 
 
-<!--@include: ./parts/slots-feedback-errors.md-->
+<!--@include: ../../parts/slots-feedback-errors.md-->
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `click` | When element is clicked | `ClickEvent` |
 
 

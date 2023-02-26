@@ -3,6 +3,7 @@ import { defineConfig } from 'vitepress'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
+import { version } from '../../package.json'
 
 const production = process.env.NODE_ENV === 'production'
 const site = production ? 'https://vanilla-components.com' : 'http://localhost:3005'
@@ -13,8 +14,6 @@ const navQuickStart = [
   { text: 'Introduction', link: '/guide/introduction' },
   { text: 'Installation', link: '/guide/quick-start' },
   { text: 'Configuration', link: '/guide/configuration' },
-  { text: 'Variants & Usage', link: '/guide/variants' },
-  { text: 'Shared Props', link: '/guide/props' },
 ]
 
 export default defineConfig({
@@ -108,7 +107,7 @@ export default defineConfig({
       },
       { text: 'Guide', link: '/guide/quick-start', activeMatch: '/guide/quick-start' },
       { text: 'Components', link: '/guide/components-list', activeMatch: '/guide/components-list' },
-      { text: 'v0.7.29', link: 'https://github.com/flavorly/vanilla-components' },
+      { text: version, link: 'https://github.com/flavorly/vanilla-components' },
     ],
 
     sidebar: {
@@ -147,6 +146,7 @@ export default defineConfig({
           text: 'Advanced',
           items: [
             { text: 'Custom Components', link: '/guide/advanced-configuration' },
+            { text: 'Shared Props', link: '/guide/props' },
           ],
         },
         {

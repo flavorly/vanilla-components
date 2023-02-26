@@ -6,8 +6,7 @@ outline: deep
 
 An Avatar component useful for User Profile Pictures, support uploading new pictures, or display an existing one.
 
-<!--@include: ./parts/title-preview.md-->
-
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleAvatar />
 
@@ -15,7 +14,7 @@ An Avatar component useful for User Profile Pictures, support uploading new pict
 <<< @/components/ExampleAvatar.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop                  | Description                    | Accepted Values      | Default       |
 |:----------------------|:-------------------------------|:---------------------|:--------------|
@@ -28,7 +27,7 @@ An Avatar component useful for User Profile Pictures, support uploading new pict
 | `uploadButtonVariant` | Variant for the upload button  | `[String,undefined]` | `undefined`   |
 | `resetButtonVariant`  | Variant for the reset button   | `[String,undefined]` | `'undefined'` |
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `photo`
 
@@ -66,15 +65,13 @@ Slot to override the default reset button next to the profile photo and when a p
 | `photoPreview` | Base64 enconded blob         | `[Blog, String]` |
 
 
-<!--@include: ./parts/slots-feedback-errors.md-->
+<!--@include: ../../parts/slots-feedback-errors.md-->
 
+<!--@include: ../../parts/title-events.md-->
 
-<!--@include: ./parts/title-events.md-->
-
-| Event   | Description             | Value     |
-|:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
-| `open` | Slideover was opened | `Boolean` |
-| `previewUpdated` | Preview was updated | `Blob` |
-| `previewReset` | Preview was removed/reset | `true` |
-| `uploadTriggered` | Upload button pressed | `true` |
+| Event             | Description               | Value     |
+|:------------------|:--------------------------|:----------|
+| `open`            | Slideover was opened      | `Boolean` |
+| `previewUpdated`  | Preview was updated       | `Blob`    |
+| `previewReset`    | Preview was removed/reset | `true`    |
+| `uploadTriggered` | Upload button pressed     | `true`    |

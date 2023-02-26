@@ -6,7 +6,7 @@ outline: deep
 
 A full-fledged select component with support for custom options, custom values, ajax loading, options prefetching, tags, keyboard accessibility, searching & many more.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleRichSelect />
 
@@ -14,7 +14,7 @@ A full-fledged select component with support for custom options, custom values, 
 <<< @/components/ExampleRichSelect.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop                       | Description                                                    | Type              | Default          |
 |:---------------------------|:---------------------------------------------------------------|:------------------|:-----------------|
@@ -153,7 +153,7 @@ anytime and return the appropriate options to be pre-fetched and always included
 
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 By default all slots get all the props and configuration from the component.
 The slots are divided by two categories, trigger & dropdown.
@@ -219,11 +219,11 @@ Section on the bottom of the dropdown, before the search box for additional cont
 When the dropdown is loading or fetching results, this section will be used, you can override it as well
 
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `change` | Input Value changed | `CustomEvent` |
 | `input` | Input / Value changed | `CustomEvent` |
 | `keydown` | KeyboardDown Pressed | `KeyboardEvent` |

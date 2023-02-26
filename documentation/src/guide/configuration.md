@@ -4,7 +4,7 @@ outline: deep
 
 # Configuration
 
-## Structure
+## Styling Structure
 
 Components contain three major keys that can be set: `fixedClasses`, `classes`, `variants` & `props`, Below we will explain what each of them means and what's their behavior, as they represent the core concept:
 
@@ -19,7 +19,7 @@ With this little system, you can imagine how flexible this can be, the limit is 
 To check the full list of the available properties for all components please check the [props section](./props)
 :::
 
-## Components
+## Style your Components
 
 The library comes out of the box configured to be used with [Tailwind](https://tailwindcss.com), you are free to change this configuration and provide your own when installing the plugin. The configuration keys can be found [here](https://github.com/flavorly/vanilla-components/blob/0c8308bcfb2be5c59d6b3dbb9488157a6a1f95d4/packages/vanilla-components/src/configuration.ts#L9), you can even include configuration for your components and ***leverage the configuration system*** for your components
 
@@ -48,16 +48,21 @@ app.use(VanillaComponents, {
 
 Please also note that when you override, you will lose the default styling for this component, which means you will have to configure this component on your own. You can find our presets on the official GitHub.
 
-## Default Configuration
+## Default Style & Configuration
 
-You can check the default and full configuration here : [full Configuration](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets/all.json)
-Where it also includes the configuration file separated for each component [here](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets)
+You can check the default and full configuration here : [full Configuration](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets/tailwind/all.json)
+Where it also includes the configuration file separated for each component [here](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets/tailwind)
+The default configuration is using TailwindCSS, but you can use any other framework you want, just keep in mind that you will have to provide the correct classes for each component.
 
 Here is a demo of the Input Component Configuration file:
 
-<<< @/presets/Input.json#snippet
+::: code-group
+<<< @/presets/tailwind/Input.json{Input}
+<<< @/presets/tailwind/Button.json{Button}
+<<< @/presets/tailwind/Select.json#snippet{Select}
+:::
 
-## Inline Configuration
+## Inline Style Configuration
 
 You are not limited to setting a configuration on a file and loading it, even though we recommend doing it, you are also able to define `classes`, `fixedClasses` & `variants` directly to the component. We will cover more of this in the [variants](./variants) section.
 
@@ -107,34 +112,117 @@ app.use(VanillaComponents, {
 })
 ```
 
+# Variants
+
+## Using Variants
+
+One of the main features of Vanilla Components is the usage of variants as explained in the [configuration](./configuration) section, when using variants the component will swap the classes automatically while preserving the `fixedClasses` you may use the `variant` prop to quickly toggle different variants.
+
+There is one special variant for errors called `error`, this variant is meant to be temporary and once you change or interact with the component it will fall back to the original variant provided initially ( if any ).
+
+You may use variants as shown below:
+
+```vue
+<template>
+    <Button variant="soft-red"/>
+    <Button :variant="true ? 'soft-red' : 'soft-blue'"/>
+    <!-- This will use "error" variant, and once you hit, it will fallback to soft-red -->
+    <Button variant="soft-red" :errors="'There is something wrong'"/>
+</template>
+```
+
+You are not limited to configuring everything when booting the plugin, you may also define your `classes`, `fixedClasses` & `variants` on your component, this is useful for edge cases or specific scenarios that you want to override something specific.
+
+:::warning A note on overrides & inline configuration
+Please just keep in mind that when you do this, we will completely **ignore** the global configuration and use the classes, fixedClasses, or variants provided "inline".
+:::
+
+Here is a small example:
+
+```vue
+<template>
+    <Button
+        :variants="{
+            dark: {
+                classes: {
+                    wrapper: 'pt-20'
+                }
+            }
+        }"
+        :classes="{
+            wrapper: 'pt-10'
+        }"
+        :fixed-classes="{
+            wrapper: 'pb-20'
+        }"
+        variant="dark"
+    />
+</template>
+```
+
+Given the example above we would always use the `pb-20` from the fixed classes, and `pt-20` from the `dark` variant we picked up, ignoring the default `pt-10` that was the default value for the key "wrapper".
+
+The actual HTML result would be something like the following :
+
+```html
+<button class="pb-20 pt-20"></button>
+```
+
+## Errors Variant
+
+All components should include the `default` variant and `error` variant, the `error` variant is meant to be used when you want to show an error message to the user, this variant will be automatically applied when you provide the `errors` prop to the component.
+Once you "touch" the v-model of the component the `error` variant will be removed and the component will fall back to the original variant.
+
+This is really useful when errors are coming from the backend ( Ex: Inertia ) and you want to flash them but instantly remove them as soon as the user tries again.
+
+Here is a small example using hybridly or inertia:
+
+```vue
+<script setup lang="ts">
+const login = useForm({
+	method: 'POST',
+	url: route('login'),
+	fields: {
+		email: '',
+		password: '',
+		remember: false,
+	},
+})
+</script>
+<template layout="auth/layout-auth">
+    <VanillaInputGroup
+        :label="t('app.fields.email')"
+        name="email"
+    >
+        <VanillaInput
+            v-model="login.fields.email"
+            :errors="login.errors.email" //[!code focus]
+            :placeholder="t('app.placeholders.email')"
+            type="email"
+            required
+            autofocus
+        />
+    </VanillaInputGroup>
+</template>
+```
+
+## Hands on!
+
+Yes, you are not limited to having a fixed color or style set in your component! But enough talk, let's see some real examples.
+
+<DemoExampleVariant />
+
+And here is the code :
+
+<<< @/components/DemoExampleVariant.vue
+
 ## Tailwind Defaults
 
 Note on the default Primary Color for Tailwind, the color used by default is called **primary**, which relies also on `@tailwindcss/forms` so please extend your tailwind.config.js to have the primary color as you wish.
 
 Here is a demo tailwind configuration:
 
-
-```js
-const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
-module.exports = {
-    // the rest of  your configuration.. //[!vp focus:15]
-    content: [
-        "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
-        "./node_modules/@flavorly/vanilla-components/dist/components/**/*.{ts,vue}",
-    ],
-    theme: {
-        colors: {
-            primary: colors.indigo, // alias "primary" to "indigo"
-        },
-    },
-    plugins: [
-        require('@tailwindcss/typography'),
-        require('@tailwindcss/aspect-ratio'),
-        require('@tailwindcss/forms'),
-    ],
-}
-```
+<<< @/snippets/tailwind.config.js
 
 That's it! With this in mind, you are free to start being creative and create your own thing. If you want to style your components please have a look under [Advanced Configuration](./advanced-configuration)
 

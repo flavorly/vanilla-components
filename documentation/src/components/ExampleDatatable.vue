@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { Datatable } from '@flavorly/vanilla-components'
 import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
-import _default from '@flavorly/vanilla-components/components/icons/flag-async.vue'
-import type = _default.props.country.type
 
 const onGenericEvent = (e) => {
   console.log('Datatable Event dispatched', e)

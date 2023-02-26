@@ -6,7 +6,7 @@ outline: deep
 
 With Alert components you can provide contextual feedback messages for typical user actions with handful of available contexts.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleAlert />
 
@@ -14,7 +14,7 @@ With Alert components you can provide contextual feedback messages for typical u
 <<< @/components/ExampleAlert.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 
 | Prop         | Description                                           | Accepted Values | Default     |
@@ -25,7 +25,7 @@ With Alert components you can provide contextual feedback messages for typical u
 | `closeAfter` | Emit close event after defined amount of milliseconds | `Number`        | `undefined` |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `default`
 
@@ -43,7 +43,7 @@ Slot to override the subtitle of the alert.
 
 Slot for the alert on the bottom, below the subtitle.
 
-<!--@include: ./parts/title-events.md)-->
+<!--@include: ../../parts/title-events.md)-->
 
 | Event   | Description      | Value     |
 |:--------|:-----------------|:----------|

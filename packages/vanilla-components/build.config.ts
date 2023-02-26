@@ -1,4 +1,6 @@
 import { defineBuildConfig } from 'unbuild'
+
+// import DefineOptions from 'unplugin-vue-define-options/rollup'
 import * as pkg from './package.json'
 
 export default defineBuildConfig({
@@ -15,6 +17,14 @@ export default defineBuildConfig({
     'vite',
     '@flavorly/v-calenda',
     '@headlessui/vue',
-    '@popperjs/core'
-  ]
+    '@popperjs/core',
+  ],
+  hooks: {
+    'rollup:options': function (_ctx, options) {
+      // options.plugins?.push(DefineOptions())
+    },
+  },
+  rollup: {
+
+  },
 })

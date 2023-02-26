@@ -6,7 +6,7 @@ outline: deep
 
 A Native `<button />`  with batteries included for loading state, variants & many more.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleButton />
 
@@ -15,7 +15,7 @@ A Native `<button />`  with batteries included for loading state, variants & man
 :::
 
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop           | Description                   | Accepted Values | Default    |
 |:---------------|:------------------------------|:----------------|:-----------|
@@ -27,7 +27,7 @@ A Native `<button />`  with batteries included for loading state, variants & man
 | `focusOnMount` | Auto-focus on mount           | `Boolean`       | `false`    |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `default`
 
@@ -41,7 +41,7 @@ Appends an icon, allowing an icon to be inserted together with the loading state
 
 Label to use inside the button, as you would expect from a normal button
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|

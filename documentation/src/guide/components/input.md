@@ -6,7 +6,7 @@ outline: deep
 
 A Native `<input />` for text, number, etc. with additional features for password input with hide & show button.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleInput />
 
@@ -14,7 +14,7 @@ A Native `<input />` for text, number, etc. with additional features for passwor
 <<< @/components/ExampleInput.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop          | Description                | Accepted Values | Default     |
 |:--------------|:---------------------------|:----------------|:------------|
@@ -23,15 +23,15 @@ A Native `<input />` for text, number, etc. with additional features for passwor
 | `type`        | Type of input              | `String`        | `'text'`    |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
-<!--@include: ./parts/default-slots.md-->
+<!--@include: ../../parts/default-slots.md-->
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 
 
 

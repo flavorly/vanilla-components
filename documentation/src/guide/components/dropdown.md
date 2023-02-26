@@ -8,7 +8,7 @@ A dropdown component based on [HeadlessUI](https://headlessui.com). It is used t
 You can also leverage this dropdown to create new components, we currently provide 2 dropdowns, one based on HeadlessUI
 and another totally done from scratch that provides way more control over the dropdown. The API is pretty similar between both.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleDropdown />
 
@@ -17,7 +17,7 @@ and another totally done from scratch that provides way more control over the dr
 :::
 
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 ### Dropdown Menu Props
 
@@ -72,7 +72,7 @@ Below are the props for the Dropdown component, totally vanilla implementation
 
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `default`
 
@@ -83,11 +83,11 @@ Actual content to show when the trigger is clicked / hovered. This is the actual
 Slots usually used for the dropdown trigger button or any other element of your choice.
 
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `update:show` | Toggle for open | `Boolean` |
 | `focus` | On Focus | `FocusEvent` |
 | `blur` | On Blur | `FocusEvent` |

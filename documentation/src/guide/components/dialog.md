@@ -6,7 +6,7 @@ outline: deep
 
 A Dialog component is a modal window that can be used to display information or ask for user input. It is a wrapper around the Headless UI Dialog component.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleDialog />
 
@@ -14,7 +14,7 @@ A Dialog component is a modal window that can be used to display information or 
 <<< @/components/ExampleDialog.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop                      | Description                                    | Accepted Values                           | Default     |
 |:--------------------------|:-----------------------------------------------|:------------------------------------------|:------------|
@@ -37,7 +37,7 @@ A Dialog component is a modal window that can be used to display information or 
 
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `default`
 
@@ -52,11 +52,11 @@ Header part of the modal, usually used to place the title or/and subtitle.
 Footer part of the modal, usually used to place buttons or actions.
 
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `open` | Dialog was opened | `Boolean` |
 | `close` | Dialog was closed | `Boolean` |
 | `opening` | Dialog is about to be opened — before the transition starts | `Boolean` |

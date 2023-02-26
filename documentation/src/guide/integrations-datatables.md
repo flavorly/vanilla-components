@@ -372,24 +372,36 @@ You may want to dispatch a inertia call after the action is executed, you can do
 First install the adapter package with one of the following commands:
 
 For Inertia: 
-```bash
-# Using pnpm
+
+::: code-group
+```bash [pnpm]
 pnpm add @flavorly/vanilla-components-inertia
-# Using Yarn
-yarn add @flavorly/vanilla-components-inertia
-# Using npm
-npm add @flavorly/vanilla-components-inertia
 ```
 
-For Hybridly:
-```bash
-# Using pnpm
-pnpm add @flavorly/vanilla-components-hybridly
-# Using Yarn
-yarn add @flavorly/vanilla-components-hybridly
-# Using npm
-npm add @flavorly/vanilla-components-hybridly
+```bash [Yarn]
+yarn add @flavorly/vanilla-components-inertia
 ```
+
+```bash [npm]
+npm install @flavorly/vanilla-components-inertia
+```
+:::
+
+For Hybridly:
+
+::: code-group
+```bash [pnpm]
+pnpm add @flavorly/vanilla-components-hybridly
+```
+
+```bash [Yarn]
+yarn add @flavorly/vanilla-components-hybridly
+```
+
+```bash [npm]
+npm install @flavorly/vanilla-components-hybridly
+```
+:::
 
 On your table actions you should be able to do the following:
 

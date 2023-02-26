@@ -31,7 +31,7 @@ feel free to explore most of them but some highlights:
 
 But enough talk, let's see it in action!
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 
 <ExampleDatatable />
@@ -40,7 +40,7 @@ But enough talk, let's see it in action!
 <<< @/components/ExampleDatatable.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop                       | Description                         | Accepted Values       | Default            |
 |:---------------------------|:------------------------------------|:----------------------|:-------------------|
@@ -101,7 +101,7 @@ Request Params explained :
 | `sorting`     | Array with sorting's applied & their direction  |
 | `action`      | Action selected to perform bulk actions         |
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event            | Description                 | Value            |
 |:-----------------|:----------------------------|:-----------------|
@@ -119,7 +119,7 @@ Request Params explained :
 
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 Besides, the regular static slots, data table also provides dynamic slots for rows columns & actions
 
@@ -352,7 +352,7 @@ Dialog that shows the filters to apply
 
 
 
-## Caveats & Bugs :bug:
+## Known issues :bug:
 
 - When using method GET to fetch items, we are unable to send filters in a proper way, for the time being please use post
 - Overriding certain slots can still cause issues, please kindly double-check has the library lacks of tests.

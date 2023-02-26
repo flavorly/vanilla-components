@@ -11,8 +11,6 @@ module.exports = {
         /base\.css/,
         /vp-code\.css/,
         /utils\.css/,
-        /brand\.css/,
-        /custom\.css/,
       ],
       transform(prefix, _selector, prefixedSelector) {
         const [selector, pseudo = ''] = _selector.split(/(:\S*)$/)

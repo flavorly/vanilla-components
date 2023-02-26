@@ -30,12 +30,12 @@
     "dist"
   ],
   "types": "./dist/index.d.ts",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.umd.js",
+  "module": "./dist/index.es.js",
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.mjs",
+      "require": "./dist/index.umd.js",
+      "import": "./dist/index.es.js",
       "types": "./dist/index.d.ts"
     }
   },
@@ -50,7 +50,9 @@
     }
   },
   "scripts": {
-    "build": "unbuild",
+    "build": "vite build",
+    "unbuild": "unbuild",
+    "build:watch": "vite build --watch",
     "stub": "unbuild --stub"
   },
   "dependencies": {
@@ -64,8 +66,7 @@
     "libphonenumber-js": "^1.10.14",
     "lodash": "^4.17.21",
     "qs": "^6.11.0",
-    "universal-cookie": "^4.0.4",
-    "unplugin-vue-define-options": "^1.0.0"
+    "universal-cookie": "^4.0.4"
   },
   "peerDependencies": {
     "@flavorly/v-calendar": "3.0.0-alpha.11",

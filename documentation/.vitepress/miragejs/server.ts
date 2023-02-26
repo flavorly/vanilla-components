@@ -3,8 +3,8 @@
 import type { Request } from 'miragejs'
 import { Factory, Model, createServer } from 'miragejs'
 import { Pagination } from 'paginatedjs'
-import { faker } from '@faker-js/faker'
 import orderBy from 'lodash/orderBy'
+import sample from 'lodash/sample'
 import each from 'lodash/each'
 import Fuse from 'fuse.js'
 import collect from 'collect.js'
@@ -150,13 +150,15 @@ export function makeServer({ environment = 'development' } = {}) {
                     return i
                 },
                 gateway(i) {
-                    return faker.helpers.arrayElement(['Paypal', 'Bank Transfer', 'Credit Card', 'Bitcoin', 'Ethereum'])
+                    return sample(['Paypal', 'Bank Transfer', 'Credit Card', 'Bitcoin', 'Ethereum'])
                 },
                 amount(i) {
-                    return `${faker.datatype.number({ min: 10, max: 230 })}€`
+                    // return `${faker.datatype.number({ min: 10, max: 230 })}€`
+                    const random = Math.floor(Math.random() * (230 - 10 + 1)) + 10
+                    return `${random}€`
                 },
                 status(i) {
-                    return faker.helpers.arrayElement(['Completed', 'Pending', 'Refunded'])
+                    return sample(['Completed', 'Pending', 'Refunded'])
                 },
             }),
         },

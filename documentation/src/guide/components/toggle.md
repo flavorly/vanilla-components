@@ -6,7 +6,7 @@ outline: deep
 
 A toggle is a switch that can be turned on or off. I can be used to change settings, toggle options, and may more.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleToggle />
 
@@ -14,7 +14,7 @@ A toggle is a switch that can be turned on or off. I can be used to change setti
 <<< @/components/ExampleToggle.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop             | Description                | Accepted Values                                                 | Default     |
 |:-----------------|:---------------------------|:----------------------------------------------------------------|:------------|
@@ -27,7 +27,7 @@ A toggle is a switch that can be turned on or off. I can be used to change setti
 | `icon`           | If we should show the icon | `Boolean`                                                       | `true`      |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 
 ### Slot `unchecked`
@@ -45,15 +45,15 @@ The default slot is used to display the label of the toggle, but you can be crea
 
 | Attribute   | Description               | Type                         |
 |:------------|:--------------------------|:-----------------------------|
-<!--@include: ./parts/slots-default-binds.md-->
+<!--@include: ../../parts/slots-default-binds.md-->
 
-<!--@include: ./parts/slots-feedback-errors.md-->
+<!--@include: ../../parts/slots-feedback-errors.md-->
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `click` | When element is clicked | `ClickEvent` |
 
 

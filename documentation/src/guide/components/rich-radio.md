@@ -7,7 +7,7 @@ outline: deep
 The rich radio is intended to be used as a replacement for the standard HTML radio input. It is a more flexible and customizable component that can be used to create a variety of different radio button styles.
 
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleRichRadio />
 
@@ -15,7 +15,7 @@ The rich radio is intended to be used as a replacement for the standard HTML rad
 <<< @/components/ExampleRichRadio.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop               | Description                              | Type      | Default     |
 |:-------------------|:-----------------------------------------|:----------|:------------|
@@ -57,7 +57,7 @@ After the option is normalized, it is than passed to the component and everythin
 the raw option of your data by using `option.raw` in the `option` slot.
 :::
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 By default all slots get all the props and configuration from the component, for option slots you always get the `normalizedOption` that contains the raw option. 
 Option slots also gets the `index`, `active`, `checked` that are forwarded to all slots.
@@ -92,7 +92,7 @@ The slot `descriptionText` is used to override the default description text whil
 
 The slot `svgIcon` is used to override the default svg icon when the option is checked.
 
-<!--@include: ./parts/default-slots.md-->
+<!--@include: ../../parts/default-slots.md-->
 
 
 | Attribute       | Description                                | Type              |
@@ -108,11 +108,11 @@ The slot `svgIcon` is used to override the default svg icon when the option is c
 | `disabled`      | If the option is disabled                  | `Boolean`         |
 
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 
 
 ## Rich Radio Option

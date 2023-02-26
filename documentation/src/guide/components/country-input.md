@@ -6,7 +6,7 @@ outline: deep
 
 A `<RichSelect />` made only to pick a list of countries with beautiful flags for each country. Add your favorite countries & search for other countries. 
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 
 <ExampleCountryInput />
@@ -15,7 +15,7 @@ A `<RichSelect />` made only to pick a list of countries with beautiful flags fo
 <<< @/components/ExampleCountryInput.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop                       | Description                                             | Accepted Values                 | Default                      |
 |:---------------------------|:--------------------------------------------------------|:--------------------------------|:-----------------------------|
@@ -31,7 +31,7 @@ A `<RichSelect />` made only to pick a list of countries with beautiful flags fo
 | `minimumInputLengthText`   | A function or a number with the minimum chars to search | `String`, `Function`            | `3`                          |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `label`
 
@@ -52,13 +52,13 @@ The slot for the option on the select dropdown.
 | `className`  | The current class name            | `String`  |
 | `isSelected` | If the current option is selected | `Boolean` |
 
-<!--@include: ./parts/default-slots.md-->
+<!--@include: ../../parts/default-slots.md-->
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `update:countryDialCode` | The country dial code | `string` |
 | `update:countryCode` | The ISO country code | `string` |
 | `update:countryName` | The English name of the country | `string` |

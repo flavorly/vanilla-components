@@ -6,7 +6,7 @@ outline: deep
 
 Little status indicators, with pulse animation, able to be used in any context, like buttons, cards, etc.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleStatusIndicator />
 
@@ -14,7 +14,7 @@ Little status indicators, with pulse animation, able to be used in any context, 
 <<< @/components/ExampleStatusIndicator.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop    | Description                    | Accepted Values | Default |
 |:--------|:-------------------------------|:----------------|:--------|

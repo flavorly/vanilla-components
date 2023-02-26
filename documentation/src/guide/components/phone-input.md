@@ -7,7 +7,7 @@ outline: deep
 A Native Input dedicated to Mobile & Local Phone numbers, includes a beautiful country picker and a native input.
 Exports the national number, local number & country code for flexible & easier way to validate on the backend.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExamplePhoneInput />
 
@@ -15,7 +15,7 @@ Exports the national number, local number & country code for flexible & easier w
 <<< @/components/ExamplePhoneInput.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop                       | Description                                             | Accepted Values                 | Default                      |
 |:---------------------------|:--------------------------------------------------------|:--------------------------------|:-----------------------------|
@@ -35,15 +35,15 @@ Exports the national number, local number & country code for flexible & easier w
 
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
-<!--@include: ./parts/default-slots.md-->
+<!--@include: ../../parts/default-slots.md-->
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `update:countryDialCode` | The country dial code | `string` |
 | `update:countryCode` | The ISO country code | `string` |
 | `update:phoneNumberNational` | Phone number in national format | `string` |

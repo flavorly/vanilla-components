@@ -8,25 +8,37 @@ outline: deep
 
 Please install it with your favorite package manager.
 
-```bash
-# Using pnpm
+::: code-group
+```bash [pnpm]
 pnpm add @flavorly/vanilla-components
-# Using Yarn
+```
+
+```bash [Yarn]
 yarn add @flavorly/vanilla-components
-# Using npm
+```
+
+```bash [npm]
 npm install @flavorly/vanilla-components
 ```
+:::
 
 Once installed on your project, install also the `peer dependencies`, those are packages that are required for Vanilla Components to work, but they are not bundled with Vanilla Components:
 
-```bash
-# Using pnpm
+
+::: code-group
+```bash [pnpm]
 pnpm add @headlessui/vue @popperjs/core libphonenumber-js
-# Using Yarn
+```
+
+```bash [Yarn]
 yarn add @headlessui/vue @popperjs/core libphonenumber-js
-# Using npm
+```
+
+```bash [npm]
 npm add @headlessui/vue @popperjs/core libphonenumber-js
 ```
+:::
+
 
 
 ## Install on Vue 3
@@ -40,7 +52,7 @@ import { Plugin } from '@flavorly/vanilla-components'
 // Or If you prefer
 import { VanillaComponents } from '@flavorly/vanilla-components'
 const app = createApp()
-app.use(VanillaComponents, {})
+app.use(VanillaComponents)
 ```
 
 :::warning
@@ -55,11 +67,11 @@ After installation, you may import the components as you need them, if you are n
 
 ```vue
 <script setup lang="ts">
-import { Button, Avatar as MyOwnAvatarComponent } from '@flavorly/vanilla-components' // [!code focus:1]
+import { Button, Avatar } from '@flavorly/vanilla-components' // [!code focus:1]
 </script>
 
 <template>
-    <MyOwnAvatarComponent /> // [!code focus:1]
+    <Avatar /> // [!code focus:1]
     <Button>Continue</Button>
 </template>
 ```
@@ -78,24 +90,4 @@ import type { ButtonProps } from '@flavorly/vanilla-components'  // [!code focus
 
 If you are using Tailwind please ensure your configuration file matches the following:
 
-```js
-const defaultTheme = require('tailwindcss/defaultTheme');
-const colors = require('tailwindcss/colors');
-module.exports = {
-    // the rest of  your configuration.. // [!code focus:15]
-    content: [
-        "./resources/**/*.{js,ts,jsx,tsx,vue,php}",
-        "./node_modules/@flavorly/vanilla-components/dist/components/**/*.{ts,vue}",
-    ],
-    theme: { 
-        colors: {
-            primary: colors.indigo, // alias "primary" to "indigo"  
-        },
-    },
-    plugins: [
-        require('@tailwindcss/typography'),
-        require('@tailwindcss/aspect-ratio'),
-        require('@tailwindcss/forms'),
-    ],
-}
-```
+<<< @/snippets/tailwind.config.js

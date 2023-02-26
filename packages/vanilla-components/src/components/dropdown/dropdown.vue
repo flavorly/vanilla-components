@@ -113,8 +113,8 @@ const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dr
 
 // Refs
 const isTouchOnlyDevice = ref<boolean>(false)
-const originalShown = ref<boolean>(configuration.show)
-const shown = refThrottled<boolean>(originalShown, 1000)
+const originalShown = ref<boolean | undefined>(configuration.show)
+const shown = refThrottled<boolean | undefined>(originalShown, 1000)
 const initAsShow = ref<boolean | undefined>(configuration.show)
 const hideTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const focusableElements = ref<Array<HTMLElement>>([])

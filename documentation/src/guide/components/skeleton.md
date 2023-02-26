@@ -6,7 +6,7 @@ outline: deep
 
 The skeleton loaders are used to display a busy state of your app, and fill the white gaps with a nice animation.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleSkeleton />
 
@@ -14,7 +14,7 @@ The skeleton loaders are used to display a busy state of your app, and fill the 
 <<< @/components/ExampleSkeleton.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop    | Description                   | Accepted Values | Default |
 |:--------|:------------------------------|:----------------|:--------|

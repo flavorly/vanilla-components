@@ -7,7 +7,7 @@ outline: deep
 A dialog with a slideover behaviour backed by HeadlessUI dialogs :smile:
 Useful to display additional context from the edges of the screen.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleSlideover />
 
@@ -15,7 +15,7 @@ Useful to display additional context from the edges of the screen.
 <<< @/components/ExampleSlideover.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 | Prop                      | Description                                          | Accepted Values                   | Default     |
 |:--------------------------|:-----------------------------------------------------|:----------------------------------|:------------|
@@ -36,7 +36,7 @@ Useful to display additional context from the edges of the screen.
 | `size`                    | Size of the slideover                                | `default`,`medium`,`large`,`full` | `medium`    |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 ### Slot `default`
 
@@ -66,11 +66,11 @@ Slot to override the subtitle of the slideover
 
 Slot to override the close icon on the top right corner of the slideover
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
 | `open` | Slideover was opened | `Boolean` |
 | `close` | Slideover was closed | `Boolean` |
 | `opening` | Slideover is about to be opened — before the transition starts | `Boolean` |

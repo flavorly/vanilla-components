@@ -1322,7 +1322,7 @@ defineOptions({
                       }"
                     >
                       <div
-                        :class="configuration.classesList.skeletonPlaceholder"
+                        :class="classesList.skeletonPlaceholder"
                       >
                         <span class="opacity-0">
                           {{ get(result, column.name) }}

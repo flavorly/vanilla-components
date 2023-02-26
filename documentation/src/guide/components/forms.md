@@ -103,7 +103,7 @@ Props available for this component extending the default variant & global props.
 | `errors` | The error string or array of errors | `string`, `Array` | `undefined` |
 | `safe`   | Allow v-html or v-text              | `Boolean`         | `false`     |
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleForms />
 

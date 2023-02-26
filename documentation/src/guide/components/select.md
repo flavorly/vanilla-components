@@ -6,7 +6,7 @@ outline: deep
 
 A Native `<select />` support regular options, multiple & many more.
 
-<!--@include: ./parts/title-preview.md-->
+<!--@include: ../../parts/title-preview.md-->
 
 <ExampleSelect />
 
@@ -14,7 +14,7 @@ A Native `<select />` support regular options, multiple & many more.
 <<< @/components/ExampleSelect.vue
 :::
 
-<!--@include: ./parts/title-props.md-->
+<!--@include: ../../parts/title-props.md-->
 
 
 | Prop               | Description                                       | Type      | Default            |
@@ -30,7 +30,7 @@ A Native `<select />` support regular options, multiple & many more.
 | `empty`            | The object or value when nothing is selected      | `String`  | `undefined`        |
 
 
-<!--@include: ./parts/title-slots.md-->
+<!--@include: ../../parts/title-slots.md-->
 
 By default all slots get all the props and configuration from the component.
 
@@ -45,11 +45,11 @@ If you are looking for a select with more options please checkout the [RichSelec
 | `option`        | The actual option on the loop                | `Object`, `Array` |
 | `safe`          | If its save to print HTML or we should scape | `Boolean`         |
 
-<!--@include: ./parts/default-slots.md-->
+<!--@include: ../../parts/default-slots.md-->
 
 
-<!--@include: ./parts/title-events.md-->
+<!--@include: ../../parts/title-events.md-->
 
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ./parts/events-model-value.md-->
+<!--@include: ../../parts/events-model-value.md-->
