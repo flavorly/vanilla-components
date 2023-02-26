@@ -1,5 +1,5 @@
 <p align="center">
-<img src="/packages/documentation/src/public/symbol-gradient.svg" height="150">
+<img src="/documentation/src/public/symbol-gradient.svg" height="150">
 </p>
 
 
