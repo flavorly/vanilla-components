@@ -12,6 +12,7 @@ import type {
  * Stores the Type for all components available in project
  */
 interface ComponentsConfiguration {
+  Alert?: Components.AlertProps
   Avatar?: Components.AvatarProps
   Button?: Components.ButtonProps
   Card?: Components.CardProps

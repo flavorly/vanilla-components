@@ -8,6 +8,18 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.31
+
+- General: Moved compiler to Unbuild for better performance on inertia & hybridly packages
+- Docs: Refactor to documentation theme
+- General: Optimized build workflow
+- General: Optimized tsconfig and package.json deps
+- General: Optimized pnpm workflow/workspaces
+- Exporting Presets for Tailwind for both docs & dist folders
+- Docs: Improved documentation
+- Added: defineConfiguration & mergeConfiguration export, to allow for customizing the components while keeping the defaults / deep merge
+
+
 ### 0.7.30
 
 - General: Removed Axios Dependency in favor of native Fetch
@@ -18,7 +30,8 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 - Datatables: Rich select filters now supports pre-fetching while using API Endpoint
 - Datatables: Refactor to how filters are cleaned up, supporting arrays as values for filters
 - General : Bugfixes
-- 
+
+
 ### 0.7.27
 
 - Nothing

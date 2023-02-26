@@ -1,3 +1,4 @@
+export * from './components/alert/config'
 export * from './components/avatar/config'
 export * from './components/button/config'
 export * from './components/card/config'

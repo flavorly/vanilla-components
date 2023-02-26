@@ -45,11 +45,10 @@ export default defineConfig({
         include: /\.(?:vue|md)$/, // also scan in markdown files
       }),
     ],
-
-    // build: {
-    //   sourcemap: false,
-    //   chunkSizeWarningLimit: 16000,
-    // },
+    build: {
+      sourcemap: false,
+      chunkSizeWarningLimit: 16000,
+    },
     ssr: {
       noExternal: ['@flavorly/vanilla-components'],
     },
@@ -146,19 +145,15 @@ export default defineConfig({
           text: 'Advanced',
           items: [
             { text: 'Custom Components', link: '/guide/advanced-configuration' },
-            { text: 'Shared Props', link: '/guide/props' },
+            { text: 'Shared Props', link: '/guide/advanced-configuration' },
+            { text: 'Auto-Import', link: '/guide/advanced-autoimport' },
+            { text: 'Form Sections & Groups', link: '/guide/examples-form-sections' },
           ],
         },
         {
           text: 'Integrations',
           items: [
             { text: 'Laravel + Datatables', link: '/guide/integrations-datatables' },
-          ],
-        },
-        {
-          text: 'Examples',
-          items: [
-            { text: 'Form Sections & Groups', link: '/guide/examples-form-sections' },
           ],
         },
       ],

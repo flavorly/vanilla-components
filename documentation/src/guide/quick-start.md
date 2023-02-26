@@ -41,7 +41,7 @@ npm add @headlessui/vue @popperjs/core libphonenumber-js
 
 
 
-## Install on Vue 3
+## Vue Plugin
 
 Now that the package is install you may go further and enable the package on your Vue application entry point.
 This setup is only required to register the global & default configuration, no components are registered.
@@ -89,5 +89,23 @@ import type { ButtonProps } from '@flavorly/vanilla-components'  // [!code focus
 ## Using Tailwind
 
 If you are using Tailwind please ensure your configuration file matches the following:
+
+Install the required plugins:
+
+::: code-group
+```bash [pnpm]
+pnpm add @tailwindcss/typography @tailwindcss/aspect-ratio @tailwindcss/forms
+```
+
+```bash [Yarn]
+yarn add @tailwindcss/typography @tailwindcss/aspect-ratio @tailwindcss/forms
+```
+
+```bash [npm]
+npm add @tailwindcss/typography @tailwindcss/aspect-ratio @tailwindcss/forms
+```
+:::
+
+Update your tailwind.config.js file:
 
 <<< @/snippets/tailwind.config.js

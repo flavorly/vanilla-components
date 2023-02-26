@@ -100,5 +100,7 @@ export {
 
 export {
   defaultConfiguration,
+  mergeConfiguration,
+  defineConfiguration,
 } from './configuration'
 

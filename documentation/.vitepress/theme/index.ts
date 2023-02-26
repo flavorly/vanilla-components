@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-nocheck
 import DefaultTheme from 'vitepress/theme'
-import { Plugin } from '@flavorly/vanilla-components'
+import { Plugin, defineConfiguration } from '@flavorly/vanilla-components'
 import type { EnhanceAppContext } from 'vitepress'
 import DynamicLayout from '../components/DynamicLayout.vue'
 import { makeServer } from '../miragejs/server'
@@ -20,7 +20,7 @@ export default {
     DefaultTheme.enhanceApp(ctx)
 
     // Install Vanilla Components Plugin
-    ctx.app.use(Plugin)
+    ctx.app.use(Plugin, defineConfiguration({}))
 
     // Register Demo Components
     const components = import.meta.glob('../../src/components/*.vue', { eager: true })
