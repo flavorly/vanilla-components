@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
+import { useConfiguration, useVariantProps } from '../../core/use'
+import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
 import type { RichSelectOptionWithImageClassesValidKeys, RichSelectOptionWithImageProps } from './config'
 import { richSelectOptionWithImageConfig } from './config'
-import { useConfiguration, useVariantProps } from '@/core/use'
-import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
 
 const props = defineProps({
   ...useVariantProps<RichSelectOptionWithImageProps, RichSelectOptionWithImageClassesValidKeys>(),

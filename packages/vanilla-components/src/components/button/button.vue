@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { ComponentPublicInstance, PropType, Ref } from 'vue'
 import { onMounted, ref } from 'vue'
+import { useConfiguration, useVariantProps } from '../../core/use'
+import { hasSlot } from '../../core/helpers'
+import LoadingSpinnerIcon from '../icons/spinner.vue'
 import type { ButtonClassesValidKeys, ButtonProps } from './config'
 import { buttonConfig } from './config'
-import LoadingSpinnerIcon from '@/components/icons/spinner.vue'
-import { useConfiguration, useVariantProps } from '@/core/use'
-import { hasSlot } from '@/core/helpers'
 
 const props = defineProps({
     ...useVariantProps<ButtonProps, ButtonClassesValidKeys>(),
@@ -89,7 +89,9 @@ defineOptions({
     :disabled="disabled"
     @click="handleClickEvent"
   >
-    <div :class="configuration.classesList.container">
+    <div
+      :class="configuration.classesList.container"
+    >
       <slot name="default">
         <!-- Loading Icon -->
         <span v-if="loading">

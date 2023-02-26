@@ -1,4 +1,4 @@
-import type { NormalizedOption, NormalizedOptions } from '@/core/types'
+import type { NormalizedOption, NormalizedOptions } from '../types'
 
 const flattenOptions = (options: NormalizedOptions): NormalizedOptions => options.flatMap((option: NormalizedOption) => {
   if (option.children) {

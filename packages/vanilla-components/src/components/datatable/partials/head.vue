@@ -4,9 +4,9 @@ import { ref, watch } from 'vue'
 import find from 'lodash/find'
 import findIndex from 'lodash/findIndex'
 import type * as Types from '../config'
-import { useInjectsClassesList } from '@/core/use'
-import ChevronDownIcon from '@/components/icons/hero/solid/ChevronDownIcon.vue'
-import ChevronUpIcon from '@/components/icons/hero/solid/ChevronUpIcon.vue'
+import { useInjectsClassesList } from '../../../core/use'
+import ChevronDownIcon from '../../icons/hero/solid/ChevronDownIcon.vue'
+import ChevronUpIcon from '../../icons/hero/solid/ChevronUpIcon.vue'
 
 const props = defineProps({
   columns: {

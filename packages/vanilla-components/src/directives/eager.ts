@@ -1,4 +1,4 @@
-import { isServer } from '@/core/helpers'
+import { isServer } from '../core/helpers'
 
 function event(name: string) {
   if (isServer()) {

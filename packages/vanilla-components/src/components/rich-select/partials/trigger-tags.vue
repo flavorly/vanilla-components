@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import type { ComputedRef } from 'vue'
 import { inject } from 'vue'
+import type { NormalizedOption } from '../../../core/types'
+import { useInjectsClassesListClass } from '../../../core/use'
 import SelectTriggerTagsTag from './trigger-tags-tag.vue'
-import type { NormalizedOption } from '@/core/types'
-import { useInjectsClassesListClass } from '@/core/use'
 
 const selectedOptions = inject<ComputedRef<NormalizedOption[]>>('selectedOption')!
 const className = useInjectsClassesListClass('tagsWrapper')!

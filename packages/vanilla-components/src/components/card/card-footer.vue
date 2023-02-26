@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { useInjectsClassesList } from '@/core/use'
+import { useInjectsClassesList } from '../../core/use'
 
 const props = defineProps({
   columns: {

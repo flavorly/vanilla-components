@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "module": "esnext",
+    "lib": ["esnext", "dom", "dom.iterable"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": false,
+    "strictNullChecks": true,
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+    "paths": {
+      "@flavorly/vanilla-components": ["./packages/vanilla-components/src/index.ts"],
+      "@flavorly/vanilla-components-hybridly": ["./packages/vanilla-components-hybridly/src/index.ts"],
+      "@flavorly/vanilla-components-inertia": ["./packages/vanilla-components-inertia/src/index.ts"]
+    },
+    "include": [
+        "documentation/**/*",
+        "packages/**/*"
+    ],
+    "types": [
+      "vite/client",
+      "node",
+      "unplugin-vue-macros/define-options"
+    ]
+  },
+  "exclude": [
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
+}

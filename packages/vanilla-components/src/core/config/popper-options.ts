@@ -1,5 +1,5 @@
 import type { Modifier, ModifierArguments } from '@popperjs/core'
-import type { Data } from '@/core/types'
+import type { Data } from '../types'
 
 const popperOptions = {
   placement: 'bottom-end',
@@ -12,6 +12,8 @@ const popperOptions = {
     },
   ],
   strategy: 'absolute',
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   onFirstUpdate: undefined,
 }
 

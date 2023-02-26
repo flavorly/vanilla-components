@@ -34,52 +34,21 @@
     "dist"
   ],
   "types": "./dist/index.d.ts",
-  "main": "./dist/vanilla-components-hybridly.umd.js",
-  "module": "./dist/vanilla-components-hybridly.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "import": "./dist/vanilla-components-hybridly.es.js",
-      "require": "./dist/vanilla-components-hybridly.umd.js"
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
     }
   },
   "scripts": {
-    "build": "vite build",
-    "build:watch": "vite build --watch",
-    "lib:publish": "pnpm publish",
-    "lint": "eslint --ext .js,.vue --ignore-path ../../.gitignore --fix packages/src",
-    "format": "prettier ../..  --write"
+    "build": "unbuild",
+    "stub": "unbuild --stub"
   },
   "dependencies": {
     "@flavorly/vanilla-components": "workspace:*",
     "hybridly": "0.0.1-alpha.22"
-  },
-  "peerDependencies": {
-    "@flavorly/vanilla-components": "workspace:*",
-    "hybridly": "0.0.1-alpha.22"
-  },
-  "devDependencies": {
-    "@antfu/eslint-config": "^0.34.0",
-    "@antfu/ni": "^0.19.0",
-    "@rollup/plugin-typescript": "^11.0.0",
-    "@types/lodash": "^4.14.189",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
-    "bumpp": "^8.2.1",
-    "eslint": "^8.27.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.2",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-tree-shaking": "^1.10.0",
-    "eslint-plugin-unicorn": "^45.0.0",
-    "eslint-plugin-vue": "^9.7.0",
-    "pnpm": "^7.16.0",
-    "prettier": "^2.7.1",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-visualizer": "^5.8.3",
-    "typescript": "^4.8.4",
-    "vite": "^4.1.1",
-    "vite-plugin-dts": "^1.7.1"
   }
 }

@@ -1,7 +1,9 @@
+import merge from 'lodash/merge'
 import type { ComponentsConfiguration } from './core/types'
-import * as Components from '@/components'
+import * as Components from './components'
 
 export const defaultConfiguration = {
+  Alert: Components.alertConfig,
   Avatar: Components.avatarConfig,
   Button: Components.buttonConfig,
   Card: Components.cardConfig,
@@ -35,7 +37,14 @@ export const defaultConfiguration = {
 export const mergeConfiguration = (userConfiguration: ComponentsConfiguration = {}) => {
     // Merge Vanilla Components Configuration with the user configuration
     // Return Both Merged Configuration
-    return Object.assign(defaultConfiguration, userConfiguration)
+    return merge(defaultConfiguration, userConfiguration)
 }
 
-export default mergeConfiguration
+export const defineConfiguration = (userConfiguration: ComponentsConfiguration = {}, preset: ComponentsConfiguration | undefined = {}) => {
+    // Merge Vanilla Components Configuration with the user configuration
+    // Return Both Merged Configuration
+    if (preset) {
+      return merge(preset, userConfiguration)
+    }
+    return merge(defaultConfiguration, userConfiguration)
+}

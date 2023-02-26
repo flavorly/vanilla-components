@@ -1,6 +1,6 @@
 import type { PropType } from 'vue'
-import type { CSSRawClassesList, ComponentProps, Data, ElementPosition, VariantsWithClassesList } from '@/core/types'
-import { useDefaultName } from '@/core/use/index'
+import type { CSSRawClassesList, ComponentProps, Data, ElementPosition, VariantsWithClassesList } from '../types'
+import { useDefaultName } from '../use/index'
 
 const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends string>(): ComponentProps<ClassesKeys> => ({
   classes: {
@@ -37,7 +37,6 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
     },
   },
   autocomplete: {
-    type: [String, Boolean] as PropType<string | boolean>,
     required: false,
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error

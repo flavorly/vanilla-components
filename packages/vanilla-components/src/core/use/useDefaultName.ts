@@ -1,6 +1,6 @@
 import { getCurrentInstance } from 'vue'
-import { uniqueId } from '@/core/helpers'
-import type { Data } from '@/core/types'
+import { uniqueId } from '../helpers'
+import type { Data } from '../types'
 
 /**
  * Attempts to set the child name default based on parent label / name

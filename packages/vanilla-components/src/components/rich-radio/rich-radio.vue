@@ -2,13 +2,13 @@
 import type { PropType } from 'vue'
 import { RadioGroup, RadioGroupOption } from '@headlessui/vue'
 import RichRadioOption from '../rich-radio-option/rich-radio-option.vue'
+import type { InputOptions } from '../../core/types'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import { normalizeOptions } from '../../core/helpers'
+import FormErrors from '../forms/form-errors.vue'
+import FormFeedback from '../forms/form-feedback.vue'
 import { richRadioConfig } from './config'
 import type { RichRadioClassesValidKeys, RichRadioProps, RichRadioValue } from './config'
-import FormErrors from '@/components/forms/form-errors.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
-import type { InputOptions } from '@/core/types'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import { normalizeOptions } from '@/core/helpers'
 
 const props = defineProps({
   ...useVariantProps<RichRadioProps, RichRadioClassesValidKeys>(),

@@ -2,13 +2,13 @@
 import { defineComponent } from 'vue'
 import { DatePicker } from '@flavorly/v-calendar'
 import ClearButton from '../rich-select/partials/clear-button.vue'
+import { get } from '../../core/helpers'
+import { useConfiguration, useVModel } from '../../core/use'
+import VanillaInput from '../input/input.vue'
+import ClientOnly from '../misc/client-only.vue'
 import { baseProps } from './baseProps'
 import type { DateTimeInputProps } from './config'
 import { dateTimeInputConfig } from './config'
-import VanillaInput from '@/components/input/input.vue'
-import { get } from '@/core/helpers'
-import { useConfiguration, useVModel } from '@/core/use'
-import ClientOnly from '@/components/misc/client-only.vue'
 
 const props = defineProps(baseProps)
 const localValue = useVModel(props, 'modelValue')

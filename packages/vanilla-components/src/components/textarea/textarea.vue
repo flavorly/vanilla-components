@@ -2,15 +2,15 @@
 import type { PropType } from 'vue'
 import { ref } from 'vue'
 import { useClipboard } from '@vueuse/core'
-import { textareaConfig } from './config'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import { hasSlot } from '../../core/helpers'
+import FormErrors from '../forms/form-errors.vue'
+import FormFeedback from '../forms/form-feedback.vue'
+import ExclamationCircleIcon from '../icons/hero/solid/ExclamationCircleIcon.vue'
+import ClipboardIcon from '../icons/hero/outline/ClipboardIcon.vue'
+import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
 import type { TextareaClassesValidKeys, TextareaProps, TextareaValue } from './config'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import { hasSlot } from '@/core/helpers'
-import FormErrors from '@/components/forms/form-errors.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
-import ExclamationCircleIcon from '@/components/icons/hero/solid/ExclamationCircleIcon.vue'
-import ClipboardIcon from '@/components/icons/hero/outline/ClipboardIcon.vue'
-import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
+import { textareaConfig } from './config'
 
 const props = defineProps({
   ...useVariantProps<TextareaProps, TextareaClassesValidKeys>(),

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { useInjectDatatableConfiguration, useInjectDatatableTranslations } from '../utils'
-import { useInjectsClassesList, useReplacePlaceholders } from '@/core/use'
+import { useInjectsClassesList, useReplacePlaceholders } from '../../../core/use'
 
 const props = defineProps({
   isAllSelected: {

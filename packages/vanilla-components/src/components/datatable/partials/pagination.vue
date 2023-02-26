@@ -3,10 +3,10 @@ import type { PropType } from 'vue'
 import { computed } from 'vue'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
-import ChevronLeftIcon from '@/components/icons/hero/solid/ChevronLeftIcon.vue'
-import ChevronRightIcon from '@/components/icons/hero/solid/ChevronRightIcon.vue'
-import { useInjectsClassesList, useReplacePlaceholders } from '@/core/use'
-import Button from '@/components/button/button.vue'
+import { useInjectsClassesList, useReplacePlaceholders } from '../../../core/use'
+import ChevronLeftIcon from '../../icons/hero/solid/ChevronLeftIcon.vue'
+import ChevronRightIcon from '../../icons/hero/solid/ChevronRightIcon.vue'
+import Button from '../../button/button.vue'
 
 const props = defineProps({
   isFetching: {

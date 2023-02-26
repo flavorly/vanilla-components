@@ -1,4 +1,5 @@
 import type { ComponentPropsOptions, PropType } from 'vue'
+import type * as Components from '../../components'
 import type {
   CSSRawClassesList,
   Data,
@@ -6,12 +7,12 @@ import type {
   VariantsWithClassesList,
   WithVariantPropsAndClassesList,
 } from './index'
-import type * as Components from '@/components'
 
 /**
  * Stores the Type for all components available in project
  */
 interface ComponentsConfiguration {
+  Alert?: Components.AlertProps
   Avatar?: Components.AvatarProps
   Button?: Components.ButtonProps
   Card?: Components.CardProps

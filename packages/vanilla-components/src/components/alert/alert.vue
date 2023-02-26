@@ -1,15 +1,15 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { onMounted } from 'vue'
-import type { AlertClassesValidKeys, AlertProps } from './config'
+import { hasSlot } from '../../core/helpers'
+import { useConfiguration, useVariantProps } from '../../core/use'
+import XCircleIcon from '../icons/hero/solid/XCircleIcon.vue'
+import CheckCircleIcon from '../icons/hero/solid/CheckCircleIcon.vue'
+import ExclamationTriangleIcon from '../icons/hero/solid/ExclamationTriangleIcon.vue'
+import InformationCircleIcon from '../icons/hero/solid/InformationCircleIcon.vue'
+import XMarkIcon from '../icons/hero/outline/XMarkIcon.vue'
 import { alertConfig } from './config'
-import { hasSlot } from '@/core/helpers'
-import { useConfiguration, useVariantProps } from '@/core/use'
-import XCircleIcon from '@/components/icons/hero/solid/XCircleIcon.vue'
-import CheckCircleIcon from '@/components/icons/hero/solid/CheckCircleIcon.vue'
-import ExclamationTriangleIcon from '@/components/icons/hero/solid/ExclamationTriangleIcon.vue'
-import InformationCircleIcon from '@/components/icons/hero/solid/InformationCircleIcon.vue'
-import XMarkIcon from '@/components/icons/hero/outline/XMarkIcon.vue'
+import type { AlertClassesValidKeys, AlertProps } from './config'
 
 const props = defineProps({
   ...useVariantProps<AlertProps, AlertClassesValidKeys>(),
@@ -28,6 +28,10 @@ const props = defineProps({
   closeAfter: {
     type: [Number] as PropType<number>,
     default: undefined,
+  },
+  dismissLabel: {
+    type: [String] as PropType<string>,
+    default: 'Dismiss',
   },
 })
 
@@ -116,7 +120,7 @@ onMounted(() => {
               :class="configuration.classesList.closeButton"
               @click="close"
             >
-              <span class="sr-only">Dismiss</span>
+              <span class="sr-only">{{ props.dismissLabel }}</span>
 
               <XMarkIcon
                 :class="configuration.classesList.closeButtonIcon"

@@ -1,5 +1,5 @@
 import type { InputHTMLAttributes } from 'vue'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 const defaultCard = {
   card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-800/70 dark:text-white dark:shadow-dark-xl dark:border dark:border-white/10',

@@ -5,18 +5,18 @@ import type { Options, Placement, Instance as PopperInstance } from '@popperjs/c
 import { createPopper as createPopperBase } from '@popperjs/core'
 import { onClickOutside, refThrottled, useFocus } from '@vueuse/core'
 import { useFocusTrap } from '@vueuse/integrations/useFocusTrap'
-import { dropdownConfig, dropdownPopperDefaultOptions, validDropdownPlacements } from './config'
-import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import Transitionable from '@/components/misc/transitionable.vue'
-import type { DebouncedFn } from '@/core/types'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import type { DebouncedFn } from '../../core/types'
 import {
   debounce,
   elementIsTargetOrTargetChild,
   getFocusableElements,
   isTouchOnlyDevice as getIsTouch,
   isServer,
-} from '@/core/helpers'
+} from '../../core/helpers'
+import Transitionable from '../misc/transitionable.vue'
+import { dropdownConfig, dropdownPopperDefaultOptions, validDropdownPlacements } from './config'
+import type { DropdownClassesValidKeys, DropdownExtendedProps } from './config'
 
 /* eslint @typescript-eslint/no-use-before-define: ["off"] */
 
@@ -113,8 +113,8 @@ const { configuration, attributes } = useConfiguration<DropdownExtendedProps>(dr
 
 // Refs
 const isTouchOnlyDevice = ref<boolean>(false)
-const originalShown = ref<boolean>(configuration.show)
-const shown = refThrottled<boolean>(originalShown, 1000)
+const originalShown = ref<boolean | undefined>(configuration.show)
+const shown = refThrottled<boolean | undefined>(originalShown, 1000)
 const initAsShow = ref<boolean | undefined>(configuration.show)
 const hideTimeout = ref<ReturnType<typeof setTimeout> | null>(null)
 const focusableElements = ref<Array<HTMLElement>>([])

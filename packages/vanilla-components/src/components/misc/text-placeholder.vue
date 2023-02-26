@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useInjectsClassesListClass } from '@/core/use'
+import { useInjectsClassesListClass } from '../../core/use'
 
 const props = defineProps({
   classProperty: {

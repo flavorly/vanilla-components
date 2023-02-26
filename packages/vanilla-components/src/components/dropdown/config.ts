@@ -1,8 +1,8 @@
 import type { Options, Placement } from '@popperjs/core'
 import type { InputHTMLAttributes } from 'vue'
-import { commonClasses, popperOptions } from '@/core/config'
-import { mergeClasses } from '@/core/helpers'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import { commonClasses, popperOptions } from '../../core/config'
+import { mergeClasses } from '../../core/helpers'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const dropdownConfig = {
   fixedClasses: {

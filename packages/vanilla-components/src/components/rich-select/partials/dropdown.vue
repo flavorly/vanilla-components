@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import type { ComputedRef } from 'vue'
 import { inject, ref } from 'vue'
+import { useInjectsClassesListClass, useInjectsConfiguration } from '../../../core/use'
+import type { NormalizedOptions } from '../../../core/types'
+import type { RichSelectProps } from '../config'
 import OptionsList from './option-list.vue'
 import SearchInput from './search.vue'
 import SelectState from './state.vue'
-import { useInjectsClassesListClass, useInjectsConfiguration } from '@/core/use'
-import type { NormalizedOptions } from '@/core/types'
-import type { RichSelectProps } from '@/components/rich-select/config'
 
 const root = ref()
 const searchInput = ref()

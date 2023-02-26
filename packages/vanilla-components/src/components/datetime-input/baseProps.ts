@@ -1,5 +1,5 @@
+import { useVariantProps } from '../../core/use'
 import type { DateTimeInputClassesValidKeys, DateTimeInputProps } from './config'
-import { useVariantProps } from '@/core/use'
 
 export const baseProps = {
   ...useVariantProps<DateTimeInputProps, DateTimeInputClassesValidKeys>(),

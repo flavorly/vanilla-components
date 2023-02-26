@@ -2,7 +2,7 @@
 import type { ComputedRef, Ref } from 'vue'
 import { inject, nextTick, onMounted, ref, watch } from 'vue'
 import type { RichSelectProps } from '../config'
-import { useInjectsClassesList, useInjectsConfiguration } from '@/core/use'
+import { useInjectsClassesList, useInjectsConfiguration } from '../../../core/use'
 
 const search = ref<HTMLInputElement>()
 const shown = inject<ComputedRef<boolean>>('shown')!

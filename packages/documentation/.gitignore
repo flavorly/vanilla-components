@@ -1,6 +1,0 @@
-node_modules
-.vitepress/dist
-.vitepress/index/lunr.cjs
-src/.vite-inspect
-yarn.lock
-pnpm.lock.yaml

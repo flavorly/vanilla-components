@@ -1,8 +1,8 @@
 import type { ComputedRef } from 'vue'
 import { computed } from 'vue'
-import type { CssClass } from '@/core/types'
-import { useInjectsConfiguration } from '@/core/use'
-import { get } from '@/core/helpers'
+import type { CssClass } from '../types'
+import { useInjectsConfiguration } from '../use'
+import { get } from '../helpers'
 
 export default function useInjectsClassesListClass(property: string): ComputedRef<CssClass> {
   const configuration = useInjectsConfiguration()

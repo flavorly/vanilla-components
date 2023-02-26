@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useInjectsClassesListClass } from '@/core/use'
-import CloseIcon from '@/components/icons/close.vue'
+import { useInjectsClassesListClass } from '../../../core/use'
+import CloseIcon from '../../icons/close.vue'
 const className = useInjectsClassesListClass('clearButton')
 const iconClassName = useInjectsClassesListClass('clearButtonIcon')
 </script>

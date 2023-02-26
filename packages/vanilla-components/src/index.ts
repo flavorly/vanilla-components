@@ -1,5 +1,3 @@
-import { useConfiguration } from '@/core/use'
-
 export { default as Alert, default as VanillaAlert } from './components/alert/alert.vue'
 
 export { default as Avatar, default as VanillaAvatar } from './components/avatar/avatar.vue'
@@ -102,5 +100,7 @@ export {
 
 export {
   defaultConfiguration,
+  mergeConfiguration,
+  defineConfiguration,
 } from './configuration'
 

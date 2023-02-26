@@ -2,11 +2,11 @@
 import type { PropType } from 'vue'
 import { nextTick, ref } from 'vue'
 import { useInjectDatatableTranslations } from '../utils'
-import UFOIcon from '@/components/icons/ufo.vue'
-import RadarIcon from '@/components/icons/RadarIcon.vue'
-import EmptyIcon from '@/components/icons/hero/outline/FunnelIcon.vue'
-import Button from '@/components/button/button.vue'
-import { useInjectsClassesList } from '@/core/use'
+import { useInjectsClassesList } from '../../../core/use'
+import UFOIcon from '../../icons/ufo.vue'
+import RadarIcon from '../../icons/RadarIcon.vue'
+import EmptyIcon from '../../icons/hero/outline/FunnelIcon.vue'
+import Button from '../../button/button.vue'
 
 const props = defineProps({
   hasFiltersOrSearch: {

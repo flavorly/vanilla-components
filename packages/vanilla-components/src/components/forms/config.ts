@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
-import { commonClasses } from '@/core/config'
-import { mergeClasses } from '@/core/helpers'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import { commonClasses } from '../../core/config'
+import { mergeClasses } from '../../core/helpers'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const formsConfig = {
   fixedClasses: {
@@ -18,7 +18,7 @@ export const formsConfig = {
   classes: {
     label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1',
     errors: mergeClasses('mt-2 text-xs', commonClasses.inputsErrorText),
-    feedback: 'mt-2 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer text-left',
+    feedback: 'mt-2 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer',
     section: '',
     sectionDivided: 'divide-y divide-gray-200 dark:divide-gray-700',
     sectionSpaced: 'space-y-2',

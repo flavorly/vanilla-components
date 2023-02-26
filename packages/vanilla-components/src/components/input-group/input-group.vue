@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import Fuse from 'fuse.js'
-import type { InputGroupClassesValidKeys, InputGroupProps } from './config'
+import { useConfiguration, useVariantProps } from '../../core/use'
+import { hasSlot } from '../../core/helpers'
+import FormErrors from '../forms/form-errors.vue'
+import FormFeedback from '../forms/form-feedback.vue'
+import FormLabel from '../forms/form-label.vue'
 import { inputGroupConfig } from './config'
-import { useConfiguration, useVariantProps } from '@/core/use'
-import { hasSlot } from '@/core/helpers'
-import FormErrors from '@/components/forms/form-errors.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
-import FormLabel from '@/components/forms/form-label.vue'
+import type { InputGroupClassesValidKeys, InputGroupProps } from './config'
 const props = defineProps({
   ...useVariantProps<InputGroupProps, InputGroupClassesValidKeys>(),
   errors: {

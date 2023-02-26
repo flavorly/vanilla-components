@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
-import { mergeClasses } from '@/core/helpers'
-import { commonClasses } from '@/core/config'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import { mergeClasses } from '../../core/helpers'
+import { commonClasses } from '../../core/config'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const buttonConfig = {
   fixedClasses: {
@@ -27,7 +27,7 @@ export const buttonConfig = {
       commonClasses.buttonSpacing,
       commonClasses.buttonShadow,
       'focus:ring-primary-600',
-      'text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white',
+      'text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white dark:focus:text-white',
       'bg-white dark:bg-gray-800',
       'border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600',
     ),

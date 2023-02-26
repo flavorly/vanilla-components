@@ -8,11 +8,11 @@ import {
     Dialog as HeadlessDialog,
     TransitionChild, TransitionRoot,
 } from '@headlessui/vue'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import { hasSlot } from '../../core/helpers'
 import DialogFooter from './partials/footer.vue'
 import type { DialogClassesValidKeys, DialogProps } from './config'
 import { dialogConfig } from './config'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import { hasSlot } from '@/core/helpers'
 
 const props = defineProps({
   ...useVariantProps<DialogProps, DialogClassesValidKeys>(),

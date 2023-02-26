@@ -5,15 +5,15 @@ import find from 'lodash/find'
 import { useClipboard } from '@vueuse/core'
 import type * as Types from '../config'
 import { useInjectDatatableTranslations } from '../utils'
-import Button from '@/components/button/button.vue'
-import { useInjectsClassesList } from '@/core/use'
-import { Base64, isEqual, isServer, urlHelper } from '@/core/helpers'
-import TrashIcon from '@/components/icons/hero/outline/TrashIcon.vue'
-import Dialog from '@/components/dialog/dialog.vue'
-import InputGroup from '@/components/input-group/input-group.vue'
-import FormSection from '@/components/forms/form-section.vue'
-import ClipboardIcon from '@/components/icons/hero/outline/ClipboardIcon.vue'
-import CheckIcon from '@/components/icons/hero/solid/CheckIcon.vue'
+import { useInjectsClassesList } from '../../../core/use'
+import { Base64, isEqual, isServer, urlHelper } from '../../../core/helpers'
+import Button from '../../button/button.vue'
+import TrashIcon from '../../icons/hero/outline/TrashIcon.vue'
+import Dialog from '../../dialog/dialog.vue'
+import InputGroup from '../../input-group/input-group.vue'
+import FormSection from '../../forms/form-section.vue'
+import ClipboardIcon from '../../icons/hero/outline/ClipboardIcon.vue'
+import CheckIcon from '../../icons/hero/solid/CheckIcon.vue'
 
 const props = defineProps({
   filters: {
@@ -36,13 +36,13 @@ const emit = defineEmits([
 ])
 
 // Components Async
-const Select = defineAsyncComponent(() => import('@/components/select/select.vue'))
-const RichSelect = defineAsyncComponent(() => import('@/components/rich-select/rich-select.vue'))
-const Checkbox = defineAsyncComponent(() => import('@/components/checkbox/checkbox.vue'))
-const Toggle = defineAsyncComponent(() => import('@/components/toggle/toggle.vue'))
-const VanillaInput = defineAsyncComponent(() => import('@/components/input/input.vue'))
-const Textarea = defineAsyncComponent(() => import('@/components/textarea/textarea.vue'))
-const DateTimeInput = defineAsyncComponent(() => import('@/components/datetime-input/datetime-input.vue'))
+const Select = defineAsyncComponent(() => import('../../select/select.vue'))
+const RichSelect = defineAsyncComponent(() => import('../../rich-select/rich-select.vue'))
+const Checkbox = defineAsyncComponent(() => import('../../checkbox/checkbox.vue'))
+const Toggle = defineAsyncComponent(() => import('../../toggle/toggle.vue'))
+const VanillaInput = defineAsyncComponent(() => import('../../input/input.vue'))
+const Textarea = defineAsyncComponent(() => import('../../textarea/textarea.vue'))
+const DateTimeInput = defineAsyncComponent(() => import('../../datetime-input/datetime-input.vue'))
 
 const isOpen = ref(false) as Ref<boolean>
 const localFilters = ref({}) as Ref<Types.DatatableSavedFilter>

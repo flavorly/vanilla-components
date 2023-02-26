@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes } from 'vue'
-import type { Data, InputOptions, NormalizedOption, NormalizedOptions, WithVariantPropsAndClassesList } from '@/core/types'
-import { mergeClasses } from '@/core/helpers'
+import type { Data, InputOptions, NormalizedOption, NormalizedOptions, WithVariantPropsAndClassesList } from '../../core/types'
+import { mergeClasses } from '../../core/helpers'
 
 export const datatableConfig = {
   fixedClasses: {},

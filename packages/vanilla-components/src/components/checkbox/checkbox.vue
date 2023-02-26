@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed } from 'vue'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import FormErrors from '../forms/form-errors.vue'
+import FormFeedback from '../forms/form-feedback.vue'
 import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
 import { checkboxConfig } from './config'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import FormErrors from '@/components/forms/form-errors.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
 
 const props = defineProps({
   ...useVariantProps<CheckboxProps, CheckboxClassesValidKeys>(),

@@ -6,15 +6,15 @@
   import type { Instance as PopperInstance } from '@popperjs/core/lib/types'
   import { Menu as HeadlessMenu, MenuButton, MenuItems } from '@headlessui/vue'
   import { onClickOutside } from '@vueuse/core'
+  import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+  import { throttle } from '../../core/helpers'
+  import { validPlacements } from '../../core/config'
+
+  import Button from '../button/button.vue'
+  import Transitionable from '../misc/transitionable.vue'
+  import ChevronDownIcon from '../icons/hero/solid/ChevronDownIcon.vue'
   import { dropdownConfig, dropdownPopperDefaultOptions } from './config'
   import type { DropdownClassesValidKeys, DropdownProps } from './config'
-  import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-  import { throttle } from '@/core/helpers'
-  import { validPlacements } from '@/core/config'
-
-  import Button from '@/components/button/button.vue'
-  import Transitionable from '@/components/misc/transitionable.vue'
-  import ChevronDownIcon from '@/components/icons/hero/solid/ChevronDownIcon.vue'
 
   const props = defineProps({
     ...useVariantProps<DropdownProps, DropdownClassesValidKeys>(),

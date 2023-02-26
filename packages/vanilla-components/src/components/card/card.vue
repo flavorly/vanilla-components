@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { provide } from 'vue'
+import { hasSlot } from '../../core/helpers'
+import { useConfiguration, useVariantProps } from '../../core/use'
 import Footer from './card-footer.vue'
 import type { CardClassesValidKeys, CardProps } from './config'
 import { cardConfig } from './config'
-import { hasSlot } from '@/core/helpers'
-import { useConfiguration, useVariantProps } from '@/core/use'
 
 const props = defineProps({
   ...useVariantProps<CardProps, CardClassesValidKeys>(),
@@ -55,7 +55,7 @@ defineOptions({
     v-bind="$attrs"
   >
     <div
-      v-if="hasSlot($slots.title) || hasSlot($slots.subtitle) || hasSlot($slots.actions) || title !== '' || subtitle !== ''"
+      v-if="hasSlot($slots.title) || hasSlot($slots.subtitle) || hasSlot($slots.actions) || props.title || props.subtitle"
       :class="[
         configuration.classesList.header,
       ]"

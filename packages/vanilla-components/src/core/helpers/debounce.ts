@@ -1,4 +1,4 @@
-import type { DebounceFn, DebouncedFn } from '@/core/types'
+import type { DebounceFn, DebouncedFn } from '../types'
 
 const debounce = (func: (...args: any[]) => void, wait = 200): DebouncedFn => {
   let timeout: ReturnType<typeof setTimeout> | undefined

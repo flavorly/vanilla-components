@@ -1,6 +1,6 @@
 import type * as Types from '../config'
+import type { Data } from '../../../core/types'
 import useFetchData from './fetch-data'
-import type { Data } from '@/core/types'
 
 export default function configurationBuilder<
   Props extends Types.DatatableConfiguration | Data,

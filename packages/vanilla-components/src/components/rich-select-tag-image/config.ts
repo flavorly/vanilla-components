@@ -1,6 +1,6 @@
 import type { InputHTMLAttributes } from 'vue'
-import { commonClasses } from '@/core/config'
-import type { Data, WithVariantPropsAndClassesList } from '@/core/types'
+import { commonClasses } from '../../core/config'
+import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const richSelectTagWithImageConfig = {
   classes: {

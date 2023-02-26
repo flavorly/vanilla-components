@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed, ref } from 'vue'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
+import VanillaCheckedIcon from '../icons/checked.vue'
+import VanillaUncheckedIcon from '../icons/unchecked.vue'
 import type { ToggleClassesValidKeys, ToggleProps, ToggleValue } from './config'
 import { toggleConfig } from './config'
-import { useConfiguration, useVModel, useVariantProps } from '@/core/use'
-import VanillaCheckedIcon from '@/components/icons/checked.vue'
-import VanillaUncheckedIcon from '@/components/icons/unchecked.vue'
 
 const props = defineProps({
   ...useVariantProps<ToggleProps, ToggleClassesValidKeys>(),

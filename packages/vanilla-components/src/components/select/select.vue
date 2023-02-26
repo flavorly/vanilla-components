@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { computed, provide, ref } from 'vue'
+import { useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '../../core/use'
+import type { InputOptions, NormalizedOption } from '../../core/types'
+import FormErrors from '../forms/form-errors.vue'
+import FormFeedback from '../forms/form-feedback.vue'
 import type { SelectClassesValidKeys, SelectProps, SelectValue } from './config'
 import SelectOption from './option.vue'
 import { selectConfig } from './config'
-import { useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '@/core/use'
-import FormErrors from '@/components/forms/form-errors.vue'
-import FormFeedback from '@/components/forms/form-feedback.vue'
-import type { InputOptions, NormalizedOption } from '@/core/types'
 
 const props = defineProps({
   ...useVariantProps<SelectProps, SelectClassesValidKeys>(),

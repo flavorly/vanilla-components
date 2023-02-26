@@ -1,4 +1,4 @@
-import type { InputOptions, NormalizedOption, NormalizedOptions, ObjectWithProperties, WithVariantPropsAndClassesList } from '@/core/types'
+import type { InputOptions, NormalizedOption, NormalizedOptions, ObjectWithProperties, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const richRadioConfig = {
   fixedClasses: {

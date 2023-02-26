@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { camelize, computed, onMounted, onUnmounted, provide, reactive, ref, toRaw, unref, watch } from 'vue'
-import { useLocalStorage, useSessionStorage } from '@vueuse/core'
+import { camelize, computed, onMounted, onUnmounted, provide, reactive, ref, watch } from 'vue'
+import { useLocalStorage } from '@vueuse/core'
 
 // Lodash
 import each from 'lodash/each'
@@ -12,6 +12,18 @@ import omit from 'lodash/omit'
 import debounce from 'lodash/debounce'
 
 // Partials
+import type { CSSClassesList, NormalizedOption } from '../../core/types'
+import { useConfiguration, useDynamicSlots, useVariantProps } from '../../core/use'
+import { get, isServer } from '../../core/helpers'
+import Button from '../button/button.vue'
+import ArrowPathIcon from '../icons/hero/outline/ArrowPathIcon.vue'
+import FunnelIcon from '../icons/hero/outline/FunnelIcon.vue'
+import CogIcon from '../icons/hero/solid/CogIcon.vue'
+import SearchIcon from '../icons/hero/solid/MagnifyingGlassIcon.vue'
+import EllipsisVerticalIcon from '../icons/hero/solid/EllipsisVerticalIcon.vue'
+import DropdownOption from '../dropdown/dropdown-option.vue'
+import Dropdown from '../dropdown/dropdown-menu.vue'
+import Card from '../card/card.vue'
 import TableHead from './partials/head.vue'
 import RowSkeleton from './partials/row-skeleton.vue'
 import Search from './partials/search-bar.vue'
@@ -29,19 +41,6 @@ import { datatableConfig } from './config'
 import type * as Types from './config'
 
 // Other Components
-import Button from '@/components/button/button.vue'
-import ArrowPathIcon from '@/components/icons/hero/outline/ArrowPathIcon.vue'
-import FunnelIcon from '@/components/icons/hero/outline/FunnelIcon.vue'
-import CogIcon from '@/components/icons/hero/solid/CogIcon.vue'
-import SearchIcon from '@/components/icons/hero/solid/MagnifyingGlassIcon.vue'
-import EllipsisVerticalIcon from '@/components/icons/hero/solid/EllipsisVerticalIcon.vue'
-import DropdownOption from '@/components/dropdown/dropdown-option.vue'
-import Dropdown from '@/components/dropdown/dropdown-menu.vue'
-import Card from '@/components/card/card.vue'
-
-import type { CSSClassesList, NormalizedOption } from '@/core/types'
-import { useConfiguration, useDynamicSlots, useVariantProps } from '@/core/use'
-import { get, isServer } from '@/core/helpers'
 
 const props = defineProps({
   ...useVariantProps<Types.DatatableProps, Types.DatatableClassesValidKeys>(),
@@ -178,7 +177,7 @@ const currentPageIds = computed(() => results.data?.map(item => item.id) || []) 
 /** Result Hash */
 const resultsHash = computed(() => JSON.stringify(results.data)) as Ref<string>
 
-const hasResults = computed(() => results.data !== null && results.data.length > 0)
+const hasResults = computed(() => typeof results.data !== 'undefined' && results.data.length > 0)
 
 /** If there is currently selected items on the config */
 const hasAnyItemsSelected = computed(() => queryData.selectedAll || queryData.selected.length > 0) as Ref<boolean>
@@ -1153,7 +1152,7 @@ defineOptions({
           ((hasAnyItemsSelected && hasActions || filtersActiveCount > 0)) ? classesList.tableContainerBorder : '',
         ]"
       >
-        <template v-if="!showBeInLoadingState && results.data.length <= 0 ">
+        <template v-if="!showBeInLoadingState && !hasResults ">
           <EmptyState
             :has-filters-or-search="hasFiltersOrSearchApplied"
             :is-fetching="isFetching"
@@ -1254,12 +1253,12 @@ defineOptions({
                 isFetching,
                 showBeInLoadingState,
                 columnsCount: visibleColumnsCount,
-                rowsCount: results.data.length || queryData.perPage,
+                rowsCount: results.data?.length || queryData.perPage,
               }"
             >
               <RowSkeleton
                 :columns="columnsComputed"
-                :number-of-rows="results.data.length || queryData.perPage"
+                :number-of-rows="results.data?.length || queryData.perPage"
                 :is-selectable="datatable.options.selectable"
               />
             </slot>
@@ -1323,7 +1322,7 @@ defineOptions({
                       }"
                     >
                       <div
-                        :class="configuration.classesList.skeletonPlaceholder"
+                        :class="classesList.skeletonPlaceholder"
                       >
                         <span class="opacity-0">
                           {{ get(result, column.name) }}
