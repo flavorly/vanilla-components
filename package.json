@@ -10,7 +10,7 @@
     "docs:dev": "vitepress dev documentation",
     "docs:build": "vitepress build documentation",
     "docs:index:fresh": "rm -f documentation/.vitepress/lunr/lunr.cjs && cp documentation/.vitepress/lunr/lunr.stub.cjs documentation/.vitepress/lunr/lunr.cjs",
-    "docs:index:build": "rm -f documentation/.vitepress/lunr/lunr.cjs && cp documentation/.vitepress/lunr/lunr.stub.cjs documentation/.vitepress/lunr/lunr.cjs && vitepress build documentation && node ./build/lunr.cjs"
+    "docs:index:build": "rm -f documentation/.vitepress/lunr/lunr.cjs && cp documentation/.vitepress/lunr/lunr.stub.cjs documentation/.vitepress/lunr/lunr.cjs && vitepress build documentation && node ./build/lunr.cjs && vitepress build documentation"
   },
   "keywords": [],
   "author": "",

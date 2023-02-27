@@ -50,7 +50,7 @@ After the commands you should have a local vite server up & running.
 
 ```bash
 pnpm install
-pnpm build
+pnpm -r build
 pnpm docs:dev
 ```
 
@@ -59,7 +59,7 @@ To start fresh, simply run the following commands
 ```bash
 pnpm clean
 pnpm install
-pnpm build
+pnpm -r build
 pnpm docs:dev
 ```
 
@@ -69,9 +69,7 @@ Lunr replaces the default Vitepress Algolia Search
 To get the project index correctly do the following:
 
 ```
-pnpm lunr:start
-pnpm build ( optional if already built )
-pnpm lunr:index
+pnpm docs:index:build
 ```
 
 ## Credits
@@ -79,7 +77,8 @@ pnpm lunr:index
 Thanks to: 
 - [VariantJS](https://github.com/variantjs/vue) - Base Inspiration & Code - Thanks to Alfonsobries
 - [VueUse](https://github.com/vueuse/vueuse) - How we could we not credit this?
-- [RobertBoes] - For all the time helping with Troubleshooting
+- [RobertBoes](https://github.com/RobertBoes) - For all the time helping with Troubleshooting
+- [Enzo Innocenzi](https://github.com/innocenzi) - For the inspiration & help!
 - All my friends, that could stay online while i was whispering all day long! 
 
 ## Contribution

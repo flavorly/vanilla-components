@@ -15,7 +15,7 @@ To develop and test `vanilla-components` package:
 
 1. Run `pnpm install` in `vanilla-components`'s root folder
 
-2. Run `pnpm build` or `pnpm docs:dev` to build the library for the first time
+2. Run `pnpm -r build` or `pnpm docs:dev` to build the library for the first time
 
 3. Run `pnpm docs:dev` to run the Vitepress instance and check the documentation and toy around with the components
 
@@ -42,8 +42,11 @@ And re-run `pnpm install` to link the package.
 
 - Checkout a topic branch from a base branch, e.g. `master`, and merge back against that branch.
 
-- If adding a new feature:
-
+- If adding a new feature/component:
+- 
+    - Ensure all types are exported
+    - Ensure Documentation is updated
+    - Ensure nothing is breaking if no tests are provided
     - Add accompanying test case.
     - Provide a convincing reason to add this feature. Ideally, you should open a suggestion issue first and have it approved before working on it.
 
