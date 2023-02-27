@@ -17,6 +17,14 @@ const navQuickStart = [
 ]
 
 export default defineConfig({
+  themeConfig: {
+    algolia: {
+      appId: 'MPT9YSZL25',
+      apiKey: '98b3ea697d5242577262c11bfcb0f8ec',
+      indexName: 'vanilla-components',
+    },
+  },
+
   // Vite config
   vite: {
     server: {
@@ -28,7 +36,8 @@ export default defineConfig({
     resolve: {
       alias: [
         { find: '@flavorly/vanilla-components', replacement: resolve(__dirname, '../../packages/vanilla-components/src') },
-        { find: './VPNavBarSearch.vue', replacement: resolve(__dirname, './lunr/VPNavBarSearch.vue') },
+
+        // { find: './VPNavBarSearch.vue', replacement: resolve(__dirname, './lunr/VPNavBarSearch.vue') },
       ],
     },
     json: {
