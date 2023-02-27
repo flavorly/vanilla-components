@@ -143,7 +143,7 @@ export function makeServer({ environment = 'development' } = {}) {
         models: {
             payment: Model,
         },
-        useDefaultPassthroughs: true,
+        useDefaultPassthroughs: false,
         factories: {
             payment: Factory.extend({
                 id(i) {
@@ -173,7 +173,7 @@ export function makeServer({ environment = 'development' } = {}) {
                     '/datatables',
                 )
             })
-            this.passthrough('https://www.omdbapi.com', 'https://hybridly.test/*')
+            this.passthrough(request => !request.url.match(/datatables/g))
         },
     })
 }
