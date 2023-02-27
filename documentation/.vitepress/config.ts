@@ -17,13 +17,6 @@ const navQuickStart = [
 ]
 
 export default defineConfig({
-  themeConfig: {
-    algolia: {
-      appId: 'MPT9YSZL25',
-      apiKey: '98b3ea697d5242577262c11bfcb0f8ec',
-      indexName: 'vanilla-components',
-    },
-  },
 
   // Vite config
   vite: {
@@ -91,6 +84,13 @@ export default defineConfig({
 
   // Theme Configuration
   themeConfig: {
+
+    algolia: {
+      appId: 'MPT9YSZL25',
+      apiKey: '98b3ea697d5242577262c11bfcb0f8ec',
+      indexName: 'vanilla-components',
+    },
+
     logo: '/symbol-gradient.svg',
 
     editLink: {
