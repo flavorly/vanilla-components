@@ -53,6 +53,12 @@ defineOptions({
   name: 'VanillaInput',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaInput
+ * @description Input component
+ **/
 </script>
 
 <template>

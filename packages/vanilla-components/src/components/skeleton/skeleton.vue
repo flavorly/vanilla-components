@@ -29,6 +29,12 @@ defineOptions({
   name: 'VanillaSkeleton',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaSkeleton
+ * @description A skeleton bar
+ **/
 </script>
 
 <template>

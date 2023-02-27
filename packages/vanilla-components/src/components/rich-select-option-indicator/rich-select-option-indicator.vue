@@ -53,6 +53,12 @@ defineOptions({
   name: 'VanillaRichSelectOptionWithIndicator',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaRichSelectOptionWithIndicator
+ * @description A rich select option with an indicator
+ **/
 </script>
 
 <template>

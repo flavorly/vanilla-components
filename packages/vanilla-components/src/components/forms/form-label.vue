@@ -27,6 +27,12 @@ defineOptions({
   name: 'VanillaFormLabel',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaFormLabel
+ * @description Display a label for a form or a field
+ **/
 </script>
 
 <template>

@@ -137,6 +137,12 @@ defineOptions({
   name: 'VanillaPhoneInput',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaPhoneInput
+ * @description An input component that allows you to enter a phone number & country
+ **/
 </script>
 
 <template>

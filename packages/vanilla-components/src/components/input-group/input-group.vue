@@ -69,6 +69,12 @@ defineOptions({
   name: 'VanillaInputGroup',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaInputGroup
+ * @description Group of inputs
+ **/
 </script>
 
 <template>

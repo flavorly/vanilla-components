@@ -33,6 +33,12 @@ defineOptions({
   name: 'VanillaDateTimeInput',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaDateTimeInput
+ * @description A date and time input component.
+ **/
 </script>
 
 <template>

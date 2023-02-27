@@ -565,6 +565,12 @@ defineOptions({
   name: 'VanillaDropdown',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaDropdown
+ * @description A dropdown component
+ **/
 </script>
 
 <template>

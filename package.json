@@ -63,6 +63,8 @@
     "vitepress": "1.0.0-alpha.46",
     "vitest": "^0.28.5",
     "vue": "^3.2.47",
+    "vue-docgen-cli": "^4.57.1",
+    "vue-docgen-web-types": "^0.1.8",
     "vue-json-pretty": "^2.2.3"
   },
   "pnpm": {

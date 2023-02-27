@@ -32,6 +32,12 @@
     name: 'VanillaDropdownOption',
     inheritAttrs: true,
   })
+
+  /**
+   * @docs
+   * @displayName VanillaDropdownOption
+   * @description A dropdown option menu component
+   **/
 </script>
 
 <template>

@@ -51,6 +51,12 @@ defineOptions({
   name: 'VanillaRichRadioOption',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaRichRadioOption
+ * @description Option for a rich radio group
+ **/
 </script>
 
 <template>

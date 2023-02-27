@@ -39,6 +39,12 @@ defineOptions({
   name: 'VanillaCardFooter',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaCardFooter
+ * @description A footer for the card component
+ **/
 </script>
 
 <template>

@@ -46,6 +46,12 @@ onMounted(() => {
     setTimeout(() => emit('close'), props.closeAfter)
   }
 })
+
+/**
+ * @docs
+ * @displayName VanillaAlert
+ * @description An alert component
+ **/
 </script>
 
 <template>

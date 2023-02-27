@@ -41,6 +41,12 @@ defineOptions({
   name: 'VanillaRichSelectOptionTagWithImage',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaRichSelectOptionTagWithImage
+ * @description A rich select option with an image
+ **/
 </script>
 
 <template>

@@ -10,8 +10,6 @@ const plugin = {
   },
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
 declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     $vanillaComponents: boolean

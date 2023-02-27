@@ -82,6 +82,12 @@ provide('configuration_vanilla', configuration)
 defineOptions({
   name: 'VanillaSelect',
 })
+
+/**
+ * @docs
+ * @displayName VanillaSelect
+ * @description A select component
+ **/
 </script>
 
 <template>

@@ -6,6 +6,12 @@ defineOptions({
   name: 'VanillaCardEmptyPlaceholder',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaCardEmptyPlaceholder
+ * @description A placeholder when the card is empty
+ **/
 </script>
 
 <template>

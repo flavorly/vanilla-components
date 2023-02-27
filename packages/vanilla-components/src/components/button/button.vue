@@ -71,6 +71,12 @@ defineOptions({
   name: 'VanillaButton',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaButton
+ * @description A simple button component
+ **/
 </script>
 
 <template>

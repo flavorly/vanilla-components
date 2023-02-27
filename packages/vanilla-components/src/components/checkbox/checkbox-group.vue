@@ -57,6 +57,12 @@ defineOptions({
   name: 'VanillaCheckboxGroup',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaCheckboxGroup
+ * @description A checkbox group component.
+ **/
 </script>
 
 <template>

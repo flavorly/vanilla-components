@@ -67,6 +67,7 @@ public-hoist-pattern[]=@vue*
 shamefully-hoist=true
 ```
 
+Recently we have added support for [Webtypes](https://github.com/JetBrains/) :pray: so for latest versions of Jetbrains IDE you should get full support for the components when it comes to illentisense and auto import.
 
 
 

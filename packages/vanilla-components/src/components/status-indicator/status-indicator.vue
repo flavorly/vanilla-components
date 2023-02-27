@@ -17,6 +17,12 @@ defineOptions({
   name: 'VanillaStatusIndicator',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaStatusIndicator
+ * @description A status indicator
+ **/
 </script>
 
 <template>

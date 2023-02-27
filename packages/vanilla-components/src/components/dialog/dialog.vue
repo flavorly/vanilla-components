@@ -127,6 +127,12 @@ provide('configuration_vanilla', configuration)
 defineOptions({
   name: 'VanillaDialog',
 })
+
+/**
+ * @docs
+ * @displayName VanillaDialog
+ * @description A dialog is a window overlaid on either the primary window or another dialog window. It is used to display critical information that requires user input or attention.
+ **/
 </script>
 
 <template>

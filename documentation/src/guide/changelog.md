@@ -8,6 +8,9 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.32
+- Added support [Web Types](https://github.com/JetBrains/web-types/tree/master)
+
 ### 0.7.31
 
 - General: Moved compiler to Unbuild for better performance on inertia & hybridly packages

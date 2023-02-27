@@ -943,6 +943,12 @@ defineOptions({
   name: 'VanillaDatatable',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaDatatable
+ * @description Country Input Option Component
+ **/
 </script>
 
 <template>

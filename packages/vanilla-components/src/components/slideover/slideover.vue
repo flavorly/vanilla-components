@@ -206,6 +206,12 @@ defineOptions({
   name: 'VanillaSlideover',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaSlideover
+ * @description A slideover is a dialog that slides in from the side of the screen.
+ **/
 </script>
 
 <template>

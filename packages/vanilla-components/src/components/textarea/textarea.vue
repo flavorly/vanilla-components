@@ -43,6 +43,12 @@ defineOptions({
   name: 'VanillaTextarea',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaTextarea
+ * @description A textarea component
+ **/
 </script>
 
 <template>

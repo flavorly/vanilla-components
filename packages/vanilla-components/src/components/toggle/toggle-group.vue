@@ -57,6 +57,12 @@ defineOptions({
   name: 'VanillaToggleGroup',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaToggleGroup
+ * @description A toggle group component.
+ **/
 </script>
 
 <template>

@@ -43,6 +43,12 @@ defineOptions({
   name: 'VanillaRichSelectOptionWithImage',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaRichSelectOptionWithImage
+ * @description A rich select option with an image
+ **/
 </script>
 
 <template>

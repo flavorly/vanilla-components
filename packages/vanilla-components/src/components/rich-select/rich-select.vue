@@ -686,6 +686,12 @@ defineOptions({
   name: 'VanillaRichSelect',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaRichSelect
+ * @description A rich select component
+ **/
 </script>
 
 <template>

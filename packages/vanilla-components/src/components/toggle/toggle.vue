@@ -111,6 +111,12 @@ defineOptions({
   name: 'VanillaToggle',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaToggle
+ * @description A toggle component.
+ **/
 </script>
 
 <template>

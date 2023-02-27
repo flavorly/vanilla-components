@@ -115,6 +115,12 @@ defineOptions({
   name: 'VanillaCountryInput',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaCountryInput
+ * @description Country Input Component
+ **/
 </script>
 
 <template>

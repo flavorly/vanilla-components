@@ -23,6 +23,12 @@ defineOptions({
   name: 'VanillaFormErrors',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaFormErrors
+ * @description Display errors for a form or a field
+ **/
 </script>
 
 <template>

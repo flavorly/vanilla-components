@@ -29,6 +29,12 @@ defineOptions({
   name: 'VanillaFormFeedback',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaFormFeedback
+ * @description Display feedback for a form or a field
+ **/
 </script>
 
 <template>

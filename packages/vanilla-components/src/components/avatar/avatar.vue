@@ -91,6 +91,12 @@
     name: 'VanillaAvatar',
     inheritAttrs: false,
   })
+
+  /**
+   * @docs
+   * @displayName VanillaAvatar
+   * @description An avatar Component to display a user's profile photo.
+   **/
 </script>
 
 <template>

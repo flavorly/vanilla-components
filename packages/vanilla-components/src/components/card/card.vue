@@ -46,6 +46,12 @@ defineOptions({
   name: 'VanillaCard',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaCard
+ * @description A simple card component
+ **/
 </script>
 
 <template>

@@ -29,6 +29,7 @@
   "files": [
     "dist"
   ],
+  "web-types": "./dist/webtypes.json",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.umd.js",
   "module": "./dist/index.es.js",
@@ -50,7 +51,7 @@
     }
   },
   "scripts": {
-    "build": "vite build",
+    "build": "vite build && vue-docgen-web-types --configFile=./webtypesconfig.ts",
     "unbuild": "unbuild",
     "build:watch": "vite build --watch",
     "stub": "unbuild --stub"

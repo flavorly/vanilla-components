@@ -104,6 +104,12 @@ defineOptions({
   name: 'VanillaCheckbox',
   inheritAttrs: false,
 })
+
+/**
+ * @docs
+ * @displayName VanillaCheckbox
+ * @description A checkbox component
+ **/
 </script>
 
 <template>

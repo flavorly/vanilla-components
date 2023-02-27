@@ -34,6 +34,12 @@ defineOptions({
   name: 'VanillaFormSection',
   inheritAttrs: true,
 })
+
+/**
+ * @docs
+ * @displayName VanillaFormSection
+ * @description Form section
+ **/
 </script>
 
 <template>
