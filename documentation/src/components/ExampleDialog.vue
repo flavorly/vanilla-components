@@ -38,7 +38,7 @@ const valueFromSelect = ref()
             🎉 Thank you for testing Vanilla!
           </h3>
           <div class="mt-2">
-            <p class="text-sm text-gray-500">
+            <p class="text-sm text-gray-500 dark:text-gray-400">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur amet labore.
             </p>
           </div>

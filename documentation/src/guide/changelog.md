@@ -8,6 +8,10 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.34
+- Tailwind : Switched Borders with Rings where it makes sense to do so
+- Docs: Adjusted documentation theming for better dark mode constrast
+
 ### 0.7.32
 - Added support [Web Types](https://github.com/JetBrains/web-types/tree/master)
 

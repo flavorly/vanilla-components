@@ -10,7 +10,7 @@ export const dialogConfig = {
     wrapper: 'fixed inset-0 z-30 overflow-y-auto',
     inner: 'min-h-screen px-4 text-center',
     closeButton: 'inline-block h-screen align-middle',
-    overlay: 'fixed inset-0 transition-opacity bg-gray-700/50 dark:bg-gray-900/90 backdrop-blur-sm',
+    overlay: 'fixed inset-0 transition-opacity bg-gray-600/50 dark:bg-gray-900/70 backdrop-blur-sm',
 
     modalWithPadding: 'px-4 pt-5 pb-4 sm:my-8 sm:p-6',
 

@@ -8,11 +8,14 @@ const commonClasses = {
   inputsBackgroundDarkerOrSofter: 'bg-gray-50 dark:bg-gray-800',
   inputsText: 'leading-normal sm:text-sm ',
   inputsTextColor: 'text-gray-700 dark:text-white placeholder-gray-500/90',
-  inputsBorder: 'border border-gray-300 dark:border-gray-700 focus:border-primary-600 dark:focus:border-primary-400',
+  inputsBorder: 'border-0',
   inputsSpacing: 'px-4 py-2.5',
   inputsShadows: 'shadow',
-  inputsRing: 'focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-primary-600',
+  inputsRing: 'ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600',
+  inputsRingBase: 'ring-1 ring-inset focus:ring-inset focus:ring-2',
+
   inputsDisabled: 'disabled:opacity-50 disabled:cursor-not-allowed',
+  inputsAutofill: 'autofill:!bg-white dark:autofill:!bg-gray-900',
 
   inputsRadius: 'rounded-lg',
   inputsRadiusTop: 'rounded-none rounded-t-lg',
@@ -29,8 +32,8 @@ const commonClasses = {
   // Inputs with Errors
   inputsErrorText: 'text-red-400 placeholder-red-400 leading-normal text-sm',
   inputsErrorsBackground: 'bg-white dark:bg-gray-900',
-  inputsErrorsBorder: 'border border-red-400 focus:border-red-400 dark:focus:border-red-400',
-  inputsErrorsRing: 'focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900 focus:ring-red-500',
+  inputsErrorsBorder: 'border-0',
+  inputsErrorsRing: 'ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500  dark:focus:ring-offset-gray-900',
 
   // Buttons
   buttonRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900',

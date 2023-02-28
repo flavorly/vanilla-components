@@ -25,6 +25,7 @@ export const selectConfig = {
       commonClasses.inputsTextColor,
       commonClasses.inputsBackground,
       commonClasses.inputsBorder,
+      commonClasses.inputsRingBase,
       commonClasses.inputsRing,
       commonClasses.inputsRadius,
     ),

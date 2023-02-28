@@ -21,6 +21,7 @@ const defaultVariant = {
     trigger: mergeClasses(
       commonClasses.inputsBackground,
       commonClasses.inputsBorder,
+      commonClasses.inputsRingBase,
       commonClasses.inputsRing,
 
       // commonClasses.inputsRadius,
@@ -95,6 +96,7 @@ const defaultVariant = {
 
     searchInput: mergeClasses('inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2',
       commonClasses.inputsTextColor,
+      commonClasses.inputsRingBase,
       commonClasses.inputsRing,
       commonClasses.inputsBorder,
       commonClasses.inputsRadius,

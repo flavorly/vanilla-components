@@ -42,7 +42,7 @@ export const checkboxConfig = {
 
     container: '',
     checkbox: mergeClasses(
-      'border-gray-300 text-primary-600 focus:ring-primary-500',
+      'border-gray-300 text-primary-600 focus:ring-primary-500 checked:border-0',
       'dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600',
     ),
     label: {

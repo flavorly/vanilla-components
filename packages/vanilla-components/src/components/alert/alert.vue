@@ -121,18 +121,23 @@ onMounted(() => {
           :class="configuration.classesList.closeButtonWrapper"
         >
           <div :class="configuration.classesList.closeButtonContainer">
-            <button
-              type="button"
-              :class="configuration.classesList.closeButton"
-              @click="close"
+            <slot
+              name="close"
+              v-bind="{ close, className: configuration.classesList.closeButton }"
             >
-              <span class="sr-only">{{ props.dismissLabel }}</span>
+              <button
+                type="button"
+                :class="configuration.classesList.closeButton"
+                @click="close"
+              >
+                <span class="sr-only">{{ props.dismissLabel }}</span>
 
-              <XMarkIcon
-                :class="configuration.classesList.closeButtonIcon"
-                aria-hidden="true"
-              />
-            </button>
+                <XMarkIcon
+                  :class="configuration.classesList.closeButtonIcon"
+                  aria-hidden="true"
+                />
+              </button>
+            </slot>
           </div>
         </div>
       </div>

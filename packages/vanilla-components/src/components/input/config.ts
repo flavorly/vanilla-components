@@ -9,8 +9,10 @@ const defaultInput = {
     commonClasses.inputsText,
     commonClasses.inputsTextColor,
     commonClasses.inputsBackground,
+    commonClasses.inputsRingBase,
     commonClasses.inputsRing,
     commonClasses.inputsSpacing,
+    commonClasses.inputsAutofill,
   ),
 
   roundedFull: '',
@@ -70,6 +72,7 @@ export const inputConfig = {
         input: mergeClasses(
           commonClasses.inputsErrorText,
           commonClasses.inputsErrorsBackground,
+          commonClasses.inputsRingBase,
           commonClasses.inputsErrorsRing,
         ),
         inputBorder: commonClasses.inputsErrorsBorder,
@@ -90,6 +93,7 @@ export const inputConfig = {
           commonClasses.inputsTextColor,
           commonClasses.inputsBackground,
           commonClasses.inputsBorder,
+          commonClasses.inputsRingBase,
           commonClasses.inputsRing,
           commonClasses.inputsRadius,
           'px-4 py-2',
