@@ -51,7 +51,7 @@ Please keep in mind that you should still follow the standard installation instr
 
 ## Unplugin Imports
 
-You can also import a few functions provided by the package automaticly with [unplugin-imports]()
+You can also import a few functions provided by the package automaticly with [unplugin-imports](https://github.com/antfu/unplugin-auto-import)
 
 ```ts [vite.config.ts]
 // vite.config.ts
