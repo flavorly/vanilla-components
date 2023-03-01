@@ -1,23 +1,28 @@
 <script setup lang="ts">
-import type { PropType } from 'vue'
-import { onMounted } from 'vue'
+import type { PropType, Ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { hasSlot } from '../../core/helpers'
-import { useConfiguration, useVariantProps } from '../../core/use'
+import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import XCircleIcon from '../icons/hero/solid/XCircleIcon.vue'
 import CheckCircleIcon from '../icons/hero/solid/CheckCircleIcon.vue'
 import ExclamationTriangleIcon from '../icons/hero/solid/ExclamationTriangleIcon.vue'
 import InformationCircleIcon from '../icons/hero/solid/InformationCircleIcon.vue'
 import XMarkIcon from '../icons/hero/outline/XMarkIcon.vue'
+import Transitionable from '../misc/transitionable.vue'
 import { alertConfig } from './config'
 import type { AlertClassesValidKeys, AlertProps } from './config'
 
 const props = defineProps({
   ...useVariantProps<AlertProps, AlertClassesValidKeys>(),
+  modelValue: {
+    type: [Boolean] as PropType<boolean>,
+    default: true,
+  },
   title: {
     type: [String] as PropType<string>,
     default: undefined,
   },
-  subtitle: {
+  text: {
     type: [String] as PropType<string>,
     default: undefined,
   },
@@ -25,7 +30,7 @@ const props = defineProps({
     type: [Boolean] as PropType<boolean>,
     default: false,
   },
-  closeAfter: {
+  timeout: {
     type: [Number] as PropType<number>,
     default: undefined,
   },
@@ -33,18 +38,77 @@ const props = defineProps({
     type: [String] as PropType<string>,
     default: 'Dismiss',
   },
+  icon: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+    validator: (value: string | undefined) => {
+      if (value === undefined) {
+        return true
+      }
+      return [
+        'error',
+        'success',
+        'warning',
+        'info',
+      ].includes(value)
+    },
+  },
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits([
+  'update:modelValue',
+  'close',
+])
 
-const { configuration, errors, hasErrors } = useConfiguration<AlertProps>(alertConfig, 'Alert')
+const localValue: Ref<boolean> = useVModel(props, 'modelValue')
+const { configuration, errors, hasErrors } = useConfiguration<AlertProps>(alertConfig, 'Alert', localValue)
 
-const close = () => emit('close')
+const timeout = ref(undefined) as Ref<ReturnType<typeof setTimeout> | undefined>
+const internalTimeout = ref(undefined) as Ref<ReturnType<typeof setTimeout> | undefined>
+const main = ref<HTMLDivElement>() as Ref<HTMLDivElement>
 
-onMounted(() => {
-  if (props.closeAfter) {
-    setTimeout(() => emit('close'), props.closeAfter)
+// Close function little delay to allow transitions to take place
+const close = () => {
+  internalTimeout.value = setTimeout(() => {
+    localValue.value = false
+    clearTimeout(timeout.value)
+    emit('close')
+  }, 200)
+}
+
+// Timeout function to register the dismiss function
+const registerTimeoutDismiss = () => {
+  if (props.timeout) {
+    timeout.value = setTimeout(() => {
+      localValue.value = false
+      emit('close')
+    }, props.timeout)
   }
+}
+
+// We need to watch this value to be able to clear the timeout
+// Also to rebind in case model-value changes again
+// We cannot leverage the onMounted hook because it will not be called again if model-value changes
+watch(() => localValue.value, (value) => {
+  if (value) {
+    registerTimeoutDismiss()
+  }
+  else {
+    clearTimeout(timeout.value)
+  }
+})
+
+// On mounted if local.value is true we should register the dismiss
+onMounted(() => {
+  if (localValue.value) {
+    registerTimeoutDismiss()
+  }
+})
+
+// Clear all the timeouts on leave
+onUnmounted(() => {
+  clearTimeout(timeout.value)
+  clearTimeout(internalTimeout.value)
 })
 
 /**
@@ -55,92 +119,105 @@ onMounted(() => {
 </script>
 
 <template>
-  <div
-    class="vanilla-alert"
-    :class="configuration.classesList.wrapper"
+  <Transitionable
+    name="transition"
+    duration="200"
+    :classes-list="configuration.classesList"
   >
-    <slot name="default">
-      <div class="flex">
-        <div
-          v-if="props.variant"
-          :class="configuration.classesList.iconWrapper"
-        >
-          <XCircleIcon
-            v-if="props.variant === 'error'"
-            :class="configuration.classesList.icon"
-            aria-hidden="true"
-          />
+    <div
+      v-if="localValue"
+      ref="main"
+      class="vanilla-alert"
+      :class="configuration.classesList.wrapper"
+    >
+      <slot name="default">
+        <div class="flex">
+          <slot name="icon">
+            <div
+              v-if="props.icon"
+              :class="configuration.classesList.iconWrapper"
+            >
+              <XCircleIcon
+                v-if="props.icon === 'error'"
+                :class="configuration.classesList.icon"
+                aria-hidden="true"
+              />
 
-          <CheckCircleIcon
-            v-if="props.variant === 'success'"
-            :class="configuration.classesList.icon"
-            aria-hidden="true"
-          />
+              <CheckCircleIcon
+                v-if="props.icon === 'success'"
+                :class="configuration.classesList.icon"
+                aria-hidden="true"
+              />
 
-          <ExclamationTriangleIcon
-            v-if="props.variant === 'warning'"
-            :class="configuration.classesList.icon"
-            aria-hidden="true"
-          />
+              <ExclamationTriangleIcon
+                v-if="props.icon === 'warning'"
+                :class="configuration.classesList.icon"
+                aria-hidden="true"
+              />
 
-          <InformationCircleIcon
-            v-if="props.variant === 'info'"
-            :class="configuration.classesList.icon"
-            aria-hidden="true"
-          />
-        </div>
+              <InformationCircleIcon
+                v-if="props.icon === 'info'"
+                :class="configuration.classesList.icon"
+                aria-hidden="true"
+              />
+            </div>
+          </slot>
 
-        <div :class="configuration.classesList.contentWrapper">
-          <h3 :class="configuration.classesList.title">
-            <slot name="title">
-              <span>{{ title }}</span>
-            </slot>
-          </h3>
+          <div :class="configuration.classesList.contentWrapper">
+            <h3
+              v-if="title || hasSlot($slots.title)"
+              :class="configuration.classesList.title"
+            >
+              <slot name="title">
+                <span>{{ title }}</span>
+              </slot>
+            </h3>
 
-          <div
-            v-if="subtitle || hasSlot($slots.subtitle)"
-            :class="configuration.classesList.subtitle"
-          >
-            <slot name="subtitle">
-              <p>{{ subtitle }}</p>
-            </slot>
+            <div
+              v-if="text || hasSlot($slots.text)"
+              :class="configuration.classesList.text"
+            >
+              <slot name="text">
+                <p>{{ text }}</p>
+              </slot>
+            </div>
+
+            <div
+              v-if="hasSlot($slots.actions)"
+              :class="configuration.classesList.actionsWrapper"
+            >
+              <div :class="configuration.classesList.actionsContainer">
+                <slot name="actions" />
+              </div>
+            </div>
           </div>
 
           <div
-            v-if="hasSlot($slots.actions)"
-            :class="configuration.classesList.actionsWrapper"
+            v-if="closable"
+            :class="configuration.classesList.closeButtonWrapper"
           >
-            <div :class="configuration.classesList.actionsContainer">
-              <slot name="actions" />
+            <div :class="configuration.classesList.closeButtonContainer">
+              <slot
+                name="close"
+                v-bind="{ close, className: configuration.classesList.closeButton }"
+              >
+                <button
+                  type="button"
+                  :class="configuration.classesList.closeButton"
+                  @click="close"
+                >
+                  <span class="sr-only">{{ props.dismissLabel }}</span>
+
+                  <XMarkIcon
+                    :class="configuration.classesList.closeButtonIcon"
+                    aria-hidden="true"
+                  />
+                </button>
+              </slot>
             </div>
           </div>
         </div>
-
-        <div
-          v-if="closable"
-          :class="configuration.classesList.closeButtonWrapper"
-        >
-          <div :class="configuration.classesList.closeButtonContainer">
-            <slot
-              name="close"
-              v-bind="{ close, className: configuration.classesList.closeButton }"
-            >
-              <button
-                type="button"
-                :class="configuration.classesList.closeButton"
-                @click="close"
-              >
-                <span class="sr-only">{{ props.dismissLabel }}</span>
-
-                <XMarkIcon
-                  :class="configuration.classesList.closeButtonIcon"
-                  aria-hidden="true"
-                />
-              </button>
-            </slot>
-          </div>
-        </div>
-      </div>
-    </slot>
-  </div>
+      </slot>
+    </div>
+  </Transitionable>
 </template>

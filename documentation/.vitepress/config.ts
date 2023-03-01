@@ -14,6 +14,7 @@ const navQuickStart = [
   { text: 'Introduction', link: '/guide/introduction' },
   { text: 'Installation', link: '/guide/quick-start' },
   { text: 'Configuration', link: '/guide/configuration' },
+  { text: 'Changelog', link: '/guide/changelog' },
 ]
 
 export default defineConfig({

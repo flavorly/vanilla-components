@@ -6,7 +6,6 @@ import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 const defaultInput = {
   input: mergeClasses(
     '',
-    commonClasses.inputsText,
     commonClasses.inputsTextColor,
     commonClasses.inputsBackground,
     commonClasses.inputsRingBase,
@@ -37,6 +36,7 @@ const defaultInput = {
 export const inputConfig = {
   fixedClasses: {
     input: mergeClasses(
+      commonClasses.inputsText,
       'appearance-none w-full',
       commonClasses.inputsShadows,
       commonClasses.inputsDisabled,
@@ -71,10 +71,12 @@ export const inputConfig = {
     error: {
       classes: {
         input: mergeClasses(
-          commonClasses.inputsErrorText,
+          commonClasses.inputsErrorTextColor,
           commonClasses.inputsErrorsBackground,
           commonClasses.inputsRingBase,
           commonClasses.inputsErrorsRing,
+          commonClasses.inputsSpacing,
+          commonClasses.inputsAutofill,
         ),
         inputBorder: commonClasses.inputsErrorsBorder,
         wrapper: '',

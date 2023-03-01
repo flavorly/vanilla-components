@@ -5,7 +5,7 @@ module.exports = {
     require('tailwindcss'),
     require('autoprefixer'),
     require('postcss-prefix-selector')({
-      prefix: ':not(:where(.vp-raw *, #headlessui-portal-root *))',
+      prefix: ':not(:where(.vp-raw *, #headlessui-portal-root *, .z-50 *))',
       includeFiles: [
         /vp-doc\.css/,
         /base\.css/,

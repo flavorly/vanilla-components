@@ -34,6 +34,7 @@
     "@whyframe/vue": "^0.1.5",
     "autoprefixer": "^10.4.13",
     "bumpp": "^8.2.1",
+    "change-case": "^4.1.2",
     "cheerio": "1.0.0-rc.12",
     "collect.js": "^4.34.3",
     "eslint": "^8.27.0",

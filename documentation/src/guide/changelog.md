@@ -8,6 +8,24 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.34
+- Alert Component : `closeAfter` prop renamed to `timeout`
+- Alert Component : Icon is no longer auto-generated based on variant, you must provide it yourself as a key `success`,`error`, `warning`, `info`
+- Alert Component : Transitions added for better DX
+- Alert Component : Re-worked on close event to be more consistent and cleanup
+- Alert Component : Added `icon` slot to override icon
+- Alert Component : Added 4 new variants: `muted`, `error-muted`, `warning-muted`, `info-muted`, `success-muted`
+- Rich Select: Fixed styling issue with `focus-within` on `input` element when it was triggered by keyboard event
+- Rich Select: Fixed styling issue with error variant
+- Input: Fixed a little issue on error variant that was giving +1px jumps on focus
+- Transitionable: Added proper duration & props forwarding
+- Variants names should be now `camelCase`, users are able to use any casing they want, but the variants will be converted to `snakeCase` before being applied
+
+
+### 0.7.33
+- Tailwind : Switched Borders with Rings where it makes sense to do so
+- Docs: Adjusted documentation theming for better dark mode constrast
+
 ### 0.7.33
 - Tailwind : Switched Borders with Rings where it makes sense to do so
 - Docs: Adjusted documentation theming for better dark mode constrast

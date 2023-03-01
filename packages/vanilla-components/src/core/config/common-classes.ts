@@ -6,12 +6,12 @@ const commonClasses = {
   // Inputs, selects, textarea on default _old_theme
   inputsBackground: 'bg-white dark:bg-gray-900',
   inputsBackgroundDarkerOrSofter: 'bg-gray-50 dark:bg-gray-800',
-  inputsText: 'leading-normal sm:text-sm ',
+  inputsText: 'leading-normal sm:text-sm',
   inputsTextColor: 'text-gray-700 dark:text-white placeholder-gray-500/90',
   inputsBorder: 'border-0',
   inputsSpacing: 'px-4 py-2.5',
   inputsShadows: 'shadow',
-  inputsRing: 'ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600',
+  inputsRing: 'ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600',
   inputsRingBase: 'ring-1 ring-inset focus:ring-inset focus:ring-2',
 
   inputsDisabled: 'disabled:opacity-50 disabled:cursor-not-allowed',
@@ -30,10 +30,10 @@ const commonClasses = {
   inputsTransition: 'transition duration-100 ease-in-out',
 
   // Inputs with Errors
-  inputsErrorText: 'text-red-400 placeholder-red-400 leading-normal text-sm',
+  inputsErrorTextColor: 'text-red-400 placeholder-red-400',
   inputsErrorsBackground: 'bg-white dark:bg-gray-900',
   inputsErrorsBorder: 'border-0',
-  inputsErrorsRing: 'ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500  dark:focus:ring-offset-gray-900',
+  inputsErrorsRing: 'ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500',
 
   // Buttons
   buttonRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900',

@@ -1,10 +1,10 @@
 {
     "fixedClasses": {
-        "trigger": "relative"
+        "trigger": "relative appearance-none focus:outline-none"
     },
     "classes": {
         "wrapper": "block w-full",
-        "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+        "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
         "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
         "dropdownContent": "space-y-1",
         "dropdownContentWithSearch": "pt-1",
@@ -24,7 +24,7 @@
         "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
         "optgroupOptionsList": "px-2 pb-2",
         "searchWrapper": "inline-block w-full px-3 py-2",
-        "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+        "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
         "searchingText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
         "needsMoreCharsText": "flex items-center justify-center px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center space-x-2",
         "noResultsText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
@@ -54,7 +54,7 @@
         "error": {
             "classes": {
                 "wrapper": "block w-full",
-                "trigger": "bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 dark:focus:ring-offset-gray-900 text-red-400 placeholder-red-400 leading-normal text-sm rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+                "trigger": "ring-1 ring-inset focus:ring-inset focus:ring-2 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 text-red-400 placeholder-red-400 rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
                 "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
                 "dropdownContent": "space-y-1",
                 "dropdownContentWithSearch": "pt-1",
@@ -74,13 +74,13 @@
                 "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
                 "optgroupOptionsList": "px-2 pb-2",
                 "searchWrapper": "inline-block w-full px-3 py-2",
-                "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+                "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
                 "searchingText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
                 "needsMoreCharsText": "flex items-center justify-center px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center space-x-2",
                 "noResultsText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
                 "optionsListLoadingMore": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
                 "selectButtonLabel": "block pr-4 truncate",
-                "selectButtonPlaceholder": "block text-gray-500/90 truncate",
+                "selectButtonPlaceholder": "block text-red-400 placeholder-red-400 truncate",
                 "selectButtonSearchingPlaceholder": "block text-gray-400 truncate",
                 "selectButtonLoadingIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
                 "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",

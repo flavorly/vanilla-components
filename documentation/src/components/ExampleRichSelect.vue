@@ -103,7 +103,6 @@ const fetchOptions = (query?: string, nextPage?: number) => {
           :clearable="true"
           feedback="Im useful helper out here, choose wisely"
           placeholder="Please select an option"
-          multiple
         />
       </div>
       <!-- Multiple -->
@@ -269,7 +268,7 @@ const fetchOptions = (query?: string, nextPage?: number) => {
           v-model="value7"
           feedback="Type a movie name to search"
           placeholder="Ex: Search for the Matrix or Pokemon"
-          fetch-endpoint="https://hybridly.test/api/payments"
+          fetch-endpoint="/datatables"
           :minimum-input-length="3"
           value-attribute="id"
           text-attribute="gateway"

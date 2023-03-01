@@ -7,7 +7,7 @@ module.exports = {
   darkMode: 'class',
   content: [
     './documentation/.vitepress/**/*.{js,jsx,ts,tsx,vue,md}',
-    './packages/vanilla-components/src/**/*.{js,jsx,ts,tsx,vue,md,json}',
+    './packages/vanilla-components/src/**/*.*',
     './documentation/src/**/*.{js,jsx,ts,tsx,vue,md,json}',
   ],
   theme: {
