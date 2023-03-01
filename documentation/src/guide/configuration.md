@@ -85,8 +85,8 @@ app.use(Plugin, defineConfiguration(overrides,preset))
 
 ### Default Style & Configuration
 
-You can check the default and full configuration here : [full Configuration](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets/tailwind/all.json)
-Where it also includes the configuration file separated for each component [here](https://github.com/flavorly/vanilla-components/blob/master/packages/documentation/src/presets/tailwind)
+You can check the default and full configuration here : [full Configuration](https://github.com/flavorly/vanilla-components/blob/master/documentation/src/presets/tailwind/all.json)
+Where it also includes the configuration file separated for each component [here](https://github.com/flavorly/vanilla-components/blob/master/documentation/src/presets/tailwind)
 The default configuration is using TailwindCSS, but you can use any other framework you want, just keep in mind that you will have to provide the correct classes for each component.
 
 Here is a demo of the Input Component Configuration file:

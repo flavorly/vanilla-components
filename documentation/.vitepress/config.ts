@@ -155,14 +155,15 @@ export default defineConfig({
           items: [
             { text: 'Custom Components', link: '/guide/advanced-configuration' },
             { text: 'Shared Props', link: '/guide/advanced-props' },
-            { text: 'Auto-Import', link: '/guide/advanced-autoimport' },
             { text: 'Form Sections & Groups', link: '/guide/examples-form-sections' },
+            { text: 'IDE Config', link: '/guide/advanced-ide' },
           ],
         },
         {
           text: 'Integrations',
           items: [
             { text: 'Laravel + Datatables', link: '/guide/integrations-datatables' },
+            { text: 'Unplugin', link: '/guide/integrations-autoimport' },
           ],
         },
       ],

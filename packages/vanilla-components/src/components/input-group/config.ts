@@ -6,7 +6,7 @@ export const inputGroupConfig = {
   fixedClasses: {
     wrapper: '',
     container: '',
-    containerWithPadding: 'px-6 py-3.5',
+    containerWithPadding: 'px-6 py-3.5 first:pt-0 last:pb-0',
     label: '',
     labelWrapperLeftTop: commonClasses.leftTop,
     labelWrapperLeftCenter: commonClasses.leftCenter,

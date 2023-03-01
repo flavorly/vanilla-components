@@ -5,10 +5,10 @@
         "imageAndPreviewContainer": "flex items-center justify-center cursor-pointer",
         "imagePreviewContainer": "mt-2",
         "currentImage": "rounded-full h-20 w-20 object-cover",
-        "avatarPlaceholder": "inline-flex items-center justify-center rounded-full h-20 w-20 rounded-full p-5 border border-gray-100 dark:border-gray-500 shadow-sm",
+        "avatarPlaceholder": "inline-flex items-center justify-center rounded-full h-20 w-20 rounded-full p-5 border-0 ring-1",
         "avatarPlaceholderText": "text-sm font-light leading-none",
         "buttonsContainer": "flex items-center justify-center mt-2",
-        "preview": "relative w-20 h-20 border border-gray-100 dark:border-gray-500 shadow-sm rounded-full"
+        "preview": "relative w-20 h-20 shadow-sm rounded-full border-0 ring-1"
     },
     "classes": {
         "wrapper": "relative",
@@ -16,10 +16,10 @@
         "imageAndPreviewContainer": "",
         "imagePreviewContainer": "",
         "currentImage": "",
-        "avatarPlaceholder": "bg-primary-100 text-primary-800 dark:bg-gray-600 dark:text-white",
+        "avatarPlaceholder": "bg-primary-100 text-primary-800 dark:bg-gray-600 dark:text-white ring-gray-300 dark:ring-white/30",
         "avatarPlaceholderText": "",
         "buttonsContainer": "",
-        "preview": ""
+        "preview": "ring-gray-300 dark:ring-white/30"
     },
     "variants": {
         "error": {
@@ -29,7 +29,7 @@
                 "imageAndPreviewContainer": "",
                 "imagePreviewContainer": "",
                 "currentImage": "",
-                "avatarPlaceholder": "bg-red-100 text-red-500",
+                "avatarPlaceholder": "bg-red-100 text-red-500 ring-red-300 dark:ring-red-500/60",
                 "avatarPlaceholderText": "",
                 "buttonsContainer": "",
                 "preview": ""

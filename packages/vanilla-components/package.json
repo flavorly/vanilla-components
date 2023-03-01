@@ -51,7 +51,7 @@
     }
   },
   "scripts": {
-    "build": "vite build && vue-docgen-web-types --configFile=./webtypesconfig.ts",
+    "build": "vite build && vue-docgen-web-types --configFile=./webtypesconfig.ts && tsx ./../../build/generate-presets.ts",
     "unbuild": "unbuild",
     "build:watch": "vite build --watch",
     "stub": "unbuild --stub"

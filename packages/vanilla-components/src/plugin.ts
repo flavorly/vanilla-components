@@ -1,8 +1,8 @@
-import type { App } from 'vue'
+import type { App, Plugin } from 'vue'
 import { mergeConfiguration } from './configuration'
 import type { ComponentsConfiguration } from './core/types'
 
-const plugin = {
+const plugin: Plugin = {
   install: (app: App<Element>, configuration: ComponentsConfiguration = {}): void => {
     app.config.globalProperties.$vanillaComponents = true
     const mergedConfiguration = mergeConfiguration(configuration)

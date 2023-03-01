@@ -56,6 +56,7 @@ export const inputConfig = {
     roundedBottomRight: commonClasses.inputsRadiusBottomRight,
     roundedTopLeft: commonClasses.inputsRadiusTopLeft,
     roundedTopRight: commonClasses.inputsRadiusTopRight,
+    inputBorder: '',
   },
 
   // Default Input appearance
