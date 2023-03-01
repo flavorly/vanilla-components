@@ -35,6 +35,7 @@ onMounted(() => {
 <template>
   <PreviewWrapper>
     <div class="flex flex-col space-y-2">
+      <h3>Solid Colors</h3>
       <Alert
         v-model="showWithVModel2"
         :title="title"
@@ -111,18 +112,42 @@ onMounted(() => {
         </template>
       </Alert>
 
+      <h3>Muted Colors</h3>
+
       <Alert
         v-model="showWithVModel"
         variant="muted"
         closable
         subtitle="Something can go here as well"
-        title="A new software update is available. See what’s new in version 2.0.4."
+        title="This is called a `warning-muted` variant with a nice touch with the primary color"
       />
 
       <Alert
         variant="warning-muted"
         title="Attention needed"
-        text="We recently saw something on your account, please let us know if you recognize this activity."
+        text="This is called a `warning-muted` variant in a nice green text"
+        closable
+      />
+
+      <Alert
+        variant="error-muted"
+        title="Attention needed"
+        text="This is called a `error-muted` variant in a nice red text"
+        closable
+      />
+
+      <Alert
+        variant="info-muted"
+        title="Attention needed"
+        text="This is called a `info-muted` variant in a nice blue text"
+        closable
+      />
+
+      <Alert
+        variant="success-muted"
+        title="Attention needed"
+        text="This is called a `success-muted` variant in a nice green text"
+        closable
       />
     </div>
   </PreviewWrapper>

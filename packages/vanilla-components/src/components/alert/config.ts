@@ -124,10 +124,11 @@ export const alertConfig = {
         actionsContainer: '',
         closeButtonWrapper: '',
         closeButtonContainer: '',
-        closeButton: 'bg-transparent text-primary-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-800',
+        closeButton: 'bg-transparent text-primary-500 hover:bg-primary-400/20 dark:hover:bg-primary-700/20 focus:ring-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-800',
         closeButtonIcon: '',
       },
     },
+
     warning_muted: {
       classes: {
         wrapper: 'ring-1 ring-inset rounded-md p-4 ring-yellow-400/50 bg-yellow-300/10 dark:bg-yellow-600/10',
@@ -140,7 +141,58 @@ export const alertConfig = {
         actionsContainer: '',
         closeButtonWrapper: '',
         closeButtonContainer: '',
-        closeButton: 'bg-transparent text-yellow-500 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-primary-600 focus:ring-offset-white dark:focus:ring-offset-gray-800',
+        closeButton: 'bg-transparent text-yellow-500 hover:bg-yellow-400/20 dark:hover:bg-yellow-700/20 focus:ring-yellow-600 focus:ring-offset-white dark:focus:ring-offset-gray-800',
+        closeButtonIcon: '',
+      },
+    },
+
+    error_muted: {
+      classes: {
+        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-red-400/50 bg-red-300/10 dark:bg-red-600/10',
+        iconWrapper: '',
+        icon: '',
+        contentWrapper: '',
+        title: 'text-red-800 dark:text-red-400',
+        text: 'text-red-700 dark:text-red-200',
+        actionsWrapper: '',
+        actionsContainer: '',
+        closeButtonWrapper: '',
+        closeButtonContainer: '',
+        closeButton: 'bg-transparent text-red-500 hover:bg-red-400/20 dark:hover:bg-red-700/20 focus:ring-red-600 focus:ring-offset-white dark:focus:ring-offset-gray-800',
+        closeButtonIcon: '',
+      },
+    },
+
+    info_muted: {
+      classes: {
+        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-blue-400/50 bg-blue-300/10 dark:bg-blue-600/10',
+        iconWrapper: '',
+        icon: '',
+        contentWrapper: '',
+        title: 'text-blue-800 dark:text-blue-400',
+        text: 'text-blue-700 dark:text-blue-200',
+        actionsWrapper: '',
+        actionsContainer: '',
+        closeButtonWrapper: '',
+        closeButtonContainer: '',
+        closeButton: 'bg-transparent text-blue-500 hover:bg-blue-400/20 dark:hover:bg-blue-700/20 focus:ring-blue-600 focus:ring-offset-white dark:focus:ring-offset-gray-800',
+        closeButtonIcon: '',
+      },
+    },
+
+    success_muted: {
+      classes: {
+        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-green-400/50 bg-green-300/10 dark:bg-green-600/10',
+        iconWrapper: '',
+        icon: '',
+        contentWrapper: '',
+        title: 'text-green-800 dark:text-green-400',
+        text: 'text-green-700 dark:text-green-200',
+        actionsWrapper: '',
+        actionsContainer: '',
+        closeButtonWrapper: '',
+        closeButtonContainer: '',
+        closeButton: 'bg-transparent text-green-500 hover:bg-green-400/20 dark:hover:bg-green-700/20 focus:ring-green-600 focus:ring-offset-white dark:focus:ring-offset-gray-800',
         closeButtonIcon: '',
       },
     },
