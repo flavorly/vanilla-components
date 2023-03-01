@@ -20,7 +20,8 @@ With Alert components you can provide contextual feedback messages for typical u
 | Prop         | Description                                           | Accepted Values | Default     |
 |:-------------|:------------------------------------------------------|:----------------|:------------|
 | `title`      | Title for the alert                                   | `String`        | `undefined` |
-| `subtitle`   | Subtitle for the alert                                | `String`        | `undefined` |
+| `text`       | text for the alert                                    | `String`        | `undefined` |
+| `icon`       | info, warning, error, success                         | `String`        | `undefined` |
 | `closable`   | Show the close button                                 | `Boolean`       | `false`     |
 | `closeAfter` | Emit close event after defined amount of milliseconds | `Number`        | `undefined` |
 
@@ -42,6 +43,10 @@ Slot to override the subtitle of the alert.
 ### Slot `actions`
 
 Slot for the alert on the bottom, below the subtitle.
+
+### Slot `close`
+
+Slot to override the close button / icon, provides a `close` method to close the alert internally.
 
 <!--@include: ../../parts/title-events.md)-->
 

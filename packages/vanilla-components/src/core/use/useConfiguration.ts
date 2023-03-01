@@ -1,5 +1,6 @@
 import type { ComponentInternalInstance, ComputedRef, Ref } from 'vue'
 import { camelize, computed, getCurrentInstance, inject, reactive, ref, watch } from 'vue'
+import { snakeCase } from 'change-case'
 import { get, isEqual, isPrimitive, pick } from '../helpers'
 import { useParseVariant } from '../use'
 import type { ComponentsConfiguration, Data } from '../types'
@@ -112,6 +113,11 @@ export function useConfiguration<ComponentOptions extends Data>(
   const variant = ref<string | undefined>(props?.variant as string | undefined)
   const hasErrors = computed(() => errors?.value !== undefined && errors?.value !== null && errors?.value !== '') as ComputedRef<boolean>
 
+  // If there is a variant, we will snake case it
+  if (variant.value) {
+    variant.value = snakeCase(variant.value)
+  }
+
   // If there is any error, we will just set the variant to the error one
   if (errors.value !== undefined && errors.value !== '' && errors.value !== null) {
       variant.value = 'error'
@@ -149,7 +155,7 @@ export function useConfiguration<ComponentOptions extends Data>(
   const computedConfiguration = computed(() => ({
     ...props || {},
     ...useParseVariant(
-      propsValues.value,
+      propsValues.value as any,
       finalClassesListKeys,
       componentGlobalConfiguration,
       defaultConfiguration,

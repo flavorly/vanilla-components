@@ -17,7 +17,10 @@ export const formsConfig = {
   // Default Input appearance
   classes: {
     label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1',
-    errors: mergeClasses('mt-2 text-xs', commonClasses.inputsErrorText),
+    errors: mergeClasses(
+      'mt-2 text-xs',
+      commonClasses.inputsErrorTextColor,
+    ),
     feedback: 'mt-2 text-xs text-gray-500 opacity-75 dark:text-gray-300 cursor-pointer',
     section: '',
     sectionDivided: 'divide-y divide-gray-200 dark:divide-gray-700',

@@ -8,6 +8,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  duration: {
+    type: [Number, String],
+    default: 150,
+  },
 })
 
 defineOptions({
@@ -17,7 +21,7 @@ defineOptions({
 </script>
 
 <template>
-  <transition
+  <Transition
     :enter-active-class="classesList?.enterActiveClass"
     :enter-from-class="classesList?.enterFromClass"
     :enter-to-class="classesList?.enterToClass"
@@ -25,7 +29,8 @@ defineOptions({
     :leave-from-class="classesList?.leaveFromClass"
     :leave-to-class="classesList?.leaveToClass"
     :css="enabled"
+    :duration="duration"
   >
     <slot />
-  </transition>
+  </Transition>
 </template>

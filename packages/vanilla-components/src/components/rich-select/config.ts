@@ -161,7 +161,7 @@ const defaultVariant = {
 export const richSelectConfig = {
   // Until the little bits are merged or variantjs fixes this issue or provider a clear way to override the trigger
   fixedClasses: {
-    trigger: 'relative',
+    trigger: 'relative appearance-none focus:outline-none',
   },
 
   // Default Input appearance
@@ -177,10 +177,11 @@ export const richSelectConfig = {
           ...Object.assign(defaultVariant, {
               // Trigger
               trigger: mergeClasses(
+                commonClasses.inputsRingBase,
                 commonClasses.inputsErrorsBackground,
                 commonClasses.inputsErrorsBorder,
                 commonClasses.inputsErrorsRing,
-                commonClasses.inputsErrorText,
+                commonClasses.inputsErrorTextColor,
                 commonClasses.inputsRadius,
 
                 // Only way to get border-b-none and etc working :(
@@ -199,6 +200,8 @@ export const richSelectConfig = {
                 commonClasses.iconsSize,
                 commonClasses.inputsTransition,
               ),
+
+              selectButtonPlaceholder: 'block text-red-400 placeholder-red-400 truncate',
 
               // Single tag
               tag: mergeClasses(
