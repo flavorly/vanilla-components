@@ -8,7 +8,7 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
-### 0.7.34
+### 0.7.35
 - Alert Component : `closeAfter` prop renamed to `timeout`
 - Alert Component : Icon is no longer auto-generated based on variant, you must provide it yourself as a key `success`,`error`, `warning`, `info`
 - Alert Component : Transitions added for better DX
@@ -22,7 +22,7 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 - Variants names should be now `camelCase`, users are able to use any casing they want, but the variants will be converted to `snakeCase` before being applied
 
 
-### 0.7.33
+### 0.7.34
 - Tailwind : Switched Borders with Rings where it makes sense to do so
 - Docs: Adjusted documentation theming for better dark mode constrast
 
