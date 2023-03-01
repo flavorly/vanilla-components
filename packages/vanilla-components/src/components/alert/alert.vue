@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import { hasSlot } from '../../core/helpers'
 import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import XCircleIcon from '../icons/hero/solid/XCircleIcon.vue'
@@ -30,7 +30,7 @@ const props = defineProps({
     type: [Boolean] as PropType<boolean>,
     default: false,
   },
-  closeAfter: {
+  timeout: {
     type: [Number] as PropType<number>,
     default: undefined,
   },
@@ -63,22 +63,52 @@ const emit = defineEmits([
 const localValue: Ref<boolean> = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<AlertProps>(alertConfig, 'Alert', localValue)
 
+const timeout = ref(undefined) as Ref<ReturnType<typeof setTimeout> | undefined>
+const internalTimeout = ref(undefined) as Ref<ReturnType<typeof setTimeout> | undefined>
 const main = ref<HTMLDivElement>() as Ref<HTMLDivElement>
 
+// Close function little delay to allow transitions to take place
 const close = () => {
-  setTimeout(() => {
+  internalTimeout.value = setTimeout(() => {
     localValue.value = false
+    clearTimeout(timeout.value)
     emit('close')
   }, 200)
 }
 
-onMounted(() => {
-  if (props.closeAfter) {
-    setTimeout(() => {
+// Timeout function to register the dismiss function
+const registerTimeoutDismiss = () => {
+  if (props.timeout) {
+    timeout.value = setTimeout(() => {
       localValue.value = false
       emit('close')
-    }, props.closeAfter)
+    }, props.timeout)
   }
+}
+
+// We need to watch this value to be able to clear the timeout
+// Also to rebind in case model-value changes again
+// We cannot leverage the onMounted hook because it will not be called again if model-value changes
+watch(() => localValue.value, (value) => {
+  if (value) {
+    registerTimeoutDismiss()
+  }
+  else {
+    clearTimeout(timeout.value)
+  }
+})
+
+// On mounted if local.value is true we should register the dismiss
+onMounted(() => {
+  if (localValue.value) {
+    registerTimeoutDismiss()
+  }
+})
+
+// Clear all the timeouts on leave
+onUnmounted(() => {
+  clearTimeout(timeout.value)
+  clearTimeout(internalTimeout.value)
 })
 
 /**

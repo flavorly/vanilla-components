@@ -12,10 +12,11 @@ const showWithVModel2 = ref(true)
 const counter = ref(0)
 
 const close = () => {
-    counter.value += 1
-    title.value = `You just got paid again! Times: ${counter.value}`
-    showWithVModel2.value = true
-    console.log('Model Value is now: ', showWithVModel2.value)
+    setTimeout(() => {
+      counter.value += 1
+      title.value = `You just got paid again! Times: ${counter.value}`
+      showWithVModel2.value = true
+    }, 2000)
 }
 const closeInfo = () => {
   showInfo.value = false
@@ -37,7 +38,8 @@ onMounted(() => {
       <Alert
         v-model="showWithVModel2"
         :title="title"
-        :close-after="3000"
+        :timeout="3000"
+        closable
         @close="close"
       />
 
