@@ -8,6 +8,11 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+
+### 0.7.36
+- Icons : Removing all icons from the package
+- Deps: Removing `@heroicons/vue` dependency
+
 ### 0.7.35
 - Alert Component : `closeAfter` prop renamed to `timeout`
 - Alert Component : Icon is no longer auto-generated based on variant, you must provide it yourself as a key `success`,`error`, `warning`, `info`

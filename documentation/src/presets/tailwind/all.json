@@ -230,7 +230,7 @@
         "fixedClasses": {
             "button": "block justify-center inline-flex items-center focus:ring-offset-2 cursor-pointer",
             "container": "flex items-center space-x-1",
-            "spinner": "animate-spin -ml-1 mr-1 h-5 w-5 text-whit",
+            "spinner": "-ml-1 mr-1 h-4 w-4 text-whit",
             "disableOpacity": "opacity-50",
             "enableOpacity": "opacity-100",
             "busyOrInvalidState": "cursor-not-allowed"
@@ -901,7 +901,7 @@
         "fixedClasses": {
             "wrapper": "",
             "container": "",
-            "containerWithPadding": "px-6 py-3.5 first:pt-0 last:pb-0",
+            "containerWithPadding": "px-6 py-3.5",
             "label": "",
             "labelWrapperLeftTop": "justify-start items-start",
             "labelWrapperLeftCenter": "justify-start items-center",
