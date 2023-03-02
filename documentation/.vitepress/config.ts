@@ -177,6 +177,7 @@ export default defineConfig({
           text: 'Integrations',
           items: [
             { text: 'Laravel + Datatables', link: '/guide/integrations-datatables' },
+            { text: 'Nuxt', link: '/guide/integrations-nuxt' },
             { text: 'Unplugin', link: '/guide/integrations-autoimport' },
           ],
         },
