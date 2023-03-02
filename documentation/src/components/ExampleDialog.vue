@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Button, Dialog, RichSelect } from '@flavorly/vanilla-components'
-import { CheckIcon } from '@heroicons/vue/24/solid/index.js'
 import { ref } from 'vue'
+import CheckIcon from '~icons/heroicons/check-solid'
 const open = ref(false)
 const open2 = ref(false)
 const valueFromSelect = ref()

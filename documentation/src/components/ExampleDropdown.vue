@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { Button, Dropdown, DropdownMenu, DropdownOption } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
-import { CheckCircleIcon, DocumentDuplicateIcon } from '@heroicons/vue/24/solid/index.js'
+import CheckCircleIcon from '~icons/heroicons/check-circle-solid'
+import DocumentDuplicateIcon from '~icons/heroicons/document-duplicate-solid'
 
 const value = ref(false)
 const value2 = ref(false)

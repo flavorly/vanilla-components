@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Datatable } from '@flavorly/vanilla-components'
-import { TrashIcon } from '@heroicons/vue/24/outline/index.js'
+import TrashIcon from '~icons/heroicons/trash'
 
 const onGenericEvent = (e) => {
   console.log('Datatable Event dispatched', e)
