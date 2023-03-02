@@ -14,6 +14,7 @@ importers:
       '@heroicons/vue': ^2.0.16
       '@iconify-json/arcticons': ^1.1.43
       '@iconify-json/heroicons': ^1.1.10
+      '@iconify-json/ph': ^1.1.4
       '@iconify-json/svg-spinners': ^1.1.1
       '@iconify-json/tabler': ^1.1.63
       '@tailwindcss/aspect-ratio': ^0.4.2
@@ -72,6 +73,7 @@ importers:
       '@heroicons/vue': 2.0.16_vue@3.2.47
       '@iconify-json/arcticons': 1.1.43
       '@iconify-json/heroicons': 1.1.10
+      '@iconify-json/ph': 1.1.4
       '@iconify-json/svg-spinners': 1.1.1
       '@iconify-json/tabler': 1.1.63
       '@tailwindcss/aspect-ratio': 0.4.2_tailwindcss@3.2.7
@@ -1190,6 +1192,12 @@ packages:
 
   /@iconify-json/heroicons/1.1.10:
     resolution: {integrity: sha512-BQNQIQEL6QZ4FoPxJzLrTBAz7OHQezFFdEEl3gyDOZK8rawIIaPl7AtOZrvyOoSgtkU/Xp8V9pJ5JekdREEsQA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/ph/1.1.4:
+    resolution: {integrity: sha512-2A3+G/bvYB+ab1QL4SIsXVECvjSkSg+smNdWAg30QlksyZ1bI7Zh3wzyZCA2saDJPkVGyMJHSLI5EXExk/jmnQ==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

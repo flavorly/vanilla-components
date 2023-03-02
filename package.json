@@ -26,6 +26,7 @@
     "@heroicons/vue": "^2.0.16",
     "@iconify-json/arcticons": "^1.1.43",
     "@iconify-json/heroicons": "^1.1.10",
+    "@iconify-json/ph": "^1.1.4",
     "@iconify-json/svg-spinners": "^1.1.1",
     "@iconify-json/tabler": "^1.1.63",
     "@tailwindcss/aspect-ratio": "^0.4.2",

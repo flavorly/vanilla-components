@@ -2,9 +2,9 @@
 import type { PropType } from 'vue'
 import { computed, ref } from 'vue'
 import { useConfiguration } from '../../core/use'
-import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
 import type { RichSelectOptionWithIndicatorsProps } from './config'
 import { richSelectOptionWithIndicatorsConfig } from './config'
+import CheckIcon from '~icons/heroicons/check-solid'
 
 const props = defineProps({
   name: {

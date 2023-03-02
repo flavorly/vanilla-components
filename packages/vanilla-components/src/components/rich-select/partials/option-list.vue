@@ -5,8 +5,8 @@ import type { RichSelectProps } from '../config'
 import { useInjectsClassesList } from '../../../core/use'
 import { debounce, normalizeMeasure } from '../../../core/helpers'
 import type { NormalizedOptions } from '../../../core/types'
-import LoadingIcon from '../../icons/loading.vue'
 import SelectOption from './option.vue'
+import LoadingIcon from '~icons/svg-spinners/180-ring-with-bg'
 
 const props = defineProps({
   options: {

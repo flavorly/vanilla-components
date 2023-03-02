@@ -9,12 +9,11 @@
   import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
   import { throttle } from '../../core/helpers'
   import { validPlacements } from '../../core/config'
-
   import Button from '../button/button.vue'
   import Transitionable from '../misc/transitionable.vue'
-  import ChevronDownIcon from '../icons/hero/solid/ChevronDownIcon.vue'
   import { dropdownConfig, dropdownPopperDefaultOptions } from './config'
   import type { DropdownClassesValidKeys, DropdownProps } from './config'
+  import ChevronDownIcon from '~icons/heroicons/chevron-down-solid'
 
   const props = defineProps({
     ...useVariantProps<DropdownProps, DropdownClassesValidKeys>(),

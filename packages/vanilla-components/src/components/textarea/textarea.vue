@@ -6,11 +6,12 @@ import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
 import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
-import ExclamationCircleIcon from '../icons/hero/solid/ExclamationCircleIcon.vue'
-import ClipboardIcon from '../icons/hero/outline/ClipboardIcon.vue'
-import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
 import type { TextareaClassesValidKeys, TextareaProps, TextareaValue } from './config'
 import { textareaConfig } from './config'
+
+import ExclamationCircleIcon from '~icons/heroicons/exclamation-circle-solid'
+import ClipboardIcon from '~icons/heroicons/clipboard'
+import CheckIcon from '~icons/heroicons/check-solid'
 
 const props = defineProps({
   ...useVariantProps<TextareaProps, TextareaClassesValidKeys>(),
@@ -24,7 +25,7 @@ const props = defineProps({
   },
   placeholder: {
     type: [String] as PropType<string>,
-    default: 'text',
+    default: '',
   },
   copiable: {
     type: [Boolean] as PropType<boolean>,
@@ -69,6 +70,7 @@ defineOptions({
         v-model="localValue"
         :name="name"
         :autocomplete="props.autocomplete"
+        :placeholder="props.placeholder"
         :class="[
           hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
           hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',

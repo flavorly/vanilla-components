@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import type { ComputedRef, PropType } from 'vue'
-import { computed, defineComponent, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, ref } from 'vue'
 import { useInjectsClassesList } from '../../../core/use'
 import { normalizedOptionIsDisabled } from '../../../core/helpers'
 import type { NormalizedOption } from '../../../core/types'
-import CloseIcon from '../../icons/close.vue'
+import CloseIcon from '~icons/heroicons/x-mark-solid'
 
 const props = defineProps({
   option: {

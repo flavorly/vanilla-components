@@ -40,8 +40,6 @@ export { default as FormLabel, default as VanillaFormLabel } from './components/
 export { default as FormSection, default as VanillaFormSection } from './components/forms/form-section.vue'
 
 export { default as IconFlag, default as VanillaIconFlag } from './components/icons/flag.vue'
-export { default as IconSpinner, default as VanillaIconSpinner } from './components/icons/spinner.vue'
-export { default as IconLoading, default as VanillaIconLoading } from './components/icons/loading.vue'
 
 export { default as Input, default as VanillaInput } from './components/input/input.vue'
 export { default as InputGroup, default as VanillaInputGroup } from './components/input-group/input-group.vue'
