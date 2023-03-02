@@ -23,7 +23,6 @@
     "@flavorly/v-calendar": "3.0.0-alpha.11",
     "@flavorly/vanilla-components": "workspace:*",
     "@headlessui/vue": "^1.7.4",
-    "@heroicons/vue": "^2.0.16",
     "@iconify-json/arcticons": "^1.1.43",
     "@iconify-json/heroicons": "^1.1.10",
     "@iconify-json/ph": "^1.1.4",
