@@ -6,10 +6,11 @@ import { useInjectDatatableTranslations } from '../utils'
 import { useInjectsClassesList, useReplacePlaceholders } from '../../../core/use'
 import Dialog from '../../dialog/dialog.vue'
 import Button from '../../button/button.vue'
-import ExclamationTriangleIcon from '../../icons/hero/outline/ExclamationTriangleIcon.vue'
-import CheckIcon from '../../icons/hero/outline/CheckIcon.vue'
-import SignalIcon from '../../icons/hero/outline/SignalIcon.vue'
-import InformationCircleIcon from '../../icons/hero/outline/InformationCircleIcon.vue'
+
+import ExclamationTriangleIcon from '~icons/heroicons/exclamation-triangle'
+import CheckIcon from '~icons/heroicons/check'
+import SignalIcon from '~icons/heroicons/signal'
+import InformationCircleIcon from '~icons/heroicons/information-circle'
 
 const props = defineProps({
   action: {

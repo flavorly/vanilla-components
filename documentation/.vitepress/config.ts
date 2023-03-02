@@ -3,6 +3,9 @@ import { defineConfig } from 'vitepress'
 import DefineOptions from 'unplugin-vue-define-options/vite'
 import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
 import { version } from '../../package.json'
 
 const production = process.env.NODE_ENV === 'production'
@@ -46,6 +49,16 @@ export default defineConfig({
       // Initialize Vue integration plugin
       whyframeVue({
         include: /\.(?:vue|md)$/, // also scan in markdown files
+      }),
+      Icons({
+        autoInstall: true,
+      }),
+      Components({
+        resolvers: [
+          IconsResolver(),
+        ],
+        dirs: ['foo'],
+        dts: true,
       }),
     ],
     build: {

@@ -9,9 +9,9 @@ import Select from '../../select/select.vue'
 import CheckboxGroup from '../../checkbox/checkbox-group.vue'
 import Toggle from '../../toggle/toggle.vue'
 import InputGroup from '../../input-group/input-group.vue'
-import TrashIcon from '../../icons/hero/outline/TrashIcon.vue'
 import Button from '../../button/button.vue'
 import FormSection from '../../forms/form-section.vue'
+import TrashIcon from '~icons/heroicons/trash'
 
 const props = defineProps({
   userSettings: {
