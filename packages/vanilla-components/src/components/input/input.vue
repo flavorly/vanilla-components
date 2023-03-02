@@ -6,13 +6,13 @@ import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
 import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
-import ExclamationCircleIcon from '../icons/hero/solid/ExclamationCircleIcon.vue'
-import EyeIcon from '../icons/hero/solid/EyeIcon.vue'
-import EyeSlashIcon from '../icons/hero/solid/EyeSlashIcon.vue'
-import ClipboardIcon from '../icons/hero/outline/ClipboardIcon.vue'
-import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
 import { inputConfig } from './config'
 import type { InputClassesValidKeys, InputProps, InputValue } from './config'
+import ExclamationCircleIcon from '~icons/heroicons/exclamation-circle-solid'
+import EyeIcon from '~icons/heroicons/eye-solid'
+import EyeSlashIcon from '~icons/heroicons/eye-slash-solid'
+import ClipboardIcon from '~icons/heroicons/clipboard'
+import CheckIcon from '~icons/heroicons/check-solid'
 
 const props = defineProps({
   ...useVariantProps<InputProps, InputClassesValidKeys>(),
@@ -22,11 +22,11 @@ const props = defineProps({
   },
   type: {
     type: [String] as PropType<string>,
-    default: 'text',
+    default: '',
   },
   placeholder: {
     type: [String] as PropType<string>,
-    default: 'text',
+    default: '',
   },
   copiable: {
     type: [Boolean] as PropType<boolean>,

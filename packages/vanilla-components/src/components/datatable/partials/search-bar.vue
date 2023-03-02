@@ -3,7 +3,7 @@ import type { PropType } from 'vue'
 import { ref } from 'vue'
 import { useInjectsClassesList, useVModel } from '../../../core/use'
 import Input from '../../input/input.vue'
-import MagnifyingGlassIcon from '../../icons/hero/solid/MagnifyingGlassIcon.vue'
+import MagnifyingGlassIcon from '~icons/heroicons/magnifying-glass-solid'
 
 const props = defineProps({
   modelValue: {

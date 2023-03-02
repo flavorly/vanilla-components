@@ -3,8 +3,8 @@ import type { ComputedRef, Ref } from 'vue'
 import { computed, inject } from 'vue'
 import type { RichSelectProps } from '../config'
 import { useInjectsClassesList, useInjectsConfiguration } from '../../../core/use'
-import LoadingIcon from '../../icons/loading.vue'
 
+import LoadingIcon from '~icons/svg-spinners/180-ring-with-bg'
 const options = inject<ComputedRef<RichSelectProps>>('options')!
 const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
 const needsMoreCharsToFetch = inject<Ref<boolean>>('needsMoreCharsToFetch')!

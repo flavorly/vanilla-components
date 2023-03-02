@@ -3,9 +3,9 @@ import type { ComponentPublicInstance, PropType, Ref } from 'vue'
 import { onMounted, ref } from 'vue'
 import { useConfiguration, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
-import LoadingSpinnerIcon from '../icons/spinner.vue'
 import type { ButtonClassesValidKeys, ButtonProps } from './config'
 import { buttonConfig } from './config'
+import LoadingSpinnerIcon from '~icons/svg-spinners/180-ring-with-bg'
 
 const props = defineProps({
     ...useVariantProps<ButtonProps, ButtonClassesValidKeys>(),

@@ -8,12 +8,13 @@ import { useInjectDatatableTranslations } from '../utils'
 import { useInjectsClassesList } from '../../../core/use'
 import { Base64, isEqual, isServer, urlHelper } from '../../../core/helpers'
 import Button from '../../button/button.vue'
-import TrashIcon from '../../icons/hero/outline/TrashIcon.vue'
 import Dialog from '../../dialog/dialog.vue'
 import InputGroup from '../../input-group/input-group.vue'
 import FormSection from '../../forms/form-section.vue'
-import ClipboardIcon from '../../icons/hero/outline/ClipboardIcon.vue'
-import CheckIcon from '../../icons/hero/solid/CheckIcon.vue'
+
+import TrashIcon from '~icons/heroicons/trash'
+import ClipboardIcon from '~icons/heroicons/clipboard'
+import CheckIcon from '~icons/heroicons/check'
 
 const props = defineProps({
   filters: {

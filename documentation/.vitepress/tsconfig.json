@@ -9,6 +9,9 @@
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
-    "types": ["vite/client"]
+    "types": [
+      "vite/client",
+      "unplugin-icons/types/vue"
+    ]
   }
 }

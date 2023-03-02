@@ -16,14 +16,11 @@ import type { CSSClassesList, NormalizedOption } from '../../core/types'
 import { useConfiguration, useDynamicSlots, useVariantProps } from '../../core/use'
 import { get, isServer } from '../../core/helpers'
 import Button from '../button/button.vue'
-import ArrowPathIcon from '../icons/hero/outline/ArrowPathIcon.vue'
-import FunnelIcon from '../icons/hero/outline/FunnelIcon.vue'
-import CogIcon from '../icons/hero/solid/CogIcon.vue'
-import SearchIcon from '../icons/hero/solid/MagnifyingGlassIcon.vue'
-import EllipsisVerticalIcon from '../icons/hero/solid/EllipsisVerticalIcon.vue'
+
 import DropdownOption from '../dropdown/dropdown-option.vue'
 import Dropdown from '../dropdown/dropdown-menu.vue'
 import Card from '../card/card.vue'
+
 import TableHead from './partials/head.vue'
 import RowSkeleton from './partials/row-skeleton.vue'
 import Search from './partials/search-bar.vue'
@@ -40,7 +37,12 @@ import { useConfigurationBuilder, useFetchData, useValidator } from './utils'
 import { datatableConfig } from './config'
 import type * as Types from './config'
 
-// Other Components
+// Icons
+import ArrowPathIcon from '~icons/heroicons/arrow-path-solid'
+import FunnelIcon from '~icons/heroicons/funnel'
+import CogIcon from '~icons/heroicons/cog-8-tooth'
+import SearchIcon from '~icons/heroicons/magnifying-glass-solid'
+import EllipsisVerticalIcon from '~icons/heroicons/ellipsis-vertical-solid'
 
 const props = defineProps({
   ...useVariantProps<Types.DatatableProps, Types.DatatableClassesValidKeys>(),

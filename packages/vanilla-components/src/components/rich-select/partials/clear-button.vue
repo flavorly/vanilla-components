@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useInjectsClassesListClass } from '../../../core/use'
-import CloseIcon from '../../icons/close.vue'
+import CloseIcon from '~icons/heroicons/x-mark-solid'
 const className = useInjectsClassesListClass('clearButton')
 const iconClassName = useInjectsClassesListClass('clearButtonIcon')
 </script>

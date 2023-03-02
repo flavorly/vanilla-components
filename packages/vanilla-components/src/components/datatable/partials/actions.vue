@@ -7,7 +7,7 @@ import { useInjectsClassesList } from '../../../core/use'
 import Dropdown from '../../dropdown/dropdown-menu.vue'
 import DropdownOption from '../../dropdown/dropdown-option.vue'
 import Button from '../../button/button.vue'
-import ChevronDownIcon from '../../icons/hero/solid/ChevronDownIcon.vue'
+import ChevronDownIcon from '~icons/heroicons/chevron-down-solid'
 
 const props = defineProps({
   actions: {

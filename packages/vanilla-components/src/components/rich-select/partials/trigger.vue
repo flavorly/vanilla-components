@@ -5,9 +5,10 @@ import type { RichSelectProps } from '../config'
 import { useInjectsClassesList, useInjectsConfiguration } from '../../../core/use'
 import type { NormalizedOption } from '../../../core/types'
 import TextPlaceholder from '../../misc/text-placeholder.vue'
-import SelectorIcon from '../../icons/selector.vue'
-import LoadingIcon from '../../icons/loading.vue'
 import SelectTriggerTags from './trigger-tags.vue'
+
+import LoadingIcon from '~icons/svg-spinners/180-ring-with-bg'
+import SelectorIcon from '~icons/heroicons/chevron-up-down'
 
 const props = defineProps({})
 const configuration = useInjectsConfiguration<RichSelectProps>()

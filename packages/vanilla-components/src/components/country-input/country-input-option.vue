@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, onMounted } from 'vue'
+import { computed } from 'vue'
 import { useConfiguration } from '../../core/use'
 import Flag from '../icons/flag.vue'
-import CheckIcon from '../icons/hero/solid/CheckIcon.vue'
 import { countryInputOptionConfig } from './config'
 import type { CountryInputOptionProps } from './config'
+import CheckIcon from '~icons/heroicons/check-solid'
 
 const props = defineProps({
   country: {

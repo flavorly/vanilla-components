@@ -5,6 +5,9 @@ import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import copy from 'rollup-plugin-copy'
 import DefineOptions from 'unplugin-vue-define-options/vite'
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Components from 'unplugin-vue-components/vite'
 import { dependencies, peerDependencies } from './package.json'
 
 const externals = [
@@ -30,6 +33,16 @@ const plugins: PluginOption[] = [
     staticImport: true,
     skipDiagnostics: true,
     outputDir: 'dist',
+  }),
+  Icons({
+    autoInstall: true,
+  }),
+  Components({
+    resolvers: [
+      IconsResolver(),
+    ],
+    dirs: ['foo'],
+    dts: true,
   }),
 ]
 

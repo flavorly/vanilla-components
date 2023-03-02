@@ -11,7 +11,7 @@ export const buttonConfig = {
       'cursor-pointer',
     ),
     container: 'flex items-center space-x-1',
-    spinner: 'animate-spin -ml-1 mr-1 h-5 w-5 text-whit',
+    spinner: '-ml-1 mr-1 h-4 w-4 text-whit',
     disableOpacity: 'opacity-50',
     enableOpacity: 'opacity-100',
     busyOrInvalidState: 'cursor-not-allowed',
