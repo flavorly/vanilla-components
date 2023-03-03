@@ -8,6 +8,9 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.37
+- Inputs & Select : Issues with `focus-within` & `focus outline` element when it was triggered by keyboard event
+- Docs: Added more variants to select & input component
 
 ### 0.7.36
 - Icons : Removing all icons from the package

@@ -824,7 +824,7 @@
     },
     "Input": {
         "fixedClasses": {
-            "input": "leading-normal sm:text-sm appearance-none w-full shadow disabled:opacity-50 disabled:cursor-not-allowed",
+            "input": "leading-normal sm:text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed",
             "wrapper": "relative",
             "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
             "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",
@@ -1256,7 +1256,7 @@
     "Select": {
         "fixedClasses": {
             "wrapper": "relative",
-            "select": "appearance-none block w-full shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+            "select": "appearance-none block w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
             "selectIfMultiple": "space-y-2"
         },
         "classes": {
@@ -1269,7 +1269,7 @@
             "error": {
                 "classes": {
                     "wrapper": "",
-                    "select": "bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 rounded-lg",
+                    "select": "leading-normal sm:text-sm ring-1 ring-inset focus:ring-inset focus:ring-2 text-red-400 placeholder-red-400 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 rounded-lg",
                     "selectIfMultiple": "",
                     "optGroup": "px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed leading-normal sm:text-sm rounded-lg checked:font-semibold checked:text-red-900 checked:bg-red-100 checked:dark:bg-red-300 checked:dark:text-black select:focus:text-red-100 w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2"
                 }
@@ -1416,7 +1416,7 @@
     },
     "Textarea": {
         "fixedClasses": {
-            "input": "leading-normal sm:text-sm appearance-none w-full shadow disabled:opacity-50 disabled:cursor-not-allowed",
+            "input": "leading-normal sm:text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed",
             "wrapper": "relative",
             "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
             "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",

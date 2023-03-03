@@ -4,6 +4,7 @@ import { ref } from 'vue'
 const value = ref(null)
 const valueErrors = ref(null)
 const valuePassword = ref(null)
+const valueCopy = ref('Ill be copied to clipboard')
 </script>
 
 <template>
@@ -46,6 +47,15 @@ const valuePassword = ref(null)
         type="password"
         placeholder="A secure password"
         feedback="Please input a dummy password"
+      />
+
+      <!-- Copiable -->
+      <Input
+        v-model="valueCopy"
+        copiable
+        type="text"
+        placeholder="Ill be copied to clipboard"
+        feedback="This will be copied to your clipboard"
       />
     </div>
   </PreviewWrapper>
