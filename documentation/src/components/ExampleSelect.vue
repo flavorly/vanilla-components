@@ -17,7 +17,6 @@ const options = [
     ],
   },
 ]
-
 </script>
 
 <template>
@@ -29,9 +28,15 @@ const options = [
         placeholder="Please choose your stack"
         feedback="You can add SVGs as addons before & After"
         :options="options"
-      >
-      </Select>
+      />
 
+      <Select
+        v-model="value2"
+        placeholder="Please choose your stack"
+        feedback="You can add SVGs as addons before & After"
+        :options="options"
+        errors="There is something wrong with this field"
+      />
     </div>
   </PreviewWrapper>
 </template>

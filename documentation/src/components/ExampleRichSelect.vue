@@ -2,6 +2,7 @@
 import { FormLabel, RichSelect, RichSelectOptionImage, RichSelectOptionIndicator } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref('Option 1')
+const valueErrors = ref('Option 1')
 const value2 = ref(['Option 1', 'Option 2'])
 const value3 = ref(null)
 const value4 = ref([])
@@ -103,6 +104,17 @@ const fetchOptions = (query?: string, nextPage?: number) => {
           :clearable="true"
           feedback="Im useful helper out here, choose wisely"
           placeholder="Please select an option"
+        />
+      </div>
+      <!-- Regular with errors -->
+      <div class="w-full">
+        <RichSelect
+          v-model="valueErrors"
+          :options="options"
+          :clearable="true"
+          feedback="Im useful helper out here, choose wisely"
+          placeholder="Please select an option"
+          errors="Something is wrong here"
         />
       </div>
       <!-- Multiple -->

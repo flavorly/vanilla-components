@@ -7,7 +7,7 @@ export const selectConfig = {
   fixedClasses: {
     wrapper: 'relative',
     select: mergeClasses(
-      'appearance-none block w-full',
+      'appearance-none block w-full focus:outline-none',
       commonClasses.inputsShadows,
       commonClasses.inputsDisabled,
       commonClasses.inputsSpacing,
@@ -54,7 +54,9 @@ export const selectConfig = {
       classes: {
         wrapper: '',
         select: mergeClasses(
-          commonClasses.inputsErrorText,
+          commonClasses.inputsText,
+          commonClasses.inputsRingBase,
+          commonClasses.inputsErrorTextColor,
           commonClasses.inputsErrorsBackground,
           commonClasses.inputsErrorsBorder,
           commonClasses.inputsErrorsRing,
