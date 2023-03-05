@@ -453,7 +453,7 @@
         },
         "classes": {
             "wrapper": "block w-full",
-            "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+            "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
             "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
             "dropdownContent": "space-y-1",
             "dropdownContentWithSearch": "pt-1",
@@ -473,7 +473,7 @@
             "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
             "optgroupOptionsList": "px-2 pb-2",
             "searchWrapper": "inline-block w-full px-3 py-2",
-            "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+            "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2.5 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
             "searchingText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
             "needsMoreCharsText": "flex items-center justify-center px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center space-x-2",
             "noResultsText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
@@ -503,7 +503,7 @@
             "error": {
                 "classes": {
                     "wrapper": "block w-full",
-                    "trigger": "ring-1 ring-inset focus:ring-inset focus:ring-2 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 text-red-400 placeholder-red-400 rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+                    "trigger": "ring-1 ring-inset focus:ring-inset focus:ring-2 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 text-red-400 placeholder-red-400 rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
                     "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
                     "dropdownContent": "space-y-1",
                     "dropdownContentWithSearch": "pt-1",
@@ -523,7 +523,7 @@
                     "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
                     "optgroupOptionsList": "px-2 pb-2",
                     "searchWrapper": "inline-block w-full px-3 py-2",
-                    "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+                    "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2.5 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
                     "searchingText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
                     "needsMoreCharsText": "flex items-center justify-center px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center space-x-2",
                     "noResultsText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
@@ -843,7 +843,7 @@
             "inputBorder": ""
         },
         "classes": {
-            "input": "text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 px-4 py-2.5 autofill:!bg-white dark:autofill:!bg-gray-900",
+            "input": "border-0 text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 px-4 py-3 !autofill:bg-white !dark:autofill:bg-gray-900",
             "roundedFull": "",
             "roundedTop": "",
             "roundedBottom": "",
@@ -864,7 +864,7 @@
         "variants": {
             "error": {
                 "classes": {
-                    "input": "text-red-400 placeholder-red-400 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 px-4 py-2.5 autofill:!bg-white dark:autofill:!bg-gray-900",
+                    "input": "text-red-400 placeholder-red-400 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 px-4 py-3 !autofill:bg-white !dark:autofill:bg-gray-900",
                     "inputBorder": "border-0",
                     "wrapper": "",
                     "addonBefore": "",
@@ -951,14 +951,19 @@
     "PhoneInput": {
         "fixedClasses": {
             "wrapper": "relative",
-            "inputsContainer": "rounded-lg -space-y-px"
+            "inputsContainer": "rounded-lg -space-y-px",
+            "input": {
+                "fixedClasses": {
+                    "addonBeforeInputClasses": "pl-12"
+                }
+            }
         },
         "classes": {
             "wrapper": "",
             "inputsContainer": "",
             "input": {
                 "fixedClasses": {
-                    "addonBeforeInputClasses": "pl-12"
+                    "addonBeforeInputClasses": ""
                 }
             }
         },
@@ -966,7 +971,7 @@
             "error": {
                 "input": {
                     "fixedClasses": {
-                        "addonBeforeInputClasses": "pl-12"
+                        "addonBeforeInputClasses": ""
                     }
                 }
             }
@@ -1103,7 +1108,7 @@
         },
         "classes": {
             "wrapper": "block w-full",
-            "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+            "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
             "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
             "dropdownContent": "space-y-1",
             "dropdownContentWithSearch": "pt-1",
@@ -1123,7 +1128,7 @@
             "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
             "optgroupOptionsList": "px-2 pb-2",
             "searchWrapper": "inline-block w-full px-3 py-2",
-            "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+            "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2.5 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
             "searchingText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
             "needsMoreCharsText": "flex items-center justify-center px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center space-x-2",
             "noResultsText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
@@ -1153,7 +1158,7 @@
             "error": {
                 "classes": {
                     "wrapper": "block w-full",
-                    "trigger": "ring-1 ring-inset focus:ring-inset focus:ring-2 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 text-red-400 placeholder-red-400 rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+                    "trigger": "ring-1 ring-inset focus:ring-inset focus:ring-2 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 text-red-400 placeholder-red-400 rounded-lg flex items-center justify-between w-full leading-normal sm:text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
                     "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
                     "dropdownContent": "space-y-1",
                     "dropdownContentWithSearch": "pt-1",
@@ -1173,7 +1178,7 @@
                     "optgroupLabel": "block px-3 py-2 text-xs text-gray-400 uppercase truncate",
                     "optgroupOptionsList": "px-2 pb-2",
                     "searchWrapper": "inline-block w-full px-3 py-2",
-                    "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
+                    "searchInput": "inline-block w-full shadow-inner focus:ring-opacity-70 text-sm px-4 py-2.5 text-gray-700 dark:text-white placeholder-gray-500/90 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 border-0 rounded-lg shadow bg-gray-50 dark:bg-gray-800",
                     "searchingText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
                     "needsMoreCharsText": "flex items-center justify-center px-3 pt-0 pb-2 text-xs text-gray-500 dark:text-gray-400 text-center space-x-2",
                     "noResultsText": "flex items-center justify-center px-3 py-2 text-sm text-gray-500 dark:text-gray-400 text-center space-x-2",
@@ -1256,14 +1261,14 @@
     "Select": {
         "fixedClasses": {
             "wrapper": "relative",
-            "select": "appearance-none block w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-2.5",
+            "select": "appearance-none block w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
             "selectIfMultiple": "space-y-2"
         },
         "classes": {
             "wrapper": "",
             "select": "leading-normal sm:text-sm text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 rounded-lg",
             "selectIfMultiple": "",
-            "optGroup": "px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed leading-normal sm:text-sm rounded-lg checked:font-semibold checked:text-primary-900 checked:bg-primary-100 checked:dark:bg-primary-300 checked:dark:text-black select:focus:text-red-100 w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2"
+            "optGroup": "px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed leading-normal sm:text-sm rounded-lg checked:font-semibold checked:text-primary-900 checked:bg-primary-100 checked:dark:bg-primary-300 checked:dark:text-black select:focus:text-red-100 w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2"
         },
         "variants": {
             "error": {
@@ -1271,7 +1276,7 @@
                     "wrapper": "",
                     "select": "leading-normal sm:text-sm ring-1 ring-inset focus:ring-inset focus:ring-2 text-red-400 placeholder-red-400 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 rounded-lg",
                     "selectIfMultiple": "",
-                    "optGroup": "px-4 py-2.5 disabled:opacity-50 disabled:cursor-not-allowed leading-normal sm:text-sm rounded-lg checked:font-semibold checked:text-red-900 checked:bg-red-100 checked:dark:bg-red-300 checked:dark:text-black select:focus:text-red-100 w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2"
+                    "optGroup": "px-4 py-3 disabled:opacity-50 disabled:cursor-not-allowed leading-normal sm:text-sm rounded-lg checked:font-semibold checked:text-red-900 checked:bg-red-100 checked:dark:bg-red-300 checked:dark:text-black select:focus:text-red-100 w-full disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed text-sm font-normal px-3 py-2"
                 }
             }
         }
@@ -1435,7 +1440,7 @@
             "inputBorder": ""
         },
         "classes": {
-            "input": "text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 px-4 py-2.5 autofill:!bg-white dark:autofill:!bg-gray-900",
+            "input": "border-0 text-gray-700 dark:text-white placeholder-gray-500/90 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 px-4 py-3 !autofill:bg-white !dark:autofill:bg-gray-900",
             "roundedFull": "",
             "roundedTop": "",
             "roundedBottom": "",
@@ -1456,7 +1461,7 @@
         "variants": {
             "error": {
                 "classes": {
-                    "input": "text-red-400 placeholder-red-400 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 px-4 py-2.5 autofill:!bg-white dark:autofill:!bg-gray-900",
+                    "input": "text-red-400 placeholder-red-400 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 px-4 py-3 !autofill:bg-white !dark:autofill:bg-gray-900",
                     "inputBorder": "border-0",
                     "wrapper": "",
                     "addonBefore": "",
