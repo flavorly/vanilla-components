@@ -32,10 +32,7 @@ A lightweight, flexible & customizable ui library for Vue 3
 
 Get started by installing the peer dependencies than, move on installing the package
 
-```bash
-pnpm add @headlessui/vue@^1.5.0 @popperjs/core@^2.11.2 flatpickr@^4.6.9 libphonenumber-js@^1.9.49 
-pnpm add @flavorly/vanilla-components
-```
+Visit the [Documentation](https://vanilla-components.com/guide/quick-start.html) for more information.
 
 Import the components as needed with the following:
 
