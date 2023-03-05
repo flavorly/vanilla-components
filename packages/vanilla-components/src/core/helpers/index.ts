@@ -22,7 +22,7 @@ export { default as throttle } from './throttle'
 export { default as isTouchOnlyDevice } from './isTouchOnlyDevice'
 export { default as objectToArrayMap } from './objectToArrayMap'
 export { default as getFocusableElements } from './getFocusableElements'
-export { mergeClasses, mergeClassesFromObject } from './mergeClasses'
+export { mergeClasses, mergeClassesFromObject, removeClassesBeforeResetDirect } from './mergeClasses'
 export { default as uniqueId } from './uniqueID'
 export { default as urlHelper } from './urlHelper'
 

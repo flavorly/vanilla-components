@@ -9,7 +9,7 @@ import type {
   WithVariantPropsAndClassesList,
 } from '../types'
 
-import { hasProperty, mergeClasses, mergeClassesFromObject, pick } from '../helpers'
+import { hasProperty, mergeClasses, mergeClassesFromObject, pick, removeClassesBeforeResetDirect } from '../helpers'
 
 const getCustomPropsFromVariant = <
   P extends ObjectWithClassesList,
@@ -177,15 +177,19 @@ const useParseVariant = <
 
     if (isObject(classesForTheCurrentKey)) {
       mergedClasses[classItemKey as string] = mergeClassesFromObject(
-        classesForTheCurrentKey,
         fixedClassesForTheCurrentKey,
+        classesForTheCurrentKey,
       )
     }
     else {
       mergedClasses[classItemKey as string] = mergeClasses(
-        classesForTheCurrentKey,
         fixedClassesForTheCurrentKey,
+        classesForTheCurrentKey,
       )
+
+      if (mergedClasses[classItemKey]) {
+        mergedClasses[classItemKey] = removeClassesBeforeResetDirect(mergedClasses[classItemKey as string])
+      }
     }
   })
 

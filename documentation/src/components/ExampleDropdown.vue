@@ -11,7 +11,7 @@ const value2 = ref(false)
 <template>
   <PreviewWrapper>
     <div class="h-[200px]">
-      <div class="flex items-center justify-center mx-auto">
+      <div class="flex flex-col items-center justify-center mx-auto space-y-3 ">
         <DropdownMenu
           v-model="value"
           text="Options"
@@ -27,9 +27,7 @@ const value2 = ref(false)
             <span>Mark as Done</span>
           </DropdownOption>
         </DropdownMenu>
-      </div>
 
-      <div class="flex items-center justify-center mx-auto">
         <DropdownMenu
           v-model="value2"
           overlay
@@ -46,9 +44,7 @@ const value2 = ref(false)
             <span>Mark as Done</span>
           </DropdownOption>
         </DropdownMenu>
-      </div>
 
-      <div class="mt-10 flex items-center justify-center mx-auto">
         <Dropdown :teleport="true">
           <template #trigger>
             <Button class="btn">
