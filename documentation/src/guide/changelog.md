@@ -8,7 +8,7 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
-### 0.7.39
+### 0.7.38
 - Core : Added `$reset` modified to `classes` and `fixedClasses`giving the ability to reset all generated classes BEFORE the modified ( Inspired by Formkit )
 - Input: Added more padding to the input element
 - Phone Input: Fixed Classes for addon with phone indicative
