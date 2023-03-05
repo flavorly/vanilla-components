@@ -6,6 +6,7 @@ import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 const defaultInput = {
   input: mergeClasses(
     '',
+    commonClasses.inputsBorder,
     commonClasses.inputsTextColor,
     commonClasses.inputsBackground,
     commonClasses.inputsRingBase,

@@ -6,13 +6,18 @@ export const phoneInputConfig = {
   fixedClasses: {
     wrapper: 'relative',
     inputsContainer: 'rounded-lg -space-y-px',
+    input: {
+      fixedClasses: {
+        addonBeforeInputClasses: 'pl-12',
+      },
+    },
   },
   classes: {
     wrapper: '',
     inputsContainer: '',
     input: {
         fixedClasses: {
-          addonBeforeInputClasses: 'pl-12',
+          addonBeforeInputClasses: '',
         },
     },
   },
@@ -20,7 +25,7 @@ export const phoneInputConfig = {
     error: {
       input: {
         fixedClasses: {
-          addonBeforeInputClasses: 'pl-12',
+          addonBeforeInputClasses: '',
         },
       },
     },

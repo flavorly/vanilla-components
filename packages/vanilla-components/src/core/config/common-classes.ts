@@ -9,13 +9,13 @@ const commonClasses = {
   inputsText: 'leading-normal sm:text-sm',
   inputsTextColor: 'text-gray-700 dark:text-white placeholder-gray-500/90',
   inputsBorder: 'border-0',
-  inputsSpacing: 'px-4 py-2.5',
+  inputsSpacing: 'px-4 py-3',
   inputsShadows: 'shadow',
   inputsRing: 'ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600',
   inputsRingBase: 'ring-1 ring-inset focus:ring-inset focus:ring-2',
 
   inputsDisabled: 'disabled:opacity-50 disabled:cursor-not-allowed',
-  inputsAutofill: 'autofill:!bg-white dark:autofill:!bg-gray-900',
+  inputsAutofill: '!autofill:bg-white !dark:autofill:bg-gray-900',
 
   inputsRadius: 'rounded-lg',
   inputsRadiusTop: 'rounded-none rounded-t-lg',

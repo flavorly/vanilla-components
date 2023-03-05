@@ -86,7 +86,7 @@ defineOptions({
           hasSlot($slots.before) ? configuration.classesList.addonBeforeInputClasses : '',
           hasSlot($slots.after) || hasErrors ? configuration.classesList.addonAfterInputClasses : '',
           configuration.classesList.input,
-          configuration.classesList.inputBorder,
+          // configuration.classesList.inputBorder,
           props.rounded === 'full' ? configuration.classesList.roundedFull : '',
           props.rounded === 'top' ? configuration.classesList.roundedTop : '',
           props.rounded === 'bottom' ? configuration.classesList.roundedBottom : '',

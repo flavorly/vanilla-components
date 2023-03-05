@@ -10,6 +10,12 @@ const valueCopy = ref('Ill be copied to clipboard')
 <template>
   <PreviewWrapper>
     <div class="grid space-y-2">
+      <Input
+        v-model="value"
+        placeholder="Dead simple"
+        feedback="You can add SVGs as addons before & After"
+      />
+
       <!-- Regular -->
       <Input
         v-model="value"

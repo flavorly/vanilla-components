@@ -138,6 +138,41 @@ You are not limited to setting a configuration on a file and loading it, even th
 </template>
 ```
 
+### Reset Classes Modifier
+
+If you want to reset a particular component classes, you can use the `$reset` modifier, which will remove all the classes `BEFORE` the given modifier from the component for that specific `key`, this is useful to get rid of `fixedClasses` and `classes` injected after they are resolved and all together.
+
+```vue
+<template>
+    <Button
+        :classes="{
+            button: '$reset bg-red-600'
+        }"
+    />
+    
+    <!-- Also works for nested properties -->
+    <PhoneInput
+        :classes="{
+            input: {
+                wrapper: '$reset bg-red-600'
+            },
+        }"
+    />
+</template>
+```
+
+Given the example above, everything before the `$reset` modifier will be removed, so the final result will be:
+
+```html
+<button class="bg-red-600"> Hey!</button>
+```
+
+This modifier works for `classes` and `fixedClasses` and also for nested properties.
+
+
+
+
+
 ### Override Props Values
 
 As mentioned before you may also override the props default values from the components using the variants & other settings, just keep in mind to always use valid types, as this could bring unwanted behaviors.
