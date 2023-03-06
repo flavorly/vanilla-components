@@ -41,6 +41,7 @@ export const inputConfig = {
       'appearance-none w-full focus:outline-none',
       commonClasses.inputsShadows,
       commonClasses.inputsDisabled,
+      commonClasses.inputsBorder,
     ),
     wrapper: 'relative',
     addonBefore: 'absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer',

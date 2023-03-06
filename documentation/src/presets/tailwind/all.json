@@ -824,7 +824,7 @@
     },
     "Input": {
         "fixedClasses": {
-            "input": "leading-normal sm:text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed",
+            "input": "leading-normal sm:text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed border-0",
             "wrapper": "relative",
             "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
             "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",
@@ -1421,7 +1421,7 @@
     },
     "Textarea": {
         "fixedClasses": {
-            "input": "leading-normal sm:text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed",
+            "input": "leading-normal sm:text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed border-0",
             "wrapper": "relative",
             "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
             "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",
