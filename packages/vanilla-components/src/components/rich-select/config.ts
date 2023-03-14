@@ -162,6 +162,7 @@ export const richSelectConfig = {
   // Until the little bits are merged or variantjs fixes this issue or provider a clear way to override the trigger
   fixedClasses: {
     trigger: 'relative appearance-none focus:outline-none',
+    clearButton: 'z-10',
   },
 
   // Default Input appearance

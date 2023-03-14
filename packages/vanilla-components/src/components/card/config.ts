@@ -2,7 +2,7 @@ import type { InputHTMLAttributes } from 'vue'
 import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 const defaultCard = {
-  card: 'relative bg-white shadow-lg rounded-lg sm:rounded-lg dark:bg-gray-800/70 dark:text-white dark:shadow-dark-xl ring-1 ring-gray-900/10 dark:ring-white/10',
+  card: 'relative bg-white shadow-lg rounded-lg dark:bg-gray-800/70 dark:text-white dark:shadow-dark-xl ring-1 ring-gray-900/10 dark:ring-white/10',
 
   header: 'px-4 py-5 border-b border-gray-200 sm:px-6 dark:border-gray-700',
   headerInner: 'flex justify-between items-center flex-wrap sm:flex-nowrap',
@@ -13,7 +13,7 @@ const defaultCard = {
   subtitle: 'mt-1 max-w-2xl text-sm leading-5 text-gray-500 dark:text-gray-400',
   actions: 'sm:ml-4 mt-4 sm:mt-0 flex space-x-1 content-center flex-wrap flex-shrink',
 
-  body: '',
+  body: 'rounded-lg',
   bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
   bodyDividedDarker: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-900',
   bodyDarker: 'bg-gray-50 dark:bg-gray-800',

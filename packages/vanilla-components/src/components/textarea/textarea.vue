@@ -33,7 +33,7 @@ const props = defineProps({
   },
 })
 
-const localRef = ref(null)
+const root = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<TextareaProps>(textareaConfig, 'Textarea', localValue)
 
@@ -66,7 +66,7 @@ defineOptions({
       </div>
       <textarea
         :id="name"
-        ref="localRef"
+        ref="root"
         v-model="localValue"
         :name="name"
         :autocomplete="props.autocomplete"

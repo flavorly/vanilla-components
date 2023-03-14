@@ -1,6 +1,6 @@
 {
   "name": "@flavorly/vanilla-components-inertia",
-  "version": "0.7.39",
+  "version": "0.7.40",
   "type": "module",
   "sideEffects": false,
   "private": false,

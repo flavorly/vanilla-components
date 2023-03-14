@@ -1,5 +1,5 @@
 import merge from 'lodash/merge'
-import type { ComponentsConfiguration } from './core/types'
+import type { ComponentsConfiguration, PluginOptions } from './core/types'
 import * as Components from './components'
 
 export const defaultConfiguration = {
@@ -47,4 +47,12 @@ export const defineConfiguration = (userConfiguration: ComponentsConfiguration =
       return merge(preset, userConfiguration)
     }
     return merge(defaultConfiguration, userConfiguration)
+}
+
+export const defaultOptions: PluginOptions = {
+  swapErrorsVariantOnModelValueChanges: false,
+}
+
+export const defineOptions = (userOptions: PluginOptions = {}): PluginOptions => {
+  return merge(defaultOptions, userOptions)
 }

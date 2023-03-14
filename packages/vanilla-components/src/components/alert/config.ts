@@ -3,12 +3,13 @@ import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const alertConfig = {
   fixedClasses: {
-    wrapper: '',
+    wrapper: 'p-4',
     iconWrapper: 'flex-shrink-0',
     icon: 'h-5 w-5',
-    contentWrapper: 'ml-3 flex flex-col space-y-2',
+    contentWrapper: 'flex flex-col space-y-2 items-start justify-center',
+    contentWrapperWithIcon: 'ml-3',
     title: 'text-sm font-medium',
-    text: 'text-sm',
+    text: 'text-xs text-left',
     actionsWrapper: 'mt-4',
     actionsContainer: '-mx-2 -my-1.5 flex',
     closeButtonWrapper: 'ml-auto pl-3',
@@ -25,10 +26,11 @@ export const alertConfig = {
   },
 
   classes: {
-    wrapper: 'border-l-4 rounded-md p-4 border-primary-400 bg-white dark:bg-gray-800/70',
+    wrapper: 'border-l-4 rounded-md  border-primary-400 bg-white dark:bg-gray-800/70',
     iconWrapper: '',
     icon: '',
     contentWrapper: '',
+    contentWrapperWithIcon: '',
     title: 'text-gray-800 dark:text-white',
     text: 'text-gray-700 dark:text-gray-50',
     actionsWrapper: '',
@@ -50,10 +52,11 @@ export const alertConfig = {
   variants: {
     success: {
       classes: {
-        wrapper: 'border-l-4 rounded-md p-4 border-green-400 dark:border-green-600 bg-green-50 dark:bg-green-200',
+        wrapper: 'border-l-4 rounded-md border-green-400 dark:border-green-600 bg-green-50 dark:bg-green-200',
         iconWrapper: '',
         icon: 'text-green-400 dark:text-green-600',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-green-800 dark:text-green-900',
         text: 'text-green-700 dark:text-green-900/90',
         actionsWrapper: '',
@@ -66,10 +69,11 @@ export const alertConfig = {
     },
     warning: {
       classes: {
-        wrapper: 'border-l-4 rounded-md p-4 border-yellow-400 dark:border-yellow-600 bg-yellow-50 dark:bg-yellow-200',
+        wrapper: 'border-l-4 rounded-md border-yellow-400 dark:border-yellow-600 bg-yellow-50 dark:bg-yellow-200',
         iconWrapper: '',
         icon: 'text-yellow-400 dark:text-yellow-600',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-yellow-800 dark:text-yellow-900',
         text: 'text-yellow-700 dark:text-yellow-900/90',
         actionsWrapper: '',
@@ -82,10 +86,11 @@ export const alertConfig = {
     },
     error: {
       classes: {
-        wrapper: 'border-l-4 rounded-md p-4 border-red-400 dark:border-red-600 bg-red-50 dark:bg-red-200',
+        wrapper: 'border-l-4 rounded-md border-red-400 dark:border-red-600 bg-red-50 dark:bg-red-200',
         iconWrapper: '',
         icon: 'text-red-400 dark:text-red-600',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-red-800 dark:text-red-900',
         text: 'text-red-700 dark:text-red-900/90',
         actionsWrapper: '',
@@ -98,10 +103,11 @@ export const alertConfig = {
     },
     info: {
       classes: {
-        wrapper: 'border-l-4 rounded-md p-4 border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-200',
+        wrapper: 'border-l-4 rounded-md border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-200',
         iconWrapper: '',
         icon: 'text-blue-400 dark:text-blue-600',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-blue-800 dark:text-blue-900',
         text: 'text-blue-700 dark:text-blue-900/90',
         actionsWrapper: '',
@@ -114,10 +120,11 @@ export const alertConfig = {
     },
     muted: {
       classes: {
-        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-primary-400/50 bg-primary-300/10 dark:bg-primary-600/10',
+        wrapper: 'ring-1 ring-inset rounded-md ring-primary-400/50 bg-primary-300/10 dark:bg-primary-600/10',
         iconWrapper: '',
         icon: '',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'font-semibold  text-primary-800 dark:text-primary-400',
         text: 'text-primary-700 dark:text-primary-200',
         actionsWrapper: '',
@@ -131,10 +138,11 @@ export const alertConfig = {
 
     warning_muted: {
       classes: {
-        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-yellow-400/50 bg-yellow-300/10 dark:bg-yellow-600/10',
+        wrapper: 'ring-1 ring-inset rounded-md ring-yellow-400/50 bg-yellow-300/10 dark:bg-yellow-600/10',
         iconWrapper: '',
         icon: '',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-yellow-800 dark:text-yellow-400',
         text: 'text-yellow-700 dark:text-yellow-200',
         actionsWrapper: '',
@@ -148,10 +156,11 @@ export const alertConfig = {
 
     error_muted: {
       classes: {
-        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-red-400/50 bg-red-300/10 dark:bg-red-600/10',
+        wrapper: 'ring-1 ring-inset rounded-md ring-red-400/50 bg-red-300/10 dark:bg-red-600/10',
         iconWrapper: '',
         icon: '',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-red-800 dark:text-red-400',
         text: 'text-red-700 dark:text-red-200',
         actionsWrapper: '',
@@ -165,10 +174,11 @@ export const alertConfig = {
 
     info_muted: {
       classes: {
-        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-blue-400/50 bg-blue-300/10 dark:bg-blue-600/10',
+        wrapper: 'ring-1 ring-inset rounded-md ring-blue-400/50 bg-blue-300/10 dark:bg-blue-600/10',
         iconWrapper: '',
         icon: '',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-blue-800 dark:text-blue-400',
         text: 'text-blue-700 dark:text-blue-200',
         actionsWrapper: '',
@@ -182,10 +192,11 @@ export const alertConfig = {
 
     success_muted: {
       classes: {
-        wrapper: 'ring-1 ring-inset rounded-md p-4 ring-green-400/50 bg-green-300/10 dark:bg-green-600/10',
+        wrapper: 'ring-1 ring-inset rounded-md  ring-green-400/50 bg-green-300/10 dark:bg-green-600/10',
         iconWrapper: '',
         icon: '',
         contentWrapper: '',
+        contentWrapperWithIcon: '',
         title: 'text-green-800 dark:text-green-400',
         text: 'text-green-700 dark:text-green-200',
         actionsWrapper: '',

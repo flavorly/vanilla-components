@@ -17,7 +17,7 @@ export const slideoverConfig = {
     innerBottom: 'fixed bottom-0 pt-10 max-w-full flex',
 
     slideover: 'pointer-events-auto w-screen mx-auto',
-    slideoverContainer: 'flex h-full flex-col overflow-y-scroll bg-white dark:bg-gray-800 shadow-xl',
+    slideoverContainer: 'flex h-full flex-col bg-white dark:bg-gray-800 shadow-xl overflow-y-auto',
     slideOverContainerWithPadding: 'py-6',
 
     sizeWidthDefault: 'max-w-sm',

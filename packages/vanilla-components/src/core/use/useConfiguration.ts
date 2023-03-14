@@ -3,7 +3,7 @@ import { camelize, computed, getCurrentInstance, inject, reactive, ref, watch } 
 import { snakeCase } from 'change-case'
 import { get, isEqual, isPrimitive, pick } from '../helpers'
 import { useParseVariant } from '../use'
-import type { ComponentsConfiguration, Data } from '../types'
+import type { ComponentsConfiguration, Data, PluginOptions } from '../types'
 
 /**
  * Extract the defined props from the component
@@ -112,6 +112,7 @@ export function useConfiguration<ComponentOptions extends Data>(
   const errors = ref<string | undefined>(props?.errors as string | undefined)
   const variant = ref<string | undefined>(props?.variant as string | undefined)
   const hasErrors = computed(() => errors?.value !== undefined && errors?.value !== null && errors?.value !== '') as ComputedRef<boolean>
+  const globalOptions = inject<PluginOptions>('vanilla_components_options', {})
 
   // If there is a variant, we will snake case it
   if (variant.value) {
@@ -124,11 +125,11 @@ export function useConfiguration<ComponentOptions extends Data>(
   }
 
   // If there is a model value, we will watch it and reset the errors
-  if (modelValue !== undefined) {
+  if (modelValue !== undefined && globalOptions.swapErrorsVariantOnModelValueChanges) {
     watch(() => modelValue?.value, () => {
       errors.value = undefined
       variant.value = props?.variant as string | undefined
-    })
+    }, { deep: true })
   }
 
   // Watch the variant change and re-pass it
@@ -145,7 +146,7 @@ export function useConfiguration<ComponentOptions extends Data>(
     else {
       variant.value = props?.variant as string | undefined
     }
-  })
+  }, { deep: true })
 
   // Finally here extract everything on a single computed configuration
   const { propsValues, componentGlobalConfiguration } = useConfigurationParts<ComponentOptions>(componentName)

@@ -30,6 +30,7 @@ const setActiveOption = inject<(option: NormalizedOption) => void>('setActiveOpt
 const optionIsSelected = inject<(option: NormalizedOption) => boolean>('optionIsSelected')!
 const optionIsActive = inject<(option: NormalizedOption) => boolean>('optionIsActive')!
 const shown = inject<Ref<boolean>>('shown')
+const clearable = inject<boolean>('clearable')
 const classesList = useInjectsClassesList()!
 
 // Computed stuff
@@ -37,7 +38,10 @@ const isActive = computed(() => optionIsActive(props.option)) as Ref<boolean>
 const isSelected = computed(() => optionIsSelected(props.option)) as Ref<boolean>
 const isDisabled = computed(() => normalizedOptionIsDisabled(props.option)) as Ref<boolean>
 const hasChildren = computed(() => props.option.children !== undefined && props.option.children.length > 0) as Ref<boolean>
-const valueAttribute = computed(() => typeof props.option.value === 'object' ? JSON.stringify(props.option.value) : String(props.option.value))
+const valueAttribute = computed(() => typeof props.option.value === 'object'
+  ? JSON.stringify(props.option.value)
+  : String(props.option.value))
+
 const optionClasses = computed(() => {
   const classes: CssClass[] = [classesList.value!.option]
 
@@ -86,6 +90,10 @@ const mouseWheelHandler = () => {
 
 const clickHandler = () => {
   if (isDisabled.value) {
+    return
+  }
+
+  if (!clearable && isSelected.value) {
     return
   }
   toggleOption(props.option)

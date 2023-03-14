@@ -22,7 +22,7 @@ const props = defineProps({
   },
   type: {
     type: [String] as PropType<string>,
-    default: '',
+    default: 'text',
   },
   placeholder: {
     type: [String] as PropType<string>,
@@ -34,7 +34,7 @@ const props = defineProps({
   },
 })
 
-const localRef = ref(null)
+const root = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const localType = ref(props.type)
 const { configuration, errors, hasErrors } = useConfiguration<InputProps>(inputConfig, 'Input', localValue)
@@ -77,7 +77,7 @@ defineOptions({
       <!-- Input -->
       <input
         :id="name"
-        ref="localRef"
+        ref="root"
         v-model="localValue"
         :name="name"
         :autocomplete="props.autocomplete"

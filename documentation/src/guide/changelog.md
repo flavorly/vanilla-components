@@ -8,6 +8,20 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.40
+- Feature: Introduced Options API for all components, allowing for more flexibility and customization of behavior
+- **Breaking Change**: All components by default will not trigger back to regular variant after an error, please use the options API to enable this behavior
+- Avatar : Added `size` class to allow for customizing the size of the avatar without breaking the other styles
+- Alert: Improved styling
+- Card: Fixed issue with `bodyDarker` prop that allowed content to overflow
+- Dropdown: Swaped from border to Ring & added small size, also fixed teleport issues & transition effects
+- General : Main element ref is now available on all components as `root`
+- Input: Defaults to type "text" if no type is provided
+- InputGroup: Prefers `gap` over `space` between elements, avoiding empty nodes to create space in DOM & Fixed Types
+- Phone Input: Fixed issue that would not allow initial indicative to be set on first render
+- Rich Select: Fixed issue that would still allow to clear the input while `clearable` was set to false
+- Slideover: Fixed issue with overflow on body, now its set to auto, to avoid scrollbars when they are not needed
+
 ### 0.7.39
 - Input: Fixed issues with border
 

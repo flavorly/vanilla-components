@@ -11,7 +11,6 @@ importers:
       '@flavorly/v-calendar': 3.0.0-alpha.11
       '@flavorly/vanilla-components': workspace:*
       '@headlessui/vue': ^1.7.4
-      '@heroicons/vue': ^2.0.16
       '@iconify-json/arcticons': ^1.1.43
       '@iconify-json/heroicons': ^1.1.10
       '@iconify-json/ph': ^1.1.4
@@ -70,7 +69,6 @@ importers:
       '@flavorly/v-calendar': 3.0.0-alpha.11_vue@3.2.47
       '@flavorly/vanilla-components': link:packages/vanilla-components
       '@headlessui/vue': 1.7.4_vue@3.2.47
-      '@heroicons/vue': 2.0.16_vue@3.2.47
       '@iconify-json/arcticons': 1.1.43
       '@iconify-json/heroicons': 1.1.10
       '@iconify-json/ph': 1.1.4
@@ -1088,14 +1086,6 @@ packages:
     engines: {node: '>=10'}
     peerDependencies:
       vue: ^3.2.0
-    dependencies:
-      vue: 3.2.47
-    dev: true
-
-  /@heroicons/vue/2.0.16_vue@3.2.47:
-    resolution: {integrity: sha512-saVAExLlGu6epqmS543qeWd/UOJUxpTJyK9aXeFGqS3VIW8X7yyJQmUGT40A38gBEAxMOdTdH9jFSh8sjPFM7A==}
-    peerDependencies:
-      vue: '>= 3'
     dependencies:
       vue: 3.2.47
     dev: true

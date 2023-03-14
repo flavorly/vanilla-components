@@ -37,7 +37,7 @@ export const dropdownConfig = {
 
     dropdown: mergeClasses(
       commonClasses.dropdownsBackground,
-      commonClasses.dropdownsBorder,
+      commonClasses.dropdownsRing,
       commonClasses.dropdownsRadius,
       commonClasses.dropdownsShadows,
       'top-5',
@@ -56,6 +56,7 @@ export const dropdownConfig = {
     roundedTopLeft: commonClasses.inputsRadiusTopLeft,
     roundedTopRight: commonClasses.inputsRadiusTopRight,
 
+    sizeSmall: 'w-48',
     sizeDefault: 'w-56',
     sizeMedium: 'w-64',
     sizeLarge: 'w-72',

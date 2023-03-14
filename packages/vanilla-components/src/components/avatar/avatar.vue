@@ -131,20 +131,31 @@
         >
           <div
             v-show="!photoPreview"
-            :class="configuration.classesList.imagePreviewContainer"
+            :class="[
+              configuration.classesList.imagePreviewContainer,
+              configuration.classesList.size,
+            ]"
             @click="triggerFileUploadAction"
           >
             <img
               v-if="currentPhotoUrl"
               :src="currentPhotoUrl"
               :alt="currentPhotoAltTag"
-              :class="configuration.classesList.currentImage"
+              :class="[
+                configuration.classesList.currentImage,
+                configuration.classesList.size,
+              ]"
             >
             <span
               v-else
               :class="configuration.classesList.avatarPlaceholderText"
             >
-              <span :class="configuration.classesList.avatarPlaceholder">{{ avatarInitials }}</span>
+              <span
+                :class="[
+                  configuration.classesList.avatarPlaceholder,
+                  configuration.classesList.size,
+                ]"
+              >{{ avatarInitials }}</span>
             </span>
           </div>
         </slot>
@@ -160,7 +171,10 @@
           >
             <div
               :style="`background-size: cover; background-repeat: no-repeat; background-position: center center; background-image: url('${photoPreview}');`"
-              :class="configuration.classesList.preview"
+              :class="[
+                configuration.classesList.preview,
+                configuration.classesList.size,
+              ]"
             />
           </div>
         </slot>

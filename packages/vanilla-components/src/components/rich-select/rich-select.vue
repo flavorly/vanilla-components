@@ -321,6 +321,7 @@ const {
   flattenedOptions,
   localValue,
   computed(() => configuration.multiple!),
+  computed(() => configuration.clearable!),
 )
 
 const {
@@ -476,7 +477,7 @@ const keydownUpHandler = (e: KeyboardEvent): void => {
 const keydownEnterHandler = (e: KeyboardEvent): void => {
   emit('keydown', e)
 
-  if (shown.value === true) {
+  if (shown.value) {
     toggleOptionFromActiveOption()
   }
 }
@@ -486,10 +487,10 @@ const keydownSpaceHandler = (e: KeyboardEvent): void => {
 
   e.preventDefault()
 
-  if (configuration.toggleOnClick && shown.value === false) {
+  if (configuration.toggleOnClick && shown.value) {
     showDropdown()
   }
-  else if (shown.value === true) {
+  else if (shown.value) {
     toggleOptionFromActiveOption()
   }
 }
@@ -665,6 +666,8 @@ provide('keydownEscHandler', keydownEscHandler)
 provide('keydownEnterHandler', keydownEnterHandler)
 
 provide('shown', shown)
+
+provide('clearable', configuration.clearable)
 
 provide('showSearchInput', showSearchInput)
 

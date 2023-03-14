@@ -111,6 +111,11 @@ onUnmounted(() => {
   clearTimeout(internalTimeout.value)
 })
 
+defineOptions({
+  name: 'VanillaAlert',
+  inheritAttrs: false,
+})
+
 /**
  * @docs
  * @displayName VanillaAlert
@@ -163,7 +168,12 @@ onUnmounted(() => {
             </div>
           </slot>
 
-          <div :class="configuration.classesList.contentWrapper">
+          <div
+            :class="[
+              configuration.classesList.contentWrapper,
+              props.icon ? configuration.classesList.contentWrapperWithIcon : '',
+            ]"
+          >
             <h3
               v-if="title || hasSlot($slots.title)"
               :class="configuration.classesList.title"
@@ -176,6 +186,7 @@ onUnmounted(() => {
             <div
               v-if="text || hasSlot($slots.text)"
               :class="configuration.classesList.text"
+              v-bind="$attrs"
             >
               <slot name="text">
                 <p>{{ text }}</p>

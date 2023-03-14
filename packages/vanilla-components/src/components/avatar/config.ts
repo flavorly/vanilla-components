@@ -7,11 +7,12 @@ export const avatarConfig = {
     wrapperImageAndButtons: '',
     imageAndPreviewContainer: 'flex items-center justify-center cursor-pointer',
     imagePreviewContainer: 'mt-2',
-    currentImage: 'rounded-full h-20 w-20 object-cover',
-    avatarPlaceholder: 'inline-flex items-center justify-center rounded-full h-20 w-20 rounded-full p-5 border-0 ring-1',
+    currentImage: 'rounded-full object-cover',
+    avatarPlaceholder: 'inline-flex items-center justify-center rounded-full rounded-full p-5 border-0 ring-1',
     avatarPlaceholderText: 'text-sm font-light leading-none',
     buttonsContainer: 'flex items-center justify-center mt-2',
-    preview: 'relative w-20 h-20 shadow-sm rounded-full border-0 ring-1',
+    preview: 'relative shadow-sm rounded-full border-0 ring-1',
+    size: 'h-20 w-20',
   },
 
   // Default Input appearance
@@ -25,6 +26,7 @@ export const avatarConfig = {
     avatarPlaceholderText: '',
     buttonsContainer: '',
     preview: 'ring-gray-300 dark:ring-white/30',
+    size: '',
   },
 
   // Variants
@@ -41,6 +43,7 @@ export const avatarConfig = {
         avatarPlaceholderText: '',
         buttonsContainer: '',
         preview: '',
+        size: 'h-20 w-20',
       },
     },
   },

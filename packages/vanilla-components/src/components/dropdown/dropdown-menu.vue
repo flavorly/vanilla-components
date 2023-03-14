@@ -94,7 +94,7 @@
       type: [String] as PropType<string>,
       default: 'default',
       validator(value: string) {
-        return ['default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value)
+        return ['small', 'default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value)
       },
     },
     position: {
@@ -280,16 +280,17 @@
       </slot>
     </MenuButton>
     <!-- Overlay if enable -->
-    <div
-      v-if="overlay && open"
-      :class="configuration.classesList.overlay"
-      @click="closeOnClickOverlay"
-    />
 
     <teleport
       :to="teleportTo"
       :disabled="!teleport"
     >
+      <div
+        v-if="overlay && open"
+        :class="configuration.classesList.overlay"
+        @click="closeOnClickOverlay"
+      />
+
       <div
         ref="dropdown"
         :class="[
@@ -310,6 +311,7 @@
           <MenuItems
             :class="[
               configuration.classesList.dropdown,
+              size === 'small' ? configuration.classesList.sizeSmall : '',
               size === 'default' ? configuration.classesList.sizeDefault : '',
               size === 'medium' ? configuration.classesList.sizeMedium : '',
               size === 'large' ? configuration.classesList.sizeLarge : '',

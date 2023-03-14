@@ -67,7 +67,7 @@ const props = defineProps({
   },
 })
 
-const localRef = ref(null)
+const root = ref(null)
 const { localValue } = useMultipleVModel(props, 'modelValue', props.multiple)
 const { configuration, errors, hasErrors } = useConfiguration<SelectProps>(selectConfig, 'Select', localValue)
 
@@ -95,7 +95,7 @@ defineOptions({
     <div :class="configuration.classesList?.wrapper">
       <select
         :id="name"
-        ref="localRef"
+        ref="root"
         v-model="localValue"
         :name="name"
         :autocomplete="props.autocomplete"

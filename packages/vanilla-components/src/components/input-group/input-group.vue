@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import Fuse from 'fuse.js'
 import { useConfiguration, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
 import FormErrors from '../forms/form-errors.vue'
@@ -28,6 +27,11 @@ const props = defineProps({
     default: undefined,
     required: false,
   },
+  for: {
+    type: [String, undefined] as PropType<string | undefined>,
+    default: undefined,
+    required: false,
+  },
   showErrors: {
     type: Boolean as PropType<boolean>,
     default: true,
@@ -38,7 +42,7 @@ const props = defineProps({
     default: true,
     required: false,
   },
-  withPadding: {
+  padding: {
     type: [Boolean] as PropType<boolean>,
     default: true,
     required: false,
@@ -81,12 +85,13 @@ defineOptions({
   <div
     :class="[
       configuration.classesList.container,
-      configuration.withPadding ? configuration.classesList.containerWithPadding : '',
+      configuration.padding ? configuration.classesList.containerWithPadding : '',
     ]"
   >
     <!-- Label And Input -->
     <div :class="configuration.classesList.wrapper">
       <div
+        v-if="label || hasSlot($slots.label)"
         :class="[
           configuration.classesList.labelWrapper,
           alignLabel === 'left-top' ? configuration.classesList.labelWrapperLeftTop : '',

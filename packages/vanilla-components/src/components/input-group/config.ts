@@ -20,8 +20,8 @@ export const inputGroupConfig = {
     inputWrapper: '',
   },
   classes: {
-    wrapper: 'grid space-y-2',
-    container: 'block sm:grid space-y-2',
+    wrapper: 'grid gap-y-2',
+    container: 'block sm:grid gap-y-2',
     containerWithPadding: '',
     label: '',
     labelWrapper: 'sm:mt-px sm:pt-0 flex',
@@ -34,14 +34,14 @@ export const inputGroupConfig = {
     labelWrapperCenterTop: '',
     labelWrapperCenterCenter: '',
     labelWrapperCenterBottom: '',
-    inputWrapper: 'flex mt-0 grid space-y-2',
+    inputWrapper: 'mt-0 grid gap-y-2',
   },
   variants: {
     inline: {
       classes: {
         wrapper: 'sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 content-center',
         labelWrapper: 'flex items-center justify-start h-full',
-        inputWrapper: 'mt-1 sm:col-span-2 sm:mt-0 flex flex-col space-y-2',
+        inputWrapper: 'mt-1 sm:col-span-2 sm:mt-0 flex flex-col gap-y-2',
         label: '',
       },
     },
@@ -59,4 +59,12 @@ export const inputGroupClassesKeys = Object.keys(inputGroupConfig.classes)
 export declare type InputGroupClassesValidKeys = keyof typeof inputGroupConfig.classes
 export declare type InputGroupValue = string | number | undefined
 export declare type InputGroupProps = WithVariantPropsAndClassesList<{
+  errors?: string[] | string | undefined
+  label?: string | undefined
+  name?: string | undefined
+  for?: string | undefined
+  showErrors?: boolean
+  showFeedback?: boolean
+  padding?: boolean
+  alignLabel?: string | 'left-top' | 'left-center' | 'left-bottom' | 'right-top' | 'right-center' | 'right-bottom' | 'center-top' | 'center-center' | 'center-bottom'
 } & InputHTMLAttributes & Data, InputGroupClassesValidKeys>

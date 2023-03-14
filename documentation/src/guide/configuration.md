@@ -305,6 +305,31 @@ And here is the code :
 
 <<< @/components/DemoExampleVariant.vue
 
+
+## Options
+
+The plugin also supports an object of configurable options, you can pass them as the third argument when installing the plugin.
+You may import defineOptions, that will help find out what options are available and ensure a type-safe experience.
+Here is a quick example.
+
+```ts
+import { Plugin, defineConfiguration, defineOptions } from '@flavorly/vanilla-components'
+
+app.use(Plugin, defineConfiguration({}), defineOptions({
+    swapErrorsVariantOnModelValueChanges: true,
+}))
+```
+
+### swapErrorsVariantOnModelValueChanges
+
+This option will automatically swap the `error` variant to the original variant once the v-model of the component changes.
+
+Setting it to `true`, will assume that your `error` prop is reactive and will change once the error gets changed, it will also remove the error variant once the user changes the input.
+
+Settings it to `false` will change the behaviour, and the error will persist even if the user changes the input, it will only go back to the original variant once `errors` prop is cleared or set to a nullish value.
+
+In both cases, the input will go back to the normal variant once the errors prop is set to a nullish value.
+
 ## Styling Structure :dna:
 
 Components contain three major keys that can be set: `fixedClasses`, `classes`, `variants` & `props`, Below we will explain what each of them means and what's their behavior, as they represent the core concept:

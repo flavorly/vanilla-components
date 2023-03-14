@@ -41,7 +41,7 @@ const props = defineProps({
 
 const emit = defineEmits(['click'])
 
-const localRef = ref(null) as Ref<ComponentPublicInstance<HTMLInputElement> | null>
+const root = ref(null) as Ref<ComponentPublicInstance<HTMLInputElement> | null>
 const localValue = ref(props.label)
 const { configuration } = useConfiguration<ButtonProps>(buttonConfig, 'Button', localValue)
 
@@ -59,10 +59,10 @@ const handleClickEvent = (event: MouseEvent) => {
 onMounted(() => {
   if (props.focusOnMount) {
     try {
-      localRef?.value?.focus()
+      root?.value?.focus()
     }
     catch (e) {
-      localRef?.value?.$el?.focus()
+      root?.value?.$el?.focus()
     }
   }
 })
@@ -82,7 +82,7 @@ defineOptions({
 <template>
   <component
     :is="as"
-    ref="localRef"
+    ref="root"
     :as="asDeep"
     :class="[
       configuration.classesList.button,

@@ -10,6 +10,7 @@ export default function useSelectableOption(
   options: Ref<NormalizedOption[]>,
   localValue: Ref<any>,
   multiple: Ref<boolean>,
+  clearable: Ref<boolean>,
 ): {
     selectedOption: Ref<SelectedOption>
     hasSelectedOption: ComputedRef<boolean>
@@ -23,7 +24,7 @@ export default function useSelectableOption(
       return Array.isArray(localValue.value)
         && localValue.value.some(value =>
           isEqual(value, option.value)
-          || ((isNumber(value) || isNumber(option.value)) && isEqual(value.toString(), option.value.toString())),
+          || ((isNumber(value) || isNumber(option.value)) && isEqual(value.toString(), option.value?.toString())),
         )
     }
 
@@ -89,6 +90,11 @@ export default function useSelectableOption(
   }
 
   const toggleOption = (option: NormalizedOption): void => {
+    // Ensure we cannot deselect the option if its not multiple and not clearable
+    if (!multiple.value && !clearable.value && localValue.value === option.value) {
+      return
+    }
+
     if (optionIsSelected(option)) {
       if (multiple.value) {
         localValue.value = subtractFromArray(localValue.value, option.value)

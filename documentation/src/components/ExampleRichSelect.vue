@@ -136,6 +136,7 @@ const fetchOptions = (query?: string, nextPage?: number) => {
           v-model="value3"
           feedback="A select with a list of persons"
           :options="optionsPersons"
+          :clearable="false"
           placeholder="Please select a person"
         >
           <template #label="{ option: { raw: person }, className, isSelected, hasErrors }">

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
 import type { CountryCallingCode, CountryCode, PhoneNumber } from 'libphonenumber-js/types'
-import { ref, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js'
 import examples from 'libphonenumber-js/mobile/examples'
 import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '../../core/types'
@@ -72,15 +72,15 @@ const emit = defineEmits([
   'update:phoneNumberInternational',
 ])
 
-const localRefPhone = ref(null)
-const localRefCountry = ref(null)
+const rootPhone = ref(null)
+const rootCountry = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const phoneCountryCode = ref<CountryCode>(props.countryCode)
-const phoneDialCode = ref<CountryCallingCode | string[] | number>(null)
+const phoneDialCode = ref<CountryCallingCode | string[] | number | null>(null)
 const phoneNumber: Ref<string | undefined> = ref(localValue.value)
 const isValidPhoneNumber: Ref<boolean> = ref(false)
 const placeholder = ref<string | number | undefined>(props.phonePlaceholder)
-const parsedPhoneNumber = ref<PhoneNumber>(null)
+const parsedPhoneNumber = ref<PhoneNumber | null>(null)
 
 const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountryCodeValue: CountryCode) => {
   if (!phoneNumberValue || !phoneCountryCodeValue) {
@@ -112,7 +112,12 @@ const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountry
   }
 }
 
-attemptToParseNumber(phoneNumber.value, phoneCountryCode.value)
+onMounted(() => {
+  attemptToParseNumber(phoneNumber.value, phoneCountryCode.value)
+  if (phoneDialCode.value === null) {
+    phoneDialCode.value = getCountryCallingCode(phoneCountryCode.value)
+  }
+})
 
 const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInputProps>(phoneInputConfig, 'PhoneInput', localValue)
 
@@ -124,6 +129,10 @@ watch([phoneCountryCode, phoneNumber, localValue], ([newPhoneCountryCode, newPho
   const examplePlaceHolder = getExampleNumber(newPhoneCountryCode, examples)?.nationalNumber as string | undefined
   if (examplePlaceHolder && (props.phonePlaceholder === '' || props.phonePlaceholder === undefined)) {
     placeholder.value = examplePlaceHolder
+  }
+
+  if (phoneCountryCode.value) {
+    phoneDialCode.value = getCountryCallingCode(phoneCountryCode.value)
   }
 
   // Watch & Emit additional data
@@ -152,7 +161,7 @@ defineOptions({
   >
     <div :class="[configuration.classesList.inputsContainer]">
       <CountryInput
-        ref="localRefCountry"
+        ref="rootCountry"
         v-model.lazy="phoneCountryCode"
         :favorite-countries="favoriteCountries"
         :variant="variant"
@@ -168,7 +177,7 @@ defineOptions({
         rounded="top"
       />
       <Input
-        ref="localRefPhone"
+        ref="rootPhone"
         v-model.lazy="phoneNumber"
         :variant="variant"
         :show-errors="false"

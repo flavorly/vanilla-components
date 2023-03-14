@@ -57,7 +57,7 @@ const props = defineProps({
 
 const emit = defineEmits(['update:modelValue', 'updated:checked'])
 
-const localRef = ref(null)
+const root = ref(null)
 const localValue = useVModel(props, 'modelValue')
 
 // When toggle changes, emit the update in a different way.
@@ -138,7 +138,7 @@ defineOptions({
   >
     <input
       :id="name"
-      ref="localRef"
+      ref="root"
       :checked="isChecked"
       :value="value"
       style="display: none;"
@@ -154,7 +154,7 @@ defineOptions({
       ]"
       type="button"
       v-bind="$attrs"
-      @click="$refs.localRef.click()"
+      @click="$refs.root.click()"
     >
       <span
         :class="[
