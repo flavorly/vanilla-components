@@ -8,6 +8,16 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.41
+- Datetime : Removed & Deprecated `@flavorly/v-calendar` dependency, please use `v-calendar@next` instead tagged 3.0.0
+- Datetime : Added `v-calendar@next` as a peer dependency
+- Targets: Added `esnext` & `node 16` as a target, supporting async component loading
+- Dropdown: fixed issues with border radius
+- Phone Input: Removed `libphonenumber-js` dependency in favor of `awesome-phonenumber`
+- Bundling: Added deps to bundling, and left only `@headlessui/vue` & `@popperjs/core` as a peer dependency
+- Country Input: Lazy Load Flag Icons
+- Flag: Moved to Async Component
+
 ### 0.7.40
 - Feature: Introduced Options API for all components, allowing for more flexibility and customization of behavior
 - **Breaking Change**: All components by default will not trigger back to regular variant after an error, please use the options API to enable this behavior
