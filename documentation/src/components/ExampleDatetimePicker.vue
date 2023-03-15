@@ -20,7 +20,6 @@ const selectDragAttribute = {
         <!-- Range -->
         <DateTimeInput
           v-model="rangeValue"
-          :is24hr="true"
           :minute-increment="5"
           :is-required="false"
           :is-range="true"
@@ -69,6 +68,7 @@ const selectDragAttribute = {
             :inline="true"
             :is-range="true"
             mode="dateTime"
+            is24hr
             placeholder="Please select your date"
             @drag="dragValue = $event"
           >

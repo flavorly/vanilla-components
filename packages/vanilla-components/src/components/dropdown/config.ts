@@ -41,7 +41,7 @@ export const dropdownConfig = {
       commonClasses.dropdownsRadius,
       commonClasses.dropdownsShadows,
       'top-5',
-      'focus:ring-0 focus:outline-none',
+      'focus:outline-none',
       'z-[99]',
       'overflow-hidden',
     ),

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineComponent } from 'vue'
-import { DatePicker } from '@flavorly/v-calendar'
+import { DatePicker } from 'v-calendar'
 import ClearButton from '../rich-select/partials/clear-button.vue'
 import { get } from '../../core/helpers'
 import { useConfiguration, useVModel } from '../../core/use'
@@ -15,12 +15,6 @@ const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, variant } = useConfiguration<DateTimeInputProps>(dateTimeInputConfig, 'DateTimeInput', localValue)
 
 const mergedProps = { ...DatePicker.props, ...baseProps }
-
-const DateTimePicker = defineComponent({
-  name: 'DateTimePicker',
-  extends: DatePicker,
-  props: mergedProps,
-})
 
 const formatRange = (start: Date, end: Date) => {
   if (!start || !end) {
@@ -43,8 +37,10 @@ defineOptions({
 
 <template>
   <ClientOnly>
-    <DateTimePicker
+    <DatePicker
       v-model="localValue"
+      color="indigo"
+      :is-dark="{ selector: ':root', darkClass: 'dark' }"
       :input-debounce="1200"
       :update-on-input="false"
       :popover="{ visibility: 'focus' }"
@@ -91,7 +87,7 @@ defineOptions({
     <!--        v-bind="scope" -->
     <!--      /> -->
     <!--    </template> -->
-    </DateTimePicker>
+    </DatePicker>
   </ClientOnly>
 </template>
 

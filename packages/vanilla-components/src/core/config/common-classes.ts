@@ -52,8 +52,8 @@ const commonClasses = {
   dropdownsShadows: 'shadow-lg',
   dropdownsRadius: 'rounded-md',
   dropdownsBorder: 'border border-1 border-gray-300 dark:border-gray-700',
-  dropdownsRing: 'ring-1 ring-gray-900/50 dark:ring-white/10',
-  dropdownsFocus: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900',
+  dropdownsRing: 'ring-1 ring-gray-400/50 dark:ring-white/10',
+  dropdownsFocus: 'focus:outline-none focus:ring-1 dark:focus:ring-offset-gray-900',
 
   // Options
   optionOrItemDisabled: 'opacity-50 cursor-not-allowed',
