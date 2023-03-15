@@ -5,8 +5,8 @@ import { ref } from 'vue'
 const value = ref('+35191523813')
 const valueCountry = 'PT'
 
-const value2 = ref('915279172')
-const value2Country = 'PT'
+const value2 = ref('+1915279172')
+const value2Country = 'US'
 </script>
 
 <template>

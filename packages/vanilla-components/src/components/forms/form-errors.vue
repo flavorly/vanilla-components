@@ -7,7 +7,7 @@ import { formsConfig } from './config'
 const props = defineProps({
   ...useVariantProps<FormErrorsProps, FormClassesValidKeys>(),
   errors: {
-    type: [Array, String] as PropType<string[] | string>,
+    type: String as PropType<string | undefined>,
     default: undefined,
     required: true,
   },

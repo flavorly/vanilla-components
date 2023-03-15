@@ -27,15 +27,15 @@ Once installed on your project, install also the `peer dependencies`, those are 
 
 ::: code-group
 ```bash [pnpm]
-pnpm add @headlessui/vue @popperjs/core libphonenumber-js
+pnpm add @headlessui/vue @popperjs/core
 ```
 
 ```bash [Yarn]
-yarn add @headlessui/vue @popperjs/core libphonenumber-js
+yarn add @headlessui/vue @popperjs/core
 ```
 
 ```bash [npm]
-npm add @headlessui/vue @popperjs/core libphonenumber-js
+npm add @headlessui/vue @popperjs/core
 ```
 :::
 

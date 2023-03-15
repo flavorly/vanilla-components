@@ -15,7 +15,7 @@ export default defineBuildConfig({
   externals: [
     'vue',
     'vite',
-    '@flavorly/v-calenda',
+    'v-calendar',
     '@headlessui/vue',
     '@popperjs/core',
   ],

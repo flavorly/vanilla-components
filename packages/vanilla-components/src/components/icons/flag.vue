@@ -1,533 +1,275 @@
-<script lang="ts">
-import { defineComponent } from 'vue'
-
-// Components
-import FlagAC from './flags/FlagAC.vue'
-import FlagAD from './flags/FlagAD.vue'
-import FlagAE from './flags/FlagAE.vue'
-import FlagAF from './flags/FlagAF.vue'
-import FlagAG from './flags/FlagAG.vue'
-import FlagAI from './flags/FlagAI.vue'
-import FlagAL from './flags/FlagAL.vue'
-import FlagAM from './flags/FlagAM.vue'
-import FlagAO from './flags/FlagAO.vue'
-import FlagAQ from './flags/FlagAQ.vue'
-import FlagAR from './flags/FlagAR.vue'
-import FlagAS from './flags/FlagAS.vue'
-import FlagAT from './flags/FlagAT.vue'
-import FlagAU from './flags/FlagAU.vue'
-import FlagAW from './flags/FlagAW.vue'
-import FlagAX from './flags/FlagAX.vue'
-import FlagAZ from './flags/FlagAZ.vue'
-import FlagBA from './flags/FlagBA.vue'
-import FlagBB from './flags/FlagBB.vue'
-import FlagBD from './flags/FlagBD.vue'
-import FlagBE from './flags/FlagBE.vue'
-import FlagBF from './flags/FlagBF.vue'
-import FlagBG from './flags/FlagBG.vue'
-import FlagBH from './flags/FlagBH.vue'
-import FlagBI from './flags/FlagBI.vue'
-import FlagBJ from './flags/FlagBJ.vue'
-import FlagBL from './flags/FlagBL.vue'
-import FlagBM from './flags/FlagBM.vue'
-import FlagBN from './flags/FlagBN.vue'
-import FlagBO from './flags/FlagBO.vue'
-import FlagBQ from './flags/FlagBQ.vue'
-import FlagBR from './flags/FlagBR.vue'
-import FlagBS from './flags/FlagBS.vue'
-import FlagBT from './flags/FlagBT.vue'
-import FlagBV from './flags/FlagBV.vue'
-import FlagBW from './flags/FlagBW.vue'
-import FlagBY from './flags/FlagBY.vue'
-import FlagBZ from './flags/FlagBZ.vue'
-import FlagCA from './flags/FlagCA.vue'
-import FlagCC from './flags/FlagCC.vue'
-import FlagCD from './flags/FlagCD.vue'
-import FlagCF from './flags/FlagCF.vue'
-import FlagCG from './flags/FlagCG.vue'
-import FlagCH from './flags/FlagCH.vue'
-import FlagCI from './flags/FlagCI.vue'
-import FlagCK from './flags/FlagCK.vue'
-import FlagCL from './flags/FlagCL.vue'
-import FlagCM from './flags/FlagCM.vue'
-import FlagCN from './flags/FlagCN.vue'
-import FlagCO from './flags/FlagCO.vue'
-import FlagCR from './flags/FlagCR.vue'
-import FlagCU from './flags/FlagCU.vue'
-import FlagCV from './flags/FlagCV.vue'
-import FlagCW from './flags/FlagCW.vue'
-import FlagCX from './flags/FlagCX.vue'
-import FlagCY from './flags/FlagCY.vue'
-import FlagCZ from './flags/FlagCZ.vue'
-import FlagDE from './flags/FlagDE.vue'
-import FlagDJ from './flags/FlagDJ.vue'
-import FlagDK from './flags/FlagDK.vue'
-import FlagDM from './flags/FlagDM.vue'
-import FlagDO from './flags/FlagDO.vue'
-import FlagDZ from './flags/FlagDZ.vue'
-import FlagEC from './flags/FlagEC.vue'
-import FlagEE from './flags/FlagEE.vue'
-import FlagEG from './flags/FlagEG.vue'
-import FlagEH from './flags/FlagEH.vue'
-import FlagER from './flags/FlagER.vue'
-import FlagES from './flags/FlagES.vue'
-import FlagET from './flags/FlagET.vue'
-import FlagEU from './flags/FlagEU.vue'
-import FlagFI from './flags/FlagFI.vue'
-import FlagFJ from './flags/FlagFJ.vue'
-import FlagFK from './flags/FlagFK.vue'
-import FlagFM from './flags/FlagFM.vue'
-import FlagFO from './flags/FlagFO.vue'
-import FlagFR from './flags/FlagFR.vue'
-import FlagGA from './flags/FlagGA.vue'
-import FlagGB from './flags/FlagGB.vue'
-import FlagGD from './flags/FlagGD.vue'
-import FlagGEAB from './flags/FlagGEAB.vue'
-import FlagGEOS from './flags/FlagGEOS.vue'
-import FlagGE from './flags/FlagGE.vue'
-import FlagGF from './flags/FlagGF.vue'
-import FlagGG from './flags/FlagGG.vue'
-import FlagGH from './flags/FlagGH.vue'
-import FlagGI from './flags/FlagGI.vue'
-import FlagGL from './flags/FlagGL.vue'
-import FlagGM from './flags/FlagGM.vue'
-import FlagGN from './flags/FlagGN.vue'
-import FlagGP from './flags/FlagGP.vue'
-import FlagGQ from './flags/FlagGQ.vue'
-import FlagGR from './flags/FlagGR.vue'
-import FlagGS from './flags/FlagGS.vue'
-import FlagGT from './flags/FlagGT.vue'
-import FlagGU from './flags/FlagGU.vue'
-import FlagGW from './flags/FlagGW.vue'
-import FlagGY from './flags/FlagGY.vue'
-import FlagHK from './flags/FlagHK.vue'
-import FlagHM from './flags/FlagHM.vue'
-import FlagHN from './flags/FlagHN.vue'
-import FlagHR from './flags/FlagHR.vue'
-import FlagHT from './flags/FlagHT.vue'
-import FlagHU from './flags/FlagHU.vue'
-import FlagID from './flags/FlagID.vue'
-import FlagIE from './flags/FlagIE.vue'
-import FlagIL from './flags/FlagIL.vue'
-import FlagIM from './flags/FlagIM.vue'
-import FlagIN from './flags/FlagIN.vue'
-import FlagIO from './flags/FlagIO.vue'
-import FlagIQ from './flags/FlagIQ.vue'
-import FlagIR from './flags/FlagIR.vue'
-import FlagIS from './flags/FlagIS.vue'
-import FlagIT from './flags/FlagIT.vue'
-import FlagJE from './flags/FlagJE.vue'
-import FlagJM from './flags/FlagJM.vue'
-import FlagJO from './flags/FlagJO.vue'
-import FlagJP from './flags/FlagJP.vue'
-import FlagKE from './flags/FlagKE.vue'
-import FlagKG from './flags/FlagKG.vue'
-import FlagKH from './flags/FlagKH.vue'
-import FlagKI from './flags/FlagKI.vue'
-import FlagKM from './flags/FlagKM.vue'
-import FlagKN from './flags/FlagKN.vue'
-import FlagKP from './flags/FlagKP.vue'
-import FlagKR from './flags/FlagKR.vue'
-import FlagKW from './flags/FlagKW.vue'
-import FlagKY from './flags/FlagKY.vue'
-import FlagKZ from './flags/FlagKZ.vue'
-import FlagLA from './flags/FlagLA.vue'
-import FlagLB from './flags/FlagLB.vue'
-import FlagLC from './flags/FlagLC.vue'
-import FlagLI from './flags/FlagLI.vue'
-import FlagLK from './flags/FlagLK.vue'
-import FlagLR from './flags/FlagLR.vue'
-import FlagLS from './flags/FlagLS.vue'
-import FlagLT from './flags/FlagLT.vue'
-import FlagLU from './flags/FlagLU.vue'
-import FlagLV from './flags/FlagLV.vue'
-import FlagLY from './flags/FlagLY.vue'
-import FlagMA from './flags/FlagMA.vue'
-import FlagMC from './flags/FlagMC.vue'
-import FlagMD from './flags/FlagMD.vue'
-import FlagME from './flags/FlagME.vue'
-import FlagMF from './flags/FlagMF.vue'
-import FlagMG from './flags/FlagMG.vue'
-import FlagMH from './flags/FlagMH.vue'
-import FlagMK from './flags/FlagMK.vue'
-import FlagML from './flags/FlagML.vue'
-import FlagMM from './flags/FlagMM.vue'
-import FlagMN from './flags/FlagMN.vue'
-import FlagMO from './flags/FlagMO.vue'
-import FlagMP from './flags/FlagMP.vue'
-import FlagMQ from './flags/FlagMQ.vue'
-import FlagMR from './flags/FlagMR.vue'
-import FlagMS from './flags/FlagMS.vue'
-import FlagMT from './flags/FlagMT.vue'
-import FlagMU from './flags/FlagMU.vue'
-import FlagMV from './flags/FlagMV.vue'
-import FlagMW from './flags/FlagMW.vue'
-import FlagMX from './flags/FlagMX.vue'
-import FlagMY from './flags/FlagMY.vue'
-import FlagMZ from './flags/FlagMZ.vue'
-import FlagNA from './flags/FlagNA.vue'
-import FlagNC from './flags/FlagNC.vue'
-import FlagNE from './flags/FlagNE.vue'
-import FlagNF from './flags/FlagNF.vue'
-import FlagNG from './flags/FlagNG.vue'
-import FlagNI from './flags/FlagNI.vue'
-import FlagNL from './flags/FlagNL.vue'
-import FlagNO from './flags/FlagNO.vue'
-import FlagNP from './flags/FlagNP.vue'
-import FlagNR from './flags/FlagNR.vue'
-import FlagNU from './flags/FlagNU.vue'
-import FlagNZ from './flags/FlagNZ.vue'
-import FlagOM from './flags/FlagOM.vue'
-import FlagPA from './flags/FlagPA.vue'
-import FlagPE from './flags/FlagPE.vue'
-import FlagPF from './flags/FlagPF.vue'
-import FlagPG from './flags/FlagPG.vue'
-import FlagPH from './flags/FlagPH.vue'
-import FlagPK from './flags/FlagPK.vue'
-import FlagPL from './flags/FlagPL.vue'
-import FlagPM from './flags/FlagPM.vue'
-import FlagPN from './flags/FlagPN.vue'
-import FlagPR from './flags/FlagPR.vue'
-import FlagPS from './flags/FlagPS.vue'
-import FlagPT from './flags/FlagPT.vue'
-import FlagPW from './flags/FlagPW.vue'
-import FlagPY from './flags/FlagPY.vue'
-import FlagQA from './flags/FlagQA.vue'
-import FlagRE from './flags/FlagRE.vue'
-import FlagRO from './flags/FlagRO.vue'
-import FlagRS from './flags/FlagRS.vue'
-import FlagRU from './flags/FlagRU.vue'
-import FlagRW from './flags/FlagRW.vue'
-import FlagSA from './flags/FlagSA.vue'
-import FlagSB from './flags/FlagSB.vue'
-import FlagSC from './flags/FlagSC.vue'
-import FlagSD from './flags/FlagSD.vue'
-import FlagSE from './flags/FlagSE.vue'
-import FlagSG from './flags/FlagSG.vue'
-import FlagSH from './flags/FlagSH.vue'
-import FlagSI from './flags/FlagSI.vue'
-import FlagSJ from './flags/FlagSJ.vue'
-import FlagSK from './flags/FlagSK.vue'
-import FlagSL from './flags/FlagSL.vue'
-import FlagSM from './flags/FlagSM.vue'
-import FlagSN from './flags/FlagSN.vue'
-import FlagSO from './flags/FlagSO.vue'
-import FlagSR from './flags/FlagSR.vue'
-import FlagSS from './flags/FlagSS.vue'
-import FlagST from './flags/FlagST.vue'
-import FlagSV from './flags/FlagSV.vue'
-import FlagSX from './flags/FlagSX.vue'
-import FlagSY from './flags/FlagSY.vue'
-import FlagSZ from './flags/FlagSZ.vue'
-import FlagTA from './flags/FlagTA.vue'
-import FlagTC from './flags/FlagTC.vue'
-import FlagTD from './flags/FlagTD.vue'
-import FlagTF from './flags/FlagTF.vue'
-import FlagTG from './flags/FlagTG.vue'
-import FlagTH from './flags/FlagTH.vue'
-import FlagTJ from './flags/FlagTJ.vue'
-import FlagTK from './flags/FlagTK.vue'
-import FlagTL from './flags/FlagTL.vue'
-import FlagTM from './flags/FlagTM.vue'
-import FlagTN from './flags/FlagTN.vue'
-import FlagTO from './flags/FlagTO.vue'
-import FlagTR from './flags/FlagTR.vue'
-import FlagTT from './flags/FlagTT.vue'
-import FlagTV from './flags/FlagTV.vue'
-import FlagTW from './flags/FlagTW.vue'
-import FlagTZ from './flags/FlagTZ.vue'
-import FlagUA from './flags/FlagUA.vue'
-import FlagUG from './flags/FlagUG.vue'
-import FlagUM from './flags/FlagUM.vue'
-import FlagUS from './flags/FlagUS.vue'
-import FlagUY from './flags/FlagUY.vue'
-import FlagUZ from './flags/FlagUZ.vue'
-import FlagVA from './flags/FlagVA.vue'
-import FlagVC from './flags/FlagVC.vue'
-import FlagVE from './flags/FlagVE.vue'
-import FlagVG from './flags/FlagVG.vue'
-import FlagVI from './flags/FlagVI.vue'
-import FlagVN from './flags/FlagVN.vue'
-import FlagVU from './flags/FlagVU.vue'
-import FlagWF from './flags/FlagWF.vue'
-import FlagWS from './flags/FlagWS.vue'
-import FlagXK from './flags/FlagXK.vue'
-import FlagYE from './flags/FlagYE.vue'
-import FlagYT from './flags/FlagYT.vue'
-import FlagZA from './flags/FlagZA.vue'
-import FlagZM from './flags/FlagZM.vue'
-import FlagZW from './flags/FlagZW.vue'
-
-export default defineComponent({
+<script>
+import { defineAsyncComponent } from 'vue'
+export default {
     components: {
-        FlagAC,
-        FlagAD,
-        FlagAE,
-        FlagAF,
-        FlagAG,
-        FlagAI,
-        FlagAL,
-        FlagAM,
-        FlagAO,
-        FlagAQ,
-        FlagAR,
-        FlagAS,
-        FlagAT,
-        FlagAU,
-        FlagAW,
-        FlagAX,
-        FlagAZ,
-        FlagBA,
-        FlagBB,
-        FlagBD,
-        FlagBE,
-        FlagBF,
-        FlagBG,
-        FlagBH,
-        FlagBI,
-        FlagBJ,
-        FlagBL,
-        FlagBM,
-        FlagBN,
-        FlagBO,
-        FlagBQ,
-        FlagBR,
-        FlagBS,
-        FlagBT,
-        FlagBV,
-        FlagBW,
-        FlagBY,
-        FlagBZ,
-        FlagCA,
-        FlagCC,
-        FlagCD,
-        FlagCF,
-        FlagCG,
-        FlagCH,
-        FlagCI,
-        FlagCK,
-        FlagCL,
-        FlagCM,
-        FlagCN,
-        FlagCO,
-        FlagCR,
-        FlagCU,
-        FlagCV,
-        FlagCW,
-        FlagCX,
-        FlagCY,
-        FlagCZ,
-        FlagDE,
-        FlagDJ,
-        FlagDK,
-        FlagDM,
-        FlagDO,
-        FlagDZ,
-        FlagEC,
-        FlagEE,
-        FlagEG,
-        FlagEH,
-        FlagER,
-        FlagES,
-        FlagET,
-        FlagEU,
-        FlagFI,
-        FlagFJ,
-        FlagFK,
-        FlagFM,
-        FlagFO,
-        FlagFR,
-        FlagGA,
-        FlagGB,
-        FlagGD,
-        FlagGEAB,
-        FlagGEOS,
-        FlagGE,
-        FlagGF,
-        FlagGG,
-        FlagGH,
-        FlagGI,
-        FlagGL,
-        FlagGM,
-        FlagGN,
-        FlagGP,
-        FlagGQ,
-        FlagGR,
-        FlagGS,
-        FlagGT,
-        FlagGU,
-        FlagGW,
-        FlagGY,
-        FlagHK,
-        FlagHM,
-        FlagHN,
-        FlagHR,
-        FlagHT,
-        FlagHU,
-        FlagID,
-        FlagIE,
-        FlagIL,
-        FlagIM,
-        FlagIN,
-        FlagIO,
-        FlagIQ,
-        FlagIR,
-        FlagIS,
-        FlagIT,
-        FlagJE,
-        FlagJM,
-        FlagJO,
-        FlagJP,
-        FlagKE,
-        FlagKG,
-        FlagKH,
-        FlagKI,
-        FlagKM,
-        FlagKN,
-        FlagKP,
-        FlagKR,
-        FlagKW,
-        FlagKY,
-        FlagKZ,
-        FlagLA,
-        FlagLB,
-        FlagLC,
-        FlagLI,
-        FlagLK,
-        FlagLR,
-        FlagLS,
-        FlagLT,
-        FlagLU,
-        FlagLV,
-        FlagLY,
-        FlagMA,
-        FlagMC,
-        FlagMD,
-        FlagME,
-        FlagMF,
-        FlagMG,
-        FlagMH,
-        FlagMK,
-        FlagML,
-        FlagMM,
-        FlagMN,
-        FlagMO,
-        FlagMP,
-        FlagMQ,
-        FlagMR,
-        FlagMS,
-        FlagMT,
-        FlagMU,
-        FlagMV,
-        FlagMW,
-        FlagMX,
-        FlagMY,
-        FlagMZ,
-        FlagNA,
-        FlagNC,
-        FlagNE,
-        FlagNF,
-        FlagNG,
-        FlagNI,
-        FlagNL,
-        FlagNO,
-        FlagNP,
-        FlagNR,
-        FlagNU,
-        FlagNZ,
-        FlagOM,
-        FlagPA,
-        FlagPE,
-        FlagPF,
-        FlagPG,
-        FlagPH,
-        FlagPK,
-        FlagPL,
-        FlagPM,
-        FlagPN,
-        FlagPR,
-        FlagPS,
-        FlagPT,
-        FlagPW,
-        FlagPY,
-        FlagQA,
-        FlagRE,
-        FlagRO,
-        FlagRS,
-        FlagRU,
-        FlagRW,
-        FlagSA,
-        FlagSB,
-        FlagSC,
-        FlagSD,
-        FlagSE,
-        FlagSG,
-        FlagSH,
-        FlagSI,
-        FlagSJ,
-        FlagSK,
-        FlagSL,
-        FlagSM,
-        FlagSN,
-        FlagSO,
-        FlagSR,
-        FlagSS,
-        FlagST,
-        FlagSV,
-        FlagSX,
-        FlagSY,
-        FlagSZ,
-        FlagTA,
-        FlagTC,
-        FlagTD,
-        FlagTF,
-        FlagTG,
-        FlagTH,
-        FlagTJ,
-        FlagTK,
-        FlagTL,
-        FlagTM,
-        FlagTN,
-        FlagTO,
-        FlagTR,
-        FlagTT,
-        FlagTV,
-        FlagTW,
-        FlagTZ,
-        FlagUA,
-        FlagUG,
-        FlagUM,
-        FlagUS,
-        FlagUY,
-        FlagUZ,
-        FlagVA,
-        FlagVC,
-        FlagVE,
-        FlagVG,
-        FlagVI,
-        FlagVN,
-        FlagVU,
-        FlagWF,
-        FlagWS,
-        FlagXK,
-        FlagYE,
-        FlagYT,
-        FlagZA,
-        FlagZM,
-        FlagZW,
+        FlagAc: defineAsyncComponent(() => import('./Flags/FlagAC.vue')),
+        FlagAd: defineAsyncComponent(() => import('./Flags/FlagAD.vue')),
+        FlagAe: defineAsyncComponent(() => import('./Flags/FlagAE.vue')),
+        FlagAf: defineAsyncComponent(() => import('./Flags/FlagAF.vue')),
+        FlagAg: defineAsyncComponent(() => import('./Flags/FlagAG.vue')),
+        FlagAi: defineAsyncComponent(() => import('./Flags/FlagAI.vue')),
+        FlagAl: defineAsyncComponent(() => import('./Flags/FlagAL.vue')),
+        FlagAm: defineAsyncComponent(() => import('./Flags/FlagAM.vue')),
+        FlagAo: defineAsyncComponent(() => import('./Flags/FlagAO.vue')),
+        FlagAq: defineAsyncComponent(() => import('./Flags/FlagAQ.vue')),
+        FlagAr: defineAsyncComponent(() => import('./Flags/FlagAR.vue')),
+        FlagAs: defineAsyncComponent(() => import('./Flags/FlagAS.vue')),
+        FlagAt: defineAsyncComponent(() => import('./Flags/FlagAT.vue')),
+        FlagAu: defineAsyncComponent(() => import('./Flags/FlagAU.vue')),
+        FlagAw: defineAsyncComponent(() => import('./Flags/FlagAW.vue')),
+        FlagAx: defineAsyncComponent(() => import('./Flags/FlagAX.vue')),
+        FlagAz: defineAsyncComponent(() => import('./Flags/FlagAZ.vue')),
+        FlagBa: defineAsyncComponent(() => import('./Flags/FlagBA.vue')),
+        FlagBb: defineAsyncComponent(() => import('./Flags/FlagBB.vue')),
+        FlagBd: defineAsyncComponent(() => import('./Flags/FlagBD.vue')),
+        FlagBe: defineAsyncComponent(() => import('./Flags/FlagBE.vue')),
+        FlagBf: defineAsyncComponent(() => import('./Flags/FlagBF.vue')),
+        FlagBg: defineAsyncComponent(() => import('./Flags/FlagBG.vue')),
+        FlagBh: defineAsyncComponent(() => import('./Flags/FlagBH.vue')),
+        FlagBi: defineAsyncComponent(() => import('./Flags/FlagBI.vue')),
+        FlagBj: defineAsyncComponent(() => import('./Flags/FlagBJ.vue')),
+        FlagBl: defineAsyncComponent(() => import('./Flags/FlagBL.vue')),
+        FlagBm: defineAsyncComponent(() => import('./Flags/FlagBM.vue')),
+        FlagBn: defineAsyncComponent(() => import('./Flags/FlagBN.vue')),
+        FlagBo: defineAsyncComponent(() => import('./Flags/FlagBO.vue')),
+        FlagBq: defineAsyncComponent(() => import('./Flags/FlagBQ.vue')),
+        FlagBr: defineAsyncComponent(() => import('./Flags/FlagBR.vue')),
+        FlagBs: defineAsyncComponent(() => import('./Flags/FlagBS.vue')),
+        FlagBt: defineAsyncComponent(() => import('./Flags/FlagBT.vue')),
+        FlagBv: defineAsyncComponent(() => import('./Flags/FlagBV.vue')),
+        FlagBw: defineAsyncComponent(() => import('./Flags/FlagBW.vue')),
+        FlagBy: defineAsyncComponent(() => import('./Flags/FlagBY.vue')),
+        FlagBz: defineAsyncComponent(() => import('./Flags/FlagBZ.vue')),
+        FlagCa: defineAsyncComponent(() => import('./Flags/FlagCA.vue')),
+        FlagCc: defineAsyncComponent(() => import('./Flags/FlagCC.vue')),
+        FlagCd: defineAsyncComponent(() => import('./Flags/FlagCD.vue')),
+        FlagCf: defineAsyncComponent(() => import('./Flags/FlagCF.vue')),
+        FlagCg: defineAsyncComponent(() => import('./Flags/FlagCG.vue')),
+        FlagCh: defineAsyncComponent(() => import('./Flags/FlagCH.vue')),
+        FlagCi: defineAsyncComponent(() => import('./Flags/FlagCI.vue')),
+        FlagCk: defineAsyncComponent(() => import('./Flags/FlagCK.vue')),
+        FlagCl: defineAsyncComponent(() => import('./Flags/FlagCL.vue')),
+        FlagCm: defineAsyncComponent(() => import('./Flags/FlagCM.vue')),
+        FlagCn: defineAsyncComponent(() => import('./Flags/FlagCN.vue')),
+        FlagCo: defineAsyncComponent(() => import('./Flags/FlagCO.vue')),
+        FlagCr: defineAsyncComponent(() => import('./Flags/FlagCR.vue')),
+        FlagCu: defineAsyncComponent(() => import('./Flags/FlagCU.vue')),
+        FlagCv: defineAsyncComponent(() => import('./Flags/FlagCV.vue')),
+        FlagCw: defineAsyncComponent(() => import('./Flags/FlagCW.vue')),
+        FlagCx: defineAsyncComponent(() => import('./Flags/FlagCX.vue')),
+        FlagCy: defineAsyncComponent(() => import('./Flags/FlagCY.vue')),
+        FlagCz: defineAsyncComponent(() => import('./Flags/FlagCZ.vue')),
+        FlagDe: defineAsyncComponent(() => import('./Flags/FlagDE.vue')),
+        FlagDj: defineAsyncComponent(() => import('./Flags/FlagDJ.vue')),
+        FlagDk: defineAsyncComponent(() => import('./Flags/FlagDK.vue')),
+        FlagDm: defineAsyncComponent(() => import('./Flags/FlagDM.vue')),
+        FlagDo: defineAsyncComponent(() => import('./Flags/FlagDO.vue')),
+        FlagDz: defineAsyncComponent(() => import('./Flags/FlagDZ.vue')),
+        FlagEc: defineAsyncComponent(() => import('./Flags/FlagEC.vue')),
+        FlagEe: defineAsyncComponent(() => import('./Flags/FlagEE.vue')),
+        FlagEg: defineAsyncComponent(() => import('./Flags/FlagEG.vue')),
+        FlagEh: defineAsyncComponent(() => import('./Flags/FlagEH.vue')),
+        FlagEr: defineAsyncComponent(() => import('./Flags/FlagER.vue')),
+        FlagEs: defineAsyncComponent(() => import('./Flags/FlagES.vue')),
+        FlagEt: defineAsyncComponent(() => import('./Flags/FlagET.vue')),
+        FlagEu: defineAsyncComponent(() => import('./Flags/FlagEU.vue')),
+        FlagFi: defineAsyncComponent(() => import('./Flags/FlagFI.vue')),
+        FlagFj: defineAsyncComponent(() => import('./Flags/FlagFJ.vue')),
+        FlagFk: defineAsyncComponent(() => import('./Flags/FlagFK.vue')),
+        FlagFm: defineAsyncComponent(() => import('./Flags/FlagFM.vue')),
+        FlagFo: defineAsyncComponent(() => import('./Flags/FlagFO.vue')),
+        FlagFr: defineAsyncComponent(() => import('./Flags/FlagFR.vue')),
+        FlagGa: defineAsyncComponent(() => import('./Flags/FlagGA.vue')),
+        FlagGb: defineAsyncComponent(() => import('./Flags/FlagGB.vue')),
+        FlagGd: defineAsyncComponent(() => import('./Flags/FlagGD.vue')),
+        FlagGeab: defineAsyncComponent(() => import('./Flags/FlagGEAB.vue')),
+        FlagGeos: defineAsyncComponent(() => import('./Flags/FlagGEOS.vue')),
+        FlagGe: defineAsyncComponent(() => import('./Flags/FlagGE.vue')),
+        FlagGf: defineAsyncComponent(() => import('./Flags/FlagGF.vue')),
+        FlagGg: defineAsyncComponent(() => import('./Flags/FlagGG.vue')),
+        FlagGh: defineAsyncComponent(() => import('./Flags/FlagGH.vue')),
+        FlagGi: defineAsyncComponent(() => import('./Flags/FlagGI.vue')),
+        FlagGl: defineAsyncComponent(() => import('./Flags/FlagGL.vue')),
+        FlagGm: defineAsyncComponent(() => import('./Flags/FlagGM.vue')),
+        FlagGn: defineAsyncComponent(() => import('./Flags/FlagGN.vue')),
+        FlagGp: defineAsyncComponent(() => import('./Flags/FlagGP.vue')),
+        FlagGq: defineAsyncComponent(() => import('./Flags/FlagGQ.vue')),
+        FlagGr: defineAsyncComponent(() => import('./Flags/FlagGR.vue')),
+        FlagGs: defineAsyncComponent(() => import('./Flags/FlagGS.vue')),
+        FlagGt: defineAsyncComponent(() => import('./Flags/FlagGT.vue')),
+        FlagGu: defineAsyncComponent(() => import('./Flags/FlagGU.vue')),
+        FlagGw: defineAsyncComponent(() => import('./Flags/FlagGW.vue')),
+        FlagGy: defineAsyncComponent(() => import('./Flags/FlagGY.vue')),
+        FlagHk: defineAsyncComponent(() => import('./Flags/FlagHK.vue')),
+        FlagHm: defineAsyncComponent(() => import('./Flags/FlagHM.vue')),
+        FlagHn: defineAsyncComponent(() => import('./Flags/FlagHN.vue')),
+        FlagHr: defineAsyncComponent(() => import('./Flags/FlagHR.vue')),
+        FlagHt: defineAsyncComponent(() => import('./Flags/FlagHT.vue')),
+        FlagHu: defineAsyncComponent(() => import('./Flags/FlagHU.vue')),
+        FlagId: defineAsyncComponent(() => import('./Flags/FlagID.vue')),
+        FlagIe: defineAsyncComponent(() => import('./Flags/FlagIE.vue')),
+        FlagIl: defineAsyncComponent(() => import('./Flags/FlagIL.vue')),
+        FlagIm: defineAsyncComponent(() => import('./Flags/FlagIM.vue')),
+        FlagIn: defineAsyncComponent(() => import('./Flags/FlagIN.vue')),
+        FlagIo: defineAsyncComponent(() => import('./Flags/FlagIO.vue')),
+        FlagIq: defineAsyncComponent(() => import('./Flags/FlagIQ.vue')),
+        FlagIr: defineAsyncComponent(() => import('./Flags/FlagIR.vue')),
+        FlagIs: defineAsyncComponent(() => import('./Flags/FlagIS.vue')),
+        FlagIt: defineAsyncComponent(() => import('./Flags/FlagIT.vue')),
+        FlagJe: defineAsyncComponent(() => import('./Flags/FlagJE.vue')),
+        FlagJm: defineAsyncComponent(() => import('./Flags/FlagJM.vue')),
+        FlagJo: defineAsyncComponent(() => import('./Flags/FlagJO.vue')),
+        FlagJp: defineAsyncComponent(() => import('./Flags/FlagJP.vue')),
+        FlagKe: defineAsyncComponent(() => import('./Flags/FlagKE.vue')),
+        FlagKg: defineAsyncComponent(() => import('./Flags/FlagKG.vue')),
+        FlagKh: defineAsyncComponent(() => import('./Flags/FlagKH.vue')),
+        FlagKi: defineAsyncComponent(() => import('./Flags/FlagKI.vue')),
+        FlagKm: defineAsyncComponent(() => import('./Flags/FlagKM.vue')),
+        FlagKn: defineAsyncComponent(() => import('./Flags/FlagKN.vue')),
+        FlagKp: defineAsyncComponent(() => import('./Flags/FlagKP.vue')),
+        FlagKr: defineAsyncComponent(() => import('./Flags/FlagKR.vue')),
+        FlagKw: defineAsyncComponent(() => import('./Flags/FlagKW.vue')),
+        FlagKy: defineAsyncComponent(() => import('./Flags/FlagKY.vue')),
+        FlagKz: defineAsyncComponent(() => import('./Flags/FlagKZ.vue')),
+        FlagLa: defineAsyncComponent(() => import('./Flags/FlagLA.vue')),
+        FlagLb: defineAsyncComponent(() => import('./Flags/FlagLB.vue')),
+        FlagLc: defineAsyncComponent(() => import('./Flags/FlagLC.vue')),
+        FlagLi: defineAsyncComponent(() => import('./Flags/FlagLI.vue')),
+        FlagLk: defineAsyncComponent(() => import('./Flags/FlagLK.vue')),
+        FlagLr: defineAsyncComponent(() => import('./Flags/FlagLR.vue')),
+        FlagLs: defineAsyncComponent(() => import('./Flags/FlagLS.vue')),
+        FlagLt: defineAsyncComponent(() => import('./Flags/FlagLT.vue')),
+        FlagLu: defineAsyncComponent(() => import('./Flags/FlagLU.vue')),
+        FlagLv: defineAsyncComponent(() => import('./Flags/FlagLV.vue')),
+        FlagLy: defineAsyncComponent(() => import('./Flags/FlagLY.vue')),
+        FlagMa: defineAsyncComponent(() => import('./Flags/FlagMA.vue')),
+        FlagMc: defineAsyncComponent(() => import('./Flags/FlagMC.vue')),
+        FlagMd: defineAsyncComponent(() => import('./Flags/FlagMD.vue')),
+        FlagMe: defineAsyncComponent(() => import('./Flags/FlagME.vue')),
+        FlagMf: defineAsyncComponent(() => import('./Flags/FlagMF.vue')),
+        FlagMg: defineAsyncComponent(() => import('./Flags/FlagMG.vue')),
+        FlagMh: defineAsyncComponent(() => import('./Flags/FlagMH.vue')),
+        FlagMk: defineAsyncComponent(() => import('./Flags/FlagMK.vue')),
+        FlagMl: defineAsyncComponent(() => import('./Flags/FlagML.vue')),
+        FlagMm: defineAsyncComponent(() => import('./Flags/FlagMM.vue')),
+        FlagMn: defineAsyncComponent(() => import('./Flags/FlagMN.vue')),
+        FlagMo: defineAsyncComponent(() => import('./Flags/FlagMO.vue')),
+        FlagMp: defineAsyncComponent(() => import('./Flags/FlagMP.vue')),
+        FlagMq: defineAsyncComponent(() => import('./Flags/FlagMQ.vue')),
+        FlagMr: defineAsyncComponent(() => import('./Flags/FlagMR.vue')),
+        FlagMs: defineAsyncComponent(() => import('./Flags/FlagMS.vue')),
+        FlagMt: defineAsyncComponent(() => import('./Flags/FlagMT.vue')),
+        FlagMu: defineAsyncComponent(() => import('./Flags/FlagMU.vue')),
+        FlagMv: defineAsyncComponent(() => import('./Flags/FlagMV.vue')),
+        FlagMw: defineAsyncComponent(() => import('./Flags/FlagMW.vue')),
+        FlagMx: defineAsyncComponent(() => import('./Flags/FlagMX.vue')),
+        FlagMy: defineAsyncComponent(() => import('./Flags/FlagMY.vue')),
+        FlagMz: defineAsyncComponent(() => import('./Flags/FlagMZ.vue')),
+        FlagNa: defineAsyncComponent(() => import('./Flags/FlagNA.vue')),
+        FlagNc: defineAsyncComponent(() => import('./Flags/FlagNC.vue')),
+        FlagNe: defineAsyncComponent(() => import('./Flags/FlagNE.vue')),
+        FlagNf: defineAsyncComponent(() => import('./Flags/FlagNF.vue')),
+        FlagNg: defineAsyncComponent(() => import('./Flags/FlagNG.vue')),
+        FlagNi: defineAsyncComponent(() => import('./Flags/FlagNI.vue')),
+        FlagNl: defineAsyncComponent(() => import('./Flags/FlagNL.vue')),
+        FlagNo: defineAsyncComponent(() => import('./Flags/FlagNO.vue')),
+        FlagNp: defineAsyncComponent(() => import('./Flags/FlagNP.vue')),
+        FlagNr: defineAsyncComponent(() => import('./Flags/FlagNR.vue')),
+        FlagNu: defineAsyncComponent(() => import('./Flags/FlagNU.vue')),
+        FlagNz: defineAsyncComponent(() => import('./Flags/FlagNZ.vue')),
+        FlagOm: defineAsyncComponent(() => import('./Flags/FlagOM.vue')),
+        FlagPa: defineAsyncComponent(() => import('./Flags/FlagPA.vue')),
+        FlagPe: defineAsyncComponent(() => import('./Flags/FlagPE.vue')),
+        FlagPf: defineAsyncComponent(() => import('./Flags/FlagPF.vue')),
+        FlagPg: defineAsyncComponent(() => import('./Flags/FlagPG.vue')),
+        FlagPh: defineAsyncComponent(() => import('./Flags/FlagPH.vue')),
+        FlagPk: defineAsyncComponent(() => import('./Flags/FlagPK.vue')),
+        FlagPl: defineAsyncComponent(() => import('./Flags/FlagPL.vue')),
+        FlagPm: defineAsyncComponent(() => import('./Flags/FlagPM.vue')),
+        FlagPn: defineAsyncComponent(() => import('./Flags/FlagPN.vue')),
+        FlagPr: defineAsyncComponent(() => import('./Flags/FlagPR.vue')),
+        FlagPs: defineAsyncComponent(() => import('./Flags/FlagPS.vue')),
+        FlagPt: defineAsyncComponent(() => import('./Flags/FlagPT.vue')),
+        FlagPw: defineAsyncComponent(() => import('./Flags/FlagPW.vue')),
+        FlagPy: defineAsyncComponent(() => import('./Flags/FlagPY.vue')),
+        FlagQa: defineAsyncComponent(() => import('./Flags/FlagQA.vue')),
+        FlagRe: defineAsyncComponent(() => import('./Flags/FlagRE.vue')),
+        FlagRo: defineAsyncComponent(() => import('./Flags/FlagRO.vue')),
+        FlagRs: defineAsyncComponent(() => import('./Flags/FlagRS.vue')),
+        FlagRu: defineAsyncComponent(() => import('./Flags/FlagRU.vue')),
+        FlagRw: defineAsyncComponent(() => import('./Flags/FlagRW.vue')),
+        FlagSa: defineAsyncComponent(() => import('./Flags/FlagSA.vue')),
+        FlagSb: defineAsyncComponent(() => import('./Flags/FlagSB.vue')),
+        FlagSc: defineAsyncComponent(() => import('./Flags/FlagSC.vue')),
+        FlagSd: defineAsyncComponent(() => import('./Flags/FlagSD.vue')),
+        FlagSe: defineAsyncComponent(() => import('./Flags/FlagSE.vue')),
+        FlagSg: defineAsyncComponent(() => import('./Flags/FlagSG.vue')),
+        FlagSh: defineAsyncComponent(() => import('./Flags/FlagSH.vue')),
+        FlagSi: defineAsyncComponent(() => import('./Flags/FlagSI.vue')),
+        FlagSj: defineAsyncComponent(() => import('./Flags/FlagSJ.vue')),
+        FlagSk: defineAsyncComponent(() => import('./Flags/FlagSK.vue')),
+        FlagSl: defineAsyncComponent(() => import('./Flags/FlagSL.vue')),
+        FlagSm: defineAsyncComponent(() => import('./Flags/FlagSM.vue')),
+        FlagSn: defineAsyncComponent(() => import('./Flags/FlagSN.vue')),
+        FlagSo: defineAsyncComponent(() => import('./Flags/FlagSO.vue')),
+        FlagSr: defineAsyncComponent(() => import('./Flags/FlagSR.vue')),
+        FlagSs: defineAsyncComponent(() => import('./Flags/FlagSS.vue')),
+        FlagSt: defineAsyncComponent(() => import('./Flags/FlagST.vue')),
+        FlagSv: defineAsyncComponent(() => import('./Flags/FlagSV.vue')),
+        FlagSx: defineAsyncComponent(() => import('./Flags/FlagSX.vue')),
+        FlagSy: defineAsyncComponent(() => import('./Flags/FlagSY.vue')),
+        FlagSz: defineAsyncComponent(() => import('./Flags/FlagSZ.vue')),
+        FlagTa: defineAsyncComponent(() => import('./Flags/FlagTA.vue')),
+        FlagTc: defineAsyncComponent(() => import('./Flags/FlagTC.vue')),
+        FlagTd: defineAsyncComponent(() => import('./Flags/FlagTD.vue')),
+        FlagTf: defineAsyncComponent(() => import('./Flags/FlagTF.vue')),
+        FlagTg: defineAsyncComponent(() => import('./Flags/FlagTG.vue')),
+        FlagTh: defineAsyncComponent(() => import('./Flags/FlagTH.vue')),
+        FlagTj: defineAsyncComponent(() => import('./Flags/FlagTJ.vue')),
+        FlagTk: defineAsyncComponent(() => import('./Flags/FlagTK.vue')),
+        FlagTl: defineAsyncComponent(() => import('./Flags/FlagTL.vue')),
+        FlagTm: defineAsyncComponent(() => import('./Flags/FlagTM.vue')),
+        FlagTn: defineAsyncComponent(() => import('./Flags/FlagTN.vue')),
+        FlagTo: defineAsyncComponent(() => import('./Flags/FlagTO.vue')),
+        FlagTr: defineAsyncComponent(() => import('./Flags/FlagTR.vue')),
+        FlagTt: defineAsyncComponent(() => import('./Flags/FlagTT.vue')),
+        FlagTv: defineAsyncComponent(() => import('./Flags/FlagTV.vue')),
+        FlagTw: defineAsyncComponent(() => import('./Flags/FlagTW.vue')),
+        FlagTz: defineAsyncComponent(() => import('./Flags/FlagTZ.vue')),
+        FlagUa: defineAsyncComponent(() => import('./Flags/FlagUA.vue')),
+        FlagUg: defineAsyncComponent(() => import('./Flags/FlagUG.vue')),
+        FlagUm: defineAsyncComponent(() => import('./Flags/FlagUM.vue')),
+        FlagUs: defineAsyncComponent(() => import('./Flags/FlagUS.vue')),
+        FlagUy: defineAsyncComponent(() => import('./Flags/FlagUY.vue')),
+        FlagUz: defineAsyncComponent(() => import('./Flags/FlagUZ.vue')),
+        FlagVa: defineAsyncComponent(() => import('./Flags/FlagVA.vue')),
+        FlagVc: defineAsyncComponent(() => import('./Flags/FlagVC.vue')),
+        FlagVe: defineAsyncComponent(() => import('./Flags/FlagVE.vue')),
+        FlagVg: defineAsyncComponent(() => import('./Flags/FlagVG.vue')),
+        FlagVi: defineAsyncComponent(() => import('./Flags/FlagVI.vue')),
+        FlagVn: defineAsyncComponent(() => import('./Flags/FlagVN.vue')),
+        FlagVu: defineAsyncComponent(() => import('./Flags/FlagVU.vue')),
+        FlagWf: defineAsyncComponent(() => import('./Flags/FlagWF.vue')),
+        FlagWs: defineAsyncComponent(() => import('./Flags/FlagWS.vue')),
+        FlagXk: defineAsyncComponent(() => import('./Flags/FlagXK.vue')),
+        FlagYe: defineAsyncComponent(() => import('./Flags/FlagYE.vue')),
+        FlagYt: defineAsyncComponent(() => import('./Flags/FlagYT.vue')),
+        FlagZa: defineAsyncComponent(() => import('./Flags/FlagZA.vue')),
+        FlagZm: defineAsyncComponent(() => import('./Flags/FlagZM.vue')),
+        FlagZw: defineAsyncComponent(() => import('./Flags/FlagZW.vue')),
     },
     props: {
         country: {
             type: String,
-            required: true,
+            default: 'en',
         },
     },
     computed: {
         componentName() {
-            return `Flag${this.country}`
+            return `flag-${this.country.toLowerCase()}`
         },
     },
-})
+}
 </script>
 
 <template>

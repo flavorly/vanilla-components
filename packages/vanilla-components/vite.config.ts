@@ -54,9 +54,18 @@ export default defineConfig({
         { find: '@', replacement: resolve(__dirname, 'src') },
       ],
     },
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'esnext',
+      },
+    },
     build: {
       minify: false,
       sourcemap: true,
+      emptyOutDir: true,
+
+      // Target must be esnext in order to support dynamic imports for umd builds
+      target: 'esnext',
       lib: {
         formats: ['es', 'cjs', 'umd'],
         entry: resolve(__dirname, 'src/index.ts'),
@@ -66,7 +75,6 @@ export default defineConfig({
       rollupOptions: {
         external: externals,
         output: {
-          sourcemapExcludeSources: true,
           globals: {
             'vue': 'vue',
             '@vueuse/core': 'vue-use',
@@ -74,7 +82,7 @@ export default defineConfig({
             '@headlessui/vue': 'headlessui-vue',
             'libphonenumber-js': 'libphonenumber-js',
             'fuse.js': 'fusejs',
-            '@flavorly/v-calendar': 'v-calendar',
+            'v-calendar': 'v-calendar',
             'focus-trap': 'focus-trap',
             'qs': 'qs',
             'universal-cookie': 'universal-cookie',

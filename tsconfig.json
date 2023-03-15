@@ -1,14 +1,21 @@
 {
   "compilerOptions": {
-    "target": "es2017",
+    "target": "esnext",
     "module": "esnext",
     "lib": ["esnext", "dom", "dom.iterable"],
+    "jsx": "preserve",
+    "declaration": true,
+    "outDir": "./dist",
+    "sourceMap": true,
+    "declarationMap": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "strict": false,
     "strictNullChecks": true,
     "resolveJsonModule": true,
     "skipDefaultLibCheck": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "paths": {
       "@flavorly/vanilla-components": ["./packages/vanilla-components/src/index.ts"],
       "@flavorly/vanilla-components-hybridly": ["./packages/vanilla-components-hybridly/src/index.ts"],
@@ -23,6 +30,7 @@
       "node",
       "unplugin-vue-macros/define-options",
       "unplugin-icons/types/vue",
+      "unplugin-vue-macros/macros-global"
     ]
   },
   "exclude": [

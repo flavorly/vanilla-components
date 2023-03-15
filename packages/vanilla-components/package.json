@@ -24,7 +24,7 @@
     "registry": "https://registry.npmjs.org"
   },
   "engines": {
-    "node": ">=10"
+    "node": ">=16"
   },
   "files": [
     "dist"
@@ -57,26 +57,28 @@
     "stub": "unbuild --stub"
   },
   "dependencies": {
-    "@flavorly/v-calendar": "3.0.0-alpha.11",
     "@headlessui/vue": "^1.7.4",
-    "@popperjs/core": "^2.11.6",
-    "@vueuse/core": "^9.5.0",
-    "@vueuse/integrations": "^9.6.0",
-    "focus-trap": "^7.1.0",
-    "fuse.js": "^6.6.2",
-    "libphonenumber-js": "^1.10.14",
-    "lodash": "^4.17.21",
-    "qs": "^6.11.0",
-    "universal-cookie": "^4.0.4"
+    "@popperjs/core": "^2.11.6"
   },
   "peerDependencies": {
-    "@flavorly/v-calendar": "3.0.0-alpha.11",
+    "v-calendar": "3.0.0",
     "@headlessui/vue": "^1.7.0",
     "@popperjs/core": "^2.11.6",
     "vue": "^3.2.45"
   },
+  "optionalDependencies": {
+    "v-calendar": "3.0.0"
+  },
   "devDependencies": {
     "@types/lodash": "^4.14.189",
-    "@types/qs": "^6.9.7"
+    "@types/qs": "^6.9.7",
+    "universal-cookie": "^4.0.4",
+    "awesome-phonenumber": "^5.2.0",
+    "@vueuse/core": "^9.5.0",
+    "qs": "^6.11.0",
+    "@vueuse/integrations": "^9.6.0",
+    "focus-trap": "^7.1.0",
+    "fuse.js": "^6.6.2",
+    "lodash": "^4.17.21"
   }
 }

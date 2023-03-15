@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import type { CountryCallingCode, CountryCode, PhoneNumber } from 'libphonenumber-js/types'
-import { onMounted, ref, watch } from 'vue'
-import { getCountryCallingCode, getExampleNumber, parsePhoneNumber } from 'libphonenumber-js'
-import examples from 'libphonenumber-js/mobile/examples'
+import { ref, watch } from 'vue'
+import type { ParsedPhoneNumber } from 'awesome-phonenumber'
+import { getCountryCodeForRegionCode, getExample, parsePhoneNumber } from 'awesome-phonenumber'
 import type { FavoriteCountriesValue, MinimumInputLengthTextProp } from '../../core/types'
 import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
-import { countryCodes } from '../../core/utils'
 import CountryInput from '../country-input/country-input.vue'
 import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
@@ -21,7 +19,7 @@ const props = defineProps({
     default: undefined,
   },
   countryCode: {
-    type: [String] as PropType<CountryCode>,
+    type: [String] as PropType<string>,
     default: '',
   },
   phonePlaceholder: {
@@ -70,69 +68,67 @@ const emit = defineEmits([
   'update:modelValue',
   'update:phoneNumberNational',
   'update:phoneNumberInternational',
+  'update:phoneNumberIsValid',
 ])
 
 const rootPhone = ref(null)
 const rootCountry = ref(null)
 const localValue = useVModel(props, 'modelValue')
-const phoneCountryCode = ref<CountryCode>(props.countryCode)
-const phoneDialCode = ref<CountryCallingCode | string[] | number | null>(null)
-const phoneNumber: Ref<string | undefined> = ref(localValue.value)
+const phoneCountryCode = ref<string | undefined>(props.countryCode)
+const phoneDialCode = ref<number | null | undefined>(null)
+const phoneNumber: Ref<string | null | undefined> = ref(localValue.value)
 const isValidPhoneNumber: Ref<boolean> = ref(false)
 const placeholder = ref<string | number | undefined>(props.phonePlaceholder)
-const parsedPhoneNumber = ref<PhoneNumber | null>(null)
+const parsedPhoneNumber = ref<null | ParsedPhoneNumber>(null)
 
-const attemptToParseNumber = (phoneNumberValue: string | undefined, phoneCountryCodeValue: CountryCode) => {
-  if (!phoneNumberValue || !phoneCountryCodeValue) {
-    return
-  }
+const attemptToParseNumber = (phoneNumberValue: string | null | undefined, phoneCountryCodeValue: string | undefined = undefined) => {
+    if (!phoneNumberValue) {
+      return
+    }
 
-  try {
     // Always resolve the country code to dial code
-    phoneDialCode.value = getCountryCallingCode(phoneCountryCodeValue)
+    if (phoneCountryCodeValue) {
+      phoneDialCode.value = getCountryCodeForRegionCode(phoneCountryCodeValue)
+
+      // console.log('Dial code', phoneDialCode.value)
+    }
 
     // Attempt to parse the number and country code
-    parsedPhoneNumber.value = parsePhoneNumber(phoneNumberValue || '', phoneCountryCodeValue)
+    parsedPhoneNumber.value = parsePhoneNumber(phoneNumberValue || '', { regionCode: phoneCountryCodeValue })
 
     // If we are able to parse, then we will assign the new values
-    if (parsedPhoneNumber.value) {
-      isValidPhoneNumber.value = parsedPhoneNumber.value?.isValid()
-      phoneCountryCode.value = parsedPhoneNumber.value.country
-      phoneDialCode.value = parsedPhoneNumber.value?.countryCallingCode
-      phoneNumber.value = parsedPhoneNumber.value?.nationalNumber
+    if (parsedPhoneNumber.value && parsedPhoneNumber.value?.countryCode) {
+      isValidPhoneNumber.value = true
+      phoneCountryCode.value = parsedPhoneNumber.value?.regionCode
+      phoneDialCode.value = parsedPhoneNumber.value?.countryCode
+      phoneNumber.value = parsedPhoneNumber.value?.number?.significant
       localValue.value = `+${phoneDialCode.value}${phoneNumber.value}`
     }
-  }
-  catch (e) {
-    const countryCallingCode = countryCodes.find(country => country.iso2 === phoneCountryCodeValue?.toLowerCase())?.dialCode
-    if (countryCallingCode) {
-      phoneDialCode.value = countryCallingCode
+    else {
+      isValidPhoneNumber.value = false
+      localValue.value = undefined
     }
-    localValue.value = `+${phoneDialCode.value}${phoneNumber.value}`
-  }
 }
 
-onMounted(() => {
-  attemptToParseNumber(phoneNumber.value, phoneCountryCode.value)
-  if (phoneDialCode.value === null) {
-    phoneDialCode.value = getCountryCallingCode(phoneCountryCode.value)
-  }
-})
+// This need to run here before the initial watcher is set.
+attemptToParseNumber(localValue.value, phoneCountryCode.value || undefined)
 
 const { configuration, errors, hasErrors, variant } = useConfiguration<PhoneInputProps>(phoneInputConfig, 'PhoneInput', localValue)
 
 // Watch Country Code and Phone number together
 // When one changes we will trigger the model value & emit back
-watch([phoneCountryCode, phoneNumber, localValue], ([newPhoneCountryCode, newPhoneNumber]) => {
-  attemptToParseNumber(newPhoneNumber, newPhoneCountryCode)
+watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) => {
+  attemptToParseNumber(newPhoneNumber, newPhoneCountryCode || undefined)
 
-  const examplePlaceHolder = getExampleNumber(newPhoneCountryCode, examples)?.nationalNumber as string | undefined
-  if (examplePlaceHolder && (props.phonePlaceholder === '' || props.phonePlaceholder === undefined)) {
-    placeholder.value = examplePlaceHolder
+  if (newPhoneCountryCode) {
+    const examplePlaceHolder = getExample(newPhoneCountryCode, 'mobile')?.number?.significant as string | undefined
+    if (examplePlaceHolder && (props.phonePlaceholder === '' || props.phonePlaceholder === undefined)) {
+      placeholder.value = examplePlaceHolder
+    }
   }
 
   if (phoneCountryCode.value) {
-    phoneDialCode.value = getCountryCallingCode(phoneCountryCode.value)
+    phoneDialCode.value = getCountryCodeForRegionCode(phoneCountryCode.value)
   }
 
   // Watch & Emit additional data
@@ -140,7 +136,8 @@ watch([phoneCountryCode, phoneNumber, localValue], ([newPhoneCountryCode, newPho
   emit('update:countryCode', phoneCountryCode.value)
   emit('update:phoneNumberNational', phoneNumber.value)
   emit('update:phoneNumberInternational', localValue.value)
-}, { immediate: true })
+  emit('update:phoneNumberIsValid', isValidPhoneNumber.value)
+}, { immediate: false })
 
 defineOptions({
   name: 'VanillaPhoneInput',

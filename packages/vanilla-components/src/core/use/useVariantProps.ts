@@ -12,7 +12,7 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
     default: undefined,
   },
   variants: {
-    type: Object as PropType<VariantsWithClassesList<ComponentOptions, ClassesKeys>>,
+    type: Object as PropType<VariantsWithClassesList<ComponentOptions, ClassesKeys> | undefined>,
     default: undefined,
   },
   variant: {

@@ -726,7 +726,7 @@
             "menuWrapperRight": "absolute origin-top-right right-0",
             "menuWrapperCenter": "absolute origin-top-right right-0 left-0 sm:left-auto sm:w-sm",
             "menuWrapperCenterFull": "absolute origin-top-right right-0 mx-4 left-0 sm:left-auto sm:w-sm",
-            "dropdown": "bg-white dark:bg-gray-900 ring-1 ring-gray-900/50 dark:ring-white/10 rounded-md shadow-lg top-5 focus:ring-0 focus:outline-none z-[99] overflow-hidden",
+            "dropdown": "bg-white dark:bg-gray-900 ring-1 ring-gray-400/50 dark:ring-white/10 rounded-md shadow-lg top-5 focus:outline-none z-[99] overflow-hidden",
             "roundedFull": "rounded-lg",
             "roundedTop": "rounded-none rounded-t-lg",
             "roundedBottom": "rounded-none rounded-b-lg",
