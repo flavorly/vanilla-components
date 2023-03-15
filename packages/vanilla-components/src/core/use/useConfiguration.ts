@@ -94,7 +94,7 @@ export function useConfigurationParts<ComponentOptions extends Data>(
  * @param componentName
  */
 export function useConfiguration<ComponentOptions extends Data>(
-  defaultConfiguration: ComponentOptions,
+  defaultConfiguration: { variants?: Data; classesList?: Data; classes?: Data; props?: Data; [key: string]: any },
   componentName: keyof ComponentsConfiguration,
   modelValue: Ref | undefined = undefined,
   classesListKeys: string[] | undefined = undefined,

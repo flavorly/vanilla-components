@@ -96,8 +96,6 @@ const attemptToParseNumber = (phoneNumberValue: string | null | undefined, phone
     // Attempt to parse the number and country code
     parsedPhoneNumber.value = parsePhoneNumber(phoneNumberValue || '', { regionCode: phoneCountryCodeValue })
 
-    console.log('Parsed', parsedPhoneNumber.value)
-
     // If we are able to parse, then we will assign the new values
     if (parsedPhoneNumber.value && parsedPhoneNumber.value?.countryCode) {
       isValidPhoneNumber.value = true
