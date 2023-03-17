@@ -26,7 +26,7 @@
         "bodyWithPadding": "px-4 sm:px-6",
         "bodyWithTitle": "mt-6",
         "closeButtonContainer": "flex h-7 items-center",
-        "closeButton": "rounded-md sm:text-sm text-base font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-white dark:bg-gray-700 p-0.5 hover:text-gray-500 dark:hover:text-gray-300",
+        "closeButton": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-white dark:bg-gray-700 p-0.5 hover:text-gray-500 dark:hover:text-gray-300",
         "closeButtonIcon": "h-6 w-6",
         "titleContainer": "flex items-start justify-between space-x-3",
         "titleWrapper": "px-4 sm:px-6",

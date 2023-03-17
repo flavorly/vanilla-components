@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { provide } from 'vue'
+import { computed, provide, useSlots } from 'vue'
 import {
-    DialogDescription,
-    DialogOverlay,
-    DialogTitle,
-    Dialog as HeadlessDialog,
-    TransitionChild, TransitionRoot,
+  DialogDescription,
+  DialogOverlay,
+  DialogPanel,
+  DialogTitle,
+  Dialog as HeadlessDialog, TransitionChild, TransitionRoot,
 } from '@headlessui/vue'
+import { has } from 'cheerio/lib/api/traversing'
 import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
 import DialogFooter from './partials/footer.vue'
@@ -48,29 +49,17 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: true,
   },
-  paddingOnModal: {
+  padding: {
     type: Boolean as PropType<boolean>,
     default: false,
   },
-  bodyDivided: {
+  paddingBody: {
     type: [Boolean] as PropType<boolean>,
-    default: false,
-  },
-  bodyDarker: {
-    type: [Boolean] as PropType<boolean>,
-    default: false,
-  },
-  bodyWithPadding: {
-    type: [Boolean] as PropType<boolean>,
-    default: false,
-  },
-  bodyClasses: {
-    type: [String] as PropType<string>,
-    default: '',
+    default: true,
   },
   divided: {
     type: Boolean as PropType<boolean>,
-    default: true,
+    default: false,
   },
   as: {
     type: [String] as PropType<string>,
@@ -84,6 +73,14 @@ const props = defineProps({
       return ['default', 'small', 'medium', 'large', 'full'].includes(align)
     },
   },
+  position: {
+    type: [String] as PropType<string>,
+    required: false,
+    default: 'center',
+    validator(align: string) {
+      return ['center-bottom', 'center-top', 'center', 'top', 'bottom'].includes(align)
+    },
+  },
 })
 
 const emit = defineEmits([
@@ -95,6 +92,8 @@ const emit = defineEmits([
   'closing',
   'closed',
 ])
+
+const slots = useSlots()
 
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<DialogProps>(dialogConfig, 'Dialog', localValue)
@@ -120,6 +119,16 @@ const open = () => {
   emit('open')
 }
 
+// Design control variables
+const hasHeaderSlot = computed(() => hasSlot(slots.header) || props.title !== undefined)
+const hasFooterSlot = computed(() => hasSlot(slots.footer))
+const shouldApplyModalPaddingX = computed(() => props.padding && !hasHeaderSlot.value)
+const shouldApplyModalPaddingTop = computed(() => props.padding && !hasHeaderSlot.value)
+const shouldApplyModalPaddingBottom = computed(() => props.padding && !hasFooterSlot.value)
+const shouldApplyBodyPaddingTop = computed(() => (props.paddingBody && !hasHeaderSlot.value) || (hasHeaderSlot.value && props.divided))
+const shouldApplyBodyPaddingBottom = computed(() => (props.paddingBody && !hasFooterSlot.value) || (hasFooterSlot.value && props.divided))
+const shouldApplyBodyXPadding = computed(() => props.paddingBody)
+
 const emitTransitionEvent = (event: 'opening' | 'opened' | 'closing' | 'closed') => emit(event)
 
 provide('configuration_vanilla', configuration)
@@ -138,7 +147,7 @@ defineOptions({
 <template>
   <TransitionRoot
     appear
-    :show="localValue"
+    :show="localValue as boolean"
     as="template"
     @before-enter="emitTransitionEvent('opening')"
     @after-enter="emitTransitionEvent('opened')"
@@ -150,40 +159,57 @@ defineOptions({
       :initial-focus="null"
       @close="close"
     >
-      <div :class="configuration.classesList.wrapper">
-        <div :class="configuration.classesList.inner">
+      <TransitionChild
+        as="template"
+        :enter="configuration.classesList.overlayEnter as string"
+        :enter-from="configuration.classesList.overlayEnterFrom as string"
+        :enter-to="configuration.classesList.overlayEnterTo as string"
+        :leave="configuration.classesList.overlayLeave as string"
+        :leave-from="configuration.classesList.overlayLeaveFrom as string"
+        :leave-to="configuration.classesList.overlayLeaveTo as string"
+      >
+        <DialogOverlay
+          :class="[
+            configuration.classesList.overlay,
+            configuration.classesList.overlayColor,
+            configuration.classesList.zIndexOverlay,
+          ]"
+        />
+      </TransitionChild>
+
+      <div
+        :class="[
+          configuration.classesList.wrapper,
+          configuration.classesList.zIndexWrapper,
+        ]"
+      >
+        <div
+          :class="[
+            configuration.classesList.inner,
+            position === 'center' ? configuration.classesList.positionCentered : '',
+            position === 'center-bottom' ? configuration.classesList.positionCenterBottom : '',
+            position === 'center-top' ? configuration.classesList.positionCenterTop : '',
+            position === 'bottom' ? configuration.classesList.positionBottom : '',
+            position === 'top' ? configuration.classesList.positionTop : '',
+          ]"
+        >
           <TransitionChild
             as="template"
-            :enter="configuration.classesList.overlayEnter"
-            :enter-from="configuration.classesList.overlayEnterFrom"
-            :enter-to="configuration.classesList.overlayEnterTo"
-            :leave="configuration.classesList.overlayLeave"
-            :leave-from="configuration.classesList.overlayLeaveFrom"
-            :leave-to="configuration.classesList.overlayLeaveTo"
+            :enter="configuration.classesList.dialogEnter as string"
+            :enter-from="configuration.classesList.dialogEnterFrom as string"
+            :enter-to="configuration.classesList.dialogEnterTo as string"
+            :leave="configuration.classesList.dialogLeave as string"
+            :leave-from="configuration.classesList.dialogLeaveFrom as string"
+            :leave-to="configuration.classesList.dialogLeaveTo as string"
           >
-            <DialogOverlay :class="configuration.classesList.overlay" />
-          </TransitionChild>
-
-          <span
-            :class="configuration.classesList.closeButton"
-            aria-hidden="true"
-          >
-            &#8203;
-          </span>
-
-          <TransitionChild
-            as="template"
-            :enter="configuration.classesList.dialogEnter"
-            :enter-from="configuration.classesList.dialogEnterFrom"
-            :enter-to="configuration.classesList.dialogEnterTo"
-            :leave="configuration.classesList.dialogLeave"
-            :leave-from="configuration.classesList.dialogLeaveFrom"
-            :leave-to="configuration.classesList.dialogLeaveTo"
-          >
-            <div
+            <DialogPanel
               :class="[
                 configuration.classesList.modal,
-                paddingOnModal ? configuration.classesList.modalWithPadding : '',
+                configuration.classesList.modalBackground,
+                configuration.classesList.modalRing,
+                shouldApplyModalPaddingX ? configuration.classesList.modalPaddingX : '',
+                shouldApplyModalPaddingTop ? configuration.classesList.modalPaddingTop : '',
+                shouldApplyModalPaddingBottom ? configuration.classesList.modalPaddingBottom : '',
                 size === 'default' ? configuration.classesList.sizeDefault : '',
                 size === 'small' ? configuration.classesList.sizeSmall : '',
                 size === 'medium' ? configuration.classesList.sizeMedium : '',
@@ -199,7 +225,7 @@ defineOptions({
 
               <!-- Header -->
               <DialogTitle
-                v-if="hasSlot($slots.header) || title !== undefined"
+                v-if="hasHeaderSlot"
                 as="div"
                 :class="[
                   configuration.classesList.title,
@@ -220,26 +246,22 @@ defineOptions({
               <!-- Body -->
               <DialogDescription
                 as="div"
+                v-bind="$attrs"
                 :class="[
-                  bodyDivided ? configuration.classesList.bodyDivided : '',
-                  bodyWithPadding ? configuration.classesList.bodyWithPadding : '',
-                  bodyWithPadding && (!hasSlot($slots.header) || title === undefined) ? configuration.classesList.bodyWithPaddingTop : '',
-                  bodyWithPadding && hasSlot($slots.footer) ? configuration.classesList.bodyWithPaddingBottom : '',
-                  bodyDarker ? configuration.classesList.bodyDarker : '',
-                  bodyClasses,
+                  shouldApplyBodyXPadding ? configuration.classesList.bodyPaddingX : '',
+                  shouldApplyBodyPaddingTop ? configuration.classesList.bodyPaddingTop : '',
+                  shouldApplyBodyPaddingBottom ? configuration.classesList.bodyPaddingBottom : '',
+                  configuration.classesList.body,
                 ]"
               >
                 <slot
-                  v-bind="{
-                    close,
-                    classes: configuration.classesList.body,
-                  }"
+                  v-bind="{ close }"
                 />
               </DialogDescription>
 
               <!-- Footer -->
               <DialogFooter
-                v-if="hasSlot($slots.footer)"
+                v-if="hasFooterSlot"
                 ref="footer"
                 :divided="divided"
               >
@@ -248,7 +270,7 @@ defineOptions({
                   name="footer"
                 />
               </DialogFooter>
-            </div>
+            </DialogPanel>
           </TransitionChild>
         </div>
       </div>

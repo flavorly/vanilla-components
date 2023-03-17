@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FormLabel, RichSelect, RichSelectOptionImage, RichSelectOptionIndicator } from '@flavorly/vanilla-components'
+import { FormLabel, RichSelect, RichSelectOptionImage, RichSelectOptionIndicator, VanillaInputGroup } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref('Option 1')
 const valueErrors = ref('Option 1')
@@ -100,6 +100,7 @@ const fetchOptions = (query?: string, nextPage?: number) => {
       <div class="w-full">
         <RichSelect
           v-model="value"
+          name="test"
           :options="options"
           :clearable="true"
           feedback="Im useful helper out here, choose wisely"

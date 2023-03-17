@@ -109,7 +109,7 @@ defineOptions({
           <FormLabel
             v-if="label !== undefined"
             :label="label"
-            :for="name"
+            :for="props.for || name"
           />
         </slot>
       </div>

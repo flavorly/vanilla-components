@@ -3,26 +3,40 @@ import { mergeClasses } from '../../core/helpers'
 import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
 export const dialogConfig = {
-  fixedClasses: {},
+  fixedClasses: {
+  },
 
   // Default appearance
   classes: {
-    wrapper: 'fixed inset-0 z-30 overflow-y-auto',
-    inner: 'min-h-screen px-4 text-center',
-    closeButton: 'inline-block h-screen align-middle',
-    overlay: 'fixed inset-0 transition-opacity bg-gray-600/50 dark:bg-gray-900/70 backdrop-blur-sm',
 
-    modalWithPadding: 'px-4 pt-5 pb-4 sm:my-8 sm:p-6',
+    wrapper: 'fixed inset-0 overflow-y-auto',
 
+    inner: 'flex min-h-full p-4 justify-center text-center sm:p-0',
+    positionCentered: 'items-center',
+    positionCenterBottom: 'items-end sm:items-center',
+    positionCenterTop: 'items-start sm:items-center',
+    positionBottom: 'items-end',
+    positionTop: 'items-start',
+
+    overlay: 'fixed inset-0 transition-opacity  backdrop-blur-sm',
+    overlayColor: 'bg-gray-600/50 dark:bg-gray-900/80',
+
+    modalBackground: 'bg-white dark:bg-gray-800',
+    modalRing: 'ring-1 ring-gray-500/20 dark:ring-gray-200/20',
     modal: mergeClasses(
-      '',
+      'sm:my-8',
       'relative inline-block align-middle overflow-hidden',
-      'bg-white dark:bg-gray-800',
       'shadow-xl',
       'rounded-lg',
       'transform transition-all',
-      'dark:border dark:border-gray-700',
     ),
+
+    modalPaddingX: 'px-5',
+    modalPaddingTop: 'pt-5',
+    modalPaddingBottom: 'pb-4',
+
+    zIndexWrapper: 'z-[40]',
+    zIndexOverlay: 'z-[30]',
 
     sizeDefault: 'max-w-sm w-full sm:max-w-sm sm:w-full',
     sizeSmall: 'max-w-xs w-full sm:max-w-xs sm:w-full',
@@ -30,26 +44,25 @@ export const dialogConfig = {
     sizeLarge: 'max-w-lg w-full sm:max-w-lg sm:w-full',
     sizeFull: ' w-full',
 
+    // Body
+    // body: 'text-sm leading-5 text-gray-600 dark:text-gray-300',
+    body: '',
+
+    // bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
+    bodyPaddingX: 'px-4',
+    bodyPaddingBottom: 'pb-4',
+    bodyPaddingTop: 'pt-5',
+
     // Header / Title
-    title: 'px-4 py-5 sm:px-6 text-gray-700',
+    title: 'px-4 py-4 sm:px-6 text-gray-700',
     titleDivided: 'border-b dark:border-gray-700',
     titleText: 'text-lg leading-6 font-medium text-gray-900 dark:text-white',
 
-    // Body
-    body: 'mt-2 text-sm leading-5 text-gray-600 dark:text-gray-300',
-    bodyDivided: 'sm:divide-y sm:divide-gray-200 dark:divide-gray-800',
-    bodyDarker: 'bg-gray-50 dark:bg-gray-900/60',
-
-    // bodyWithPadding: 'px-4 sm:px-8 py-4 sm:py-8',
-    bodyWithPadding: 'px-4',
-    bodyWithPaddingBottom: 'pb-4',
-    bodyWithPaddingTop: 'pt-5',
-
     // Footer
-    footer: 'px-4 py-5',
+    footer: 'px-4 py-4',
     footerDivided: 'border-t border-gray-200 dark:border-gray-700',
-    footerWithOneButton: 'sm:grid sm:grid-cols-1 sm:gap-2 sm:grid-flow-row-dense',
-    footerWithTwoButtons: 'sm:grid sm:grid-cols-2 sm:gap-2 sm:grid-flow-row-dense space-y-2 sm:space-y-0',
+    footerWithOneButton: 'grid grid-cols-1',
+    footerWithTwoButtons: 'grid gap-y-2 grid-cols-1 sm:grid-cols-2 sm:gap-x-2 sm:gap-y-0 xs:grid-cols-2 xs:grid-flow-row-dense xs:gap-x-2 xs:gap-y-0',
     footerWithThreeButtons: 'sm:grid sm:grid-cols-3 sm:gap-2 sm:grid-flow-row-dense',
 
     // Transition backdrop

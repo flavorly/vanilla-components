@@ -5,11 +5,29 @@ import CheckIcon from '~icons/heroicons/check-solid'
 const open = ref(false)
 const open2 = ref(false)
 const valueFromSelect = ref()
+const shouldDivide = ref(false)
+const position = ref('center')
+
+const openDivided = () => {
+  open2.value = !open2.value
+  shouldDivide.value = true
+}
+
+const openPlain = () => {
+  open2.value = !open2.value
+  shouldDivide.value = false
+}
+
+const openAligned = (align = 'center') => {
+  open2.value = !open2.value
+  position.value = align
+  shouldDivide.value = false
+}
 </script>
 
 <template>
   <PreviewWrapper>
-    <div class="flex space-x-2">
+    <div class="flex flex-col items-center justify-center mx-auto space-y-3 ">
       <Button
         label="Open Dialog"
         @click="open = !open"
@@ -17,15 +35,31 @@ const valueFromSelect = ref()
 
       <Button
         label="Open another Dialog"
-        @click="open2 = !open2"
+        @click="openPlain"
+      />
+
+      <Button
+        label="Open Divided Dialog"
+        @click="openDivided"
+      />
+
+      <Button
+        label="Centered Dialog"
+        @click="openAligned('center')"
+      />
+
+      <Button
+        label="Bottom Dialog"
+        @click="openAligned('bottom')"
+      />
+
+      <Button
+        label="Bottom Dialog"
+        @click="openAligned('top')"
       />
     </div>
 
-    <Dialog
-      v-model="open"
-      :divided="false"
-      :padding-on-modal="true"
-    >
+    <Dialog v-model="open">
       <div>
         <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
           <CheckIcon
@@ -73,12 +107,11 @@ const valueFromSelect = ref()
 
     <Dialog
       v-model="open2"
-      :divided="true"
-      :padding-on-modal="false"
-      :body-with-padding="true"
+      :divided="shouldDivide"
+      :position="position"
       title="Another Dialog"
     >
-      <div class="mt-3 text-center sm:mt-5">
+      <div class="text-center">
         <p class="text-sm text-gray-500 dark:text-gray-200">
           This is just another modal, divided, and with padded body
           and also two action buttons.

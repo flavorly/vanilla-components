@@ -8,6 +8,18 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.42
+- Dialog : Removed `bodyClasses` prop, please use `classes: { body: '...' }` instead
+- Dialog : Removed `bodyDivided` & `bodyDarker` props, please use `classes: { body: 'divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-800 bg-gray-50' }` instead
+- Dialog : `paddingOnModal` was renamed to `padding` and now defaults to `false`
+- Dialog: `bodyWithPadding` was renamed to `bodyPadding` and now defaults to `true`
+- Dialog: added `position` prop to allow positioning the dialog on the screen on : `top`, `bottom`, `left`, `right`, `center`
+- Dialog: Added more classes for better customization and granular control
+- Dialog: Refactor on how the paddings are set, this should be smart enough to understand when it needs to give padding on top/bottom depending on the content / header and footer slots
+- Rich Select: Fixed issue that was not able to be focused when clicking a label with a `for` attribute
+- Rich Select: Fixed issue that would let re-focus on leave when toggleOnFocus is set
+- Button: Changed default text size on Mobile to `text-sm`
+
 ### 0.7.41
 - Datetime : Removed & Deprecated `@flavorly/v-calendar` dependency, please use `v-calendar@next` instead tagged 3.0.0
 - Datetime : Added `v-calendar@next` as a peer dependency

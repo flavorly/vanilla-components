@@ -403,6 +403,9 @@ const dropdownClasses: Ref<CSSRawClassesList> = computed(() => {
 const showClearButton: Ref<boolean> = computed(() => (hasSelectedOption.value && configuration.clearable === true && configuration.disabled !== true))
 
 const focusDropdownTrigger = (): void => {
+  if (configuration.toggleOnFocus) {
+    return
+  }
   dropdownComponent.value!.focus()
 }
 
@@ -487,7 +490,7 @@ const keydownSpaceHandler = (e: KeyboardEvent): void => {
 
   e.preventDefault()
 
-  if (configuration.toggleOnClick && shown.value) {
+  if (configuration.toggleOnClick && !shown.value) {
     showDropdown()
   }
   else if (shown.value) {
@@ -538,7 +541,9 @@ const onOptionSelected = (): void => {
     || (configuration.closeOnSelect === undefined && !configuration.multiple)
   ) {
     hideDropdown()
-    focusDropdownTrigger()
+    if (!configuration.toggleOnFocus) {
+      focusDropdownTrigger()
+    }
   }
 }
 
@@ -593,6 +598,10 @@ const focusHandler = (e: FocusEvent): void => {
   if (configuration.toggleOnFocus) {
     showDropdown()
   }
+}
+
+const rootElementFocusHandler = (e: FocusEvent): void => {
+  dropdownComponent.value?.focus()
 }
 
 const blurOnChildHandler = (e: FocusEvent): void => {
@@ -714,7 +723,9 @@ defineOptions({
           :classes="undefined"
           :multiple="configuration.multiple"
           :options="flattenedOptions"
-          style="display:none"
+          style="width: 0; opacity: 0; height: 0;"
+          aria-hidden="true"
+          @focusin="rootElementFocusHandler"
         />
 
         <DropdownSimple

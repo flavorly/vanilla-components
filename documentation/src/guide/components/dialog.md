@@ -16,24 +16,23 @@ A Dialog component is a modal window that can be used to display information or 
 
 <!--@include: ../../parts/title-props.md-->
 
-| Prop                      | Description                                    | Accepted Values                           | Default     |
-|:--------------------------|:-----------------------------------------------|:------------------------------------------|:------------|
-| `modelValue`              | Controls the open/close of the dialog          | `Boolean`                                 | `false`     |
-| `title`                   | A title for the dialog                         | `String`                                  | `undefined` |
-| `teleport`                | If we should teleport the dropdown             | `Boolean`                                 | `true`      |
-| `teleportTo`              | Element to teleport                            | `string`                                  | `body`      |
-| `closeableOnClickOutside` | Clicking outside closes the dialog             | `Boolean`                                 | `true`      |
-| `overlay`                 | Adds a overlay behind the dialog               | `Boolean`                                 | `true`      |
-| `closeable`               | If we should allow open/close the dialog       | `Boolean`                                 | `true`      |
-| `closeableOnPressEscape`  | Keyboard ESC closes the dialog                 | `Boolean`                                 | `true`      |
-| `paddingOnModal`          | Give padding to the whole modal                | `Boolean`                                 | `true`      |
-| `bodyDivided`             | Divide the items inside the body               | `Boolean`                                 | `false`     |
-| `bodyDarker`              | Darkens the modal body, for easier reading     | `Boolean`                                 | `false`     |
-| `bodyWithPadding`         | Gives a slight padding to the whole modal body | `Boolean`                                 | `false`     |
-| `bodyClasses`             | Additional classes for the modal body          | `String`                                  | `undefined` |
-| `divided`                 | Divide header, body & footer                   | `Boolean`                                 | `true`      |
-| `as`                      | Render the modal as this element               | `String`                                  | `div`       |
-| `size`                    | Size of the modal                              | `default`,`small`,`medium`,`large`,`full` | `default`   |
+| Prop                      | Description                              | Accepted Values                                          | Default     |
+|:--------------------------|:-----------------------------------------|:---------------------------------------------------------|:------------|
+| `modelValue`              | Controls the open/close of the dialog    | `Boolean`                                                | `false`     |
+| `title`                   | A title for the dialog                   | `String`                                                 | `undefined` |
+| `teleport`                | If we should teleport the dropdown       | `Boolean`                                                | `true`      |
+| `teleportTo`              | Element to teleport                      | `string`                                                 | `body`      |
+| `closeableOnClickOutside` | Clicking outside closes the dialog       | `Boolean`                                                | `true`      |
+| `overlay`                 | Adds a overlay behind the dialog         | `Boolean`                                                | `true`      |
+| `closeable`               | If we should allow open/close the dialog | `Boolean`                                                | `true`      |
+| `closeableOnPressEscape`  | Keyboard ESC closes the dialog           | `Boolean`                                                | `true`      |
+| `padding`                 | Give padding to the whole modal          | `Boolean`                                                | `false`     |
+| `paddingBody`             | Give padding to the Body of the modal    | `Boolean`                                                | `true`      |
+| `divided`                 | Divide header and footer with border     | `Boolean`                                                | `false`     |
+| `divided`                 | Divide header, body & footer             | `Boolean`                                                | `true`      |
+| `as`                      | Render the modal as this element         | `String`                                                 | `div`       |
+| `size`                    | Size of the modal                        | `default`,`small`,`medium`,`large`,`full`                | `default`   |
+| `position`                | Position of the modal                    | `center-bottom`, `center-top`, `center`, `top`, `bottom` | `center`    |
 
 
 

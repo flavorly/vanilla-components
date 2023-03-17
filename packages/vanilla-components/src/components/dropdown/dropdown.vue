@@ -249,7 +249,7 @@ const doHide = async (): Promise<void> => {
       try {
         deactivate()
       }
-catch (e) {}
+      catch (e) {}
     }
     onHidden()
     focused.value = true
