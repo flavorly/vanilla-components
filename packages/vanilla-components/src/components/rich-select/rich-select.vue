@@ -706,6 +706,12 @@ provide('usesTags', usesTags)
  **/
 </script>
 
+<script lang="ts">
+export default {
+  inheritAttrs: false,
+}
+</script>
+
 <template>
   <div
     ref="main"
