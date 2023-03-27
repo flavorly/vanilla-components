@@ -100,10 +100,10 @@ const isChecked = computed(() => {
   return localValue.value === props.checkedValue
 })
 
-defineOptions({
-  name: 'VanillaCheckbox',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaCheckbox',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

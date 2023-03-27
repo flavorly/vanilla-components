@@ -28,10 +28,10 @@
 
   const classesList = useInjectsClassesList()!
 
-  defineOptions({
-    name: 'VanillaDropdownOption',
-    inheritAttrs: true,
-  })
+  // defineOptions({
+  //   name: 'VanillaDropdownOption',
+  //   inheritAttrs: true,
+  // })
 
   /**
    * @docs

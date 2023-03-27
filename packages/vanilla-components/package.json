@@ -31,12 +31,12 @@
   ],
   "web-types": "./dist/webtypes.json",
   "types": "./dist/index.d.ts",
-  "main": "./dist/index.umd.js",
-  "module": "./dist/index.es.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
   "exports": {
     ".": {
-      "require": "./dist/index.umd.js",
-      "import": "./dist/index.es.js",
+      "require": "./dist/index.js",
+      "import": "./dist/index.mjs",
       "types": "./dist/index.d.ts"
     }
   },

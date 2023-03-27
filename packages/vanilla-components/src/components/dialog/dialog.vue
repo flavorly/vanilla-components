@@ -133,9 +133,9 @@ const emitTransitionEvent = (event: 'opening' | 'opened' | 'closing' | 'closed')
 
 provide('configuration_vanilla', configuration)
 
-defineOptions({
-  name: 'VanillaDialog',
-})
+// defineOptions({
+//   name: 'VanillaDialog',
+// })
 
 /**
  * @docs

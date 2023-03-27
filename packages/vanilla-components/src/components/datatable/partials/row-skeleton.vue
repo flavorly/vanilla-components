@@ -21,9 +21,9 @@ const props = defineProps({
 
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
-defineOptions({
-  name: 'VanillaDatatableRowSkeleton',
-})
+// defineOptions({
+//   name: 'VanillaDatatableRowSkeleton',
+// })
 </script>
 
 <template>

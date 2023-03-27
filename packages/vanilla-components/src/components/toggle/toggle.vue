@@ -109,10 +109,10 @@ const isChecked = computed(() => {
 })
 const { configuration, errors, hasErrors } = useConfiguration<ToggleProps>(toggleConfig, 'Toggle', localValue)
 
-defineOptions({
-  name: 'VanillaToggle',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaToggle',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

@@ -111,10 +111,10 @@ const { configuration, errors, hasErrors, variant } = useConfiguration<CountryIn
 // Rebind Attributes
 const bindAttributes = useAttributesAndProps()
 
-defineOptions({
-  name: 'VanillaCountryInput',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaCountryInput',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

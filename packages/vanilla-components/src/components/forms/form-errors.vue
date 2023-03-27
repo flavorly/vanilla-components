@@ -19,10 +19,10 @@ const props = defineProps({
 })
 const { configuration, errors, hasErrors } = useConfiguration<FormErrorsProps>(formsConfig, 'FormErrors')
 
-defineOptions({
-  name: 'VanillaFormErrors',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaFormErrors',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

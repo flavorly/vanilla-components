@@ -87,10 +87,10 @@
     }
   })
 
-  defineOptions({
-    name: 'VanillaAvatar',
-    inheritAttrs: false,
-  })
+  // defineOptions({
+  //   name: 'VanillaAvatar',
+  //   inheritAttrs: false,
+  // })
 
   /**
    * @docs

@@ -67,10 +67,10 @@ onMounted(() => {
   }
 })
 
-defineOptions({
-  name: 'VanillaButton',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaButton',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

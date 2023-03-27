@@ -79,9 +79,9 @@ const { normalizedOptions } = useMultipleOptions(
 )
 provide('configuration_vanilla', configuration)
 
-defineOptions({
-  name: 'VanillaSelect',
-})
+// defineOptions({
+//   name: 'VanillaSelect',
+// })
 
 /**
  * @docs

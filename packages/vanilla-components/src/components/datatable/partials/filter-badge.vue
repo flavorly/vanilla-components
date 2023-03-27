@@ -44,9 +44,9 @@ const translateFilterValue = (filter: Types.DatatableFilter): any => {
   return filter.value
 }
 
-defineOptions({
-  name: 'VanillaDatatableFilterBadge',
-})
+// defineOptions({
+//   name: 'VanillaDatatableFilterBadge',
+// })
 </script>
 
 <template>

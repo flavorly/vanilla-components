@@ -26,9 +26,9 @@ const search = ref<HTMLElement>()
 const localValue = useVModel(props, 'modelValue')
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
-defineOptions({
-  name: 'VanillaDatatableRowSkeleton',
-})
+// defineOptions({
+//   name: 'VanillaDatatableRowSkeleton',
+// })
 </script>
 
 <template>

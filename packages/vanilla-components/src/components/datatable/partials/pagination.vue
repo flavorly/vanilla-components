@@ -95,9 +95,9 @@ const pagesLimited = computed(() => {
   return pagesSliced
 })
 
-defineOptions({
-  name: 'VanillaDatatablePagination',
-})
+// defineOptions({
+//   name: 'VanillaDatatablePagination',
+// })
 </script>
 
 <template>

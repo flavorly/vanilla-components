@@ -202,10 +202,10 @@ defineExpose({ open, close })
 
 provide('configuration_vanilla', configuration)
 
-defineOptions({
-  name: 'VanillaSlideover',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaSlideover',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

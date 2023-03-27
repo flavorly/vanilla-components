@@ -53,10 +53,10 @@ const { normalizedOptions } = useMultipleOptions(
   computed(() => props.normalizeOptions!),
 )
 
-defineOptions({
-  name: 'VanillaCheckboxGroup',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaCheckboxGroup',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

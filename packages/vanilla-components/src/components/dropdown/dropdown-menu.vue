@@ -233,10 +233,10 @@
 
   provide('configuration_vanilla', configuration)
 
-  defineOptions({
-    name: 'VanillaDropdownMenu',
-    inheritAttrs: true,
-  })
+  // defineOptions({
+  //   name: 'VanillaDropdownMenu',
+  //   inheritAttrs: true,
+  // })
 
   /**
    * @docs

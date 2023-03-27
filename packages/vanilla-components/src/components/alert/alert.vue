@@ -111,10 +111,10 @@ onUnmounted(() => {
   clearTimeout(internalTimeout.value)
 })
 
-defineOptions({
-  name: 'VanillaAlert',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaAlert',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

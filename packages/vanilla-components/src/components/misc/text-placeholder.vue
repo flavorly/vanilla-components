@@ -14,10 +14,10 @@ const props = defineProps({
 
 const className = useInjectsClassesListClass(props.classProperty)
 
-defineOptions({
-  name: 'VanillaTextPlaceholder',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaTextPlaceholder',
+//   inheritAttrs: true,
+// })
 </script>
 
 <template>

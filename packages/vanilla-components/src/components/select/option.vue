@@ -19,9 +19,9 @@ const props = defineProps({
 const classesList = useInjectsClassesList()!
 const hasChildren = computed(() => props.option.children !== undefined && props.option.children.length > 0)
 
-defineOptions({
-  name: 'VanillaSelectOption',
-})
+// defineOptions({
+//   name: 'VanillaSelectOption',
+// })
 </script>
 
 <template>

@@ -2,10 +2,10 @@
 import { useInjectsClassesList } from '../../core/use'
 const classesList = useInjectsClassesList()!
 
-defineOptions({
-  name: 'VanillaCardEmptyPlaceholder',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaCardEmptyPlaceholder',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

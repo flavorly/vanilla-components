@@ -61,10 +61,10 @@ const normalizedOptions = normalizeOptions(
   props.valueAttribute,
 )
 
-defineOptions({
-  name: 'VanillaRichRadio',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaRichRadio',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

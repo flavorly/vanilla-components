@@ -53,10 +53,10 @@ const { normalizedOptions } = useMultipleOptions(
   computed(() => props.normalizeOptions!),
 )
 
-defineOptions({
-  name: 'VanillaToggleGroup',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaToggleGroup',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

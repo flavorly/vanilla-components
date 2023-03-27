@@ -49,10 +49,10 @@ const togglePassword = () => {
 // Clipboard handler
 const { text, copy, copied, isSupported } = useClipboard()
 
-defineOptions({
-  name: 'VanillaInput',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaInput',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

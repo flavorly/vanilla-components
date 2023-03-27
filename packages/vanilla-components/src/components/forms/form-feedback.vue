@@ -25,10 +25,10 @@ const clicked = () => {
   emit('click', true)
 }
 
-defineOptions({
-  name: 'VanillaFormFeedback',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaFormFeedback',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

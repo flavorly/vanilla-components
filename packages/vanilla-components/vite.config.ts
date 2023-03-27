@@ -4,7 +4,6 @@ import type { PluginOption } from 'vite'
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
 import copy from 'rollup-plugin-copy'
-import DefineOptions from 'unplugin-vue-define-options/vite'
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
 import Components from 'unplugin-vue-components/vite'
@@ -17,7 +16,6 @@ const externals = [
 
 const plugins: PluginOption[] = [
   vue(),
-  DefineOptions(),
   copy({
     targets: [
       { src: 'src/components/**/*.vue', dest: 'dist' },

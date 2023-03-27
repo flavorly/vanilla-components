@@ -69,10 +69,10 @@ const props = defineProps({
 
 const { configuration, errors, hasErrors, variant } = useConfiguration<InputGroupProps>(inputGroupConfig, 'InputGroup')
 
-defineOptions({
-  name: 'VanillaInputGroup',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaInputGroup',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

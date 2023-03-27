@@ -941,10 +941,10 @@ provide('datatable_configuration', datatable)
 // ----- Functions to other components  -----  //
 provide('datatable_reset_url_function', resetUrl)
 
-defineOptions({
-  name: 'VanillaDatatable',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaDatatable',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

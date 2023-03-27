@@ -39,10 +39,10 @@ const props = defineProps({
 
 const { configuration } = useConfiguration<RichSelectOptionWithImageProps>(richSelectOptionWithImageConfig, 'RichSelectOptionWithImage')
 
-defineOptions({
-  name: 'VanillaRichSelectOptionWithImage',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaRichSelectOptionWithImage',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

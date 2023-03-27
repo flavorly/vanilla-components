@@ -139,10 +139,10 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
   emit('update:phoneNumberIsValid', isValidPhoneNumber.value)
 }, { immediate: false })
 
-defineOptions({
-  name: 'VanillaPhoneInput',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaPhoneInput',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

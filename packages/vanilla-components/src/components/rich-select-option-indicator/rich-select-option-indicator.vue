@@ -49,10 +49,10 @@ const indicatorClass = computed(() => {
   }[props.status]
 })
 
-defineOptions({
-  name: 'VanillaRichSelectOptionWithIndicator',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaRichSelectOptionWithIndicator',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

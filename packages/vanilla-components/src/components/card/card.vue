@@ -42,10 +42,10 @@ const props = defineProps({
 const { configuration } = useConfiguration<CardProps>(cardConfig, 'Card')
 provide('configuration_vanilla', configuration)
 
-defineOptions({
-  name: 'VanillaCard',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaCard',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

@@ -7,7 +7,7 @@ export const alertConfig = {
     iconWrapper: 'flex-shrink-0',
     icon: 'h-5 w-5',
     contentWrapper: 'flex flex-col space-y-2 items-start justify-center',
-    contentWrapperWithIcon: 'ml-3',
+    contentWrapperWithIcon: 'ml-2',
     title: 'text-sm font-medium',
     text: 'text-xs text-left',
     actionsWrapper: 'mt-4',
@@ -122,7 +122,7 @@ export const alertConfig = {
       classes: {
         wrapper: 'ring-1 ring-inset rounded-md ring-primary-400/50 bg-primary-300/10 dark:bg-primary-600/10',
         iconWrapper: '',
-        icon: '',
+        icon: 'text-blue-400 dark:text-blue-400',
         contentWrapper: '',
         contentWrapperWithIcon: '',
         title: 'font-semibold  text-primary-800 dark:text-primary-400',
@@ -140,7 +140,7 @@ export const alertConfig = {
       classes: {
         wrapper: 'ring-1 ring-inset rounded-md ring-yellow-400/50 bg-yellow-300/10 dark:bg-yellow-600/10',
         iconWrapper: '',
-        icon: '',
+        icon: 'text-yellow-400 dark:text-yellow-400',
         contentWrapper: '',
         contentWrapperWithIcon: '',
         title: 'text-yellow-800 dark:text-yellow-400',
@@ -158,7 +158,7 @@ export const alertConfig = {
       classes: {
         wrapper: 'ring-1 ring-inset rounded-md ring-red-400/50 bg-red-300/10 dark:bg-red-600/10',
         iconWrapper: '',
-        icon: '',
+        icon: 'text-red-400 dark:text-red-400',
         contentWrapper: '',
         contentWrapperWithIcon: '',
         title: 'text-red-800 dark:text-red-400',
@@ -176,7 +176,7 @@ export const alertConfig = {
       classes: {
         wrapper: 'ring-1 ring-inset rounded-md ring-blue-400/50 bg-blue-300/10 dark:bg-blue-600/10',
         iconWrapper: '',
-        icon: '',
+        icon: 'text-blue-400 dark:text-blue-400',
         contentWrapper: '',
         contentWrapperWithIcon: '',
         title: 'text-blue-800 dark:text-blue-400',
@@ -194,7 +194,7 @@ export const alertConfig = {
       classes: {
         wrapper: 'ring-1 ring-inset rounded-md  ring-green-400/50 bg-green-300/10 dark:bg-green-600/10',
         iconWrapper: '',
-        icon: '',
+        icon: 'text-green-400 dark:text-green-400',
         contentWrapper: '',
         contentWrapperWithIcon: '',
         title: 'text-green-800 dark:text-green-400',

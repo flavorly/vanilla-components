@@ -40,9 +40,9 @@ const translations = useInjectDatatableTranslations()!
 const configuration = useInjectDatatableConfiguration()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
-defineOptions({
-  name: 'VanillaDatatableSelectionBar',
-})
+// defineOptions({
+//   name: 'VanillaDatatableSelectionBar',
+// })
 </script>
 
 <template>

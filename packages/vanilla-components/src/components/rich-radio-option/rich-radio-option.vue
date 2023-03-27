@@ -47,10 +47,10 @@ const props = defineProps({
 })
 const { configuration } = useConfiguration<RichRadioOptionProps>(richRadioOptionConfig, 'RichRadioOption')
 
-defineOptions({
-  name: 'VanillaRichRadioOption',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaRichRadioOption',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

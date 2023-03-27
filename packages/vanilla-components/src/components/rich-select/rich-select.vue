@@ -694,10 +694,10 @@ provide('dropdownBottomReachedHandler', dropdownBottomReachedHandler)
 
 provide('usesTags', usesTags)
 
-defineOptions({
-  name: 'VanillaRichSelect',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaRichSelect',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

@@ -117,9 +117,9 @@ const toggleSorting = (columnToSort: string) => {
 
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
-defineOptions({
-  name: 'VanillaDatatableTableHead',
-})
+// defineOptions({
+//   name: 'VanillaDatatableTableHead',
+// })
 </script>
 
 <template>

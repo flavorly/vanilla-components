@@ -23,10 +23,10 @@ const formatRange = (start: Date, end: Date) => {
   return `${start || ''} - ${start || ''}`
 }
 
-defineOptions({
-  name: 'VanillaDateTimeInput',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaDateTimeInput',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

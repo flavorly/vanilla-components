@@ -35,10 +35,10 @@ const props = defineProps({
 
 const classesList = useInjectsClassesList()!
 
-defineOptions({
-  name: 'VanillaCardFooter',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaCardFooter',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

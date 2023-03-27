@@ -32,9 +32,9 @@ onMounted(() => {
   }
 })
 
-defineOptions({
-  name: 'VanillaDialogFooter',
-})
+// defineOptions({
+//   name: 'VanillaDialogFooter',
+// })
 </script>
 
 <template>

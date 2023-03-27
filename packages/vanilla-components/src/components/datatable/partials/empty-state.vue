@@ -39,9 +39,9 @@ const resetFilters = () => {
 
 const actionWithoutRecords = () => emit('actionWithoutRecords')
 
-defineOptions({
-  name: 'VanillaDatatableEmptyState',
-})
+// defineOptions({
+//   name: 'VanillaDatatableEmptyState',
+// })
 </script>
 
 <template>

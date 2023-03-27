@@ -13,10 +13,10 @@ const props = defineProps({
 })
 const { configuration } = useConfiguration<StatusIndicatorProps>(statusIndicatorConfig, 'StatusIndicator')
 
-defineOptions({
-  name: 'VanillaStatusIndicator',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaStatusIndicator',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

@@ -30,10 +30,10 @@ const props = defineProps({
 
 const { configuration } = useConfiguration<FormSectionProps>(formsConfig, 'FormSection')
 
-defineOptions({
-  name: 'VanillaFormSection',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaFormSection',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

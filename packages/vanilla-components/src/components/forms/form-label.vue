@@ -23,10 +23,10 @@ const props = defineProps({
 })
 const { configuration } = useConfiguration<FormLabelProps>(formsConfig, 'FormLabel')
 
-defineOptions({
-  name: 'VanillaFormLabel',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaFormLabel',
+//   inheritAttrs: true,
+// })
 
 /**
  * @docs

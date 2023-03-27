@@ -70,9 +70,9 @@ watch(isOpen, (val: boolean) => {
   emit('update:modelValue', val)
 })
 
-defineOptions({
-  name: 'VanillaDatatableConfirmActionDialog',
-})
+// defineOptions({
+//   name: 'VanillaDatatableConfirmActionDialog',
+// })
 </script>
 
 <template>

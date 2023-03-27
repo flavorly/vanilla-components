@@ -561,10 +561,10 @@ defineExpose({
   shown,
 })
 
-defineOptions({
-  name: 'VanillaDropdown',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaDropdown',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

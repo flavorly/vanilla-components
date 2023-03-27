@@ -14,10 +14,10 @@ const props = defineProps({
   },
 })
 
-defineOptions({
-  name: 'VanillaTransionable',
-  inheritAttrs: true,
-})
+// defineOptions({
+//   name: 'VanillaTransionable',
+//   inheritAttrs: true,
+// })
 </script>
 
 <template>

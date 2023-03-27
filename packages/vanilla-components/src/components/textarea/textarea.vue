@@ -40,10 +40,10 @@ const { configuration, errors, hasErrors } = useConfiguration<TextareaProps>(tex
 // Clipboard handler
 const { text, copy, copied, isSupported } = useClipboard()
 
-defineOptions({
-  name: 'VanillaTextarea',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaTextarea',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

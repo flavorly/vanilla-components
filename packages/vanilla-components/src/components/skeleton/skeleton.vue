@@ -25,10 +25,10 @@ const props = defineProps({
 })
 const { configuration } = useConfiguration<SkeletonBarProps>(skeletonConfig, 'SkeletonBar')
 
-defineOptions({
-  name: 'VanillaSkeleton',
-  inheritAttrs: false,
-})
+// defineOptions({
+//   name: 'VanillaSkeleton',
+//   inheritAttrs: false,
+// })
 
 /**
  * @docs

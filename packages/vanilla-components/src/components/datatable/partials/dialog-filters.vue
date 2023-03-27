@@ -133,9 +133,9 @@ watch(isOpen, (val: boolean) => {
 const translations = useInjectDatatableTranslations()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
 
-defineOptions({
-  name: 'VanillaDatatableFiltersDialog',
-})
+// defineOptions({
+//   name: 'VanillaDatatableFiltersDialog',
+// })
 </script>
 
 <template>
