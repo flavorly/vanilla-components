@@ -74,7 +74,7 @@
     "@types/qs": "^6.9.7",
     "universal-cookie": "^4.0.4",
     "awesome-phonenumber": "^5.2.0",
-    "@vueuse/core": "^9.5.0",
+    "@vueuse/core": "^10.1.0",
     "qs": "^6.11.0",
     "@vueuse/integrations": "^9.6.0",
     "focus-trap": "^7.1.0",
