@@ -76,7 +76,7 @@
     "awesome-phonenumber": "^5.2.0",
     "@vueuse/core": "^9.5.0",
     "qs": "^6.11.0",
-    "@vueuse/integrations": "^9.6.0",
+    "@vueuse/integrations": "^10.1.2",
     "focus-trap": "^7.1.0",
     "fuse.js": "^6.6.2",
     "lodash": "^4.17.21"
