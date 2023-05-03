@@ -22,6 +22,7 @@ export const checkboxConfig = {
     },
     groupContainer: 'space-y-3',
     groupCheckboxWrapper: 'relative flex items-start',
+    groupCheckboxWrapperSelected: '',
     groupCheckbox: 'flex items-center h-5',
     groupLabelWrapper: 'ml-3 text-sm leading-5',
     groupLabelFeedback: 'text-gray-500',
@@ -50,6 +51,7 @@ export const checkboxConfig = {
     },
     groupContainer: '',
     groupCheckboxWrapper: '',
+    groupCheckboxWrapperSelected: '',
     groupCheckbox: '',
     groupLabelWrapper: '',
     groupLabelFeedback: '',
@@ -95,5 +97,6 @@ export declare type CheckboxProps = WithVariantPropsAndClassesList<{
     uncheckedValue?: CheckboxValue
     type?: 'checkbox'
     checked?: boolean
+    navigation?: boolean
 } & InputHTMLAttributes & Data, CheckboxClassesValidKeys>
 

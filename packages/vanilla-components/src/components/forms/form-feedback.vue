@@ -25,16 +25,18 @@ const clicked = () => {
   emit('click', true)
 }
 
-defineOptions({
-  name: 'VanillaFormFeedback',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaFormFeedback
  * @description Display feedback for a form or a field
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaFormFeedback',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

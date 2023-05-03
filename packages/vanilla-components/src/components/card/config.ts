@@ -32,7 +32,7 @@ const defaultCard = {
   footerWithTwoGrids: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0',
   footerWithThreeGrids: 'sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense',
 
-  footerSplitContainer: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense',
+  footerSplitContainer: 'sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense w-full',
   footerSplitLeft: 'flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0',
   footerSplitRight: 'flex mt-0 sm:mt-0 items-center justify-center sm:justify-end',
 
@@ -44,8 +44,11 @@ const defaultCard = {
 export const cardConfig = {
   fixedClasses: {
     bodyDivided: '',
+    title: '',
   },
-  classes: defaultCard,
+  classes: {
+    ...defaultCard,
+  },
   variants: {
     simple: {
       classes: {

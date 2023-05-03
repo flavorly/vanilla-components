@@ -1,6 +1,5 @@
 import { resolve } from 'path'
 import { defineConfig } from 'vitepress'
-import DefineOptions from 'unplugin-vue-define-options/vite'
 import { whyframe } from '@whyframe/core'
 import { whyframeVue } from '@whyframe/vue'
 import Icons from 'unplugin-icons/vite'
@@ -41,7 +40,6 @@ export default defineConfig({
       stringify: true,
     },
     plugins: [
-      DefineOptions(),
       whyframe({
         defaultSrc: '/frames/default', // provide our own html
       }),

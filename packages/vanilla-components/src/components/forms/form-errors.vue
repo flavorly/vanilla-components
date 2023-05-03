@@ -19,16 +19,18 @@ const props = defineProps({
 })
 const { configuration, errors, hasErrors } = useConfiguration<FormErrorsProps>(formsConfig, 'FormErrors')
 
-defineOptions({
-  name: 'VanillaFormErrors',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaFormErrors
  * @description Display errors for a form or a field
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaFormErrors',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

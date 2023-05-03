@@ -113,6 +113,7 @@ export function useConfiguration<ComponentOptions extends Data>(
   const variant = ref<string | undefined>(props?.variant as string | undefined)
   const hasErrors = computed(() => errors?.value !== undefined && errors?.value !== null && errors?.value !== '') as ComputedRef<boolean>
   const globalOptions = inject<PluginOptions>('vanilla_components_options', {})
+  const errorVariant = ref<string>(props?.variantError as any || 'error')
 
   // If there is a variant, we will snake case it
   if (variant.value) {
@@ -121,7 +122,7 @@ export function useConfiguration<ComponentOptions extends Data>(
 
   // If there is any error, we will just set the variant to the error one
   if (errors.value !== undefined && errors.value !== '' && errors.value !== null) {
-      variant.value = 'error'
+      variant.value = errorVariant.value
   }
 
   // If there is a model value, we will watch it and reset the errors

@@ -59,7 +59,7 @@ const defaultVariant = {
 
     // Option list
     // We could also have here space-y-1
-    optionsList: '',
+    optionsList: 'scrollbar-thin',
 
     // Option wrapper
     optionWrapper: 'focus:outline-none',
@@ -117,7 +117,7 @@ const defaultVariant = {
     selectButtonPlaceholder: 'block text-gray-500/90 truncate',
     selectButtonSearchingPlaceholder: 'block text-gray-400 truncate',
     selectButtonLoadingIcon: 'flex-shrink-0 w-4 h-4 ml-1 text-gray-600',
-    selectButtonSelectorIcon: 'flex-shrink-0 w-4 h-4 ml-1 text-gray-600',
+    selectButtonSelectorIcon: 'flex-shrink-0 w-4 h-4 ml-1 dark:text-gray-500 text-gray-400',
 
     // Select button tags
     tagsWrapper: 'flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8',

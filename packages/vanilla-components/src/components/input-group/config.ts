@@ -20,11 +20,11 @@ export const inputGroupConfig = {
     inputWrapper: '',
   },
   classes: {
-    wrapper: 'grid gap-y-2',
+    wrapper: 'grid grid-col-1 gap-y-2',
     container: 'block sm:grid gap-y-2',
     containerWithPadding: '',
     label: '',
-    labelWrapper: 'sm:mt-px sm:pt-0 flex',
+    labelWrapper: 'sm:mt-px sm:pt-0 flex items-center',
     labelWrapperLeftTop: '',
     labelWrapperLeftCenter: '',
     labelWrapperLeftBottom: '',
@@ -34,7 +34,7 @@ export const inputGroupConfig = {
     labelWrapperCenterTop: '',
     labelWrapperCenterCenter: '',
     labelWrapperCenterBottom: '',
-    inputWrapper: 'mt-0 grid gap-y-2',
+    inputWrapper: 'mt-0 grid grid-cols-1 gap-y-2',
   },
   variants: {
     inline: {

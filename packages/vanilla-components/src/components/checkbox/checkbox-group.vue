@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed } from 'vue'
-import type { InputOptions } from '../../core/types'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
+import type { InputOptions, NormalizedOption } from '../../core/types'
 import { useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '../../core/use'
 import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
@@ -41,11 +41,14 @@ const props = defineProps({
     type: String as PropType<string | undefined>,
     default: 'text',
   },
+  navigation: {
+    type: Boolean as PropType<boolean>,
+    default: true,
+  },
 })
 
 const { localValue } = useMultipleVModel(props, 'modelValue', true)
-const { configuration, errors, hasErrors, variant } = useConfiguration<CheckboxProps>(checkboxConfig, 'CheckboxGroup', localValue)
-
+const { configuration, errors, hasErrors, variant } = useConfiguration<CheckboxProps>(checkboxConfig, 'Checkbox', localValue)
 const { normalizedOptions } = useMultipleOptions(
   computed(() => props.options as InputOptions | undefined),
   computed(() => props.textAttribute),
@@ -53,10 +56,41 @@ const { normalizedOptions } = useMultipleOptions(
   computed(() => props.normalizeOptions!),
 )
 
-defineOptions({
-  name: 'VanillaCheckboxGroup',
-  inheritAttrs: false,
-})
+// Refs
+const root = ref<HTMLElement | null>(null)
+
+// Defines if an option is selected for highlighting
+const isOptionSelected = (normalizedOption: NormalizedOption) => {
+  if (Array.isArray(localValue.value)) {
+    return localValue.value.includes(normalizedOption.value as string)
+  }
+
+  return localValue.value === normalizedOption.value
+}
+
+// Navigation to focus next element
+const focusElement = (currentIndex, direction) => {
+  const group: HTMLCollection | undefined = root.value?.children
+  if (group === undefined) {
+    return
+  }
+  const newIndex = (currentIndex + direction + group.length) % group.length
+  group[newIndex].focus()
+}
+
+// On keydown, left and right
+const handleKeydown = (event, currentIndex) => {
+  if (!root.value?.contains(event.target)) {
+    return
+  }
+  if (event.key === 'ArrowLeft') {
+    focusElement(currentIndex, -1)
+    return
+  }
+  if (event.key === 'ArrowRight') {
+    focusElement(currentIndex, 1)
+  }
+}
 
 /**
  * @docs
@@ -65,19 +99,35 @@ defineOptions({
  **/
 </script>
 
+<script lang="ts">
+export default {
+  name: 'VanillaCheckboxGroup',
+  inheritAttrs: false,
+}
+</script>
+
 <template>
-  <div
-    class="vanilla-checkbox-group"
-    :class="[
-      configuration.classesList.container,
-      configuration.classesList.groupContainer,
-    ]"
-  >
+  <div class="">
     <div
-      v-for="(option, index) in normalizedOptions"
-      :key="index"
+      ref="root"
+      class="vanilla-checkbox-group"
+      :class="[
+        configuration.classesList.container,
+        configuration.classesList.groupContainer,
+      ]"
     >
-      <div :class="configuration.classesList.groupCheckboxWrapper">
+      <FormLabel
+        v-for="(option, index) in normalizedOptions"
+        :key="index"
+        :for="option.value.toString()"
+        :label="option.text.toString()"
+        :class="[
+          isOptionSelected(option)
+            ? configuration.classesList.groupCheckboxWrapperSelected
+            : configuration.classesList.groupCheckboxWrapper,
+        ]"
+        @keydown="handleKeydown($event, index)"
+      >
         <div :class="configuration.classesList.groupCheckbox">
           <Checkbox
             v-model="localValue"
@@ -88,9 +138,12 @@ defineOptions({
         </div>
         <div :class="configuration.classesList.groupLabelWrapper">
           <FormLabel
+            as="span"
             :for="option.value.toString()"
             :label="option.text.toString()"
-            :classes="configuration.classesList.label"
+            :classes="{
+              label: configuration.classesList.label.label,
+            }"
           />
           <span
             v-if="option.raw?.description"
@@ -98,7 +151,7 @@ defineOptions({
             v-text="option.raw?.description"
           />
         </div>
-      </div>
+      </FormLabel>
     </div>
     <slot
       name="errors"

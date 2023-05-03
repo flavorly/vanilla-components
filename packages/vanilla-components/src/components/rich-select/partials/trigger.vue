@@ -17,6 +17,7 @@ const hasSelectedOption = inject<ComputedRef<boolean>>('hasSelectedOption')!
 const fetchingOptions = inject<Ref<boolean>>('fetchingOptions')!
 const shown = inject<ComputedRef<boolean>>('shown')!
 const usesTags = inject<ComputedRef<boolean>>('usesTags')!
+const slots = inject<Record<string, any>>('slots')!
 const classesList = useInjectsClassesList()!
 
 // Template refs
@@ -44,6 +45,10 @@ const triggerLabel = computed((): string | undefined => {
 const isFetchingOptionsWhileClosed = computed(() => fetchingOptions.value && !shown.value)
 
 const showSelectorIcon = computed((): boolean => {
+  if (slots?.right) {
+    return false
+  }
+
   if (isFetchingOptionsWhileClosed.value) {
     return false
   }
@@ -54,11 +59,13 @@ const showSelectorIcon = computed((): boolean => {
 
   return !hasSelectedOption || configuration.disabled === true
 })
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaRichSelectTrigger',
   inheritAttrs: false,
-})
+}
 </script>
 
 <template>

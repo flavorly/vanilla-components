@@ -13,11 +13,13 @@ const props = defineProps({
 })
 
 const className = useInjectsClassesListClass(props.classProperty)
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaTextPlaceholder',
   inheritAttrs: true,
-})
+}
 </script>
 
 <template>

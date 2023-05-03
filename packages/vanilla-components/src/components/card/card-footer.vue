@@ -35,16 +35,18 @@ const props = defineProps({
 
 const classesList = useInjectsClassesList()!
 
-defineOptions({
-  name: 'VanillaCardFooter',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaCardFooter
  * @description A footer for the card component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaCardFooter',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

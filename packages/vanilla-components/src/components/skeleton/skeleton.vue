@@ -25,16 +25,18 @@ const props = defineProps({
 })
 const { configuration } = useConfiguration<SkeletonBarProps>(skeletonConfig, 'SkeletonBar')
 
-defineOptions({
-  name: 'VanillaSkeleton',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaSkeleton
  * @description A skeleton bar
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaSkeleton',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

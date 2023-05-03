@@ -1,5 +1,5 @@
 import type { PropType } from 'vue'
-import type { CSSRawClassesList, ComponentProps, Data, ElementPosition, VariantsWithClassesList } from '../types'
+import type { CSSRawClassesList, ComponentProps, Data, ElementRounded, VariantsWithClassesList } from '../types'
 import { useDefaultName } from '../use/index'
 
 const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends string>(): ComponentProps<ClassesKeys> => ({
@@ -18,6 +18,10 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
   variant: {
     type: String as PropType<string | undefined>,
     default: undefined,
+  },
+  variantError: {
+    type: String as PropType<string>,
+    default: 'error',
   },
   errors: {
     type: [String, undefined] as PropType<string | undefined>,
@@ -55,7 +59,7 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
     required: false,
   },
   rounded: {
-    type: String as PropType<ElementPosition>,
+    type: String as PropType<ElementRounded>,
     default: 'full',
     required: false,
   },

@@ -28,16 +28,18 @@
 
   const classesList = useInjectsClassesList()!
 
-  defineOptions({
-    name: 'VanillaDropdownOption',
-    inheritAttrs: true,
-  })
-
   /**
    * @docs
    * @displayName VanillaDropdownOption
    * @description A dropdown option menu component
    **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaDropdownOption',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

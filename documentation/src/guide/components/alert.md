@@ -17,14 +17,16 @@ With Alert components you can provide contextual feedback messages for typical u
 <!--@include: ../../parts/title-props.md-->
 
 
-| Prop         | Description                                                                | Accepted Values | Default     |
-|:-------------|:---------------------------------------------------------------------------|:----------------|:------------|
-| `modelValue` | v-model for the alert show/hide                                            | `Boolean`       | `true`      |
-| `title`      | Title for the alert                                                        | `String`        | `undefined` |
-| `text`       | text for the alert                                                         | `String`        | `undefined` |
-| `icon`       | info, warning, error, success                                              | `String`        | `undefined` |
-| `closable`   | Show the close button                                                      | `Boolean`       | `false`     |
-| `timeout`    | Emit close event after defined amount of milliseconds and closes the alert | `Number`        | `undefined` |
+| Prop           | Description                                                                | Accepted Values | Default     |
+|:---------------|:---------------------------------------------------------------------------|:----------------|:------------|
+| `modelValue`   | v-model for the alert show/hide                                            | `Boolean`       | `true`      |
+| `title`        | Title for the alert                                                        | `String`        | `undefined` |
+| `text`         | text for the alert                                                         | `String`        | `undefined` |
+| `icon`         | info, warning, error, success                                              | `String`        | `undefined` |
+| `iconRaw`      | raw html /                                                                 | `String`        | `undefined` |
+| `closable`     | Show the close button                                                      | `Boolean`       | `false`     |
+| `timeout`      | Emit close event after defined amount of milliseconds and closes the alert | `Number`        | `undefined` |
+| `dismissLabel` | Label for dismiss for screen readers                                       | `String`        | `Close`     |
 
 
 <!--@include: ../../parts/title-slots.md-->

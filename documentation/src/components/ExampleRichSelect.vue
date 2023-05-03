@@ -282,7 +282,7 @@ const fetchOptions = (query?: string, nextPage?: number) => {
           v-model="value7"
           feedback="Type a movie name to search"
           placeholder="Ex: Search for the Matrix or Pokemon"
-          fetch-endpoint="/datatables"
+          fetch-endpoint="/fetch-users"
           :minimum-input-length="3"
           value-attribute="id"
           text-attribute="gateway"

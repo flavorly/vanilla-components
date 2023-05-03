@@ -19,9 +19,17 @@ const props = defineProps({
 const classesList = useInjectsClassesList()!
 const hasChildren = computed(() => props.option.children !== undefined && props.option.children.length > 0)
 
-defineOptions({
+/**
+ * @docs
+ * @displayName VanillaSelectOption
+ * @description A select option component
+ **/
+</script>
+
+<script lang="ts">
+export default {
   name: 'VanillaSelectOption',
-})
+}
 </script>
 
 <template>

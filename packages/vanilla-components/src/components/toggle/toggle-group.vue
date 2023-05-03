@@ -53,16 +53,18 @@ const { normalizedOptions } = useMultipleOptions(
   computed(() => props.normalizeOptions!),
 )
 
-defineOptions({
-  name: 'VanillaToggleGroup',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaToggleGroup
  * @description A toggle group component.
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaToggleGroup',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

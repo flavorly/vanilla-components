@@ -3,7 +3,7 @@ import type * as Components from '../../components'
 import type {
   CSSRawClassesList,
   Data,
-  ElementPosition,
+  ElementRounded,
   VariantsWithClassesList,
   WithVariantPropsAndClassesList,
 } from './index'
@@ -99,7 +99,7 @@ type ComponentProps<
       required: boolean
     }
     rounded: {
-      type: PropType<ElementPosition>
+      type: PropType<ElementRounded>
       default: 'full'
       required: boolean
     }
@@ -159,7 +159,7 @@ type ComponentProps<
       required: boolean
     }
     rounded: {
-      type: PropType<ElementPosition>
+      type: PropType<ElementRounded>
       default: 'full'
       required: boolean
     }

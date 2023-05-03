@@ -13,16 +13,18 @@ const props = defineProps({
 })
 const { configuration } = useConfiguration<StatusIndicatorProps>(statusIndicatorConfig, 'StatusIndicator')
 
-defineOptions({
-  name: 'VanillaStatusIndicator',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaStatusIndicator
  * @description A status indicator
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaStatusIndicator',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

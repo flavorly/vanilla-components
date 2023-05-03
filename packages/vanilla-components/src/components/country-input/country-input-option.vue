@@ -66,16 +66,18 @@ const nameLabel = computed(() => {
   return props.country.label
 })
 
-defineOptions({
-  name: 'VanillaCountryInputOption',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaCountryInputOption
  * @description Country Input Option Component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaCountryInputOption',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

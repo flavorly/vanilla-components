@@ -6,6 +6,7 @@ export const alertConfig = {
     wrapper: 'p-4',
     iconWrapper: 'flex-shrink-0',
     icon: 'h-5 w-5',
+    iconRaw: 'mr-2',
     contentWrapper: 'flex flex-col space-y-2 items-start justify-center',
     contentWrapperWithIcon: 'ml-2',
     title: 'text-sm font-medium',
@@ -29,6 +30,7 @@ export const alertConfig = {
     wrapper: 'border-l-4 rounded-md  border-primary-400 bg-white dark:bg-gray-800/70',
     iconWrapper: '',
     icon: '',
+    iconRaw: '',
     contentWrapper: '',
     contentWrapperWithIcon: '',
     title: 'text-gray-800 dark:text-white',
@@ -105,7 +107,7 @@ export const alertConfig = {
       classes: {
         wrapper: 'border-l-4 rounded-md border-blue-400 dark:border-blue-600 bg-blue-50 dark:bg-blue-200',
         iconWrapper: '',
-        icon: 'text-blue-400 dark:text-blue-600',
+        icon: 'text-blue-400 dark:text-blue-400',
         contentWrapper: '',
         contentWrapperWithIcon: '',
         title: 'text-blue-800 dark:text-blue-900',
@@ -176,7 +178,7 @@ export const alertConfig = {
       classes: {
         wrapper: 'ring-1 ring-inset rounded-md ring-blue-400/50 bg-blue-300/10 dark:bg-blue-600/10',
         iconWrapper: '',
-        icon: 'text-blue-400 dark:text-blue-900',
+        icon: 'text-blue-400 dark:text-blue-400',
         contentWrapper: '',
         contentWrapperWithIcon: '',
         title: 'text-blue-800 dark:text-blue-400',
@@ -216,7 +218,10 @@ export declare type AlertClassesValidKeys = keyof typeof alertConfig.classes
 
 export declare type AlertProps = WithVariantPropsAndClassesList<{
   title?: string
-  subtitle?: string
+  text?: string
   closable?: boolean
-  closeAfter?: number
+  timeout?: number
+  dismissLabel?: string
+  iconRaw?: string | undefined
+  icon?: string | 'error' | 'success' | 'warning' | 'info' | undefined
 } & InputHTMLAttributes & Data, AlertClassesValidKeys>

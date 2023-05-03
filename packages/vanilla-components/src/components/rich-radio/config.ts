@@ -6,6 +6,7 @@ export const richRadioConfig = {
     optionContainer: 'rounded-lg',
     optionContainerSeparated: 'space-y-2',
     optionContainerNonSeparated: '-space-y-px',
+    optionWrapper: 'outline-none focus:outline-none',
   },
 
   // Default Input appearance
@@ -15,6 +16,7 @@ export const richRadioConfig = {
     optionContainer: '',
     optionContainerSeparated: '',
     optionContainerNonSeparated: '',
+    optionWrapper: '',
   },
 
   // Variants
@@ -27,6 +29,7 @@ export const richRadioConfig = {
         optionContainer: '',
         optionContainerSeparated: '',
         optionContainerNonSeparated: '',
+        optionWrapper: '',
       },
     },
   },

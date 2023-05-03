@@ -5,7 +5,7 @@
     },
     "classes": {
         "wrapper": "block w-full",
-        "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer leading-normal text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
+        "trigger": "bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 relative flex items-center justify-between w-full focus:z-10 cursor-pointer text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
         "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
         "dropdownContent": "space-y-1",
         "dropdownContentWithSearch": "pt-1",
@@ -34,7 +34,7 @@
         "selectButtonPlaceholder": "block text-gray-500/90 truncate",
         "selectButtonSearchingPlaceholder": "block text-gray-400 truncate",
         "selectButtonLoadingIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
-        "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+        "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 dark:text-gray-500 text-gray-400",
         "tagsWrapper": "flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8",
         "tag": "rounded shadow-sm flex items-center cursor-pointer bg-primary-100 dark:bg-primary-500/20 dark:border dark:border-gray-700 m-0.5 h-8 max-w-full text-primary-900 dark:text-white white-space-no text-sm font-semibold focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-opacity-50 focus:ring-primary-600 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed",
         "tagLabel": "px-3",
@@ -55,7 +55,7 @@
         "error": {
             "classes": {
                 "wrapper": "block w-full",
-                "trigger": "ring-1 ring-inset focus:ring-inset focus:ring-2 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 text-red-400 placeholder-red-400 rounded-lg flex items-center justify-between w-full leading-normal text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
+                "trigger": "ring-1 ring-inset focus:ring-inset focus:ring-2 bg-white dark:bg-gray-900 border-0 ring-red-400 focus:ring-red-500 dark:ring-red-400 dark:focus:ring-red-500 focus-visible:ring-red-500 dark:focus-visible:ring-red-500 text-red-400 placeholder-red-400 rounded-lg flex items-center justify-between w-full text-sm transition duration-100 ease-in-out shadow disabled:opacity-50 disabled:cursor-not-allowed px-4 py-3",
                 "dropdown": "z-50 overflow-hidden bg-white dark:bg-gray-900 border border-1 border-gray-300 dark:border-gray-700 rounded-md shadow-lg",
                 "dropdownContent": "space-y-1",
                 "dropdownContentWithSearch": "pt-1",
@@ -84,7 +84,7 @@
                 "selectButtonPlaceholder": "block text-red-400 placeholder-red-400 truncate",
                 "selectButtonSearchingPlaceholder": "block text-gray-400 truncate",
                 "selectButtonLoadingIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
-                "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 text-gray-600",
+                "selectButtonSelectorIcon": "flex-shrink-0 w-4 h-4 ml-1 dark:text-gray-500 text-gray-400",
                 "tagsWrapper": "flex flex-wrap overflow-hidden -mx-2 -my-2 py-1 pr-8",
                 "tag": "rounded shadow-sm flex items-center cursor-pointer bg-red-100 dark:bg-red-500/20 m-0.5 h-8 max-w-full text-red-900 dark:text-red-300 white-space-no text-sm white-space-no focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600 focus:ring-opacity-50 transition duration-100 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed",
                 "tagLabel": "px-3",

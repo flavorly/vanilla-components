@@ -67,16 +67,18 @@ onMounted(() => {
   }
 })
 
-defineOptions({
-  name: 'VanillaButton',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaButton
  * @description A simple button component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaButton',
+  inheritAttrs: true,
+}
 </script>
 
 <template>
@@ -89,6 +91,17 @@ defineOptions({
       disabled ? configuration.classesList.disableOpacity : '',
       loading || disabled ? configuration.classesList.busyOrInvalidState : '',
       !disabled && !loading ? configuration.classesList.enableOpacity : '',
+      props.rounded === 'circle' ? configuration.classesList.paddingCircle : configuration.classesList.padding,
+      props.rounded === 'full' ? configuration.classesList.roundedFull : '',
+      props.rounded === 'circle' ? configuration.classesList.roundedCircle : '',
+      props.rounded === 'top' ? configuration.classesList.roundedTop : '',
+      props.rounded === 'bottom' ? configuration.classesList.roundedBottom : '',
+      props.rounded === 'left' ? configuration.classesList.roundedLeft : '',
+      props.rounded === 'right' ? configuration.classesList.roundedRight : '',
+      props.rounded === 'top-left' ? configuration.classesList.roundedTopLeft : '',
+      props.rounded === 'top-right' ? configuration.classesList.roundedTopRight : '',
+      props.rounded === 'bottom-left' ? configuration.classesList.roundedBottomLeft : '',
+      props.rounded === 'bottom-right' ? configuration.classesList.roundedBottomRight : '',
     ]"
     v-bind="$attrs"
     :type="type"

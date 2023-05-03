@@ -139,16 +139,18 @@ watch([phoneCountryCode, phoneNumber], ([newPhoneCountryCode, newPhoneNumber]) =
   emit('update:phoneNumberIsValid', isValidPhoneNumber.value)
 }, { immediate: false })
 
-defineOptions({
-  name: 'VanillaPhoneInput',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaPhoneInput
  * @description An input component that allows you to enter a phone number & country
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaPhoneInput',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

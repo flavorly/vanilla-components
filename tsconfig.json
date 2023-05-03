@@ -28,9 +28,7 @@
     "types": [
       "vite/client",
       "node",
-      "unplugin-vue-macros/define-options",
       "unplugin-icons/types/vue",
-      "unplugin-vue-macros/macros-global"
     ]
   },
   "exclude": [

@@ -941,16 +941,18 @@ provide('datatable_configuration', datatable)
 // ----- Functions to other components  -----  //
 provide('datatable_reset_url_function', resetUrl)
 
-defineOptions({
-  name: 'VanillaDatatable',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaDatatable
  * @description Country Input Option Component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaDatatable',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

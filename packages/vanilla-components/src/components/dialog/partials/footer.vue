@@ -31,10 +31,12 @@ onMounted(() => {
     footerClasses.value = classesList.value.footerWithThreeButtons
   }
 })
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaDialogFooter',
-})
+}
 </script>
 
 <template>

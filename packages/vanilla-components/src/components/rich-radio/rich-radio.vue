@@ -61,16 +61,18 @@ const normalizedOptions = normalizeOptions(
   props.valueAttribute,
 )
 
-defineOptions({
-  name: 'VanillaRichRadio',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaRichRadio
  * @description A rich radio component with some fancy design
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaRichRadio',
+  inheritAttrs: false,
+}
 </script>
 
 <template>
@@ -95,6 +97,7 @@ defineOptions({
           as="div"
           :value="option.value"
           :disabled="option?.disabled || false"
+          :class="configuration.classesList?.optionWrapper"
         >
           <slot
             name="option"

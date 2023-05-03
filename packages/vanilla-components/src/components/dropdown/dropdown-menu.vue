@@ -184,6 +184,7 @@
   }
 
   const refreshPopperInstance = () => {
+    console.log('Refreshing popper instance')
     const headlessUIState = dropdown.value !== undefined
     if (headlessUIState) {
       createPopperInstance()
@@ -233,16 +234,18 @@
 
   provide('configuration_vanilla', configuration)
 
-  defineOptions({
-    name: 'VanillaDropdownMenu',
-    inheritAttrs: true,
-  })
-
   /**
    * @docs
    * @displayName VanillaDropdownMenu
    * @description A dropdown menu component
    **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaDropdownMenu',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

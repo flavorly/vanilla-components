@@ -39,10 +39,12 @@ const deselectMatching = () => {
 const translations = useInjectDatatableTranslations()!
 const configuration = useInjectDatatableConfiguration()!
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaDatatableSelectionBar',
-})
+}
 </script>
 
 <template>

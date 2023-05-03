@@ -69,16 +69,18 @@ const props = defineProps({
 
 const { configuration, errors, hasErrors, variant } = useConfiguration<InputGroupProps>(inputGroupConfig, 'InputGroup')
 
-defineOptions({
-  name: 'VanillaInputGroup',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaInputGroup
  * @description Group of inputs
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaInputGroup',
+  inheritAttrs: true,
+}
 </script>
 
 <template>
@@ -110,7 +112,14 @@ defineOptions({
             v-if="label !== undefined"
             :label="label"
             :for="props.for || name"
-          />
+          >
+            <template #before>
+              <slot name="label-before" />
+            </template>
+            <template #after>
+              <slot name="label-after" />
+            </template>
+          </FormLabel>
         </slot>
       </div>
       <div

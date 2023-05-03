@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
@@ -8,7 +8,6 @@ import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
 import type { TextareaClassesValidKeys, TextareaProps, TextareaValue } from './config'
 import { textareaConfig } from './config'
-
 import ExclamationCircleIcon from '~icons/heroicons/exclamation-circle-solid'
 import ClipboardIcon from '~icons/heroicons/clipboard'
 import CheckIcon from '~icons/heroicons/check-solid'
@@ -31,25 +30,44 @@ const props = defineProps({
     type: [Boolean] as PropType<boolean>,
     default: false,
   },
+  autosize: {
+    type: [Boolean] as PropType<boolean>,
+    default: false,
+  },
 })
 
-const root = ref(null)
+const root = ref<HTMLElement | undefined>(undefined)
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<TextareaProps>(textareaConfig, 'Textarea', localValue)
 
 // Clipboard handler
 const { text, copy, copied, isSupported } = useClipboard()
 
-defineOptions({
-  name: 'VanillaTextarea',
-  inheritAttrs: false,
-})
+const resize = () => {
+  if (root.value) {
+    root.value.style.height = 'auto'
+    root.value.style.height = `${root.value.scrollHeight}px`
+  }
+}
+
+watch(localValue, () => {
+  if (props.autosize) {
+    resize()
+  }
+}, { immediate: true })
 
 /**
  * @docs
  * @displayName VanillaTextarea
  * @description A textarea component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaTextarea',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

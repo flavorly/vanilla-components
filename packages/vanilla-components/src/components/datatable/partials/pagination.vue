@@ -94,10 +94,12 @@ const pagesLimited = computed(() => {
   }
   return pagesSliced
 })
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaDatatablePagination',
-})
+}
 </script>
 
 <template>

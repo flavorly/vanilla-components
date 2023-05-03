@@ -1,8 +1,8 @@
 {
     "fixedClasses": {
-        "input": "leading-normal text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed border-0",
+        "input": "text-sm appearance-none w-full focus:outline-none shadow disabled:opacity-50 disabled:cursor-not-allowed border-0 resize-y max-h-[10rem] scrollbar-thin",
         "wrapper": "relative",
-        "addonBefore": "absolute inset-y-0 left-0 pl-3 flex items-center cursor-pointer",
+        "addonBefore": "absolute top-[0.8rem] left-0 pl-3 flex items-center cursor-pointer",
         "addonAfter": "absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer",
         "addonBeforeInputClasses": "pl-10",
         "addonAfterInputClasses": "pr-10",
@@ -52,7 +52,7 @@
         },
         "compact": {
             "classes": {
-                "input": "leading-normal text-sm text-gray-700 dark:text-white placeholder-gray-500/60 bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 rounded-lg px-4 py-2",
+                "input": "text-sm text-gray-700 dark:text-white placeholder-gray-500/60 bg-white dark:bg-gray-900 border-0 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 rounded-lg px-4 py-2",
                 "roundedFull": "",
                 "roundedTop": "",
                 "roundedBottom": "",

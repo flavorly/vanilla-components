@@ -47,16 +47,18 @@ const props = defineProps({
 })
 const { configuration } = useConfiguration<RichRadioOptionProps>(richRadioOptionConfig, 'RichRadioOption')
 
-defineOptions({
-  name: 'VanillaRichRadioOption',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaRichRadioOption
  * @description Option for a rich radio group
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaRichRadioOption',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

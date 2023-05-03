@@ -20,13 +20,13 @@ const props = defineProps({
     default: true,
     required: false,
   },
+  as: {
+    type: [String] as PropType<string>,
+    default: 'label',
+    required: false,
+  },
 })
 const { configuration } = useConfiguration<FormLabelProps>(formsConfig, 'FormLabel')
-
-defineOptions({
-  name: 'VanillaFormLabel',
-  inheritAttrs: true,
-})
 
 /**
  * @docs
@@ -35,11 +35,20 @@ defineOptions({
  **/
 </script>
 
+<script lang="ts">
+export default {
+  name: 'VanillaFormLabel',
+  inheritAttrs: true,
+}
+</script>
+
 <template>
-  <label
+  <component
+    :is="as"
     :for="props.for"
     :class="configuration.classesList.label"
   >
+    <slot name="before" />
     <slot>
       <span
         v-if="safe"
@@ -50,5 +59,6 @@ defineOptions({
         v-text="label"
       />
     </slot>
-  </label>
+    <slot name="after" />
+  </component>
 </template>

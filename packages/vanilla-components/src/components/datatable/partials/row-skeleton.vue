@@ -20,10 +20,12 @@ const props = defineProps({
 })
 
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaDatatableRowSkeleton',
-})
+}
 </script>
 
 <template>

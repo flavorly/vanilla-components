@@ -38,6 +38,10 @@ const props = defineProps({
     type: [String] as PropType<string>,
     default: 'Dismiss',
   },
+  iconRaw: {
+    type: [String] as PropType<string | undefined>,
+    default: undefined,
+  },
   icon: {
     type: [String] as PropType<string | undefined>,
     default: undefined,
@@ -111,16 +115,18 @@ onUnmounted(() => {
   clearTimeout(internalTimeout.value)
 })
 
-defineOptions({
-  name: 'VanillaAlert',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaAlert
  * @description An alert component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaAlert',
+  inheritAttrs: false,
+}
 </script>
 
 <template>
@@ -137,33 +143,46 @@ defineOptions({
     >
       <slot name="default">
         <div class="flex">
-          <slot name="icon">
+          <slot
+            name="icon"
+            v-bind="{ classes: configuration.classesList.iconWrapper }"
+          >
             <div
-              v-if="props.icon"
+              v-if="props.icon || props.iconRaw"
               :class="configuration.classesList.iconWrapper"
             >
-              <XCircleIcon
-                v-if="props.icon === 'error'"
-                :class="configuration.classesList.icon"
-                aria-hidden="true"
-              />
+              <template v-if="props.icon">
+                <XCircleIcon
+                  v-if="props.icon === 'error'"
+                  :class="configuration.classesList.icon"
+                  aria-hidden="true"
+                />
 
-              <CheckCircleIcon
-                v-if="props.icon === 'success'"
-                :class="configuration.classesList.icon"
-                aria-hidden="true"
-              />
+                <CheckCircleIcon
+                  v-if="props.icon === 'success'"
+                  :class="configuration.classesList.icon"
+                  aria-hidden="true"
+                />
 
-              <ExclamationTriangleIcon
-                v-if="props.icon === 'warning'"
-                :class="configuration.classesList.icon"
-                aria-hidden="true"
-              />
+                <ExclamationTriangleIcon
+                  v-if="props.icon === 'warning'"
+                  :class="configuration.classesList.icon"
+                  aria-hidden="true"
+                />
 
-              <InformationCircleIcon
-                v-if="props.icon === 'info'"
-                :class="configuration.classesList.icon"
-                aria-hidden="true"
+                <InformationCircleIcon
+                  v-if="props.icon === 'info'"
+                  :class="configuration.classesList.icon"
+                  aria-hidden="true"
+                />
+              </template>
+              <span
+                v-if="props.iconRaw"
+                :class="[
+                  configuration.classesList.icon,
+                  configuration.classesList.iconRaw,
+                ]"
+                v-html="props.iconRaw"
               />
             </div>
           </slot>

@@ -25,10 +25,12 @@ const emit = defineEmits(['update:modelValue'])
 const search = ref<HTMLElement>()
 const localValue = useVModel(props, 'modelValue')
 const classesList = useInjectsClassesList('configuration_vanilla_datatable')!
+</script>
 
-defineOptions({
-  name: 'VanillaDatatableRowSkeleton',
-})
+<script lang="ts">
+export default {
+  name: 'VanillaDatatableSearchbar',
+}
 </script>
 
 <template>

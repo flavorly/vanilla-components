@@ -30,16 +30,18 @@ const props = defineProps({
 
 const { configuration } = useConfiguration<FormSectionProps>(formsConfig, 'FormSection')
 
-defineOptions({
-  name: 'VanillaFormSection',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaFormSection
  * @description Form section
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaFormSection',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

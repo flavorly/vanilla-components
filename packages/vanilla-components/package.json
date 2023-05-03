@@ -61,13 +61,13 @@
     "@popperjs/core": "^2.11.6"
   },
   "peerDependencies": {
-    "v-calendar": "3.0.0",
+    "v-calendar": "^3.0.3",
     "@headlessui/vue": "^1.7.0",
     "@popperjs/core": "^2.11.6",
     "vue": "^3.2.45"
   },
   "optionalDependencies": {
-    "v-calendar": "3.0.0"
+    "v-calendar": "^3.0.3"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.189",

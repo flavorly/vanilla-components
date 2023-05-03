@@ -1,9 +1,10 @@
 <script setup lang="ts">
 import type { PropType, Ref } from 'vue'
-import { computed, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { computed, onBeforeUnmount, onMounted, provide, ref, useSlots, watch } from 'vue'
 import type { Options, Placement } from '@popperjs/core'
 import { refThrottled } from '@vueuse/core'
 import isEmpty from 'lodash/isEmpty'
+import { expose } from 'vue-docgen-cli/lib/compileTemplates'
 import type {
   CSSRawClassesList,
   Data,
@@ -16,7 +17,7 @@ import type {
   PreFetchOptionsFn,
 } from '../../core/types'
 import { popperOptions, sameWidthModifier } from '../../core/config'
-import { isEqual } from '../../core/helpers'
+import { hasSlot, isEqual } from '../../core/helpers'
 import {
   useActivableOption,
   useConfiguration,
@@ -335,6 +336,7 @@ const {
 
 const originalShown = ref(props.show)
 const shown = refThrottled<boolean>(originalShown, 1000)
+const slots = useSlots()
 
 const showSearchInput = computed<boolean>(() => {
   if (configuration.hideSearchBox) {
@@ -680,6 +682,8 @@ provide('clearable', configuration.clearable)
 
 provide('showSearchInput', showSearchInput)
 
+provide('slots', slots)
+
 provide('searchQuery', searchQuery)
 
 provide('needsMoreCharsToFetch', needsMoreCharsToFetch)
@@ -694,9 +698,9 @@ provide('dropdownBottomReachedHandler', dropdownBottomReachedHandler)
 
 provide('usesTags', usesTags)
 
-defineOptions({
-  name: 'VanillaRichSelect',
-  inheritAttrs: false,
+// Expose Public API
+defineExpose({
+  focusDropdownTrigger,
 })
 
 /**
@@ -704,6 +708,13 @@ defineOptions({
  * @displayName VanillaRichSelect
  * @description A rich select component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaRichSelect',
+  inheritAttrs: false,
+}
 </script>
 
 <template>
@@ -837,20 +848,21 @@ defineOptions({
             </template>
           </RichSelectDropdown>
         </DropdownSimple>
-
-        <ClearButton
-          v-if="showClearButton"
-          ref="clearButtonComponent"
-          @click="clearValue"
-        >
-          <template #clearButton="props">
-            <slot
-              name="clearButton"
-              v-bind="props"
-              :classes-list="configuration.classesList"
-            />
-          </template>
-        </ClearButton>
+        <slot name="right">
+          <ClearButton
+            v-if="showClearButton"
+            ref="clearButtonComponent"
+            @click="clearValue"
+          >
+            <template #clearButton="props">
+              <slot
+                name="clearButton"
+                v-bind="props"
+                :classes-list="configuration.classesList"
+              />
+            </template>
+          </ClearButton>
+        </slot>
       </div>
       <slot
         name="errors"

@@ -66,7 +66,6 @@ const useParseVariant = <
   // We should store here the variant as a "localVariant" to forward it and be able to maninpulate it
   // const localVariant = ref(givenVariant ?? variant);
   const localVariant = ref(givenVariant ?? variant)
-
   const classes: Partial<CSSRawClassesList<ClassesKeys>> = {}
   const fixedClasses: Partial<CSSRawClassesList<ClassesKeys>> = {}
   const clearClasses = getShouldClearClasses(props, 'classes', localVariant.value)
@@ -111,6 +110,11 @@ const useParseVariant = <
             classes[classItemKey] = defaultConfigurationVariant.classes[classItemKey]
           }
         }
+      }
+
+      // Needs to be here to be able to override the classes when the user wants
+      if (props.classes !== undefined && hasProperty(props.classes, classItemKey)) {
+        classes[classItemKey] = props.classes[classItemKey]
       }
     })
   }

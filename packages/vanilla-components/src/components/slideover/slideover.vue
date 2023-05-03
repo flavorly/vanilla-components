@@ -202,16 +202,18 @@ defineExpose({ open, close })
 
 provide('configuration_vanilla', configuration)
 
-defineOptions({
-  name: 'VanillaSlideover',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaSlideover
  * @description A slideover is a dialog that slides in from the side of the screen.
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaSlideover',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

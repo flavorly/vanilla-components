@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, nextTick, ref, watch } from 'vue'
 import { DatePicker } from 'v-calendar'
 import ClearButton from '../rich-select/partials/clear-button.vue'
 import { get } from '../../core/helpers'
@@ -23,16 +23,26 @@ const formatRange = (start: Date, end: Date) => {
   return `${start || ''} - ${start || ''}`
 }
 
-defineOptions({
-  name: 'VanillaDateTimeInput',
-  inheritAttrs: false,
-})
+watch(localValue, () => {
+  if (localValue.value == 'Invalid Date') {
+    nextTick(() => {
+      localValue.value = null
+    })
+  }
+}, { immediate: false })
 
 /**
  * @docs
  * @displayName VanillaDateTimeInput
  * @description A date and time input component.
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaDateTimeInput',
+  inheritAttrs: false,
+}
 </script>
 
 <template>
@@ -42,37 +52,56 @@ defineOptions({
       color="indigo"
       :is-dark="{ selector: ':root', darkClass: 'dark' }"
       :input-debounce="1200"
-      :update-on-input="false"
+      :update-on-input="true"
       :popover="{ visibility: 'focus' }"
       v-bind="$attrs"
     >
       <template
         v-if="props.inline === false"
-        #default="scope"
+        #default="{ inputValue, inputEvents }"
       >
-        <slot v-bind="scope">
+        <slot v-bind="{ inputValue, inputEvents }">
           <div :class="configuration.classesList.wrapper">
             <VanillaInput
               v-if="get($attrs, 'is-range', false) === false"
-              :model-value="scope.inputValue"
+              :model-value="inputValue"
               :placeholder="props.placeholder"
               :errors="errors"
               :variant="variant"
-              v-on="scope.inputEvents"
-            />
+              :feedback="props.feedback"
+              v-on="inputEvents"
+            >
+              <template #before>
+                <slot name="before" />
+              </template>
+              <template #after>
+                <ClearButton
+                  v-if="get($attrs, 'is-required', false) === false"
+                  :class="configuration.classesList?.clearButton"
+                  @click="localValue = null"
+                />
+              </template>
+            </VanillaInput>
             <VanillaInput
               v-if="get($attrs, 'is-range', false) === true"
-              :model-value="formatRange(scope.inputValue.start, scope.inputValue.end)"
+              :model-value="formatRange(inputValue.start, inputValue.end)"
               :placeholder="props.placeholder"
               :errors="errors"
               :variant="variant"
-              v-on="{ ...scope.inputEvents.start, ...scope.inputEvents.end }"
-            />
-            <ClearButton
-              v-if="get($attrs, 'is-required', false) === false"
-              :class="configuration.classesList?.clearButton"
-              @click="localValue = null"
-            />
+              :feedback="props.feedback"
+              v-on="{ ...inputEvents.start, ...inputEvents.end }"
+            >
+              <template #before>
+                <slot name="before" />
+              </template>
+              <template #after>
+                <ClearButton
+                  v-if="get($attrs, 'is-required', false) === false"
+                  :class="configuration.classesList?.clearButton"
+                  @click="localValue = null"
+                />
+              </template>
+            </VanillaInput>
           </div>
         </slot>
       </template>

@@ -561,16 +561,18 @@ defineExpose({
   shown,
 })
 
-defineOptions({
-  name: 'VanillaDropdown',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaDropdown
  * @description A dropdown component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaDropdown',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

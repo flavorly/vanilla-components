@@ -111,16 +111,18 @@ const { configuration, errors, hasErrors, variant } = useConfiguration<CountryIn
 // Rebind Attributes
 const bindAttributes = useAttributesAndProps()
 
-defineOptions({
-  name: 'VanillaCountryInput',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaCountryInput
  * @description Country Input Component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaCountryInput',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

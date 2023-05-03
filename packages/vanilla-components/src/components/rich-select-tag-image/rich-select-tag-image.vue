@@ -37,16 +37,18 @@ const props = defineProps({
 
 const { configuration } = useConfiguration<RichSelectTagWithImageProps>(richSelectTagWithImageConfig, 'RichSelectTagWithImage')
 
-defineOptions({
-  name: 'VanillaRichSelectOptionTagWithImage',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaRichSelectOptionTagWithImage
  * @description A rich select option with an image
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaRichSelectOptionTagWithImage',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

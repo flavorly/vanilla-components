@@ -2,16 +2,18 @@
 import { useInjectsClassesList } from '../../core/use'
 const classesList = useInjectsClassesList()!
 
-defineOptions({
-  name: 'VanillaCardEmptyPlaceholder',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaCardEmptyPlaceholder
  * @description A placeholder when the card is empty
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaCardEmptyPlaceholder',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

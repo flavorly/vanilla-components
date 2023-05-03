@@ -109,16 +109,18 @@ const isChecked = computed(() => {
 })
 const { configuration, errors, hasErrors } = useConfiguration<ToggleProps>(toggleConfig, 'Toggle', localValue)
 
-defineOptions({
-  name: 'VanillaToggle',
-  inheritAttrs: false,
-})
-
 /**
  * @docs
  * @displayName VanillaToggle
  * @description A toggle component.
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaToggle',
+  inheritAttrs: false,
+}
 </script>
 
 <template>

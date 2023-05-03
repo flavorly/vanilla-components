@@ -6,7 +6,7 @@ const commonClasses = {
   // Inputs, selects, textarea on default _old_theme
   inputsBackground: 'bg-white dark:bg-gray-900',
   inputsBackgroundDarkerOrSofter: 'bg-gray-50 dark:bg-gray-800',
-  inputsText: 'leading-normal text-sm',
+  inputsText: 'text-sm',
   inputsTextColor: 'text-gray-700 dark:text-white placeholder-gray-500/60',
   inputsBorder: 'border-0',
   inputsSpacing: 'px-4 py-3',
@@ -41,9 +41,10 @@ const commonClasses = {
   buttonErrorsRing: 'focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-red-600',
 
   buttonRadius: 'rounded-md',
-  buttonSpacing: 'px-4 py-2',
+  buttonSpacing: 'px-3 py-2',
+  buttonSpacingCircle: 'p-2',
   buttonShadow: 'shadow',
-  buttonText: 'text-sm font-medium leading-6 whitespace-nowrap',
+  buttonText: 'text-sm font-medium whitespace-nowrap',
   buttonTransition: 'transition ease-in-out duration-15',
   buttonPosition: 'block justify-center inline-flex items-center',
 

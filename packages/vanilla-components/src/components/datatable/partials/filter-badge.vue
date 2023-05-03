@@ -43,10 +43,12 @@ const translateFilterValue = (filter: Types.DatatableFilter): any => {
 
   return filter.value
 }
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaDatatableFilterBadge',
-})
+}
 </script>
 
 <template>

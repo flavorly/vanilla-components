@@ -1,6 +1,7 @@
 {
     "fixedClasses": {
-        "bodyDivided": ""
+        "bodyDivided": "",
+        "title": ""
     },
     "classes": {
         "card": "relative bg-white shadow-lg rounded-lg dark:bg-gray-800/70 dark:text-white dark:shadow-dark-xl ring-1 ring-gray-900/10 dark:ring-white/10",
@@ -25,7 +26,7 @@
         "footerWithOneGrid": "sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense",
         "footerWithTwoGrids": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0",
         "footerWithThreeGrids": "sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense",
-        "footerSplitContainer": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense",
+        "footerSplitContainer": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense w-full",
         "footerSplitLeft": "flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0",
         "footerSplitRight": "flex mt-0 sm:mt-0 items-center justify-center sm:justify-end",
         "emptyStateContainer": "flex items-center justify-center text-center px-6 py-8 rounded-lg",
@@ -57,7 +58,7 @@
                 "footerWithOneGrid": "sm:grid sm:grid-cols-1 sm:gap-3 sm:grid-flow-row-dense",
                 "footerWithTwoGrids": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense space-y-2 sm:space-y-0",
                 "footerWithThreeGrids": "sm:grid sm:grid-cols-3 sm:gap-3 sm:grid-flow-row-dense",
-                "footerSplitContainer": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense",
+                "footerSplitContainer": "sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense w-full",
                 "footerSplitLeft": "flex mt-0 ml-0 items-center justify-center sm:justify-start mb-2 sm:mb-0",
                 "footerSplitRight": "flex mt-0 sm:mt-0 items-center justify-center sm:justify-end",
                 "emptyStateContainer": "flex items-center justify-center text-center px-6 py-8 rounded-lg",

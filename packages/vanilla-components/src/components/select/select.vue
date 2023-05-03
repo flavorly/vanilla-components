@@ -62,6 +62,7 @@ const props = defineProps({
       return {
         value: null,
         text: props.placeholder,
+        disabled: true,
       }
     },
   },
@@ -79,15 +80,17 @@ const { normalizedOptions } = useMultipleOptions(
 )
 provide('configuration_vanilla', configuration)
 
-defineOptions({
-  name: 'VanillaSelect',
-})
-
 /**
  * @docs
  * @displayName VanillaSelect
  * @description A select component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaSelect',
+}
 </script>
 
 <template>
@@ -103,6 +106,7 @@ defineOptions({
           configuration.classesList?.select,
           configuration.multiple ? configuration.classesList?.selectIfMultiple : '',
         ]"
+        :placeholder="props.placeholder"
         :multiple="configuration?.multiple"
       >
         <SelectOption

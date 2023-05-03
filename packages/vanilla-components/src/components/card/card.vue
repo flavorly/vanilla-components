@@ -42,16 +42,18 @@ const props = defineProps({
 const { configuration } = useConfiguration<CardProps>(cardConfig, 'Card')
 provide('configuration_vanilla', configuration)
 
-defineOptions({
-  name: 'VanillaCard',
-  inheritAttrs: true,
-})
-
 /**
  * @docs
  * @displayName VanillaCard
  * @description A simple card component
  **/
+</script>
+
+<script lang="ts">
+export default {
+  name: 'VanillaCard',
+  inheritAttrs: true,
+}
 </script>
 
 <template>

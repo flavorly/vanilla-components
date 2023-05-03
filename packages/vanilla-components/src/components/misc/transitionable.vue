@@ -13,11 +13,13 @@ const props = defineProps({
     default: 150,
   },
 })
+</script>
 
-defineOptions({
+<script lang="ts">
+export default {
   name: 'VanillaTransionable',
   inheritAttrs: true,
-})
+}
 </script>
 
 <template>

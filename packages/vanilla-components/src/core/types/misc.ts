@@ -34,6 +34,8 @@ type FavoriteCountriesValue = undefined | string | string[] | Array<string>
 
 type ElementPosition = string | 'none' | 'full' | 'bottom' | 'top' | 'left' | 'right' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
 
+type ElementRounded = string | 'none' | 'full' | 'bottom' | 'top' | 'left' | 'right' | 'bottom-left' | 'bottom-right' | 'top-left' | 'top-right'
+
 export {
   Measure,
   Data,
@@ -51,5 +53,6 @@ export {
   MinimumInputLengthTextProp,
   FavoriteCountriesValue,
   ElementPosition,
+  ElementRounded,
 }
 
