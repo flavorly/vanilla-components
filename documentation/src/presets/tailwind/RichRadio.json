@@ -3,14 +3,16 @@
         "container": "relative flex-1",
         "optionContainer": "rounded-lg",
         "optionContainerSeparated": "space-y-2",
-        "optionContainerNonSeparated": "-space-y-px"
+        "optionContainerNonSeparated": "-space-y-px",
+        "optionWrapper": "outline-none focus:outline-none"
     },
     "classes": {
         "wrapper": "",
         "container": "",
         "optionContainer": "",
         "optionContainerSeparated": "",
-        "optionContainerNonSeparated": ""
+        "optionContainerNonSeparated": "",
+        "optionWrapper": ""
     },
     "variants": {
         "error": {
@@ -19,7 +21,8 @@
                 "container": "",
                 "optionContainer": "",
                 "optionContainerSeparated": "",
-                "optionContainerNonSeparated": ""
+                "optionContainerNonSeparated": "",
+                "optionWrapper": ""
             }
         }
     }

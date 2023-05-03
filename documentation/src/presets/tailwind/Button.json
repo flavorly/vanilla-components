@@ -1,89 +1,137 @@
 {
     "fixedClasses": {
-        "button": "block justify-center inline-flex items-center focus:ring-offset-2 cursor-pointer",
+        "button": "block justify-center inline-flex items-center cursor-pointer",
         "container": "flex items-center space-x-1",
         "spinner": "-ml-1 mr-1 h-4 w-4 text-whit",
         "disableOpacity": "opacity-50",
         "enableOpacity": "opacity-100",
-        "busyOrInvalidState": "cursor-not-allowed"
+        "busyOrInvalidState": "cursor-not-allowed",
+        "roundedFull": "rounded-md",
+        "roundedCircle": "rounded-full",
+        "roundedTop": "rounded-t-md",
+        "roundedBottom": "rounded-b-md",
+        "roundedLeft": "rounded-l-md",
+        "roundedRight": "rounded-r-md",
+        "roundedBottomLeft": "rounded-bl-md",
+        "roundedBottomRight": "rounded-br-md",
+        "roundedTopLeft": "rounded-tl-md",
+        "roundedTopRight": "rounded-tr-md"
     },
     "classes": {
-        "button": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 px-4 py-2 shadow focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white dark:focus:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600",
+        "button": "text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 shadow focus:ring-offset-2 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white dark:focus:text-white bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600",
         "container": " ",
         "spinner": "",
         "disableOpacity": "",
         "enableOpacity": "",
-        "busyOrInvalidState": ""
+        "busyOrInvalidState": "",
+        "padding": "px-3 py-2",
+        "paddingCircle": "p-2",
+        "roundedFull": "",
+        "roundedCircle": "",
+        "roundedTop": "",
+        "roundedBottom": "",
+        "roundedLeft": "",
+        "roundedRight": "",
+        "roundedBottomLeft": "",
+        "roundedBottomRight": "",
+        "roundedTopLeft": "",
+        "roundedTopRight": ""
     },
     "variants": {
         "error": {
             "classes": {
-                "button": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 px-4 py-2 shadow focus:ring-red-500 text-white focus:text-gray-200 bg-red-600",
+                "button": "text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 shadow focus:ring-offset-2 focus:ring-red-500 text-white focus:text-gray-200 bg-red-600",
                 "container": "",
                 "spinner": "",
                 "disableOpacity": "",
                 "enableOpacity": "",
-                "busyOrInvalidState": ""
+                "busyOrInvalidState": "",
+                "padding": "px-3 py-2",
+                "paddingCircle": "p-2"
             }
         },
-        "errorSoft": {
+        "error_muted": {
             "classes": {
-                "button": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 px-4 py-2 shadow focus:ring-red-500 dark:focus:ring-red-400 text-red-500 focus:text-red-600 dark:text-red-400 bg-white dark:bg-gray-800 border border-red-400 focus:border-red-400 dark:focus:border-red-400",
+                "button": "text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 shadow focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-red-400 text-red-500 focus:text-red-600 dark:text-red-400 bg-white dark:bg-gray-800 border border-red-400 focus:border-red-400 dark:focus:border-red-400",
                 "container": "",
                 "spinner": "",
                 "disableOpacity": "",
                 "enableOpacity": "",
-                "busyOrInvalidState": ""
+                "busyOrInvalidState": "",
+                "padding": "px-3 py-2",
+                "paddingCircle": "p-2"
             }
         },
         "primary": {
             "classes": {
-                "button": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 px-4 py-2 shadow focus:ring-primary-500 text-white focus:text-gray-200 bg-primary-600",
+                "button": "text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 shadow focus:ring-offset-2 focus:ring-primary-500 text-white focus:text-gray-200 bg-primary-600",
                 "container": "",
                 "spinner": "",
                 "disableOpacity": "",
                 "enableOpacity": "",
-                "busyOrInvalidState": ""
+                "busyOrInvalidState": "",
+                "padding": "px-3 py-2",
+                "paddingCircle": "p-2"
             }
         },
         "success": {
             "classes": {
-                "button": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 px-4 py-2 shadow focus:ring-green-500 text-white focus:text-gray-200 bg-green-600",
+                "button": "text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 shadow focus:ring-offset-2 focus:ring-green-500 text-white focus:text-gray-200 bg-green-600",
                 "container": "",
                 "spinner": "",
                 "disableOpacity": "",
                 "enableOpacity": "",
-                "busyOrInvalidState": ""
+                "busyOrInvalidState": "",
+                "padding": "px-3 py-2",
+                "paddingCircle": "p-2"
+            }
+        },
+        "outline": {
+            "classes": {
+                "button": "text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-offset-2 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-transparent border border-gray-400 dark:border-gray-600 dark:focus:border-primary-600",
+                "container": "",
+                "spinner": "",
+                "disableOpacity": "",
+                "enableOpacity": "",
+                "busyOrInvalidState": "",
+                "padding": "px-3 py-2",
+                "paddingCircle": "p-2"
             }
         },
         "transparent": {
             "classes": {
-                "button": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 px-4 py-2 shadow focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-transparent border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600",
+                "button": "text-sm font-medium whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 focus:ring-offset-2 focus:ring-primary-600 text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white bg-transparent",
                 "container": "",
                 "spinner": "",
                 "disableOpacity": "",
                 "enableOpacity": "",
-                "busyOrInvalidState": ""
+                "busyOrInvalidState": "",
+                "padding": "px-3 py-2",
+                "paddingCircle": "p-2"
             }
         },
-        "paginationButton": {
+        "pagination": {
             "classes": {
-                "button": "rounded-md text-sm font-medium leading-6 whitespace-nowrap focus:outline-none focus:ring-2 dark:focus:ring-offset-gray-900 px-1.5 py-1.5 cursor-pointer relative inline-flex items-center px-2 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 dark:bg-gray-800 dark:text-white dark:hover:text-white dark:border-gray-600 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-primary-300 focus:ring-primary-500 active:bg-gray-100 active:text-gray-500",
+                "button": "text-sm font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-gray-500 dark:text-white hover:text-gray-400 dark:hover:text-gray-100 px-3 py-2 cursor-pointer relative inline-flex items-center bg-white dark:bg-gray-800 border-0 ring-1 ring-inset ring-gray-300 dark:ring-gray-600/60 focus:z-10 focus:outline-none focus:ring-offset-0 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-500 -ml-px",
                 "container": "",
                 "spinner": "",
                 "disableOpacity": "",
                 "enableOpacity": "",
-                "busyOrInvalidState": ""
+                "busyOrInvalidState": "",
+                "padding": "",
+                "paddingCircle": "p-2"
             }
         },
-        "paginationButtonPage": {
+        "pagination_page": {
             "classes": {
-                "button": "text-sm leading-6 whitespace-nowrap text-gray-700 focus:text-gray-600 dark:text-white dark:hover:text-white border border-gray-300 dark:border-gray-600 dark:focus:border-primary-600 -ml-px px-3 py-1.5",
+                "button": "text-sm font-medium whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed text-sm font-medium text-gray-500 dark:text-white px-3 py-2 cursor-pointer relative inline-flex items-center border-0 bg-white dark:bg-gray-800 ring-1 ring-inset ring-gray-300 dark:ring-gray-600/60 focus:z-10 focus:outline-none focus:ring-offset-0 focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-500 -ml-px",
                 "container": "",
                 "spinner": "",
                 "disableOpacity": "",
                 "enableOpacity": "",
-                "busyOrInvalidState": ""
+                "busyOrInvalidState": "",
+                "padding": "",
+                "paddingCircle": "p-2"
             }
         }
     }

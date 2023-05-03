@@ -8,6 +8,16 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.43
+- Alert: Added ability to add raw icons/emojis
+- Input: Fixed issue with Leading text on tailwind
+- Better Input Group formatting
+- Button : Can now be fully rounded, or rounded on one side only
+- General: Switching Borders to Rings
+- Checkbox Group: Added Options to navigate with keyboard
+- Textarea: Added `resize` prop to allow for resizing the textarea automatically
+- Variants: Ability to use a custom error variant
+
 ### 0.7.42
 - Dialog : Removed `bodyClasses` prop, please use `classes: { body: '...' }` instead
 - Dialog : Removed `bodyDivided` & `bodyDarker` props, please use `classes: { body: 'divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-800 bg-gray-50' }` instead

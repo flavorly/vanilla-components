@@ -1,6 +1,6 @@
 {
   "name": "@flavorly/vanilla-components-hybridly",
-  "version": "0.7.42",
+  "version": "0.7.43",
   "type": "module",
   "sideEffects": false,
   "private": false,
