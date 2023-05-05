@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import type { InputOptions, NormalizedOption } from '../../core/types'
 import { useConfiguration, useMultipleOptions, useMultipleVModel, useVariantProps } from '../../core/use'
 import FormErrors from '../forms/form-errors.vue'
@@ -83,11 +83,11 @@ const handleKeydown = (event, currentIndex) => {
   if (!root.value?.contains(event.target)) {
     return
   }
-  if (event.key === 'ArrowLeft') {
+  if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
     focusElement(currentIndex, -1)
     return
   }
-  if (event.key === 'ArrowRight') {
+  if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
     focusElement(currentIndex, 1)
   }
 }
@@ -107,7 +107,7 @@ export default {
 </script>
 
 <template>
-  <div class="">
+  <div class="vanilla-checkbox-group-wrapper">
     <div
       ref="root"
       class="vanilla-checkbox-group"
@@ -121,10 +121,14 @@ export default {
         :key="index"
         :for="option.value.toString()"
         :label="option.text.toString()"
+        :classes="{
+          label: '',
+        }"
         :class="[
+          configuration.classesList.groupCheckboxWrapper,
           isOptionSelected(option)
-            ? configuration.classesList.groupCheckboxWrapperSelected
-            : configuration.classesList.groupCheckboxWrapper,
+            ? configuration.classesList.groupCheckboxWrapperHighlighted
+            : configuration.classesList.groupCheckboxWrapperNotHighlighted,
         ]"
         @keydown="handleKeydown($event, index)"
       >
@@ -134,6 +138,7 @@ export default {
             :name="option.value"
             :value="option.value"
             :variant="variant"
+            :variant-error="variantError"
           />
         </div>
         <div :class="configuration.classesList.groupLabelWrapper">

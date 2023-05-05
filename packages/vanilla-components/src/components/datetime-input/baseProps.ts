@@ -18,4 +18,8 @@ export const baseProps = {
     type: Boolean,
     default: false,
   },
+  inputProps: {
+    type: Object,
+    default: () => {},
+  },
 }

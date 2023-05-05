@@ -145,7 +145,10 @@ export default {
         <div class="flex">
           <slot
             name="icon"
-            v-bind="{ classes: configuration.classesList.iconWrapper }"
+            v-bind="{
+              classes: configuration.classesList.iconWrapper,
+              iconClasses: configuration.classesList.icon,
+            }"
           >
             <div
               v-if="props.icon || props.iconRaw"

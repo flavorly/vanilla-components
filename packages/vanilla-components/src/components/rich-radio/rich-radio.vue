@@ -114,6 +114,7 @@ export default {
               :compact="compact"
               :radio="radio"
               :variant="variant"
+              :variant-error="variantError"
               v-bind="$attrs"
               :disabled="option.disabled || false"
             >

@@ -15,9 +15,10 @@
         "label": {
             "label": ""
         },
-        "groupContainer": "space-y-3",
+        "groupContainer": "grid grid-cols-1 space-y-3",
         "groupCheckboxWrapper": "relative flex items-start",
-        "groupCheckboxWrapperSelected": "",
+        "groupCheckboxWrapperNotHighlighted": "",
+        "groupCheckboxWrapperHighlighted": "",
         "groupCheckbox": "flex items-center h-5",
         "groupLabelWrapper": "ml-3 text-sm leading-5",
         "groupLabelFeedback": "text-gray-500"
@@ -40,7 +41,8 @@
         },
         "groupContainer": "",
         "groupCheckboxWrapper": "",
-        "groupCheckboxWrapperSelected": "",
+        "groupCheckboxWrapperNotHighlighted": "",
+        "groupCheckboxWrapperHighlighted": "",
         "groupCheckbox": "",
         "groupLabelWrapper": "",
         "groupLabelFeedback": ""
