@@ -291,12 +291,12 @@ const filtersComputed = computed(() => {
 // ---------------------------- //
 
 /** Wrapper for the main call to the server, so we can perform additional stuff */
-const fetchFromServer = (then = () => {}) => {
+const fetchFromServer = (then = () => {}, link: string | null = null) => {
     // console.log('[REST] 🚀 Calling the server');
 
     isFetching.value = true
 
-    return fetchData(datatable, queryData)
+    return fetchData(datatable, queryData, link)
 
         // Resolve
         .then((response) => {
@@ -338,9 +338,9 @@ const fetchFromServer = (then = () => {}) => {
 }
 
 /** Refresh the datatable */
-const refresh = (then = () => {}) => {
+const refresh = (then = () => {}, link: string | null = null) => {
     if (!isFetching.value) {
-        fetchFromServer(then)
+        fetchFromServer(then, link)
     }
 }
 
@@ -700,7 +700,7 @@ const onPageNavigated = (link: string) => {
 
     // Refresh the results
     // Can't use value trigger otherwise it happens later on the event bubbling
-    refresh()
+    refresh(() => { }, link)
 
     datatable.fetchEndpoint = fetchEndpoint
     datatable.actionsEndpoint = actionsEndpoint

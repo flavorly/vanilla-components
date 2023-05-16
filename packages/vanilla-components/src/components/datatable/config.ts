@@ -404,7 +404,7 @@ export declare interface DatatableConfiguration {
   [key: string]: any
 }
 
-export declare type DatatableFetchDataFunction = (configuration: DatatableConfiguration, data: DatatableQueryData) => DatatableFetchDataPromise
+export declare type DatatableFetchDataFunction = (configuration: DatatableConfiguration, data: DatatableQueryData, link: string | null) => DatatableFetchDataPromise
 export declare type DatatableActionExecutedFunction = (action: DatatableAction, data: DatatableQueryData) => Promise<never>
 export declare type DatatableExceptionFunction = (error: object) => Promise<never>
 
