@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ComponentPublicInstance, PropType, Ref } from 'vue'
+import type { Component, ComponentPublicInstance, PropType, Ref } from 'vue'
 import { onMounted, ref } from 'vue'
 import { useConfiguration, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
@@ -10,7 +10,7 @@ import LoadingSpinnerIcon from '~icons/svg-spinners/180-ring-with-bg'
 const props = defineProps({
     ...useVariantProps<ButtonProps, ButtonClassesValidKeys>(),
     as: {
-        type: [String] as PropType<string>,
+        type: [String, Object] as PropType<string | Component>,
         default: 'button',
     },
     asDeep: {
