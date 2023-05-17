@@ -81,7 +81,7 @@ const props = defineProps({
     required: false,
     default: 'medium',
     validator(align: string) {
-      return ['default', 'small', 'medium', 'large', 'full'].includes(align)
+      return ['default', 'small', 'medium', 'large', 'extraLarge', 'full'].includes(align)
     },
   },
 })
@@ -185,6 +185,7 @@ const sizeClass = computed(() => {
       small: configuration.classesList.sizeWidthSmall,
       medium: configuration.classesList.sizeWidthMedium,
       large: configuration.classesList.sizeWidthLarge,
+      extraLarge: configuration.classesList.sizeWidthExtraLarge,
       full: configuration.classesList.sizeWidthFull,
     }[props.size]
   }
@@ -194,6 +195,7 @@ const sizeClass = computed(() => {
     small: configuration.classesList.sizeHeightSmall,
     medium: configuration.classesList.sizeHeightMedium,
     large: configuration.classesList.sizeHeightLarge,
+    extraLarge: configuration.classesList.sizeHeightExtraLarge,
     full: configuration.classesList.sizeHeightFull,
   }[props.size]
 })
