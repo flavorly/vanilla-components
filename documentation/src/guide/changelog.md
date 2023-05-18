@@ -8,6 +8,12 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.45
+- Button: Ability to pass components in `as` prop
+- Slideover: Added `extraLarge` size
+
+### 0.7.44
+
 ### 0.7.43
 - Alert: Added ability to add raw icons/emojis
 - Input: Fixed issue with Leading text on tailwind
