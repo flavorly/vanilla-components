@@ -1,7 +1,7 @@
 {
   "type": "module",
   "private": true,
-  "version": "0.7.44",
+  "version": "0.7.45",
   "packageManager": "pnpm@7.13.4",
   "scripts": {
     "build": "pnpm -r build && tsx ./build/generate-presets.ts",
@@ -20,7 +20,7 @@
     "@docsearch/css": "^3.3.3",
     "@docsearch/js": "^3.3.3",
     "@docsearch/react": "^3.3.3",
-    "@flavorly/vanilla-components": "workspace:*",
+    "@flavorly/vanilla-components": "^0.7.44",
     "@headlessui/vue": "^1.7.13",
     "@iconify-json/arcticons": "^1.1.48",
     "@iconify-json/heroicons": "^1.1.10",
