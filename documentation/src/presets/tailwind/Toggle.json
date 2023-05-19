@@ -23,7 +23,8 @@
         "groupLabelFeedback": "text-gray-500",
         "label": {
             "label": ""
-        }
+        },
+        "disabled": "opacity-60 select-none cursor-not-allowed "
     },
     "classes": {
         "wrapper": "",
@@ -52,7 +53,8 @@
         "groupToggleWrapper": "",
         "groupToggle": "",
         "groupLabelWrapper": "",
-        "groupLabelFeedback": ""
+        "groupLabelFeedback": "",
+        "disabled": ""
     },
     "variants": {
         "error": {

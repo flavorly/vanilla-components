@@ -16,7 +16,8 @@
         "roundedBottomRight": "rounded-none rounded-br-lg",
         "roundedTopLeft": "rounded-none rounded-tl-lg",
         "roundedTopRight": "rounded-none rounded-tr-lg",
-        "inputBorder": ""
+        "inputBorder": "",
+        "disabled": "opacity-60 select-none cursor-not-allowed "
     },
     "classes": {
         "input": "border-0 text-gray-700 dark:text-white placeholder-gray-500/60 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 px-4 py-3 !autofill:bg-white !dark:autofill:bg-gray-900",
@@ -35,7 +36,8 @@
         "addonAfter": "",
         "addonBeforeInputClasses": "",
         "addonAfterInputClasses": "",
-        "addonClasses": "text-gray-300 dark:text-gray-600"
+        "addonClasses": "text-gray-300 dark:text-gray-600",
+        "disabled": ""
     },
     "variants": {
         "error": {
@@ -68,7 +70,8 @@
                 "addonAfter": "",
                 "addonBeforeInputClasses": "",
                 "addonAfterInputClasses": "",
-                "addonClasses": "text-gray-300 dark:text-gray-600"
+                "addonClasses": "text-gray-300 dark:text-gray-600",
+                "disabled": ""
             }
         }
     }

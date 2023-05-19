@@ -1,11 +1,12 @@
 {
     "fixedClasses": {
-        "button": "block justify-center inline-flex items-center cursor-pointer",
+        "button": "block justify-center inline-flex items-center",
         "container": "flex items-center space-x-1",
         "spinner": "-ml-1 mr-1 h-4 w-4 text-whit",
         "disableOpacity": "opacity-50",
         "enableOpacity": "opacity-100",
         "busyOrInvalidState": "cursor-not-allowed",
+        "validState": "cursor-pointer",
         "roundedFull": "rounded-md",
         "roundedCircle": "rounded-full",
         "roundedTop": "rounded-t-md",
@@ -24,6 +25,7 @@
         "disableOpacity": "",
         "enableOpacity": "",
         "busyOrInvalidState": "",
+        "validState": "",
         "padding": "px-3 py-2",
         "paddingCircle": "p-2",
         "roundedFull": "",

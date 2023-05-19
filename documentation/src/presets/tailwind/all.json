@@ -244,12 +244,13 @@
     },
     "Button": {
         "fixedClasses": {
-            "button": "block justify-center inline-flex items-center cursor-pointer",
+            "button": "block justify-center inline-flex items-center",
             "container": "flex items-center space-x-1",
             "spinner": "-ml-1 mr-1 h-4 w-4 text-whit",
             "disableOpacity": "opacity-50",
             "enableOpacity": "opacity-100",
             "busyOrInvalidState": "cursor-not-allowed",
+            "validState": "cursor-pointer",
             "roundedFull": "rounded-md",
             "roundedCircle": "rounded-full",
             "roundedTop": "rounded-t-md",
@@ -268,6 +269,7 @@
             "disableOpacity": "",
             "enableOpacity": "",
             "busyOrInvalidState": "",
+            "validState": "",
             "padding": "px-3 py-2",
             "paddingCircle": "p-2",
             "roundedFull": "",
@@ -473,7 +475,8 @@
             "groupCheckboxWrapperHighlighted": "",
             "groupCheckbox": "flex items-center h-5",
             "groupLabelWrapper": "ml-3 text-sm leading-5",
-            "groupLabelFeedback": "text-gray-500"
+            "groupLabelFeedback": "text-gray-500",
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "wrapper": "",
@@ -497,7 +500,8 @@
             "groupCheckboxWrapperHighlighted": "",
             "groupCheckbox": "",
             "groupLabelWrapper": "",
-            "groupLabelFeedback": ""
+            "groupLabelFeedback": "",
+            "disabled": ""
         },
         "variants": {
             "error": {
@@ -778,7 +782,9 @@
         }
     },
     "Dropdown": {
-        "fixedClasses": {},
+        "fixedClasses": {
+            "disabled": "opacity-60 select-none cursor-not-allowed "
+        },
         "classes": {
             "trigger": "",
             "wrapper": "relative",
@@ -819,7 +825,8 @@
             "enterToClass": "transform scale-100 opacity-100",
             "leaveActiveClass": "transition duration-75 ease-in",
             "leaveFromClass": "transform scale-100 opacity-100",
-            "leaveToClass": "transform scale-95 opacity-0"
+            "leaveToClass": "transform scale-95 opacity-0",
+            "disabled": ""
         }
     },
     "FormErrors": {
@@ -830,7 +837,8 @@
             "section": "",
             "sectionDivided": "",
             "sectionSpaced": "",
-            "sectionFilled": ""
+            "sectionFilled": "",
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
@@ -839,7 +847,8 @@
             "section": "",
             "sectionDivided": "divide-y divide-gray-200 dark:divide-gray-700",
             "sectionSpaced": "space-y-2",
-            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50"
+            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50",
+            "disabled": ""
         }
     },
     "FormFeedback": {
@@ -850,7 +859,8 @@
             "section": "",
             "sectionDivided": "",
             "sectionSpaced": "",
-            "sectionFilled": ""
+            "sectionFilled": "",
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
@@ -859,7 +869,8 @@
             "section": "",
             "sectionDivided": "divide-y divide-gray-200 dark:divide-gray-700",
             "sectionSpaced": "space-y-2",
-            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50"
+            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50",
+            "disabled": ""
         }
     },
     "FormLabel": {
@@ -870,7 +881,8 @@
             "section": "",
             "sectionDivided": "",
             "sectionSpaced": "",
-            "sectionFilled": ""
+            "sectionFilled": "",
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
@@ -879,7 +891,8 @@
             "section": "",
             "sectionDivided": "divide-y divide-gray-200 dark:divide-gray-700",
             "sectionSpaced": "space-y-2",
-            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50"
+            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50",
+            "disabled": ""
         }
     },
     "FormSection": {
@@ -890,7 +903,8 @@
             "section": "",
             "sectionDivided": "",
             "sectionSpaced": "",
-            "sectionFilled": ""
+            "sectionFilled": "",
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
@@ -899,7 +913,8 @@
             "section": "",
             "sectionDivided": "divide-y divide-gray-200 dark:divide-gray-700",
             "sectionSpaced": "space-y-2",
-            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50"
+            "sectionFilled": "bg-gray-50 dark:bg-gray-800/50",
+            "disabled": ""
         }
     },
     "Input": {
@@ -920,7 +935,8 @@
             "roundedBottomRight": "rounded-none rounded-br-lg",
             "roundedTopLeft": "rounded-none rounded-tl-lg",
             "roundedTopRight": "rounded-none rounded-tr-lg",
-            "inputBorder": ""
+            "inputBorder": "",
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "input": "border-0 text-gray-700 dark:text-white placeholder-gray-500/60 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 px-4 py-3 !autofill:bg-white !dark:autofill:bg-gray-900",
@@ -939,7 +955,8 @@
             "addonAfter": "",
             "addonBeforeInputClasses": "",
             "addonAfterInputClasses": "",
-            "addonClasses": "text-gray-300 dark:text-gray-600"
+            "addonClasses": "text-gray-300 dark:text-gray-600",
+            "disabled": ""
         },
         "variants": {
             "error": {
@@ -972,7 +989,8 @@
                     "addonAfter": "",
                     "addonBeforeInputClasses": "",
                     "addonAfterInputClasses": "",
-                    "addonClasses": "text-gray-300 dark:text-gray-600"
+                    "addonClasses": "text-gray-300 dark:text-gray-600",
+                    "disabled": ""
                 }
             }
         }
@@ -1521,7 +1539,8 @@
             "roundedBottomRight": "rounded-none rounded-br-lg",
             "roundedTopLeft": "rounded-none rounded-tl-lg",
             "roundedTopRight": "rounded-none rounded-tr-lg",
-            "inputBorder": ""
+            "inputBorder": "",
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "input": "border-0 text-gray-700 dark:text-white placeholder-gray-500/60 bg-white dark:bg-gray-900 ring-1 ring-inset focus:ring-inset focus:ring-2 ring-gray-300 focus:ring-primary-600 dark:ring-white/20 dark:focus:ring-primary-600 focus-visible:ring-primary-600 px-4 py-3 !autofill:bg-white !dark:autofill:bg-gray-900",
@@ -1540,7 +1559,8 @@
             "addonAfter": "",
             "addonBeforeInputClasses": "",
             "addonAfterInputClasses": "",
-            "addonClasses": "text-gray-300 dark:text-gray-600"
+            "addonClasses": "text-gray-300 dark:text-gray-600",
+            "disabled": ""
         },
         "variants": {
             "error": {
@@ -1573,7 +1593,8 @@
                     "addonAfter": "",
                     "addonBeforeInputClasses": "",
                     "addonAfterInputClasses": "",
-                    "addonClasses": "text-gray-300 dark:text-gray-600"
+                    "addonClasses": "text-gray-300 dark:text-gray-600",
+                    "disabled": ""
                 }
             }
         }
@@ -1603,7 +1624,8 @@
             "groupLabelFeedback": "text-gray-500",
             "label": {
                 "label": ""
-            }
+            },
+            "disabled": "opacity-60 select-none cursor-not-allowed "
         },
         "classes": {
             "wrapper": "",
@@ -1632,7 +1654,8 @@
             "groupToggleWrapper": "",
             "groupToggle": "",
             "groupLabelWrapper": "",
-            "groupLabelFeedback": ""
+            "groupLabelFeedback": "",
+            "disabled": ""
         },
         "variants": {
             "error": {

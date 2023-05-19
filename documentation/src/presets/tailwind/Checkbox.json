@@ -21,7 +21,8 @@
         "groupCheckboxWrapperHighlighted": "",
         "groupCheckbox": "flex items-center h-5",
         "groupLabelWrapper": "ml-3 text-sm leading-5",
-        "groupLabelFeedback": "text-gray-500"
+        "groupLabelFeedback": "text-gray-500",
+        "disabled": "opacity-60 select-none cursor-not-allowed "
     },
     "classes": {
         "wrapper": "",
@@ -45,7 +46,8 @@
         "groupCheckboxWrapperHighlighted": "",
         "groupCheckbox": "",
         "groupLabelWrapper": "",
-        "groupLabelFeedback": ""
+        "groupLabelFeedback": "",
+        "disabled": ""
     },
     "variants": {
         "error": {

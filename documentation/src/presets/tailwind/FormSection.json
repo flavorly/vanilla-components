@@ -6,7 +6,8 @@
         "section": "",
         "sectionDivided": "",
         "sectionSpaced": "",
-        "sectionFilled": ""
+        "sectionFilled": "",
+        "disabled": "opacity-60 select-none cursor-not-allowed "
     },
     "classes": {
         "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
@@ -15,6 +16,7 @@
         "section": "",
         "sectionDivided": "divide-y divide-gray-200 dark:divide-gray-700",
         "sectionSpaced": "space-y-2",
-        "sectionFilled": "bg-gray-50 dark:bg-gray-800/50"
+        "sectionFilled": "bg-gray-50 dark:bg-gray-800/50",
+        "disabled": ""
     }
 }

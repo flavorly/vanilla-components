@@ -1,5 +1,7 @@
 {
-    "fixedClasses": {},
+    "fixedClasses": {
+        "disabled": "opacity-60 select-none cursor-not-allowed "
+    },
     "classes": {
         "trigger": "",
         "wrapper": "relative",
@@ -40,6 +42,7 @@
         "enterToClass": "transform scale-100 opacity-100",
         "leaveActiveClass": "transition duration-75 ease-in",
         "leaveFromClass": "transform scale-100 opacity-100",
-        "leaveToClass": "transform scale-95 opacity-0"
+        "leaveToClass": "transform scale-95 opacity-0",
+        "disabled": ""
     }
 }
