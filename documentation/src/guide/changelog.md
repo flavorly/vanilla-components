@@ -8,6 +8,10 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.46
+- DropdownOption: Ability to pass components in `as` prop
+- DropdownMenu: Added `open` state to trigger slot
+
 ### 0.7.45
 - Button: Ability to pass components in `as` prop
 - Slideover: Added `extraLarge` size
