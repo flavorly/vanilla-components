@@ -269,6 +269,7 @@ export default {
           buttonVariant,
           text,
           iconClasses: configuration.classesList.chevronIcon,
+          open,
         }"
       >
         <Button
