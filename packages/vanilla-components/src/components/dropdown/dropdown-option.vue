@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import type { PropType } from 'vue'
+  import type { Component, PropType } from 'vue'
   import { MenuItem } from '@headlessui/vue'
   import { useInjectsClassesList } from '../../core/use'
 
@@ -15,7 +15,7 @@
       default: false,
     },
     as: {
-      type: [String] as PropType<string>,
+      type: [String, Object] as PropType<string | Component>,
       required: false,
       default: 'template',
     },
