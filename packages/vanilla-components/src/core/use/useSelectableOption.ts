@@ -1,7 +1,6 @@
 import type { ComputedRef, Ref } from 'vue'
 import { computed, ref, watch } from 'vue'
-import { isNumber } from '@vueuse/core'
-import { addToArray, isEqual, subtractFromArray } from '../helpers'
+import { addToArray, isEqual, isNumber, subtractFromArray } from '../helpers'
 import type { NormalizedOption } from '../types'
 
 type SelectedOption = NormalizedOption | NormalizedOption[] | undefined

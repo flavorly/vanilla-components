@@ -73,6 +73,11 @@ const useVariantProps = <ComponentOptions extends Data, ClassesKeys extends stri
     default: true,
     required: false,
   },
+  disabled: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+    required: false,
+  },
 })
 
 export default useVariantProps

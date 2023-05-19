@@ -46,7 +46,10 @@ export default {
   <component
     :is="as"
     :for="props.for"
-    :class="configuration.classesList.label"
+    :class="[
+      configuration.classesList.label,
+      disabled ? configuration.classesList.disabled : '',
+    ]"
   >
     <slot name="before" />
     <slot>

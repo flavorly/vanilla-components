@@ -12,6 +12,11 @@ export default function useVModel<P extends Data, K extends keyof P>(
   watch(localValue, (value) => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-expect-error
+    if (props.disabled) {
+      return
+    }
+
+    // @ts-expect-error
     vm?.emit(`update:${key}`, value)
   })
 

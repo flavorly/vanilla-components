@@ -8,6 +8,10 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.47
+- Checkbox & Checkbox group: Added disabled state
+- Core: Error Variant Fallback
+
 ### 0.7.46
 - DropdownOption: Ability to pass components in `as` prop
 - DropdownMenu: Added `open` state to trigger slot
@@ -17,6 +21,13 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 - Slideover: Added `extraLarge` size
 
 ### 0.7.44
+
+- Checkbox: Added High Contrast Support for Checkbox Group
+
+### 0.7.45
+- Checkbox Group: Fixed issue with variants
+- Global: Fixed issue with errors state
+
 
 ### 0.7.43
 - Alert: Added ability to add raw icons/emojis

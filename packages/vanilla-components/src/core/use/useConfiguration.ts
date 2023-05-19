@@ -142,7 +142,7 @@ export function useConfiguration<ComponentOptions extends Data>(
   watch(() => props?.errors, (newErrors: any) => {
     errors.value = newErrors
     if (hasErrors.value) {
-      variant.value = 'error'
+      variant.value = errorVariant.value
     }
     else {
       variant.value = props?.variant as string | undefined

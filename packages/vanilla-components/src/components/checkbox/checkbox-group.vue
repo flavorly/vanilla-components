@@ -7,22 +7,13 @@ import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
 import FormLabel from '../forms/form-label.vue'
 import Checkbox from '../checkbox/checkbox.vue'
-import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxValue } from './config'
+import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxSimpleValue } from './config'
 import { checkboxConfig } from './config'
 
 const props = defineProps({
   ...useVariantProps<CheckboxProps, CheckboxClassesValidKeys>(),
   modelValue: {
-    type: [
-      String,
-      Number,
-      Boolean,
-      Array,
-      Object,
-      Date,
-      Function,
-      Symbol,
-    ] as PropType<CheckboxValue>,
+    type: [Array] as PropType<CheckboxSimpleValue[]>,
     default: undefined,
   },
   options: {
@@ -114,6 +105,7 @@ export default {
       :class="[
         configuration.classesList.container,
         configuration.classesList.groupContainer,
+        disabled ? configuration.classesList.disabled : '',
       ]"
     >
       <FormLabel
@@ -138,7 +130,7 @@ export default {
             :name="option.value"
             :value="option.value"
             :variant="variant"
-            :variant-error="variantError"
+            :disabled="disabled || option?.disabled"
           />
         </div>
         <div :class="configuration.classesList.groupLabelWrapper">
@@ -146,6 +138,7 @@ export default {
             as="span"
             :for="option.value.toString()"
             :label="option.text.toString()"
+            :disabled="disabled || option?.disabled"
             :classes="{
               label: configuration.classesList.label.label,
             }"

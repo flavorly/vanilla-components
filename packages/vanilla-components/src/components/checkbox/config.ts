@@ -1,6 +1,7 @@
 import type { InputHTMLAttributes } from 'vue'
 import { mergeClasses } from '../../core/helpers'
 import type { Data, ObjectWithProperties, WithVariantPropsAndClassesList } from '../../core/types'
+import { commonClasses } from '../../core/config'
 
 export const checkboxConfig = {
   fixedClasses: {
@@ -27,6 +28,8 @@ export const checkboxConfig = {
     groupCheckbox: 'flex items-center h-5',
     groupLabelWrapper: 'ml-3 text-sm leading-5',
     groupLabelFeedback: 'text-gray-500',
+
+    disabled: commonClasses.disabled,
   },
 
   // Default Input appearance
@@ -57,6 +60,8 @@ export const checkboxConfig = {
     groupCheckbox: '',
     groupLabelWrapper: '',
     groupLabelFeedback: '',
+
+    disabled: '',
   },
 
   // Variants

@@ -2,6 +2,7 @@ const commonClasses = {
 
   // Icons and Misc
   iconsSize: 'w-5 h-5',
+  disabled: 'cursor-not-allowed opacity-40 select-none',
 
   // Inputs, selects, textarea on default _old_theme
   inputsBackground: 'bg-white dark:bg-gray-900',

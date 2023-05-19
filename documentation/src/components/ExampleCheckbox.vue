@@ -21,6 +21,18 @@ const valueMultiple = ref([])
       />
     </div>
 
+    <div class="flex items-center justify-center mx-auto text-center mt-10">
+      <Checkbox
+        v-model="value"
+        value="accepted"
+        checked-value="accepted"
+        unchecked-value="notAccepted"
+        feedback="Im disabled"
+        align="center-center"
+        :disabled="true"
+      />
+    </div>
+
     <div class="flex items-center justify-center mx-auto text-center mt-2">
       <pre class="text-xs">{{ JSON.stringify(value) }}</pre>
     </div>

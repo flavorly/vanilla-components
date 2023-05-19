@@ -12,6 +12,7 @@ export const formsConfig = {
     sectionDivided: '',
     sectionSpaced: '',
     sectionFilled: '',
+    disabled: commonClasses.disabled,
   },
 
   // Default Input appearance
@@ -26,6 +27,7 @@ export const formsConfig = {
     sectionDivided: 'divide-y divide-gray-200 dark:divide-gray-700',
     sectionSpaced: 'space-y-2',
     sectionFilled: 'bg-gray-50 dark:bg-gray-800/50',
+    disabled: '',
   },
 }
 

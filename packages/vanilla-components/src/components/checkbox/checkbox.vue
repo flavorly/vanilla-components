@@ -137,11 +137,15 @@ export default {
         :id="name"
         ref="input"
         :checked="isChecked"
-        :class="configuration.classesList.checkbox"
+        :class="[
+          configuration.classesList.checkbox,
+          disabled ? configuration.classesList.disabled : '',
+        ]"
         :name="name"
         :value="value"
         type="checkbox"
         v-bind="$attrs"
+        :disabled="disabled"
         @change="emitUpdate"
         @click="$emit('click', $event)"
       >
