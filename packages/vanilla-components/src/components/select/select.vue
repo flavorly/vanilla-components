@@ -108,6 +108,7 @@ export default {
         ]"
         :placeholder="props.placeholder"
         :multiple="configuration?.multiple"
+        :disabled="disabled"
       >
         <SelectOption
           v-if="empty && showEmpty"

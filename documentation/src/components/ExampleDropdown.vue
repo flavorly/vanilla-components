@@ -5,6 +5,7 @@ import CheckCircleIcon from '~icons/heroicons/check-circle-solid'
 import DocumentDuplicateIcon from '~icons/heroicons/document-duplicate-solid'
 
 const value = ref(false)
+const valueDisabled = ref(false)
 const value2 = ref(false)
 </script>
 
@@ -56,6 +57,23 @@ const value2 = ref(false)
             <Button>Im a button inside this</Button>
           </div>
         </Dropdown>
+
+        <DropdownMenu
+          v-model="value"
+          :disabled="true"
+          text="Disabled"
+        >
+          <!-- Option -->
+          <DropdownOption>
+            <DocumentDuplicateIcon class="w-5 h-5 mr-2" />
+            <span>Copy Stuff</span>
+          </DropdownOption>
+          <!-- Option -->
+          <DropdownOption>
+            <CheckCircleIcon class="w-5 h-5 mr-2" />
+            <span>Mark as Done</span>
+          </DropdownOption>
+        </DropdownMenu>
       </div>
     </div>
   </PreviewWrapper>

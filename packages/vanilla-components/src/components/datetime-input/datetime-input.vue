@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { defineComponent, nextTick, ref, watch } from 'vue'
+import { nextTick, watch } from 'vue'
 import { DatePicker } from 'v-calendar'
 import ClearButton from '../rich-select/partials/clear-button.vue'
 import { get } from '../../core/helpers'
@@ -68,6 +68,7 @@ export default {
               :placeholder="props.placeholder"
               :errors="errors"
               :variant="variant"
+              :disabled="disabled"
               :feedback="props.feedback"
               v-on="inputEvents"
             >

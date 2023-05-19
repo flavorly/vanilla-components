@@ -15,6 +15,7 @@ export const dropdownConfig = {
     // roundedBottomRight: commonClasses.inputsRadiusBottomRight,
     // roundedTopLeft: commonClasses.inputsRadiusTopLeft,
     // roundedTopRight: commonClasses.inputsRadiusTopRight,
+    disabled: commonClasses.disabled,
   },
 
   // Default appearance
@@ -81,6 +82,8 @@ export const dropdownConfig = {
     leaveActiveClass: 'transition duration-75 ease-in',
     leaveFromClass: 'transform scale-100 opacity-100',
     leaveToClass: 'transform scale-95 opacity-0',
+
+    disabled: '',
   },
 }
 

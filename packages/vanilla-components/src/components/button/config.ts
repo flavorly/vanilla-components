@@ -7,13 +7,13 @@ export const buttonConfig = {
   fixedClasses: {
     button: mergeClasses(
       commonClasses.buttonPosition,
-      'cursor-pointer',
     ),
     container: 'flex items-center space-x-1',
     spinner: '-ml-1 mr-1 h-4 w-4 text-whit',
     disableOpacity: 'opacity-50',
     enableOpacity: 'opacity-100',
     busyOrInvalidState: 'cursor-not-allowed',
+    validState: 'cursor-pointer',
 
     // Rounded / Radius
     roundedFull: 'rounded-md',
@@ -45,6 +45,7 @@ export const buttonConfig = {
     disableOpacity: '',
     enableOpacity: '',
     busyOrInvalidState: '',
+    validState: '',
     padding: commonClasses.buttonSpacing,
     paddingCircle: commonClasses.buttonSpacingCircle,
 

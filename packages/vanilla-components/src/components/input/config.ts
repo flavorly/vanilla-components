@@ -32,6 +32,7 @@ const defaultInput = {
   addonBeforeInputClasses: '',
   addonAfterInputClasses: '',
   addonClasses: 'text-gray-300 dark:text-gray-600',
+  disabled: '',
 }
 
 export const inputConfig = {
@@ -59,6 +60,7 @@ export const inputConfig = {
     roundedTopLeft: commonClasses.inputsRadiusTopLeft,
     roundedTopRight: commonClasses.inputsRadiusTopRight,
     inputBorder: '',
+    disabled: commonClasses.disabled,
   },
 
   // Default Input appearance

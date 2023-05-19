@@ -98,7 +98,9 @@ export default {
           props.rounded === 'top-right' ? configuration.classesList.roundedTopRight : '',
           props.rounded === 'bottom-left' ? configuration.classesList.roundedBottomLeft : '',
           props.rounded === 'bottom-right' ? configuration.classesList.roundedBottomRight : '',
+          props.disabled ? configuration.classesList.disabled : '',
         ]"
+        :disabled="disabled"
         :type="localType"
         v-bind="$attrs"
       >

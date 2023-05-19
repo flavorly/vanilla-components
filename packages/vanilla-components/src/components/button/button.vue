@@ -89,7 +89,7 @@ export default {
     :class="[
       configuration.classesList.button,
       disabled ? configuration.classesList.disableOpacity : '',
-      loading || disabled ? configuration.classesList.busyOrInvalidState : '',
+      loading || disabled ? configuration.classesList.busyOrInvalidState : configuration.classesList.validState,
       !disabled && !loading ? configuration.classesList.enableOpacity : '',
       props.rounded === 'circle' ? configuration.classesList.paddingCircle : configuration.classesList.padding,
       props.rounded === 'full' ? configuration.classesList.roundedFull : '',

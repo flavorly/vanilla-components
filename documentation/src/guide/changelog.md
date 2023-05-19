@@ -11,7 +11,14 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 ### 0.7.47
 - Checkbox & Checkbox group: Added disabled state
 - Toggle & Toggle group: Added disabled state
+- Textarea: Added disabled state
+- Rich Select: Added disabled state
+- Date Input: Added disabled state
+- Select Input: Added disabled state
+- Dropdown & Dropdown Menu: Added disabled state
+- Button : Fixed Disabled State vs Valid State
 - Core: Error Variant Fallback
+- Docs: Added examples for Disabled State
 
 ### 0.7.46
 - DropdownOption: Ability to pass components in `as` prop

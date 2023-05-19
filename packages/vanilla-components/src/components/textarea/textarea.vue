@@ -6,6 +6,7 @@ import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
 import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
+import Input from '../input/input.vue'
 import type { TextareaClassesValidKeys, TextareaProps, TextareaValue } from './config'
 import { textareaConfig } from './config'
 import ExclamationCircleIcon from '~icons/heroicons/exclamation-circle-solid'
@@ -103,7 +104,9 @@ export default {
           props.rounded === 'top-right' ? configuration.classesList.roundedTopRight : '',
           props.rounded === 'bottom-left' ? configuration.classesList.roundedBottomLeft : '',
           props.rounded === 'bottom-right' ? configuration.classesList.roundedBottomRight : '',
+          props.disabled ? configuration.classesList.disabled : '',
         ]"
+        :disabled="disabled"
         v-bind="$attrs"
       />
       <div

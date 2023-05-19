@@ -736,6 +736,7 @@ export default {
           :options="flattenedOptions"
           style="width: 0; opacity: 0; height: 0;"
           aria-hidden="true"
+          :disabled="disabled"
           @focusin="rootElementFocusHandler"
         />
 

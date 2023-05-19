@@ -214,6 +214,9 @@ const onBeforeHide = (): void => {
 
 /** Show Dropdown */
 const doShow = async (): Promise<void> => {
+  if (props.disabled) {
+    return
+  }
   if (hideTimeout.value) {
     clearTimeout(hideTimeout.value)
   }
@@ -240,6 +243,10 @@ const doShow = async (): Promise<void> => {
 
 /** Hide Dropdown */
 const doHide = async (): Promise<void> => {
+  if (props.disabled) {
+    return
+  }
+
   onBeforeHide()
 
   shown.value = false
@@ -258,6 +265,10 @@ const doHide = async (): Promise<void> => {
 
 /** Toggle Hide/Show Dropdown */
 const doToggle = (): void => {
+  if (props.disabled) {
+    return
+  }
+
   if (!shown.value) {
     doShow()
   }

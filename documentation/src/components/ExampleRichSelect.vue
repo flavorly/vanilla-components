@@ -9,6 +9,7 @@ const value4 = ref([])
 const value5 = ref(null)
 const value6 = ref(null)
 const value7 = ref(null)
+const valueDisabled = ref(null)
 
 const options = [
     { value: 'Option 1', text: 'One Option' },
@@ -104,6 +105,18 @@ const fetchOptions = (query?: string, nextPage?: number) => {
           :options="options"
           :clearable="true"
           feedback="Im useful helper out here, choose wisely"
+          placeholder="Please select an option"
+        />
+      </div>
+      <!-- Disabled -->
+      <div class="w-full">
+        <RichSelect
+          v-model="valueDisabled"
+          name="test"
+          :options="options"
+          :clearable="true"
+          :disabled="true"
+          feedback="Im disabled, and you shouldnt need to toggle me"
           placeholder="Please select an option"
         />
       </div>

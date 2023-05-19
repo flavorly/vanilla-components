@@ -2,6 +2,7 @@
 import { Input } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref(null)
+const valueDisabled = ref(null)
 const valueErrors = ref(null)
 const valuePassword = ref(null)
 const valueCopy = ref('Ill be copied to clipboard')
@@ -14,6 +15,13 @@ const valueCopy = ref('Ill be copied to clipboard')
         v-model="value"
         placeholder="Dead simple"
         feedback="You can add SVGs as addons before & After"
+      />
+
+      <Input
+        v-model="valueDisabled"
+        placeholder="Dead simple disabled"
+        feedback="Should be disabled"
+        :disabled="true"
       />
 
       <!-- Regular -->

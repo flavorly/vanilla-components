@@ -2,6 +2,7 @@
 import { Select } from '@flavorly/vanilla-components'
 import { ref } from 'vue'
 const value = ref(undefined)
+const valueDisabled = ref(undefined)
 const value2 = ref(undefined)
 
 const options = [
@@ -36,6 +37,14 @@ const options = [
         feedback="You can add SVGs as addons before & After"
         :options="options"
         errors="There is something wrong with this field"
+      />
+
+      <Select
+        v-model="valueDisabled"
+        :disabled="true"
+        placeholder="Im disabled"
+        feedback="Im disabled :("
+        :options="options"
       />
     </div>
   </PreviewWrapper>

@@ -261,7 +261,11 @@ export default {
     <MenuButton
       ref="trigger"
       as="div"
-      :class="configuration.classesList.container"
+      :class="[
+        configuration.classesList.container,
+        configuration.disabled ? configuration.classesList.disabled : '',
+      ]"
+      :disabled="configuration.disabled"
     >
       <slot
         name="trigger"
@@ -270,10 +274,12 @@ export default {
           text,
           iconClasses: configuration.classesList.chevronIcon,
           open,
+          disabled,
         }"
       >
         <Button
           :variant="buttonVariant"
+          :disabled="configuration.disabled"
         >
           <span v-text="text" />
           <ChevronDownIcon
