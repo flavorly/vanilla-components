@@ -10,6 +10,7 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 
 ### 0.7.47
 - Checkbox & Checkbox group: Added disabled state
+- Toggle & Toggle group: Added disabled state
 - Core: Error Variant Fallback
 
 ### 0.7.46

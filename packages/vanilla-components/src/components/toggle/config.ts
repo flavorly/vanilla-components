@@ -41,6 +41,8 @@ export const toggleConfig = {
     label: {
       label: '',
     },
+
+    disabled: commonClasses.disabled,
   },
 
   // Default Input appearance
@@ -79,6 +81,8 @@ export const toggleConfig = {
     groupToggle: '',
     groupLabelWrapper: '',
     groupLabelFeedback: '',
+
+    disabled: '',
   },
 
   // Variants

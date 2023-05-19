@@ -27,6 +27,21 @@ const valueMultiple = ref([])
 
     <div class="h-1 my-5" />
 
+    <div class="flex items-center justify-center mx-auto text-center mt-2">
+      <!-- Disabled -->
+      <Toggle
+        v-model="value"
+        :disabled="true"
+        value="accepted"
+        checked-value="accepted"
+        unchecked-value="notAccepted"
+        feedback="Im disabled and you shouldnt be able to toggle me"
+        align="center-center"
+      />
+    </div>
+
+    <div class="h-1 my-5" />
+
     <div class="flex items-center justify-center space-x-2">
       <!-- Multiple -->
       <Toggle

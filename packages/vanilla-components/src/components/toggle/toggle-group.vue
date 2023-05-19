@@ -7,6 +7,7 @@ import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
 import FormLabel from '../forms/form-label.vue'
 import Toggle from '../toggle/toggle.vue'
+import Checkbox from '../checkbox/checkbox.vue'
 import type { ToggleClassesValidKeys, ToggleProps, ToggleValue } from './config'
 import { toggleConfig } from './config'
 
@@ -73,6 +74,7 @@ export default {
     :class="[
       configuration.classesList.container,
       configuration.classesList.groupContainer,
+      disabled ? configuration.classesList.disabled : '',
     ]"
   >
     <div
@@ -86,6 +88,7 @@ export default {
             :name="option.value"
             :value="option.value"
             :variant="variant"
+            :disabled="disabled || option?.disabled"
           />
         </div>
         <div :class="configuration.classesList.groupLabelWrapper">
@@ -93,6 +96,7 @@ export default {
             :for="option.value.toString()"
             :label="option.text.toString()"
             :classes="configuration.classesList.label"
+            :disabled="disabled || option?.disabled"
           />
           <span
             v-if="option.raw?.description"

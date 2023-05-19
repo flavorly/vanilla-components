@@ -107,6 +107,14 @@ const isChecked = computed(() => {
   }
   return localValue.value === props.checkedValue
 })
+
+const toggle = () => {
+  if (props.disabled) {
+    return
+  }
+  root.value.click()
+}
+
 const { configuration, errors, hasErrors } = useConfiguration<ToggleProps>(toggleConfig, 'Toggle', localValue)
 
 /**
@@ -145,6 +153,7 @@ export default {
       :value="value"
       style="display: none;"
       type="checkbox"
+      :disabled="disabled"
       @change="emitUpdate"
     >
     <button
@@ -153,10 +162,12 @@ export default {
       :class="[
         configuration.classesList.toggle,
         isChecked ? configuration.classesList.checked : configuration.classesList.unchecked,
+        disabled ? configuration.classesList.disabled : '',
       ]"
+      :disabled="disabled"
       type="button"
       v-bind="$attrs"
-      @click="$refs.root.click()"
+      @click="toggle"
     >
       <span
         :class="[
