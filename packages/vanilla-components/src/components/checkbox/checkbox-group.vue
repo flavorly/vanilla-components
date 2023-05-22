@@ -36,6 +36,11 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: true,
   },
+  disabled: {
+    type: [Boolean] as PropType<boolean>,
+    required: false,
+    default: false,
+  },
 })
 
 const { localValue } = useMultipleVModel(props, 'modelValue', true)
