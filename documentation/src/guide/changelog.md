@@ -20,6 +20,13 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 - Core: Error Variant Fallback
 - Docs: Added examples for Disabled State
 
+### 0.7.48
+- Textarea: Fix rows prop
+- CheckboxGroup: Fix disabled state
+- RichRadio: Fix disabled state
+
+### 0.7.47
+
 ### 0.7.46
 - DropdownOption: Ability to pass components in `as` prop
 - DropdownMenu: Added `open` state to trigger slot
@@ -35,7 +42,6 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 ### 0.7.45
 - Checkbox Group: Fixed issue with variants
 - Global: Fixed issue with errors state
-
 
 ### 0.7.43
 - Alert: Added ability to add raw icons/emojis
