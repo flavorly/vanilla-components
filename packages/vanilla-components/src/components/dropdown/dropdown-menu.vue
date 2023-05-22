@@ -250,7 +250,7 @@ export default {
 
 <template>
   <HeadlessMenu
-    v-slot="{ open }"
+    v-slot="{ open, close }"
     ref="root"
     as="div"
     :class="[
@@ -337,7 +337,7 @@ export default {
                 spacedItems ? configuration.classesList.menuItemsWrapperSpaced : '',
               ]"
             >
-              <slot />
+              <slot v-bind="{ close }" />
             </div>
           </MenuItems>
         </Transitionable>
