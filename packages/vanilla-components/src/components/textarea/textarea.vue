@@ -6,7 +6,6 @@ import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
 import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
-import Input from '../input/input.vue'
 import type { TextareaClassesValidKeys, TextareaProps, TextareaValue } from './config'
 import { textareaConfig } from './config'
 import ExclamationCircleIcon from '~icons/heroicons/exclamation-circle-solid'
@@ -18,10 +17,6 @@ const props = defineProps({
   modelValue: {
     type: [String, Number] as PropType<TextareaValue>,
     default: undefined,
-  },
-  rows: {
-    type: [String, Number] as PropType<string | number>,
-    default: 4,
   },
   placeholder: {
     type: [String] as PropType<string>,
