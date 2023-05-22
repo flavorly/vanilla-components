@@ -83,6 +83,7 @@ export default {
     <RadioGroup
       v-model="localValue"
       :class="configuration.classesList?.container"
+      :disabled="disabled"
     >
       <div
         :class="[
@@ -96,7 +97,7 @@ export default {
           v-slot="{ active, checked }"
           as="div"
           :value="option.value"
-          :disabled="option?.disabled || false"
+          :disabled="disabled || option?.disabled || false"
           :class="configuration.classesList?.optionWrapper"
         >
           <slot
@@ -116,7 +117,7 @@ export default {
               :variant="variant"
               :variant-error="variantError"
               v-bind="$attrs"
-              :disabled="option.disabled || false"
+              :disabled="disabled || option?.disabled || false"
             >
               <template #radioIcon>
                 <slot
