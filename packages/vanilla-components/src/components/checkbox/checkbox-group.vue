@@ -7,6 +7,7 @@ import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
 import FormLabel from '../forms/form-label.vue'
 import Checkbox from '../checkbox/checkbox.vue'
+import { uniqueId } from '../../core/helpers'
 import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxSimpleValue } from './config'
 import { checkboxConfig } from './config'
 
@@ -52,6 +53,11 @@ const { normalizedOptions } = useMultipleOptions(
   computed(() => props.normalizeOptions!),
 )
 
+// Ensure we always deal with a arrays
+if (!Array.isArray(localValue.value)) {
+  localValue.value = []
+}
+
 // Refs
 const root = ref<HTMLElement | null>(null)
 
@@ -88,6 +94,9 @@ const handleKeydown = (event, currentIndex) => {
   }
 }
 
+// Ensures the Checkbox group nested field have a unique ID, so it doesnt conflict with other values with same name
+const generateUniqueId = (name: string, id: number) => `${props.name}_${name.toLowerCase().replace(/\s+/g, '-')}_${id}`
+
 /**
  * @docs
  * @displayName VanillaCheckboxGroup
@@ -116,7 +125,7 @@ export default {
       <FormLabel
         v-for="(option, index) in normalizedOptions"
         :key="index"
-        :for="option.value.toString()"
+        :for="generateUniqueId(option.value.toString(), index)"
         :label="option.text.toString()"
         :classes="{
           label: '',
@@ -132,7 +141,7 @@ export default {
         <div :class="configuration.classesList.groupCheckbox">
           <Checkbox
             v-model="localValue"
-            :name="option.value"
+            :name="generateUniqueId(option.value.toString(), index)"
             :value="option.value"
             :variant="variant"
             :disabled="disabled || option?.disabled"
@@ -141,7 +150,7 @@ export default {
         <div :class="configuration.classesList.groupLabelWrapper">
           <FormLabel
             as="span"
-            :for="option.value.toString()"
+            :for="generateUniqueId(option.value.toString(), index)"
             :label="option.text.toString()"
             :disabled="disabled || option?.disabled"
             :classes="{

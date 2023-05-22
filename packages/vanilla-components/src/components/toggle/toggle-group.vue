@@ -54,6 +54,9 @@ const { normalizedOptions } = useMultipleOptions(
   computed(() => props.normalizeOptions!),
 )
 
+// Ensures the Checkbox group nested field have a unique ID, so it doesnt conflict with other values with same name
+const generateUniqueId = (name: string, id: number) => `${props.name}_${name.toLowerCase().replace(/\s+/g, '-')}_${id}`
+
 /**
  * @docs
  * @displayName VanillaToggleGroup
@@ -85,7 +88,7 @@ export default {
         <div :class="configuration.classesList.groupToggle">
           <Toggle
             v-model="localValue"
-            :name="option.value"
+            :name="generateUniqueId(option.value.toString(), index)"
             :value="option.value"
             :variant="variant"
             :disabled="disabled || option?.disabled"
@@ -93,7 +96,7 @@ export default {
         </div>
         <div :class="configuration.classesList.groupLabelWrapper">
           <FormLabel
-            :for="option.value.toString()"
+            :for="generateUniqueId(option.value.toString(), index)"
             :label="option.text.toString()"
             :classes="configuration.classesList.label"
             :disabled="disabled || option?.disabled"

@@ -8,6 +8,11 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.48
+- Checkbox & Checkbox group: Unique Ids for Nested Checkboxes
+- Toggle & Toggle group: Unique Ids for Nested Toggles
+
+
 ### 0.7.47
 - Checkbox & Checkbox group: Added disabled state
 - Toggle & Toggle group: Added disabled state
