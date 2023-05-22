@@ -25,6 +25,14 @@ All notable changes to `@flavorly/vanilla-components` will be documented in this
 - Core: Error Variant Fallback
 - Docs: Added examples for Disabled State
 
+### 0.7.50
+
+- DropdownMenu: Pass `close` function in default slot as a prop
+
+### 0.7.49
+
+- Checkbox & CheckboxGroup: Unique Ids for Nested Checkboxes
+
 ### 0.7.48
 - Textarea: Fix rows prop
 - CheckboxGroup: Fix disabled state
