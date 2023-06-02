@@ -67,6 +67,8 @@ export { default as Slideover, default as VanillaSlideover } from './components/
 
 export { default as StatusIndicator, default as VanillaStatusIndicator } from './components/status-indicator/status-indicator.vue'
 
+export { default as TagsInput, default as VanillaTagsInput } from './components/tags-input/tags-input.vue'
+
 export { default as Textarea, default as VanillaTextarea } from './components/textarea/textarea.vue'
 
 export { default as Toggle, default as VanillaToggle } from './components/toggle/toggle.vue'

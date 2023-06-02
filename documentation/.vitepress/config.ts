@@ -160,6 +160,7 @@ export default defineConfig({
             { text: 'Status Indicator', link: '/guide/components/status-indicator' },
             { text: 'Textarea', link: '/guide/components/textarea' },
             { text: 'Toggle', link: '/guide/components/toggle' },
+            { text: 'Tags Input', link: '/guide/components/tags-input' },
           ],
         },
         {

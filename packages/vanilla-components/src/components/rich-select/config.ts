@@ -210,14 +210,15 @@ export const richSelectConfig = {
                 'bg-red-100 dark:bg-red-500/20',
                 'm-0.5 h-8 max-w-full',
                 'text-red-900 dark:text-red-300 white-space-no text-sm white-space-no',
-                `${commonClasses.buttonErrorsRing} focus:ring-opacity-50`,
+                commonClasses.buttonErrorsRing,
                 commonClasses.inputsTransition,
                 commonClasses.inputsDisabled,
               ),
 
               tagDeleteButton: mergeClasses(
                 commonClasses.inputsTransition,
-                `${commonClasses.buttonErrorsRing} focus:ring-opacity-50`,
+                commonClasses.buttonErrorsRing,
+                'focus:ring-opacity-50',
                 '-ml-1.5 h-full hover:shadow-sm inline-flex items-center px-2 rounded-r',
                 'text-red-900 dark:text-red-300 focus:text-white hover:text-red-800 dark:hover:text-red-200',
                 'hover:bg-red-200 focus:bg-red-500 dark:hover:bg-red-400/20 dark:focus:bg-red-500/20',
