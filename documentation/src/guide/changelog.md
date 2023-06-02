@@ -8,7 +8,7 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
-### 0.7.51
+### 0.7.51 & 0.7.52
 - Tags Input: New Component Added
 
 ### 0.7.48 & 0.7.49
