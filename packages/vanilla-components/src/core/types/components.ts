@@ -41,6 +41,7 @@ interface ComponentsConfiguration {
   SkeletonBar?: Components.SkeletonBarProps
   Slideover?: Components.SlideoverProps
   StatusIndicator?: Components.StatusIndicatorProps
+  TagsInput?: Components.TagsInputProps
   Textarea?: Components.TextareaProps
   Toggle?: Components.ToggleProps
   ToggleGroup?: Components.ToggleProps

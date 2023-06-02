@@ -30,6 +30,7 @@ export const defaultConfiguration = {
   SkeletonBar: Components.skeletonConfig,
   Slideover: Components.slideoverConfig,
   StatusIndicator: Components.statusIndicatorConfig,
+  TagsInput: Components.tagsInputConfig,
   Textarea: Components.textareaConfig,
   Toggle: Components.toggleConfig,
 }

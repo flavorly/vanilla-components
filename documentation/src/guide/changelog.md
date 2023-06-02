@@ -8,6 +8,9 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.50
+- Tags Input: New Component Added
+
 ### 0.7.48 & 0.7.49
 - Checkbox & Checkbox group: Unique Ids for Nested Checkboxes
 - Toggle & Toggle group: Unique Ids for Nested Toggles

@@ -97,7 +97,7 @@ Create a file in your project and name it for ex: `v-calendar.pcss` or `v-calend
 | Prop         | Description               | Accepted Values | Default     |
 |:-------------|:--------------------------|:----------------|:------------|
 | `modelValue` | The value for the element | `Any`           | `undefined` |
-| `options`    | Flatpickr Options         | `Object`        | `undefined` |
+| `options`    | V-Calendar Options        | `Object`        | `undefined` |
 | `type`       | Type of input             | `String`        | `'text'`    |
 
 
