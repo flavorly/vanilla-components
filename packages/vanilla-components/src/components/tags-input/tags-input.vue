@@ -1,22 +1,11 @@
 <script setup lang="ts">
-import type { PropType, Ref } from 'vue'
-import { computed, nextTick, provide, ref, toRef, toRefs, watch } from 'vue'
-import { useClipboard } from '@vueuse/core'
-import { children } from 'cheerio/lib/api/traversing'
-import { useConfiguration, useMultipleOptions, useMultipleVModel, useVModel, useVariantProps } from '../../core/use'
-import { hasSlot } from '../../core/helpers'
+import type { PropType } from 'vue'
+import { nextTick, ref, watch } from 'vue'
+import { useConfiguration, useMultipleVModel, useVariantProps } from '../../core/use'
 import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
-import type { InputOptions, NormalizedOption } from '../../core/types'
-import type { ToggleValue } from '../toggle/config'
-import FormLabel from '../forms/form-label.vue'
 import { tagsInputConfig } from './config'
 import type { TagsInputClassesValidKeys, TagsInputProps, TagsInputValue } from './config'
-import ExclamationCircleIcon from '~icons/heroicons/exclamation-circle-solid'
-import EyeIcon from '~icons/heroicons/eye-solid'
-import EyeSlashIcon from '~icons/heroicons/eye-slash-solid'
-import ClipboardIcon from '~icons/heroicons/clipboard'
-import CheckIcon from '~icons/heroicons/check-solid'
 import CloseIcon from '~icons/heroicons/x-mark-solid'
 
 const props = defineProps({
@@ -92,21 +81,21 @@ const add = (value: string) => {
   if (props.disabled) {
     return
   }
-  const formattedValue = props.allowSymbols ? value.trim() : value.trim().replace(/[^a-zA-Z0-9]/g, '')
+  const formattedValue = props.allowSymbols ? value : value.trim().replace(/[^a-zA-Z0-9\s]/g, '')
   let localErrors = ''
 
   if (
     formattedValue.length === 0
-    || (!props.allowDuplicates && localValue.value?.includes(formattedValue))
-    || (props.allowedOptions.length > 0 && !props.allowedOptions.includes(formattedValue))
+    || (!props.allowDuplicates && localValue.value?.includes(value))
+    || (props.allowedOptions.length > 0 && !props.allowedOptions.includes(value))
   ) {
     // Duplicate Tag
-    if (!props.allowDuplicates && localValue.value?.includes(formattedValue)) {
+    if (!props.allowDuplicates && localValue.value?.includes(value)) {
       localErrors = props.errorTagDuplicated
     }
 
     // Not in the allowed List
-    else if (props.allowedOptions.length > 0 && !props.allowedOptions.includes(formattedValue)) {
+    else if (props.allowedOptions.length > 0 && !props.allowedOptions.includes(value)) {
       localErrors = props.errorTagNotAllowed + props.allowedOptions.join(', ')
     }
 
@@ -125,7 +114,7 @@ const add = (value: string) => {
 
   localValue.value = [
     ...localValue.value || [],
-    props.transformValue(value),
+    props.transformValue(props.allowSymbols ? value : formattedValue),
   ]
 
   tag.value = ''
@@ -224,6 +213,7 @@ export default {
 
 <template>
   <div class="vc-input">
+    <slot name="before" />
     <div :class="configuration.classesList.trigger">
       <div
         ref="root"
@@ -309,6 +299,7 @@ export default {
         </div>
       </div>
     </div>
+    <slot name="after" />
     <slot
       name="errors"
       v-bind="{ hasErrors, errors }"
