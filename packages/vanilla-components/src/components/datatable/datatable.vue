@@ -296,7 +296,7 @@ const fetchFromServer = (then = () => {}, link: string | null = null) => {
 
     isFetching.value = true
 
-    return fetchData(datatable, queryData, link)
+    return fetchData({ ...datatable }, queryData, link)
 
         // Resolve
         .then((response) => {
@@ -700,10 +700,10 @@ const onPageNavigated = (link: string) => {
 
     // Refresh the results
     // Can't use value trigger otherwise it happens later on the event bubbling
-    refresh(() => { }, link)
-
-    datatable.fetchEndpoint = fetchEndpoint
-    datatable.actionsEndpoint = actionsEndpoint
+    refresh(() => {
+      datatable.fetchEndpoint = fetchEndpoint
+      datatable.actionsEndpoint = actionsEndpoint
+    }, link)
 }
 
 /**
