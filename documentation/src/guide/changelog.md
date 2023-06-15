@@ -8,6 +8,10 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.53
+- Datatables: Pass the link to fetch the data while refreshing
+- Dropdown: new popper modifier
+
 ### 0.7.51 & 0.7.52
 - Tags Input: New Component Added
 

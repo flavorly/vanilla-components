@@ -66,7 +66,7 @@ export const datatableConfig = {
     tableRow: '',
     tableColumn: 'whitespace-nowrap py-2 pr-2 text-sm text-gray-500 dark:text-white',
     tableColumnCheckbox: 'px-6 py-3 text-sm w-[10px]',
-    tableCheckbox: 'rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 block transition duration-150 ease-in-out dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600 h-4 w-4',
+    tableCheckbox: 'rounded border-gray-300 text-primary-600 focus:ring-indigo-500 block transition duration-150 ease-in-out dark:focus:ring-offset-gray-900 dark:border-gray-600 dark:bg-gray-900 dark:checked:bg-primary-600 h-4 w-4',
     tableIdColumn: 'w-[60px]',
 
     tableHeadColumnCheckbox: 'bg-gray-100 text-left text-xs px-6 py-3 leading-4 font-medium text-gray-500 uppercase tracking-wider whitespace-nowrap dark:bg-gray-700',

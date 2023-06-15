@@ -57,6 +57,7 @@ export const dropdownConfig = {
     roundedTopLeft: commonClasses.inputsRadiusTopLeft,
     roundedTopRight: commonClasses.inputsRadiusTopRight,
 
+    sizeNone: '',
     sizeSmall: 'w-48',
     sizeDefault: 'w-56',
     sizeMedium: 'w-64',

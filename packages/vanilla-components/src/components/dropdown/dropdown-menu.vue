@@ -94,7 +94,7 @@
       type: [String] as PropType<string>,
       default: 'default',
       validator(value: string) {
-        return ['small', 'default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value)
+        return ['none', 'small', 'default', 'medium', 'large', 'extra-large', 'super-large', 'full-width'].includes(value)
       },
     },
     position: {
@@ -123,6 +123,12 @@
 
     if (configuration.placement !== undefined) {
       popperOptions.placement = configuration.placement as Placement
+      popperOptions.modifiers = [{
+        name: 'keepTogether',
+        options: {
+          enabled: true,
+        },
+      }]
     }
 
     return popperOptions
@@ -184,7 +190,6 @@
   }
 
   const refreshPopperInstance = () => {
-    console.log('Refreshing popper instance')
     const headlessUIState = dropdown.value !== undefined
     if (headlessUIState) {
       createPopperInstance()
@@ -321,6 +326,7 @@ export default {
           <MenuItems
             :class="[
               configuration.classesList.dropdown,
+              size === 'none' ? configuration.classesList.sizeNone : '',
               size === 'small' ? configuration.classesList.sizeSmall : '',
               size === 'default' ? configuration.classesList.sizeDefault : '',
               size === 'medium' ? configuration.classesList.sizeMedium : '',
