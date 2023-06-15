@@ -23,6 +23,7 @@
         "roundedBottomRight": "rounded-none rounded-br-lg",
         "roundedTopLeft": "rounded-none rounded-tl-lg",
         "roundedTopRight": "rounded-none rounded-tr-lg",
+        "sizeNone": "",
         "sizeSmall": "w-48",
         "sizeDefault": "w-56",
         "sizeMedium": "w-64",
