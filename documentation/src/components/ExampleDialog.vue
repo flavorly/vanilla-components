@@ -54,7 +54,7 @@ const openAligned = (align = 'center') => {
       />
 
       <Button
-        label="Bottom Dialog"
+        label="Top Dialog"
         @click="openAligned('top')"
       />
     </div>
