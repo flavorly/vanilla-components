@@ -833,6 +833,7 @@
     "FormErrors": {
         "fixedClasses": {
             "label": "",
+            "labelInner": "leading-none",
             "errors": "",
             "feedback": "",
             "section": "",
@@ -843,6 +844,7 @@
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
+            "labelInner": "",
             "errors": "mt-2 text-xs text-red-400 placeholder-red-400",
             "feedback": "mt-1 text-xs text-gray-500 opacity-75 dark:text-gray-400 cursor-pointer",
             "section": "",
@@ -855,6 +857,7 @@
     "FormFeedback": {
         "fixedClasses": {
             "label": "",
+            "labelInner": "leading-none",
             "errors": "",
             "feedback": "",
             "section": "",
@@ -865,6 +868,7 @@
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
+            "labelInner": "",
             "errors": "mt-2 text-xs text-red-400 placeholder-red-400",
             "feedback": "mt-1 text-xs text-gray-500 opacity-75 dark:text-gray-400 cursor-pointer",
             "section": "",
@@ -877,6 +881,7 @@
     "FormLabel": {
         "fixedClasses": {
             "label": "",
+            "labelInner": "leading-none",
             "errors": "",
             "feedback": "",
             "section": "",
@@ -887,6 +892,7 @@
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
+            "labelInner": "",
             "errors": "mt-2 text-xs text-red-400 placeholder-red-400",
             "feedback": "mt-1 text-xs text-gray-500 opacity-75 dark:text-gray-400 cursor-pointer",
             "section": "",
@@ -899,6 +905,7 @@
     "FormSection": {
         "fixedClasses": {
             "label": "",
+            "labelInner": "leading-none",
             "errors": "",
             "feedback": "",
             "section": "",
@@ -909,6 +916,7 @@
         },
         "classes": {
             "label": "block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1",
+            "labelInner": "",
             "errors": "mt-2 text-xs text-red-400 placeholder-red-400",
             "feedback": "mt-1 text-xs text-gray-500 opacity-75 dark:text-gray-400 cursor-pointer",
             "section": "",
@@ -1199,6 +1207,105 @@
                     "labelUnchecked": "font-normal text-gray-900 dark:text-white",
                     "description": "inline",
                     "descriptionChecked": "text-red-700 dark:text-gray-200",
+                    "descriptionUnchecked": "text-gray-500 dark:text-gray-400"
+                }
+            },
+            "success": {
+                "classes": {
+                    "disabled": "",
+                    "option": "relative flex px-5 py-4 cursor-pointer focus:outline-none",
+                    "checked": "bg-green-100 dark:bg-green-500/30 text-green-700 border-green-200 dark:border-green-500 z-10",
+                    "unchecked": "bg-white dark:bg-gray-900",
+                    "highlighted": "ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-green-600 border border-green-200 dark:bg-green-500 dark:border-green-500 z-10",
+                    "nonHighlighted": "border border-gray-200 dark:border-gray-700",
+                    "separated": "rounded-lg",
+                    "firstItem": "",
+                    "lastItem": "",
+                    "compact": "",
+                    "nonCompact": "",
+                    "radio": "h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center",
+                    "radioHighlighted": "ring-green-500",
+                    "radioChecked": "bg-green-600 border-transparent dark:bg-green-700 ring-offset-white dark:ring-offset-gray-90",
+                    "radioUnchecked": "bg-white dark:bg-gray-700 border-gray-300",
+                    "radioInner": "rounded-full bg-white w-1.5 h-1.5",
+                    "checkedIconWrapper": "flex-shrink-0",
+                    "checkedIcon": "w-6 h-6",
+                    "checkedIconOpacity": "fill-opacity-90 dark:fill-opacity-30 fill-green-300 dark:fill-[#fff]",
+                    "contentWrapper": "ml-3 flex items-center justify-between text-sm",
+                    "contentWrapperIfNotRadio": "w-full",
+                    "contentInner": "",
+                    "content": "flex items-center",
+                    "label": "font-medium",
+                    "labelChecked": "font-bold text-green-900 dark:text-white",
+                    "labelUnchecked": "font-normal text-gray-900 dark:text-white",
+                    "description": "inline",
+                    "descriptionChecked": "text-green-700 dark:text-gray-200",
+                    "descriptionUnchecked": "text-gray-500 dark:text-gray-400"
+                }
+            },
+            "orange": {
+                "classes": {
+                    "disabled": "",
+                    "option": "relative flex px-5 py-4 cursor-pointer focus:outline-none",
+                    "checked": "bg-orange-100 dark:bg-orange-500/30 text-orange-700 border-orange-200 dark:border-orange-500 z-10",
+                    "unchecked": "bg-white dark:bg-gray-900",
+                    "highlighted": "ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-orange-600 border border-orange-200 dark:bg-orange-500 dark:border-orange-500 z-10",
+                    "nonHighlighted": "border border-gray-200 dark:border-gray-700",
+                    "separated": "rounded-lg",
+                    "firstItem": "",
+                    "lastItem": "",
+                    "compact": "",
+                    "nonCompact": "",
+                    "radio": "h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center",
+                    "radioHighlighted": "ring-orange-500",
+                    "radioChecked": "bg-orange-600 border-transparent dark:bg-orange-700 ring-offset-white dark:ring-offset-gray-90",
+                    "radioUnchecked": "bg-white dark:bg-gray-700 border-gray-300",
+                    "radioInner": "rounded-full bg-white w-1.5 h-1.5",
+                    "checkedIconWrapper": "flex-shrink-0",
+                    "checkedIcon": "w-6 h-6",
+                    "checkedIconOpacity": "fill-opacity-90 dark:fill-opacity-30 fill-orange-300 dark:fill-[#fff]",
+                    "contentWrapper": "ml-3 flex items-center justify-between text-sm",
+                    "contentWrapperIfNotRadio": "w-full",
+                    "contentInner": "",
+                    "content": "flex items-center",
+                    "label": "font-medium",
+                    "labelChecked": "font-bold text-orange-900 dark:text-white",
+                    "labelUnchecked": "font-normal text-gray-900 dark:text-white",
+                    "description": "inline",
+                    "descriptionChecked": "text-orange-700 dark:text-gray-200",
+                    "descriptionUnchecked": "text-gray-500 dark:text-gray-400"
+                }
+            },
+            "purple": {
+                "classes": {
+                    "disabled": "",
+                    "option": "relative flex px-5 py-4 cursor-pointer focus:outline-none",
+                    "checked": "bg-purple-100 dark:bg-purple-500/30 text-purple-700 border-purple-200 dark:border-purple-500 z-10",
+                    "unchecked": "bg-white dark:bg-gray-900",
+                    "highlighted": "ring-2 ring-offset-2 ring-offset-white dark:ring-offset-gray-900 ring-purple-600 border border-purple-200 dark:bg-purple-500 dark:border-purple-500 z-10",
+                    "nonHighlighted": "border border-gray-200 dark:border-gray-700",
+                    "separated": "rounded-lg",
+                    "firstItem": "",
+                    "lastItem": "",
+                    "compact": "",
+                    "nonCompact": "",
+                    "radio": "h-4 w-4 mt-1 cursor-pointer rounded-full border flex items-center justify-center",
+                    "radioHighlighted": "ring-purple-500",
+                    "radioChecked": "bg-purple-600 border-transparent dark:bg-purple-700 ring-offset-white dark:ring-offset-gray-90",
+                    "radioUnchecked": "bg-white dark:bg-gray-700 border-gray-300",
+                    "radioInner": "rounded-full bg-white w-1.5 h-1.5",
+                    "checkedIconWrapper": "flex-shrink-0",
+                    "checkedIcon": "w-6 h-6",
+                    "checkedIconOpacity": "fill-opacity-90 dark:fill-opacity-30 fill-purple-300 dark:fill-[#fff]",
+                    "contentWrapper": "ml-3 flex items-center justify-between text-sm",
+                    "contentWrapperIfNotRadio": "w-full",
+                    "contentInner": "",
+                    "content": "flex items-center",
+                    "label": "font-medium",
+                    "labelChecked": "font-bold text-purple-900 dark:text-white",
+                    "labelUnchecked": "font-normal text-gray-900 dark:text-white",
+                    "description": "inline",
+                    "descriptionChecked": "text-purple-700 dark:text-gray-200",
                     "descriptionUnchecked": "text-gray-500 dark:text-gray-400"
                 }
             }
