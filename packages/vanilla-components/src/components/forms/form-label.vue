@@ -55,10 +55,12 @@ export default {
     <slot>
       <span
         v-if="safe"
+        :class="configuration.classesList.labelInner"
         v-html="label"
       />
       <span
         v-else
+        :class="configuration.classesList.labelInner"
         v-text="label"
       />
     </slot>

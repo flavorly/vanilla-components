@@ -6,6 +6,7 @@ import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 export const formsConfig = {
   fixedClasses: {
     label: '',
+    labelInner: 'leading-none',
     errors: '',
     feedback: '',
     section: '',
@@ -18,6 +19,7 @@ export const formsConfig = {
   // Default Input appearance
   classes: {
     label: 'block font-medium text-sm text-gray-700 dark:text-white cursor-pointer mb-1 flex items-center justify-center space-x-1',
+    labelInner: '',
     errors: mergeClasses(
       'mt-2 text-xs',
       commonClasses.inputsErrorTextColor,
