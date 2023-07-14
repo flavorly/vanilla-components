@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
-import { ref, watch } from 'vue'
+import { nextTick, onMounted, ref, watch } from 'vue'
 import { useClipboard } from '@vueuse/core'
 import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { hasSlot } from '../../core/helpers'
@@ -30,6 +30,10 @@ const props = defineProps({
     type: [Boolean] as PropType<boolean>,
     default: false,
   },
+  maxHeight: {
+    type: [String, Number] as PropType<string | number>,
+    default: 'auto',
+  },
 })
 
 const root = ref<HTMLElement | undefined>(undefined)
@@ -40,17 +44,26 @@ const { configuration, errors, hasErrors } = useConfiguration<TextareaProps>(tex
 const { text, copy, copied, isSupported } = useClipboard()
 
 const resize = () => {
-  if (root.value) {
-    root.value.style.height = 'auto'
-    root.value.style.height = `${root.value.scrollHeight}px`
-  }
+    nextTick(() => {
+      if (root.value) {
+        const maxHeight = root.value.scrollHeight > Number(props.maxHeight) ? props.maxHeight : root.value.scrollHeight
+        root.value.style.height = 'auto'
+        root.value.style.height = `${maxHeight}px`
+      }
+    })
 }
+
+onMounted(() => {
+  if (props.autosize) {
+    resize()
+  }
+})
 
 watch(localValue, () => {
   if (props.autosize) {
     resize()
   }
-}, { immediate: true })
+}, { immediate: false })
 
 /**
  * @docs

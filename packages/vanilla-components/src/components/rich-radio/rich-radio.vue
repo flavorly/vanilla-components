@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import type { PropType } from 'vue'
 import { RadioGroup, RadioGroupOption } from '@headlessui/vue'
+import { ref } from 'vue'
 import RichRadioOption from '../rich-radio-option/rich-radio-option.vue'
-import type { InputOptions } from '../../core/types'
+import type { InputOptions, NormalizedOption } from '../../core/types'
 import { useConfiguration, useVModel, useVariantProps } from '../../core/use'
 import { normalizeOptions } from '../../core/helpers'
 import FormErrors from '../forms/form-errors.vue'
@@ -40,6 +41,10 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: true,
   },
+  allowEmpty: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
   radio: {
     type: Boolean as PropType<boolean>,
     default: true,
@@ -61,6 +66,37 @@ const normalizedOptions = normalizeOptions(
   props.valueAttribute,
 )
 
+const triggerClicks = ref(0)
+const selectedOption = ref<NormalizedOption | undefined>(undefined)
+
+const onModelUpdated = (value: RichRadioValue) => {
+  if (props.disabled) {
+    return
+  }
+  localValue.value = value
+}
+
+const onClickOption = (option: NormalizedOption) => {
+  if (props.disabled || option.disabled) {
+    return
+  }
+
+  if (!props.allowEmpty) {
+    return
+  }
+
+  if (selectedOption.value && selectedOption.value.value === option.value) {
+    selectedOption.value = undefined
+    triggerClicks.value = 0
+    localValue.value = undefined
+  }
+ else {
+    selectedOption.value = option
+    triggerClicks.value = 1
+    localValue.value = option.value
+  }
+}
+
 /**
  * @docs
  * @displayName VanillaRichRadio
@@ -80,10 +116,14 @@ export default {
     class="vanilla-input"
     :class="configuration.classesList?.wrapper"
   >
+    <button @click="localValue = undefined">
+      Disable {{ localValue }}
+    </button>
     <RadioGroup
-      v-model="localValue"
+      :model-value="localValue"
       :class="configuration.classesList?.container"
       :disabled="disabled"
+      @update:model-value="onModelUpdated"
     >
       <div
         :class="[
@@ -96,19 +136,30 @@ export default {
           :key="option.value.toString()"
           v-slot="{ active, checked }"
           as="div"
-          :value="option.value"
+          :value="option.value as any"
           :disabled="disabled || option?.disabled || false"
           :class="configuration.classesList?.optionWrapper"
+          @click="onClickOption(option)"
         >
           <slot
             name="option"
-            v-bind="{ option, active, checked, index, totalOptions: normalizeOptions.length, separated, radio, variant, disabled: option.disabled || false }"
+            v-bind="{
+              option,
+              active,
+              checked,
+              index,
+              totalOptions: normalizeOptions.length,
+              separated,
+              radio,
+              variant,
+              disabled: option.disabled || false,
+            }"
           >
             <!-- Option -->
             <RichRadioOption
               :option="option"
               :active="active"
-              :checked="checked"
+              :checked="checked && localValue === option.value"
               :option-index="index"
               :total-options="normalizedOptions.length"
               :separated="separated"

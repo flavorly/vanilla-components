@@ -6,7 +6,7 @@ export const richRadioOptionConfig = {
   fixedClasses: {
     disabled: commonClasses.optionOrItemDisabled,
 
-    option: '',
+    option: 'select-none',
 
     checked: '',
     unchecked: '',

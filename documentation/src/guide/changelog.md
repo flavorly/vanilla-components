@@ -8,6 +8,10 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.55
+- Rich Radio: Allow unselect options on clicking again
+- Text Area: Fixed auto-size and added option for max-size in height
+
 ### 0.7.54
 - Rich Radio Option: Added, success, purple & orange variants
 - Form Group: Label Leading classes by default to avoid breaking lines to early

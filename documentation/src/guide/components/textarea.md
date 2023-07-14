@@ -20,6 +20,9 @@ A Native `<textarea />` for long text, comments, etc.
 |:-------------|:--------------------------------|:----------------|:------------|
 | `modelValue` | The value for the element       | `Any`           | `undefined` |
 | `rows`       | Number of rows for the textarea | `Number`        | `4`         |
+| `copiable`   | If we can copy                  | `boolean`       | `false`     |
+| `autosize`   | If height should adapt          | `boolean`       | `false`     |
+| `maxHeight`  | Maximum height                  | `string`        | `auto`      |
 
 
 <!--@include: ../../parts/title-slots.md-->
