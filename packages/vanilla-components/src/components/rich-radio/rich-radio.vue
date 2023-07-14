@@ -116,9 +116,6 @@ export default {
     class="vanilla-input"
     :class="configuration.classesList?.wrapper"
   >
-    <button @click="localValue = undefined">
-      Disable {{ localValue }}
-    </button>
     <RadioGroup
       :model-value="localValue"
       :class="configuration.classesList?.container"
