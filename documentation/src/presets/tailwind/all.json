@@ -1116,7 +1116,7 @@
     "RichRadioOption": {
         "fixedClasses": {
             "disabled": "opacity-50 cursor-not-allowed",
-            "option": "",
+            "option": "select-none",
             "checked": "",
             "unchecked": "",
             "highlighted": "",
