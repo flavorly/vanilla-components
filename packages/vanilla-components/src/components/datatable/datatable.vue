@@ -941,6 +941,29 @@ provide('datatable_configuration', datatable)
 // ----- Functions to other components  -----  //
 provide('datatable_reset_url_function', resetUrl)
 
+// Expose
+defineExpose({
+  fetchData,
+  resetUrl,
+  resetAllSettings,
+  resetSorting,
+  resetAction,
+  resetSearchQuery,
+  resetFiltersAndSearch,
+  poolForever,
+  refresh,
+  poolUntil,
+  deselectAllItemsInPage,
+  selectItem,
+  deselectAllItems,
+  toggleSelectAll,
+  isItemSelected,
+  executeAction,
+  currentAction,
+  isFetching,
+  datatable,
+})
+
 /**
  * @docs
  * @displayName VanillaDatatable
