@@ -734,7 +734,7 @@ export default {
           :classes="undefined"
           :multiple="configuration.multiple"
           :options="flattenedOptions"
-          style="width: 0; opacity: 0; height: 0;"
+          style="width: 0; opacity: 0; height: 0; pointer-events: none;"
           aria-hidden="true"
           :disabled="disabled"
           @focusin="rootElementFocusHandler"
