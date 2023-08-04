@@ -8,6 +8,10 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.58-0.7.60
+- Input: Placeholder empty as default
+- Phone Number: Removed `libphonenumber-js` dependency
+
 ### 0.7.57
 - Datatables: Expose all methods
 

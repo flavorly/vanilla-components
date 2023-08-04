@@ -26,7 +26,7 @@ const props = defineProps({
   },
   placeholder: {
     type: [String] as PropType<string>,
-    default: 'text',
+    default: '',
   },
   copiable: {
     type: [Boolean] as PropType<boolean>,

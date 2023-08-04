@@ -1,4 +1,3 @@
-import type { CountryCode } from 'libphonenumber-js/types'
 import type { InputHTMLAttributes } from 'vue'
 import type { Data, WithVariantPropsAndClassesList } from '../../core/types'
 
@@ -38,7 +37,7 @@ export declare type PhoneInputClassesValidKeys = keyof typeof phoneInputConfig.c
 
 export declare type PhoneInputProps = WithVariantPropsAndClassesList<{
   modelValue?: string | null
-  countryCode?: CountryCode
+  countryCode?: string
   phonePlaceholder?: string | undefined
   countryPlaceholder?: string | undefined
   favoriteCountries?: string | undefined
