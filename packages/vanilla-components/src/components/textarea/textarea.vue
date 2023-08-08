@@ -43,25 +43,28 @@ const { configuration, errors, hasErrors } = useConfiguration<TextareaProps>(tex
 // Clipboard handler
 const { text, copy, copied, isSupported } = useClipboard()
 
-const resize = () => {
-    nextTick(() => {
+const resize = async () => {
+    await nextTick(() => {
       if (root.value) {
         const maxHeight = root.value.scrollHeight > Number(props.maxHeight) ? props.maxHeight : root.value.scrollHeight
+        if (maxHeight <= 0) {
+          return
+        }
         root.value.style.height = 'auto'
         root.value.style.height = `${maxHeight}px`
       }
     })
 }
 
-onMounted(() => {
+onMounted(async () => {
   if (props.autosize) {
-    resize()
+    await resize()
   }
 })
 
-watch(localValue, () => {
+watch(localValue, async () => {
   if (props.autosize) {
-    resize()
+    await resize()
   }
 }, { immediate: false })
 
