@@ -49,7 +49,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['click', 'update:modelValue'])
+const emit = defineEmits(['click', 'update:modelValue', 'focus', 'focusout'])
 
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors } = useConfiguration<CheckboxProps>(checkboxConfig, 'Checkbox', localValue)
@@ -148,6 +148,8 @@ export default {
         :disabled="disabled"
         @change="emitUpdate"
         @click="$emit('click', $event)"
+        @focus="$emit('focus', $event)"
+        @focusout="$emit('focusout', $event)"
       >
       <slot v-bind="{ hasErrors, errors }" />
     </div>

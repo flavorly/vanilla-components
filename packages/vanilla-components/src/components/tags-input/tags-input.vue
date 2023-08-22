@@ -7,6 +7,7 @@ import FormFeedback from '../forms/form-feedback.vue'
 import { tagsInputConfig } from './config'
 import type { TagsInputClassesValidKeys, TagsInputProps, TagsInputValue } from './config'
 import CloseIcon from '~icons/heroicons/x-mark-solid'
+import Input from '@/components/input/input.vue'
 
 const props = defineProps({
   ...useVariantProps<TagsInputProps, TagsInputClassesValidKeys>(),
@@ -56,6 +57,9 @@ const props = defineProps({
 
 const emits = defineEmits({
   'update:modelValue': (value?: TagsInputValue) => true,
+  'click': (event: MouseEvent) => true,
+  'focus': (event: FocusEvent) => true,
+  'focusout': (event: FocusEvent) => true,
 })
 
 const root = ref<HTMLElement | null>(null)
@@ -284,6 +288,9 @@ export default {
             @keydown="handleKeydown"
             @keydown.enter.prevent="addOnPressEnter"
             @input="handleDataListInput"
+            @click="$emit('click', $event)"
+            @focus="$emit('focus', $event)"
+            @focusout="$emit('focusout', $event)"
           >
           <datalist
             v-if="allowedOptions.length > 0"

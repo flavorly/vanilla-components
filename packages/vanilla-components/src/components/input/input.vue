@@ -34,6 +34,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['click', 'update:modelValue', 'focus', 'focusout'])
+
 const root = ref(null)
 const localValue = useVModel(props, 'modelValue')
 const localType = ref(props.type)
@@ -102,6 +104,9 @@ export default {
         :disabled="disabled"
         :type="localType"
         v-bind="$attrs"
+        @click="$emit('click', $event)"
+        @focus="$emit('focus', $event)"
+        @focusout="$emit('focusout', $event)"
       >
       <!-- After Input -->
       <div

@@ -10,6 +10,7 @@ import FormErrors from '../forms/form-errors.vue'
 import FormFeedback from '../forms/form-feedback.vue'
 import { richRadioConfig } from './config'
 import type { RichRadioClassesValidKeys, RichRadioProps, RichRadioValue } from './config'
+import Input from '@/components/input/input.vue'
 
 const props = defineProps({
   ...useVariantProps<RichRadioProps, RichRadioClassesValidKeys>(),
@@ -55,7 +56,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:modelValue'])
+const emit = defineEmits(['update:modelValue', 'focus', 'focusout', 'click'])
 
 const localValue = useVModel(props, 'modelValue')
 const { configuration, errors, hasErrors, variant } = useConfiguration<RichRadioProps>(richRadioConfig, 'RichRadio', localValue)
@@ -95,6 +96,7 @@ const onClickOption = (option: NormalizedOption) => {
     triggerClicks.value = 1
     localValue.value = option.value
   }
+  emit('click', option)
 }
 
 /**
@@ -137,6 +139,8 @@ export default {
           :disabled="disabled || option?.disabled || false"
           :class="configuration.classesList?.optionWrapper"
           @click="onClickOption(option)"
+          @focus="$emit('focus', $event)"
+          @focusout="$emit('focusout', $event)"
         >
           <slot
             name="option"

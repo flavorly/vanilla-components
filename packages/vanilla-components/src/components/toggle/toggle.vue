@@ -8,6 +8,7 @@ import { toggleConfig } from './config'
 // import VanillaCheckedIcon from '~icons/heroicons/check-solid'
 import VanillaCheckedIcon from '~icons/ph/check-bold'
 import VanillaUncheckedIcon from '~icons/heroicons/x-mark-solid'
+import RichRadioOption from '@/components/rich-radio-option/rich-radio-option.vue'
 
 const props = defineProps({
   ...useVariantProps<ToggleProps, ToggleClassesValidKeys>(),
@@ -55,7 +56,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['update:modelValue', 'updated:checked'])
+const emit = defineEmits(['update:modelValue', 'updated:checked', 'focus', 'focusout', 'click'])
 
 const root = ref(null)
 const localValue = useVModel(props, 'modelValue')
@@ -108,11 +109,12 @@ const isChecked = computed(() => {
   return localValue.value === props.checkedValue
 })
 
-const toggle = () => {
+const toggle = (event) => {
   if (props.disabled) {
     return
   }
   root.value.click()
+  emit('click', event)
 }
 
 const { configuration, errors, hasErrors } = useConfiguration<ToggleProps>(toggleConfig, 'Toggle', localValue)
@@ -167,6 +169,8 @@ export default {
       :disabled="disabled"
       type="button"
       v-bind="$attrs"
+      @focus="$emit('focus', $event)"
+      @focusout="$emit('focusout', $event)"
       @click="toggle"
     >
       <span

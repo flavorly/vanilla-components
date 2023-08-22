@@ -8,6 +8,10 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.62
+- General: Added missing @focus, @focusout, @blur, @click events
+
+
 ### 0.7.61
 - Textarea: Fix Wait for mount to determine the size
 

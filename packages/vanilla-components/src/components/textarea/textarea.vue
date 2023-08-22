@@ -11,6 +11,7 @@ import { textareaConfig } from './config'
 import ExclamationCircleIcon from '~icons/heroicons/exclamation-circle-solid'
 import ClipboardIcon from '~icons/heroicons/clipboard'
 import CheckIcon from '~icons/heroicons/check-solid'
+import Input from '@/components/input/input.vue'
 
 const props = defineProps({
   ...useVariantProps<TextareaProps, TextareaClassesValidKeys>(),
@@ -35,6 +36,8 @@ const props = defineProps({
     default: 'auto',
   },
 })
+
+const emit = defineEmits(['click', 'update:modelValue', 'focus', 'focusout'])
 
 const root = ref<HTMLElement | undefined>(undefined)
 const localValue = useVModel(props, 'modelValue')
@@ -119,6 +122,9 @@ export default {
         ]"
         :disabled="disabled"
         v-bind="$attrs"
+        @click="$emit('click', $event)"
+        @focus="$emit('focus', $event)"
+        @focusout="$emit('focusout', $event)"
       />
       <div
         v-if="hasSlot($slots.after) || hasErrors || props.copiable"
