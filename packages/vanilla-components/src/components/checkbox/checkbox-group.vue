@@ -10,6 +10,7 @@ import Checkbox from '../checkbox/checkbox.vue'
 import { uniqueId } from '../../core/helpers'
 import type { CheckboxClassesValidKeys, CheckboxProps, CheckboxSimpleValue } from './config'
 import { checkboxConfig } from './config'
+import Toggle from '@/components/toggle/toggle.vue'
 
 const props = defineProps({
   ...useVariantProps<CheckboxProps, CheckboxClassesValidKeys>(),
@@ -43,6 +44,8 @@ const props = defineProps({
     default: false,
   },
 })
+
+const emit = defineEmits(['update:modelValue', 'focus', 'focusout', 'click'])
 
 const { localValue } = useMultipleVModel(props, 'modelValue', true)
 const { configuration, errors, hasErrors, variant } = useConfiguration<CheckboxProps>(checkboxConfig, 'Checkbox', localValue)
@@ -145,6 +148,8 @@ export default {
             :value="option.value"
             :variant="variant"
             :disabled="disabled || option?.disabled"
+            @focus="$emit('focus', $event)"
+            @focusout="$emit('focusout', $event)"
           />
         </div>
         <div :class="configuration.classesList.groupLabelWrapper">

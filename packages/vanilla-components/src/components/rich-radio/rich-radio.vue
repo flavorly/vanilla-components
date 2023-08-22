@@ -170,6 +170,8 @@ export default {
               :variant-error="variantError"
               v-bind="$attrs"
               :disabled="disabled || option?.disabled || false"
+              @focus="$emit('focus', $event)"
+              @focusout="$emit('focusout', $event)"
             >
               <template #radioIcon>
                 <slot

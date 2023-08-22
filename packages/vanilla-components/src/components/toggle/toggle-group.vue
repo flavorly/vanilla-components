@@ -10,6 +10,7 @@ import Toggle from '../toggle/toggle.vue'
 import Checkbox from '../checkbox/checkbox.vue'
 import type { ToggleClassesValidKeys, ToggleProps, ToggleValue } from './config'
 import { toggleConfig } from './config'
+import RichRadioOption from '@/components/rich-radio-option/rich-radio-option.vue'
 
 const props = defineProps({
   ...useVariantProps<ToggleProps, ToggleClassesValidKeys>(),
@@ -43,6 +44,8 @@ const props = defineProps({
     default: 'text',
   },
 })
+
+const emit = defineEmits(['update:modelValue', 'focus', 'focusout', 'click'])
 
 const { localValue } = useMultipleVModel(props, 'modelValue', true)
 const { configuration, errors, hasErrors, variant } = useConfiguration<ToggleProps>(toggleConfig, 'ToggleGroup', localValue)
@@ -92,6 +95,8 @@ export default {
             :value="option.value"
             :variant="variant"
             :disabled="disabled || option?.disabled"
+            @focus="$emit('focus', $event)"
+            @focusout="$emit('focusout', $event)"
           />
         </div>
         <div :class="configuration.classesList.groupLabelWrapper">
