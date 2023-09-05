@@ -1,4 +1,4 @@
-<script lang="js">
+<script lang="ts">
 import { defineComponent, onMounted, ref } from 'vue'
 export default defineComponent({
   setup(_, { slots }) {
