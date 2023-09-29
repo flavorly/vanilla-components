@@ -8,7 +8,7 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
-### 0.7.64
+### 0.7.64 & 0.7.65
 - Tags Input: Allow Disallow custom inputs
 
 ### 0.7.62-0.7.63
