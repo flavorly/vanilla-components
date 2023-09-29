@@ -8,6 +8,9 @@ outline: deep
 
 All notable changes to `@flavorly/vanilla-components` will be documented in this section
 
+### 0.7.64
+- Tags Input: Allow Disallow custom inputs
+
 ### 0.7.62-0.7.63
 - General: Added missing @focus, @focusout, @blur, @click events
 
