@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "esnext",
     "module": "esnext",
-    "lib": ["esnext", "dom", "dom.iterable"],
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable"
+    ],
     "jsx": "preserve",
     "declaration": true,
     "outDir": "./dist",
@@ -17,20 +21,26 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "paths": {
-      "@flavorly/vanilla-components": ["./packages/vanilla-components/src/index.ts"],
-      "@flavorly/vanilla-components-hybridly": ["./packages/vanilla-components-hybridly/src/index.ts"],
-      "@flavorly/vanilla-components-inertia": ["./packages/vanilla-components-inertia/src/index.ts"]
+      "@flavorly/vanilla-components": [
+        "./packages/vanilla-components/src/index.ts"
+      ],
+      "@flavorly/vanilla-components-hybridly": [
+        "./packages/vanilla-components-hybridly/src/index.ts"
+      ],
+      "@flavorly/vanilla-components-inertia": [
+        "./packages/vanilla-components-inertia/src/index.ts"
+      ]
     },
-    "include": [
-        "documentation/**/*",
-        "packages/**/*"
-    ],
     "types": [
       "vite/client",
       "node",
       "unplugin-icons/types/vue",
     ]
   },
+  "include": [
+    "documentation/**/*",
+    "packages/**/*"
+  ],
   "exclude": [
     "**/dist/**",
     "**/node_modules/**"
