@@ -29,6 +29,10 @@ const props = defineProps({
     type: Boolean as PropType<boolean>,
     default: false,
   },
+  allowCustom: {
+    type: Boolean as PropType<boolean>,
+    default: false,
+  },
   clearOnInvalid: {
     type: Boolean as PropType<boolean>,
     default: true,
@@ -91,7 +95,7 @@ const add = (value: string) => {
   if (
     formattedValue.length === 0
     || (!props.allowDuplicates && localValue.value?.includes(value))
-    || (props.allowedOptions.length > 0 && !props.allowedOptions.includes(value))
+    || (props.allowedOptions.length > 0 && !props.allowCustom && !props.allowedOptions.includes(value))
   ) {
     // Duplicate Tag
     if (!props.allowDuplicates && localValue.value?.includes(value)) {
@@ -99,7 +103,7 @@ const add = (value: string) => {
     }
 
     // Not in the allowed List
-    else if (props.allowedOptions.length > 0 && !props.allowedOptions.includes(value)) {
+    else if (props.allowedOptions.length > 0 && !props.allowCustom && !props.allowedOptions.includes(value)) {
       localErrors = props.errorTagNotAllowed + props.allowedOptions.join(', ')
     }
 
