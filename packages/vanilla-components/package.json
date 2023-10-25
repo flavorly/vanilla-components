@@ -78,7 +78,7 @@
     "qs": "^6.11.0",
     "@vueuse/integrations": "^10.3.0",
     "focus-trap": "^7.1.0",
-    "fuse.js": "^6.6.2",
+    "fuse.js": "^7.0.0",
     "lodash": "^4.17.21"
   }
 }
