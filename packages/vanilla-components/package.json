@@ -73,7 +73,7 @@
     "@types/lodash": "^4.14.189",
     "@types/qs": "^6.9.7",
     "universal-cookie": "^6.1.0",
-    "awesome-phonenumber": "^5.2.0",
+    "awesome-phonenumber": "^6.2.0",
     "@vueuse/core": "^10.3.0",
     "qs": "^6.11.0",
     "@vueuse/integrations": "^10.3.0",
