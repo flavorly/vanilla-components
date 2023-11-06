@@ -221,9 +221,10 @@ When the dropdown is loading or fetching results, this section will be used, you
 
 <!--@include: ../../parts/title-events.md-->
 
+
 | Event   | Description             | Value     |
 |:--------|:------------------------|:----------|
-<!--@include: ../../parts/events-model-value.md-->
+| `update:modelValue` | When the value changes | `any` |
 | `change` | Input Value changed | `CustomEvent` |
 | `input` | Input / Value changed | `CustomEvent` |
 | `keydown` | KeyboardDown Pressed | `KeyboardEvent` |
