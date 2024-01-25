@@ -53,7 +53,7 @@ const showSelectorIcon = computed((): boolean => {
     return false
   }
 
-  if (!configuration.clearable) {
+  if (!configuration.clearable || !hasSelectedOption) {
     return true
   }
 
