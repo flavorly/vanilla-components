@@ -2,12 +2,14 @@ version: 2
 updates:
   # Documentation
   - package-ecosystem: "npm"
+    open-pull-requests-limit: 0
     directory: "/packages/documentation"
     schedule:
       interval: "daily"
 
   # Vanilla components
   - package-ecosystem: "npm"
+    open-pull-requests-limit: 0
     directory: "/packages/vanilla-components"
     schedule:
       interval: "daily"
